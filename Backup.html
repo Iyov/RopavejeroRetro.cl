@@ -13,16 +13,17 @@
     <meta property="og:type" content="website" />
     <meta property="og:description"
         content="Vendemos juegos, consolas y accesorios Retro: Nintendo, PlayStation, Sega, Xbox, Atari, entre otros" />
-    <meta property="og:image" content="https://ropavejeroretro.carrd.co/assets/images/card.jpg?v=10351d5e" />
+    <meta property="og:image" content="img/card.jpg?v=5b2a2d37" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1280" />
     <meta property="og:image:height" content="800" />
-    <meta property="og:url" content="https://ropavejeroretro.carrd.co" />
+    <meta property="og:url" content="https://ropavejeroretro.cl/" />
     <meta property="twitter:card" content="summary_large_image" />
-    <link rel="canonical" href="https://ropavejeroretro.carrd.co" />
+    <link rel="canonical" href="https://ropavejeroretro.cl/" />
     <link
         href="https://fonts.googleapis.com/css2?display=swap&family=Inter:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&family=Karla:ital,wght@0,700;1,700"
         rel="stylesheet" type="text/css" />
+    <link rel="icon" href="img/favicon.png" type="image/x-icon" />
     <style>
         html,
         body,
@@ -204,7 +205,7 @@
             transform: scale(1);
             width: 100vw;
             z-index: 0;
-            background-image: linear-gradient(to top, rgba(34, 30, 63, 0.839), rgba(34, 30, 63, 0.839)), url('assets/images/bg.svg?v=10351d5e');
+            background-image: linear-gradient(to top, rgba(34, 30, 63, 0.839), rgba(34, 30, 63, 0.839)), url('img/bg.svg?v=5b2a2d37');
             background-position: 0% 0%, bottom;
             background-repeat: repeat, no-repeat;
             background-size: auto, cover;
@@ -1188,6 +1189,81 @@
             --indent-right: 1;
         }
 
+        .video {
+            position: relative;
+        }
+
+        .video video {
+            display: inline-block;
+            max-width: 100%;
+            vertical-align: top;
+        }
+
+        .video .frame {
+            display: inline-block;
+            max-width: 100%;
+            overflow: hidden;
+            position: relative;
+            vertical-align: top;
+        }
+
+        .video .frame:before {
+            content: '';
+            display: block;
+            width: 100%;
+        }
+
+        .video .frame iframe {
+            bottom: 0px;
+            height: 100%;
+            left: 0px;
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            width: 100%;
+            background-color: #000000;
+        }
+
+        .video.full video {
+            display: block;
+        }
+
+        .video.full:first-child video {
+            border-top-left-radius: inherit;
+            border-top-right-radius: inherit;
+        }
+
+        .video.full:last-child video {
+            border-bottom-left-radius: inherit;
+            border-bottom-right-radius: inherit;
+        }
+
+        .video.full .frame {
+            display: block;
+        }
+
+        .video.full:first-child .frame {
+            border-top-left-radius: inherit;
+            border-top-right-radius: inherit;
+        }
+
+        .video.full:last-child .frame {
+            border-bottom-left-radius: inherit;
+            border-bottom-right-radius: inherit;
+        }
+
+        #video01 video {
+            width: 20rem;
+        }
+
+        #video01 .frame {
+            width: 20rem;
+        }
+
+        #video01 .frame:before {
+            padding-top: 56.25%;
+        }
+
         .icc-credits {
             display: block;
             opacity: 1 !important;
@@ -1525,6 +1601,14 @@
                 --padding-vertical: 1rem;
                 --spacing: 1.125rem;
             }
+
+            #video01 video {
+                width: 20rem;
+            }
+
+            #video01 .frame {
+                width: 20rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1585,7 +1669,8 @@
                 --spacing: 0.84375rem;
             }
         }
-    </style><noscript>
+    </style>
+    <noscript>
         <style>
             body {
                 overflow: auto !important;
@@ -1616,7 +1701,8 @@
     </noscript>
 </head>
 
-<body class="is-loading"><svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+<body class="is-loading">
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
         xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 40 40" display="none" width="0" height="0">
         <symbol id="icon-85976685de3e4af37529a1ce5d57d2a7" viewBox="0 0 40 40">
             <path
@@ -1658,19 +1744,26 @@
     <div id="wrapper">
         <div id="main">
             <div class="inner">
-                <div id="image03" class="image"><span class="frame"><img src="assets/images/image03.png?v=10351d5e"
-                            alt="" /></span></div>
+                <div id="image03" class="image">
+                    <a class="frame" href="https://www.instagram.com/ropavejero.retro/" target="_blank">
+                        <img src="img/RopavejeroLogo_256.png" alt="@Ropavejero.Retro" />
+                    </a>
+                </div>
                 <div id="container02" class="container default">
                     <div class="wrapper">
                         <div class="inner">
                             <h1 id="text12">@Ropavejero.Retro</h1>
-                            <p id="text02"><span class="p">🎮 <strong>Tienda de VideoJuegos / Videogamer
-                                        Store:</strong><br /> Vendemos consolas, juegos y accesorios Originales
-                                    Americanos / We sell Original American consoles, games and accessories.<br />
-                                    <strong>Nintendo</strong> (NES, SNES, N64, Gamecube, GameBoy / Color / Advance,
-                                    Wii/U, DS, 3DS), <strong>PlayStation</strong> (PS1 / PS2 / PSP / PS3 / PS4),
-                                    <strong>Sega</strong> (Genesis, GameGear, Dreamcast), <strong>Xbox</strong>
-                                    (Classic, 360, One), <strong>Atari</strong> and more.</span></p>
+                            <p id="text02">
+                                <span class="p">
+                                    🎮 <strong>Tienda de VideoJuegos / Videogamer Store:</strong><br />
+                                    Vendemos consolas, juegos y accesorios Originales Americanos / 
+                                    We sell Original American consoles, games and accessories.<br />
+                                    <strong>Nintendo</strong> (NES, SNES, N64, Gamecube, GameBoy / Color / Advance, Wii/U, DS, 3DS), 
+                                    <strong>PlayStation</strong> (PS1 / PS2 / PSP / PS3 / PS4),
+                                    <strong>Sega</strong> (Genesis, GameGear, Dreamcast), 
+                                    <strong>Xbox</strong> (Classic, 360, One), <strong>Atari</strong> and more.
+                                </span>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -1682,10 +1775,14 @@
                             </div>
                             <div>
                                 <ul id="icons02" class="style1 icons">
-                                    <li><a class="n01" href="https://www.instagram.com/ropavejero.retro/"
-                                            aria-label="Instagram"><svg>
+                                    <li>
+                                        <a class="n01" href="https://www.instagram.com/ropavejero.retro/" aria-label="Instagram" target="_blank">
+                                            <svg>
                                                 <use xlink:href="#icon-85976685de3e4af37529a1ce5d57d2a7"></use>
-                                            </svg><span class="label">Instagram</span></a></li>
+                                            </svg>
+                                            <span class="label">Instagram</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -1699,10 +1796,14 @@
                             </div>
                             <div>
                                 <ul id="icons03" class="style1 icons">
-                                    <li><a class="n01" href="https://www.tiktok.com/@ropavejero.retro/"
-                                            aria-label="TikTok"><svg>
+                                    <li>
+                                        <a class="n01" href="https://www.tiktok.com/@ropavejero.retro/" aria-label="TikTok" target="_blank">
+                                            <svg>
                                                 <use xlink:href="#icon-694b338299bf630d8d2ec9bd42d31dbe"></use>
-                                            </svg><span class="label">TikTok</span></a></li>
+                                            </svg>
+                                            <span class="label">TikTok</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -1716,10 +1817,14 @@
                             </div>
                             <div>
                                 <ul id="icons04" class="style1 icons">
-                                    <li><a class="n01" href="https://www.facebook.com/ropavejero.retro/"
-                                            aria-label="Facebook"><svg>
+                                    <li>
+                                        <a class="n01" href="https://www.facebook.com/ropavejero.retro/" aria-label="Facebook" target="_blank">
+                                            <svg>
                                                 <use xlink:href="#icon-a1eb5cac0cee3b05a40d856c98ce14a5"></use>
-                                            </svg><span class="label">Facebook</span></a></li>
+                                            </svg>
+                                            <span class="label">Facebook</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -1733,10 +1838,14 @@
                             </div>
                             <div>
                                 <ul id="icons06" class="style1 icons">
-                                    <li><a class="n01" href="https://www.youtube.com/@RopavejeroRetro"
-                                            aria-label="YouTube"><svg>
+                                    <li>
+                                        <a class="n01" href="https://www.youtube.com/@RopavejeroRetro" aria-label="YouTube" target="_blank">
+                                            <svg>
                                                 <use xlink:href="#icon-a63c85b2b6ee333b6d6753e57c8dfe0a"></use>
-                                            </svg><span class="label">YouTube</span></a></li>
+                                            </svg>
+                                            <span class="label">YouTube</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -1750,9 +1859,14 @@
                             </div>
                             <div>
                                 <ul id="icons07" class="style1 icons">
-                                    <li><a class="n01" href="https://wa.me/56967691585" aria-label="WhatsApp"><svg>
+                                    <li>
+                                        <a class="n01" href="https://wa.me/56967691585" aria-label="WhatsApp" target="_blank">
+                                            <svg>
                                                 <use xlink:href="#icon-e9633646f45121eab610a3d30c929019"></use>
-                                            </svg><span class="label">WhatsApp</span></a></li>
+                                            </svg>
+                                            <span class="label">WhatsApp</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -1766,9 +1880,14 @@
                             </div>
                             <div>
                                 <ul id="icons08" class="style1 icons">
-                                    <li><a class="n01" href="https://twitter.com/RopavejeroRetro/" aria-label="X"><svg>
+                                    <li>
+                                        <a class="n01" href="https://twitter.com/RopavejeroRetro/" aria-label="X" target="_blank">
+                                            <svg>
                                                 <use xlink:href="#icon-31b8880d36499db40d4e47546c4763f3"></use>
-                                            </svg><span class="label">X</span></a></li>
+                                            </svg>
+                                            <span class="label">X</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -1782,31 +1901,58 @@
                             </div>
                             <div>
                                 <ul id="icons05" class="style1 icons">
-                                    <li><a class="n01"
-                                            href="https://docs.google.com/spreadsheets/d/18kZ6wyheBWMmoa5yb1PR_XqhqzHCTAlT/"
-                                            aria-label="Google Sheets"><svg>
+                                    <li>
+                                        <a class="n01" href="https://docs.google.com/spreadsheets/d/18kZ6wyheBWMmoa5yb1PR_XqhqzHCTAlT/" aria-label="Disponibles" target="_blank">
+                                            <svg>
                                                 <use xlink:href="#icon-bdf36593f56069222409f16c478d6d2e"></use>
-                                            </svg><span class="label">Google Sheets</span></a></li>
+                                            </svg>
+                                            <span class="label">Disponibles</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div id="video01" class="video">
+                    <div class="frame">
+                        <iframe
+                            src="https://www.youtube-nocookie.com/embed/d1tJoNykQ4s?autoplay=0&amp;rel=0&amp;loop=0&amp;controls=1&amp;cc_load_policy=0"
+                            allowfullscreen="1">
+                        </iframe>
+                    </div>
+                </div>
                 <ul id="icons01" class="icons">
-                    <li><a class="n01" href="https://www.instagram.com/ropavejero.retro/" aria-label="Instagram"><svg>
+                    <li>
+                        <a class="n01" href="https://www.instagram.com/ropavejero.retro/" aria-label="Instagram" target="_blank">
+                            <svg>
                                 <use xlink:href="#icon-85976685de3e4af37529a1ce5d57d2a7"></use>
-                            </svg><span class="label">Instagram</span></a></li>
-                    <li><a class="n02" href="https://wa.me/56967691585" aria-label="WhatsApp"><svg>
+                            </svg>
+                            <span class="label">Instagram</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="n02" href="https://wa.me/56967691585" aria-label="WhatsApp" target="_blank">
+                            <svg>
                                 <use xlink:href="#icon-e9633646f45121eab610a3d30c929019"></use>
-                            </svg><span class="label">WhatsApp</span></a></li>
-                    <li><a class="n03"
-                            href="/cdn-cgi/l/email-protection#33415c435245565956415c1d405973545e525a5f1d505c5e"
-                            aria-label="Email"><svg>
+                            </svg>
+                            <span class="label">WhatsApp</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="n03" href="mailto:ropavejero.sj@gmail.com" aria-label="Email" target="_blank">
+                            <svg>
                                 <use xlink:href="#icon-c0646d28bbeb18e39eb973f96b44bd0f"></use>
-                            </svg><span class="label">Email</span></a></li>
+                            </svg>
+                            <span class="label">Email</span>
+                        </a>
+                    </li>
                 </ul>
-                <div id="credits" class="icc-credits"><span><a href="https://carrd.co/build?ref=auto">Made with
-                            Carrd</a></span></div>
+                <div id="credits" class="icc-credits">
+                    <span>
+                        <a href="https://www.instagram.com/ropavejero.retro/" target="_blank">Creado por @Ropavejero.Retro 2024</a>
+                    </span>
+                </div>
             </div>
         </div>
     </div>
