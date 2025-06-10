@@ -178,7 +178,7 @@ body:before {
     transform: scale(1);
     width: 100vw;
     z-index: 0;
-    background-image: linear-gradient(to top, rgba(34, 30, 63, 0.839), rgba(34, 30, 63, 0.839)), url('img/bg.svg?v=5b2a2d37');
+    background-image: linear-gradient(to top, rgba(34, 30, 63, 0.839), rgba(34, 30, 63, 0.839)), url('../img/bg.svg');
     background-position: 0% 0%, bottom;
     background-repeat: repeat, no-repeat;
     background-size: auto, cover;
@@ -1528,3 +1528,4 @@ p.style1 span.p:nth-child(n + 2) {
         --spacing: 0.84375rem;
     }
 }
+
