@@ -1,0 +1,20 @@
+{
+    "es": [
+        { "date": "0905", "text": "Hoy en 1970: Se funda la empresa ASK, que luego se convertiría en Square Enix." },
+        { "date": "0102", "text": "Hoy en 1993: Se lanza 'Star Fox' para SNES, con gráficos 3D revolucionarios." },
+        { "date": "0923", "text": "Hoy en 1999: Sega lanza Dreamcast en Norteamérica, su última consola." },
+        { "date": "1105", "text": "Hoy en 2006: Nintendo lanza la Wii, revolucionando los juegos con su mando motion-sensitive." },
+        { "date": "1127", "text": "Hoy en 2005: Xbox 360 hace su debut, comenzando la séptima generación de consolas." },
+        { "date": "1203", "text": "Hoy en 1994: Sony lanza PlayStation en Japón, cambiando la industria para siempre." },
+        { "date": "1228", "text": "Hoy en 1983: Nintendo crea la franquicia Mario Bros con el lanzamiento del juego arcade." }
+    ],
+    "en": [
+        { "date": "0905", "text": "Today in 1970: The company ASK was founded, which would later become Square Enix." },
+        { "date": "0102", "text": "Today in 1993: 'Star Fox' was launched for SNES, with revolutionary 3D graphics." },
+        { "date": "0923", "text": "Today in 1999: Sega launches Dreamcast in North America, their last console." },
+        { "date": "1105", "text": "Today in 2006: Nintendo launches the Wii, revolutionizing gaming with its motion-sensitive controller." },
+        { "date": "1127", "text": "Today in 2005: Xbox 360 makes its debut, starting the seventh generation of consoles." },
+        { "date": "1203", "text": "Today in 1994: Sony launches PlayStation in Japan, changing the industry forever." },
+        { "date": "1228", "text": "Today in 1983: Nintendo creates the Mario Bros franchise with the launch of the arcade game." }
+    ]
+}
