@@ -14,13 +14,13 @@
     <link rel="canonical" href="https://ropavejeroretro.cl/" />
     <link rel="icon" href="img/favicon.png" type="image/x-icon" />
     <link rel="stylesheet" href="css/font-awesome_6.4.0_all.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/index.css" type="text/css" />
+    <link rel="stylesheet" href="css/ds.css" type="text/css" />
 </head>
 <body>
     <header>
         <div class="container header-content">
-            <a href="https://www.instagram.com/ropavejero.retro/" class="logo" target="_blank">
-                <img src="img/RopavejeroLogo_100.png" alt="@Ropavejero.Retro" />
+            <a href="#" class="logo">
+                <span class="logo-text">Ropavejero<span class="logo-accent">Retro</span></span>
             </a>
             
             <button class="mobile-menu-btn" id="mobileMenuBtn">
@@ -30,10 +30,13 @@
             <nav id="mainNav">
                 <ul>
                     <li>
-                        <a href="#about" data-translate="about"><i class="fas fa-info-circle"></i> Nosotros</a>
+                        <a href="#" data-translate="home"><i class="fas fa-home"></i> <span class="nav-text">Home</span></a>
                     </li>
                     <li>
-                        <a href="#contact" data-translate="contact"><i class="fas fa-envelope"></i> Contacto</a>
+                        <a href="#about" data-translate="about"><i class="fas fa-info-circle"></i> <span class="nav-text">Nosotros</span></a>
+                    </li>
+                    <li>
+                        <a href="#contact" data-translate="contact"><i class="fas fa-envelope"></i> <span class="nav-text">Contacto</span></a>
                     </li>
                 </ul>
             </nav>
@@ -43,10 +46,10 @@
                     <i class="fas fa-moon"></i>
                 </button>
                 <button class="btn language-select" data-lang="es">
-                    <i class="fas fa-globe"></i> ES
+                    <i class="fas fa-language"></i> ES
                 </button>
                 <button class="btn language-select" data-lang="en">
-                    <i class="fas fa-globe"></i> EN
+                    <i class="fas fa-language"></i> EN
                 </button>
             </div>
         </div>
@@ -54,27 +57,89 @@
 
     <section class="hero">
         <div class="container">
-            <span class="logo-text">@Ropavejero.<span class="logo-accent">Retro</span></span>
             <h1 data-translate="hero-title">Todo lo retro en un solo lugar</h1>
             <p data-translate="hero-text">Consolas, juegos y accesorios retro originales americanos. Revive la nostalgia de los videojuegos clásicos.</p>
-            <a href="https://www.instagram.com/ropavejero.retro/" class="btn-primary" data-translate="shop-now" target="_blank">Instagram</a>
+            <a href="#products" class="btn-primary" data-translate="shop-now">Comprar ahora</a>
         </div>
     </section>
 
     <div class="container">
         <div class="main-content">
             <div class="products">
-                <h2 class="section-title" id="products" data-translate="featured">Posts de Instagram</h2>
+                <h2 class="section-title" id="products" data-translate="featured">Productos destacados</h2>
                 <div class="products-grid" id="instagram-posts">
                     <!-- Los posts de Instagram se cargarán aquí mediante JavaScript -->
                 </div>
                 
-                <h2 class="section-title" data-translate="brands">Marcas</h2>
+                <section id="about" class="about-section">
+                    <h2 class="section-title" data-translate="about">Nosotros</h2>
+                    <div class="about-content">
+                        <div class="about-text">
+                            <p data-translate="about-text-1">Ropavejero Retro es una tienda especializada en videojuegos retro originales americanos. Nuestra pasión por los videojuegos clásicos nos impulsa a buscar y ofrecer los mejores productos para los amantes de la nostalgia gaming.</p>
+                            <p data-translate="about-text-2">Desde consolas clásicas como NES, SNES, PlayStation 1 y Sega Genesis, hasta juegos y accesorios originales, todo cuidadosamente revisado y garantizado. Trabajamos directamente con proveedores en Estados Unidos para asegurar la autenticidad de nuestros productos.</p>
+                            <p data-translate="about-text-3">Nuestro objetivo es que revivas aquellos maravillosos momentos de tu infancia con la misma calidad y emoción de entonces.</p>
+                        </div>
+                        <div class="about-image">
+                            <img src="https://images.unsplash.com/photo-1486572788966-cfd3df1f5b42?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1352&q=80" alt="Interior de Ropavejero Retro">
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="contact" class="contact-section">
+                    <h2 class="section-title" data-translate="contact">Contacto</h2>
+                    <p data-translate="contact-text">Puedes encontrarnos en nuestras redes sociales o contactarnos directamente a través de los siguientes medios:</p>
+                    <div class="contact-icons">
+                        <a href="https://www.instagram.com/ropavejero.retro/" target="_blank" class="contact-icon">
+                            <i class="fab fa-instagram"></i>
+                            <span data-translate="instagram">Instagram</span>
+                        </a>
+                        <a href="https://www.tiktok.com/@ropavejero.retro/" target="_blank" class="contact-icon">
+                            <i class="fab fa-tiktok"></i>
+                            <span data-translate="tiktok">TikTok</span>
+                        </a>
+                        <a href="https://www.youtube.com/@RopavejeroRetro" target="_blank" class="contact-icon">
+                            <i class="fab fa-youtube"></i>
+                            <span data-translate="youtube">YouTube</span>
+                        </a>
+                        <a href="https://ropavejeroretro.cl/" target="_blank" class="contact-icon">
+                            <i class="fas fa-globe"></i>
+                            <span data-translate="website">Sitio Web</span>
+                        </a>
+                        <a href="https://www.facebook.com/ropavejero.retro/" target="_blank" class="contact-icon">
+                            <i class="fab fa-facebook"></i>
+                            <span data-translate="facebook">Facebook</span>
+                        </a>
+                        <a href="https://twitter.com/RopavejeroRetro/" target="_blank" class="contact-icon">
+                            <i class="fab fa-twitter"></i>
+                            <span data-translate="twitter">Twitter</span>
+                        </a>
+                        <a href="https://wa.me/56967691585" target="_blank" class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                            <span data-translate="whatsapp">WhatsApp</span>
+                        </a>
+                        <a href="https://docs.google.com/spreadsheets/d/18kZ6wyheBWMmoa5yb1PR_XqhqzHCTAlT/" target="_blank" class="contact-icon">
+                            <i class="fas fa-file-excel"></i>
+                            <span data-translate="excel">Excel</span>
+                        </a>
+                    </div>
+                </section>
+            </div>
+            
+            <div class="sidebar">
+                <div class="ephemeris">
+                    <h2><i class="fas fa-calendar-day"></i> <span data-translate="ephemeris">Efeméride del día</span></h2>
+                    <div class="ephemeris-date" id="current-date"></div>
+                    <div class="ephemeris-content">
+                        <p id="ephemeris-text">Cargando efemérides...</p>
+                    </div>
+                </div>
+                
                 <div class="brands">
+                    <h3 data-translate="brands">Marcas</h3>
                     <div class="brands-grid">
                         <div class="brand-card">
                             <div class="brand-icon">
-                                <i class="fab fa-fantasy-flight-games"></i>
+                                <i class="fab fa-nintendo-switch"></i>
                             </div>
                             <h3>Nintendo</h3>
                         </div>
@@ -109,54 +174,6 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="sidebar">
-                <div class="ephemeris">
-                    <h2><i class="fas fa-calendar-day"></i> <span data-translate="ephemeris">Efeméride del día</span></h2>
-                    <div class="ephemeris-date" id="current-date"></div>
-                    <div class="ephemeris-content">
-                        <p id="ephemeris-text">Hoy en 1985: Nintendo lanza el Nintendo Entertainment System (NES) en Norteamérica, revolucionando la industria de los videojuegos.</p>
-                    </div>
-                </div>
-                
-                <div class="social-links">
-                    <h3 data-translate="follow-us">Síguenos</h3>
-                    <div class="social-icons">
-                        <a href="https://www.instagram.com/ropavejero.retro/" target="_blank">
-                            <i class="fab fa-instagram"></i>
-                            <span>Instagram</span>
-                        </a>
-                        <a href="https://www.tiktok.com/@ropavejero.retro/" target="_blank">
-                            <i class="fab fa-tiktok"></i>
-                            <span>TikTok</span>
-                        </a>
-                        <a href="https://www.youtube.com/@RopavejeroRetro" target="_blank">
-                            <i class="fab fa-youtube"></i>
-                            <span>YouTube</span>
-                        </a>
-                        <a href="https://ropavejeroretro.cl/" target="_blank">
-                            <i class="fas fa-globe"></i>
-                            <span>Sitio Web</span>
-                        </a>
-                        <a href="https://www.facebook.com/ropavejero.retro/" target="_blank">
-                            <i class="fab fa-facebook"></i>
-                            <span>Facebook</span>
-                        </a>
-                        <a href="https://twitter.com/RopavejeroRetro/" target="_blank">
-                            <i class="fab fa-twitter"></i>
-                            <span>Twitter</span>
-                        </a>
-                        <a href="https://wa.me/56967691585" target="_blank">
-                            <i class="fab fa-whatsapp"></i>
-                            <span>WhatsApp</span>
-                        </a>
-                        <a href="https://docs.google.com/spreadsheets/d/18kZ6wyheBWMmoa5yb1PR_XqhqzHCTAlT/" target="_blank">
-                            <i class="fas fa-file-excel"></i>
-                            <span>Excel</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -169,21 +186,41 @@
                 </div>
                 
                 <div class="footer-column">
+                    <h3 data-translate="quick-links">Enlaces Rápidos</h3>
+                    <div class="social-icons">
+                        <a href="https://www.instagram.com/ropavejero.retro/" target="_blank" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@ropavejero.retro/" target="_blank" title="TikTok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@RopavejeroRetro" target="_blank" title="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://ropavejeroretro.cl/" target="_blank" title="Sitio Web">
+                            <i class="fas fa-globe"></i>
+                        </a>
+                        <a href="https://www.facebook.com/ropavejero.retro/" target="_blank" title="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://twitter.com/RopavejeroRetro/" target="_blank" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://wa.me/56967691585" target="_blank" title="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://docs.google.com/spreadsheets/d/18kZ6wyheBWMmoa5yb1PR_XqhqzHCTAlT/" target="_blank" title="Excel">
+                            <i class="fas fa-file-excel"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
                     <h3 data-translate="contact">Contacto</h3>
                     <ul>
                         <li><i class="fas fa-phone"></i> +56 9 6769 1585</li>
                         <li><i class="fas fa-envelope"></i> info@ropavejeroretro.cl</li>
                         <li><i class="fas fa-map-marker-alt"></i> <span data-translate="address">Santiago, Chile</span></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3 data-translate="links">Enlaces rápidos</h3>
-                    <ul>
-                        <li><a href="#"><i class="fas fa-home"></i> <span data-translate="home">Inicio</span></a></li>
-                        <li><a href="#products"><i class="fas fa-shopping-cart"></i> <span data-translate="products">Productos</span></a></li>
-                        <li><a href="#consoles"><i class="fas fa-gamepad"></i> <span data-translate="consoles">Consolas</span></a></li>
-                        <li><a href="#contact"><i class="fas fa-envelope"></i> <span data-translate="contact">Contacto</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -194,6 +231,6 @@
         </div>
     </footer>
 
-    <script src="js/index.js" ></script>
+    <script src="js/ds.js" ></script>
 </body>
 </html>

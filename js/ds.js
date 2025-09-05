@@ -1,47 +1,28 @@
 // Base de datos de posts de Instagram (simulados ya que no tenemos acceso directo a la API)
 const instagramPosts = [
     {
-        image: "https://scontent.fscl25-1.fna.fbcdn.net/v/t51.82787-15/524886551_18054340481605513_6298096200081234582_n.webp?stp=dst-jpg_tt6&_nc_cat=104&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeGvQSrQlNMU7vVFE0Z9sBTcH7I7g41Sa1sfsjuDjVJrW-E2bJBoMWpBNJnSdQq7sF3BfAfpt9whqX9JWtAPMYf8&_nc_ohc=Qw2CxLk4laYQ7kNvwFA7jSU&_nc_oc=Adn4ezzDNcMGkfM3-oD7kcojWbbLlhOTPWg7oUjmtyTXcCpjAd7KEOUXN7r0DbcpZ5M&_nc_zt=23&_nc_ht=scontent.fscl25-1.fna&_nc_gid=3m-RBxfyXuSpUdxZJYEcJg&oh=00_AfaqWyus4jSkbXVHUluvK1k76GvKfDMJg0rNYrhPJJh0SA&oe=68C00EFC",
-        title: "[❌] 3267 Sega Genesis v1",
-        description: `- Sega Genesis v1 NTSC U/C original americana sin piquetes.
-- Mod para salida RCA 3 colores y VGA azul.
-- Control Genesis original.
-- Transformador de 110V, requiere minwa 110-220V.
-- Cable AV RCA alt.
-- Mantención y limpieza profunda a consola y control.
-
-[❌]: VENDIDO`,
-        link: "https://www.instagram.com/p/DMtnxS2sVZI/"
+        image: "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80",
+        title: "Nintendo 64 Edition",
+        description: "¡Miren esta belleza de Nintendo 64 que acaba de llegar! Color original y en perfecto estado. ¿Quién quiere jugar Mario Kart?",
+        link: "https://www.instagram.com/p/Cr8dXKGM4V7/"
     },
     {
-        image: "https://scontent.fscl25-1.fna.fbcdn.net/v/t51.82787-15/514765819_18051282014605513_3506785830495703064_n.webp?stp=dst-jpg_tt6&_nc_cat=109&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEPw2GqAl_33MwAWnUGq8ur0ofU0_l4zN7Sh9TT-XjM3gxu6f-jB6G2fGoh6cKrUK-grcGdx4WH1qDxobTkbILP&_nc_ohc=xKKFSMX8sIAQ7kNvwHmtJ_O&_nc_oc=AdlvraGCFLal7hxmPdxBEdK38hV81qS9ozfTSpU2x8WLW8wZnf0tC2fjczVZaxMxXnI&_nc_zt=23&_nc_ht=scontent.fscl25-1.fna&_nc_gid=6cokiaw6u5CFDbT9bPVIoA&oh=00_Afb3nOWJi68gPEzdTqpkGLTYSPJ3Aiy9iYD3HFBNWqvgsw&oe=68C01C08",
-        title: "[✅] 3172 Mario's Time Machine (CIB-Poster) [SNES] $90K",
-        description: `- Caja Mario TM NTSC U/C original americana impecable estado.
-- Juego original impecable estado.
-- Caja interna, dust cover.
-- Manual y Poster original.
-- Protector PET de regalo.
-
-[✅]: DISPONIBLE`,
-        link: "https://www.instagram.com/p/DLljA0wsCbf/"
+        image: "https://images.unsplash.com/photo-1588032786041-5cf5868c77d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80",
+        title: "PlayStation 2 Collection",
+        description: "Lote de PlayStation 2 con 15 juegos incluidos. Perfecto para coleccionistas. Todos probados y funcionando.",
+        link: "https://www.instagram.com/p/Cr5tJ9OsnL2/"
     },
     {
-        image: "https://scontent.fscl25-1.fna.fbcdn.net/v/t51.82787-15/514853449_18051281216605513_4866799882973063812_n.webp?stp=dst-jpg_tt6&_nc_cat=103&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEdzrzN73mCe9AxTf6hE9PfDwqiF6kELRUPCqIXqQQtFYCPXqmwrh6Zaw-AJHhyMCQSVpCgGTqnreH8pEXdW_r7&_nc_ohc=W97aLdOEooIQ7kNvwEilWpu&_nc_oc=AdlbjjJXLjf59z7qrEHh4HHNQqpvbGlKBKB7rk_Igl4kryNd40rc9FCvWcO-d8HlDUU&_nc_zt=23&_nc_ht=scontent.fscl25-1.fna&_nc_gid=YtWeKoffVeg1je0q99CqEg&oh=00_Afa908bLZyLcAkCoVGB5cWoHNsmJp84LjfstsQmEYOlebg&oe=68C033ED",
-        title: "[❌] 3171 Donkey Kong Country 2 (CIB) [SNES]",
-        description: `- Caja DKC 2 NTSC U/C original americana impecable estado.
-- Juego original impecable estado.
-- Caja interna, dust cover.
-- Manual original.
-- Protector PET de regalo.
-
-[❌]: VENDIDO`,
-        link: "https://www.instagram.com/p/DLlhoaOsxNi/"
+        image: "https://images.unsplash.com/photo-1607853554432-64b57b5245cc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80",
+        title: "GameBoy Advance SP",
+        description: "GameBoy Advance SP en color azul. Pantalla perfecta y batería renovada. Incluye cartucho de Pokémon Esmeralda.",
+        link: "https://www.instagram.com/p/Cr2kLpJM9X1/"
     },
     {
-        image: "../img/RopavejeroLogo_256.png",
-        title: "@Ropavejero.Retro on Instagram",
-        description: "Este es link a nuestro Instagram donde publicamos todas nuestras novedades, productos y ofertas. ¡Síguenos para no perderte nada!",
-        link: "https://www.instagram.com/ropavejero.retro/"
+        image: "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80",
+        title: "Sega Genesis Bundle",
+        description: "Pack Sega Genesis con 2 controles y 5 juegos: Sonic 2, Mortal Kombat, Street Fighter y más. ¡No te lo pierdas!",
+        link: "https://www.instagram.com/p/CrxHJKLsT5A/"
     }
 ];
 
@@ -114,10 +95,10 @@ const translations = {
         "home": "Home",
         "about": "Nosotros",
         "contact": "Contacto",
-        "hero-title": "@Ropavejero.Retro | Todo lo Retro en un solo lugar",
+        "hero-title": "Todo lo retro en un solo lugar",
         "hero-text": "Consolas, juegos y accesorios retro originales americanos. Revive la nostalgia de los videojuegos clásicos.",
-        "shop-now": "Ir a Instagram",
-        "featured": "Posts de Instagram",
+        "shop-now": "Comprar ahora",
+        "featured": "Productos destacados",
         "view-post": "Ver Post",
         "ephemeris": "Efeméride del día",
         "about-text-1": "Ropavejero Retro es una tienda especializada en videojuegos retro originales americanos. Nuestra pasión por los videojuegos clásicos nos impulsa a buscar y ofrecer los mejores productos para los amantes de la nostalgia gaming.",
@@ -143,10 +124,10 @@ const translations = {
         "home": "Home",
         "about": "About Us",
         "contact": "Contact",
-        "hero-title": "@Ropavejero.Retro | Everything Retro in one place",
+        "hero-title": "Everything retro in one place",
         "hero-text": "Original American retro consoles, games and accessories. Relive the nostalgia of classic video games.",
-        "shop-now": "Go to Instagram",
-        "featured": "Instagram Posts",
+        "shop-now": "Shop now",
+        "featured": "Featured products",
         "view-post": "View Post",
         "ephemeris": "Today in gaming history",
         "about-text-1": "Ropavejero Retro is a store specialized in original American retro video games. Our passion for classic video games drives us to seek and offer the best products for nostalgia gaming lovers.",
