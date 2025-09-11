@@ -1,7 +1,7 @@
 // Base de datos de posts de Instagram (simulados ya que no tenemos acceso directo a la API)
 const instagramPosts = [
     {
-        image: "https://scontent.fscl25-1.fna.fbcdn.net/v/t51.82787-15/524886551_18054340481605513_6298096200081234582_n.webp?stp=dst-jpg_tt6&_nc_cat=104&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeGvQSrQlNMU7vVFE0Z9sBTcH7I7g41Sa1sfsjuDjVJrW-E2bJBoMWpBNJnSdQq7sF3BfAfpt9whqX9JWtAPMYf8&_nc_ohc=Qw2CxLk4laYQ7kNvwFA7jSU&_nc_oc=Adn4ezzDNcMGkfM3-oD7kcojWbbLlhOTPWg7oUjmtyTXcCpjAd7KEOUXN7r0DbcpZ5M&_nc_zt=23&_nc_ht=scontent.fscl25-1.fna&_nc_gid=3m-RBxfyXuSpUdxZJYEcJg&oh=00_AfaqWyus4jSkbXVHUluvK1k76GvKfDMJg0rNYrhPJJh0SA&oe=68C00EFC",
+        image: "../img/Post01.jpeg",
         title: "[❌] 3267 Sega Genesis v1",
         description: `- Sega Genesis v1 NTSC U/C original americana sin piquetes.
 - Mod para salida RCA 3 colores y VGA azul.
@@ -14,7 +14,7 @@ const instagramPosts = [
         link: "https://www.instagram.com/p/DMtnxS2sVZI/"
     },
     {
-        image: "https://scontent.fscl25-1.fna.fbcdn.net/v/t51.82787-15/514765819_18051282014605513_3506785830495703064_n.webp?stp=dst-jpg_tt6&_nc_cat=109&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEPw2GqAl_33MwAWnUGq8ur0ofU0_l4zN7Sh9TT-XjM3gxu6f-jB6G2fGoh6cKrUK-grcGdx4WH1qDxobTkbILP&_nc_ohc=xKKFSMX8sIAQ7kNvwHmtJ_O&_nc_oc=AdlvraGCFLal7hxmPdxBEdK38hV81qS9ozfTSpU2x8WLW8wZnf0tC2fjczVZaxMxXnI&_nc_zt=23&_nc_ht=scontent.fscl25-1.fna&_nc_gid=6cokiaw6u5CFDbT9bPVIoA&oh=00_Afb3nOWJi68gPEzdTqpkGLTYSPJ3Aiy9iYD3HFBNWqvgsw&oe=68C01C08",
+        image: "../img/Post02.jpeg",
         title: "[✅] 3172 Mario's Time Machine (CIB-Poster) [SNES] $90K",
         description: `- Caja Mario TM NTSC U/C original americana impecable estado.
 - Juego original impecable estado.
@@ -26,7 +26,7 @@ const instagramPosts = [
         link: "https://www.instagram.com/p/DLljA0wsCbf/"
     },
     {
-        image: "https://scontent.fscl25-1.fna.fbcdn.net/v/t51.82787-15/514853449_18051281216605513_4866799882973063812_n.webp?stp=dst-jpg_tt6&_nc_cat=103&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEdzrzN73mCe9AxTf6hE9PfDwqiF6kELRUPCqIXqQQtFYCPXqmwrh6Zaw-AJHhyMCQSVpCgGTqnreH8pEXdW_r7&_nc_ohc=W97aLdOEooIQ7kNvwEilWpu&_nc_oc=AdlbjjJXLjf59z7qrEHh4HHNQqpvbGlKBKB7rk_Igl4kryNd40rc9FCvWcO-d8HlDUU&_nc_zt=23&_nc_ht=scontent.fscl25-1.fna&_nc_gid=YtWeKoffVeg1je0q99CqEg&oh=00_Afa908bLZyLcAkCoVGB5cWoHNsmJp84LjfstsQmEYOlebg&oe=68C033ED",
+        image: "../img/Post03.jpeg",
         title: "[❌] 3171 Donkey Kong Country 2 (CIB) [SNES]",
         description: `- Caja DKC 2 NTSC U/C original americana impecable estado.
 - Juego original impecable estado.
