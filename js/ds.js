@@ -1,25 +1,25 @@
 // Base de datos de posts de Instagram (simulados ya que no tenemos acceso directo a la API)
 const instagramPosts = [
     {
-        image: "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80",
+        image: "../img/Post01.jpeg",
         title: "Nintendo 64 Edition",
         description: "¡Miren esta belleza de Nintendo 64 que acaba de llegar! Color original y en perfecto estado. ¿Quién quiere jugar Mario Kart?",
         link: "https://www.instagram.com/p/Cr8dXKGM4V7/"
     },
     {
-        image: "https://images.unsplash.com/photo-1588032786041-5cf5868c77d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80",
+        image: "../img/Post02.jpeg",
         title: "PlayStation 2 Collection",
         description: "Lote de PlayStation 2 con 15 juegos incluidos. Perfecto para coleccionistas. Todos probados y funcionando.",
         link: "https://www.instagram.com/p/Cr5tJ9OsnL2/"
     },
     {
-        image: "https://images.unsplash.com/photo-1607853554432-64b57b5245cc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80",
+        image: "../img/Post03.jpeg",
         title: "GameBoy Advance SP",
         description: "GameBoy Advance SP en color azul. Pantalla perfecta y batería renovada. Incluye cartucho de Pokémon Esmeralda.",
         link: "https://www.instagram.com/p/Cr2kLpJM9X1/"
     },
     {
-        image: "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80",
+        image: "../img/RopavejeroLogo_256.png",
         title: "Sega Genesis Bundle",
         description: "Pack Sega Genesis con 2 controles y 5 juegos: Sonic 2, Mortal Kombat, Street Fighter y más. ¡No te lo pierdas!",
         link: "https://www.instagram.com/p/CrxHJKLsT5A/"
