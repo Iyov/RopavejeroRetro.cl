@@ -766,12 +766,14 @@ footer {
     }
     
     .header-content {
-        flex-direction: column;
-        gap: 10px;
+        justify-content: space-between;
+        align-items: center;
+        min-height: auto;
+        gap: 4px;
     }
     
     .header-actions {
-        width: 100%;
+        width: auto;
         justify-content: center;
     }
 }
