@@ -27,14 +27,24 @@
 
     <link rel="icon" href="img/favicon.png" type="image/x-icon" />
     <link rel="stylesheet" href="css/font-awesome_6.4.0_all.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/index.css" type="text/css" />
+    <link rel="stylesheet" href="css/index.css?v=2025-09-22" type="text/css" />
 </head>
 <body>
+    <!-- Progress bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Back to top button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
     <header>
         <div class="container header-content">
-            <a href="https://www.instagram.com/ropavejero.retro/" class="logo" target="_blank">
-                <img src="img/RopavejeroLogo_50.png" alt="@Ropavejero.Retro" />
-            </a>
+            <div class="logo" id="logoTop">
+                <img src="img/RopavejeroLogo_50.png" alt="Ropavejero.Retro Logo" />
+            </div>
             
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
@@ -47,6 +57,9 @@
                     </li>
                     <li>
                         <a href="#about" data-translate="about"><i class="fas fa-info-circle"></i> <span class="nav-text">Nosotros</span></a>
+                    </li>
+                    <li>
+                        <a href="#faq" data-translate="faq"><i class="fas fa-question-circle"></i> <span class="nav-text">FAQ</span></a>
                     </li>
                     <li>
                         <a href="#contact" data-translate="contact"><i class="fas fa-envelope"></i> <span class="nav-text">Contacto</span></a>
@@ -72,7 +85,7 @@
         <div class="container">
             <h1 data-translate="hero-title">@Ropavejero.Retro | Todo lo Retro en un solo lugar</h1>
             <p data-translate="hero-text">Consolas, juegos y accesorios retro originales americanos. Revive la nostalgia de los videojuegos clásicos.</p>
-            <a href="https://www.instagram.com/ropavejero.retro/" class="btn-primary" data-translate="shop-now" target="_blank">Ir a Instagram</a>
+            <a href="https://www.instagram.com/ropavejero.retro/" target="_blank" class="btn-primary" data-translate="instagram-button">Ir a Instagram</a>
         </div>
     </section>
 
@@ -94,6 +107,61 @@
                         </div>
                         <div class="about-image">
                             <img src="https://images.unsplash.com/photo-1486572788966-cfd3df1f5b42?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1352&q=80" alt="Interior de Ropavejero Retro">
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="faq" class="faq-section">
+                    <h2 class="section-title" data-translate="faq">Preguntas Frecuentes</h2>
+                    <div class="faq-container">
+                        <div class="faq-item">
+                            <div class="faq-question" data-translate="faq-question-1">
+                                <span>¿Qué tipos de productos venden?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer" data-translate="faq-answer-1">
+                                <p>Vendemos consolas, juegos y accesorios retro originales americanos. Trabajamos con marcas como Nintendo (NES, SNES, N64, Gamecube, GameBoy, Wii, DS, 3DS), PlayStation (PS1, PS2, PSP, PS3, PS4), Sega (Genesis, GameGear, Dreamcast), Xbox (Classic, 360, One) y Atari.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question" data-translate="faq-question-2">
+                                <span>¿Los productos son originales y en qué estado están?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer" data-translate="faq-answer-2">
+                                <p>Todos nuestros productos son 100% originales americanos. Revisamos cada artículo minuciosamente y garantizamos su funcionamiento. El estado varía desde productos como nuevos hasta usados en buen estado, siempre especificando claramente las condiciones en cada listing.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question" data-translate="faq-question-3">
+                                <span>¿Realizan envíos a todo Chile?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer" data-translate="faq-answer-3">
+                                <p>Sí, realizamos envíos a todo Chile a través de Starken y Chilexpress. El costo de envío varía según la ubicación y el peso del paquete. Para compras sobre $50.000 el envío es gratuito dentro de Santiago.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question" data-translate="faq-question-4">
+                                <span>¿Ofrecen garantía en sus productos?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer" data-translate="faq-answer-4">
+                                <p>Todos nuestros productos incluyen 30 días de garantía por defectos de funcionamiento. Para consolas reacondicionadas por nosotros, ofrecemos 90 días de garantía. La garantía cubre problemas técnicos pero no daños físicos por mal uso.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question" data-translate="faq-question-5">
+                                <span>¿Puedo ver los productos antes de comprar?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer" data-translate="faq-answer-5">
+                                <p>Actualmente no tenemos showroom físico, pero puedes agendar una cita para ver productos específicos en nuestras oficinas en Santiago. También publicamos videos demostrativos de todos nuestros productos en Instagram y YouTube.</p>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -244,7 +312,7 @@
         </div>
     </footer>
 
-    <!-- Schema.org markup for Google -->
+    <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -252,6 +320,7 @@
       "name": "Ropavejero Retro",
       "description": "Tienda especializada en videojuegos retro originales americanos",
       "url": "https://ropavejeroretro.cl",
+      "logo": "https://ropavejeroretro.cl/img/RopavejeroLogo_All.png",
       "telephone": "+56967691585",
       "address": {
         "@type": "PostalAddress",
@@ -271,6 +340,6 @@
     }
     </script>
 
-    <script src="js/index.js?v=2025-09-11" ></script>
+    <script src="js/index.js?v=2025-09-22" ></script>
 </body>
 </html>

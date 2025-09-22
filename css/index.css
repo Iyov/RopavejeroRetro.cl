@@ -33,6 +33,56 @@ body {
     background-color: var(--secondary);
     color: var(--dark-text);
     line-height: 1.6;
+    scroll-padding-top: 80px; /* Ajuste para el header fijo */
+}
+
+/* Progress bar */
+.progress-container {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 4px;
+    background: transparent;
+    z-index: 1001;
+}
+
+.progress-bar {
+    height: 4px;
+    background: var(--accent);
+    width: 0%;
+    transition: width 0.3s;
+}
+
+/* Back to top button */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--primary);
+    color: var(--secondary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background-color: var(--accent);
+    transform: translateY(-3px);
 }
 
 .container {
@@ -41,10 +91,10 @@ body {
     padding: 0 15px;
 }
 
-/* Header */
+/* Header - Ajustado para mejor navegación */
 header {
     background-color: var(--primary);
-    padding: 4px 0;
+    padding: 8px 0;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -55,12 +105,14 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    min-height: 60px; /* Altura mínima consistente */
 }
 
 .logo {
     display: flex;
     align-items: center;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .logo-text {
@@ -108,13 +160,13 @@ nav a:hover {
 .header-actions {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 8px;
 }
 
 .btn {
     background: none;
     border: none;
-    padding: 8px 8px;
+    padding: 8px 10px;
     border-radius: 4px;
     cursor: pointer;
     font-weight: 500;
@@ -137,7 +189,7 @@ nav a:hover {
     background-color: var(--secondary);
     display: flex;
     align-items: center;
-    gap: 2px;
+    gap: 4px;
 }
 
 .language-select:hover {
@@ -301,6 +353,63 @@ nav a:hover {
 
 .btn-instagram:hover {
     background-color: #E1306C; /* Color de Instagram */
+}
+
+/* FAQ Section */
+.faq-section {
+    padding: 60px 0;
+    background-color: var(--light-bg);
+    margin: 40px 0;
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border);
+}
+
+.faq-question {
+    background-color: var(--secondary);
+    color: var(--primary);
+    padding: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.faq-question:hover {
+    background-color: rgba(108, 99, 255, 0.1);
+}
+
+.faq-question i {
+    transition: transform 0.3s;
+}
+
+.faq-question.active i {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    background-color: var(--secondary);
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s, padding 0.3s;
+}
+
+.faq-answer.open {
+    padding: 20px;
+    max-height: 500px;
 }
 
 /* About Section */
@@ -550,6 +659,8 @@ footer {
     
     .header-content {
         flex-wrap: wrap;
+        min-height: auto; /* Altura automática en móviles */
+        padding: 10px 0;
     }
     
     .mobile-menu-btn {
@@ -586,6 +697,14 @@ footer {
     
     .contact-icons {
         grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
     }
 }
 
@@ -644,5 +763,15 @@ footer {
     
     .brands-grid, .contact-icons {
         grid-template-columns: 1fr;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .header-actions {
+        width: 100%;
+        justify-content: center;
     }
 }
