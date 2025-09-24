@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://franciscobarrientos.cl/sitemap.xml
