@@ -420,6 +420,7 @@ nav a:hover {
     padding: 60px 0;
     background-color: var(--light-bg);
     margin: 40px 0;
+    border-radius: 10px;
 }
 
 .about-content {
@@ -554,10 +555,12 @@ nav a:hover {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s;
     border: 1px solid var(--border);
+    text-decoration: none;
 }
 
 .brand-card:hover {
     transform: translateY(-5px);
+    cursor: pointer;
 }
 
 .brand-icon {
@@ -768,12 +771,14 @@ footer {
     }
     
     .header-content {
-        flex-direction: column;
-        gap: 10px;
+        justify-content: space-between;
+        align-items: center;
+        min-height: auto;
+        gap: 8px;
     }
     
     .header-actions {
-        width: 100%;
+        width: auto;
         justify-content: center;
     }
 }
