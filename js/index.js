@@ -2,16 +2,23 @@
 const instagramPosts = [
     {
         image: "../img/Post01.jpeg",
-        title: "[❌] 3267 Sega Genesis v1",
-        description: `- Sega Genesis v1 NTSC U/C original americana sin piquetes.
-- Mod para salida RCA 3 colores y VGA azul.
-- Control Genesis original.
-- Transformador de 110V, requiere minwa 110-220V.
-- Cable AV RCA alt.
+        title: "[❌] 3419 PS3 Slim azul 320Gb, 1 control org. y cables (HEN) $110K",
+        description: `- Sony PS3 Slim Splash Blue NTSC-J original Japonesa model CECH-3000B.
+- Control azul org.
+- Cable corriente directo a los 220V.
+- Cable HDMI.
+- Lector operativo compatible con juegos originales americanos.
+- Liberada con HEN, tienda y juegos cargados.
+- 320 GB de Disco Duro.
 - Mantención y limpieza profunda a consola y control.
 
-[❌]: VENDIDO`,
-        link: "https://www.instagram.com/p/DMtnxS2sVZI/"
+[❌]: VENDIDO
+[R]: RESERVADO
+[✅]: DISPONIBLE
+
+Siglas:
+org: original`,
+        link: "https://www.instagram.com/p/DPU_RqCjJYG/"
     },
     {
         image: "../img/Post02.jpeg",
@@ -27,21 +34,39 @@ const instagramPosts = [
     },
     {
         image: "../img/Post03.jpeg",
-        title: "[❌] 3171 Donkey Kong Country 2 (CIB) [SNES]",
-        description: `- Caja DKC 2 NTSC U/C original americana impecable estado.
-- Juego original impecable estado.
-- Caja interna, dust cover.
-- Manual original.
-- Protector PET de regalo.
-
-[❌]: VENDIDO`,
-        link: "https://www.instagram.com/p/DLlhoaOsxNi/"
+        title: "[❌] 3418 PS2 Fat en caja 30000, 1 control/cables org. 500Gb $135K",
+        description: `- Sony PS2 Fat negra NTSC-J original Japonesa model 30000.
+- Control negro org.
+- Cable corriente con minwa 110V-220V incluido.
+- Cable AV RCA Sony 3 colores org.
+- Memory Card con Free MC Boot + OPL.
+- Adaptador para Discos Duros Sata.
+- Disco Duro Sata 500 Gb con muchos juegos includos.
+- Lector NO compatible con juegos originales americanos.
+[❌]: VENDIDO
+[R]: RESERVADO
+[✅]: DISPONIBLE
+Siglas:
+org: original`,
+        link: "https://www.instagram.com/p/DPU8g8JjE5g/"
     },
     {
-        image: "../img/RopavejeroLogo_256.png",
-        title: "@Ropavejero.Retro on Instagram",
-        description: "Este es link a nuestro Instagram donde publicamos todas nuestras novedades, productos y ofertas. ¡Síguenos para no perderte nada!",
-        link: "https://www.instagram.com/ropavejero.retro/"
+        image: "../img/Post04.jpeg",
+        title: "[❌] 3417 PS1 Fat en caja, control y cables org. $120K",
+        description: `- Sony PS1 Fat NTSC U/C original americana model SCPH-7501.
+- Control plomo Sony c/análogo org.
+- Cable corriente con Minwa 110V-220V incluido.
+- Cable AV RCA Sony 3 colores org.
+- Lector funcionando bien.
+- SIN chip de liberación.
+- Mantención y limpieza profunda a consola y control.
+* La serie de la caja y consola NO coinciden.
+[❌]: VENDIDO
+[R]: RESERVADO
+[✅]: DISPONIBLE
+Siglas:
+org: original`,
+        link: "https://www.instagram.com/p/DPU5m7jjPLu/"
     }
 ];
 
