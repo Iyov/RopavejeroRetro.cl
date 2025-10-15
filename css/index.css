@@ -98,17 +98,17 @@ body {
 .logo {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     cursor: pointer;
 }
 
 .logo i {
-    font-size: 24px;
+    font-size: 22px;
     color: var(--primary-color);
 }
 
 .logo h2 {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     color: var(--text-color);
 }
@@ -502,21 +502,6 @@ body {
 .efemerides-card:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
-}
-
-/* Responsive para efemérides */
-@media (max-width: 768px) {
-    .efemerides-card {
-        padding: 20px;
-    }
-    
-    .efemerides-card h3 {
-        font-size: 1.1rem;
-    }
-    
-    .date-display {
-        font-size: 1rem;
-    }
 }
 
 /* Testimonios Section */
@@ -1041,7 +1026,11 @@ body {
 }
 
 /* Responsive */
-@media (max-width: 992px) {
+@media (max-width: 1000px) {
+    .mobile-menu-btn {
+        display: none;
+    }
+
     .hero h1 {
         font-size: 2.8rem;
     }
@@ -1056,7 +1045,7 @@ body {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 930px) {
     .nav {
         display: none;
     }
@@ -1064,7 +1053,7 @@ body {
     .mobile-menu-btn {
         display: flex;
     }
-    
+
     .hero h1 {
         font-size: 2.2rem;
     }
@@ -1137,5 +1126,19 @@ body {
     
     .section-header h2 {
         font-size: 1.8rem;
+    }
+}
+/* Responsive para efemérides */
+@media (max-width: 768px) {
+    .efemerides-card {
+        padding: 20px;
+    }
+    
+    .efemerides-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    .date-display {
+        font-size: 1rem;
     }
 }

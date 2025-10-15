@@ -642,8 +642,8 @@ function loadEfemerides() {
                 efemeridesCard.innerHTML = `
                     <div class="efemerides-header">
                         <span class="efemerides-badge" data-translate="efemerides-badge">Efeméride del día</span>
-                        <h3 data-translate="no-efemerides">Hoy no hay efemérides registradas. ¡Disfruta de tus juegos retro!</h3>
-                        <p></p>
+                        <h3 data-translate="no-efemerides">Hoy no hay efemérides registradas.</h3>
+                        <p>¡Disfruta de tus juegos retro!</p>
                     </div>
                 `;
             }
