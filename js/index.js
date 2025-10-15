@@ -605,8 +605,8 @@ function loadEfemerides() {
     const now = new Date();
     const day = String(now.getDate()).padStart(2, '0');
     const month = String(now.getMonth() + 1).padStart(2, '0'); // Los meses van de 0 a 11
-    const dateKey = `${month}${day}`;
-    
+    const dateKey = `${month}/${day}`; // Formato nuevo: MM/DD
+
     // Formatear fecha para mostrar
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const currentLang = localStorage.getItem('language') || 'es';
@@ -622,32 +622,30 @@ function loadEfemerides() {
             return response.json();
         })
         .then(data => {
-            const efemeridesData = data[currentLang];
-            
-            if (efemeridesData) {
-                // Buscar la efeméride para la fecha actual
-                const efemerideHoy = efemeridesData.find(item => item.date === dateKey);
-                
-                if (efemerideHoy) {
-                    efemeridesCard.innerHTML = `
-                        <div class="efemerides-header">
-                            <span class="efemerides-badge" data-translate="efemerides-badge">${efemerideHoy.title}</span>
-                            <h3>${efemerideHoy.text}</h3>
-                            <p>${efemerideHoy.det}</p>
-                        </div>
-                    `;
-                } else {
-                    // Si no hay efeméride para hoy, mostrar un mensaje predeterminado
-                    efemeridesCard.innerHTML = `
-                        <div class="efemerides-header">
-                            <span class="efemerides-badge" data-translate="efemerides-badge">Efeméride del día</span>
-                            <h3 data-translate="no-efemerides">Hoy no hay efemérides registradas. ¡Disfruta de tus juegos retro!</h3>
-                            <p></p>
-                        </div>
-                    `;
-                }
+            // Buscar la efeméride para la fecha actual
+            const efemeridesArr = data.efemerides;
+            const efemerideHoy = efemeridesArr.find(item => item.date === dateKey);
+
+            let langKey = currentLang === 'es' ? 'ES' : 'EN';
+
+            if (efemerideHoy && efemerideHoy[langKey]) {
+                const info = efemerideHoy[langKey];
+                efemeridesCard.innerHTML = `
+                    <div class="efemerides-header">
+                        <span class="efemerides-badge" data-translate="efemerides-badge">${info.title}</span>
+                        <h3>${info.text}</h3>
+                        <p>${info.det}</p>
+                    </div>
+                `;
             } else {
-                throw new Error('Datos de efemérides no disponibles');
+                // Si no hay efeméride para hoy, mostrar un mensaje predeterminado
+                efemeridesCard.innerHTML = `
+                    <div class="efemerides-header">
+                        <span class="efemerides-badge" data-translate="efemerides-badge">Efeméride del día</span>
+                        <h3 data-translate="no-efemerides">Hoy no hay efemérides registradas. ¡Disfruta de tus juegos retro!</h3>
+                        <p></p>
+                    </div>
+                `;
             }
         })
         .catch(error => {

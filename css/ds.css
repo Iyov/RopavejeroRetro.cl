@@ -456,7 +456,7 @@ body {
 
 /* Efemérides Section */
 .efemerides-content {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
 }
 
@@ -472,17 +472,51 @@ body {
     border-radius: 12px;
     padding: 30px;
     box-shadow: var(--shadow);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.efemerides-header {
     text-align: center;
 }
 
-.efemerides-card h3 {
-    font-size: 1.5rem;
+.efemerides-badge {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     margin-bottom: 15px;
 }
 
-.efemerides-card p {
-    font-size: 1.1rem;
-    line-height: 1.7;
+.efemerides-card h3 {
+    font-size: 1.3rem;
+    line-height: 1.5;
+    color: var(--text-color);
+    margin: 0;
+}
+
+.efemerides-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Responsive para efemérides */
+@media (max-width: 768px) {
+    .efemerides-card {
+        padding: 20px;
+    }
+    
+    .efemerides-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    .date-display {
+        font-size: 1rem;
+    }
 }
 
 /* Testimonios Section */

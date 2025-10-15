@@ -115,6 +115,9 @@ const translations = {
         
         // Efemérides
         'efemerides-title': 'Efemérides de hoy',
+        'efemerides-badge': 'Efeméride del día',
+        'no-efemerides': 'Hoy no hay efemérides registradas. ¡Disfruta de tus juegos retro!',
+        'efemerides-error': 'No se pudieron cargar las efemérides del día. Por favor, intenta más tarde.',
         
         // Testimonios
         'testimonials-title': 'Testimonios de Clientes Satisfechos',
@@ -205,6 +208,9 @@ const translations = {
         
         // Efemérides
         'efemerides-title': "Today's Anniversaries",
+        'efemerides-badge': "Today's Anniversary",
+        'no-efemerides': 'No anniversaries recorded for today. Enjoy your retro games!',
+        'efemerides-error': "Could not load today's anniversaries. Please try again later.",
         
         // Testimonios
         'testimonials-title': 'Testimonials from Satisfied Customers',
@@ -292,6 +298,9 @@ function setLanguage(lang) {
             option.classList.remove('active');
         }
     });
+    
+    // Recargar efemérides con el nuevo idioma
+    loadEfemerides();
 }
 
 // ========== BARRA DE PROGRESO ==========
@@ -588,58 +597,67 @@ org: original`,
 }
 
 // ========== EFEMÉRIDES ==========
-async function loadEfemerides() {
+function loadEfemerides() {
     const currentDateElement = document.getElementById('currentDate');
     const efemeridesCard = document.getElementById('efemeridesCard');
     
     // Obtener fecha actual
     const now = new Date();
-    const day = now.getDate();
-    const month = now.getMonth() + 1; // Los meses van de 0 a 11
-    
+    const day = String(now.getDate()).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, '0'); // Los meses van de 0 a 11
+    const dateKey = `${month}/${day}`; // Formato nuevo: MM/DD
+
     // Formatear fecha para mostrar
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const formattedDate = now.toLocaleDateString('es-ES', options);
+    const currentLang = localStorage.getItem('language') || 'es';
+    const formattedDate = now.toLocaleDateString(currentLang === 'es' ? 'es-ES' : 'en-US', options);
     currentDateElement.textContent = formattedDate;
     
-    try {
-        // Datos de efemérides (en un caso real, se cargarían desde un archivo JSON)
-        //const response = await fetch('js/efemerides.json');
-        //const ephemerisData = await response.json();
-        const efemerides = {
-            '10-14': {
-                es: {
-                    title: 'Lanzamiento de Super Mario Bros.',
-                    content: 'El 14 de octubre de 1985 se lanzó en Japón Super Mario Bros. para la Nintendo Entertainment System (NES). Este juego no solo estableció el estándar para los juegos de plataformas, sino que también ayudó a revitalizar la industria de los videojuegos después de la crisis de 1983.'
-                },
-                en: {
-                    title: 'Super Mario Bros. Release',
-                    content: 'On October 14, 1985, Super Mario Bros. was released in Japan for the Nintendo Entertainment System (NES). This game not only set the standard for platform games but also helped revitalize the video game industry after the 1983 crash.'
-                }
+    // Cargar efemérides desde el archivo JSON
+    fetch('js/efemerides.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('No se pudo cargar el archivo de efemérides');
             }
-        };
-        
-        // Obtener efeméride del día actual
-        const key = `${month}-${day}`;
-        const efemeride = efemerides[key] || efemerides['10-14']; // Por defecto, usar 14 de octubre
-        
-        // Obtener idioma actual
-        const currentLang = localStorage.getItem('language') || 'es';
-        
-        // Mostrar efeméride
-        if (efemeride && efemeride[currentLang]) {
+            return response.json();
+        })
+        .then(data => {
+            // Buscar la efeméride para la fecha actual
+            const efemeridesArr = data.efemerides;
+            const efemerideHoy = efemeridesArr.find(item => item.date === dateKey);
+
+            let langKey = currentLang === 'es' ? 'ES' : 'EN';
+
+            if (efemerideHoy && efemerideHoy[langKey]) {
+                const info = efemerideHoy[langKey];
+                efemeridesCard.innerHTML = `
+                    <div class="efemerides-header">
+                        <span class="efemerides-badge" data-translate="efemerides-badge">${info.title}</span>
+                        <h3>${info.text}</h3>
+                        <p>${info.det}</p>
+                    </div>
+                `;
+            } else {
+                // Si no hay efeméride para hoy, mostrar un mensaje predeterminado
+                efemeridesCard.innerHTML = `
+                    <div class="efemerides-header">
+                        <span class="efemerides-badge" data-translate="efemerides-badge">Efeméride del día</span>
+                        <h3 data-translate="no-efemerides">Hoy no hay efemérides registradas. ¡Disfruta de tus juegos retro!</h3>
+                        <p></p>
+                    </div>
+                `;
+            }
+        })
+        .catch(error => {
+            console.error('Error cargando efemérides:', error);
+            // Mostrar mensaje de error
             efemeridesCard.innerHTML = `
-                <h3>${efemeride[currentLang].title}</h3>
-                <p>${efemeride[currentLang].content}</p>
+                <div class="efemerides-header">
+                    <span class="efemerides-badge" data-translate="efemerides-badge">Efeméride del día</span>
+                    <h3 data-translate="efemerides-error">No se pudieron cargar las efemérides del día. Por favor, intenta más tarde.</h3>
+                </div>
             `;
-        }
-    } catch (error) {
-        console.error('Error al cargar las efemérides:', error);
-        document.getElementById('ephemeris-text').textContent = 
-            currentLang === 'es' 
-            ? "Error al cargar las efemérides." 
-            : "Error loading ephemeris.";
-    }
+        });
 }
 
 // ========== APLICAR CONFIGURACIONES GUARDADAS ==========
