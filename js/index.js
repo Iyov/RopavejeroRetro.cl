@@ -1,5 +1,5 @@
 // Configuración inicial
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Inicializar todas las funcionalidades
     initTheme();
     initLanguage();
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initBlogDialogs();
     loadInstagramPosts();
     loadEfemerides();
-    
+
     // Aplicar configuraciones guardadas
     applySavedSettings();
 });
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function initTheme() {
     const themeBtn = document.getElementById('themeBtn');
     const themeIcon = themeBtn.querySelector('i');
-    
+
     // Verificar tema guardado
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
@@ -27,10 +27,10 @@ function initTheme() {
         themeIcon.classList.remove('fa-moon');
         themeIcon.classList.add('fa-sun');
     }
-    
-    themeBtn.addEventListener('click', function() {
+
+    themeBtn.addEventListener('click', function () {
         const isLightMode = document.documentElement.classList.toggle('light-mode');
-        
+
         if (isLightMode) {
             themeIcon.classList.remove('fa-moon');
             themeIcon.classList.add('fa-sun');
@@ -48,15 +48,15 @@ function initLanguage() {
     const languageBtn = document.getElementById('languageBtn');
     const languageSelectorOverlay = document.getElementById('languageSelectorOverlay');
     const languageOptions = document.querySelectorAll('.language-option');
-    
+
     // Verificar idioma guardado
     const savedLanguage = localStorage.getItem('language') || 'es';
     setLanguage(savedLanguage);
-    
+
     // Mostrar selector de idioma
-    languageBtn.addEventListener('click', function() {
+    languageBtn.addEventListener('click', function () {
         languageSelectorOverlay.classList.add('active');
-        
+
         // Marcar la opción activa
         languageOptions.forEach(option => {
             if (option.dataset.lang === savedLanguage) {
@@ -66,19 +66,19 @@ function initLanguage() {
             }
         });
     });
-    
+
     // Seleccionar idioma
     languageOptions.forEach(option => {
-        option.addEventListener('click', function() {
+        option.addEventListener('click', function () {
             const lang = this.dataset.lang;
             setLanguage(lang);
             localStorage.setItem('language', lang);
             languageSelectorOverlay.classList.remove('active');
         });
     });
-    
+
     // Cerrar selector al hacer clic fuera
-    languageSelectorOverlay.addEventListener('click', function(e) {
+    languageSelectorOverlay.addEventListener('click', function (e) {
         if (e.target === languageSelectorOverlay) {
             languageSelectorOverlay.classList.remove('active');
         }
@@ -97,28 +97,28 @@ const translations = {
         'menu-faq': 'FAQ',
         'menu-blog': 'Blog',
         'menu-contact': 'Contacto',
-        
+
         // Hero
         'hero-title': 'Bienvenidos a @Ropavejero.Retro<br/>Todo lo Retro en un solo lugar',
         'hero-subtitle': 'Consolas, juegos y accesorios retro originales americanos. Revive la nostalgia de los videojuegos clásicos.',
         'instagram-button': 'Ir a Instagram',
-        
+
         // Instagram
         'instagram-title': 'Posts de Instagram',
-        
+
         // Nosotros
         'about-title': 'Sobre Nosotros',
         'about-text-1': 'Ropavejero Retro es una tienda especializada en videojuegos retro originales americanos. Nuestra pasión por los videojuegos clásicos nos impulsa a buscar y ofrecer los mejores productos para los amantes de la nostalgia gaming.',
         'about-text-2': 'Desde consolas clásicas como NES, SNES, PlayStation 1 y Sega Genesis, hasta juegos y accesorios originales, todo cuidadosamente revisado y garantizado. Trabajamos directamente con proveedores en Estados Unidos para asegurar la autenticidad de nuestros productos.',
         'about-text-3': 'Nuestro objetivo es que revivas aquellos maravillosos momentos de tu infancia con la misma calidad y emoción de entonces.',
         'explore-store': 'Explora la Tienda',
-        
+
         // Efemérides
         'efemerides-title': 'Efemérides de hoy',
         'efemerides-badge': 'Efeméride del día',
         'no-efemerides': 'Hoy no hay efemérides registradas. ¡Disfruta de tus juegos retro!',
         'efemerides-error': 'No se pudieron cargar las efemérides del día. Por favor, intenta más tarde.',
-        
+
         // Testimonios
         'testimonials-title': 'Testimonios de Clientes Satisfechos',
         'testimonials-subtitle': 'Nos enorgullece contar con la confianza de la comunidad retro. Aquí algunos de sus testimonios.',
@@ -128,7 +128,7 @@ const translations = {
         'testimonial-role-1': 'Coleccionista',
         'testimonial-role-2': 'Gamer',
         'testimonial-role-3': 'Entusiasta Retro',
-        
+
         // Marcas
         'brands-title': 'Marcas',
         'brand-nintendo': 'Nintendo',
@@ -136,7 +136,7 @@ const translations = {
         'brand-xbox': 'Xbox',
         'brand-sega': 'Sega',
         'brand-atari': 'Atari',
-        
+
         // FAQ
         'faq-title': 'Preguntas Frecuentes (FAQ)',
         'faq-question-1': '¿Qué tipos de productos venden?',
@@ -149,7 +149,7 @@ const translations = {
         'faq-answer-4': 'Todos nuestros productos incluyen 30 días de garantía por defectos de funcionamiento. Para consolas reacondicionadas por nosotros, ofrecemos 90 días de garantía. La garantía cubre problemas técnicos pero no daños físicos por mal uso.',
         'faq-question-5': '¿Puedo ver los productos antes de comprar?',
         'faq-answer-5': 'Actualmente no tenemos showroom físico, pero puedes agendar una cita para ver productos específicos en nuestras oficinas en Santiago. También publicamos videos demostrativos de todos nuestros productos en Instagram y YouTube.',
-        
+
         // Blog
         'blog-title': 'Nuestro Blog',
         'blog-subtitle': 'Últimas noticias, actualizaciones e historias del mundo de los videojuegos retro.',
@@ -160,7 +160,7 @@ const translations = {
         'blog-title-3': 'Guía para coleccionar videojuegos retro: Por dónde empezar',
         'blog-excerpt-3': 'Consejos prácticos para quienes quieren comenzar su colección de videojuegos retro sin gastar demasiado...',
         'read-more': 'Leer más',
-        
+
         // Contacto
         'contact-title': 'Contacto',
         'contact-subtitle': 'Puedes encontrarnos en nuestras redes sociales o contactarnos directamente a través de los siguientes medios:',
@@ -173,10 +173,10 @@ const translations = {
         'contact-whatsapp': 'WhatsApp',
         'contact-website': 'Sitio Web',
         'contact-excel': 'Excel Disponibles',
-        
+
         // Footer
         'footer-copyright': '© 2025 @Ropavejero.Retro Todos los derechos reservados.',
-        
+
         // Tooltip
         'whatsapp-tooltip': 'Comunícate con nosotros'
     },
@@ -190,28 +190,28 @@ const translations = {
         'menu-faq': 'FAQ',
         'menu-blog': 'Blog',
         'menu-contact': 'Contact',
-        
+
         // Hero
         'hero-title': 'Welcome to @Ropavejero.Retro<br/>Everything Retro in one place',
         'hero-subtitle': 'Original American retro consoles, games and accessories. Relive the nostalgia of classic video games.',
         'instagram-button': 'Go to Instagram',
-        
+
         // Instagram
         'instagram-title': 'Instagram Posts',
-        
+
         // Nosotros
         'about-title': 'About Us',
         'about-text-1': 'Ropavejero Retro is a store specialized in original American retro video games. Our passion for classic video games drives us to search for and offer the best products for nostalgia gaming lovers.',
         'about-text-2': 'From classic consoles like NES, SNES, PlayStation 1 and Sega Genesis, to original games and accessories, all carefully reviewed and guaranteed. We work directly with suppliers in the United States to ensure the authenticity of our products.',
         'about-text-3': 'Our goal is for you to relive those wonderful moments of your childhood with the same quality and excitement as then.',
         'explore-store': 'Explore the Store',
-        
+
         // Efemérides
         'efemerides-title': "Today's Anniversaries",
         'efemerides-badge': "Today's Anniversary",
         'no-efemerides': 'No anniversaries recorded for today. Enjoy your retro games!',
         'efemerides-error': "Could not load today's anniversaries. Please try again later.",
-        
+
         // Testimonios
         'testimonials-title': 'Testimonials from Satisfied Customers',
         'testimonials-subtitle': 'We are proud to have the trust of the retro community. Here are some of their testimonials.',
@@ -221,7 +221,7 @@ const translations = {
         'testimonial-role-1': 'Collector',
         'testimonial-role-2': 'Gamer',
         'testimonial-role-3': 'Retro Enthusiast',
-        
+
         // Marcas
         'brands-title': 'Brands',
         'brand-nintendo': 'Nintendo',
@@ -229,7 +229,7 @@ const translations = {
         'brand-xbox': 'Xbox',
         'brand-sega': 'Sega',
         'brand-atari': 'Atari',
-        
+
         // FAQ
         'faq-title': 'Frequently Asked Questions (FAQ)',
         'faq-question-1': 'What types of products do you sell?',
@@ -242,7 +242,7 @@ const translations = {
         'faq-answer-4': 'All our products include 30 days warranty for operational defects. For consoles refurbished by us, we offer 90 days warranty. The warranty covers technical problems but not physical damage from misuse.',
         'faq-question-5': 'Can I see the products before buying?',
         'faq-answer-5': 'We currently do not have a physical showroom, but you can schedule an appointment to see specific products at our offices in Santiago. We also publish demonstration videos of all our products on Instagram and YouTube.',
-        
+
         // Blog
         'blog-title': 'Our Blog',
         'blog-subtitle': 'Latest news, updates, and stories from the world of retro gaming.',
@@ -253,7 +253,7 @@ const translations = {
         'blog-title-3': 'Guide to Collecting Retro Video Games: Where to Start',
         'blog-excerpt-3': 'Practical tips for those who want to start their retro video game collection without spending too much...',
         'read-more': 'Read more',
-        
+
         // Contacto
         'contact-title': 'Contact',
         'contact-subtitle': 'You can find us on our social networks or contact us directly through the following means:',
@@ -266,10 +266,10 @@ const translations = {
         'contact-whatsapp': 'WhatsApp',
         'contact-website': 'Website',
         'contact-excel': 'Available Excel',
-        
+
         // Footer
         'footer-copyright': '© 2025 @Ropavejero.Retro All rights reserved.',
-        
+
         // Tooltip
         'whatsapp-tooltip': 'Contact us'
     }
@@ -278,7 +278,7 @@ const translations = {
 // Función para cambiar idioma
 function setLanguage(lang) {
     const elements = document.querySelectorAll('[data-translate]');
-    
+
     elements.forEach(element => {
         const key = element.getAttribute('data-translate');
         if (translations[lang] && translations[lang][key]) {
@@ -289,7 +289,7 @@ function setLanguage(lang) {
             }
         }
     });
-    
+
     // Actualizar opciones de idioma activas
     document.querySelectorAll('.language-option').forEach(option => {
         if (option.dataset.lang === lang) {
@@ -298,7 +298,7 @@ function setLanguage(lang) {
             option.classList.remove('active');
         }
     });
-    
+
     // Recargar efemérides con el nuevo idioma
     loadEfemerides();
 }
@@ -307,8 +307,8 @@ function setLanguage(lang) {
 function initProgressBar() {
     const progressBar = document.getElementById('progressBar');
     const progress = document.getElementById('progress');
-    
-    window.addEventListener('scroll', function() {
+
+    window.addEventListener('scroll', function () {
         const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         const scrolled = (window.scrollY / windowHeight) * 100;
         progress.style.width = scrolled + '%';
@@ -319,26 +319,26 @@ function initProgressBar() {
 function initBackToTop() {
     const backToTopBtn = document.getElementById('backToTopBtn');
     const backToTopLogo = document.getElementById('backToTopLogo');
-    
+
     // Mostrar/ocultar botón según scroll
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
         if (window.scrollY > 300) {
             backToTopBtn.classList.add('visible');
         } else {
             backToTopBtn.classList.remove('visible');
         }
     });
-    
+
     // Funcionalidad del botón
-    backToTopBtn.addEventListener('click', function() {
+    backToTopBtn.addEventListener('click', function () {
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
         });
     });
-    
+
     // Funcionalidad del logo
-    backToTopLogo.addEventListener('click', function() {
+    backToTopLogo.addEventListener('click', function () {
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
@@ -352,22 +352,22 @@ function initMobileMenu() {
     const mobileMenuClose = document.getElementById('mobileMenuClose');
     const mobileMenu = document.getElementById('mobileMenu');
     const mobileMenuLinks = mobileMenu.querySelectorAll('a');
-    
+
     // Abrir menú
-    mobileMenuBtn.addEventListener('click', function() {
+    mobileMenuBtn.addEventListener('click', function () {
         mobileMenu.classList.add('active');
         document.body.style.overflow = 'hidden';
     });
-    
+
     // Cerrar menú
-    mobileMenuClose.addEventListener('click', function() {
+    mobileMenuClose.addEventListener('click', function () {
         mobileMenu.classList.remove('active');
         document.body.style.overflow = '';
     });
-    
+
     // Cerrar menú al hacer clic en un enlace
     mobileMenuLinks.forEach(link => {
-        link.addEventListener('click', function() {
+        link.addEventListener('click', function () {
             mobileMenu.classList.remove('active');
             document.body.style.overflow = '';
         });
@@ -377,18 +377,18 @@ function initMobileMenu() {
 // ========== FAQ ==========
 function initFAQ() {
     const faqItems = document.querySelectorAll('.faq-item');
-    
+
     faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
-        
-        question.addEventListener('click', function() {
+
+        question.addEventListener('click', function () {
             // Cerrar otros items
             faqItems.forEach(otherItem => {
                 if (otherItem !== item) {
                     otherItem.classList.remove('active');
                 }
             });
-            
+
             // Abrir/cerrar item actual
             item.classList.toggle('active');
         });
@@ -400,7 +400,7 @@ function initBlogDialogs() {
     const blogDialogOverlay = document.getElementById('blogDialogOverlay');
     const blogDialogClose = document.getElementById('blogDialogClose');
     const readMoreBtns = document.querySelectorAll('.read-more-btn');
-    
+
     // Contenido de los blogs
     const blogContent = {
         1: {
@@ -461,13 +461,13 @@ function initBlogDialogs() {
             `
         }
     };
-    
+
     // Abrir dialog de blog
     readMoreBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
             const blogId = this.closest('.blog-card').getAttribute('data-blog-id');
             const content = blogContent[blogId];
-            
+
             if (content) {
                 document.getElementById('blogDialogContent').innerHTML = `
                     <div class="blog-dialog-image">
@@ -479,21 +479,21 @@ function initBlogDialogs() {
                         ${content.content}
                     </div>
                 `;
-                
+
                 blogDialogOverlay.classList.add('active');
                 document.body.style.overflow = 'hidden';
             }
         });
     });
-    
+
     // Cerrar dialog de blog
-    blogDialogClose.addEventListener('click', function() {
+    blogDialogClose.addEventListener('click', function () {
         blogDialogOverlay.classList.remove('active');
         document.body.style.overflow = '';
     });
-    
+
     // Cerrar dialog al hacer clic fuera
-    blogDialogOverlay.addEventListener('click', function(e) {
+    blogDialogOverlay.addEventListener('click', function (e) {
         if (e.target === blogDialogOverlay) {
             blogDialogOverlay.classList.remove('active');
             document.body.style.overflow = '';
@@ -504,13 +504,13 @@ function initBlogDialogs() {
 // ========== POSTS DE INSTAGRAM ==========
 function loadInstagramPosts() {
     const instagramGrid = document.getElementById('instagramGrid');
-    
+
     // Datos simulados de Instagram (en un caso real, se obtendrían de una API)
     const instagramPosts = [
         {
-        image: "../img/Post01.jpeg",
-        title: "[❌] 3419 PS3 Slim azul 320Gb, 1 control org. y cables (HEN) $110K",
-        description: `- Sony PS3 Slim Splash Blue NTSC-J original Japonesa model CECH-3000B.
+            image: "../img/Post01.jpeg",
+            title: "[❌] 3419 PS3 Slim azul 320Gb, 1 control org. y cables (HEN) $110K",
+            description: `- Sony PS3 Slim Splash Blue NTSC-J original Japonesa model CECH-3000B.
 - Control azul org.
 - Cable corriente directo a los 220V.
 - Cable HDMI.
@@ -525,24 +525,24 @@ function loadInstagramPosts() {
 
 Siglas:
 org: original`,
-        link: "https://www.instagram.com/p/DPU_RqCjJYG/"
-    },
-    {
-        image: "../img/Post02.jpeg",
-        title: "[✅] 3172 Mario's Time Machine (CIB-Poster) [SNES] $90K",
-        description: `- Caja Mario TM NTSC U/C original americana impecable estado.
+            link: "https://www.instagram.com/p/DPU_RqCjJYG/"
+        },
+        {
+            image: "../img/Post02.jpeg",
+            title: "[✅] 3172 Mario's Time Machine (CIB-Poster) [SNES] $90K",
+            description: `- Caja Mario TM NTSC U/C original americana impecable estado.
 - Juego original impecable estado.
 - Caja interna, dust cover.
 - Manual y Poster original.
 - Protector PET de regalo.
 
 [✅]: DISPONIBLE`,
-        link: "https://www.instagram.com/p/DLljA0wsCbf/"
-    },
-    {
-        image: "../img/Post03.jpeg",
-        title: "[❌] 3418 PS2 Fat en caja 30000, 1 control/cables org. 500Gb $135K",
-        description: `- Sony PS2 Fat negra NTSC-J original Japonesa model 30000.
+            link: "https://www.instagram.com/p/DLljA0wsCbf/"
+        },
+        {
+            image: "../img/Post03.jpeg",
+            title: "[❌] 3418 PS2 Fat en caja 30000, 1 control/cables org. 500Gb $135K",
+            description: `- Sony PS2 Fat negra NTSC-J original Japonesa model 30000.
 - Control negro org.
 - Cable corriente con minwa 110V-220V incluido.
 - Cable AV RCA Sony 3 colores org.
@@ -555,12 +555,12 @@ org: original`,
 [✅]: DISPONIBLE
 Siglas:
 org: original`,
-        link: "https://www.instagram.com/p/DPU8g8JjE5g/"
-    },
-    {
-        image: "../img/Post04.jpeg",
-        title: "[❌] 3417 PS1 Fat en caja, control y cables org. $120K",
-        description: `- Sony PS1 Fat NTSC U/C original americana model SCPH-7501.
+            link: "https://www.instagram.com/p/DPU8g8JjE5g/"
+        },
+        {
+            image: "../img/Post04.jpeg",
+            title: "[❌] 3417 PS1 Fat en caja, control y cables org. $120K",
+            description: `- Sony PS1 Fat NTSC U/C original americana model SCPH-7501.
 - Control plomo Sony c/análogo org.
 - Cable corriente con Minwa 110V-220V incluido.
 - Cable AV RCA Sony 3 colores org.
@@ -573,10 +573,66 @@ org: original`,
 [✅]: DISPONIBLE
 Siglas:
 org: original`,
-        link: "https://www.instagram.com/p/DPU5m7jjPLu/"
-    }
+            link: "https://www.instagram.com/p/DPU5m7jjPLu/"
+        },
+        {
+            image: "../img/Post05.jpeg",
+            title: "Ferias Retro de Noviembre/2025:",
+            description: `
+Sáb 29/Nov: Feria Retro San Bernardo
+➡ Stand Nº17
+📍 Parque García de la Huerta, San Bernardo
+📍 América #504, San Bernardo (ex Casa de la Cultura)
+
+🕒 De 12:00 a 19:00 hrs
+🫂 Acceso Gratis para todo público
+🎮 Llevaremos TODOS nuestros juegos
+¡Nos vemos!
+
+#FeriaRetro #FeriaRetroRancagua #FeriaRetroSanBernardo #RopavejeroRetro`,
+            link: "https://www.instagram.com/p/DQ9lvIeEa82/"
+        },
+        {
+            image: "../img/Post06.jpeg",
+            title: "Varios | 06/Nov/25",
+            description: `[✅] 3615 GTA V (GH-CIB) [PS3] $10K
+[✅] 3616 GTA V (BL-CIB-C/M-Japo) [PS3] $12K
+[✅] 3617 Far Cry Instincts (CIB) [Xbox] $10K
+[✅] 3618 StarCraft II: Wings of Liberty (CIB) [PC] $12K
+[✅] 3619 Guitar Hero World Tour (CIB) [PC] $12K
+[✅] 3621 Yoshi's Island (CIB) [SFC] $30K
+[✅] 3623 Super Bomberman W (CIB) [SFC] $30K
+[✅] 3624 Street Fighter 30th Anniversary (CIB) [Switch] $30K
+[✅] 3625 Super Mario RPG (Sealed-Japo) [Switch] $35K
+[✅] 3626 Paper Mario: The Origami King (Sealed-Japo) [Switch] $35K
+[✅] 3628 Control PS1 plomo org. (detalle stick) [Control] $15K
+[✅] 3629 Control PS1 plomo org. (detalle stick y marca Sony adelante) [Control] $13K
+[✅] 3630 Control N64 azul trasparente (Repro) [Control] $15K
+[✅] 3631 Control N64 azul trasparente (Repro-Estilo Hori) [Control] $15K
+[✅] 3632 Control Gamecube violeta (Repro) [Control] $15K
+[✅] 3633 Nunchuck blanco Nintendo Wii [Acc] $5K
+[✅] 3634 Nunchuck blanco Nintendo Wii [Acc] $5K
+[✅] 3635 Nunchuck blanco Nintendo Wii [Acc] $5K
+[✅] 3636 Nunchuck blanco Nintendo Wii [Acc] $5K
+
+[❌]: VENDIDO
+[R]: RESERVADO
+[✅]: DISPONIBLE
+
+Siglas:
+BL: Black Label
+GH: Greatest Hits
+CIB: Caja, Juego, Manual
+MM: Sin Manual
+S: Sealed: Sellado de Fábrica
+SFC: Super Famicom
+Japo: Japonés
+org: original
+Acc: Accesorio`,
+            link: "https://www.instagram.com/p/DQvBSs0jCkB/"
+        }
     ];
-    
+
     // Generar HTML para los posts
     instagramPosts.forEach(post => {
         const postElement = document.createElement('div');
@@ -591,7 +647,7 @@ org: original`,
                 <a href="${post.link}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Ver Post</a>
             </div>
         `;
-        
+
         instagramGrid.appendChild(postElement);
     });
 }
@@ -600,7 +656,7 @@ org: original`,
 function loadEfemerides() {
     const currentDateElement = document.getElementById('currentDate');
     const efemeridesCard = document.getElementById('efemeridesCard');
-    
+
     // Obtener fecha actual
     const now = new Date();
     const day = String(now.getDate()).padStart(2, '0');
@@ -612,7 +668,7 @@ function loadEfemerides() {
     const currentLang = localStorage.getItem('language') || 'es';
     const formattedDate = now.toLocaleDateString(currentLang === 'es' ? 'es-ES' : 'en-US', options);
     currentDateElement.textContent = formattedDate;
-    
+
     // Cargar efemérides desde el archivo JSON
     fetch('js/efemerides.json')
         .then(response => {
@@ -664,7 +720,7 @@ function loadEfemerides() {
 function applySavedSettings() {
     // Tema ya se aplica en initTheme()
     // Idioma ya se aplica en initLanguage()
-    
+
     // Cargar efemérides según el idioma
     loadEfemerides();
 }
