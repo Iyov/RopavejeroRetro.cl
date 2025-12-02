@@ -18,17 +18,17 @@
     <meta property="og:site_name" content="@Ropavejero.Retro - Tienda de Videojuegos Retro" />
     <meta property="og:description" content="Vendemos juegos, consolas y accesorios Retro: Nintendo, PlayStation, Sega, Xbox, Atari, entre otros." />
     <meta property="og:image" content="https://ropavejeroretro.cl/img/RopavejeroLogo_256.png" />
-    
+
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://ropavejeroretro.cl/">
-    <meta property="twitter:title" content="@Ropavejero.Retro - Tienda de Videojuegos Retro">
-    <meta property="twitter:description" content="Vendemos juegos, consolas y accesorios Retro: Nintendo, PlayStation, Sega, Xbox, Atari, entre otros.">
-    <meta property="twitter:image" content="https://ropavejeroretro.cl/img/RopavejeroLogo_256.png">
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://ropavejeroretro.cl/" />
+    <meta property="twitter:title" content="@Ropavejero.Retro - Tienda de Videojuegos Retro" />
+    <meta property="twitter:description" content="Vendemos juegos, consolas y accesorios Retro: Nintendo, PlayStation, Sega, Xbox, Atari, entre otros." />
+    <meta property="twitter:image" content="https://ropavejeroretro.cl/img/RopavejeroLogo_256.png" />
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/font-awesome_6.5.1_all.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/ds.css?v=2025-10-14" type="text/css" />
+    <link rel="stylesheet" href="css/ds.css?v=2025-12-01" type="text/css" />
 
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
@@ -73,6 +73,7 @@
 }
     </script>
 </head>
+
 <body>
     <!-- Barra de progreso -->
     <div class="progress-bar" id="progressBar">
@@ -92,8 +93,8 @@
                     <a href="#instagram" data-translate="menu-instagram">Instagram</a>
                     <a href="#about" data-translate="menu-about">Nosotros</a>
                     <a href="#efemerides" data-translate="menu-efemerides">Efemérides</a>
+                    <a href="#productos" data-translate="menu-products">Productos</a>
                     <a href="#testimonios" data-translate="menu-testimonials">Testimonios</a>
-                    <a href="#marcas" data-translate="menu-brands">Marcas</a>
                     <a href="#faq" data-translate="menu-faq">FAQ</a>
                     <a href="#blog" data-translate="menu-blog">Blog</a>
                     <a href="#contact" data-translate="menu-contact">Contacto</a>
@@ -123,8 +124,8 @@
             <a href="#instagram" data-translate="menu-instagram">Instagram</a>
             <a href="#about" data-translate="menu-about">Nosotros</a>
             <a href="#efemerides" data-translate="menu-efemerides">Efemérides</a>
+            <a href="#productos" data-translate="menu-products">Productos</a>
             <a href="#testimonios" data-translate="menu-testimonials">Testimonios</a>
-            <a href="#marcas" data-translate="menu-brands">Marcas</a>
             <a href="#faq" data-translate="menu-faq">FAQ</a>
             <a href="#blog" data-translate="menu-blog">Blog</a>
             <a href="#contact" data-translate="menu-contact">Contacto</a>
@@ -150,7 +151,7 @@
         <!-- Instagram Section -->
         <section class="section" id="instagram">
             <div class="container">
-                <h1 data-translate="instagram-title">Posts de Instagram</h1>
+                <h2 data-translate="instagram-title">Posts de Instagram</h2>
                 <div class="instagram-grid" id="instagramGrid">
                     <!-- Los posts se cargarán dinámicamente desde JavaScript -->
                 </div>
@@ -192,6 +193,100 @@
             </div>
         </section>
 
+        <!-- Productos Section -->
+        <section class="section" id="productos">
+            <div class="container">
+                <div class="section-header">
+                    <h2 data-translate="products-title">Productos Disponibles</h2>
+                    <p data-translate="products-subtitle">Explora nuestra colección de videojuegos retro disponibles para venta.</p>
+                </div>
+                
+                <!-- Filtros de productos -->
+                <div class="products-filters" id="productsFilters">
+                    <div class="filter-group">
+                        <label for="searchFilter" data-translate="filter-search">Buscar producto:</label>
+                        <input type="text" id="searchFilter" class="filter-input" placeholder="Escribe para buscar...">
+                    </div>
+                    <div class="filter-group">
+                        <label for="platformFilter" data-translate="filter-platform">Plataforma:</label>
+                        <select id="platformFilter" class="filter-select">
+                            <option value="all" data-translate="filter-all">Todas</option>
+                            <!-- Las opciones se cargarán dinámicamente -->
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="statusFilter" data-translate="filter-status">Estado:</label>
+                        <select id="statusFilter" class="filter-select">
+                            <option value="all" data-translate="filter-all-status">Todos</option>
+                            <option value="available" data-translate="filter-available">Disponibles</option>
+                            <option value="sold" data-translate="filter-sold">Vendidos</option>
+                        </select>
+                    </div>
+                    <button id="clearFilters" class="btn btn-secondary" data-translate="clear-filters">Limpiar</button>
+                </div>
+
+                <!-- Contador de productos -->
+                <div class="products-counter" id="productsCounter">
+                    <span data-translate="products-count">Cargando productos...</span>
+                </div>
+
+                <!-- Tabla de productos -->
+                <div class="products-container">
+                    <div class="table-responsive">
+                        <table class="products-table" id="productsTable">
+                            <thead>
+                                <tr>
+                                    <th data-translate="table-num">#</th>
+                                    <th data-translate="table-product">Producto</th>
+                                    <th data-translate="table-platform">Plataforma</th>
+                                    <th data-translate="table-price">Precio</th>
+                                    <th data-translate="table-stock">Stock</th>
+                                    <th data-translate="table-status">Estado</th>
+                                    <th data-translate="table-actions">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productsTableBody">
+                                <!-- Los productos se cargarán dinámicamente -->
+                                <tr>
+                                    <td colspan="7" class="loading-cell" data-translate="loading-products">Cargando productos...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Paginación -->
+                <div class="pagination" id="pagination">
+                    <button class="pagination-btn" id="prevPage" disabled>
+                        <i class="fas fa-chevron-left"></i>
+                        <span data-translate="pagination-prev">Anterior</span>
+                    </button>
+                    <div class="pagination-info" id="paginationInfo">
+                        <span data-translate="pagination-page">Página</span>
+                        <span id="currentPage">1</span>
+                        <span data-translate="pagination-of">de</span>
+                        <span id="totalPages">1</span>
+                    </div>
+                    <button class="pagination-btn" id="nextPage" disabled>
+                        <span data-translate="pagination-next">Siguiente</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <!-- Modal para ver detalles del producto -->
+                <div class="modal-overlay" id="productModalOverlay">
+                    <div class="modal" id="productModal">
+                        <button class="modal-close" id="productModalClose">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        <div class="modal-content" id="productModalContent">
+                            <!-- El contenido del modal se cargará dinámicamente -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Testimonios Section -->
         <section class="section" id="testimonios">
             <div class="container">
@@ -214,7 +309,7 @@
                     </div>
                     <div class="testimonial-card">
                         <div class="testimonial-image">
-                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Carla M.">
+                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&h=200&q=80" alt="Carla M.">
                         </div>
                         <blockquote>
                             <p data-translate="testimonial-2">"Encontré exactamente lo que buscaba en RopavejeroRetro. La selección de juegos y consolas retro es impresionante, y los precios son muy competitivos. Definitivamente seré un cliente recurrente."</p>
@@ -424,7 +519,7 @@
                 <div class="footer-social">
                     <a href="https://www.instagram.com/ropavejero.retro/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
                     <a href="https://www.facebook.com/ropavejero.retro/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
-                    <a href="https://tiktok.com/@ropavejero.retro/" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://twitter.com/RopavejeroRetro/" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
                 </div>
             </div>
         </div>
@@ -469,6 +564,6 @@
         </div>
     </div>
 
-    <script src="js/ds.js?v=2025-10-14"></script>
+    <script src="js/ds.js?v=2025-12-01"></script>
 </body>
 </html>

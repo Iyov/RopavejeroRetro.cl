@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initMobileMenu();
     initFAQ();
     initBlogDialogs();
+    initProducts();
     loadInstagramPosts();
     loadEfemerides();
     
@@ -92,6 +93,7 @@ const translations = {
         'menu-instagram': 'Instagram',
         'menu-about': 'Nosotros',
         'menu-efemerides': 'Efemérides',
+        'menu-products': 'Productos',
         'menu-testimonials': 'Testimonios',
         'menu-brands': 'Marcas',
         'menu-faq': 'FAQ',
@@ -119,6 +121,58 @@ const translations = {
         'no-efemerides': 'Hoy no hay efemérides registradas. ¡Disfruta de tus juegos retro!',
         'efemerides-error': 'No se pudieron cargar las efemérides del día. Por favor, intenta más tarde.',
         
+        // Productos
+        'products-title': 'Productos Disponibles',
+        'products-subtitle': 'Explora nuestra colección de videojuegos retro disponibles para venta.',
+        'filter-search': 'Buscar producto:',
+        'filter-platform': 'Plataforma:',
+        'filter-all': 'Todas',
+        'filter-status': 'Estado:',
+        'filter-all-status': 'Todos',
+        'filter-available': 'Disponibles',
+        'filter-sold': 'Vendidos',
+        'clear-filters': 'Limpiar',
+        'products-count': 'Cargando productos...',
+        'loading-products': 'Cargando productos...',
+        'table-num': '#',
+        'table-product': 'Producto',
+        'table-platform': 'Plataforma',
+        'table-price': 'Precio',
+        'table-stock': 'Stock',
+        'table-status': 'Estado',
+        'table-actions': 'Acciones',
+        'status-available': 'Disponible',
+        'status-sold': 'Vendido',
+        'view-details': 'Ver detalles',
+        'modal-close': 'Cerrar',
+        'modal-num': 'Número',
+        'modal-product': 'Producto',
+        'modal-platform': 'Plataforma',
+        'modal-sale': 'Precio de Venta',
+        'modal-price': 'Precio de Compra',
+        'modal-stock': 'Stock',
+        'modal-polish': 'Pulir',
+        'modal-sold': 'Vendido',
+        'modal-userid': 'ID Usuario',
+        'modal-username': 'Nombre Instagram',
+        'modal-payment': 'Método Pago',
+        'modal-test': 'Probado',
+        'modal-date': 'Fecha',
+        'modal-delivered': 'Entregado',
+        'modal-payment-price': 'Pago',
+        'yes': 'Sí',
+        'no': 'No',
+        'delivered-yes': 'Entregado',
+        'delivered-no': 'No entregado',
+        'polish-yes': 'Pulir',
+        'polish-no': 'No pulir',
+        'products-loaded': 'Mostrando {count} de {total} productos',
+        'no-products': 'No hay productos disponibles con los filtros seleccionados.',
+        'pagination-prev': 'Anterior',
+        'pagination-next': 'Siguiente',
+        'pagination-page': 'Página',
+        'pagination-of': 'de',
+        
         // Testimonios
         'testimonials-title': 'Testimonios de Clientes Satisfechos',
         'testimonials-subtitle': 'Nos enorgullece contar con la confianza de la comunidad retro. Aquí algunos de sus testimonios.',
@@ -128,7 +182,7 @@ const translations = {
         'testimonial-role-1': 'Coleccionista',
         'testimonial-role-2': 'Gamer',
         'testimonial-role-3': 'Entusiasta Retro',
-        
+
         // Marcas
         'brands-title': 'Marcas',
         'brand-nintendo': 'Nintendo',
@@ -136,7 +190,7 @@ const translations = {
         'brand-xbox': 'Xbox',
         'brand-sega': 'Sega',
         'brand-atari': 'Atari',
-        
+
         // FAQ
         'faq-title': 'Preguntas Frecuentes (FAQ)',
         'faq-question-1': '¿Qué tipos de productos venden?',
@@ -185,6 +239,7 @@ const translations = {
         'menu-instagram': 'Instagram',
         'menu-about': 'About Us',
         'menu-efemerides': 'Anniversaries',
+        'menu-products': 'Products',
         'menu-testimonials': 'Testimonials',
         'menu-brands': 'Brands',
         'menu-faq': 'FAQ',
@@ -212,6 +267,58 @@ const translations = {
         'no-efemerides': 'No anniversaries recorded for today. Enjoy your retro games!',
         'efemerides-error': "Could not load today's anniversaries. Please try again later.",
         
+        // Productos
+        'products-title': 'Available Products',
+        'products-subtitle': 'Explore our collection of retro video games available for sale.',
+        'filter-search': 'Search product:',
+        'filter-platform': 'Platform:',
+        'filter-all': 'All',
+        'filter-status': 'Status:',
+        'filter-all-status': 'All',
+        'filter-available': 'Available',
+        'filter-sold': 'Sold',
+        'clear-filters': 'Clear',
+        'products-count': 'Loading products...',
+        'loading-products': 'Loading products...',
+        'table-num': '#',
+        'table-product': 'Product',
+        'table-platform': 'Platform',
+        'table-price': 'Price',
+        'table-stock': 'Stock',
+        'table-status': 'Status',
+        'table-actions': 'Actions',
+        'status-available': 'Available',
+        'status-sold': 'Sold',
+        'view-details': 'View details',
+        'modal-close': 'Close',
+        'modal-num': 'Number',
+        'modal-product': 'Product',
+        'modal-platform': 'Platform',
+        'modal-sale': 'Sale Price',
+        'modal-price': 'Purchase Price',
+        'modal-stock': 'Stock',
+        'modal-polish': 'Polish',
+        'modal-sold': 'Sold',
+        'modal-userid': 'User ID',
+        'modal-username': 'Instagram Name',
+        'modal-payment': 'Payment Method',
+        'modal-test': 'Tested',
+        'modal-date': 'Date',
+        'modal-delivered': 'Delivered',
+        'modal-payment-price': 'Payment',
+        'yes': 'Yes',
+        'no': 'No',
+        'delivered-yes': 'Delivered',
+        'delivered-no': 'Not delivered',
+        'polish-yes': 'Polish',
+        'polish-no': 'No polish',
+        'products-loaded': 'Showing {count} of {total} products',
+        'no-products': 'No products available with selected filters.',
+        'pagination-prev': 'Previous',
+        'pagination-next': 'Next',
+        'pagination-page': 'Page',
+        'pagination-of': 'of',
+        
         // Testimonios
         'testimonials-title': 'Testimonials from Satisfied Customers',
         'testimonials-subtitle': 'We are proud to have the trust of the retro community. Here are some of their testimonials.',
@@ -221,7 +328,7 @@ const translations = {
         'testimonial-role-1': 'Collector',
         'testimonial-role-2': 'Gamer',
         'testimonial-role-3': 'Retro Enthusiast',
-        
+
         // Marcas
         'brands-title': 'Brands',
         'brand-nintendo': 'Nintendo',
@@ -229,7 +336,7 @@ const translations = {
         'brand-xbox': 'Xbox',
         'brand-sega': 'Sega',
         'brand-atari': 'Atari',
-        
+
         // FAQ
         'faq-title': 'Frequently Asked Questions (FAQ)',
         'faq-question-1': 'What types of products do you sell?',
@@ -275,6 +382,130 @@ const translations = {
     }
 };
 
+// Contenido de los blogs en ambos idiomas
+const blogContent = {
+    1: {
+        es: {
+            title: 'La historia de Nintendo: De las cartas a los videojuegos',
+            date: '15 de Octubre, 2025',
+            image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&h=300&q=80',
+            content: `
+                <p>Nintendo es hoy en día sinónimo de videojuegos, pero pocos conocen sus humildes orígenes. Fundada en 1889 por Fusajiro Yamauchi en Kioto, Japón, la compañía comenzó fabricando cartas Hanafuda, un tipo de baraja tradicional japonesa.</p>
+                
+                <p>Durante más de medio siglo, Nintendo se dedicó exclusivamente a los juegos de cartas, expandiéndose gradualmente a otros tipos de juegos de mesa. No fue hasta la década de 1960 que la empresa comenzó a diversificarse, incursionando en negocios tan diversos como taxis, alimentos instantáneos y hasta una cadena de hoteles del amor.</p>
+                
+                <p>El giro hacia los videojuegos llegó en los años 70, cuando Nintendo comenzó a desarrollar máquinas arcade. Su primer gran éxito fue Donkey Kong en 1981, que introdujo al mundo a Mario (entonces llamado Jumpman). Este personaje se convertiría en el ícono más reconocible de la compañía.</p>
+                
+                <p>La revolución definitiva llegó en 1983 con el lanzamiento de la Family Computer (Famicom) en Japón, conocida internacionalmente como Nintendo Entertainment System (NES). Esta consola no solo salvó a la industria de los videojuegos tras la crisis de 1983, sino que estableció estándares de calidad y jugabilidad que perduran hasta hoy.</p>
+                
+                <p>Desde entonces, Nintendo ha continuado innovando con consolas como Game Boy, Super Nintendo, Nintendo 64, GameCube, Wii, Nintendo DS, 3DS, Switch y muchas más, siempre manteniendo su filosofía de priorizar la jugabilidad por encima de todo.</p>
+            `
+        },
+        en: {
+            title: 'The History of Nintendo: From Cards to Video Games',
+            date: 'October 15, 2025',
+            image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&h=300&q=80',
+            content: `
+                <p>Nintendo is today synonymous with video games, but few know its humble origins. Founded in 1889 by Fusajiro Yamauchi in Kyoto, Japan, the company began by manufacturing Hanafuda cards, a type of traditional Japanese deck.</p>
+                
+                <p>For over half a century, Nintendo dedicated itself exclusively to card games, gradually expanding to other types of board games. It wasn't until the 1960s that the company began to diversify, venturing into businesses as diverse as taxis, instant foods, and even a love hotel chain.</p>
+                
+                <p>The turn towards video games came in the 70s, when Nintendo began developing arcade machines. Its first big success was Donkey Kong in 1981, which introduced the world to Mario (then called Jumpman). This character would become the most recognizable icon of the company.</p>
+                
+                <p>The definitive revolution came in 1983 with the launch of the Family Computer (Famicom) in Japan, known internationally as the Nintendo Entertainment System (NES). This console not only saved the video game industry after the 1983 crash, but established quality and gameplay standards that endure to this day.</p>
+                
+                <p>Since then, Nintendo has continued innovating with consoles like Game Boy, Super Nintendo, Nintendo 64, GameCube, Wii, Nintendo DS, 3DS, Switch and many more, always maintaining its philosophy of prioritizing gameplay above all else.</p>
+            `
+        }
+    },
+    2: {
+        es: {
+            title: 'Nintendo vs Sega: La batalla que definió una generación',
+            date: '10 de Octubre, 2025',
+            image: 'https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&h=300&q=80',
+            content: `
+                <p>Los años 90 fueron testigos de una de las rivalidades más épicas en la historia de los videojuegos: Nintendo contra Sega. Esta batalla no solo definió una generación de jugadores, sino que cambió para siempre la forma en que se comercializaban y percibían los videojuegos.</p>
+                
+                <p>Cuando Sega lanzó Genesis (Mega Drive fuera de América) en 1989, Nintendo dominaba el mercado con su NES. Sega adoptó una estrategia agresiva de marketing, posicionando a Genesis como la consola "cool" para adolescentes, en contraste con la imagen más infantil de Nintendo.</p>
+                
+                <p>El eslogan "Genesis does what Nintendon't" se convirtió en el estandarte de esta guerra, destacando las ventajas técnicas de la consola de Sega, como su mayor potencia y el chip de sonido Yamaha que ofrecía música de mejor calidad.</p>
+                
+                <p>La competencia se intensificó con las mascotas de ambas compañías: Mario de Nintendo contra Sonic de Sega. Sonic, con su actitud desafiante y velocidad, representaba perfectamente la imagen que Sega quería proyectar. La guerra de consolas llegó a su punto máximo con el lanzamiento de juegos como Street Fighter II, que apareció primero en SNES, y Mortal Kombat, cuya versión sin censura en Genesis le dio una ventaja significativa a Sega.</p>
+                
+                <p>Aunque Nintendo eventualmente ganó la batalla en términos de ventas, la competencia benefició enormemente a los consumidores, impulsando la innovación y reduciendo precios. Esta rivalidad demostró que en el mundo de los videojuegos, la competencia feroz puede ser el mejor catalizador para el progreso.</p>
+            `
+        },
+        en: {
+            title: 'Nintendo vs Sega: The Battle That Defined a Generation',
+            date: 'October 10, 2025',
+            image: 'https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&h=300&q=80',
+            content: `
+                <p>The 90s witnessed one of the most epic rivalries in video game history: Nintendo vs Sega. This battle not only defined a generation of players, but forever changed the way video games were marketed and perceived.</p>
+                
+                <p>When Sega launched Genesis (Mega Drive outside America) in 1989, Nintendo dominated the market with its NES. Sega adopted an aggressive marketing strategy, positioning Genesis as the "cool" console for teenagers, in contrast to Nintendo's more childish image.</p>
+                
+                <p>The slogan "Genesis does what Nintendon't" became the banner of this war, highlighting the technical advantages of Sega's console, such as its greater power and the Yamaha sound chip that offered better quality music.</p>
+                
+                <p>The competition intensified with the mascots of both companies: Nintendo's Mario vs Sega's Sonic. Sonic, with his defiant attitude and speed, perfectly represented the image Sega wanted to project. The console war reached its peak with the launch of games like Street Fighter II, which appeared first on SNES, and Mortal Kombat, whose uncensored version on Genesis gave Sega a significant advantage.</p>
+                
+                <p>Although Nintendo eventually won the battle in terms of sales, the competition greatly benefited consumers, driving innovation and reducing prices. This rivalry demonstrated that in the world of video games, fierce competition can be the best catalyst for progress.</p>
+            `
+        }
+    },
+    3: {
+        es: {
+            title: 'Guía para coleccionar videojuegos retro: Por dónde empezar',
+            date: '5 de Octubre, 2025',
+            image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&h=300&q=80',
+            content: `
+                <p>Coleccionar videojuegos retro puede ser un hobby increíblemente gratificante, pero también abrumador para quienes recién comienzan. Con tantas consolas, juegos y accesorios disponibles, es fácil perderse. Esta guía te ayudará a dar tus primeros pasos en el mundo del coleccionismo retro.</p>
+                
+                <h4>1. Define tu enfoque</h4>
+                <p>Antes de comprar nada, decide qué tipo de coleccionista quieres ser. ¿Te interesa una consola específica? ¿Una franquicia particular? ¿O prefieres tener una muestra representativa de varias épocas? Definir tu enfoque te ayudará a evitar compras impulsivas y a construir una colección coherente.</p>
+                
+                <h4>2. Investiga antes de comprar</h4>
+                <p>Conoce los precios de mercado, las ediciones especiales y los juegos más valiosos. Foros especializados, canales de YouTube y grupos de Facebook son excelentes recursos. Aprende a identificar productos originales y evita las réplicas.</p>
+                
+                <h4>3. Comienza con lo esencial</h4>
+                <p>No necesitas comprar todos los juegos de una consola para empezar. Adquiere primero los títulos más icónicos y representativos. Para NES, por ejemplo, Super Mario Bros., The Legend of Zelda y Metroid son excelentes puntos de partida.</p>
+                
+                <h4>4. Verifica el estado de los productos</h4>
+                <p>El estado es crucial en el coleccionismo. Los juegos completos en caja (CIB) valen significativamente más que los cartuchos sueltos. Revisa que los manuales, mapas y otros insertos estén presentes. Para las consolas, verifica que funcionen correctamente.</p>
+                
+                <h4>5. Conecta con la comunidad</h4>
+                <p>Únete a grupos locales de coleccionistas, participa en convenciones y ferias de intercambio. La comunidad retro es generalmente muy acogedora y estarás rodeado de personas con quienes compartir tu pasión.</p>
+                
+                <p>Recuerda: el coleccionismo debe ser una actividad placentera. No te obsesiones con completar colecciones rápidamente. Disfruta el proceso de búsqueda, el aprendizaje y, por supuesto, jugar con tus adquisiciones.</p>
+            `
+        },
+        en: {
+            title: 'Guide to Collecting Retro Video Games: Where to Start',
+            date: 'October 5, 2025',
+            image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&h=300&q=80',
+            content: `
+                <p>Collecting retro video games can be an incredibly rewarding hobby, but also overwhelming for those just starting out. With so many consoles, games and accessories available, it's easy to get lost. This guide will help you take your first steps in the world of retro collecting.</p>
+                
+                <h4>1. Define your focus</h4>
+                <p>Before buying anything, decide what kind of collector you want to be. Are you interested in a specific console? A particular franchise? Or do you prefer to have a representative sample from several eras? Defining your focus will help you avoid impulse purchases and build a coherent collection.</p>
+                
+                <h4>2. Research before buying</h4>
+                <p>Know market prices, special editions and the most valuable games. Specialized forums, YouTube channels and Facebook groups are excellent resources. Learn to identify original products and avoid replicas.</p>
+                
+                <h4>3. Start with the essentials</h4>
+                <p>You don't need to buy all the games of a console to start. First acquire the most iconic and representative titles. For NES, for example, Super Mario Bros., The Legend of Zelda and Metroid are excellent starting points.</p>
+                
+                <h4>4. Verify product condition</h4>
+                <p>Condition is crucial in collecting. Complete in box (CIB) games are worth significantly more than loose cartridges. Check that manuals, maps and other inserts are present. For consoles, verify that they work correctly.</p>
+                
+                <h4>5. Connect with the community</h4>
+                <p>Join local collector groups, participate in conventions and swap meets. The retro community is generally very welcoming and you'll be surrounded by people with whom to share your passion.</p>
+                
+                <p>Remember: collecting should be a pleasurable activity. Don't obsess over completing collections quickly. Enjoy the search process, the learning, and of course, playing with your acquisitions.</p>
+            `
+        }
+    }
+};
+
 // Función para cambiar idioma
 function setLanguage(lang) {
     const elements = document.querySelectorAll('[data-translate]');
@@ -282,10 +513,23 @@ function setLanguage(lang) {
     elements.forEach(element => {
         const key = element.getAttribute('data-translate');
         if (translations[lang] && translations[lang][key]) {
-            if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                element.placeholder = translations[lang][key];
+            if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA' || element.tagName === 'SELECT') {
+                if (element.tagName === 'SELECT') {
+                    // Para selects, actualizar las opciones si tienen data-translate
+                    const options = element.querySelectorAll('option');
+                    options.forEach(option => {
+                        const optionKey = option.getAttribute('data-translate');
+                        if (optionKey && translations[lang][optionKey]) {
+                            option.textContent = translations[lang][optionKey];
+                        }
+                    });
+                } else if (element.tagName === 'INPUT') {
+                    element.placeholder = translations[lang][key];
+                }
             } else {
-                element.innerHTML = translations[lang][key];
+                // Reemplazar placeholders en texto
+                let text = translations[lang][key];
+                element.innerHTML = text;
             }
         }
     });
@@ -301,6 +545,11 @@ function setLanguage(lang) {
     
     // Recargar efemérides con el nuevo idioma
     loadEfemerides();
+    
+    // Recargar productos con el nuevo idioma
+    if (window.productsData && window.productsData.length > 0) {
+        renderProductsTable();
+    }
 }
 
 // ========== BARRA DE PROGRESO ==========
@@ -401,72 +650,12 @@ function initBlogDialogs() {
     const blogDialogClose = document.getElementById('blogDialogClose');
     const readMoreBtns = document.querySelectorAll('.read-more-btn');
     
-    // Contenido de los blogs
-    const blogContent = {
-        1: {
-            title: 'La historia de Nintendo: De las cartas a los videojuegos',
-            date: '15 de Octubre, 2025',
-            image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&h=300&q=80',
-            content: `
-                <p>Nintendo es hoy en día sinónimo de videojuegos, pero pocos conocen sus humildes orígenes. Fundada en 1889 por Fusajiro Yamauchi en Kioto, Japón, la compañía comenzó fabricando cartas Hanafuda, un tipo de baraja tradicional japonesa.</p>
-                
-                <p>Durante más de medio siglo, Nintendo se dedicó exclusivamente a los juegos de cartas, expandiéndose gradualmente a otros tipos de juegos de mesa. No fue hasta la década de 1960 que la empresa comenzó a diversificarse, incursionando en negocios tan diversos como taxis, alimentos instantáneos y hasta una cadena de hoteles del amor.</p>
-                
-                <p>El giro hacia los videojuegos llegó en los años 70, cuando Nintendo comenzó a desarrollar máquinas arcade. Su primer gran éxito fue Donkey Kong en 1981, que introdujo al mundo a Mario (entonces llamado Jumpman). Este personaje se convertiría en el ícono más reconocible de la compañía.</p>
-                
-                <p>La revolución definitiva llegó en 1983 con el lanzamiento de la Family Computer (Famicom) en Japón, conocida internacionalmente como Nintendo Entertainment System (NES). Esta consola no solo salvó a la industria de los videojuegos tras la crisis de 1983, sino que estableció estándares de calidad y jugabilidad que perduran hasta hoy.</p>
-                
-                <p>Desde entonces, Nintendo ha continuado innovando con consolas como Game Boy, Super Nintendo, Nintendo 64, GameCube, Wii, Nintendo DS, 3DS, Switch y muchas más, siempre manteniendo su filosofía de priorizar la jugabilidad por encima de todo.</p>
-            `
-        },
-        2: {
-            title: 'Nintendo vs Sega: La batalla que definió una generación',
-            date: '10 de Octubre, 2025',
-            image: 'https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&h=300&q=80',
-            content: `
-                <p>Los años 90 fueron testigos de una de las rivalidades más épicas en la historia de los videojuegos: Nintendo contra Sega. Esta batalla no solo definió una generación de jugadores, sino que cambió para siempre la forma en que se comercializaban y percibían los videojuegos.</p>
-                
-                <p>Cuando Sega lanzó Genesis (Mega Drive fuera de América) en 1989, Nintendo dominaba el mercado con su NES. Sega adoptó una estrategia agresiva de marketing, posicionando a Genesis como la consola "cool" para adolescentes, en contraste con la imagen más infantil de Nintendo.</p>
-                
-                <p>El eslogan "Genesis does what Nintendon't" se convirtió en el estandarte de esta guerra, destacando las ventajas técnicas de la consola de Sega, como su mayor potencia y el chip de sonido Yamaha que ofrecía música de mejor calidad.</p>
-                
-                <p>La competencia se intensificó con las mascotas de ambas compañías: Mario de Nintendo contra Sonic de Sega. Sonic, con su actitud desafiante y velocidad, representaba perfectamente la imagen que Sega quería proyectar. La guerra de consolas llegó a su punto máximo con el lanzamiento de juegos como Street Fighter II, que apareció primero en SNES, y Mortal Kombat, cuya versión sin censura en Genesis le dio una ventaja significativa a Sega.</p>
-                
-                <p>Aunque Nintendo eventualmente ganó la batalla en términos de ventas, la competencia benefició enormemente a los consumidores, impulsando la innovación y reduciendo precios. Esta rivalidad demostró que en el mundo de los videojuegos, la competencia feroz puede ser el mejor catalizador para el progreso.</p>
-            `
-        },
-        3: {
-            title: 'Guía para coleccionar videojuegos retro: Por dónde empezar',
-            date: '5 de Octubre, 2025',
-            image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&h=300&q=80',
-            content: `
-                <p>Coleccionar videojuegos retro puede ser un hobby increíblemente gratificante, pero también abrumador para quienes recién comienzan. Con tantas consolas, juegos y accesorios disponibles, es fácil perderse. Esta guía te ayudará a dar tus primeros pasos en el mundo del coleccionismo retro.</p>
-                
-                <h4>1. Define tu enfoque</h4>
-                <p>Antes de comprar nada, decide qué tipo de coleccionista quieres ser. ¿Te interesa una consola específica? ¿Una franquicia particular? ¿O prefieres tener una muestra representativa de varias épocas? Definir tu enfoque te ayudará a evitar compras impulsivas y a construir una colección coherente.</p>
-                
-                <h4>2. Investiga antes de comprar</h4>
-                <p>Conoce los precios de mercado, las ediciones especiales y los juegos más valiosos. Foros especializados, canales de YouTube y grupos de Facebook son excelentes recursos. Aprende a identificar productos originales y evita las réplicas.</p>
-                
-                <h4>3. Comienza con lo esencial</h4>
-                <p>No necesitas comprar todos los juegos de una consola para empezar. Adquiere primero los títulos más icónicos y representativos. Para NES, por ejemplo, Super Mario Bros., The Legend of Zelda y Metroid son excelentes puntos de partida.</p>
-                
-                <h4>4. Verifica el estado de los productos</h4>
-                <p>El estado es crucial en el coleccionismo. Los juegos completos en caja (CIB) valen significativamente más que los cartuchos sueltos. Revisa que los manuales, mapas y otros insertos estén presentes. Para las consolas, verifica que funcionen correctamente.</p>
-                
-                <h4>5. Conecta con la comunidad</h4>
-                <p>Únete a grupos locales de coleccionistas, participa en convenciones y ferias de intercambio. La comunidad retro es generalmente muy acogedora y estarás rodeado de personas con quienes compartir tu pasión.</p>
-                
-                <p>Recuerda: el coleccionismo debe ser una actividad placentera. No te obsesiones con completar colecciones rápidamente. Disfruta el proceso de búsqueda, el aprendizaje y, por supuesto, jugar con tus adquisiciones.</p>
-            `
-        }
-    };
-    
     // Abrir dialog de blog
     readMoreBtns.forEach(btn => {
         btn.addEventListener('click', function() {
             const blogId = this.closest('.blog-card').getAttribute('data-blog-id');
-            const content = blogContent[blogId];
+            const currentLang = localStorage.getItem('language') || 'es';
+            const content = blogContent[blogId][currentLang];
             
             if (content) {
                 document.getElementById('blogDialogContent').innerHTML = `
@@ -501,80 +690,503 @@ function initBlogDialogs() {
     });
 }
 
+// ========== PRODUCTOS ==========
+// Variables globales para productos
+let allProducts = [];
+let filteredProducts = [];
+let currentPage = 1;
+const productsPerPage = 25;
+
+function initProducts() {
+    const searchFilter = document.getElementById('searchFilter');
+    const platformFilter = document.getElementById('platformFilter');
+    const statusFilter = document.getElementById('statusFilter');
+    const clearFiltersBtn = document.getElementById('clearFilters');
+    const prevPageBtn = document.getElementById('prevPage');
+    const nextPageBtn = document.getElementById('nextPage');
+    
+    // Cargar productos
+    loadProducts();
+    
+    // Event listeners para filtros
+    searchFilter.addEventListener('input', filterProducts);
+    platformFilter.addEventListener('change', filterProducts);
+    statusFilter.addEventListener('change', filterProducts);
+    clearFiltersBtn.addEventListener('click', clearFilters);
+    
+    // Event listeners para paginación
+    prevPageBtn.addEventListener('click', () => changePage(-1));
+    nextPageBtn.addEventListener('click', () => changePage(1));
+}
+
+// Cargar productos desde Google Sheets
+async function loadProducts() {
+    const tableBody = document.getElementById('productsTableBody');
+    const productsCounter = document.getElementById('productsCounter');
+    
+    try {
+        // URL de tu Google Sheet (formato CSV)
+        const sheetId = '18kZ6wyheBWMmoa5yb1PR_XqhqzHCTAlT';
+        const sheetUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv`;
+        
+        const response = await fetch(sheetUrl);
+        const csvData = await response.text();
+        
+        // Parsear CSV
+        const products = parseCSV(csvData);
+        
+        // Guardar productos globalmente
+        allProducts = products;
+        filteredProducts = [...products];
+        
+        // Actualizar filtro de plataformas
+        updatePlatformFilter(products);
+        
+        // Renderizar tabla
+        renderProductsTable();
+        
+        // Actualizar contador
+        updateProductsCounter();
+        
+    } catch (error) {
+        console.error('Error cargando productos:', error);
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="7" class="loading-cell">
+                    Error cargando productos. Por favor, intenta más tarde.
+                </td>
+            </tr>
+        `;
+        productsCounter.textContent = 'Error cargando productos';
+    }
+}
+
+// Parsear CSV a objetos - CORREGIDO
+function parseCSV(csvText) {
+    const lines = csvText.split('\n');
+    
+    // Saltar la primera línea (encabezados)
+    const dataLines = lines.slice(1);
+    
+    const products = [];
+    
+    dataLines.forEach(line => {
+        if (line.trim() === '') return;
+        
+        // Manejar comas dentro de comillas
+        const values = [];
+        let currentValue = '';
+        let insideQuotes = false;
+        
+        for (let i = 0; i < line.length; i++) {
+            const char = line[i];
+            
+            if (char === '"') {
+                insideQuotes = !insideQuotes;
+            } else if (char === ',' && !insideQuotes) {
+                values.push(currentValue.trim());
+                currentValue = '';
+            } else {
+                currentValue += char;
+            }
+        }
+        
+        // Agregar el último valor
+        values.push(currentValue.trim());
+        
+        // Crear objeto producto con índices específicos
+        const product = {
+            Num: parseInt(values[0]) || 0,
+            Product: values[1] || '',
+            Platform: values[2] || '',
+            Sale: parseFloat(values[3]) || 0,
+            Price: parseFloat(values[4]) || 0,
+            Stock: parseInt(values[5]) || 0,
+            Pulir: values[6] || '0',
+            Sold: values[7] || '0',
+            UserId: values[8] || '',
+            NombreS: values[9] || '',
+            'Mét Pago': values[10] || '',
+            Test: values[11] || '0',
+            Fecha: values[12] || '',
+            Entreg: values[13] || '0',
+            Pago: parseFloat(values[14]) || 0
+        };
+        
+        // Convertir valores string a números para comparaciones
+        product.Pulir = product.Pulir === '1' || product.Pulir === 'Si' ? 1 : 0;
+        product.Sold = product.Sold === '1' || product.Sold === 'Si' ? 1 : 0;
+        product.Test = product.Test === '1' || product.Test === 'Si' ? 1 : 0;
+        product.Entreg = product.Entreg === '1' || product.Entreg === 'Si' ? 1 : 0;
+        
+        products.push(product);
+    });
+    
+    return products;
+}
+
+// Renderizar tabla de productos
+function renderProductsTable() {
+    const tableBody = document.getElementById('productsTableBody');
+    const currentLang = localStorage.getItem('language') || 'es';
+    
+    if (filteredProducts.length === 0) {
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="7" class="loading-cell" data-translate="no-products">
+                    No hay productos disponibles.
+                </td>
+            </tr>
+        `;
+        setLanguage(currentLang);
+        updatePaginationButtons();
+        return;
+    }
+    
+    // Calcular índices para paginación
+    const startIndex = (currentPage - 1) * productsPerPage;
+    const endIndex = startIndex + productsPerPage;
+    const productsToShow = filteredProducts.slice(startIndex, endIndex);
+    
+    let html = '';
+    
+    productsToShow.forEach(product => {
+        const statusClass = product.Sold == 1 ? 'status-sold' : 'status-available';
+        const statusText = product.Sold == 1 ? 
+            (currentLang === 'es' ? 'Vendido' : 'Sold') : 
+            (currentLang === 'es' ? 'Disponible' : 'Available');
+        
+        html += `
+            <tr data-product-id="${product.Num || ''}">
+                <td>${product.Num || ''}</td>
+                <td>${product.Product || ''}</td>
+                <td>${product.Platform || ''}</td>
+                <td>$${product.Sale ? product.Sale.toLocaleString('es-CL') : '0'}</td>
+                <td><span class="stock-badge">${product.Stock || 0}</span></td>
+                <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                <td class="actions-cell">
+                    <button class="btn btn-primary btn-small view-product-btn" data-product-id="${product.Num || ''}">
+                        <i class="fas fa-eye"></i> <span data-translate="view-details">Ver detalles</span>
+                    </button>
+                </td>
+            </tr>
+        `;
+    });
+    
+    tableBody.innerHTML = html;
+    
+    // Agregar event listeners a los botones de ver detalles
+    document.querySelectorAll('.view-product-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const productId = this.getAttribute('data-product-id');
+            const product = allProducts.find(p => p.Num == productId);
+            if (product) {
+                showProductModal(product);
+            }
+        });
+    });
+    
+    // Actualizar paginación
+    updatePagination();
+    updatePaginationButtons();
+    
+    // Traducir elementos
+    setLanguage(currentLang);
+}
+
+// Actualizar filtro de plataformas - CORREGIDO
+function updatePlatformFilter(products) {
+    const platformFilter = document.getElementById('platformFilter');
+    const platforms = new Set();
+    
+    products.forEach(product => {
+        if (product.Platform && product.Platform.trim() !== '') {
+            platforms.add(product.Platform.trim());
+        }
+    });
+    
+    // Limpiar opciones excepto la primera
+    while (platformFilter.options.length > 1) {
+        platformFilter.remove(1);
+    }
+    
+    // Agregar plataformas únicas ordenadas alfabéticamente
+    Array.from(platforms).sort((a, b) => a.localeCompare(b)).forEach(platform => {
+        const option = document.createElement('option');
+        option.value = platform;
+        option.textContent = platform;
+        platformFilter.appendChild(option);
+    });
+}
+
+// Filtrar productos - CORREGIDO
+function filterProducts() {
+    const searchFilter = document.getElementById('searchFilter').value.toLowerCase();
+    const platformFilter = document.getElementById('platformFilter').value;
+    const statusFilter = document.getElementById('statusFilter').value;
+    
+    filteredProducts = allProducts.filter(product => {
+        // Filtrar por búsqueda de texto
+        if (searchFilter) {
+            const searchText = searchFilter.toLowerCase();
+            const productText = (product.Product || '').toLowerCase();
+            const platformText = (product.Platform || '').toLowerCase();
+            
+            if (!productText.includes(searchText) && !platformText.includes(searchText)) {
+                return false;
+            }
+        }
+        
+        // Filtrar por plataforma
+        if (platformFilter !== 'all' && product.Platform !== platformFilter) {
+            return false;
+        }
+        
+        // Filtrar por estado
+        if (statusFilter === 'available' && product.Sold != 0) {
+            return false;
+        }
+        if (statusFilter === 'sold' && product.Sold != 1) {
+            return false;
+        }
+        
+        return true;
+    });
+    
+    // Resetear a página 1
+    currentPage = 1;
+    
+    // Renderizar productos filtrados
+    renderProductsTable();
+    
+    // Actualizar contador
+    updateProductsCounter();
+}
+
+// Limpiar filtros
+function clearFilters() {
+    document.getElementById('searchFilter').value = '';
+    document.getElementById('platformFilter').value = 'all';
+    document.getElementById('statusFilter').value = 'all';
+    filterProducts();
+}
+
+// Actualizar contador de productos
+function updateProductsCounter() {
+    const productsCounter = document.getElementById('productsCounter');
+    const currentLang = localStorage.getItem('language') || 'es';
+    const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+    
+    const text = currentLang === 'es' 
+        ? `Mostrando ${Math.min(filteredProducts.length, productsPerPage)} de ${filteredProducts.length} productos`
+        : `Showing ${Math.min(filteredProducts.length, productsPerPage)} of ${filteredProducts.length} products`;
+    
+    productsCounter.textContent = text;
+    productsCounter.dataset.count = Math.min(filteredProducts.length, productsPerPage);
+    productsCounter.dataset.total = filteredProducts.length;
+}
+
+// Actualizar paginación
+function updatePagination() {
+    const currentPageElement = document.getElementById('currentPage');
+    const totalPagesElement = document.getElementById('totalPages');
+    const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+    
+    currentPageElement.textContent = currentPage;
+    totalPagesElement.textContent = totalPages;
+}
+
+// Actualizar botones de paginación
+function updatePaginationButtons() {
+    const prevPageBtn = document.getElementById('prevPage');
+    const nextPageBtn = document.getElementById('nextPage');
+    const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+    
+    prevPageBtn.disabled = currentPage === 1;
+    nextPageBtn.disabled = currentPage === totalPages || totalPages === 0;
+}
+
+// Cambiar página
+function changePage(direction) {
+    const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+    const newPage = currentPage + direction;
+    
+    if (newPage >= 1 && newPage <= totalPages) {
+        currentPage = newPage;
+        renderProductsTable();
+    }
+}
+
+// Mostrar modal de producto - CORREGIDO
+function showProductModal(product) {
+    const modalOverlay = document.getElementById('productModalOverlay');
+    const modalContent = document.getElementById('productModalContent');
+    const currentLang = localStorage.getItem('language') || 'es';
+    
+    // Traducir valores booleanos
+    const translateYesNo = (value) => value == 1 ? 
+        (currentLang === 'es' ? 'Sí' : 'Yes') : 
+        (currentLang === 'es' ? 'No' : 'No');
+    
+    const translateDelivered = (value) => value == 1 ? 
+        (currentLang === 'es' ? 'Entregado' : 'Delivered') : 
+        (currentLang === 'es' ? 'No entregado' : 'Not delivered');
+    
+    const translatePolish = (value) => value == 1 ? 
+        (currentLang === 'es' ? 'Pulir' : 'Polish') : 
+        (currentLang === 'es' ? 'No pulir' : 'No polish');
+    
+    modalContent.innerHTML = `
+        <div class="modal-header">
+            <h3>${product.Product || ''}</h3>
+            <span class="status-badge ${product.Sold == 1 ? 'status-sold' : 'status-available'}">
+                ${product.Sold == 1 ? 
+                    (currentLang === 'es' ? 'Vendido' : 'Sold') : 
+                    (currentLang === 'es' ? 'Disponible' : 'Available')}
+            </span>
+        </div>
+        
+        <div class="modal-details">
+            <div class="detail-item">
+                <label data-translate="modal-num">Número</label>
+                <span>${product.Num || ''}</span>
+            </div>
+            
+            <div class="detail-item">
+                <label data-translate="modal-product">Producto</label>
+                <span>${product.Product || ''}</span>
+            </div>
+            
+            <div class="detail-item">
+                <label data-translate="modal-platform">Plataforma</label>
+                <span>${product.Platform || ''}</span>
+            </div>
+            
+            <div class="detail-item">
+                <label data-translate="modal-sale">Precio de Venta</label>
+                <span>$${product.Sale ? product.Sale.toLocaleString('es-CL') : '0'}</span>
+            </div>
+            
+            <div class="detail-item">
+                <label data-translate="modal-price">Precio de Compra</label>
+                <span>$${product.Price ? product.Price.toLocaleString('es-CL') : '0'}</span>
+            </div>
+            
+            <div class="detail-item">
+                <label data-translate="modal-stock">Stock</label>
+                <span>${product.Stock || 0}</span>
+            </div>
+            
+            <div class="detail-item">
+                <label data-translate="modal-polish">Pulir</label>
+                <span>${translatePolish(product.Pulir)}</span>
+            </div>
+            
+            ${product.Sold == 1 ? `
+                <div class="detail-item">
+                    <label data-translate="modal-userid">ID Usuario</label>
+                    <span>${product.UserId || ''}</span>
+                </div>
+                
+                <div class="detail-item">
+                    <label data-translate="modal-username">Nombre Instagram</label>
+                    <span>${product.NombreS || ''}</span>
+                </div>
+                
+                <div class="detail-item">
+                    <label data-translate="modal-payment">Método Pago</label>
+                    <span>${product['Mét Pago'] || ''}</span>
+                </div>
+                
+                <div class="detail-item">
+                    <label data-translate="modal-date">Fecha</label>
+                    <span>${product.Fecha || ''}</span>
+                </div>
+                
+                <div class="detail-item">
+                    <label data-translate="modal-delivered">Entregado</label>
+                    <span>${translateDelivered(product.Entreg)}</span>
+                </div>
+                
+                <div class="detail-item">
+                    <label data-translate="modal-payment-price">Pago</label>
+                    <span>$${product.Pago ? product.Pago.toLocaleString('es-CL') : '0'}</span>
+                </div>
+            ` : ''}
+        </div>
+        
+        <div class="modal-actions">
+            <button class="btn btn-secondary" id="modalCloseBtn">
+                <span data-translate="modal-close">Cerrar</span>
+            </button>
+        </div>
+    `;
+    
+    modalOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Traducir elementos del modal
+    const modalElements = modalContent.querySelectorAll('[data-translate]');
+    modalElements.forEach(element => {
+        const key = element.getAttribute('data-translate');
+        if (translations[currentLang] && translations[currentLang][key]) {
+            element.textContent = translations[currentLang][key];
+        }
+    });
+    
+    // Cerrar modal
+    const closeBtn = modalContent.querySelector('#modalCloseBtn');
+    closeBtn.addEventListener('click', () => {
+        modalOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+    
+    // Cerrar con el botón X
+    const modalCloseBtn = document.getElementById('productModalClose');
+    modalCloseBtn.addEventListener('click', () => {
+        modalOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+    
+    // Cerrar al hacer clic fuera
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+}
+
 // ========== POSTS DE INSTAGRAM ==========
 function loadInstagramPosts() {
     const instagramGrid = document.getElementById('instagramGrid');
     
-    // Datos simulados de Instagram (en un caso real, se obtendrían de una API)
+    // Datos simulados de Instagram
     const instagramPosts = [
         {
-        image: "../img/Post01.jpeg",
-        title: "[❌] 3419 PS3 Slim azul 320Gb, 1 control org. y cables (HEN) $110K",
-        description: `- Sony PS3 Slim Splash Blue NTSC-J original Japonesa model CECH-3000B.
-- Control azul org.
-- Cable corriente directo a los 220V.
-- Cable HDMI.
-- Lector operativo compatible con juegos originales americanos.
-- Liberada con HEN, tienda y juegos cargados.
-- 320 GB de Disco Duro.
-- Mantención y limpieza profunda a consola y control.
-
-[❌]: VENDIDO
-[R]: RESERVADO
-[✅]: DISPONIBLE
-
-Siglas:
-org: original`,
-        link: "https://www.instagram.com/p/DPU_RqCjJYG/"
-    },
-    {
-        image: "../img/Post02.jpeg",
-        title: "[✅] 3172 Mario's Time Machine (CIB-Poster) [SNES] $90K",
-        description: `- Caja Mario TM NTSC U/C original americana impecable estado.
-- Juego original impecable estado.
-- Caja interna, dust cover.
-- Manual y Poster original.
-- Protector PET de regalo.
-
-[✅]: DISPONIBLE`,
-        link: "https://www.instagram.com/p/DLljA0wsCbf/"
-    },
-    {
-        image: "../img/Post03.jpeg",
-        title: "[❌] 3418 PS2 Fat en caja 30000, 1 control/cables org. 500Gb $135K",
-        description: `- Sony PS2 Fat negra NTSC-J original Japonesa model 30000.
-- Control negro org.
-- Cable corriente con minwa 110V-220V incluido.
-- Cable AV RCA Sony 3 colores org.
-- Memory Card con Free MC Boot + OPL.
-- Adaptador para Discos Duros Sata.
-- Disco Duro Sata 500 Gb con muchos juegos includos.
-- Lector NO compatible con juegos originales americanos.
-[❌]: VENDIDO
-[R]: RESERVADO
-[✅]: DISPONIBLE
-Siglas:
-org: original`,
-        link: "https://www.instagram.com/p/DPU8g8JjE5g/"
-    },
-    {
-        image: "../img/Post04.jpeg",
-        title: "[❌] 3417 PS1 Fat en caja, control y cables org. $120K",
-        description: `- Sony PS1 Fat NTSC U/C original americana model SCPH-7501.
-- Control plomo Sony c/análogo org.
-- Cable corriente con Minwa 110V-220V incluido.
-- Cable AV RCA Sony 3 colores org.
-- Lector funcionando bien.
-- SIN chip de liberación.
-- Mantención y limpieza profunda a consola y control.
-* La serie de la caja y consola NO coinciden.
-[❌]: VENDIDO
-[R]: RESERVADO
-[✅]: DISPONIBLE
-Siglas:
-org: original`,
-        link: "https://www.instagram.com/p/DPU5m7jjPLu/"
-    }
+            image: 'https://images.unsplash.com/photo-1593305841991-05c297ba4575?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&h=500&q=80',
+            title: 'Nuevo Lote de NES',
+            description: 'Acabamos de recibir un lote increíble de NES con juegos clásicos como Super Mario Bros 3, Zelda y Metroid. ¡No te los pierdas!',
+            link: 'https://www.instagram.com/ropavejero.retro/'
+        },
+        {
+            image: 'https://images.unsplash.com/photo-1486572788966-cfd3df1f5b42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&h=500&q=80',
+            title: 'GameBoy Color Restaurado',
+            description: 'Este GameBoy Color fue completamente restaurado por nuestro equipo. Pantalla nueva, carcasa original y batería de larga duración.',
+            link: 'https://www.instagram.com/ropavejero.retro/'
+        },
+        {
+            image: 'https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&h=500&q=80',
+            title: 'PlayStation 1 con Juegos',
+            description: 'Pack completo de PS1 con 2 controles, memory card y 5 juegos incluidos. Perfecto estado y listo para jugar.',
+            link: 'https://www.instagram.com/ropavejero.retro/'
+        },
+        {
+            image: 'https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&h=500&q=80',
+            title: 'Colección Sega Genesis',
+            description: 'Impresionante colección de juegos de Sega Genesis. Desde Sonic hasta Streets of Rage, tenemos los clásicos que buscas.',
+            link: 'https://www.instagram.com/ropavejero.retro/'
+        }
     ];
     
     // Generar HTML para los posts
@@ -606,7 +1218,7 @@ function loadEfemerides() {
     const day = String(now.getDate()).padStart(2, '0');
     const month = String(now.getMonth() + 1).padStart(2, '0'); // Los meses van de 0 a 11
     const dateKey = `${month}/${day}`; // Formato nuevo: MM/DD
-
+    
     // Formatear fecha para mostrar
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const currentLang = localStorage.getItem('language') || 'es';
@@ -642,8 +1254,8 @@ function loadEfemerides() {
                 efemeridesCard.innerHTML = `
                     <div class="efemerides-header">
                         <span class="efemerides-badge" data-translate="efemerides-badge">Efeméride del día</span>
-                        <h3 data-translate="no-efemerides">Hoy no hay efemérides registradas. ¡Disfruta de tus juegos retro!</h3>
-                        <p></p>
+                        <h3 data-translate="no-efemerides">Hoy no hay efemérides registradas.</h3>
+                        <p>¡Disfruta de tus juegos retro!</p>
                     </div>
                 `;
             }
