@@ -799,25 +799,14 @@ function parseCSV(csvText) {
             Num: parseInt(values[0]) || 0,
             Product: values[1] || '',
             Platform: values[2] || '',
-            Sale: parseFloat(values[3]) || 0,
-            Price: parseFloat(values[4]) || 0,
-            Stock: parseInt(values[5]) || 0,
-            Pulir: values[6] || '0',
-            Sold: values[7] || '0',
-            UserId: values[8] || '',
-            NombreS: values[9] || '',
-            'Mét Pago': values[10] || '',
-            Test: values[11] || '0',
-            Fecha: values[12] || '',
-            Entreg: values[13] || '0',
-            Pago: parseFloat(values[14]) || 0
+            Sale: values[3] || 'X',
+            Neto: values[4] || 'X',
+            Stock: values[5] || '0',
+            Sold: values[7] || '0'
         };
         
         // Convertir valores string a números para comparaciones
-        product.Pulir = product.Pulir === '1' || product.Pulir === 'Si' ? 1 : 0;
         product.Sold = product.Sold === '1' || product.Sold === 'Si' ? 1 : 0;
-        product.Test = product.Test === '1' || product.Test === 'Si' ? 1 : 0;
-        product.Entreg = product.Entreg === '1' || product.Entreg === 'Si' ? 1 : 0;
         
         products.push(product);
     });
@@ -856,21 +845,23 @@ function renderProductsTable() {
             (currentLang === 'es' ? 'Vendido' : 'Sold') : 
             (currentLang === 'es' ? 'Disponible' : 'Available');
         
-        html += `
-            <tr data-product-id="${product.Num || ''}">
-                <td>${product.Num || ''}</td>
-                <td>${product.Product || ''}</td>
-                <td>${product.Platform || ''}</td>
-                <td>$${product.Sale ? product.Sale.toLocaleString('es-CL') : '0'}</td>
-                <td><span class="stock-badge">${product.Stock || 0}</span></td>
-                <td><span class="status-badge ${statusClass}">${statusText}</span></td>
-                <td class="actions-cell">
-                    <button class="btn btn-primary btn-small view-product-btn" data-product-id="${product.Num || ''}">
-                        <i class="fas fa-eye"></i> <span data-translate="view-details">Ver detalles</span>
-                    </button>
-                </td>
-            </tr>
-        `;
+        if( product.Num && product.Num !== '' ) {
+            html += `
+                <tr data-product-id="${product.Num}">
+                    <td>${product.Num || ''}</td>
+                    <td>${product.Product || ''}</td>
+                    <td>${product.Platform || ''}</td>
+                    <td>${product.Neto ? product.Neto : '0'}</td>
+                    <td><span class="stock-badge">${product.Stock || 0}</span></td>
+                    <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                    <td class="actions-cell">
+                        <button class="btn btn-primary btn-small view-product-btn" data-product-id="${product.Num || ''}">
+                            <i class="fas fa-eye"></i> <span data-translate="view-details">Ver detalles</span>
+                        </button>
+                    </td>
+                </tr>
+            `;
+        }
     });
     
     tableBody.innerHTML = html;
@@ -1028,13 +1019,13 @@ function showProductModal(product) {
         (currentLang === 'es' ? 'Sí' : 'Yes') : 
         (currentLang === 'es' ? 'No' : 'No');
     
-    const translateDelivered = (value) => value == 1 ? 
+    /*const translateDelivered = (value) => value == 1 ? 
         (currentLang === 'es' ? 'Entregado' : 'Delivered') : 
         (currentLang === 'es' ? 'No entregado' : 'Not delivered');
     
     const translatePolish = (value) => value == 1 ? 
         (currentLang === 'es' ? 'Pulir' : 'Polish') : 
-        (currentLang === 'es' ? 'No pulir' : 'No polish');
+        (currentLang === 'es' ? 'No pulir' : 'No polish');*/
     
     modalContent.innerHTML = `
         <div class="modal-header">
@@ -1064,55 +1055,14 @@ function showProductModal(product) {
             
             <div class="detail-item">
                 <label data-translate="modal-sale">Precio de Venta</label>
-                <span>$${product.Sale ? product.Sale.toLocaleString('es-CL') : '0'}</span>
-            </div>
-            
-            <div class="detail-item">
-                <label data-translate="modal-price">Precio de Compra</label>
-                <span>$${product.Price ? product.Price.toLocaleString('es-CL') : '0'}</span>
+                <span>${product.Neto ? product.Neto.toLocaleString('es-CL') : '0'}</span>
             </div>
             
             <div class="detail-item">
                 <label data-translate="modal-stock">Stock</label>
                 <span>${product.Stock || 0}</span>
             </div>
-            
-            <div class="detail-item">
-                <label data-translate="modal-polish">Pulir</label>
-                <span>${translatePolish(product.Pulir)}</span>
-            </div>
-            
-            ${product.Sold == 1 ? `
-                <div class="detail-item">
-                    <label data-translate="modal-userid">ID Usuario</label>
-                    <span>${product.UserId || ''}</span>
-                </div>
-                
-                <div class="detail-item">
-                    <label data-translate="modal-username">Nombre Instagram</label>
-                    <span>${product.NombreS || ''}</span>
-                </div>
-                
-                <div class="detail-item">
-                    <label data-translate="modal-payment">Método Pago</label>
-                    <span>${product['Mét Pago'] || ''}</span>
-                </div>
-                
-                <div class="detail-item">
-                    <label data-translate="modal-date">Fecha</label>
-                    <span>${product.Fecha || ''}</span>
-                </div>
-                
-                <div class="detail-item">
-                    <label data-translate="modal-delivered">Entregado</label>
-                    <span>${translateDelivered(product.Entreg)}</span>
-                </div>
-                
-                <div class="detail-item">
-                    <label data-translate="modal-payment-price">Pago</label>
-                    <span>$${product.Pago ? product.Pago.toLocaleString('es-CL') : '0'}</span>
-                </div>
-            ` : ''}
+
         </div>
         
         <div class="modal-actions">
