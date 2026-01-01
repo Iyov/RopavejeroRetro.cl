@@ -229,7 +229,7 @@ const translations = {
         'contact-excel': 'Excel Disponibles',
         
         // Footer
-        'footer-copyright': '© 2025 @Ropavejero.Retro Todos los derechos reservados.',
+        'footer-copyright': '© 2026 @Ropavejero.Retro Todos los derechos reservados.',
         
         // Tooltip
         'whatsapp-tooltip': 'Comunícate con nosotros'
@@ -375,7 +375,7 @@ const translations = {
         'contact-excel': 'Available Excel',
         
         // Footer
-        'footer-copyright': '© 2025 @Ropavejero.Retro All rights reserved.',
+        'footer-copyright': '© 2026 @Ropavejero.Retro All rights reserved.',
         
         // Tooltip
         'whatsapp-tooltip': 'Contact us'
