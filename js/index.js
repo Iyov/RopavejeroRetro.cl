@@ -802,6 +802,7 @@ function parseCSV(csvText) {
             Sale: values[3] || 'X',
             Neto: values[4] || 'X',
             Stock: values[5] || '0',
+            Link: values[6] || '',
             Sold: values[7] || '0'
         };
         
@@ -855,8 +856,11 @@ function renderProductsTable() {
                     <td><span class="stock-badge">${product.Stock || 0}</span></td>
                     <td><span class="status-badge ${statusClass}">${statusText}</span></td>
                     <td class="actions-cell">
-                        <button class="btn btn-primary btn-small view-product-btn" data-product-id="${product.Num || ''}">
-                            <i class="fas fa-eye"></i> <span data-translate="view-details">Ver detalles</span>
+                        <button class="btn btn-primary btn-small view-product-btn" data-product-id="${product.Num || ''}" alt="Ver detalles">
+                            <i class="fas fa-eye"></i> <!--<span data-translate="view-details">Ver detalles</span>-->
+                        </button>
+                        <button class="btn btn-primary btn-small link-product-btn" data-product-link="${product.Link}" alt="Link Instagram">
+                            <i class="fab fa-instagram"></i>
                         </button>
                     </td>
                 </tr>
@@ -874,6 +878,13 @@ function renderProductsTable() {
             if (product) {
                 showProductModal(product);
             }
+        });
+    });
+
+    document.querySelectorAll('.link-product-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            let productLink = this.getAttribute('data-product-link');
+            window.open(getLinkProductInstagram(productLink), '_blank');
         });
     });
     
@@ -1063,6 +1074,11 @@ function showProductModal(product) {
                 <span>${product.Stock || 0}</span>
             </div>
 
+            <div class="detail-item">
+                <label >Link</label>
+                <span>${getLinkProductInstagram(product.Link)}</span>
+            </div>
+
         </div>
         
         <div class="modal-actions">
@@ -1105,6 +1121,16 @@ function showProductModal(product) {
             document.body.style.overflow = '';
         }
     });
+}
+
+// Obtener Link de producto en Instagram
+function getLinkProductInstagram(productLink) {
+    if (productLink) {
+        productLink = "https://www.instagram.com/p/" + productLink + "/";
+    } else {
+        productLink = "https://www.instagram.com/ropavejero.retro/";
+    }
+    return productLink;
 }
 
 // ========== POSTS DE INSTAGRAM ==========
