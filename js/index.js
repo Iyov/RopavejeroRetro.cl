@@ -1135,15 +1135,9 @@ org: original`,
         },
         {
             image: "../img/Post02.jpeg",
-            title: "[✅] 3172 Mario's Time Machine (CIB-Poster) [SNES] $90K",
-            description: `- Caja Mario TM NTSC U/C original americana impecable estado.
-- Juego original impecable estado.
-- Caja interna, dust cover.
-- Manual y Poster original.
-- Protector PET de regalo.
-
-[✅]: DISPONIBLE`,
-            link: "https://www.instagram.com/p/DLljA0wsCbf/"
+            title: "Feliz Navidad y Próspero Año Nuevo 2026",
+            description: `Esperamos que pasen un feliz año 2026, lleno de bendiciones, éxito y salud. Muchas gracias 2025 por todo y allá vamos 2026!`,
+            link: "https://www.instagram.com/p/DS82t4FFa2x/"
         },
         {
             image: "../img/Post03.jpeg",
@@ -1183,38 +1177,30 @@ org: original`,
         },
         {
             image: "../img/Post05.jpeg",
-            title: "Ferias Retro de Noviembre/2025:",
-            description: `
-Sáb 29/Nov: Feria Retro San Bernardo
-➡ Stand Nº17
-📍 Parque García de la Huerta, San Bernardo
-📍 América #504, San Bernardo (ex Casa de la Cultura)
+            title: "[✅] 3676 Spiderman Edge of Time (CIB) [Wii] $20K",
+            description: `[✅]: DISPONIBLE
 
-🕒 De 12:00 a 19:00 hrs
-🫂 Acceso Gratis para todo público
-🎮 Llevaremos TODOS nuestros juegos
-¡Nos vemos!
-
-#FeriaRetro #FeriaRetroRancagua #FeriaRetroSanBernardo #RopavejeroRetro`,
-            link: "https://www.instagram.com/p/DQ9lvIeEa82/"
+Siglas:
+CIB: Caja, Juego, Manual`,
+            link: "https://www.instagram.com/p/DSdo4Y_laqb/"
         },
         {
             image: "../img/Post06.jpeg",
             title: "Varios | 06/Nov/25",
-            description: `[✅] 3615 GTA V (GH-CIB) [PS3] $10K
+            description: `[❌] 3615 GTA V (GH-CIB) [PS3] $10K
 [✅] 3616 GTA V (BL-CIB-C/M-Japo) [PS3] $12K
 [✅] 3617 Far Cry Instincts (CIB) [Xbox] $10K
 [✅] 3618 StarCraft II: Wings of Liberty (CIB) [PC] $12K
 [✅] 3619 Guitar Hero World Tour (CIB) [PC] $12K
-[✅] 3621 Yoshi's Island (CIB) [SFC] $30K
+[❌] 3621 Yoshi's Island (CIB) [SFC] $30K
 [✅] 3623 Super Bomberman W (CIB) [SFC] $30K
 [✅] 3624 Street Fighter 30th Anniversary (CIB) [Switch] $30K
-[✅] 3625 Super Mario RPG (Sealed-Japo) [Switch] $35K
+[❌] 3625 Super Mario RPG (Sealed-Japo) [Switch] $35K
 [✅] 3626 Paper Mario: The Origami King (Sealed-Japo) [Switch] $35K
-[✅] 3628 Control PS1 plomo org. (detalle stick) [Control] $15K
+[❌] 3628 Control PS1 plomo org. (detalle stick) [Control] $15K
 [✅] 3629 Control PS1 plomo org. (detalle stick y marca Sony adelante) [Control] $13K
 [✅] 3630 Control N64 azul trasparente (Repro) [Control] $15K
-[✅] 3631 Control N64 azul trasparente (Repro-Estilo Hori) [Control] $15K
+[❌] 3631 Control N64 azul trasparente (Repro-Estilo Hori) [Control] $15K
 [✅] 3632 Control Gamecube violeta (Repro) [Control] $15K
 [✅] 3633 Nunchuck blanco Nintendo Wii [Acc] $5K
 [✅] 3634 Nunchuck blanco Nintendo Wii [Acc] $5K
