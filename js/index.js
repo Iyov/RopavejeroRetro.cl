@@ -387,7 +387,7 @@ const blogContent = {
     1: {
         es: {
             title: 'La historia de Nintendo: De las cartas a los videojuegos',
-            date: '15 de Octubre, 2025',
+            date: '02 de Enero, 2026',
             image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&h=300&q=80',
             content: `
                 <p>Nintendo es hoy en día sinónimo de videojuegos, pero pocos conocen sus humildes orígenes. Fundada en 1889 por Fusajiro Yamauchi en Kioto, Japón, la compañía comenzó fabricando cartas Hanafuda, un tipo de baraja tradicional japonesa.</p>
@@ -403,7 +403,7 @@ const blogContent = {
         },
         en: {
             title: 'The History of Nintendo: From Cards to Video Games',
-            date: 'October 15, 2025',
+            date: 'January 02, 2026',
             image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&h=300&q=80',
             content: `
                 <p>Nintendo is today synonymous with video games, but few know its humble origins. Founded in 1889 by Fusajiro Yamauchi in Kyoto, Japan, the company began by manufacturing Hanafuda cards, a type of traditional Japanese deck.</p>
@@ -421,7 +421,7 @@ const blogContent = {
     2: {
         es: {
             title: 'Nintendo vs Sega: La batalla que definió una generación',
-            date: '10 de Octubre, 2025',
+            date: '02 de Enero, 2026',
             image: 'https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&h=300&q=80',
             content: `
                 <p>Los años 90 fueron testigos de una de las rivalidades más épicas en la historia de los videojuegos: Nintendo contra Sega. Esta batalla no solo definió una generación de jugadores, sino que cambió para siempre la forma en que se comercializaban y percibían los videojuegos.</p>
@@ -437,7 +437,7 @@ const blogContent = {
         },
         en: {
             title: 'Nintendo vs Sega: The Battle That Defined a Generation',
-            date: 'October 10, 2025',
+            date: 'January 02, 2026',
             image: 'https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&h=300&q=80',
             content: `
                 <p>The 90s witnessed one of the most epic rivalries in video game history: Nintendo vs Sega. This battle not only defined a generation of players, but forever changed the way video games were marketed and perceived.</p>
@@ -455,7 +455,7 @@ const blogContent = {
     3: {
         es: {
             title: 'Guía para coleccionar videojuegos retro: Por dónde empezar',
-            date: '5 de Octubre, 2025',
+            date: '02 de Enero, 2026',
             image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&h=300&q=80',
             content: `
                 <p>Coleccionar videojuegos retro puede ser un hobby increíblemente gratificante, pero también abrumador para quienes recién comienzan. Con tantas consolas, juegos y accesorios disponibles, es fácil perderse. Esta guía te ayudará a dar tus primeros pasos en el mundo del coleccionismo retro.</p>
@@ -480,7 +480,7 @@ const blogContent = {
         },
         en: {
             title: 'Guide to Collecting Retro Video Games: Where to Start',
-            date: 'October 5, 2025',
+            date: 'January 2, 2026',
             image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&h=300&q=80',
             content: `
                 <p>Collecting retro video games can be an incredibly rewarding hobby, but also overwhelming for those just starting out. With so many consoles, games and accessories available, it's easy to get lost. This guide will help you take your first steps in the world of retro collecting.</p>
