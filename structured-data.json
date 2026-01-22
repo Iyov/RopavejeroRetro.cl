@@ -1,0 +1,73 @@
+{
+  "faq": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Qué tipos de productos venden?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Vendemos consolas, juegos y accesorios retro originales americanos. Trabajamos con marcas como Nintendo (NES, SNES, N64, Gamecube, GameBoy, Wii, DS, 3DS), PlayStation (PS1, PS2, PSP, PS3, PS4), Sega (Genesis, GameGear, Dreamcast), Xbox (Classic, 360, One) y Atari."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Los productos son originales y en qué estado están?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Todos nuestros productos son 100% originales americanos. Revisamos cada artículo minuciosamente y garantizamos su funcionamiento. El estado varía desde productos como nuevos hasta usados en buen estado, siempre especificando claramente las condiciones en cada listing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Realizan envíos a todo Chile?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí, realizamos envíos a todo Chile a través de Starken. El costo de envío varía según la ubicación y el peso del paquete. Las entregas presenciales dentro de Santiago se realizan en metro San Joaquín L5."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Ofrecen garantía en sus productos?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Todos nuestros productos incluyen 30 días de garantía por defectos de funcionamiento. Para consolas reacondicionadas por nosotros, ofrecemos 90 días de garantía. La garantía cubre problemas técnicos pero no daños físicos por mal uso."
+        }
+      }
+    ]
+  },
+  "breadcrumb": {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Inicio",
+        "item": "https://ropavejeroretro.cl/"
+      }
+    ]
+  },
+  "organization": {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Ropavejero Retro",
+    "url": "https://ropavejeroretro.cl",
+    "logo": "https://ropavejeroretro.cl/img/RopavejeroLogo_All.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+56967691585",
+      "contactType": "customer service",
+      "availableLanguage": ["Spanish", "English"],
+      "areaServed": "CL"
+    },
+    "sameAs": [
+      "https://www.instagram.com/ropavejero.retro/",
+      "https://www.tiktok.com/@ropavejero.retro/",
+      "https://www.youtube.com/@RopavejeroRetro",
+      "https://www.facebook.com/ropavejero.retro/",
+      "https://twitter.com/RopavejeroRetro/"
+    ]
+  }
+}

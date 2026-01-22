@@ -1532,3 +1532,137 @@ body {
         font-size: 1rem;
     }
 }
+/* ========== BREADCRUMBS ========== */
+.breadcrumb {
+    margin-bottom: 20px;
+    padding: 10px 0;
+}
+
+.breadcrumb ol {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    font-size: 0.9rem;
+}
+
+.breadcrumb li {
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb li:not(:last-child)::after {
+    content: "›";
+    margin-left: 8px;
+    color: var(--text-secondary);
+}
+
+.breadcrumb a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.breadcrumb a:hover {
+    color: var(--primary-light);
+    text-decoration: underline;
+}
+
+.breadcrumb li:last-child span {
+    color: var(--text-secondary);
+}
+
+/* ========== ABOUT FEATURES ========== */
+.about-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+    background: var(--card-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.feature-item i {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+.feature-item span {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* ========== SEO IMPROVEMENTS ========== */
+/* Mejoras para accesibilidad y SEO */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Skip to content link */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: var(--primary-color);
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 1000;
+    transition: top 0.3s;
+}
+
+.skip-link:focus {
+    top: 6px;
+}
+
+/* Mejoras para imágenes */
+img {
+    height: auto;
+    max-width: 100%;
+}
+
+/* Focus indicators mejorados */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* ========== RESPONSIVE BREADCRUMBS ========== */
+@media (max-width: 768px) {
+    .breadcrumb ol {
+        font-size: 0.8rem;
+        flex-wrap: wrap;
+    }
+    
+    .about-features {
+        grid-template-columns: 1fr;
+    }
+    
+    .feature-item {
+        justify-content: center;
+        text-align: center;
+    }
+}
