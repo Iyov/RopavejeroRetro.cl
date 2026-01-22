@@ -113,6 +113,9 @@ const translations = {
         'about-text-1': 'Ropavejero Retro es una tienda especializada en videojuegos retro originales americanos. Nuestra pasión por los videojuegos clásicos nos impulsa a buscar y ofrecer los mejores productos para los amantes de la nostalgia gaming.',
         'about-text-2': 'Desde consolas clásicas como NES, SNES, PlayStation 1 y Sega Genesis, hasta juegos y accesorios originales, todo cuidadosamente revisado y garantizado. Trabajamos directamente con proveedores en Estados Unidos para asegurar la autenticidad de nuestros productos.',
         'about-text-3': 'Nuestro objetivo es que revivas aquellos maravillosos momentos de tu infancia con la misma calidad y emoción de entonces.',
+        'about-btn-1': 'Garantía 30 días',
+        'about-btn-2': 'Envío a todo Chile',
+        'about-btn-3': 'Productos originales',
         'explore-store': 'Explora la Tienda',
         
         // Efemérides
@@ -259,6 +262,9 @@ const translations = {
         'about-text-1': 'Ropavejero Retro is a store specialized in original American retro video games. Our passion for classic video games drives us to search for and offer the best products for nostalgia gaming lovers.',
         'about-text-2': 'From classic consoles like NES, SNES, PlayStation 1 and Sega Genesis, to original games and accessories, all carefully reviewed and guaranteed. We work directly with suppliers in the United States to ensure the authenticity of our products.',
         'about-text-3': 'Our goal is for you to relive those wonderful moments of your childhood with the same quality and excitement as then.',
+        'about-btn-1': '30-day warranty',
+        'about-btn-2': 'Shipping throughout Chile',
+        'about-btn-3': 'Original products',
         'explore-store': 'Explore the Store',
         
         // Efemérides
