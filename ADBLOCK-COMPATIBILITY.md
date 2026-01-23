@@ -11,13 +11,29 @@ Este sitio web está diseñado para ser **completamente funcional** incluso cuan
 - ✅ **Funcionalidad completa**: El sitio funciona 100% sin scripts de terceros
 - ✅ **Transparencia**: Informamos sobre qué recursos externos usamos
 
-## 🔧 Recursos Externos y AdBlockers
+## 🔧 Recursos Externos y Navegadores
 
 ### **Cloudflare Analytics**
-- **Estado**: Opcional - bloqueado por AdBlockers
+- **Estado**: Bloqueado por algunos navegadores (CORS/AdBlocker)
+- **Navegadores afectados**: Brave, Opera, Opera GX, DuckDuckGo
+- **Navegadores compatibles**: Chrome, Firefox, Edge, Safari
 - **Impacto**: Ninguno en la funcionalidad
-- **Alternativa**: Analytics básico interno (opcional)
-- **Error común**: `net::ERR_BLOCKED_BY_CLIENT` - **NORMAL**
+- **Alternativa**: Analytics básico interno (automático)
+- **Errores comunes**: 
+  - `net::ERR_BLOCKED_BY_CLIENT` - **NORMAL**
+  - `Access to script... blocked by CORS policy` - **NORMAL**
+
+### **Comportamiento por Navegador**
+| Navegador | Cloudflare | Motivo | Alternativa |
+|-----------|------------|--------|-------------|
+| Chrome | ✅ Funciona | - | - |
+| Firefox | ✅ Funciona | - | - |
+| Edge | ✅ Funciona | - | - |
+| Safari | ✅ Funciona | - | - |
+| Brave | ❌ Bloqueado | Política CORS estricta | Analytics interno |
+| Opera | ❌ Bloqueado | Política CORS estricta | Analytics interno |
+| Opera GX | ❌ Bloqueado | Política CORS estricta | Analytics interno |
+| DuckDuckGo | ❌ Bloqueado | Protección de privacidad | Analytics interno |
 
 ### **Google Fonts**
 - **Estado**: Generalmente permitido por AdBlockers
@@ -87,24 +103,50 @@ function initFallbackAnalytics() {
 
 ### `net::ERR_BLOCKED_BY_CLIENT`
 - **Causa**: AdBlocker bloqueando Cloudflare Analytics
+- **Navegadores**: Todos con AdBlocker activo
 - **Estado**: **NORMAL** - no es un error real
 - **Acción**: Ninguna - el sitio funciona perfectamente
+
+### `Access to script... blocked by CORS policy`
+- **Causa**: Política CORS estricta del navegador
+- **Navegadores**: Brave, Opera, Opera GX, DuckDuckGo
+- **Estado**: **NORMAL** - característica de seguridad del navegador
+- **Acción**: Sistema alternativo se activa automáticamente
 
 ### `Failed to load resource`
 - **Causa**: Recurso bloqueado por extensiones de privacidad
 - **Estado**: **ESPERADO** - comportamiento normal
 - **Acción**: Sistema alternativo se activa automáticamente
 
-## 🛡️ Extensiones Compatibles
+### `main.js:1 {AKGCx8: 'b'}`
+- **Causa**: Cloudflare intentando inicializar pero siendo bloqueado
+- **Estado**: **NORMAL** - mensaje interno de Cloudflare
+- **Acción**: Se ignora automáticamente
+
+## 🛡️ Navegadores y Compatibilidad
 
 Hemos probado la compatibilidad con:
 
-- ✅ **uBlock Origin**
-- ✅ **AdBlock Plus**
-- ✅ **Ghostery**
-- ✅ **Privacy Badger**
-- ✅ **DuckDuckGo Privacy Essentials**
-- ✅ **Brave Browser** (shields up)
+### **Navegadores que permiten Cloudflare:**
+- ✅ **Google Chrome** - Funciona completamente
+- ✅ **Mozilla Firefox** - Funciona completamente  
+- ✅ **Microsoft Edge** - Funciona completamente
+- ✅ **Safari** - Funciona completamente
+
+### **Navegadores con políticas CORS estrictas:**
+- 🛡️ **Brave Browser** - Bloquea por CORS (analytics alternativo activo)
+- 🛡️ **Opera** - Bloquea por CORS (analytics alternativo activo)
+- 🛡️ **Opera GX** - Bloquea por CORS (analytics alternativo activo)
+- 🛡️ **DuckDuckGo Browser** - Bloquea por privacidad (analytics alternativo activo)
+
+### **Con extensiones de privacidad:**
+- ✅ **uBlock Origin** - Compatible con analytics alternativo
+- ✅ **AdBlock Plus** - Compatible con analytics alternativo
+- ✅ **Ghostery** - Compatible con analytics alternativo
+- ✅ **Privacy Badger** - Compatible con analytics alternativo
+- ✅ **DuckDuckGo Privacy Essentials** - Compatible con analytics alternativo
+
+**Nota**: En TODOS los casos, el sitio web funciona al 100% de su capacidad.
 
 ## 📞 Soporte
 

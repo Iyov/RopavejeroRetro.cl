@@ -1871,36 +1871,56 @@ function applySavedSettings() {
     loadEfemerides();
 }
 
-// ========== MANEJO DE RECURSOS BLOQUEADOS ==========
-// Función para detectar si Cloudflare Analytics está bloqueado
+// ========== MANEJO DE RECURSOS BLOQUEADOS Y CORS ==========
+// Función para detectar si Cloudflare Analytics está bloqueado o tiene problemas CORS
 function detectBlockedResources() {
     const blockedResources = {
         cloudflareAnalytics: false,
-        adBlockerDetected: false
+        adBlockerDetected: false,
+        corsBlocked: false,
+        browserBlocked: false
     };
     
     // Detectar si Cloudflare Analytics está disponible
     setTimeout(() => {
-        if (typeof window.__CF$cv$params === 'undefined' && 
-            typeof window.cloudflare === 'undefined') {
+        const hasCloudflare = typeof window.__CF$cv$params !== 'undefined' || 
+                             typeof window.cloudflare !== 'undefined';
+        
+        if (!hasCloudflare) {
             blockedResources.cloudflareAnalytics = true;
-            blockedResources.adBlockerDetected = true;
             
-            // Log solo en desarrollo
-            if (window.location.hostname === 'localhost' || 
-                window.location.hostname === '127.0.0.1') {
-                console.info('🛡️ Cloudflare Analytics bloqueado por AdBlocker (normal)');
+            // Detectar tipo de bloqueo basado en el navegador
+            const userAgent = navigator.userAgent.toLowerCase();
+            const isBrave = navigator.brave && typeof navigator.brave.isBrave === 'function';
+            const isOpera = userAgent.includes('opr/') || userAgent.includes('opera');
+            const isDuckDuckGo = userAgent.includes('duckduckgo');
+            
+            if (isBrave || isOpera || isDuckDuckGo) {
+                blockedResources.corsBlocked = true;
+                blockedResources.browserBlocked = true;
+            } else {
+                blockedResources.adBlockerDetected = true;
             }
             
-            // Implementar analytics alternativo si es necesario
+            // Log solo en desarrollo con información específica
+            if (window.location.hostname === 'localhost' || 
+                window.location.hostname === '127.0.0.1') {
+                if (blockedResources.corsBlocked) {
+                    console.info('🛡️ Cloudflare bloqueado por política CORS del navegador (Brave/Opera/DuckDuckGo)');
+                } else {
+                    console.info('🛡️ Cloudflare Analytics bloqueado por AdBlocker (normal)');
+                }
+            }
+            
+            // Implementar analytics alternativo
             initFallbackAnalytics();
         }
-    }, 2000);
+    }, 3000); // Aumentar tiempo de espera para navegadores lentos
     
     return blockedResources;
 }
 
-// Analytics alternativo básico (opcional)
+// Analytics alternativo mejorado para diferentes navegadores
 function initFallbackAnalytics() {
     // Solo si realmente necesitas analytics básicos
     const analytics = {
@@ -1911,15 +1931,25 @@ function initFallbackAnalytics() {
                     page: page || window.location.pathname,
                     referrer: document.referrer,
                     timestamp: new Date().toISOString(),
-                    userAgent: navigator.userAgent.substring(0, 100) // Truncar para privacidad
+                    userAgent: navigator.userAgent.substring(0, 100), // Truncar para privacidad
+                    browser: getBrowserInfo(),
+                    viewport: {
+                        width: window.innerWidth,
+                        height: window.innerHeight
+                    }
                 };
                 
                 // Enviar a tu propio endpoint (opcional)
                 // navigator.sendBeacon('/api/analytics', JSON.stringify(data));
+                
+                // Log en desarrollo
+                if (window.location.hostname === 'localhost') {
+                    console.debug('📊 Fallback Analytics - Page View:', data);
+                }
             }
         },
         
-        event: function(category, action, label) {
+        event: function(category, action, label, value) {
             // Tracking de eventos básico
             if (navigator.sendBeacon && window.location.hostname !== 'localhost') {
                 const data = {
@@ -1927,11 +1957,18 @@ function initFallbackAnalytics() {
                     category: category,
                     action: action,
                     label: label,
-                    timestamp: new Date().toISOString()
+                    value: value,
+                    timestamp: new Date().toISOString(),
+                    page: window.location.pathname
                 };
                 
                 // Enviar a tu propio endpoint (opcional)
                 // navigator.sendBeacon('/api/analytics', JSON.stringify(data));
+                
+                // Log en desarrollo
+                if (window.location.hostname === 'localhost') {
+                    console.debug('📊 Fallback Analytics - Event:', data);
+                }
             }
         }
     };
@@ -1941,25 +1978,64 @@ function initFallbackAnalytics() {
     
     // Track página inicial
     analytics.pageView();
+    
+    // Log de activación
+    if (window.location.hostname === 'localhost') {
+        console.info('📊 Fallback Analytics activado');
+    }
 }
 
-// Función para manejar errores de carga de recursos
+// Función para obtener información del navegador
+function getBrowserInfo() {
+    const userAgent = navigator.userAgent.toLowerCase();
+    
+    if (navigator.brave && typeof navigator.brave.isBrave === 'function') {
+        return 'Brave';
+    } else if (userAgent.includes('edg/')) {
+        return 'Edge';
+    } else if (userAgent.includes('opr/') || userAgent.includes('opera')) {
+        return 'Opera';
+    } else if (userAgent.includes('chrome/')) {
+        return 'Chrome';
+    } else if (userAgent.includes('firefox/')) {
+        return 'Firefox';
+    } else if (userAgent.includes('safari/') && !userAgent.includes('chrome/')) {
+        return 'Safari';
+    } else if (userAgent.includes('duckduckgo')) {
+        return 'DuckDuckGo';
+    } else {
+        return 'Unknown';
+    }
+}
+
+// Función mejorada para manejar errores de carga de recursos
 function handleResourceError(event) {
     const resource = event.target;
     const resourceUrl = resource.src || resource.href;
     
     if (resourceUrl && resourceUrl.includes('cloudflareinsights.com')) {
+        const browserInfo = getBrowserInfo();
+        
         // Cloudflare bloqueado - comportamiento normal
         if (window.location.hostname === 'localhost' || 
             window.location.hostname === '127.0.0.1') {
-            console.info('🛡️ Cloudflare Analytics bloqueado por cliente (AdBlocker)');
+            
+            if (['Brave', 'Opera', 'DuckDuckGo'].includes(browserInfo)) {
+                console.info(`🛡️ Cloudflare bloqueado por política CORS de ${browserInfo} (normal)`);
+            } else {
+                console.info('🛡️ Cloudflare Analytics bloqueado por cliente (AdBlocker)');
+            }
         }
         
-        // Inicializar analytics alternativo
-        initFallbackAnalytics();
+        // Inicializar analytics alternativo si no está ya inicializado
+        if (!window.fallbackAnalytics) {
+            initFallbackAnalytics();
+        }
     } else if (resourceUrl) {
         // Otros recursos bloqueados
-        console.warn('⚠️ Recurso bloqueado:', resourceUrl);
+        if (window.location.hostname === 'localhost') {
+            console.warn('⚠️ Recurso bloqueado:', resourceUrl);
+        }
     }
 }
 
@@ -1977,17 +2053,27 @@ function handleCSPViolation(violationEvent) {
                          window.location.hostname === '127.0.0.1' || 
                          window.location.hostname.includes('localhost');
     
-    // Filtrar violaciones comunes de AdBlockers
+    // Filtrar violaciones comunes de AdBlockers y CORS
     const isAdBlockerViolation = violationEvent.blockedURI && (
         violationEvent.blockedURI.includes('cloudflareinsights.com') ||
         violationEvent.blockedURI.includes('google-analytics.com') ||
         violationEvent.blockedURI.includes('googletagmanager.com')
     );
     
-    if (isAdBlockerViolation) {
-        // No reportar violaciones de AdBlockers como errores
+    const isCorsViolation = violationEvent.violatedDirective && 
+                           violationEvent.violatedDirective.includes('script-src') &&
+                           violationEvent.blockedURI && 
+                           violationEvent.blockedURI.includes('cloudflareinsights.com');
+    
+    if (isAdBlockerViolation || isCorsViolation) {
+        // No reportar violaciones de AdBlockers o CORS como errores
         if (isDevelopment) {
-            console.info('🛡️ AdBlocker bloqueó:', violationEvent.blockedURI);
+            const browserInfo = getBrowserInfo();
+            if (['Brave', 'Opera', 'DuckDuckGo'].includes(browserInfo)) {
+                console.info(`🛡️ ${browserInfo} bloqueó por CORS:`, violationEvent.blockedURI);
+            } else {
+                console.info('🛡️ AdBlocker bloqueó:', violationEvent.blockedURI);
+            }
         }
         return;
     }
@@ -2028,7 +2114,8 @@ function handleCSPViolation(violationEvent) {
                 violatedDirective: violationEvent.violatedDirective,
                 documentURI: violationEvent.documentURI,
                 timestamp: new Date().toISOString(),
-                userAgent: navigator.userAgent
+                userAgent: navigator.userAgent,
+                browser: getBrowserInfo()
             })
         }).catch(err => console.error('Failed to report CSP violation:', err));
         */
@@ -2075,26 +2162,43 @@ function loadResourceSafely(url, type = 'script') {
             
             // Manejar específicamente scripts de Cloudflare
             if (url.includes('cloudflareinsights.com')) {
-                element.onerror = () => {
-                    // Cloudflare bloqueado por AdBlocker - no es un error real
-                    console.info('🛡️ Cloudflare Analytics bloqueado por AdBlocker (comportamiento normal)');
-                    initFallbackAnalytics();
+                element.onerror = (error) => {
+                    const browserInfo = getBrowserInfo();
+                    
+                    // Diferentes mensajes según el navegador
+                    if (['Brave', 'Opera', 'DuckDuckGo'].includes(browserInfo)) {
+                        console.info(`🛡️ Cloudflare bloqueado por política CORS de ${browserInfo} (comportamiento normal)`);
+                    } else {
+                        console.info('🛡️ Cloudflare Analytics bloqueado por AdBlocker (comportamiento normal)');
+                    }
+                    
+                    // Activar analytics alternativo
+                    if (!window.fallbackAnalytics) {
+                        initFallbackAnalytics();
+                    }
+                    
                     resolve(null); // Resolver como éxito para evitar errores
+                };
+                
+                // También manejar eventos de carga exitosa
+                element.onload = () => {
+                    console.debug('✅ Cloudflare Analytics cargado exitosamente');
+                    resolve(element);
                 };
             } else {
                 element.onerror = () => reject(new Error(`Failed to load ${type}: ${url}`));
+                element.onload = () => resolve(element);
             }
         } else if (type === 'style') {
             element = document.createElement('link');
             element.rel = 'stylesheet';
             element.href = url;
             element.onerror = () => reject(new Error(`Failed to load ${type}: ${url}`));
+            element.onload = () => resolve(element);
         } else {
             reject(new Error(`Unsupported resource type: ${type}`));
             return;
         }
-        
-        element.onload = () => resolve(element);
         
         document.head.appendChild(element);
     });
@@ -2112,14 +2216,27 @@ function initCloudflareAnalytics() {
     const cloudflareScript = document.querySelector('script[src*="cloudflareinsights.com"]');
     if (cloudflareScript) {
         return new Promise((resolve) => {
-            // Esperar un poco para ver si se carga
+            // Esperar más tiempo para navegadores con políticas estrictas
             setTimeout(() => {
                 if (typeof window.__CF$cv$params === 'undefined') {
                     // No se cargó, probablemente bloqueado
-                    initFallbackAnalytics();
+                    const browserInfo = getBrowserInfo();
+                    
+                    if (window.location.hostname === 'localhost') {
+                        if (['Brave', 'Opera', 'DuckDuckGo'].includes(browserInfo)) {
+                            console.info(`🛡️ ${browserInfo} bloqueó Cloudflare por CORS (activando alternativo)`);
+                        } else {
+                            console.info('🛡️ Cloudflare bloqueado (activando alternativo)');
+                        }
+                    }
+                    
+                    // Activar analytics alternativo
+                    if (!window.fallbackAnalytics) {
+                        initFallbackAnalytics();
+                    }
                 }
                 resolve();
-            }, 3000);
+            }, 4000); // Aumentar tiempo de espera
         });
     }
     
