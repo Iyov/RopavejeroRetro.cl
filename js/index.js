@@ -28,7 +28,9 @@ function sanitizeURL(url) {
         'www.threads.net',
         'wa.me',
         'docs.google.com',
-        'ropavejeroretro.cl'
+        'ropavejeroretro.cl',
+        'static.cloudflareinsights.com',
+        'cloudflareinsights.com'
     ];
     
     try {
@@ -1867,4 +1869,44 @@ function applySavedSettings() {
     
     // Cargar efemérides según el idioma
     loadEfemerides();
+}
+
+// ========== MANEJO DE CSP DINÁMICO ==========
+// Función para reportar violaciones de CSP (opcional)
+function handleCSPViolation(violationEvent) {
+    // Log de violación para debugging (solo en desarrollo)
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        console.warn('CSP Violation:', {
+            blockedURI: violationEvent.blockedURI,
+            violatedDirective: violationEvent.violatedDirective,
+            originalPolicy: violationEvent.originalPolicy,
+            documentURI: violationEvent.documentURI
+        });
+    }
+    
+    // En producción, podrías enviar esto a un servicio de logging
+    // fetch('/api/csp-violation', { method: 'POST', body: JSON.stringify(violationEvent) });
+}
+
+// Escuchar violaciones de CSP
+document.addEventListener('securitypolicyviolation', handleCSPViolation);
+
+// Función para verificar si un dominio está permitido en CSP
+function isAllowedByCSP(url) {
+    const allowedDomains = [
+        'docs.google.com',
+        'static.cloudflareinsights.com',
+        'cloudflareinsights.com',
+        'fonts.googleapis.com',
+        'fonts.gstatic.com'
+    ];
+    
+    try {
+        const urlObj = new URL(url);
+        return allowedDomains.some(domain => 
+            urlObj.hostname === domain || urlObj.hostname.endsWith('.' + domain)
+        );
+    } catch (e) {
+        return false;
+    }
 }

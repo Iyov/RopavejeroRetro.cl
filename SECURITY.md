@@ -47,11 +47,11 @@
 #### **Content Security Policy (CSP)**
 ```
 default-src 'self'; 
-script-src 'self' 'unsafe-inline' https://docs.google.com; 
+script-src 'self' 'unsafe-inline' https://docs.google.com https://static.cloudflareinsights.com https://cloudflareinsights.com; 
 style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; 
 font-src 'self' https://fonts.gstatic.com; 
 img-src 'self' data: https: blob:; 
-connect-src 'self' https://docs.google.com; 
+connect-src 'self' https://docs.google.com https://cloudflareinsights.com https://static.cloudflareinsights.com; 
 frame-src 'none'; 
 object-src 'none'; 
 base-uri 'self'; 
@@ -69,6 +69,8 @@ upgrade-insecure-requests
 - wa.me
 - docs.google.com
 - ropavejeroretro.cl
+- static.cloudflareinsights.com (Cloudflare Analytics)
+- cloudflareinsights.com (Cloudflare Analytics)
 
 ### 🚨 **Funciones de Seguridad Implementadas**
 
