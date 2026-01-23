@@ -367,10 +367,19 @@
                     </div>
                     <div class="filter-group">
                         <label for="platformFilter" data-translate="filter-platform">Plataforma:</label>
-                        <select id="platformFilter" class="filter-select">
-                            <option value="all" data-translate="filter-all">Todas</option>
-                            <!-- Las opciones se cargarán dinámicamente -->
-                        </select>
+                        <div class="multi-select-container">
+                            <div class="multi-select-display" id="platformDisplay">
+                                <span class="placeholder" data-translate="filter-all">Todas</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="multi-select-dropdown" id="platformDropdown">
+                                <div class="multi-select-option" data-value="all">
+                                    <input type="checkbox" id="platform-all" checked>
+                                    <label for="platform-all" data-translate="filter-all">Todas</label>
+                                </div>
+                                <!-- Las opciones se cargarán dinámicamente -->
+                            </div>
+                        </div>
                     </div>
                     <div class="filter-group">
                         <label for="statusFilter" data-translate="filter-status">Estado:</label>

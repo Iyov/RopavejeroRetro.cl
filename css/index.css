@@ -1666,3 +1666,224 @@ textarea:focus {
         text-align: center;
     }
 }
+/* ========== MULTI-SELECT FILTER ========== */
+.multi-select-container {
+    position: relative;
+    width: 100%;
+}
+
+.multi-select-display {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background: var(--surface-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-height: 44px;
+}
+
+.multi-select-display:hover {
+    border-color: var(--primary-color);
+}
+
+.multi-select-display.active {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(25, 25, 230, 0.1);
+}
+
+.multi-select-display .placeholder {
+    color: var(--text-color);
+    flex: 1;
+}
+
+.multi-select-display i {
+    color: var(--text-secondary);
+    transition: transform 0.3s ease;
+}
+
+.multi-select-display.active i {
+    transform: rotate(180deg);
+}
+
+.multi-select-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.multi-select-dropdown.active {
+    display: block;
+}
+
+.multi-select-option {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.multi-select-option:hover {
+    background: var(--card-bg);
+}
+
+.multi-select-option input[type="checkbox"] {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.multi-select-option label {
+    cursor: pointer;
+    flex: 1;
+    margin: 0;
+}
+
+.selected-platforms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.platform-tag {
+    background: var(--primary-color);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.platform-tag .remove {
+    cursor: pointer;
+    font-weight: bold;
+    opacity: 0.8;
+}
+
+.platform-tag .remove:hover {
+    opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .multi-select-dropdown {
+        max-height: 150px;
+    }
+    
+    .multi-select-option {
+        padding: 8px 12px;
+    }
+    
+    .platform-tag {
+        font-size: 0.75rem;
+        padding: 1px 6px;
+    }
+}
+
+/* Scrollbar styling for dropdown */
+.multi-select-dropdown::-webkit-scrollbar {
+    width: 6px;
+}
+
+.multi-select-dropdown::-webkit-scrollbar-track {
+    background: var(--card-bg);
+}
+
+.multi-select-dropdown::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 3px;
+}
+
+.multi-select-dropdown::-webkit-scrollbar-thumb:hover {
+    background: var(--text-secondary);
+}
+/* ========== MENSAJE NO HAY PLATAFORMAS ========== */
+.no-platforms-message {
+    font-style: italic !important;
+    color: var(--text-secondary) !important;
+    justify-content: center !important;
+    cursor: default !important;
+    opacity: 0.7;
+}
+
+.no-platforms-message:hover {
+    background: transparent !important;
+}
+
+/* Animación suave para mostrar/ocultar opciones */
+.multi-select-option {
+    transition: all 0.2s ease;
+}
+
+.multi-select-option[style*="display: none"] {
+    opacity: 0;
+    transform: translateY(-5px);
+}
+
+/* Mejorar la visualización cuando hay pocas opciones */
+.multi-select-dropdown:has(.no-platforms-message) {
+    min-height: 50px;
+}
+
+/* Indicador visual para opciones filtradas */
+.multi-select-option.filtered-out {
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+/* Destacar opciones disponibles */
+.multi-select-option.available {
+    opacity: 1;
+    pointer-events: all;
+}
+/* ========== CONTADOR DE TAGS ========== */
+.counter-tag {
+    background: var(--text-secondary) !important;
+    cursor: help !important;
+    font-weight: bold;
+}
+
+.counter-tag:hover {
+    background: var(--primary-dark) !important;
+}
+
+/* Mejorar el espaciado cuando hay muchos tags */
+.selected-platforms {
+    max-width: calc(100% - 30px); /* Dejar espacio para el chevron */
+    overflow: hidden;
+}
+
+/* Animación suave para cambios en el display */
+.multi-select-display .placeholder,
+.selected-platforms {
+    transition: all 0.2s ease;
+}
+
+/* Indicador de filtrado activo */
+.multi-select-display.filtered {
+    border-color: var(--warning-color);
+    background: rgba(245, 158, 11, 0.05);
+}
+
+.multi-select-display.filtered::after {
+    content: "🔍";
+    position: absolute;
+    right: 25px;
+    font-size: 0.8em;
+    opacity: 0.6;
+}
