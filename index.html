@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>🎮 Ropavejero Retro - Tienda de Videojuegos Retro en Chile | Nintendo, PlayStation, Sega, Xbox</title>
     <meta name="description" content="🎮 Tienda de videojuegos retro en Chile. Consolas, juegos y accesorios originales americanos: Nintendo, PlayStation, Sega, Xbox, Atari. ✅ Envío a todo Chile" />
     <meta name="keywords" content="videojuegos retro chile, consolas retro santiago, juegos retro originales, nintendo chile, playstation retro, sega genesis, xbox clasico, atari chile, coleccionables gaming, tienda videojuegos retro, nes snes n64, ps1 ps2 ps3, gameboy chile" />
@@ -18,13 +19,30 @@
     <meta name="geo.position" content="-33.4489;-70.6693" />
     <meta name="ICBM" content="-33.4489, -70.6693" />
     
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://docs.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https://docs.google.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    
     <!-- Additional SEO Meta Tags -->
+    <!-- PWA and Mobile App Meta Tags -->
     <meta name="theme-color" content="#1919e6" />
     <meta name="msapplication-TileColor" content="#1919e6" />
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Ropavejero Retro" />
+    <meta name="application-name" content="Ropavejero Retro" />
+    <meta name="msapplication-tooltip" content="Tienda de Videojuegos Retro" />
+    <meta name="msapplication-starturl" content="/" />
     <link rel="canonical" href="https://ropavejeroretro.cl/" />
     <link rel="icon" href="img/favicon.png" type="image/x-icon" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="img/RopavejeroLogo_150.png" />
+    <link rel="apple-touch-icon" sizes="100x100" href="img/RopavejeroLogo_100.png" />
+    <link rel="apple-touch-icon" sizes="150x150" href="img/RopavejeroLogo_150.png" />
+    <link rel="apple-touch-icon" sizes="256x256" href="img/RopavejeroLogo_256.png" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -704,7 +722,7 @@
         </div>
     </div>
 
-    <script src="js/index.js?v=20260122"></script>
+    <script src="js/index.js?v=2026-01-22"></script>
 </body>
 
 </html>

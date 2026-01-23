@@ -1,3 +1,99 @@
+// ========== FUNCIONES DE SEGURIDAD ==========
+// Función para sanitizar HTML y prevenir XSS
+function sanitizeHTML(str) {
+    if (typeof str !== 'string') return '';
+    
+    const temp = document.createElement('div');
+    temp.textContent = str;
+    return temp.innerHTML;
+}
+
+// Función para validar y sanitizar URLs
+function sanitizeURL(url) {
+    if (typeof url !== 'string') return '#';
+    
+    // Lista blanca de dominios permitidos
+    const allowedDomains = [
+        'instagram.com',
+        'www.instagram.com',
+        'facebook.com',
+        'www.facebook.com',
+        'tiktok.com',
+        'www.tiktok.com',
+        'youtube.com',
+        'www.youtube.com',
+        'twitter.com',
+        'www.twitter.com',
+        'threads.net',
+        'www.threads.net',
+        'wa.me',
+        'docs.google.com',
+        'ropavejeroretro.cl'
+    ];
+    
+    try {
+        const urlObj = new URL(url);
+        const domain = urlObj.hostname.toLowerCase();
+        
+        // Verificar protocolo seguro
+        if (!['https:', 'http:'].includes(urlObj.protocol)) {
+            return '#';
+        }
+        
+        // Verificar dominio permitido
+        const isAllowed = allowedDomains.some(allowedDomain => 
+            domain === allowedDomain || domain.endsWith('.' + allowedDomain)
+        );
+        
+        if (!isAllowed) {
+            return '#';
+        }
+        
+        return url;
+    } catch (e) {
+        return '#';
+    }
+}
+
+// Función para validar datos de productos
+function validateProductData(product) {
+    if (!product || typeof product !== 'object') return null;
+    
+    return {
+        Num: parseInt(product.Num) || 0,
+        Product: sanitizeHTML(String(product.Product || '')),
+        Platform: sanitizeHTML(String(product.Platform || '')),
+        Sale: sanitizeHTML(String(product.Sale || 'X')),
+        Neto: sanitizeHTML(String(product.Neto || 'X')),
+        Stock: sanitizeHTML(String(product.Stock || '0')),
+        Link: sanitizeHTML(String(product.Link || '')),
+        Sold: product.Sold === '1' || product.Sold === 'Si' ? 1 : 0
+    };
+}
+
+// Función para manejo seguro de errores
+function handleSecureError(error, context = 'general') {
+    // Log interno para debugging (no mostrar al usuario)
+    console.error(`[${context}] Error interno:`, error);
+    
+    // Mensaje genérico para el usuario
+    const userMessages = {
+        'es': {
+            'products': 'Error cargando productos. Por favor, intenta más tarde.',
+            'efemerides': 'No se pudieron cargar las efemérides del día.',
+            'general': 'Ha ocurrido un error. Por favor, intenta más tarde.'
+        },
+        'en': {
+            'products': 'Error loading products. Please try again later.',
+            'efemerides': 'Could not load today\'s anniversaries.',
+            'general': 'An error occurred. Please try again later.'
+        }
+    };
+    
+    const currentLang = localStorage.getItem('language') || 'es';
+    return userMessages[currentLang][context] || userMessages[currentLang]['general'];
+}
+
 // Configuración inicial
 document.addEventListener('DOMContentLoaded', function() {
     // Inicializar todas las funcionalidades
@@ -731,21 +827,43 @@ function initProducts() {
     nextPageBtn.addEventListener('click', () => changePage(1));
 }
 
-// Cargar productos desde Google Sheets
+// Cargar productos desde Google Sheets - SEGURO
 async function loadProducts() {
     const tableBody = document.getElementById('productsTableBody');
     const productsCounter = document.getElementById('productsCounter');
     
     try {
-        // URL de tu Google Sheet (formato CSV)
+        // URL de tu Google Sheet (formato CSV) - validada
         const sheetId = '18kZ6wyheBWMmoa5yb1PR_XqhqzHCTAlT';
-        const sheetUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv`;
+        const sheetUrl = `https://docs.google.com/spreadsheets/d/${encodeURIComponent(sheetId)}/gviz/tq?tqx=out:csv`;
         
-        const response = await fetch(sheetUrl);
+        const response = await fetch(sheetUrl, {
+            method: 'GET',
+            headers: {
+                'Accept': 'text/csv',
+            },
+            // Timeout de 10 segundos
+            signal: AbortSignal.timeout(10000)
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
         const csvData = await response.text();
         
-        // Parsear CSV
-        const products = parseCSV(csvData);
+        // Validar que el CSV no esté vacío
+        if (!csvData || csvData.trim().length === 0) {
+            throw new Error('CSV data is empty');
+        }
+        
+        // Parsear CSV de forma segura
+        const products = parseCSVSecure(csvData);
+        
+        // Validar que tengamos productos
+        if (!Array.isArray(products) || products.length === 0) {
+            throw new Error('No valid products found');
+        }
         
         // Guardar productos globalmente
         allProducts = products;
@@ -761,86 +879,106 @@ async function loadProducts() {
         updateProductsCounter();
         
     } catch (error) {
-        console.error('Error cargando productos:', error);
+        const errorMessage = handleSecureError(error, 'products');
         tableBody.innerHTML = `
             <tr>
                 <td colspan="7" class="loading-cell">
-                    Error cargando productos. Por favor, intenta más tarde.
+                    ${sanitizeHTML(errorMessage)}
                 </td>
             </tr>
         `;
-        productsCounter.textContent = 'Error cargando productos';
+        productsCounter.textContent = errorMessage;
     }
 }
 
-// Parsear CSV a objetos - CORREGIDO
-function parseCSV(csvText) {
+// Parsear CSV a objetos - SEGURO
+function parseCSVSecure(csvText) {
+    if (typeof csvText !== 'string') {
+        throw new Error('Invalid CSV data type');
+    }
+    
     const lines = csvText.split('\n');
+    
+    if (lines.length < 2) {
+        throw new Error('CSV must have at least header and one data row');
+    }
     
     // Saltar la primera línea (encabezados)
     const dataLines = lines.slice(1);
-    
     const products = [];
     
-    dataLines.forEach(line => {
+    dataLines.forEach((line, index) => {
         if (line.trim() === '') return;
         
-        // Manejar comas dentro de comillas
-        const values = [];
-        let currentValue = '';
-        let insideQuotes = false;
-        
-        for (let i = 0; i < line.length; i++) {
-            const char = line[i];
+        try {
+            // Manejar comas dentro de comillas de forma segura
+            const values = [];
+            let currentValue = '';
+            let insideQuotes = false;
             
-            if (char === '"') {
-                insideQuotes = !insideQuotes;
-            } else if (char === ',' && !insideQuotes) {
-                values.push(currentValue.trim());
-                currentValue = '';
-            } else {
-                currentValue += char;
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                
+                if (char === '"') {
+                    insideQuotes = !insideQuotes;
+                } else if (char === ',' && !insideQuotes) {
+                    values.push(currentValue.trim());
+                    currentValue = '';
+                } else {
+                    currentValue += char;
+                }
             }
+            
+            // Agregar el último valor
+            values.push(currentValue.trim());
+            
+            // Validar que tengamos suficientes columnas
+            if (values.length < 8) {
+                console.warn(`Row ${index + 2} has insufficient columns, skipping`);
+                return;
+            }
+            
+            // Crear objeto producto con validación
+            const rawProduct = {
+                Num: values[0] || '',
+                Product: values[1] || '',
+                Platform: values[2] || '',
+                Sale: values[3] || 'X',
+                Neto: values[4] || 'X',
+                Stock: values[5] || '0',
+                Link: values[6] || '',
+                Sold: values[7] || '0'
+            };
+            
+            // Validar y sanitizar producto
+            const product = validateProductData(rawProduct);
+            
+            if (product && product.Num > 0) {
+                products.push(product);
+            }
+            
+        } catch (rowError) {
+            console.warn(`Error parsing row ${index + 2}:`, rowError);
         }
-        
-        // Agregar el último valor
-        values.push(currentValue.trim());
-        
-        // Crear objeto producto con índices específicos
-        const product = {
-            Num: parseInt(values[0]) || 0,
-            Product: values[1] || '',
-            Platform: values[2] || '',
-            Sale: values[3] || 'X',
-            Neto: values[4] || 'X',
-            Stock: values[5] || '0',
-            Link: values[6] || '',
-            Sold: values[7] || '0'
-        };
-        
-        // Convertir valores string a números para comparaciones
-        product.Sold = product.Sold === '1' || product.Sold === 'Si' ? 1 : 0;
-        
-        products.push(product);
     });
     
     return products;
 }
 
-// Renderizar tabla de productos
+// Renderizar tabla de productos - SEGURO
 function renderProductsTable() {
     const tableBody = document.getElementById('productsTableBody');
     const currentLang = localStorage.getItem('language') || 'es';
     
     if (filteredProducts.length === 0) {
+        const noProductsMsg = currentLang === 'es' ? 'No hay productos disponibles.' : 'No products available.';
         tableBody.innerHTML = `
             <tr>
-                <td colspan="7" class="loading-cell" data-translate="no-products">
-                    No hay productos disponibles.
+                <td colspan="7" class="loading-cell">
+                    ${sanitizeHTML(noProductsMsg)}
                 </td>
             </tr>
         `;
-        setLanguage(currentLang);
         updatePaginationButtons();
         return;
     }
@@ -853,31 +991,33 @@ function renderProductsTable() {
     let html = '';
     
     productsToShow.forEach(product => {
-        const statusClass = product.Sold == 1 ? 'status-sold' : 'status-available';
-        const statusText = product.Sold == 1 ? 
+        // Validar y sanitizar producto
+        const safeProduct = validateProductData(product);
+        if (!safeProduct || !safeProduct.Num) return;
+        
+        const statusClass = safeProduct.Sold == 1 ? 'status-sold' : 'status-available';
+        const statusText = safeProduct.Sold == 1 ? 
             (currentLang === 'es' ? 'Vendido' : 'Sold') : 
             (currentLang === 'es' ? 'Disponible' : 'Available');
         
-        if( product.Num && product.Num !== '' ) {
-            html += `
-                <tr data-product-id="${product.Num}">
-                    <td>${product.Num || ''}</td>
-                    <td>${product.Product || ''}</td>
-                    <td>${product.Platform || ''}</td>
-                    <td>${product.Neto ? product.Neto : '0'}</td>
-                    <td><span class="stock-badge">${product.Stock || 0}</span></td>
-                    <td><span class="status-badge ${statusClass}">${statusText}</span></td>
-                    <td class="actions-cell">
-                        <button class="btn btn-primary btn-small view-product-btn" data-product-id="${product.Num || ''}" alt="Ver detalles">
-                            <i class="fas fa-eye"></i> <!--<span data-translate="view-details">Ver detalles</span>-->
-                        </button>
-                        <button class="btn btn-primary btn-small link-product-btn" data-product-link="${product.Link}" alt="Link Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </button>
-                    </td>
-                </tr>
-            `;
-        }
+        html += `
+            <tr data-product-id="${safeProduct.Num}">
+                <td>${safeProduct.Num}</td>
+                <td>${safeProduct.Product}</td>
+                <td>${safeProduct.Platform}</td>
+                <td>${safeProduct.Neto !== 'X' ? safeProduct.Neto : '0'}</td>
+                <td><span class="stock-badge">${safeProduct.Stock}</span></td>
+                <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                <td class="actions-cell">
+                    <button class="btn btn-primary btn-small view-product-btn" data-product-id="${safeProduct.Num}" title="Ver detalles">
+                        <i class="fas fa-eye" aria-hidden="true"></i>
+                    </button>
+                    <button class="btn btn-primary btn-small link-product-btn" data-product-link="${safeProduct.Link}" title="Ver en Instagram">
+                        <i class="fab fa-instagram" aria-hidden="true"></i>
+                    </button>
+                </td>
+            </tr>
+        `;
     });
     
     tableBody.innerHTML = html;
@@ -885,8 +1025,8 @@ function renderProductsTable() {
     // Agregar event listeners a los botones de ver detalles
     document.querySelectorAll('.view-product-btn').forEach(btn => {
         btn.addEventListener('click', function() {
-            const productId = this.getAttribute('data-product-id');
-            const product = allProducts.find(p => p.Num == productId);
+            const productId = parseInt(this.getAttribute('data-product-id'));
+            const product = allProducts.find(p => p.Num === productId);
             if (product) {
                 showProductModal(product);
             }
@@ -895,8 +1035,11 @@ function renderProductsTable() {
 
     document.querySelectorAll('.link-product-btn').forEach(btn => {
         btn.addEventListener('click', function() {
-            let productLink = this.getAttribute('data-product-link');
-            window.open(getLinkProductInstagram(productLink), '_blank');
+            const productLink = this.getAttribute('data-product-link');
+            const safeURL = sanitizeURL(getLinkProductInstagram(productLink));
+            if (safeURL !== '#') {
+                window.open(safeURL, '_blank', 'noopener,noreferrer');
+            }
         });
     });
     
@@ -1031,106 +1174,101 @@ function changePage(direction) {
     }
 }
 
-// Mostrar modal de producto - CORREGIDO
+// Mostrar modal de producto - SEGURO
 function showProductModal(product) {
     const modalOverlay = document.getElementById('productModalOverlay');
     const modalContent = document.getElementById('productModalContent');
     const currentLang = localStorage.getItem('language') || 'es';
     
-    // Traducir valores booleanos
-    const translateYesNo = (value) => value == 1 ? 
-        (currentLang === 'es' ? 'Sí' : 'Yes') : 
-        (currentLang === 'es' ? 'No' : 'No');
+    // Validar y sanitizar producto
+    const safeProduct = validateProductData(product);
+    if (!safeProduct) {
+        console.error('Invalid product data for modal');
+        return;
+    }
     
-    /*const translateDelivered = (value) => value == 1 ? 
-        (currentLang === 'es' ? 'Entregado' : 'Delivered') : 
-        (currentLang === 'es' ? 'No entregado' : 'Not delivered');
+    const statusClass = safeProduct.Sold == 1 ? 'status-sold' : 'status-available';
+    const statusText = safeProduct.Sold == 1 ? 
+        (currentLang === 'es' ? 'Vendido' : 'Sold') : 
+        (currentLang === 'es' ? 'Disponible' : 'Available');
     
-    const translatePolish = (value) => value == 1 ? 
-        (currentLang === 'es' ? 'Pulir' : 'Polish') : 
-        (currentLang === 'es' ? 'No pulir' : 'No polish');*/
+    // Crear contenido del modal de forma segura
+    const modalHeader = document.createElement('div');
+    modalHeader.className = 'modal-header';
     
-    modalContent.innerHTML = `
-        <div class="modal-header">
-            <h3>${product.Product || ''}</h3>
-            <span class="status-badge ${product.Sold == 1 ? 'status-sold' : 'status-available'}">
-                ${product.Sold == 1 ? 
-                    (currentLang === 'es' ? 'Vendido' : 'Sold') : 
-                    (currentLang === 'es' ? 'Disponible' : 'Available')}
-            </span>
-        </div>
+    const productTitle = document.createElement('h3');
+    productTitle.textContent = safeProduct.Product;
+    
+    const statusBadge = document.createElement('span');
+    statusBadge.className = `status-badge ${statusClass}`;
+    statusBadge.textContent = statusText;
+    
+    modalHeader.appendChild(productTitle);
+    modalHeader.appendChild(statusBadge);
+    
+    const modalDetails = document.createElement('div');
+    modalDetails.className = 'modal-details';
+    
+    // Crear elementos de detalles de forma segura
+    const details = [
+        { label: currentLang === 'es' ? 'Número' : 'Number', value: safeProduct.Num },
+        { label: currentLang === 'es' ? 'Producto' : 'Product', value: safeProduct.Product },
+        { label: currentLang === 'es' ? 'Plataforma' : 'Platform', value: safeProduct.Platform },
+        { label: currentLang === 'es' ? 'Precio de Venta' : 'Sale Price', value: safeProduct.Neto !== 'X' ? safeProduct.Neto : '0' },
+        { label: currentLang === 'es' ? 'Stock' : 'Stock', value: safeProduct.Stock },
+        { label: 'Link', value: getLinkProductInstagram(safeProduct.Link) }
+    ];
+    
+    details.forEach(detail => {
+        const detailItem = document.createElement('div');
+        detailItem.className = 'detail-item';
         
-        <div class="modal-details">
-            <div class="detail-item">
-                <label data-translate="modal-num">Número</label>
-                <span>${product.Num || ''}</span>
-            </div>
-            
-            <div class="detail-item">
-                <label data-translate="modal-product">Producto</label>
-                <span>${product.Product || ''}</span>
-            </div>
-            
-            <div class="detail-item">
-                <label data-translate="modal-platform">Plataforma</label>
-                <span>${product.Platform || ''}</span>
-            </div>
-            
-            <div class="detail-item">
-                <label data-translate="modal-sale">Precio de Venta</label>
-                <span>${product.Neto ? product.Neto.toLocaleString('es-CL') : '0'}</span>
-            </div>
-            
-            <div class="detail-item">
-                <label data-translate="modal-stock">Stock</label>
-                <span>${product.Stock || 0}</span>
-            </div>
-
-            <div class="detail-item">
-                <label >Link</label>
-                <span>${getLinkProductInstagram(product.Link)}</span>
-            </div>
-
-        </div>
+        const label = document.createElement('label');
+        label.textContent = detail.label;
         
-        <div class="modal-actions">
-            <button class="btn btn-secondary" id="modalCloseBtn">
-                <span data-translate="modal-close">Cerrar</span>
-            </button>
-        </div>
-    `;
+        const span = document.createElement('span');
+        span.textContent = detail.value;
+        
+        detailItem.appendChild(label);
+        detailItem.appendChild(span);
+        modalDetails.appendChild(detailItem);
+    });
+    
+    const modalActions = document.createElement('div');
+    modalActions.className = 'modal-actions';
+    
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'btn btn-secondary';
+    closeBtn.id = 'modalCloseBtn';
+    closeBtn.textContent = currentLang === 'es' ? 'Cerrar' : 'Close';
+    
+    modalActions.appendChild(closeBtn);
+    
+    // Limpiar y agregar contenido
+    modalContent.innerHTML = '';
+    modalContent.appendChild(modalHeader);
+    modalContent.appendChild(modalDetails);
+    modalContent.appendChild(modalActions);
     
     modalOverlay.classList.add('active');
     document.body.style.overflow = 'hidden';
     
-    // Traducir elementos del modal
-    const modalElements = modalContent.querySelectorAll('[data-translate]');
-    modalElements.forEach(element => {
-        const key = element.getAttribute('data-translate');
-        if (translations[currentLang] && translations[currentLang][key]) {
-            element.textContent = translations[currentLang][key];
-        }
-    });
-    
-    // Cerrar modal
-    const closeBtn = modalContent.querySelector('#modalCloseBtn');
-    closeBtn.addEventListener('click', () => {
+    // Event listeners para cerrar modal
+    const closeModal = () => {
         modalOverlay.classList.remove('active');
         document.body.style.overflow = '';
-    });
+    };
     
-    // Cerrar con el botón X
+    closeBtn.addEventListener('click', closeModal);
+    
     const modalCloseBtn = document.getElementById('productModalClose');
-    modalCloseBtn.addEventListener('click', () => {
-        modalOverlay.classList.remove('active');
-        document.body.style.overflow = '';
-    });
+    if (modalCloseBtn) {
+        modalCloseBtn.addEventListener('click', closeModal);
+    }
     
-    // Cerrar al hacer clic fuera
     modalOverlay.addEventListener('click', (e) => {
         if (e.target === modalOverlay) {
-            modalOverlay.classList.remove('active');
-            document.body.style.overflow = '';
+            closeModal();
         }
     });
 }
@@ -1282,7 +1420,7 @@ Acc: Accesorio`,
     });
 }
 
-// ========== EFEMÉRIDES ==========
+// ========== EFEMÉRIDES - SEGURO ==========
 function loadEfemerides() {
     const currentDateElement = document.getElementById('currentDate');
     const efemeridesCard = document.getElementById('efemeridesCard');
@@ -1290,59 +1428,121 @@ function loadEfemerides() {
     // Obtener fecha actual
     const now = new Date();
     const day = String(now.getDate()).padStart(2, '0');
-    const month = String(now.getMonth() + 1).padStart(2, '0'); // Los meses van de 0 a 11
-    const dateKey = `${month}/${day}`; // Formato nuevo: MM/DD
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const dateKey = `${month}/${day}`;
     
     // Formatear fecha para mostrar
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const currentLang = localStorage.getItem('language') || 'es';
     const formattedDate = now.toLocaleDateString(currentLang === 'es' ? 'es-ES' : 'en-US', options);
-    currentDateElement.textContent = formattedDate;
     
-    // Cargar efemérides desde el archivo JSON
-    fetch('js/efemerides.json')
+    if (currentDateElement) {
+        currentDateElement.textContent = formattedDate;
+    }
+    
+    // Cargar efemérides desde el archivo JSON de forma segura
+    fetch('js/efemerides.json', {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+        },
+        signal: AbortSignal.timeout(5000) // Timeout de 5 segundos
+    })
         .then(response => {
             if (!response.ok) {
-                throw new Error('No se pudo cargar el archivo de efemérides');
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
             return response.json();
         })
         .then(data => {
+            // Validar estructura de datos
+            if (!data || !Array.isArray(data.efemerides)) {
+                throw new Error('Invalid efemerides data structure');
+            }
+            
             // Buscar la efeméride para la fecha actual
             const efemeridesArr = data.efemerides;
             const efemerideHoy = efemeridesArr.find(item => item.date === dateKey);
-
-            let langKey = currentLang === 'es' ? 'ES' : 'EN';
-
+            
+            const langKey = currentLang === 'es' ? 'ES' : 'EN';
+            
             if (efemerideHoy && efemerideHoy[langKey]) {
                 const info = efemerideHoy[langKey];
-                efemeridesCard.innerHTML = `
-                    <div class="efemerides-header">
-                        <span class="efemerides-badge" data-translate="efemerides-badge">${info.title}</span>
-                        <h3>${info.text}</h3>
-                        <p>${info.det}</p>
-                    </div>
-                `;
+                
+                // Validar y sanitizar datos
+                const safeTitle = sanitizeHTML(info.title || '');
+                const safeText = sanitizeHTML(info.text || '');
+                const safeDet = sanitizeHTML(info.det || '');
+                
+                // Crear elementos de forma segura
+                const headerDiv = document.createElement('div');
+                headerDiv.className = 'efemerides-header';
+                
+                const badge = document.createElement('span');
+                badge.className = 'efemerides-badge';
+                badge.textContent = currentLang === 'es' ? 'Efeméride del día' : 'Today\'s Anniversary';
+                
+                const title = document.createElement('h3');
+                title.textContent = safeTitle;
+                
+                const text = document.createElement('p');
+                text.textContent = safeText;
+                
+                const detail = document.createElement('p');
+                detail.textContent = safeDet;
+                
+                headerDiv.appendChild(badge);
+                headerDiv.appendChild(title);
+                headerDiv.appendChild(text);
+                headerDiv.appendChild(detail);
+                
+                efemeridesCard.innerHTML = '';
+                efemeridesCard.appendChild(headerDiv);
             } else {
-                // Si no hay efeméride para hoy, mostrar un mensaje predeterminado
-                efemeridesCard.innerHTML = `
-                    <div class="efemerides-header">
-                        <span class="efemerides-badge" data-translate="efemerides-badge">Efeméride del día</span>
-                        <h3 data-translate="no-efemerides">Hoy no hay efemérides registradas.</h3>
-                        <p>¡Disfruta de tus juegos retro!</p>
-                    </div>
-                `;
+                // Mensaje predeterminado
+                const headerDiv = document.createElement('div');
+                headerDiv.className = 'efemerides-header';
+                
+                const badge = document.createElement('span');
+                badge.className = 'efemerides-badge';
+                badge.textContent = currentLang === 'es' ? 'Efeméride del día' : 'Today\'s Anniversary';
+                
+                const title = document.createElement('h3');
+                title.textContent = currentLang === 'es' ? 
+                    'Hoy no hay efemérides registradas.' : 
+                    'No anniversaries recorded for today.';
+                
+                const text = document.createElement('p');
+                text.textContent = currentLang === 'es' ? 
+                    '¡Disfruta de tus juegos retro!' : 
+                    'Enjoy your retro games!';
+                
+                headerDiv.appendChild(badge);
+                headerDiv.appendChild(title);
+                headerDiv.appendChild(text);
+                
+                efemeridesCard.innerHTML = '';
+                efemeridesCard.appendChild(headerDiv);
             }
         })
         .catch(error => {
-            console.error('Error cargando efemérides:', error);
-            // Mostrar mensaje de error
-            efemeridesCard.innerHTML = `
-                <div class="efemerides-header">
-                    <span class="efemerides-badge" data-translate="efemerides-badge">Efeméride del día</span>
-                    <h3 data-translate="efemerides-error">No se pudieron cargar las efemérides del día. Por favor, intenta más tarde.</h3>
-                </div>
-            `;
+            const errorMessage = handleSecureError(error, 'efemerides');
+            
+            const headerDiv = document.createElement('div');
+            headerDiv.className = 'efemerides-header';
+            
+            const badge = document.createElement('span');
+            badge.className = 'efemerides-badge';
+            badge.textContent = currentLang === 'es' ? 'Efeméride del día' : 'Today\'s Anniversary';
+            
+            const title = document.createElement('h3');
+            title.textContent = errorMessage;
+            
+            headerDiv.appendChild(badge);
+            headerDiv.appendChild(title);
+            
+            efemeridesCard.innerHTML = '';
+            efemeridesCard.appendChild(headerDiv);
         });
 }
 

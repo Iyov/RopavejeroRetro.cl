@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agradecimientos de Seguridad - Ropavejero Retro</title>
+    <meta name="description" content="Reconocimientos a investigadores de seguridad que han ayudado a mejorar la seguridad de Ropavejero Retro." />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" href="img/favicon.png" type="image/x-icon" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1, h2 { color: #1919e6; }
+        .researcher {
+            background: #f8f9fa;
+            border-left: 4px solid #1919e6;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .researcher h3 {
+            margin-top: 0;
+            color: #1919e6;
+        }
+        .vulnerability-type {
+            background: #e9ecef;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.85em;
+            margin-right: 5px;
+            display: inline-block;
+        }
+        .date {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .hall-of-fame {
+            background: linear-gradient(135deg, #1919e6, #3a3ae9);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 30px 0;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .stat-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #e9ecef;
+        }
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #1919e6;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .empty-state i {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>🏆 Agradecimientos de Seguridad</h1>
+    
+    <div class="hall-of-fame">
+        <h2>🛡️ Hall of Fame</h2>
+        <p>Reconocemos y agradecemos a los investigadores de seguridad que han contribuido a hacer de Ropavejero Retro un sitio más seguro.</p>
+    </div>
+    
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-number">0</div>
+            <div>Vulnerabilidades Reportadas</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">0</div>
+            <div>Investigadores Reconocidos</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">100%</div>
+            <div>Vulnerabilidades Corregidas</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">48h</div>
+            <div>Tiempo Promedio de Respuesta</div>
+        </div>
+    </div>
+    
+    <h2>📋 Investigadores Reconocidos</h2>
+    
+    <div class="empty-state">
+        <div style="font-size: 3em; margin-bottom: 20px;">🔍</div>
+        <h3>¡Sé el primero!</h3>
+        <p>Aún no hemos recibido reportes de vulnerabilidades válidos. Si encuentras algún problema de seguridad, por favor repórtalo siguiendo nuestra <a href="security-policy.html">política de divulgación responsable</a>.</p>
+    </div>
+    
+    <!-- Ejemplo de cómo se verían los reconocimientos:
+    <div class="researcher">
+        <h3>👤 Nombre del Investigador</h3>
+        <p><strong>Organización:</strong> Empresa/Universidad (opcional)</p>
+        <p><strong>Vulnerabilidad encontrada:</strong> 
+            <span class="vulnerability-type">XSS</span>
+            Cross-Site Scripting en formulario de contacto
+        </p>
+        <p><strong>Impacto:</strong> Medio</p>
+        <p><strong>Estado:</strong> ✅ Corregido</p>
+        <p class="date">📅 Reportado: 15 de enero, 2026 | Corregido: 16 de enero, 2026</p>
+        <p><strong>Contacto:</strong> <a href="https://twitter.com/researcher" target="_blank" rel="noopener">@researcher</a></p>
+    </div>
+    -->
+    
+    <h2>🔒 Tipos de Vulnerabilidades que Reconocemos</h2>
+    <div style="margin: 20px 0;">
+        <span class="vulnerability-type">XSS</span>
+        <span class="vulnerability-type">SQL Injection</span>
+        <span class="vulnerability-type">CSRF</span>
+        <span class="vulnerability-type">Authentication Bypass</span>
+        <span class="vulnerability-type">Data Exposure</span>
+        <span class="vulnerability-type">Security Misconfiguration</span>
+        <span class="vulnerability-type">Broken Access Control</span>
+        <span class="vulnerability-type">Cryptographic Issues</span>
+    </div>
+    
+    <h2>📝 Cómo Reportar</h2>
+    <p>Si has encontrado una vulnerabilidad de seguridad:</p>
+    <ol>
+        <li>📧 Envía un email a: <strong>contacto@ropavejeroretro.cl</strong></li>
+        <li>📋 Incluye el asunto: <strong>[SEGURIDAD] Reporte de Vulnerabilidad</strong></li>
+        <li>📖 Lee nuestra <a href="security-policy.html">política de seguridad completa</a></li>
+        <li>⏱️ Espera nuestra respuesta en 48-72 horas</li>
+    </ol>
+    
+    <div style="background: #d4edda; border: 1px solid #c3e6cb; padding: 15px; border-radius: 5px; margin: 20px 0;">
+        <h3 style="color: #155724; margin-top: 0;">💡 ¿Por qué reportar vulnerabilidades?</h3>
+        <ul style="color: #155724;">
+            <li>Ayudas a proteger a nuestra comunidad de usuarios</li>
+            <li>Contribuyes al ecosistema de seguridad web</li>
+            <li>Obtienes reconocimiento público (si lo deseas)</li>
+            <li>Formas parte de nuestra comunidad de seguridad</li>
+        </ul>
+    </div>
+    
+    <p><a href="/">← Volver al sitio principal</a> | <a href="security-policy.html">📋 Política de Seguridad</a></p>
+    
+    <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; font-size: 0.9em; color: #666;">
+        <p>© 2026 Ropavejero Retro. Esta página fue actualizada por última vez el 22 de enero de 2026.</p>
+        <p>🔐 Comprometidos con la seguridad y la transparencia.</p>
+    </footer>
+</body>
+</html>

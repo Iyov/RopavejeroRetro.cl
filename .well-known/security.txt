@@ -1,0 +1,7 @@
+Contact: mailto:contacto@ropavejeroretro.cl
+Expires: 2026-12-31T23:59:59.000Z
+Encryption: https://ropavejeroretro.cl/pgp-key.txt
+Preferred-Languages: es, en
+Canonical: https://ropavejeroretro.cl/.well-known/security.txt
+Policy: https://ropavejeroretro.cl/security-policy.html
+Acknowledgments: https://ropavejeroretro.cl/security-acknowledgments.html
