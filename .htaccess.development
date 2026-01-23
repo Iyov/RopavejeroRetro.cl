@@ -1,0 +1,37 @@
+# Development .htaccess - Configuración más permisiva para desarrollo local
+
+RewriteEngine On
+
+# Security Headers para desarrollo (más permisivos)
+<IfModule mod_headers.c>
+    # CSP más permisivo para desarrollo
+    Header always set Content-Security-Policy "default-src 'self' 'unsafe-inline' 'unsafe-eval'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://docs.google.com https://static.cloudflareinsights.com https://cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https://docs.google.com https://cloudflareinsights.com https://static.cloudflareinsights.com ws: wss:; frame-src 'self'; object-src 'self'; base-uri 'self'; form-action 'self'"
+    
+    # Headers básicos de seguridad
+    Header always set X-Content-Type-Options nosniff
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Permitir CORS para desarrollo
+    Header always set Access-Control-Allow-Origin "*"
+    Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+    Header always set Access-Control-Allow-Headers "Content-Type, Authorization"
+</IfModule>
+
+# Configuración de tipos MIME
+<Files "manifest.json">
+    Header set Content-Type "application/manifest+json; charset=utf-8"
+</Files>
+
+<Files "security.txt">
+    Header set Content-Type "text/plain; charset=utf-8"
+</Files>
+
+# Páginas de error personalizadas
+ErrorDocument 404 /404.html
+ErrorDocument 500 /500.html
+
+# Comentario: Para usar este archivo en desarrollo local:
+# 1. Renombra .htaccess a .htaccess.production
+# 2. Renombra .htaccess.development a .htaccess
+# 3. Para volver a producción, invierte el proceso

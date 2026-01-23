@@ -1872,20 +1872,49 @@ function applySavedSettings() {
 }
 
 // ========== MANEJO DE CSP DINÁMICO ==========
-// Función para reportar violaciones de CSP (opcional)
+// Función para reportar violaciones de CSP
 function handleCSPViolation(violationEvent) {
-    // Log de violación para debugging (solo en desarrollo)
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        console.warn('CSP Violation:', {
-            blockedURI: violationEvent.blockedURI,
-            violatedDirective: violationEvent.violatedDirective,
-            originalPolicy: violationEvent.originalPolicy,
-            documentURI: violationEvent.documentURI
-        });
+    const isDevelopment = window.location.hostname === 'localhost' || 
+                         window.location.hostname === '127.0.0.1' || 
+                         window.location.hostname.includes('localhost');
+    
+    // Log detallado en desarrollo
+    if (isDevelopment) {
+        console.group('🔒 CSP Violation Detected');
+        console.warn('Blocked URI:', violationEvent.blockedURI);
+        console.warn('Violated Directive:', violationEvent.violatedDirective);
+        console.warn('Original Policy:', violationEvent.originalPolicy);
+        console.warn('Document URI:', violationEvent.documentURI);
+        console.warn('Source File:', violationEvent.sourceFile);
+        console.warn('Line Number:', violationEvent.lineNumber);
+        console.groupEnd();
+        
+        // Sugerencia para desarrolladores
+        if (violationEvent.blockedURI && violationEvent.blockedURI !== 'eval') {
+            console.info('💡 Tip: Add this domain to CSP if it\'s trusted:', 
+                        new URL(violationEvent.blockedURI).hostname);
+        }
     }
     
-    // En producción, podrías enviar esto a un servicio de logging
-    // fetch('/api/csp-violation', { method: 'POST', body: JSON.stringify(violationEvent) });
+    // En producción, enviar a servicio de logging (opcional)
+    if (!isDevelopment && typeof fetch !== 'undefined') {
+        // Ejemplo de envío a endpoint de logging
+        /*
+        fetch('/api/csp-violation', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                blockedURI: violationEvent.blockedURI,
+                violatedDirective: violationEvent.violatedDirective,
+                documentURI: violationEvent.documentURI,
+                timestamp: new Date().toISOString(),
+                userAgent: navigator.userAgent
+            })
+        }).catch(err => console.error('Failed to report CSP violation:', err));
+        */
+    }
 }
 
 // Escuchar violaciones de CSP
@@ -1909,4 +1938,34 @@ function isAllowedByCSP(url) {
     } catch (e) {
         return false;
     }
+}
+
+// Función para validar recursos antes de cargarlos dinámicamente
+function loadResourceSafely(url, type = 'script') {
+    return new Promise((resolve, reject) => {
+        if (!isAllowedByCSP(url)) {
+            reject(new Error(`URL not allowed by CSP: ${url}`));
+            return;
+        }
+        
+        let element;
+        
+        if (type === 'script') {
+            element = document.createElement('script');
+            element.src = url;
+            element.async = true;
+        } else if (type === 'style') {
+            element = document.createElement('link');
+            element.rel = 'stylesheet';
+            element.href = url;
+        } else {
+            reject(new Error(`Unsupported resource type: ${type}`));
+            return;
+        }
+        
+        element.onload = () => resolve(element);
+        element.onerror = () => reject(new Error(`Failed to load ${type}: ${url}`));
+        
+        document.head.appendChild(element);
+    });
 }
