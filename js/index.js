@@ -1871,14 +1871,128 @@ function applySavedSettings() {
     loadEfemerides();
 }
 
-// ========== MANEJO DE CSP DINÁMICO ==========
+// ========== MANEJO DE RECURSOS BLOQUEADOS ==========
+// Función para detectar si Cloudflare Analytics está bloqueado
+function detectBlockedResources() {
+    const blockedResources = {
+        cloudflareAnalytics: false,
+        adBlockerDetected: false
+    };
+    
+    // Detectar si Cloudflare Analytics está disponible
+    setTimeout(() => {
+        if (typeof window.__CF$cv$params === 'undefined' && 
+            typeof window.cloudflare === 'undefined') {
+            blockedResources.cloudflareAnalytics = true;
+            blockedResources.adBlockerDetected = true;
+            
+            // Log solo en desarrollo
+            if (window.location.hostname === 'localhost' || 
+                window.location.hostname === '127.0.0.1') {
+                console.info('🛡️ Cloudflare Analytics bloqueado por AdBlocker (normal)');
+            }
+            
+            // Implementar analytics alternativo si es necesario
+            initFallbackAnalytics();
+        }
+    }, 2000);
+    
+    return blockedResources;
+}
+
+// Analytics alternativo básico (opcional)
+function initFallbackAnalytics() {
+    // Solo si realmente necesitas analytics básicos
+    const analytics = {
+        pageView: function(page) {
+            // Implementar tracking básico sin cookies ni scripts externos
+            if (navigator.sendBeacon && window.location.hostname !== 'localhost') {
+                const data = {
+                    page: page || window.location.pathname,
+                    referrer: document.referrer,
+                    timestamp: new Date().toISOString(),
+                    userAgent: navigator.userAgent.substring(0, 100) // Truncar para privacidad
+                };
+                
+                // Enviar a tu propio endpoint (opcional)
+                // navigator.sendBeacon('/api/analytics', JSON.stringify(data));
+            }
+        },
+        
+        event: function(category, action, label) {
+            // Tracking de eventos básico
+            if (navigator.sendBeacon && window.location.hostname !== 'localhost') {
+                const data = {
+                    type: 'event',
+                    category: category,
+                    action: action,
+                    label: label,
+                    timestamp: new Date().toISOString()
+                };
+                
+                // Enviar a tu propio endpoint (opcional)
+                // navigator.sendBeacon('/api/analytics', JSON.stringify(data));
+            }
+        }
+    };
+    
+    // Hacer disponible globalmente
+    window.fallbackAnalytics = analytics;
+    
+    // Track página inicial
+    analytics.pageView();
+}
+
+// Función para manejar errores de carga de recursos
+function handleResourceError(event) {
+    const resource = event.target;
+    const resourceUrl = resource.src || resource.href;
+    
+    if (resourceUrl && resourceUrl.includes('cloudflareinsights.com')) {
+        // Cloudflare bloqueado - comportamiento normal
+        if (window.location.hostname === 'localhost' || 
+            window.location.hostname === '127.0.0.1') {
+            console.info('🛡️ Cloudflare Analytics bloqueado por cliente (AdBlocker)');
+        }
+        
+        // Inicializar analytics alternativo
+        initFallbackAnalytics();
+    } else if (resourceUrl) {
+        // Otros recursos bloqueados
+        console.warn('⚠️ Recurso bloqueado:', resourceUrl);
+    }
+}
+
+// Escuchar errores de carga de recursos
+window.addEventListener('error', handleResourceError, true);
+
+// Detectar recursos bloqueados al cargar la página
+document.addEventListener('DOMContentLoaded', function() {
+    detectBlockedResources();
+});
+// ========== MANEJO DE CSP Y RECURSOS BLOQUEADOS ==========
 // Función para reportar violaciones de CSP
 function handleCSPViolation(violationEvent) {
     const isDevelopment = window.location.hostname === 'localhost' || 
                          window.location.hostname === '127.0.0.1' || 
                          window.location.hostname.includes('localhost');
     
-    // Log detallado en desarrollo
+    // Filtrar violaciones comunes de AdBlockers
+    const isAdBlockerViolation = violationEvent.blockedURI && (
+        violationEvent.blockedURI.includes('cloudflareinsights.com') ||
+        violationEvent.blockedURI.includes('google-analytics.com') ||
+        violationEvent.blockedURI.includes('googletagmanager.com')
+    );
+    
+    if (isAdBlockerViolation) {
+        // No reportar violaciones de AdBlockers como errores
+        if (isDevelopment) {
+            console.info('🛡️ AdBlocker bloqueó:', violationEvent.blockedURI);
+        }
+        return;
+    }
+    
+    // Log detallado en desarrollo para violaciones reales
     if (isDevelopment) {
         console.group('🔒 CSP Violation Detected');
         console.warn('Blocked URI:', violationEvent.blockedURI);
@@ -1891,12 +2005,16 @@ function handleCSPViolation(violationEvent) {
         
         // Sugerencia para desarrolladores
         if (violationEvent.blockedURI && violationEvent.blockedURI !== 'eval') {
-            console.info('💡 Tip: Add this domain to CSP if it\'s trusted:', 
-                        new URL(violationEvent.blockedURI).hostname);
+            try {
+                console.info('💡 Tip: Add this domain to CSP if it\'s trusted:', 
+                            new URL(violationEvent.blockedURI).hostname);
+            } catch (e) {
+                // URL inválida, ignorar
+            }
         }
     }
     
-    // En producción, enviar a servicio de logging (opcional)
+    // En producción, enviar solo violaciones reales a servicio de logging
     if (!isDevelopment && typeof fetch !== 'undefined') {
         // Ejemplo de envío a endpoint de logging
         /*
@@ -1954,18 +2072,89 @@ function loadResourceSafely(url, type = 'script') {
             element = document.createElement('script');
             element.src = url;
             element.async = true;
+            
+            // Manejar específicamente scripts de Cloudflare
+            if (url.includes('cloudflareinsights.com')) {
+                element.onerror = () => {
+                    // Cloudflare bloqueado por AdBlocker - no es un error real
+                    console.info('🛡️ Cloudflare Analytics bloqueado por AdBlocker (comportamiento normal)');
+                    initFallbackAnalytics();
+                    resolve(null); // Resolver como éxito para evitar errores
+                };
+            } else {
+                element.onerror = () => reject(new Error(`Failed to load ${type}: ${url}`));
+            }
         } else if (type === 'style') {
             element = document.createElement('link');
             element.rel = 'stylesheet';
             element.href = url;
+            element.onerror = () => reject(new Error(`Failed to load ${type}: ${url}`));
         } else {
             reject(new Error(`Unsupported resource type: ${type}`));
             return;
         }
         
         element.onload = () => resolve(element);
-        element.onerror = () => reject(new Error(`Failed to load ${type}: ${url}`));
         
         document.head.appendChild(element);
     });
 }
+
+// Función para inicializar Cloudflare Analytics de manera resiliente
+function initCloudflareAnalytics() {
+    // Verificar si ya está cargado
+    if (typeof window.__CF$cv$params !== 'undefined' || 
+        typeof window.cloudflare !== 'undefined') {
+        return Promise.resolve();
+    }
+    
+    // Intentar cargar Cloudflare Analytics
+    const cloudflareScript = document.querySelector('script[src*="cloudflareinsights.com"]');
+    if (cloudflareScript) {
+        return new Promise((resolve) => {
+            // Esperar un poco para ver si se carga
+            setTimeout(() => {
+                if (typeof window.__CF$cv$params === 'undefined') {
+                    // No se cargó, probablemente bloqueado
+                    initFallbackAnalytics();
+                }
+                resolve();
+            }, 3000);
+        });
+    }
+    
+    return Promise.resolve();
+}
+// ========== INICIALIZACIÓN DE ANALYTICS ==========
+// Inicializar analytics al cargar la página
+document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar Cloudflare Analytics de manera resiliente
+    initCloudflareAnalytics();
+    
+    // Detectar recursos bloqueados después de un tiempo
+    setTimeout(() => {
+        detectBlockedResources();
+    }, 1000);
+});
+
+// Función para track de eventos personalizados (compatible con ambos sistemas)
+function trackEvent(category, action, label, value) {
+    // Intentar usar Cloudflare Analytics si está disponible
+    if (typeof window.__CF$cv$params !== 'undefined' && window.cloudflare) {
+        // Cloudflare Analytics está disponible
+        try {
+            // Implementar tracking específico de Cloudflare si es necesario
+            console.debug('Cloudflare Analytics event:', { category, action, label, value });
+        } catch (e) {
+            console.warn('Error tracking with Cloudflare:', e);
+        }
+    }
+    
+    // Usar analytics alternativo si está disponible
+    if (window.fallbackAnalytics) {
+        window.fallbackAnalytics.event(category, action, label);
+    }
+}
+
+// Hacer disponible globalmente para uso en otros scripts
+window.trackEvent = trackEvent;
