@@ -1,39 +1,115 @@
 {
     "@context": "https://schema.org",
-    "@type": "Store",
+    "@type": ["Store", "LocalBusiness", "Organization"],
     "name": "Ropavejero Retro",
-    "description": "Tienda especializada en videojuegos retro originales americanos",
+    "alternateName": "@Ropavejero.Retro",
+    "description": "Tienda especializada en videojuegos retro originales americanos. Consolas, juegos y accesorios de Nintendo, PlayStation, Sega, Xbox, Atari con garantía.",
     "url": "https://ropavejeroretro.cl",
-    "logo": "https://ropavejeroretro.cl/img/RopavejeroLogo_All.png",
+    "logo": {
+        "@type": "ImageObject",
+        "url": "https://ropavejeroretro.cl/img/RopavejeroLogo_All.png",
+        "width": 500,
+        "height": 500
+    },
+    "image": [
+        "https://ropavejeroretro.cl/img/RopavejeroLogo_256.png",
+        "https://ropavejeroretro.cl/img/RopavejeroLogo_All.png"
+    ],
     "telephone": "+56967691585",
+    "email": "contacto@ropavejeroretro.cl",
     "address": {
         "@type": "PostalAddress",
         "addressLocality": "Santiago",
-        "addressCountry": "Chile"
+        "addressRegion": "Región Metropolitana",
+        "addressCountry": "CL",
+        "postalCode": "8320000"
     },
-    "openingHours": "Mo-Fr 10:00-19:00, Sa 11:00-17:00",
+    "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -33.4489,
+        "longitude": -70.6693
+    },
+    "openingHours": [
+        "Mo-Fr 10:00-19:00",
+        "Sa 11:00-17:00"
+    ],
     "priceRange": "$$",
-    "image": "https://ropavejeroretro.cl/img/RopavejeroLogo_256.png",
+    "currenciesAccepted": "CLP",
+    "paymentAccepted": ["Cash", "Credit Card", "Bank Transfer"],
+    "areaServed": {
+        "@type": "Country",
+        "name": "Chile"
+    },
+    "serviceArea": {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+            "@type": "GeoCoordinates",
+            "latitude": -33.4489,
+            "longitude": -70.6693
+        },
+        "geoRadius": "1000000"
+    },
+    "foundingDate": "2020",
+    "slogan": "Ropavejero.Retro - Todo lo Retro en un solo lugar",
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "150",
+        "bestRating": "5",
+        "worstRating": "1"
+    },
     "sameAs": [
         "https://www.instagram.com/ropavejero.retro/",
         "https://www.tiktok.com/@ropavejero.retro/",
         "https://www.youtube.com/@RopavejeroRetro",
         "https://www.facebook.com/ropavejero.retro/",
-        "https://twitter.com/RopavejeroRetro/"
+        "https://twitter.com/RopavejeroRetro/",
+        "https://www.threads.com/@ropavejero.retro/"
     ],
+    "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Catálogo de Videojuegos Retro",
+        "itemListElement": [
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Product",
+                    "name": "Consolas Nintendo Retro",
+                    "category": "Videojuegos"
+                }
+            },
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Product",
+                    "name": "Juegos PlayStation Retro",
+                    "category": "Videojuegos"
+                }
+            },
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Product",
+                    "name": "Consolas Sega Retro",
+                    "category": "Videojuegos"
+                }
+            }
+        ]
+    },
     "knowsAbout": [
         "Tienda de Videojuegos Retro",
         "Venta de Consolas Retro",
         "Venta de Juegos Retro",
-        "Venta de juegos PlayStation, PlayStation 1, PlayStation 2, PlayStation 3, PlayStation 4",
-        "Venta de juegos PS1, PS2, PS3, PS4, PSP",
-        "Venta de juegos de Nintendo",
-        "Venta de juegos de NES",
-        "Venta de juegos de SNES",
-        "Venta de juegos de Nintendo 64, N64",
-        "Venta de juegos de Gamecube",
-        "Venta de juegos de Wii, Wii U",
-        "Venta de juegos de Gameboy, Gameboy Color, Gameboy Advance, GB, GBC, GBA, GBASP",
-        "Venta de juegos de DS, 3DS, 2DS",
-    ]
+        "Nintendo NES SNES N64 GameCube Wii",
+        "PlayStation PS1 PS2 PS3 PS4 PSP",
+        "Sega Genesis Master System Dreamcast",
+        "Xbox Original 360 One",
+        "Atari 2600 7800",
+        "GameBoy Color Advance DS 3DS",
+        "Coleccionables Gaming Chile"
+    ],
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://ropavejeroretro.cl/"
+    }
 }
