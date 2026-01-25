@@ -4,6 +4,8 @@ Disallow: /admin/
 Disallow: /private/
 Disallow: /*.json$
 Disallow: /js/efemerides.json
+Disallow: /security-policy.html
+Disallow: /security-acknowledgments.html
 
 # Crawl-delay for specific bots
 User-agent: Bingbot
