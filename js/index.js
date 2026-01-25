@@ -1082,7 +1082,7 @@ function renderProductsTable() {
                     </div>
                     <div class="product-card-field">
                         <div class="product-card-label">${priceText}</div>
-                        <div class="product-card-value product-card-price">$${safeProduct.Neto !== 'X' ? safeProduct.Neto : '0'}</div>
+                        <div class="product-card-value product-card-price">${safeProduct.Neto !== 'X' ? safeProduct.Neto : '0'}</div>
                     </div>
                     <div class="product-card-field">
                         <div class="product-card-label">${stockText}</div>
@@ -1098,10 +1098,6 @@ function renderProductsTable() {
                     </div>
                 </div>
                 <div class="product-card-actions">
-                    <button class="btn btn-primary btn-small view-product-btn" data-product-id="${safeProduct.Num}" title="${viewDetailsText}">
-                        <i class="fas fa-eye" aria-hidden="true"></i>
-                        <span>${viewDetailsText}</span>
-                    </button>
                     <button class="btn btn-primary btn-small link-product-btn" data-product-link="${safeProduct.Link}" title="${viewInstagramText}">
                         <i class="fab fa-instagram" aria-hidden="true"></i>
                         <span>Instagram</span>
