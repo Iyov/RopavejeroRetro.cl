@@ -1002,6 +1002,7 @@ function parseCSVSecure(csvText) {
 // Renderizar tabla de productos - SEGURO
 function renderProductsTable() {
     const tableBody = document.getElementById('productsTableBody');
+    const mobileCards = document.getElementById('mobileCards');
     const currentLang = localStorage.getItem('language') || 'es';
     
     if (filteredProducts.length === 0) {
@@ -1013,6 +1014,11 @@ function renderProductsTable() {
                 </td>
             </tr>
         `;
+        mobileCards.innerHTML = `
+            <div class="loading-card">
+                ${sanitizeHTML(noProductsMsg)}
+            </div>
+        `;
         updatePaginationButtons();
         return;
     }
@@ -1022,7 +1028,8 @@ function renderProductsTable() {
     const endIndex = startIndex + productsPerPage;
     const productsToShow = filteredProducts.slice(startIndex, endIndex);
     
-    let html = '';
+    let tableHtml = '';
+    let cardsHtml = '';
     
     productsToShow.forEach(product => {
         // Validar y sanitizar producto
@@ -1034,7 +1041,8 @@ function renderProductsTable() {
             (currentLang === 'es' ? 'Vendido' : 'Sold') : 
             (currentLang === 'es' ? 'Disponible' : 'Available');
         
-        html += `
+        // HTML para tabla (desktop)
+        tableHtml += `
             <tr data-product-id="${safeProduct.Num}">
                 <td>${safeProduct.Num}</td>
                 <td>${safeProduct.Product}</td>
@@ -1052,11 +1060,61 @@ function renderProductsTable() {
                 </td>
             </tr>
         `;
+        
+        // HTML para tarjetas (móvil)
+        const priceText = currentLang === 'es' ? 'Precio' : 'Price';
+        const platformText = currentLang === 'es' ? 'Plataforma' : 'Platform';
+        const stockText = currentLang === 'es' ? 'Stock' : 'Stock';
+        const statusTextLabel = currentLang === 'es' ? 'Estado' : 'Status';
+        const viewDetailsText = currentLang === 'es' ? 'Ver detalles' : 'View details';
+        const viewInstagramText = currentLang === 'es' ? 'Ver en Instagram' : 'View on Instagram';
+        
+        cardsHtml += `
+            <div class="product-card" data-product-id="${safeProduct.Num}">
+                <div class="product-card-header">
+                    <div class="product-card-number">#${safeProduct.Num}</div>
+                    <h3 class="product-card-title">${safeProduct.Product}</h3>
+                </div>
+                <div class="product-card-body">
+                    <div class="product-card-field">
+                        <div class="product-card-label">${platformText}</div>
+                        <div class="product-card-value">${safeProduct.Platform}</div>
+                    </div>
+                    <div class="product-card-field">
+                        <div class="product-card-label">${priceText}</div>
+                        <div class="product-card-value product-card-price">$${safeProduct.Neto !== 'X' ? safeProduct.Neto : '0'}</div>
+                    </div>
+                    <div class="product-card-field">
+                        <div class="product-card-label">${stockText}</div>
+                        <div class="product-card-value">
+                            <span class="stock-badge">${safeProduct.Stock}</span>
+                        </div>
+                    </div>
+                    <div class="product-card-field">
+                        <div class="product-card-label">${statusTextLabel}</div>
+                        <div class="product-card-value">
+                            <span class="status-badge ${statusClass}">${statusText}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card-actions">
+                    <button class="btn btn-primary btn-small view-product-btn" data-product-id="${safeProduct.Num}" title="${viewDetailsText}">
+                        <i class="fas fa-eye" aria-hidden="true"></i>
+                        <span>${viewDetailsText}</span>
+                    </button>
+                    <button class="btn btn-primary btn-small link-product-btn" data-product-link="${safeProduct.Link}" title="${viewInstagramText}">
+                        <i class="fab fa-instagram" aria-hidden="true"></i>
+                        <span>Instagram</span>
+                    </button>
+                </div>
+            </div>
+        `;
     });
     
-    tableBody.innerHTML = html;
+    tableBody.innerHTML = tableHtml;
+    mobileCards.innerHTML = cardsHtml;
     
-    // Agregar event listeners a los botones de ver detalles
+    // Agregar event listeners a los botones de ver detalles (tanto tabla como tarjetas)
     document.querySelectorAll('.view-product-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             const productId = parseInt(this.getAttribute('data-product-id'));

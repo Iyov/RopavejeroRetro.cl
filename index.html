@@ -73,7 +73,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/font-awesome_6.5.1_all.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/index.css?v=2026-01-23_1" type="text/css" />
+    <link rel="stylesheet" href="css/index.css?v=2026-01-25_1" type="text/css" />
 
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
@@ -505,7 +505,8 @@
 
                 <!-- Tabla de productos -->
                 <div class="products-container">
-                    <div class="table-responsive">
+                    <!-- Vista de tabla para desktop -->
+                    <div class="table-responsive desktop-table">
                         <table class="products-table" id="productsTable">
                             <thead>
                                 <tr>
@@ -525,6 +526,12 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                    
+                    <!-- Vista de tarjetas para móvil -->
+                    <div class="mobile-cards" id="mobileCards">
+                        <div class="loading-card" data-translate="loading-products">Cargando productos...</div>
+                        <!-- Las tarjetas se cargarán dinámicamente -->
                     </div>
                 </div>
 
@@ -837,7 +844,7 @@
         </div>
     </div>
 
-    <script src="js/index.js?v=2026-01-23_2"></script>
+    <script src="js/index.js?v=2026-01-25_1"></script>
 </body>
 
 </html>
