@@ -61,6 +61,21 @@ function sanitizeURL(url) {
 function validateProductData(product) {
     if (!product || typeof product !== 'object') return null;
     
+    // Lógica corregida para el campo Sold:
+    // - Vacío/undefined/null/string vacío = NO vendido (0)
+    // - "1" o 1 = SÍ vendido (1)
+    let soldValue = 0;
+    
+    // Debug: log del valor original del campo Sold
+    // console.log('Sold original value:', product.Sold, 'Type:', typeof product.Sold);
+    
+    if (product.Sold === '1' || product.Sold === 1) {
+        soldValue = 1;
+    } else {
+        // Cualquier otro valor (vacío, null, undefined, '0', 0) = NO vendido
+        soldValue = 0;
+    }
+    
     return {
         Num: parseInt(product.Num) || 0,
         Product: sanitizeHTML(String(product.Product || '')),
@@ -69,7 +84,7 @@ function validateProductData(product) {
         Neto: sanitizeHTML(String(product.Neto || 'X')),
         Stock: sanitizeHTML(String(product.Stock || '0')),
         Link: sanitizeHTML(String(product.Link || '')),
-        Sold: product.Sold === '1' || product.Sold === 'Si' ? 1 : 0
+        Sold: soldValue
     };
 }
 
@@ -981,11 +996,16 @@ function parseCSVSecure(csvText) {
                 Neto: values[4] || 'X',
                 Stock: values[5] || '0',
                 Link: values[6] || '',
-                Sold: values[7] || '0'
+                Sold: values[7] || ''  // Cambiado: dejar vacío en lugar de '0'
             };
             
             // Validar y sanitizar producto
             const product = validateProductData(rawProduct);
+            
+            // Debug temporal: log de algunos productos para verificar el campo Sold
+            if (product && product.Num <= 5) {
+                console.log(`Producto #${product.Num}: Sold original="${rawProduct.Sold}", Sold procesado=${product.Sold}`);
+            }
             
             if (product && product.Num > 0) {
                 products.push(product);
@@ -1425,10 +1445,10 @@ function filterProducts() {
         }
         
         // Filtrar por estado
-        if (statusFilter === 'available' && product.Sold != 0) {
+        if (statusFilter === 'available' && product.Sold === 1) {
             return false;
         }
-        if (statusFilter === 'sold' && product.Sold != 1) {
+        if (statusFilter === 'sold' && product.Sold === 0) {
             return false;
         }
         
