@@ -24,10 +24,10 @@
     <meta name="adblock-friendly" content="true" />
     
     <!-- Security Headers -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://docs.google.com https://static.cloudflareinsights.com https://cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https://docs.google.com https://cloudflareinsights.com https://static.cloudflareinsights.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
-    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://docs.google.com https://static.cloudflareinsights.com https://cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https://docs.google.com https://cloudflareinsights.com https://static.cloudflareinsights.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
     
     <!-- Additional SEO Meta Tags -->
     <!-- PWA and Mobile App Meta Tags -->
@@ -71,9 +71,23 @@
     <meta name="twitter:image" content="https://ropavejeroretro.cl/img/RopavejeroLogo_256.png" />
     <meta name="twitter:image:alt" content="Logo Ropavejero Retro - Tienda de Videojuegos Retro" />
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/font-awesome_6.5.1_all.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/index.css?v=2026-01-25_1" type="text/css" />
+    <!-- Preconnect a dominios críticos para mejorar rendimiento -->
+    <link rel="preconnect" href="https://docs.google.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://static.cloudflareinsights.com" crossorigin />
+    
+    <!-- DNS Prefetch para recursos secundarios -->
+    <link rel="dns-prefetch" href="//cloudflareinsights.com" />
+    
+    <!-- CSS con preload para recursos críticos -->
+    <link rel="preload" href="css/font-awesome_6.5.1_all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="css/font-awesome_6.5.1_all.min.css"></noscript>
+    <link rel="stylesheet" href="css/index.css?v=2026-01-27_1" type="text/css" />
+    
+    <!-- Preload de recursos críticos -->
+    <link rel="preload" href="js/index.js?v=2026-01-27_2" as="script" />
+    <link rel="preload" href="img/RopavejeroLogo_256.png" as="image" type="image/png" />
 
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
@@ -496,6 +510,10 @@
                         </select>
                     </div>
                     <button id="clearFilters" class="btn btn-secondary" data-translate="clear-filters">Limpiar</button>
+                    <button id="clearCache" class="btn btn-secondary" onclick="clearProductsCache(); location.reload();" title="Limpiar caché y recargar datos">
+                        <i class="fas fa-sync-alt"></i>
+                        <span data-translate="clear-cache">Actualizar</span>
+                    </button>
                 </div>
 
                 <!-- Contador de productos -->
@@ -844,7 +862,7 @@
         </div>
     </div>
 
-    <script src="js/index.js?v=2026-01-26_1"></script>
+    <script src="js/index.js?v=2026-01-27_2"></script>
 </body>
 
 </html>

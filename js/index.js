@@ -1,4 +1,57 @@
-// ========== FUNCIONES DE SEGURIDAD ==========
+// ========== SISTEMA DE CACHÉ INTELIGENTE ==========
+const CACHE_CONFIG = {
+    PRODUCTS_KEY: 'ropavejero_products_cache',
+    TIMESTAMP_KEY: 'ropavejero_cache_timestamp',
+    CACHE_DURATION: 5 * 60 * 1000, // 5 minutos en milisegundos
+    MAX_RETRIES: 3,
+    RETRY_DELAY: 2000 // 2 segundos
+};
+
+// Función para obtener datos del caché
+function getCachedProducts() {
+    try {
+        const cachedData = localStorage.getItem(CACHE_CONFIG.PRODUCTS_KEY);
+        const timestamp = localStorage.getItem(CACHE_CONFIG.TIMESTAMP_KEY);
+        
+        if (!cachedData || !timestamp) {
+            return null;
+        }
+        
+        const now = Date.now();
+        const cacheAge = now - parseInt(timestamp);
+        
+        // Verificar si el caché ha expirado
+        if (cacheAge > CACHE_CONFIG.CACHE_DURATION) {
+            // Limpiar caché expirado
+            localStorage.removeItem(CACHE_CONFIG.PRODUCTS_KEY);
+            localStorage.removeItem(CACHE_CONFIG.TIMESTAMP_KEY);
+            return null;
+        }
+        
+        return JSON.parse(cachedData);
+    } catch (error) {
+        console.warn('Error reading cache:', error);
+        return null;
+    }
+}
+
+// Función para guardar datos en caché
+function setCachedProducts(products) {
+    try {
+        localStorage.setItem(CACHE_CONFIG.PRODUCTS_KEY, JSON.stringify(products));
+        localStorage.setItem(CACHE_CONFIG.TIMESTAMP_KEY, Date.now().toString());
+        console.info('✅ Productos guardados en caché');
+    } catch (error) {
+        console.warn('Error saving to cache:', error);
+    }
+}
+
+// Función para limpiar caché manualmente
+function clearProductsCache() {
+    localStorage.removeItem(CACHE_CONFIG.PRODUCTS_KEY);
+    localStorage.removeItem(CACHE_CONFIG.TIMESTAMP_KEY);
+    console.info('🗑️ Caché de productos limpiado');
+}
 // Función para sanitizar HTML y prevenir XSS
 function sanitizeHTML(str) {
     if (typeof str !== 'string') return '';
@@ -251,6 +304,7 @@ const translations = {
         'filter-available': 'Disponibles',
         'filter-sold': 'Vendidos',
         'clear-filters': 'Limpiar',
+        'clear-cache': 'Actualizar',
         'platforms-selected': 'plataformas seleccionadas',
         'platform-selected': 'plataforma seleccionada',
         'products-count': 'Cargando productos...',
@@ -405,6 +459,7 @@ const translations = {
         'filter-available': 'Available',
         'filter-sold': 'Sold',
         'clear-filters': 'Clear',
+        'clear-cache': 'Refresh',
         'platforms-selected': 'platforms selected',
         'platform-selected': 'platform selected',
         'products-count': 'Loading products...',
@@ -881,63 +936,120 @@ async function loadProducts() {
     const tableBody = document.getElementById('productsTableBody');
     const productsCounter = document.getElementById('productsCounter');
     
-    try {
-        // URL de tu Google Sheet (formato CSV) - validada
-        const sheetId = '18kZ6wyheBWMmoa5yb1PR_XqhqzHCTAlT';
-        const sheetUrl = `https://docs.google.com/spreadsheets/d/${encodeURIComponent(sheetId)}/gviz/tq?tqx=out:csv`;
-        
-        const response = await fetch(sheetUrl, {
-            method: 'GET',
-            headers: {
-                'Accept': 'text/csv',
-            },
-            // Timeout de 10 segundos
-            signal: AbortSignal.timeout(10000)
-        });
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const csvData = await response.text();
-        
-        // Validar que el CSV no esté vacío
-        if (!csvData || csvData.trim().length === 0) {
-            throw new Error('CSV data is empty');
-        }
-        
-        // Parsear CSV de forma segura
-        const products = parseCSVSecure(csvData);
-        
-        // Validar que tengamos productos
-        if (!Array.isArray(products) || products.length === 0) {
-            throw new Error('No valid products found');
-        }
-        
-        // Guardar productos globalmente
-        allProducts = products;
-        filteredProducts = [...products];
-        
-        // Actualizar filtro de plataformas
-        updatePlatformFilter(products);
-        
-        // Renderizar tabla
+    // Intentar cargar desde caché primero
+    const cachedProducts = getCachedProducts();
+    if (cachedProducts && Array.isArray(cachedProducts) && cachedProducts.length > 0) {
+        console.info('📦 Cargando productos desde caché');
+        allProducts = cachedProducts;
+        filteredProducts = [...cachedProducts];
+        updatePlatformFilter(cachedProducts);
         renderProductsTable();
-        
-        // Actualizar contador
         updateProductsCounter();
-        
-    } catch (error) {
-        const errorMessage = handleSecureError(error, 'products');
-        tableBody.innerHTML = `
-            <tr>
-                <td colspan="7" class="loading-cell">
-                    ${sanitizeHTML(errorMessage)}
-                </td>
-            </tr>
-        `;
-        productsCounter.textContent = errorMessage;
+        return;
     }
+    
+    // Si no hay caché, cargar desde Google Sheets con reintentos
+    let retryCount = 0;
+    
+    while (retryCount < CACHE_CONFIG.MAX_RETRIES) {
+        try {
+            console.info(`🔄 Cargando productos desde Google Sheets (intento ${retryCount + 1}/${CACHE_CONFIG.MAX_RETRIES})`);
+            
+            // URL de tu Google Sheet (formato CSV) - validada
+            const sheetId = '18kZ6wyheBWMmoa5yb1PR_XqhqzHCTAlT';
+            const sheetUrl = `https://docs.google.com/spreadsheets/d/${encodeURIComponent(sheetId)}/gviz/tq?tqx=out:csv&headers=1&tq=${encodeURIComponent('SELECT *')}`;
+            
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 segundos timeout
+            
+            const response = await fetch(sheetUrl, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'text/csv',
+                    'Cache-Control': 'no-cache, no-store, must-revalidate',
+                    'Pragma': 'no-cache'
+                },
+                signal: controller.signal
+            });
+            
+            clearTimeout(timeoutId);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const csvData = await response.text();
+            
+            // Validar que el CSV no esté vacío
+            if (!csvData || csvData.trim().length === 0) {
+                throw new Error('CSV data is empty');
+            }
+            
+            // Parsear CSV de forma segura
+            const products = parseCSVSecure(csvData);
+            
+            // Validar que tengamos productos
+            if (!Array.isArray(products) || products.length === 0) {
+                throw new Error('No valid products found');
+            }
+            
+            // Guardar productos globalmente y en caché
+            allProducts = products;
+            filteredProducts = [...products];
+            setCachedProducts(products);
+            
+            // Actualizar filtro de plataformas
+            updatePlatformFilter(products);
+            
+            // Renderizar tabla
+            renderProductsTable();
+            
+            // Actualizar contador
+            updateProductsCounter();
+            
+            console.info(`✅ ${products.length} productos cargados exitosamente`);
+            return; // Éxito, salir del bucle
+            
+        } catch (error) {
+            retryCount++;
+            console.warn(`❌ Error cargando productos (intento ${retryCount}):`, error.message);
+            
+            if (retryCount < CACHE_CONFIG.MAX_RETRIES) {
+                console.info(`⏳ Reintentando en ${CACHE_CONFIG.RETRY_DELAY/1000} segundos...`);
+                await new Promise(resolve => setTimeout(resolve, CACHE_CONFIG.RETRY_DELAY));
+            } else {
+                // Todos los intentos fallaron
+                console.error('💥 Todos los intentos de carga fallaron');
+                showLoadingError();
+            }
+        }
+    }
+}
+
+// Función para mostrar error de carga
+function showLoadingError() {
+    const tableBody = document.getElementById('productsTableBody');
+    const mobileCards = document.getElementById('mobileCards');
+    const currentLang = localStorage.getItem('language') || 'es';
+    
+    const errorMsg = currentLang === 'es' ? 
+        'Error cargando productos. Por favor, recarga la página.' : 
+        'Error loading products. Please reload the page.';
+    
+    const retryMsg = currentLang === 'es' ? 'Reintentar' : 'Retry';
+    
+    const errorHtml = `
+        <div style="text-align: center; padding: 40px; color: var(--danger-color);">
+            <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 15px;"></i>
+            <p>${errorMsg}</p>
+            <button onclick="location.reload()" class="btn btn-primary" style="margin-top: 15px;">
+                <i class="fas fa-redo"></i> ${retryMsg}
+            </button>
+        </div>
+    `;
+    
+    tableBody.innerHTML = `<tr><td colspan="7">${errorHtml}</td></tr>`;
+    mobileCards.innerHTML = errorHtml;
 }
 
 // Parsear CSV a objetos - SEGURO

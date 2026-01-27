@@ -9,7 +9,9 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
 RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 
-# Compression
+# ========== OPTIMIZACIONES DE RENDIMIENTO AVANZADAS ==========
+
+# Compression mejorada
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/plain
     AddOutputFilterByType DEFLATE text/html
@@ -21,11 +23,24 @@ RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
     AddOutputFilterByType DEFLATE application/javascript
     AddOutputFilterByType DEFLATE application/x-javascript
     AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE image/svg+xml
+    AddOutputFilterByType DEFLATE font/truetype
+    AddOutputFilterByType DEFLATE font/opentype
+    AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
+    
+    # Configurar nivel de compresión (1-9, 6 es un buen balance)
+    DeflateCompressionLevel 6
+    
+    # Excluir archivos ya comprimidos
+    SetEnvIfNoCase Request_URI \
+        \.(?:gif|jpe?g|png|zip|gz|bz2|sit|rar|pdf)$ no-gzip dont-vary
 </IfModule>
 
-# Browser Caching
+# Browser Caching optimizado para alto tráfico
 <IfModule mod_expires.c>
     ExpiresActive on
+    
+    # Recursos estáticos - caché largo
     ExpiresByType text/css "access plus 1 year"
     ExpiresByType application/javascript "access plus 1 year"
     ExpiresByType image/png "access plus 1 year"
@@ -34,19 +49,29 @@ RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
     ExpiresByType image/gif "access plus 1 year"
     ExpiresByType image/svg+xml "access plus 1 year"
     ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/avif "access plus 1 year"
     ExpiresByType font/woff "access plus 1 year"
     ExpiresByType font/woff2 "access plus 1 year"
-    ExpiresByType application/json "access plus 1 day"
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/otf "access plus 1 year"
+    ExpiresByType application/font-woff "access plus 1 year"
+    ExpiresByType application/font-woff2 "access plus 1 year"
+    
+    # HTML - caché corto para actualizaciones frecuentes
+    ExpiresByType text/html "access plus 1 hour"
+    
+    # JSON - caché muy corto para datos dinámicos
+    ExpiresByType application/json "access plus 5 minutes"
+    
+    # Manifest y otros archivos de configuración
+    ExpiresByType application/manifest+json "access plus 1 week"
+    ExpiresByType text/cache-manifest "access plus 0 seconds"
 </IfModule>
 
-# Security Headers
+# Headers de rendimiento mejorados
 <IfModule mod_headers.c>
     # Content Security Policy (Producción)
-    # Nota: CSP Report-Only no puede ser enviado via meta tag, solo via HTTP header
     Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://docs.google.com https://static.cloudflareinsights.com https://cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https://docs.google.com https://cloudflareinsights.com https://static.cloudflareinsights.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
-    
-    # CSP Report-Only para monitoreo (descomentear solo en producción si necesitas reportes)
-    # Header always set Content-Security-Policy-Report-Only "default-src 'self'; report-uri /csp-violation-report"
     
     # Security Headers
     Header always set X-Content-Type-Options nosniff
@@ -56,17 +81,78 @@ RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
     Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), speaker=()"
     Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
     
+    # Performance Headers
+    Header always set X-UA-Compatible "IE=edge"
+    Header always set Vary "Accept-Encoding, User-Agent"
+    
+    # Preload critical resources
+    <FilesMatch "\.(css)$">
+        Header set Link "</css/font-awesome_6.5.1_all.min.css>; rel=preload; as=style"
+    </FilesMatch>
+    
     # Remove Server Information
     Header always unset Server
     Header always unset X-Powered-By
+    Header always unset X-Pingback
     
-    # Cache Control for sensitive files
+    # Cache Control optimizado por tipo de archivo
+    <FilesMatch "\.(css|js)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+        Header set Pragma "public"
+    </FilesMatch>
+    
+    <FilesMatch "\.(png|jpg|jpeg|gif|webp|avif|svg|ico)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+        Header set Pragma "public"
+    </FilesMatch>
+    
+    <FilesMatch "\.(woff|woff2|ttf|otf|eot)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+        Header set Pragma "public"
+        Header set Access-Control-Allow-Origin "*"
+    </FilesMatch>
+    
+    <FilesMatch "\.(html|htm)$">
+        Header set Cache-Control "public, max-age=3600, must-revalidate"
+    </FilesMatch>
+    
     <FilesMatch "\.(json|xml)$">
-        Header set Cache-Control "no-cache, no-store, must-revalidate"
-        Header set Pragma "no-cache"
-        Header set Expires "0"
+        Header set Cache-Control "public, max-age=300, must-revalidate"
+        Header set Pragma "public"
     </FilesMatch>
 </IfModule>
+
+# ========== OPTIMIZACIONES DE CONEXIÓN ==========
+
+# Keep-Alive para reducir latencia
+<IfModule mod_headers.c>
+    Header always set Connection "Keep-Alive"
+    Header always set Keep-Alive "timeout=5, max=100"
+</IfModule>
+
+# Preconnect a dominios externos críticos
+<IfModule mod_headers.c>
+    <FilesMatch "\.(html|htm)$">
+        Header add Link "<https://docs.google.com>; rel=preconnect; crossorigin"
+        Header add Link "<https://fonts.googleapis.com>; rel=preconnect; crossorigin"
+        Header add Link "<https://fonts.gstatic.com>; rel=preconnect; crossorigin"
+    </FilesMatch>
+</IfModule>
+
+# ========== LÍMITES DE RECURSOS ==========
+
+# Límites para prevenir ataques DDoS básicos
+<IfModule mod_evasive24.c>
+    DOSHashTableSize    2048
+    DOSPageCount        10
+    DOSSiteCount        50
+    DOSPageInterval     1
+    DOSSiteInterval     1
+    DOSBlockingPeriod   600
+</IfModule>
+
+# Límites de tamaño de request
+LimitRequestBody 10485760  # 10MB máximo
 
 # Hide sensitive files
 <FilesMatch "^\.">
