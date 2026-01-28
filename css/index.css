@@ -412,26 +412,29 @@ body {
 /* Instagram Section */
 .instagram-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
 }
 
 .instagram-card {
-    background-color: var(--surface-color);
-    border-radius: 12px;
+    background: var(--card-bg);
+    border-radius: 15px;
     overflow: hidden;
-    box-shadow: var(--shadow);
-    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--border-color);
 }
 
 .instagram-card:hover {
     transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .instagram-image {
+    position: relative;
     width: 100%;
-    height: 200px;
+    height: 250px;
     overflow: hidden;
 }
 
@@ -439,26 +442,121 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s;
+    transition: transform 0.3s ease;
 }
 
 .instagram-card:hover .instagram-image img {
     transform: scale(1.05);
 }
 
+.video-indicator {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 8px;
+    border-radius: 50%;
+    font-size: 14px;
+}
+
 .instagram-content {
-    padding: 20px;
+    padding: 25px;
 }
 
 .instagram-content h3 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--text-color);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .instagram-content p {
-    color: var(--text-secondary);
-    margin-bottom: 15px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 20px;
     font-size: 0.9rem;
+}
+
+.instagram-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.instagram-actions .btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 20px;
+    font-size: 0.9rem;
+    background: linear-gradient(45deg, #E4405F, #F56040);
+    border: none;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.instagram-actions .btn:hover {
+    background: linear-gradient(45deg, #D73652, #E55039);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(228, 64, 95, 0.3);
+}
+
+.post-date {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.instagram-loading {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-muted);
+}
+
+.instagram-loading i {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.instagram-error {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-muted);
+}
+
+.instagram-error .btn {
+    margin-top: 20px;
+    background: linear-gradient(45deg, #E4405F, #F56040);
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.instagram-error .btn:hover {
+    background: linear-gradient(45deg, #D73652, #E55039);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(228, 64, 95, 0.3);
 }
 
 /* About Section */
@@ -1617,6 +1715,29 @@ body {
     .testimonials-grid,
     .blog-grid {
         grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .instagram-image {
+        height: 200px;
+    }
+    
+    .instagram-content {
+        padding: 20px;
+    }
+    
+    .instagram-content h3 {
+        font-size: 1rem;
+    }
+    
+    .instagram-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .post-date {
+        text-align: center;
+        margin-top: 10px;
     }
     
     .brands-grid,

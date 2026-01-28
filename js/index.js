@@ -52,6 +52,20 @@ function clearProductsCache() {
     localStorage.removeItem(CACHE_CONFIG.TIMESTAMP_KEY);
     console.info('🗑️ Caché de productos limpiado');
 }
+
+// Función para limpiar caché de Instagram
+function clearInstagramCache() {
+    localStorage.removeItem(INSTAGRAM_CONFIG.CACHE_KEY);
+    localStorage.removeItem(INSTAGRAM_CONFIG.CACHE_TIMESTAMP_KEY);
+    console.info('🗑️ Caché de Instagram limpiado');
+}
+
+// Función para limpiar todo el caché
+function clearAllCache() {
+    clearProductsCache();
+    clearInstagramCache();
+    console.info('🗑️ Todo el caché limpiado');
+}
 // Función para sanitizar HTML y prevenir XSS
 function sanitizeHTML(str) {
     if (typeof str !== 'string') return '';
@@ -1785,14 +1799,283 @@ function getLinkProductInstagram(productLink) {
     return productLink;
 }
 
+// ========== CONFIGURACIÓN DE INSTAGRAM API ==========
+const INSTAGRAM_CONFIG = {
+    // Usar configuración externa si está disponible
+    ACCESS_TOKEN: window.INSTAGRAM_API_CONFIG?.ACCESS_TOKEN || '',
+    USER_ID: window.INSTAGRAM_API_CONFIG?.USER_ID || '',
+    API_BASE_URL: window.INSTAGRAM_API_CONFIG?.API_BASE_URL || 'https://graph.instagram.com',
+    CACHE_KEY: 'ropavejero_instagram_cache',
+    CACHE_TIMESTAMP_KEY: 'ropavejero_instagram_timestamp',
+    CACHE_DURATION: window.INSTAGRAM_API_CONFIG?.CACHE_DURATION || (30 * 60 * 1000), // 30 minutos
+    MAX_POSTS: window.INSTAGRAM_API_CONFIG?.MAX_POSTS || 6,
+    FALLBACK_ENABLED: window.INSTAGRAM_API_CONFIG?.FALLBACK_ENABLED !== false
+};
+
 // ========== POSTS DE INSTAGRAM ==========
-function loadInstagramPosts() {
+async function loadInstagramPosts() {
     const instagramGrid = document.getElementById('instagramGrid');
     
-    // Datos simulados de Instagram
-    const instagramPosts = [
+    if (!instagramGrid) {
+        console.warn('Instagram grid element not found');
+        return;
+    }
+    
+    // Mostrar loading
+    instagramGrid.innerHTML = `
+        <div class="instagram-loading">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Cargando posts de Instagram...</p>
+        </div>
+    `;
+    
+    try {
+        // Intentar cargar desde caché primero
+        const cachedPosts = getCachedInstagramPosts();
+        if (cachedPosts && cachedPosts.length > 0) {
+            console.info('📦 Cargando posts de Instagram desde caché');
+            renderInstagramPosts(cachedPosts);
+            return;
+        }
+        
+        // Intentar cargar desde API real si está configurada
+        if (INSTAGRAM_CONFIG.ACCESS_TOKEN && INSTAGRAM_CONFIG.USER_ID) {
+            console.info('🔄 Cargando posts desde Instagram API');
+            const realPosts = await fetchInstagramPosts();
+            if (realPosts && realPosts.length > 0) {
+                setCachedInstagramPosts(realPosts);
+                renderInstagramPosts(realPosts);
+                return;
+            }
+        }
+        
+        // Fallback a datos simulados
+        if (INSTAGRAM_CONFIG.FALLBACK_ENABLED) {
+            console.info('📋 Usando datos simulados de Instagram');
+            const simulatedPosts = getSimulatedInstagramPosts();
+            console.debug('📸 Posts simulados cargados:', simulatedPosts.length);
+            console.debug('📸 Rutas de imágenes:', simulatedPosts.map(p => `${p.title?.substring(0, 20)}... -> ${p.image}`));
+            renderInstagramPosts(simulatedPosts);
+        } else {
+            throw new Error('Instagram API not configured and fallback disabled');
+        }
+        
+    } catch (error) {
+        console.error('Error loading Instagram posts:', error);
+        showInstagramError();
+    }
+}
+
+// Función para obtener posts desde la API real de Instagram
+async function fetchInstagramPosts() {
+    try {
+        const fields = 'id,caption,media_type,media_url,thumbnail_url,permalink,timestamp';
+        const url = `${INSTAGRAM_CONFIG.API_BASE_URL}/${INSTAGRAM_CONFIG.USER_ID}/media?fields=${fields}&limit=${INSTAGRAM_CONFIG.MAX_POSTS}&access_token=${INSTAGRAM_CONFIG.ACCESS_TOKEN}`;
+        
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+            },
+            signal: AbortSignal.timeout(10000) // 10 segundos timeout
+        });
+        
+        if (!response.ok) {
+            throw new Error(`Instagram API error: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        if (!data.data || !Array.isArray(data.data)) {
+            throw new Error('Invalid Instagram API response format');
+        }
+        
+        // Transformar datos de la API al formato interno
+        return data.data.map(post => ({
+            id: post.id,
+            title: extractTitleFromCaption(post.caption),
+            description: post.caption || '',
+            image: post.media_type === 'VIDEO' ? post.thumbnail_url : post.media_url,
+            link: post.permalink,
+            timestamp: post.timestamp,
+            media_type: post.media_type
+        }));
+        
+    } catch (error) {
+        console.error('Error fetching from Instagram API:', error);
+        return null;
+    }
+}
+
+// Función para extraer título de la descripción
+function extractTitleFromCaption(caption) {
+    if (!caption) return 'Post de Instagram';
+    
+    // Buscar la primera línea que parezca un título
+    const lines = caption.split('\n');
+    const firstLine = lines[0].trim();
+    
+    // Si la primera línea es muy larga, cortarla
+    if (firstLine.length > 80) {
+        return firstLine.substring(0, 77) + '...';
+    }
+    
+    return firstLine || 'Post de Instagram';
+}
+
+// Funciones de caché para Instagram
+function getCachedInstagramPosts() {
+    try {
+        const cachedData = localStorage.getItem(INSTAGRAM_CONFIG.CACHE_KEY);
+        const timestamp = localStorage.getItem(INSTAGRAM_CONFIG.CACHE_TIMESTAMP_KEY);
+        
+        if (!cachedData || !timestamp) {
+            return null;
+        }
+        
+        const now = Date.now();
+        const cacheAge = now - parseInt(timestamp);
+        
+        if (cacheAge > INSTAGRAM_CONFIG.CACHE_DURATION) {
+            localStorage.removeItem(INSTAGRAM_CONFIG.CACHE_KEY);
+            localStorage.removeItem(INSTAGRAM_CONFIG.CACHE_TIMESTAMP_KEY);
+            return null;
+        }
+        
+        return JSON.parse(cachedData);
+    } catch (error) {
+        console.warn('Error reading Instagram cache:', error);
+        return null;
+    }
+}
+
+function setCachedInstagramPosts(posts) {
+    try {
+        localStorage.setItem(INSTAGRAM_CONFIG.CACHE_KEY, JSON.stringify(posts));
+        localStorage.setItem(INSTAGRAM_CONFIG.CACHE_TIMESTAMP_KEY, Date.now().toString());
+        console.info('✅ Posts de Instagram guardados en caché');
+    } catch (error) {
+        console.warn('Error saving Instagram cache:', error);
+    }
+}
+
+// Función para renderizar posts de Instagram
+function renderInstagramPosts(posts) {
+    const instagramGrid = document.getElementById('instagramGrid');
+    
+    if (!posts || posts.length === 0) {
+        showInstagramError();
+        return;
+    }
+    
+    instagramGrid.innerHTML = '';
+    
+    posts.forEach(post => {
+        const postElement = document.createElement('div');
+        postElement.className = 'instagram-card';
+        
+        // Sanitizar datos
+        const safeTitle = sanitizeHTML(post.title || 'Post de Instagram');
+        const safeDescription = sanitizeHTML(post.description || '');
+        
+        // Para imágenes, verificar si es una ruta local o URL externa
+        let safeImage = '';
+        if (post.image) {
+            if (post.image.startsWith('img/') || post.image.startsWith('./img/') || post.image.startsWith('../img/')) {
+                // Es una ruta local, usarla directamente
+                safeImage = post.image.replace('../img/', 'img/').replace('./img/', 'img/');
+            } else {
+                // Es una URL externa, sanitizarla
+                safeImage = sanitizeURL(post.image) || 'img/RopavejeroLogo_256.png';
+            }
+        } else {
+            safeImage = 'img/RopavejeroLogo_256.png';
+        }
+        
+        const safeLink = sanitizeURL(post.link || '');
+        
+        console.debug(`📸 Renderizando post: ${post.title?.substring(0, 30)}... con imagen: ${safeImage}`);
+        
+        postElement.innerHTML = `
+            <div class="instagram-image">
+                <img src="${safeImage}" alt="${safeTitle}" loading="lazy" onerror="this.onerror=null; this.src='img/RopavejeroLogo_256.png'; this.alt='Imagen no disponible'; console.warn('Error cargando imagen:', '${safeImage}');">
+                ${post.media_type === 'VIDEO' ? '<div class="video-indicator"><i class="fas fa-play"></i></div>' : ''}
+            </div>
+            <div class="instagram-content">
+                <h3>${safeTitle}</h3>
+                <p>${safeDescription.length > 200 ? safeDescription.substring(0, 197) + '...' : safeDescription}</p>
+                <div class="instagram-actions">
+                    <a href="${safeLink}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                        <i class="fab fa-instagram"></i>
+                        Ver Post
+                    </a>
+                    ${post.timestamp ? `<span class="post-date">${formatInstagramDate(post.timestamp)}</span>` : ''}
+                </div>
+            </div>
+        `;
+        
+        instagramGrid.appendChild(postElement);
+    });
+}
+
+// Función para formatear fecha de Instagram
+function formatInstagramDate(timestamp) {
+    try {
+        const date = new Date(timestamp);
+        const now = new Date();
+        const diffTime = Math.abs(now - date);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        
+        if (diffDays === 1) {
+            return 'Hace 1 día';
+        } else if (diffDays < 7) {
+            return `Hace ${diffDays} días`;
+        } else if (diffDays < 30) {
+            const weeks = Math.floor(diffDays / 7);
+            return `Hace ${weeks} semana${weeks > 1 ? 's' : ''}`;
+        } else {
+            return date.toLocaleDateString('es-ES', { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric' 
+            });
+        }
+    } catch (error) {
+        return '';
+    }
+}
+
+// Función para mostrar error de Instagram
+function showInstagramError() {
+    const instagramGrid = document.getElementById('instagramGrid');
+    const currentLang = localStorage.getItem('language') || 'es';
+    
+    const errorMsg = currentLang === 'es' ? 
+        'No se pudieron cargar los posts de Instagram.' : 
+        'Could not load Instagram posts.';
+    
+    const visitMsg = currentLang === 'es' ? 
+        'Visita nuestro Instagram' : 
+        'Visit our Instagram';
+    
+    instagramGrid.innerHTML = `
+        <div class="instagram-error">
+            <i class="fab fa-instagram" style="font-size: 3rem; color: #E4405F; margin-bottom: 15px;"></i>
+            <p>${errorMsg}</p>
+            <a href="https://www.instagram.com/ropavejero.retro/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                <i class="fab fa-instagram"></i>
+                ${visitMsg}
+            </a>
+        </div>
+    `;
+}
+
+// Datos simulados como fallback
+function getSimulatedInstagramPosts() {
+    return [
         {
-            image: "../img/Post01.jpeg",
+            id: 'sim_1',
+            image: "img/Post01.jpeg",
             title: "[❌] 3419 PS3 Slim azul 320Gb, 1 control org. y cables (HEN) $110K",
             description: `- Sony PS3 Slim Splash Blue NTSC-J original Japonesa model CECH-3000B.
 - Control azul org.
@@ -1809,16 +2092,20 @@ function loadInstagramPosts() {
 
 Siglas:
 org: original`,
-            link: "https://www.instagram.com/p/DPU_RqCjJYG/"
+            link: "https://www.instagram.com/p/DPU_RqCjJYG/",
+            media_type: 'IMAGE'
         },
         {
-            image: "../img/Post02.jpeg",
+            id: 'sim_2',
+            image: "img/Post02.jpeg",
             title: "Feliz Navidad y Próspero Año Nuevo 2026",
             description: `Esperamos que pasen un feliz año 2026, lleno de bendiciones, éxito y salud. Muchas gracias 2025 por todo y allá vamos 2026!`,
-            link: "https://www.instagram.com/p/DS82t4FFa2x/"
+            link: "https://www.instagram.com/p/DS82t4FFa2x/",
+            media_type: 'IMAGE'
         },
         {
-            image: "../img/Post03.jpeg",
+            id: 'sim_3',
+            image: "img/Post03.jpeg",
             title: "[❌] 3418 PS2 Fat en caja 30000, 1 control/cables org. 500Gb $135K",
             description: `- Sony PS2 Fat negra NTSC-J original Japonesa model 30000.
 - Control negro org.
@@ -1833,10 +2120,12 @@ org: original`,
 [✅]: DISPONIBLE
 Siglas:
 org: original`,
-            link: "https://www.instagram.com/p/DPU8g8JjE5g/"
+            link: "https://www.instagram.com/p/DPU8g8JjE5g/",
+            media_type: 'IMAGE'
         },
         {
-            image: "../img/Post04.jpeg",
+            id: 'sim_4',
+            image: "img/Post04.jpeg",
             title: "[❌] 3417 PS1 Fat en caja, control y cables org. $120K",
             description: `- Sony PS1 Fat NTSC U/C original americana model SCPH-7501.
 - Control plomo Sony c/análogo org.
@@ -1851,19 +2140,23 @@ org: original`,
 [✅]: DISPONIBLE
 Siglas:
 org: original`,
-            link: "https://www.instagram.com/p/DPU5m7jjPLu/"
+            link: "https://www.instagram.com/p/DPU5m7jjPLu/",
+            media_type: 'IMAGE'
         },
         {
-            image: "../img/Post05.jpeg",
+            id: 'sim_5',
+            image: "img/Post05.jpeg",
             title: "[✅] 3676 Spiderman Edge of Time (CIB) [Wii] $20K",
             description: `[✅]: DISPONIBLE
 
 Siglas:
 CIB: Caja, Juego, Manual`,
-            link: "https://www.instagram.com/p/DSdo4Y_laqb/"
+            link: "https://www.instagram.com/p/DSdo4Y_laqb/",
+            media_type: 'IMAGE'
         },
         {
-            image: "../img/Post06.jpeg",
+            id: 'sim_6',
+            image: "img/Post06.jpeg",
             title: "Varios | 06/Nov/25",
             description: `[❌] 3615 GTA V (GH-CIB) [PS3] $10K
 [✅] 3616 GTA V (BL-CIB-C/M-Japo) [PS3] $12K
@@ -1899,27 +2192,10 @@ SFC: Super Famicom
 Japo: Japonés
 org: original
 Acc: Accesorio`,
-            link: "https://www.instagram.com/p/DQvBSs0jCkB/"
+            link: "https://www.instagram.com/p/DQvBSs0jCkB/",
+            media_type: 'IMAGE'
         }
     ];
-    
-    // Generar HTML para los posts
-    instagramPosts.forEach(post => {
-        const postElement = document.createElement('div');
-        postElement.className = 'instagram-card';
-        postElement.innerHTML = `
-            <div class="instagram-image">
-                <img src="${post.image}" alt="${post.title}">
-            </div>
-            <div class="instagram-content">
-                <h3>${post.title}</h3>
-                <p>${post.description}</p>
-                <a href="${post.link}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Ver Post</a>
-            </div>
-        `;
-        
-        instagramGrid.appendChild(postElement);
-    });
 }
 
 // ========== EFEMÉRIDES - SEGURO ==========
