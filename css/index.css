@@ -412,7 +412,7 @@ body {
 /* Instagram Section */
 .instagram-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 30px;
     margin-top: 30px;
 }
@@ -434,19 +434,22 @@ body {
 .instagram-image {
     position: relative;
     width: 100%;
-    height: 250px;
+    height: 350px;
     overflow: hidden;
+    background: var(--surface-color);
 }
 
 .instagram-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    object-position: center;
     transition: transform 0.3s ease;
+    background: var(--card-bg);
 }
 
 .instagram-card:hover .instagram-image img {
-    transform: scale(1.05);
+    transform: scale(1.02);
 }
 
 .video-indicator {
@@ -482,6 +485,27 @@ body {
     line-height: 1.6;
     margin-bottom: 20px;
     font-size: 0.9rem;
+    white-space: pre-line;
+    max-height: 200px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.instagram-content p::-webkit-scrollbar {
+    width: 4px;
+}
+
+.instagram-content p::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.instagram-content p::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 2px;
+}
+
+.instagram-content p::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
 }
 
 .instagram-actions {
@@ -499,24 +523,40 @@ body {
     gap: 8px;
     padding: 12px 20px;
     font-size: 0.9rem;
-    background: linear-gradient(45deg, #E4405F, #F56040);
+    background: linear-gradient(45deg, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #FFDC80);
+    background-size: 300% 300%;
+    animation: instagram-gradient 3s ease infinite;
     border: none;
     color: white;
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 25px;
     transition: all 0.3s ease;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+@keyframes instagram-gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .instagram-actions .btn:hover {
-    background: linear-gradient(45deg, #D73652, #E55039);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(228, 64, 95, 0.3);
+    box-shadow: 0 8px 20px rgba(131, 58, 180, 0.4);
+    animation-duration: 1s;
+}
+
+.instagram-actions .btn:active {
+    transform: translateY(0);
 }
 
 .post-date {
     font-size: 0.8rem;
     color: var(--text-muted);
     white-space: nowrap;
+    font-style: italic;
 }
 
 .instagram-loading {
@@ -541,22 +581,23 @@ body {
 
 .instagram-error .btn {
     margin-top: 20px;
-    background: linear-gradient(45deg, #E4405F, #F56040);
+    background: linear-gradient(45deg, #833AB4, #C13584, #E1306C);
     border: none;
     color: white;
     padding: 12px 24px;
-    border-radius: 8px;
+    border-radius: 25px;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     gap: 8px;
     transition: all 0.3s ease;
+    font-weight: 600;
 }
 
 .instagram-error .btn:hover {
-    background: linear-gradient(45deg, #D73652, #E55039);
+    background: linear-gradient(45deg, #7B2CBF, #B91372, #D62598);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(228, 64, 95, 0.3);
+    box-shadow: 0 4px 12px rgba(131, 58, 180, 0.3);
 }
 
 /* About Section */
@@ -1718,8 +1759,12 @@ body {
         gap: 20px;
     }
     
+    .instagram-grid {
+        grid-template-columns: 1fr;
+    }
+    
     .instagram-image {
-        height: 200px;
+        height: 280px;
     }
     
     .instagram-content {
@@ -1728,16 +1773,30 @@ body {
     
     .instagram-content h3 {
         font-size: 1rem;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+    }
+    
+    .instagram-content p {
+        font-size: 0.85rem;
+        max-height: 150px;
     }
     
     .instagram-actions {
         flex-direction: column;
         align-items: stretch;
+        gap: 10px;
+    }
+    
+    .instagram-actions .btn {
+        padding: 14px 20px;
+        font-size: 0.85rem;
     }
     
     .post-date {
         text-align: center;
-        margin-top: 10px;
+        margin-top: 5px;
+        font-size: 0.75rem;
     }
     
     .brands-grid,

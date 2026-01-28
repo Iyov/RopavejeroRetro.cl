@@ -2003,7 +2003,7 @@ function renderInstagramPosts(posts) {
             </div>
             <div class="instagram-content">
                 <h3>${safeTitle}</h3>
-                <p>${safeDescription.length > 200 ? safeDescription.substring(0, 197) + '...' : safeDescription}</p>
+                <p>${safeDescription.length > 300 ? safeDescription.substring(0, 297) + '...' : safeDescription}</p>
                 <div class="instagram-actions">
                     <a href="${safeLink}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
                         <i class="fab fa-instagram"></i>
