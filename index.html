@@ -83,10 +83,10 @@
     <!-- CSS con preload para recursos críticos -->
     <link rel="preload" href="css/font-awesome_6.5.1_all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="css/font-awesome_6.5.1_all.min.css"></noscript>
-    <link rel="stylesheet" href="css/index.css?v=2026-01-28_1" type="text/css" />
+    <link rel="stylesheet" href="css/index.css?v=2026-01-28_2" type="text/css" />
     
     <!-- Preload de recursos críticos -->
-    <link rel="preload" href="js/index.js?v=2026-01-28_1" as="script" />
+    <link rel="preload" href="js/index.js?v=2026-01-28_2" as="script" />
     <link rel="preload" href="img/RopavejeroLogo_256.png" as="image" type="image/png" />
     
     <!-- CONFIGURACIÓN DE INSTAGRAM API (OPCIONAL) -->
@@ -498,6 +498,10 @@
                                 <i class="fas fa-chevron-down"></i>
                             </div>
                             <div class="multi-select-dropdown" id="platformDropdown">
+                                <div class="platform-search-container">
+                                    <input type="text" class="platform-search-input" id="platformSearchInput" data-translate-placeholder="filter-platform-search" placeholder="Buscar plataforma...">
+                                    <i class="fas fa-search"></i>
+                                </div>
                                 <div class="multi-select-option" data-value="all">
                                     <input type="checkbox" id="platform-all" checked>
                                     <label for="platform-all" data-translate="filter-all">Todas</label>
@@ -867,7 +871,7 @@
         </div>
     </div>
 
-    <script src="js/index.js?v=2026-01-28_1"></script>
+    <script src="js/index.js?v=2026-01-28_2"></script>
 </body>
 
 </html>

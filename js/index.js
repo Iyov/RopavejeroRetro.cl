@@ -312,6 +312,7 @@ const translations = {
         'products-subtitle': 'Explora nuestra colección de videojuegos retro disponibles para venta.',
         'filter-search': 'Buscar producto:',
         'filter-platform': 'Plataforma:',
+        'filter-platform-search': 'Buscar plataforma...',
         'filter-all': 'Todas',
         'filter-status': 'Estado:',
         'filter-all-status': 'Todos',
@@ -467,6 +468,7 @@ const translations = {
         'products-subtitle': 'Explore our collection of retro video games available for sale.',
         'filter-search': 'Search product:',
         'filter-platform': 'Platform:',
+        'filter-platform-search': 'Search platform...',
         'filter-all': 'All',
         'filter-status': 'Status:',
         'filter-all-status': 'All',
@@ -732,6 +734,15 @@ function setLanguage(lang) {
         }
     });
     
+    // Manejar placeholders con atributo especial
+    const placeholderElements = document.querySelectorAll('[data-translate-placeholder]');
+    placeholderElements.forEach(element => {
+        const key = element.getAttribute('data-translate-placeholder');
+        if (translations[lang] && translations[lang][key]) {
+            element.placeholder = translations[lang][key];
+        }
+    });
+    
     // Actualizar opciones de idioma activas
     document.querySelectorAll('.language-option').forEach(option => {
         if (option.dataset.lang === lang) {
@@ -923,12 +934,20 @@ function initProducts() {
 function initMultiSelectPlatform() {
     const platformDisplay = document.getElementById('platformDisplay');
     const platformDropdown = document.getElementById('platformDropdown');
+    const platformSearchInput = document.getElementById('platformSearchInput');
     
     // Toggle dropdown
     platformDisplay.addEventListener('click', function(e) {
         e.stopPropagation();
         platformDropdown.classList.toggle('active');
         platformDisplay.classList.toggle('active');
+        
+        // Enfocar el campo de búsqueda cuando se abre el dropdown
+        if (platformDropdown.classList.contains('active')) {
+            setTimeout(() => {
+                platformSearchInput.focus();
+            }, 100);
+        }
     });
     
     // Cerrar dropdown al hacer clic fuera
@@ -936,11 +955,25 @@ function initMultiSelectPlatform() {
         if (!e.target.closest('.multi-select-container')) {
             platformDropdown.classList.remove('active');
             platformDisplay.classList.remove('active');
+            // Limpiar búsqueda al cerrar
+            platformSearchInput.value = '';
+            filterPlatformOptions('');
         }
     });
     
     // Prevenir que el dropdown se cierre al hacer clic dentro
     platformDropdown.addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+    
+    // Funcionalidad de búsqueda
+    platformSearchInput.addEventListener('input', function(e) {
+        const searchTerm = e.target.value.toLowerCase();
+        filterPlatformOptions(searchTerm);
+    });
+    
+    // Prevenir que el campo de búsqueda cierre el dropdown al hacer clic
+    platformSearchInput.addEventListener('click', function(e) {
         e.stopPropagation();
     });
 }
@@ -1374,7 +1407,52 @@ function updatePlatformDropdownMessage(availablePlatformsCount) {
         platformDropdown.appendChild(messageDiv);
     }
 }
-// Actualizar filtro de plataformas - MULTI-SELECT INICIAL
+// Filtrar opciones de plataforma basado en búsqueda
+function filterPlatformOptions(searchTerm) {
+    const platformDropdown = document.getElementById('platformDropdown');
+    const platformOptions = platformDropdown.querySelectorAll('.multi-select-option:not([data-value="all"])');
+    const currentLang = localStorage.getItem('language') || 'es';
+    
+    let visibleCount = 0;
+    
+    // Remover mensaje de "no hay resultados" existente
+    const existingNoResults = platformDropdown.querySelector('.no-search-results');
+    if (existingNoResults) {
+        existingNoResults.remove();
+    }
+    
+    platformOptions.forEach(option => {
+        const platform = option.getAttribute('data-value');
+        const label = option.querySelector('label').textContent;
+        
+        // Verificar si la plataforma coincide con la búsqueda
+        const matchesSearch = searchTerm === '' || 
+                             platform.toLowerCase().includes(searchTerm) || 
+                             label.toLowerCase().includes(searchTerm);
+        
+        if (matchesSearch) {
+            option.classList.remove('search-hidden');
+            visibleCount++;
+        } else {
+            option.classList.add('search-hidden');
+        }
+    });
+    
+    // Mostrar mensaje si no hay resultados
+    if (visibleCount === 0 && searchTerm !== '') {
+        const noResultsDiv = document.createElement('div');
+        noResultsDiv.className = 'no-search-results';
+        noResultsDiv.textContent = currentLang === 'es' ? 
+            `No se encontraron plataformas que contengan "${searchTerm}"` : 
+            `No platforms found containing "${searchTerm}"`;
+        
+        // Insertar después del campo de búsqueda
+        const searchContainer = platformDropdown.querySelector('.platform-search-container');
+        searchContainer.insertAdjacentElement('afterend', noResultsDiv);
+    }
+}
+
+// Actualizar filtro de plataformas - MULTI-SELECT INICIAL CON BÚSQUEDA
 function updatePlatformFilter(products) {
     const platformDropdown = document.getElementById('platformDropdown');
     const platforms = new Set();
@@ -1385,9 +1463,11 @@ function updatePlatformFilter(products) {
         }
     });
     
-    // Limpiar opciones excepto "Todas"
+    // Limpiar opciones excepto "Todas" y el campo de búsqueda
     const allOption = platformDropdown.querySelector('[data-value="all"]');
+    const searchContainer = platformDropdown.querySelector('.platform-search-container');
     platformDropdown.innerHTML = '';
+    platformDropdown.appendChild(searchContainer);
     platformDropdown.appendChild(allOption);
     
     // Agregar plataformas únicas ordenadas alfabéticamente
@@ -1606,13 +1686,20 @@ function filterProducts() {
     updateProductsCounter();
 }
 
-// Limpiar filtros - MULTI-SELECT CON RESET DE PLATAFORMAS
+// Limpiar filtros - MULTI-SELECT CON RESET DE PLATAFORMAS Y BÚSQUEDA
 function clearFilters() {
     // Limpiar búsqueda
     document.getElementById('searchFilter').value = '';
     
     // Limpiar estado
     document.getElementById('statusFilter').value = 'all';
+    
+    // Limpiar búsqueda de plataformas
+    const platformSearchInput = document.getElementById('platformSearchInput');
+    if (platformSearchInput) {
+        platformSearchInput.value = '';
+        filterPlatformOptions('');
+    }
     
     // Limpiar plataformas
     selectedPlatforms.clear();
@@ -1629,12 +1716,19 @@ function clearFilters() {
     const platformOptions = platformDropdown.querySelectorAll('.multi-select-option:not([data-value="all"])');
     platformOptions.forEach(option => {
         option.style.display = 'flex';
+        option.classList.remove('search-hidden');
     });
     
     // Remover mensaje de "no hay plataformas"
     const existingMessage = platformDropdown.querySelector('.no-platforms-message');
     if (existingMessage) {
         existingMessage.remove();
+    }
+    
+    // Remover mensaje de "no hay resultados de búsqueda"
+    const existingNoResults = platformDropdown.querySelector('.no-search-results');
+    if (existingNoResults) {
+        existingNoResults.remove();
     }
     
     // Actualizar display
