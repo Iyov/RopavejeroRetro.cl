@@ -2060,7 +2060,7 @@ function showInstagramError() {
     
     instagramGrid.innerHTML = `
         <div class="instagram-error">
-            <i class="fab fa-instagram" style="font-size: 3rem; color: #E4405F; margin-bottom: 15px;"></i>
+            <i class="fab fa-instagram" style="font-size: 3rem; color: var(--instagram-error-color); margin-bottom: 15px;"></i>
             <p>${errorMsg}</p>
             <a href="https://www.instagram.com/ropavejero.retro/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
                 <i class="fab fa-instagram"></i>

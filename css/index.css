@@ -14,6 +14,7 @@
     --surface-color: #1a1a2e;
     --text-color: #f6f6f8;
     --text-secondary: #a0a0b0;
+    --text-muted: #8a8a9a;
     --border-color: #2a2a3a;
     --card-bg: rgba(255, 255, 255, 0.05);
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -22,6 +23,10 @@
     --warning-color: #f59e0b;
     --danger-color: #ef4444;
     --info-color: #3b82f6;
+    --accent-color: #4FC3F7;
+    --price-color: #4FC3F7;
+    --whatsapp-color: #25D366;
+    --instagram-error-color: #E4405F;
 }
 
 .light-mode {
@@ -33,6 +38,7 @@
     --surface-color: #ffffff;
     --text-color: #111121;
     --text-secondary: #5a5a6a;
+    --text-muted: #6a6a7a;
     --border-color: #e0e0e8;
     --card-bg: rgba(0, 0, 0, 0.02);
     --shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -41,6 +47,10 @@
     --warning-color: #d97706;
     --danger-color: #dc2626;
     --info-color: #2563eb;
+    --accent-color: #1919e6;
+    --price-color: #1919e6;
+    --whatsapp-color: #25D366;
+    --instagram-error-color: #E4405F;
 }
 
 html {
@@ -354,7 +364,8 @@ body {
 }
 
 .btn-success:hover {
-    background-color: #0da271;
+    background-color: var(--success-color);
+    filter: brightness(0.9);
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
 }
@@ -365,7 +376,8 @@ body {
 }
 
 .btn-warning:hover {
-    background-color: #e68a00;
+    background-color: var(--warning-color);
+    filter: brightness(0.9);
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
 }
@@ -376,7 +388,8 @@ body {
 }
 
 .btn-danger:hover {
-    background-color: #d63030;
+    background-color: var(--danger-color);
+    filter: brightness(0.9);
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
 }
@@ -908,7 +921,7 @@ body {
 .product-card-price {
     font-size: 16px;
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--price-color);
 }
 
 .product-card-actions {
@@ -1416,7 +1429,7 @@ body {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background-color: #25D366;
+    background-color: var(--whatsapp-color);
     color: white;
     font-size: 24px;
     text-decoration: none;
