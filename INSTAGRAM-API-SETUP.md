@@ -190,6 +190,12 @@ console.log('Instagram API Status:', {
 
 ## 🔒 Seguridad
 
+### ⚠️ IMPORTANTE: Información Sensible
+
+**NUNCA subas `instagram-config.js` con credenciales reales al repositorio público.**
+
+El archivo `instagram-config.js` está incluido en `.gitignore` para proteger tus credenciales. Para más información sobre seguridad, consulta: [INSTAGRAM-SETUP-SECURITY.md](INSTAGRAM-SETUP-SECURITY.md)
+
 ### Mejores Prácticas
 
 1. **Nunca expongas tokens en el frontend**
@@ -197,6 +203,17 @@ console.log('Instagram API Status:', {
 3. **Implementa rate limiting**
 4. **Monitorea el uso de la API**
 5. **Rota tokens regularmente**
+6. **Verifica que .gitignore funcione correctamente**
+
+### Verificación de Seguridad
+
+```bash
+# Verificar que instagram-config.js no está rastreado
+git status --ignored | grep instagram-config.js
+
+# El archivo NO debe aparecer en git status
+git status
+```
 
 ### Configuración de Producción
 
