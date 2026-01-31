@@ -1,105 +1,56 @@
-# 🔐 Configuración Segura de Instagram API
+# 🔐 Configuración Simple y Segura
 
-## ⚠️ IMPORTANTE: Seguridad de Credenciales
+## 📝 Instrucciones Fáciles
 
-Este proyecto utiliza la Instagram Basic Display API para mostrar posts en tiempo real. Las credenciales de API son **información sensible** y deben manejarse con cuidado.
+### 1. Configurar Instagram (Opcional)
+Si quieres mostrar tus posts reales de Instagram:
 
-## 🚀 Configuración Inicial
+1. **Abre el archivo `instagram-config.js`**
+2. **Reemplaza estos valores:**
+   ```javascript
+   ACCESS_TOKEN: 'tu_access_token_aqui',  // ← Pon tu token real aquí
+   USER_ID: 'tu_user_id_aqui',            // ← Pon tu user ID real aquí
+   ```
+3. **Guarda el archivo**
+4. **¡Listo!** El sitio usará tus posts reales
 
-### 1. Copiar el Archivo de Configuración
-```bash
-cp instagram-config.example.js instagram-config.js
-```
+### 2. Si NO tienes credenciales
+- **No hagas nada**, el sitio funciona perfectamente con datos simulados
+- Los posts de ejemplo se ven igual de bien
 
-### 2. Configurar Credenciales
-Edita `instagram-config.js` y reemplaza los placeholders:
-- `TU_ACCESS_TOKEN_AQUI` → Tu token de acceso real
-- `TU_USER_ID_AQUI` → Tu ID de usuario de Instagram
+## 🔑 ¿Cómo obtener las credenciales?
 
-### 3. Verificar .gitignore
-El archivo `instagram-config.js` debe estar listado en `.gitignore` para evitar subir credenciales al repositorio.
+### Paso 1: Crear App en Facebook
+1. Ve a https://developers.facebook.com/
+2. Crea una nueva aplicación
+3. Agrega "Instagram Basic Display"
 
-## 🔒 Archivos Protegidos por .gitignore
+### Paso 2: Obtener credenciales
+1. Copia tu **Access Token**
+2. Copia tu **User ID**
+3. Pégalos en `instagram-config.js`
 
-Los siguientes archivos están excluidos del control de versiones por seguridad:
+## 🛡️ Seguridad Simple
 
-### Configuraciones de API
-- `instagram-config.js` - Credenciales de Instagram API
-- `*-config.js` - Cualquier archivo de configuración con credenciales
-- `.env*` - Variables de entorno
+### ✅ Qué hacer:
+- Configurar credenciales en `instagram-config.js`
+- Mantener el archivo seguro
+- No compartir tus tokens
 
-### Información Sensible
-- `*.key`, `*.pem`, `*.crt` - Certificados y claves
-- `credentials.js`, `secrets.js` - Archivos de credenciales
-- `*.sql`, `*.db` - Backups de base de datos
+### ❌ Qué NO hacer:
+- No subir credenciales reales a GitHub público
+- No compartir tu Access Token
 
-## 🛡️ Mejores Prácticas de Seguridad
+## 🚨 Si algo sale mal:
+1. **Revisa la consola del navegador** (F12)
+2. **Verifica que las credenciales sean correctas**
+3. **Si no funciona, el sitio usará datos simulados automáticamente**
 
-### ✅ Hacer
-- Usar el archivo `.example` como plantilla
-- Mantener credenciales en archivos locales no rastreados
-- Renovar tokens regularmente (cada 60 días)
-- Usar HTTPS en producción
-- Verificar que `.gitignore` funcione correctamente
-
-### ❌ No Hacer
-- Subir credenciales reales al repositorio
-- Compartir tokens de acceso públicamente
-- Hardcodear credenciales en el código
-- Usar tokens en URLs o logs
-- Ignorar las fechas de expiración
-
-## 🔄 Renovación de Tokens
-
-Los tokens de Instagram expiran cada 60 días. Para renovarlos:
-
-```javascript
-// Endpoint para renovar token
-GET https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token={tu-token}
-```
-
-## 🚨 En Caso de Compromiso
-
-Si sospechas que tus credenciales han sido comprometidas:
-
-1. **Revoca inmediatamente** el token en Facebook Developers
-2. **Genera nuevas credenciales**
-3. **Actualiza** `instagram-config.js`
-4. **Verifica** que no hay credenciales en el historial de Git
-5. **Considera** cambiar las URLs de callback
-
-## 📋 Verificación de Seguridad
-
-Ejecuta estos comandos para verificar que todo está configurado correctamente:
-
-```bash
-# Verificar que instagram-config.js no está rastreado
-git status --ignored | grep instagram-config.js
-
-# Verificar que .gitignore funciona
-echo "test-secret" > instagram-config.js
-git status  # No debería aparecer el archivo
-
-# Limpiar archivo de prueba
-rm instagram-config.js
-```
-
-## 🆘 Soporte
-
-Si tienes problemas con la configuración:
-
-1. Revisa la [documentación oficial de Instagram Basic Display API](https://developers.facebook.com/docs/instagram-basic-display-api)
-2. Verifica que todas las URLs de callback estén configuradas correctamente
-3. Asegúrate de que el token no haya expirado
-4. Consulta los logs del navegador para errores específicos
-
-## 📝 Notas Adicionales
-
-- El sitio funciona sin configuración de API usando datos simulados
-- La configuración de API es opcional pero recomendada para datos en tiempo real
-- Los datos simulados se usan automáticamente si la API falla
-- Todos los errores de API se manejan de forma silenciosa para el usuario final
+## 📞 ¿Necesitas ayuda?
+- El sitio funciona sin configuración adicional
+- Los datos simulados se ven igual de bien
+- Solo configura Instagram si quieres datos reales
 
 ---
 
-**🔐 Recuerda: La seguridad es responsabilidad de todos. Mantén tus credenciales seguras.**
+**🎯 Resumen: Configura `instagram-config.js` si quieres datos reales, o déjalo como está para usar datos simulados. ¡Ambas opciones funcionan perfectamente!**

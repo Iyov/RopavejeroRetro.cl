@@ -1002,7 +1002,7 @@ async function loadProducts() {
         try {
             console.info(`🔄 Cargando productos desde Google Sheets (intento ${retryCount + 1}/${CACHE_CONFIG.MAX_RETRIES})`);
             
-            // URL de tu Google Sheet (formato CSV) - validada
+            // URL de tu Google Sheet (formato CSV) - ID fijo
             const sheetId = '18kZ6wyheBWMmoa5yb1PR_XqhqzHCTAlT';
             const sheetUrl = `https://docs.google.com/spreadsheets/d/${encodeURIComponent(sheetId)}/gviz/tq?tqx=out:csv&headers=1&tq=${encodeURIComponent('SELECT *')}`;
             
@@ -1895,7 +1895,7 @@ function getLinkProductInstagram(productLink) {
 
 // ========== CONFIGURACIÓN DE INSTAGRAM API ==========
 const INSTAGRAM_CONFIG = {
-    // Usar configuración externa si está disponible
+    // Usar configuración de instagram-config.js
     ACCESS_TOKEN: window.INSTAGRAM_API_CONFIG?.ACCESS_TOKEN || '',
     USER_ID: window.INSTAGRAM_API_CONFIG?.USER_ID || '',
     API_BASE_URL: window.INSTAGRAM_API_CONFIG?.API_BASE_URL || 'https://graph.instagram.com',
