@@ -1,11 +1,3 @@
-# ========== ARCHIVOS CON INFORMACIÓN SENSIBLE ==========
-# NO subir archivos con credenciales reales
-.env
-.env.local
-.env.development
-.env.production
-env.js
-
 # ========== ARCHIVOS TEMPORALES ==========
 *.bak
 *.tmp

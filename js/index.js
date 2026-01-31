@@ -53,17 +53,9 @@ function clearProductsCache() {
     console.info('🗑️ Caché de productos limpiado');
 }
 
-// Función para limpiar caché de Instagram
-function clearInstagramCache() {
-    localStorage.removeItem(INSTAGRAM_CONFIG.CACHE_KEY);
-    localStorage.removeItem(INSTAGRAM_CONFIG.CACHE_TIMESTAMP_KEY);
-    console.info('🗑️ Caché de Instagram limpiado');
-}
-
 // Función para limpiar todo el caché
 function clearAllCache() {
     clearProductsCache();
-    clearInstagramCache();
     console.info('🗑️ Todo el caché limpiado');
 }
 // Función para sanitizar HTML y prevenir XSS
@@ -1893,21 +1885,8 @@ function getLinkProductInstagram(productLink) {
     return productLink;
 }
 
-// ========== CONFIGURACIÓN DE INSTAGRAM API ==========
-const INSTAGRAM_CONFIG = {
-    // Usar configuración de instagram-config.js
-    ACCESS_TOKEN: window.INSTAGRAM_API_CONFIG?.ACCESS_TOKEN || '',
-    USER_ID: window.INSTAGRAM_API_CONFIG?.USER_ID || '',
-    API_BASE_URL: window.INSTAGRAM_API_CONFIG?.API_BASE_URL || 'https://graph.instagram.com',
-    CACHE_KEY: 'ropavejero_instagram_cache',
-    CACHE_TIMESTAMP_KEY: 'ropavejero_instagram_timestamp',
-    CACHE_DURATION: window.INSTAGRAM_API_CONFIG?.CACHE_DURATION || (30 * 60 * 1000), // 30 minutos
-    MAX_POSTS: window.INSTAGRAM_API_CONFIG?.MAX_POSTS || 6,
-    FALLBACK_ENABLED: window.INSTAGRAM_API_CONFIG?.FALLBACK_ENABLED !== false
-};
-
 // ========== POSTS DE INSTAGRAM ==========
-async function loadInstagramPosts() {
+function loadInstagramPosts() {
     const instagramGrid = document.getElementById('instagramGrid');
     
     if (!instagramGrid) {
@@ -1924,35 +1903,12 @@ async function loadInstagramPosts() {
     `;
     
     try {
-        // Intentar cargar desde caché primero
-        const cachedPosts = getCachedInstagramPosts();
-        if (cachedPosts && cachedPosts.length > 0) {
-            console.info('📦 Cargando posts de Instagram desde caché');
-            renderInstagramPosts(cachedPosts);
-            return;
-        }
-        
-        // Intentar cargar desde API real si está configurada
-        if (INSTAGRAM_CONFIG.ACCESS_TOKEN && INSTAGRAM_CONFIG.USER_ID) {
-            console.info('🔄 Cargando posts desde Instagram API');
-            const realPosts = await fetchInstagramPosts();
-            if (realPosts && realPosts.length > 0) {
-                setCachedInstagramPosts(realPosts);
-                renderInstagramPosts(realPosts);
-                return;
-            }
-        }
-        
-        // Fallback a datos simulados
-        if (INSTAGRAM_CONFIG.FALLBACK_ENABLED) {
-            console.info('📋 Usando datos simulados de Instagram');
-            const simulatedPosts = getSimulatedInstagramPosts();
-            console.debug('📸 Posts simulados cargados:', simulatedPosts.length);
-            console.debug('📸 Rutas de imágenes:', simulatedPosts.map(p => `${p.title?.substring(0, 20)}... -> ${p.image}`));
-            renderInstagramPosts(simulatedPosts);
-        } else {
-            throw new Error('Instagram API not configured and fallback disabled');
-        }
+        // Usar datos simulados directamente
+        console.info('📋 Cargando posts de Instagram simulados');
+        const simulatedPosts = getSimulatedInstagramPosts();
+        console.debug('📸 Posts simulados cargados:', simulatedPosts.length);
+        console.debug('📸 Rutas de imágenes:', simulatedPosts.map(p => `${p.title?.substring(0, 20)}... -> ${p.image}`));
+        renderInstagramPosts(simulatedPosts);
         
     } catch (error) {
         console.error('Error loading Instagram posts:', error);
@@ -1960,98 +1916,6 @@ async function loadInstagramPosts() {
     }
 }
 
-// Función para obtener posts desde la API real de Instagram
-async function fetchInstagramPosts() {
-    try {
-        const fields = 'id,caption,media_type,media_url,thumbnail_url,permalink,timestamp';
-        const url = `${INSTAGRAM_CONFIG.API_BASE_URL}/${INSTAGRAM_CONFIG.USER_ID}/media?fields=${fields}&limit=${INSTAGRAM_CONFIG.MAX_POSTS}&access_token=${INSTAGRAM_CONFIG.ACCESS_TOKEN}`;
-        
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-            },
-            signal: AbortSignal.timeout(10000) // 10 segundos timeout
-        });
-        
-        if (!response.ok) {
-            throw new Error(`Instagram API error: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        
-        if (!data.data || !Array.isArray(data.data)) {
-            throw new Error('Invalid Instagram API response format');
-        }
-        
-        // Transformar datos de la API al formato interno
-        return data.data.map(post => ({
-            id: post.id,
-            title: extractTitleFromCaption(post.caption),
-            description: post.caption || '',
-            image: post.media_type === 'VIDEO' ? post.thumbnail_url : post.media_url,
-            link: post.permalink,
-            timestamp: post.timestamp,
-            media_type: post.media_type
-        }));
-        
-    } catch (error) {
-        console.error('Error fetching from Instagram API:', error);
-        return null;
-    }
-}
-
-// Función para extraer título de la descripción
-function extractTitleFromCaption(caption) {
-    if (!caption) return 'Post de Instagram';
-    
-    // Buscar la primera línea que parezca un título
-    const lines = caption.split('\n');
-    const firstLine = lines[0].trim();
-    
-    // Si la primera línea es muy larga, cortarla
-    if (firstLine.length > 80) {
-        return firstLine.substring(0, 77) + '...';
-    }
-    
-    return firstLine || 'Post de Instagram';
-}
-
-// Funciones de caché para Instagram
-function getCachedInstagramPosts() {
-    try {
-        const cachedData = localStorage.getItem(INSTAGRAM_CONFIG.CACHE_KEY);
-        const timestamp = localStorage.getItem(INSTAGRAM_CONFIG.CACHE_TIMESTAMP_KEY);
-        
-        if (!cachedData || !timestamp) {
-            return null;
-        }
-        
-        const now = Date.now();
-        const cacheAge = now - parseInt(timestamp);
-        
-        if (cacheAge > INSTAGRAM_CONFIG.CACHE_DURATION) {
-            localStorage.removeItem(INSTAGRAM_CONFIG.CACHE_KEY);
-            localStorage.removeItem(INSTAGRAM_CONFIG.CACHE_TIMESTAMP_KEY);
-            return null;
-        }
-        
-        return JSON.parse(cachedData);
-    } catch (error) {
-        console.warn('Error reading Instagram cache:', error);
-        return null;
-    }
-}
-
-function setCachedInstagramPosts(posts) {
-    try {
-        localStorage.setItem(INSTAGRAM_CONFIG.CACHE_KEY, JSON.stringify(posts));
-        localStorage.setItem(INSTAGRAM_CONFIG.CACHE_TIMESTAMP_KEY, Date.now().toString());
-        console.info('✅ Posts de Instagram guardados en caché');
-    } catch (error) {
-        console.warn('Error saving Instagram cache:', error);
-    }
-}
 
 // Función para renderizar posts de Instagram
 function renderInstagramPosts(posts) {
