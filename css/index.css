@@ -570,6 +570,8 @@ body {
     color: var(--text-muted);
     white-space: nowrap;
     font-style: italic;
+    margin-bottom: 10px;
+    display: block;
 }
 
 .instagram-loading {
@@ -1807,8 +1809,8 @@ body {
     }
     
     .post-date {
-        text-align: center;
-        margin-top: 5px;
+        text-align: left;
+        margin-bottom: 8px;
         font-size: 0.75rem;
     }
     

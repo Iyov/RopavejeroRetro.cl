@@ -1961,13 +1961,13 @@ function renderInstagramPosts(posts) {
             </div>
             <div class="instagram-content">
                 <h3>${safeTitle}</h3>
+                ${post.date ? `<div class="post-date">${formatInstagramDate(post.date)}</div>` : ''}
                 <p>${safeDescription}</p>
                 <div class="instagram-actions">
                     <a href="${safeLink}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
                         <i class="fab fa-instagram"></i>
                         Ver Post
                     </a>
-                    ${post.timestamp ? `<span class="post-date">${formatInstagramDate(post.timestamp)}</span>` : ''}
                 </div>
             </div>
         `;
@@ -1976,32 +1976,7 @@ function renderInstagramPosts(posts) {
     });
 }
 
-// Función para formatear fecha de Instagram
-function formatInstagramDate(timestamp) {
-    try {
-        const date = new Date(timestamp);
-        const now = new Date();
-        const diffTime = Math.abs(now - date);
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        
-        if (diffDays === 1) {
-            return 'Hace 1 día';
-        } else if (diffDays < 7) {
-            return `Hace ${diffDays} días`;
-        } else if (diffDays < 30) {
-            const weeks = Math.floor(diffDays / 7);
-            return `Hace ${weeks} semana${weeks > 1 ? 's' : ''}`;
-        } else {
-            return date.toLocaleDateString('es-ES', { 
-                year: 'numeric', 
-                month: 'short', 
-                day: 'numeric' 
-            });
-        }
-    } catch (error) {
-        return '';
-    }
-}
+
 
 // Función para mostrar error de Instagram
 function showInstagramError() {
@@ -2030,130 +2005,83 @@ function showInstagramError() {
 
 // Datos simulados como fallback
 function getSimulatedInstagramPosts() {
+    // Usar datos del archivo externo si está disponible
+    if (typeof getInstagramPostsData === 'function') {
+        return getInstagramPostsData();
+    }
+    
+    // Fallback en caso de que el archivo no se cargue
+    console.warn('Archivo instagram_posts.js no cargado, usando datos de respaldo');
     return [
         {
-            id: 'sim_1',
-            image: "img/Post01.jpeg",
-            title: "[❌] 3419 PS3 Slim azul 320Gb, 1 control org. y cables (HEN) $110K",
-            description: `- Sony PS3 Slim Splash Blue NTSC-J original Japonesa model CECH-3000B.
-- Control azul org.
-- Cable corriente directo a los 220V.
-- Cable HDMI.
-- Lector operativo compatible con juegos originales americanos.
-- Liberada con HEN, tienda y juegos cargados.
-- 320 GB de Disco Duro.
-- Mantención y limpieza profunda a consola y control.
-
-[❌]: VENDIDO
-[R]: RESERVADO
-[✅]: DISPONIBLE
-
-Siglas:
-org: original`,
-            link: "https://www.instagram.com/p/DPU_RqCjJYG/",
-            media_type: 'IMAGE'
-        },
-        {
-            id: 'sim_2',
-            image: "img/Post02.jpeg",
-            title: "Feliz Navidad y Próspero Año Nuevo 2026",
-            description: `Esperamos que pasen un feliz año 2026, lleno de bendiciones, éxito y salud. Muchas gracias 2025 por todo y allá vamos 2026!`,
-            link: "https://www.instagram.com/p/DS82t4FFa2x/",
-            media_type: 'IMAGE'
-        },
-        {
-            id: 'sim_3',
-            image: "img/Post03.jpeg",
-            title: "[❌] 3418 PS2 Fat en caja 30000, 1 control/cables org. 500Gb $135K",
-            description: `- Sony PS2 Fat negra NTSC-J original Japonesa model 30000.
-- Control negro org.
-- Cable corriente con minwa 110V-220V incluido.
-- Cable AV RCA Sony 3 colores org.
-- Memory Card con Free MC Boot + OPL.
-- Adaptador para Discos Duros Sata.
-- Disco Duro Sata 500 Gb con muchos juegos includos.
-- Lector NO compatible con juegos originales americanos.
-[❌]: VENDIDO
-[R]: RESERVADO
-[✅]: DISPONIBLE
-Siglas:
-org: original`,
-            link: "https://www.instagram.com/p/DPU8g8JjE5g/",
-            media_type: 'IMAGE'
-        },
-        {
-            id: 'sim_4',
-            image: "img/Post04.jpeg",
-            title: "[❌] 3417 PS1 Fat en caja, control y cables org. $120K",
-            description: `- Sony PS1 Fat NTSC U/C original americana model SCPH-7501.
-- Control plomo Sony c/análogo org.
-- Cable corriente con Minwa 110V-220V incluido.
-- Cable AV RCA Sony 3 colores org.
-- Lector funcionando bien.
-- SIN chip de liberación.
-- Mantención y limpieza profunda a consola y control.
-* La serie de la caja y consola NO coinciden.
-[❌]: VENDIDO
-[R]: RESERVADO
-[✅]: DISPONIBLE
-Siglas:
-org: original`,
-            link: "https://www.instagram.com/p/DPU5m7jjPLu/",
-            media_type: 'IMAGE'
-        },
-        {
-            id: 'sim_5',
-            image: "img/Post05.jpeg",
-            title: "[✅] 3676 Spiderman Edge of Time (CIB) [Wii] $20K",
-            description: `[✅]: DISPONIBLE
-
-Siglas:
-CIB: Caja, Juego, Manual`,
-            link: "https://www.instagram.com/p/DSdo4Y_laqb/",
-            media_type: 'IMAGE'
-        },
-        {
-            id: 'sim_6',
-            image: "img/Post06.jpeg",
-            title: "Varios | 06/Nov/25",
-            description: `[❌] 3615 GTA V (GH-CIB) [PS3] $10K
-[✅] 3616 GTA V (BL-CIB-C/M-Japo) [PS3] $12K
-[✅] 3617 Far Cry Instincts (CIB) [Xbox] $10K
-[✅] 3618 StarCraft II: Wings of Liberty (CIB) [PC] $12K
-[✅] 3619 Guitar Hero World Tour (CIB) [PC] $12K
-[❌] 3621 Yoshi's Island (CIB) [SFC] $30K
-[✅] 3623 Super Bomberman W (CIB) [SFC] $30K
-[✅] 3624 Street Fighter 30th Anniversary (CIB) [Switch] $30K
-[❌] 3625 Super Mario RPG (Sealed-Japo) [Switch] $35K
-[✅] 3626 Paper Mario: The Origami King (Sealed-Japo) [Switch] $35K
-[❌] 3628 Control PS1 plomo org. (detalle stick) [Control] $15K
-[✅] 3629 Control PS1 plomo org. (detalle stick y marca Sony adelante) [Control] $13K
-[✅] 3630 Control N64 azul trasparente (Repro) [Control] $15K
-[❌] 3631 Control N64 azul trasparente (Repro-Estilo Hori) [Control] $15K
-[✅] 3632 Control Gamecube violeta (Repro) [Control] $15K
-[✅] 3633 Nunchuck blanco Nintendo Wii [Acc] $5K
-[✅] 3634 Nunchuck blanco Nintendo Wii [Acc] $5K
-[✅] 3635 Nunchuck blanco Nintendo Wii [Acc] $5K
-[✅] 3636 Nunchuck blanco Nintendo Wii [Acc] $5K
-
-[❌]: VENDIDO
-[R]: RESERVADO
-[✅]: DISPONIBLE
-
-Siglas:
-BL: Black Label
-GH: Greatest Hits
-CIB: Caja, Juego, Manual
-MM: Sin Manual
-S: Sealed: Sellado de Fábrica
-SFC: Super Famicom
-Japo: Japonés
-org: original
-Acc: Accesorio`,
-            link: "https://www.instagram.com/p/DQvBSs0jCkB/",
-            media_type: 'IMAGE'
+            id: 'fallback_1',
+            image: "img/RopavejeroLogo_256.png",
+            title: "Post de Instagram",
+            description: "No se pudieron cargar los posts de Instagram.",
+            link: "https://www.instagram.com/ropavejero.retro/",
+            media_type: 'IMAGE',
+            date: new Date().toISOString().split('T')[0]
         }
     ];
+}
+
+// Función para formatear fecha de Instagram
+function formatInstagramDate(dateString) {
+    try {
+        // Crear fecha agregando la hora para evitar problemas de zona horaria
+        const date = new Date(dateString + 'T12:00:00');
+        const now = new Date();
+        
+        // Normalizar las fechas para comparar solo días (sin horas)
+        const dateOnly = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        const nowOnly = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        
+        const diffTime = nowOnly.getTime() - dateOnly.getTime();
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        
+        const currentLang = localStorage.getItem('language') || 'es';
+        
+        if (diffDays === 0) {
+            return currentLang === 'es' ? 'Hoy' : 'Today';
+        } else if (diffDays === 1) {
+            return currentLang === 'es' ? 'Hace 1 día' : '1 day ago';
+        } else if (diffDays > 0 && diffDays < 7) {
+            return currentLang === 'es' ? `Hace ${diffDays} días` : `${diffDays} days ago`;
+        } else if (diffDays > 0 && diffDays < 30) {
+            const weeks = Math.floor(diffDays / 7);
+            if (currentLang === 'es') {
+                return `Hace ${weeks} semana${weeks > 1 ? 's' : ''}`;
+            } else {
+                return `${weeks} week${weeks > 1 ? 's' : ''} ago`;
+            }
+        } else if (diffDays < 0) {
+            // Fecha futura
+            const futureDays = Math.abs(diffDays);
+            if (futureDays === 1) {
+                return currentLang === 'es' ? 'Mañana' : 'Tomorrow';
+            } else if (futureDays < 7) {
+                return currentLang === 'es' ? `En ${futureDays} días` : `In ${futureDays} days`;
+            } else {
+                const options = { 
+                    year: 'numeric', 
+                    month: 'short', 
+                    day: 'numeric' 
+                };
+                return date.toLocaleDateString(currentLang === 'es' ? 'es-ES' : 'en-US', options);
+            }
+        } else {
+            // Fecha muy antigua, mostrar fecha completa
+            const options = { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric' 
+            };
+            return date.toLocaleDateString(currentLang === 'es' ? 'es-ES' : 'en-US', options);
+        }
+    } catch (error) {
+        console.warn('Error formatting date:', error);
+        return '';
+    }
 }
 
 // ========== EFEMÉRIDES - SEGURO ==========
