@@ -1,11 +1,30 @@
 // ========== SISTEMA DE CACHÉ INTELIGENTE ==========
 const CACHE_CONFIG = {
-    PRODUCTS_KEY: 'ropavejero_products_cache',
-    TIMESTAMP_KEY: 'ropavejero_cache_timestamp',
+    VERSION: '1.0.0', // Versión del caché
+    PRODUCTS_KEY: 'ropavejero_products_cache_v1',
+    TIMESTAMP_KEY: 'ropavejero_cache_timestamp_v1',
     CACHE_DURATION: 5 * 60 * 1000, // 5 minutos en milisegundos
     MAX_RETRIES: 3,
     RETRY_DELAY: 2000 // 2 segundos
 };
+
+// Limpiar cachés antiguos al cargar
+function cleanOldCaches() {
+    try {
+        // Limpiar cachés sin versión
+        const oldKeys = ['ropavejero_products_cache', 'ropavejero_cache_timestamp'];
+        oldKeys.forEach(key => {
+            if (localStorage.getItem(key)) {
+                localStorage.removeItem(key);
+            }
+        });
+    } catch (error) {
+        console.warn('Error cleaning old caches:', error);
+    }
+}
+
+// Ejecutar limpieza al cargar
+cleanOldCaches();
 
 // Función para obtener datos del caché
 function getCachedProducts() {
@@ -898,6 +917,7 @@ let filteredProducts = [];
 let currentPage = 1;
 const productsPerPage = 25;
 let selectedPlatforms = new Set(['all']); // Plataformas seleccionadas
+let searchTimeout = null; // Para debounce de búsqueda
 
 function initProducts() {
     const searchFilter = document.getElementById('searchFilter');
@@ -909,8 +929,11 @@ function initProducts() {
     // Cargar productos
     loadProducts();
     
-    // Event listeners para filtros
-    searchFilter.addEventListener('input', filterProducts);
+    // Event listeners para filtros (con debounce en búsqueda)
+    searchFilter.addEventListener('input', function() {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(filterProducts, 300); // Espera 300ms después de dejar de escribir
+    });
     statusFilter.addEventListener('change', filterProducts);
     clearFiltersBtn.addEventListener('click', clearFilters);
     
@@ -1072,15 +1095,15 @@ function showLoadingError() {
     const currentLang = localStorage.getItem('language') || 'es';
     
     const errorMsg = currentLang === 'es' ? 
-        'Error cargando productos. Por favor, recarga la página.' : 
-        'Error loading products. Please reload the page.';
+        'No se pudieron cargar los productos. Verifica tu conexión a internet.' : 
+        'Could not load products. Check your internet connection.';
     
     const retryMsg = currentLang === 'es' ? 'Reintentar' : 'Retry';
     
     const errorHtml = `
         <div style="text-align: center; padding: 40px; color: var(--danger-color);">
             <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 15px;"></i>
-            <p>${errorMsg}</p>
+            <p style="font-size: 1.1rem; margin-bottom: 10px;">${errorMsg}</p>
             <button onclick="location.reload()" class="btn btn-primary" style="margin-top: 15px;">
                 <i class="fas fa-redo"></i> ${retryMsg}
             </button>
@@ -1153,8 +1176,8 @@ function parseCSVSecure(csvText) {
             // Validar y sanitizar producto
             const product = validateProductData(rawProduct);
             
-            // Debug temporal: log de algunos productos para verificar el campo Sold
-            if (product && product.Num <= 5) {
+            // Debug temporal: solo en desarrollo
+            if (window.location.hostname === 'localhost' && product && product.Num <= 5) {
                 console.log(`Producto #${product.Num}: Sold original="${rawProduct.Sold}", Sold procesado=${product.Sold}`);
             }
             
@@ -1768,6 +1791,15 @@ function changePage(direction) {
     if (newPage >= 1 && newPage <= totalPages) {
         currentPage = newPage;
         renderProductsTable();
+        
+        // Scroll suave a la sección de productos
+        const productosSection = document.getElementById('productos');
+        if (productosSection) {
+            productosSection.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+        }
     }
 }
 
@@ -1850,24 +1882,30 @@ function showProductModal(product) {
     modalOverlay.classList.add('active');
     document.body.style.overflow = 'hidden';
     
-    // Event listeners para cerrar modal
+    // Event listeners para cerrar modal (usando once: true para evitar duplicados)
     const closeModal = () => {
         modalOverlay.classList.remove('active');
         document.body.style.overflow = '';
     };
     
-    closeBtn.addEventListener('click', closeModal);
+    closeBtn.addEventListener('click', closeModal, { once: true });
     
     const modalCloseBtn = document.getElementById('productModalClose');
     if (modalCloseBtn) {
-        modalCloseBtn.addEventListener('click', closeModal);
+        // Remover listener anterior si existe
+        const newModalCloseBtn = modalCloseBtn.cloneNode(true);
+        modalCloseBtn.parentNode.replaceChild(newModalCloseBtn, modalCloseBtn);
+        newModalCloseBtn.addEventListener('click', closeModal, { once: true });
     }
     
+    // Usar AbortController para poder cancelar el listener
+    const controller = new AbortController();
     modalOverlay.addEventListener('click', (e) => {
         if (e.target === modalOverlay) {
             closeModal();
+            controller.abort();
         }
-    });
+    }, { signal: controller.signal });
 }
 
 // Obtener Link de producto en Instagram
@@ -1899,10 +1937,14 @@ function loadInstagramPosts() {
     
     try {
         // Usar datos simulados directamente
-        console.info('📋 Cargando posts de Instagram simulados');
+        if (window.location.hostname === 'localhost') {
+            console.info('📋 Cargando posts de Instagram simulados');
+        }
         const simulatedPosts = getSimulatedInstagramPosts();
-        console.debug('📸 Posts simulados cargados:', simulatedPosts.length);
-        console.debug('📸 Rutas de imágenes:', simulatedPosts.map(p => `${p.title?.substring(0, 20)}... -> ${p.image}`));
+        if (window.location.hostname === 'localhost') {
+            console.debug('📸 Posts simulados cargados:', simulatedPosts.length);
+            console.debug('📸 Rutas de imágenes:', simulatedPosts.map(p => `${p.title?.substring(0, 20)}... -> ${p.image}`));
+        }
         renderInstagramPosts(simulatedPosts);
         
     } catch (error) {
@@ -1947,7 +1989,9 @@ function renderInstagramPosts(posts) {
         
         const safeLink = sanitizeURL(post.link || '');
         
-        console.debug(`📸 Renderizando post: ${post.title?.substring(0, 30)}... con imagen: ${safeImage}`);
+        if (window.location.hostname === 'localhost') {
+            console.debug(`📸 Renderizando post: ${post.title?.substring(0, 30)}... con imagen: ${safeImage}`);
+        }
         
         postElement.innerHTML = `
             <div class="instagram-image">
