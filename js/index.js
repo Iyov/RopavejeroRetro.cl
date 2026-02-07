@@ -202,6 +202,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initProducts();
     loadInstagramPosts();
     loadEfemerides();
+    initOfflineIndicator();
     
     // Aplicar configuraciones guardadas
     applySavedSettings();
@@ -2713,3 +2714,119 @@ function trackEvent(category, action, label, value) {
 
 // Hacer disponible globalmente para uso en otros scripts
 window.trackEvent = trackEvent;
+
+
+// ========== INDICADOR DE CONEXIÓN OFFLINE ==========
+function initOfflineIndicator() {
+    // Crear indicador offline
+    const offlineIndicator = document.createElement('div');
+    offlineIndicator.id = 'offline-indicator';
+    offlineIndicator.className = 'offline-indicator';
+    offlineIndicator.innerHTML = `
+        <i class="fas fa-wifi-slash"></i>
+        <span>Sin conexión - Modo offline</span>
+    `;
+    offlineIndicator.style.cssText = `
+        position: fixed;
+        top: 60px;
+        left: 50%;
+        transform: translateX(-50%) translateY(-100px);
+        background: #ff6b6b;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 600;
+        transition: transform 0.3s ease;
+    `;
+    document.body.appendChild(offlineIndicator);
+    
+    // Función para mostrar/ocultar indicador
+    function updateOnlineStatus() {
+        if (!navigator.onLine) {
+            offlineIndicator.style.transform = 'translateX(-50%) translateY(0)';
+        } else {
+            offlineIndicator.style.transform = 'translateX(-50%) translateY(-100px)';
+        }
+    }
+    
+    // Escuchar cambios de conexión
+    window.addEventListener('online', () => {
+        updateOnlineStatus();
+        // Mostrar mensaje de reconexión
+        const currentLang = localStorage.getItem('language') || 'es';
+        const message = currentLang === 'es' ? 'Conexión restaurada' : 'Connection restored';
+        showToast(message, 'success');
+    });
+    
+    window.addEventListener('offline', () => {
+        updateOnlineStatus();
+        const currentLang = localStorage.getItem('language') || 'es';
+        const message = currentLang === 'es' ? 'Sin conexión a internet' : 'No internet connection';
+        showToast(message, 'warning');
+    });
+    
+    // Verificar estado inicial
+    updateOnlineStatus();
+}
+
+// Función para mostrar notificaciones toast
+function showToast(message, type = 'info') {
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    toast.textContent = message;
+    toast.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: ${type === 'success' ? '#51cf66' : type === 'warning' ? '#ffa94d' : '#339af0'};
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        z-index: 10001;
+        animation: slideIn 0.3s ease;
+        font-weight: 500;
+    `;
+    
+    document.body.appendChild(toast);
+    
+    // Remover después de 3 segundos
+    setTimeout(() => {
+        toast.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
+// Agregar animaciones CSS para toast
+if (!document.getElementById('toast-animations')) {
+    const style = document.createElement('style');
+    style.id = 'toast-animations';
+    style.textContent = `
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+}
