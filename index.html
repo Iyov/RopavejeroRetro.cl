@@ -343,13 +343,13 @@
                 </nav>
 
                 <div class="header-controls">
-                    <button class="control-btn" id="languageBtn">
+                    <button class="control-btn" id="languageBtn" aria-label="Cambiar idioma" title="Cambiar idioma">
                         <i class="fas fa-globe"></i>
                     </button>
-                    <button class="control-btn" id="themeBtn">
+                    <button class="control-btn" id="themeBtn" aria-label="Cambiar tema claro/oscuro" title="Cambiar tema">
                         <i class="fas fa-moon"></i>
                     </button>
-                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú de navegación" aria-expanded="false">
                         <i class="fas fa-bars"></i>
                     </button>
                 </div>
@@ -358,11 +358,12 @@
     </header>
 
     <!-- Menú móvil -->
-    <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title">
         <div class="mobile-menu-content">
-            <button class="mobile-menu-close" id="mobileMenuClose">
+            <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Cerrar menú">
                 <i class="fas fa-times"></i>
             </button>
+            <h2 id="mobile-menu-title" class="sr-only">Menú de navegación</h2>
             <a href="#instagram" data-translate="menu-instagram">Instagram</a>
             <a href="#about" data-translate="menu-about">Nosotros</a>
             <a href="#efemerides" data-translate="menu-efemerides">Efemérides</a>
@@ -482,24 +483,34 @@
                 </div>
                 
                 <!-- Filtros de productos -->
-                <div class="products-filters" id="productsFilters">
+                <div class="products-filters" id="productsFilters" role="search" aria-label="Filtros de productos">
                     <div class="filter-group">
                         <label for="searchFilter" data-translate="filter-search">Buscar producto:</label>
-                        <input type="text" id="searchFilter" class="filter-input" placeholder="Escribe para buscar...">
+                        <input type="text" 
+                               id="searchFilter" 
+                               class="filter-input" 
+                               placeholder="Escribe para buscar..."
+                               aria-describedby="search-help">
+                        <span id="search-help" class="sr-only">Busca productos por nombre o plataforma</span>
                     </div>
                     <div class="filter-group">
                         <label for="comboBoxMulti" data-translate="filter-platform">Plataforma:</label>
-                        <div class="multi-select-container" id="comboBoxMulti">
-                            <div class="multi-select-display" id="platformDisplay">
+                        <div class="multi-select-container" id="comboBoxMulti" role="combobox" aria-expanded="false" aria-haspopup="listbox">
+                            <div class="multi-select-display" id="platformDisplay" tabindex="0" aria-label="Seleccionar plataformas">
                                 <span class="placeholder" data-translate="filter-all">Todas</span>
                                 <i class="fas fa-chevron-down"></i>
                             </div>
-                            <div class="multi-select-dropdown" id="platformDropdown">
+                            <div class="multi-select-dropdown" id="platformDropdown" role="listbox" aria-label="Lista de plataformas">
                                 <div class="platform-search-container">
-                                    <input type="text" class="platform-search-input" id="platformSearchInput" data-translate-placeholder="filter-platform-search" placeholder="Buscar plataforma...">
+                                    <input type="text" 
+                                           class="platform-search-input" 
+                                           id="platformSearchInput" 
+                                           data-translate-placeholder="filter-platform-search" 
+                                           placeholder="Buscar plataforma..."
+                                           aria-label="Buscar en plataformas">
                                     <i class="fas fa-search"></i>
                                 </div>
-                                <div class="multi-select-option" data-value="all">
+                                <div class="multi-select-option" data-value="all" role="option">
                                     <input type="checkbox" id="platform-all" checked>
                                     <label for="platform-all" data-translate="filter-all">Todas</label>
                                 </div>
@@ -509,21 +520,25 @@
                     </div>
                     <div class="filter-group">
                         <label for="statusFilter" data-translate="filter-status">Estado:</label>
-                        <select id="statusFilter" class="filter-select">
+                        <select id="statusFilter" class="filter-select" aria-label="Filtrar por estado del producto">
                             <option value="all" data-translate="filter-all-status">Todos</option>
                             <option value="available" data-translate="filter-available">Disponibles</option>
                             <option value="sold" data-translate="filter-sold">Vendidos</option>
                         </select>
                     </div>
-                    <button id="clearFilters" class="btn btn-secondary" data-translate="clear-filters">Limpiar</button>
-                    <button id="clearCache" class="btn btn-secondary" onclick="clearProductsCache(); location.reload();" title="Limpiar caché y recargar datos">
+                    <button id="clearFilters" class="btn btn-secondary" data-translate="clear-filters" aria-label="Limpiar todos los filtros">Limpiar</button>
+                    <button id="clearCache" 
+                            class="btn btn-secondary" 
+                            onclick="clearProductsCache(); location.reload();" 
+                            title="Limpiar caché y recargar datos"
+                            aria-label="Actualizar lista de productos">
                         <i class="fas fa-sync-alt"></i>
                         <span data-translate="clear-cache">Actualizar</span>
                     </button>
                 </div>
 
                 <!-- Contador de productos -->
-                <div class="products-counter" id="productsCounter">
+                <div class="products-counter" id="productsCounter" role="status" aria-live="polite">
                     <span data-translate="products-count">Cargando productos...</span>
                 </div>
 
@@ -560,27 +575,27 @@
                 </div>
 
                 <!-- Paginación -->
-                <div class="pagination" id="pagination">
-                    <button class="pagination-btn" id="prevPage" disabled>
+                <div class="pagination" id="pagination" role="navigation" aria-label="Paginación de productos">
+                    <button class="pagination-btn" id="prevPage" disabled aria-label="Página anterior">
                         <i class="fas fa-chevron-left"></i>
                         <span data-translate="pagination-prev">Anterior</span>
                     </button>
-                    <div class="pagination-info" id="paginationInfo">
+                    <div class="pagination-info" id="paginationInfo" aria-live="polite" aria-atomic="true">
                         <span data-translate="pagination-page">Página</span>
                         <span id="currentPage">1</span>
                         <span data-translate="pagination-of">de</span>
                         <span id="totalPages">1</span>
                     </div>
-                    <button class="pagination-btn" id="nextPage" disabled>
+                    <button class="pagination-btn" id="nextPage" disabled aria-label="Página siguiente">
                         <span data-translate="pagination-next">Siguiente</span>
                         <i class="fas fa-chevron-right"></i>
                     </button>
                 </div>
 
                 <!-- Modal para ver detalles del producto -->
-                <div class="modal-overlay" id="productModalOverlay">
+                <div class="modal-overlay" id="productModalOverlay" role="dialog" aria-modal="true" aria-labelledby="product-modal-title">
                     <div class="modal" id="productModal">
-                        <button class="modal-close" id="productModalClose">
+                        <button class="modal-close" id="productModalClose" aria-label="Cerrar detalles del producto">
                             <i class="fas fa-times"></i>
                         </button>
                         <div class="modal-content" id="productModalContent">
@@ -869,7 +884,7 @@
     </div>
 
     <script src="js/instagram_posts.js?v=2026-02-07_1"></script>
-    <script src="js/index.js?v=2026-02-07_2"></script>
+    <script src="js/index.js?v=2026-02-07_3"></script>
 </body>
 
 </html>

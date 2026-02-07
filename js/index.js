@@ -826,12 +826,21 @@ function initMobileMenu() {
     mobileMenuBtn.addEventListener('click', function() {
         mobileMenu.classList.add('active');
         document.body.style.overflow = 'hidden';
+        mobileMenuBtn.setAttribute('aria-expanded', 'true');
+        
+        // Focus en el primer enlace del menú
+        const firstLink = mobileMenu.querySelector('a');
+        if (firstLink) {
+            setTimeout(() => firstLink.focus(), 100);
+        }
     });
     
     // Cerrar menú
     mobileMenuClose.addEventListener('click', function() {
         mobileMenu.classList.remove('active');
         document.body.style.overflow = '';
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        mobileMenuBtn.focus(); // Devolver focus al botón
     });
     
     // Cerrar menú al hacer clic en un enlace
@@ -839,7 +848,18 @@ function initMobileMenu() {
         link.addEventListener('click', function() {
             mobileMenu.classList.remove('active');
             document.body.style.overflow = '';
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
         });
+    });
+    
+    // Cerrar menú con tecla Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            mobileMenuBtn.focus();
+        }
     });
 }
 
@@ -954,8 +974,9 @@ function initMultiSelectPlatform() {
     // Toggle dropdown
     platformDisplay.addEventListener('click', function(e) {
         e.stopPropagation();
-        platformDropdown.classList.toggle('active');
+        const isActive = platformDropdown.classList.toggle('active');
         platformDisplay.classList.toggle('active');
+        platformDisplay.parentElement.setAttribute('aria-expanded', isActive);
         
         // Enfocar el campo de búsqueda cuando se abre el dropdown
         if (platformDropdown.classList.contains('active')) {
@@ -970,6 +991,7 @@ function initMultiSelectPlatform() {
         if (!e.target.closest('.multi-select-container')) {
             platformDropdown.classList.remove('active');
             platformDisplay.classList.remove('active');
+            platformDisplay.parentElement.setAttribute('aria-expanded', 'false');
             // Limpiar búsqueda al cerrar
             platformSearchInput.value = '';
             filterPlatformOptions('');
@@ -1243,10 +1265,16 @@ function renderProductsTable() {
                 <td>${safeProduct.Neto !== 'X' ? safeProduct.Neto : '0'}</td>
                 <td><span class="stock-badge">${safeProduct.Stock}</span></td>
                 <td class="actions-cell">
-                    <button class="btn btn-primary btn-small view-product-btn" data-product-id="${safeProduct.Num}" title="Ver detalles">
+                    <button class="btn btn-primary btn-small view-product-btn" 
+                            data-product-id="${safeProduct.Num}" 
+                            aria-label="Ver detalles de ${safeProduct.Product}"
+                            title="Ver detalles">
                         <i class="fas fa-eye" aria-hidden="true"></i>
                     </button>
-                    <button class="btn btn-primary btn-small link-product-btn" data-product-link="${safeProduct.Link}" title="Ver en Instagram">
+                    <button class="btn btn-primary btn-small link-product-btn" 
+                            data-product-link="${safeProduct.Link}"
+                            aria-label="Ver ${safeProduct.Product} en Instagram"
+                            title="Ver en Instagram">
                         <i class="fab fa-instagram" aria-hidden="true"></i>
                     </button>
                 </td>
@@ -1287,7 +1315,10 @@ function renderProductsTable() {
                     </div>
                 </div>
                 <div class="product-card-actions">
-                    <button class="btn btn-primary btn-small link-product-btn" data-product-link="${safeProduct.Link}" title="${viewInstagramText}">
+                    <button class="btn btn-primary btn-small link-product-btn" 
+                            data-product-link="${safeProduct.Link}" 
+                            aria-label="Ver ${safeProduct.Product} en Instagram"
+                            title="${viewInstagramText}">
                         <i class="fab fa-instagram" aria-hidden="true"></i>
                         <span>Instagram</span>
                     </button>
@@ -1828,9 +1859,11 @@ function showProductModal(product) {
     statusBadge.textContent = statusIcon;
     statusBadge.style.fontSize = '24px';
     statusBadge.style.marginRight = '10px';
+    statusBadge.setAttribute('aria-label', safeProduct.Sold == 1 ? 'Producto vendido' : 'Producto disponible');
     
     const productTitle = document.createElement('h3');
     productTitle.textContent = safeProduct.Product;
+    productTitle.id = 'product-modal-title'; // Para aria-labelledby
     
     modalHeader.appendChild(statusBadge);
     modalHeader.appendChild(productTitle);
@@ -1882,11 +1915,29 @@ function showProductModal(product) {
     modalOverlay.classList.add('active');
     document.body.style.overflow = 'hidden';
     
+    // Focus en el botón de cerrar
+    setTimeout(() => {
+        const closeButton = document.getElementById('productModalClose');
+        if (closeButton) closeButton.focus();
+    }, 100);
+    
     // Event listeners para cerrar modal (usando once: true para evitar duplicados)
     const closeModal = () => {
         modalOverlay.classList.remove('active');
         document.body.style.overflow = '';
+        // Remover listener de escape
+        document.removeEventListener('keydown', escapeHandler);
     };
+    
+    // Handler para tecla Escape
+    const escapeHandler = (e) => {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    };
+    
+    // Agregar listener de Escape
+    document.addEventListener('keydown', escapeHandler);
     
     closeBtn.addEventListener('click', closeModal, { once: true });
     
