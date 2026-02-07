@@ -191,6 +191,19 @@ function handleSecureError(error, context = 'general') {
 
 // Configuración inicial
 document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar Analytics
+    if (typeof RopavejeroAnalytics !== 'undefined') {
+        RopavejeroAnalytics.init();
+        
+        // Track load time
+        if (window.performance && window.performance.timing) {
+            const loadTime = window.performance.timing.loadEventEnd - window.performance.timing.navigationStart;
+            if (loadTime > 0) {
+                RopavejeroAnalytics.trackLoadTime(loadTime);
+            }
+        }
+    }
+    
     // Inicializar todas las funcionalidades
     initTheme();
     initLanguage();
@@ -202,10 +215,12 @@ document.addEventListener('DOMContentLoaded', function() {
     initProducts();
     loadInstagramPosts();
     loadEfemerides();
-    initOfflineIndicator();
     
     // Aplicar configuraciones guardadas
     applySavedSettings();
+    
+    // Inicializar Stats Dashboard
+    initStatsDashboard();
 });
 
 // ========== TEMA CLARO/OSCURO ==========
@@ -232,6 +247,11 @@ function initTheme() {
             themeIcon.classList.remove('fa-sun');
             themeIcon.classList.add('fa-moon');
             localStorage.setItem('theme', 'dark');
+        }
+        
+        // Track cambio de tema
+        if (typeof RopavejeroAnalytics !== 'undefined') {
+            RopavejeroAnalytics.trackInteraction('themeChanges');
         }
     });
 }
@@ -267,6 +287,11 @@ function initLanguage() {
             setLanguage(lang);
             localStorage.setItem('language', lang);
             languageSelectorOverlay.classList.remove('active');
+            
+            // Track cambio de idioma
+            if (typeof RopavejeroAnalytics !== 'undefined') {
+                RopavejeroAnalytics.trackInteraction('languageChanges');
+            }
         });
     });
     
@@ -434,7 +459,8 @@ const translations = {
         'footer-copyright': '© 2026 @Ropavejero.Retro Todos los derechos reservados.',
         
         // Tooltip
-        'whatsapp-tooltip': 'Comunícate con nosotros'
+        'whatsapp-tooltip': 'Comunícate con nosotros',
+        'stats-tooltip': 'Estadísticas'
     },
     en: {
         // Menú
@@ -590,7 +616,8 @@ const translations = {
         'footer-copyright': '© 2026 @Ropavejero.Retro All rights reserved.',
         
         // Tooltip
-        'whatsapp-tooltip': 'Contact us'
+        'whatsapp-tooltip': 'Contact us',
+        'stats-tooltip': 'Statistics'
     }
 };
 
@@ -772,7 +799,6 @@ function setLanguage(lang) {
         renderProductsTable();
     }
 }
-
 // ========== BARRA DE PROGRESO ==========
 function initProgressBar() {
     const progressBar = document.getElementById('progressBar');
@@ -953,9 +979,24 @@ function initProducts() {
     // Event listeners para filtros (con debounce en búsqueda)
     searchFilter.addEventListener('input', function() {
         clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(filterProducts, 300); // Espera 300ms después de dejar de escribir
+        searchTimeout = setTimeout(() => {
+            filterProducts();
+            
+            // Track búsqueda
+            const searchTerm = searchFilter.value.trim();
+            if (searchTerm && typeof RopavejeroAnalytics !== 'undefined') {
+                RopavejeroAnalytics.trackSearch(searchTerm);
+            }
+        }, 300); // Espera 300ms después de dejar de escribir
     });
-    statusFilter.addEventListener('change', filterProducts);
+    statusFilter.addEventListener('change', () => {
+        filterProducts();
+        
+        // Track uso de filtro
+        if (typeof RopavejeroAnalytics !== 'undefined') {
+            RopavejeroAnalytics.trackInteraction('filterUses');
+        }
+    });
     clearFiltersBtn.addEventListener('click', clearFilters);
     
     // Event listeners para paginación
@@ -1338,6 +1379,11 @@ function renderProductsTable() {
             const product = allProducts.find(p => p.Num === productId);
             if (product) {
                 showProductModal(product);
+                
+                // Track vista de producto
+                if (typeof RopavejeroAnalytics !== 'undefined') {
+                    RopavejeroAnalytics.trackProductView(product.Num, product.Product, product.Platform);
+                }
             }
         });
     });
@@ -1348,6 +1394,20 @@ function renderProductsTable() {
             const safeURL = sanitizeURL(getLinkProductInstagram(productLink));
             if (safeURL !== '#') {
                 window.open(safeURL, '_blank', 'noopener,noreferrer');
+                
+                // Track clic en Instagram
+                if (typeof RopavejeroAnalytics !== 'undefined') {
+                    RopavejeroAnalytics.trackInteraction('instagramClicks');
+                    
+                    // Track clic específico del producto
+                    const productId = this.closest('[data-product-id]')?.getAttribute('data-product-id');
+                    if (productId) {
+                        const product = allProducts.find(p => p.Num === parseInt(productId));
+                        if (product) {
+                            RopavejeroAnalytics.trackProductClick(product.Num, product.Product, 'instagram');
+                        }
+                    }
+                }
             }
         });
     });
@@ -1720,6 +1780,11 @@ function filterProducts() {
     
     // Resetear a página 1
     currentPage = 1;
+    
+    // Track filtro de plataformas
+    if (!selectedPlatforms.has('all') && typeof RopavejeroAnalytics !== 'undefined') {
+        RopavejeroAnalytics.trackPlatformFilter(Array.from(selectedPlatforms));
+    }
     
     // Renderizar productos filtrados
     renderProductsTable();
@@ -2716,117 +2781,311 @@ function trackEvent(category, action, label, value) {
 window.trackEvent = trackEvent;
 
 
-// ========== INDICADOR DE CONEXIÓN OFFLINE ==========
-function initOfflineIndicator() {
-    // Crear indicador offline
-    const offlineIndicator = document.createElement('div');
-    offlineIndicator.id = 'offline-indicator';
-    offlineIndicator.className = 'offline-indicator';
-    offlineIndicator.innerHTML = `
-        <i class="fas fa-wifi-slash"></i>
-        <span>Sin conexión - Modo offline</span>
-    `;
-    offlineIndicator.style.cssText = `
-        position: fixed;
-        top: 60px;
-        left: 50%;
-        transform: translateX(-50%) translateY(-100px);
-        background: #ff6b6b;
-        color: white;
-        padding: 12px 24px;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        z-index: 10000;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-weight: 600;
-        transition: transform 0.3s ease;
-    `;
-    document.body.appendChild(offlineIndicator);
+// ========== STATS DASHBOARD ==========
+function initStatsDashboard() {
+    const statsBtn = document.getElementById('statsBtn');
+    const statsOverlay = document.getElementById('statsOverlay');
+    const statsClose = document.getElementById('statsClose');
+    const exportStatsBtn = document.getElementById('exportStatsBtn');
+    const clearStatsBtn = document.getElementById('clearStatsBtn');
     
-    // Función para mostrar/ocultar indicador
-    function updateOnlineStatus() {
-        if (!navigator.onLine) {
-            offlineIndicator.style.transform = 'translateX(-50%) translateY(0)';
-        } else {
-            offlineIndicator.style.transform = 'translateX(-50%) translateY(-100px)';
+    if (!statsBtn || !statsOverlay) return;
+    
+    // Abrir dashboard
+    statsBtn.addEventListener('click', function() {
+        statsOverlay.classList.add('active');
+        renderStatsDashboard();
+        
+        // Track apertura de stats
+        if (typeof RopavejeroAnalytics !== 'undefined') {
+            RopavejeroAnalytics.trackInteraction('statsViews');
         }
+    });
+    
+    // Cerrar dashboard
+    function closeStatsDashboard() {
+        statsOverlay.classList.remove('active');
     }
     
-    // Escuchar cambios de conexión
-    window.addEventListener('online', () => {
-        updateOnlineStatus();
-        // Mostrar mensaje de reconexión
-        const currentLang = localStorage.getItem('language') || 'es';
-        const message = currentLang === 'es' ? 'Conexión restaurada' : 'Connection restored';
-        showToast(message, 'success');
+    statsClose.addEventListener('click', closeStatsDashboard);
+    
+    // Cerrar al hacer clic fuera
+    statsOverlay.addEventListener('click', function(e) {
+        if (e.target === statsOverlay) {
+            closeStatsDashboard();
+        }
     });
     
-    window.addEventListener('offline', () => {
-        updateOnlineStatus();
-        const currentLang = localStorage.getItem('language') || 'es';
-        const message = currentLang === 'es' ? 'Sin conexión a internet' : 'No internet connection';
-        showToast(message, 'warning');
+    // Cerrar con tecla Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && statsOverlay.classList.contains('active')) {
+            closeStatsDashboard();
+        }
     });
     
-    // Verificar estado inicial
-    updateOnlineStatus();
-}
-
-// Función para mostrar notificaciones toast
-function showToast(message, type = 'info') {
-    const toast = document.createElement('div');
-    toast.className = `toast toast-${type}`;
-    toast.textContent = message;
-    toast.style.cssText = `
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background: ${type === 'success' ? '#51cf66' : type === 'warning' ? '#ffa94d' : '#339af0'};
-        color: white;
-        padding: 12px 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        z-index: 10001;
-        animation: slideIn 0.3s ease;
-        font-weight: 500;
-    `;
+    // Exportar estadísticas
+    exportStatsBtn.addEventListener('click', function() {
+        if (typeof RopavejeroAnalytics !== 'undefined') {
+            RopavejeroAnalytics.downloadStats();
+            
+            const currentLang = localStorage.getItem('language') || 'es';
+            const message = currentLang === 'es' ? 'Estadísticas exportadas' : 'Statistics exported';
+            showToast(message, 'success');
+        }
+    });
     
-    document.body.appendChild(toast);
-    
-    // Remover después de 3 segundos
-    setTimeout(() => {
-        toast.style.animation = 'slideOut 0.3s ease';
-        setTimeout(() => toast.remove(), 300);
-    }, 3000);
-}
-
-// Agregar animaciones CSS para toast
-if (!document.getElementById('toast-animations')) {
-    const style = document.createElement('style');
-    style.id = 'toast-animations';
-    style.textContent = `
-        @keyframes slideIn {
-            from {
-                transform: translateX(400px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
+    // Limpiar estadísticas
+    clearStatsBtn.addEventListener('click', function() {
+        if (typeof RopavejeroAnalytics !== 'undefined') {
+            const currentLang = localStorage.getItem('language') || 'es';
+            const confirmMsg = currentLang === 'es' 
+                ? '¿Estás seguro de que quieres borrar todas las estadísticas?' 
+                : 'Are you sure you want to delete all statistics?';
+            
+            if (confirm(confirmMsg)) {
+                RopavejeroAnalytics.clearAllData();
+                renderStatsDashboard();
+                
+                const message = currentLang === 'es' ? 'Estadísticas borradas' : 'Statistics cleared';
+                showToast(message, 'success');
             }
         }
-        @keyframes slideOut {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(400px);
-                opacity: 0;
-            }
+    });
+}
+
+function renderStatsDashboard() {
+    const statsContent = document.getElementById('statsContent');
+    if (!statsContent || typeof RopavejeroAnalytics === 'undefined') return;
+    
+    const currentLang = localStorage.getItem('language') || 'es';
+    const stats = RopavejeroAnalytics.getAllStats();
+    
+    // Traducciones
+    const translations = {
+        es: {
+            overview: 'Resumen General',
+            sessions: 'Sesiones',
+            pageViews: 'Vistas de Página',
+            avgDuration: 'Duración Promedio',
+            minutes: 'minutos',
+            topProducts: 'Productos Más Vistos',
+            views: 'vistas',
+            topSearches: 'Búsquedas Más Populares',
+            searches: 'búsquedas',
+            topPlatforms: 'Plataformas Más Filtradas',
+            filters: 'filtros',
+            interactions: 'Interacciones',
+            themeChanges: 'Cambios de Tema',
+            languageChanges: 'Cambios de Idioma',
+            filterUses: 'Uso de Filtros',
+            instagramClicks: 'Clics en Instagram',
+            performance: 'Rendimiento',
+            avgLoadTime: 'Tiempo de Carga Promedio',
+            minLoadTime: 'Tiempo Mínimo',
+            maxLoadTime: 'Tiempo Máximo',
+            seconds: 'segundos',
+            noData: 'No hay datos disponibles',
+            noProducts: 'No hay productos vistos aún',
+            noSearches: 'No hay búsquedas registradas',
+            noPlatforms: 'No hay filtros de plataforma usados'
+        },
+        en: {
+            overview: 'Overview',
+            sessions: 'Sessions',
+            pageViews: 'Page Views',
+            avgDuration: 'Average Duration',
+            minutes: 'minutes',
+            topProducts: 'Most Viewed Products',
+            views: 'views',
+            topSearches: 'Most Popular Searches',
+            searches: 'searches',
+            topPlatforms: 'Most Filtered Platforms',
+            filters: 'filters',
+            interactions: 'Interactions',
+            themeChanges: 'Theme Changes',
+            languageChanges: 'Language Changes',
+            filterUses: 'Filter Uses',
+            instagramClicks: 'Instagram Clicks',
+            performance: 'Performance',
+            avgLoadTime: 'Average Load Time',
+            minLoadTime: 'Minimum Time',
+            maxLoadTime: 'Maximum Time',
+            seconds: 'seconds',
+            noData: 'No data available',
+            noProducts: 'No products viewed yet',
+            noSearches: 'No searches recorded',
+            noPlatforms: 'No platform filters used'
         }
+    };
+    
+    const t = translations[currentLang];
+    
+    // Construir HTML del dashboard
+    let html = '';
+    
+    // Resumen General
+    html += `
+        <div class="stats-section">
+            <h3><i class="fas fa-chart-line"></i> ${t.overview}</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>${t.sessions}</h4>
+                    <div class="stat-value">${stats.sessions.total || 0}</div>
+                </div>
+                <div class="stat-card">
+                    <h4>${t.pageViews}</h4>
+                    <div class="stat-value">${stats.sessions.totalPageViews || 0}</div>
+                </div>
+                <div class="stat-card">
+                    <h4>${t.avgDuration}</h4>
+                    <div class="stat-value">${formatDuration(stats.sessions.avgDuration || 0)}</div>
+                </div>
+            </div>
+        </div>
     `;
-    document.head.appendChild(style);
+    
+    // Productos Más Vistos
+    if (stats.topProducts && stats.topProducts.length > 0) {
+        html += `
+            <div class="stats-section">
+                <h3><i class="fas fa-gamepad"></i> ${t.topProducts}</h3>
+                <ul class="stats-list">
+        `;
+        stats.topProducts.slice(0, 10).forEach(product => {
+            html += `
+                <li>
+                    <span class="stat-name">${sanitizeHTML(product.name)}</span>
+                    <span class="stat-count">${product.count} ${t.views}</span>
+                </li>
+            `;
+        });
+        html += `
+                </ul>
+            </div>
+        `;
+    } else {
+        html += `
+            <div class="stats-section">
+                <h3><i class="fas fa-gamepad"></i> ${t.topProducts}</h3>
+                <p style="color: var(--text-muted); text-align: center; padding: 20px;">${t.noProducts}</p>
+            </div>
+        `;
+    }
+    
+    // Búsquedas Más Populares
+    if (stats.topSearches && stats.topSearches.length > 0) {
+        html += `
+            <div class="stats-section">
+                <h3><i class="fas fa-search"></i> ${t.topSearches}</h3>
+                <ul class="stats-list">
+        `;
+        stats.topSearches.slice(0, 10).forEach(search => {
+            html += `
+                <li>
+                    <span class="stat-name">"${sanitizeHTML(search.term)}"</span>
+                    <span class="stat-count">${search.count} ${t.searches}</span>
+                </li>
+            `;
+        });
+        html += `
+                </ul>
+            </div>
+        `;
+    } else {
+        html += `
+            <div class="stats-section">
+                <h3><i class="fas fa-search"></i> ${t.topSearches}</h3>
+                <p style="color: var(--text-muted); text-align: center; padding: 20px;">${t.noSearches}</p>
+            </div>
+        `;
+    }
+    
+    // Plataformas Más Filtradas
+    if (stats.topPlatforms && stats.topPlatforms.length > 0) {
+        html += `
+            <div class="stats-section">
+                <h3><i class="fas fa-filter"></i> ${t.topPlatforms}</h3>
+                <ul class="stats-list">
+        `;
+        stats.topPlatforms.slice(0, 10).forEach(platform => {
+            html += `
+                <li>
+                    <span class="stat-name">${sanitizeHTML(platform.platform)}</span>
+                    <span class="stat-count">${platform.count} ${t.filters}</span>
+                </li>
+            `;
+        });
+        html += `
+                </ul>
+            </div>
+        `;
+    } else {
+        html += `
+            <div class="stats-section">
+                <h3><i class="fas fa-filter"></i> ${t.topPlatforms}</h3>
+                <p style="color: var(--text-muted); text-align: center; padding: 20px;">${t.noPlatforms}</p>
+            </div>
+        `;
+    }
+    
+    // Interacciones
+    html += `
+        <div class="stats-section">
+            <h3><i class="fas fa-mouse-pointer"></i> ${t.interactions}</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>${t.themeChanges}</h4>
+                    <div class="stat-value">${stats.interactions.themeChanges || 0}</div>
+                </div>
+                <div class="stat-card">
+                    <h4>${t.languageChanges}</h4>
+                    <div class="stat-value">${stats.interactions.languageChanges || 0}</div>
+                </div>
+                <div class="stat-card">
+                    <h4>${t.filterUses}</h4>
+                    <div class="stat-value">${stats.interactions.filterUses || 0}</div>
+                </div>
+                <div class="stat-card">
+                    <h4>${t.instagramClicks}</h4>
+                    <div class="stat-value">${stats.interactions.instagramClicks || 0}</div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Performance
+    if (stats.performance) {
+        html += `
+            <div class="stats-section">
+                <h3><i class="fas fa-tachometer-alt"></i> ${t.performance}</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h4>${t.avgLoadTime}</h4>
+                        <div class="stat-value">${(stats.performance.avg / 1000).toFixed(2)}${t.seconds}</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>${t.minLoadTime}</h4>
+                        <div class="stat-value">${(stats.performance.min / 1000).toFixed(2)}${t.seconds}</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>${t.maxLoadTime}</h4>
+                        <div class="stat-value">${(stats.performance.max / 1000).toFixed(2)}${t.seconds}</div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    
+    statsContent.innerHTML = html;
+}
+
+// Función auxiliar para formatear duración
+function formatDuration(ms) {
+    const minutes = Math.floor(ms / 60000);
+    const seconds = Math.floor((ms % 60000) / 1000);
+    
+    if (minutes > 0) {
+        return `${minutes}m ${seconds}s`;
+    }
+    return `${seconds}s`;
 }

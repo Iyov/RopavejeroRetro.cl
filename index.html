@@ -83,10 +83,10 @@
     <!-- CSS con preload para recursos críticos -->
     <link rel="preload" href="css/font-awesome_6.5.1_all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="css/font-awesome_6.5.1_all.min.css"></noscript>
-    <link rel="stylesheet" href="css/index.css?v=2026-02-07_1" type="text/css" />
+    <link rel="stylesheet" href="css/index.css?v=2026-02-07_7" type="text/css" />
     
     <!-- Preload de recursos críticos -->
-    <link rel="preload" href="js/index.js?v=2026-02-07_1" as="script" />
+    <link rel="preload" href="js/index.js?v=2026-02-07_7" as="script" />
     <!--<link rel="preload" href="img/RopavejeroLogo_256.png" as="image" type="image/png" />-->
     
 
@@ -864,9 +864,12 @@
             <div class="footer-content">
                 <p data-translate="footer-copyright">© 2026 @Ropavejero.Retro Todos los derechos reservados.</p>
                 <div class="footer-social">
-                    <a href="https://www.instagram.com/ropavejero.retro/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.facebook.com/ropavejero.retro/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
-                    <a href="https://tiktok.com/@ropavejero.retro/" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://www.instagram.com/ropavejero.retro/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/ropavejero.retro/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="https://tiktok.com/@ropavejero.retro/" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <button id="statsBtn" class="footer-stats-btn" aria-label="Ver estadísticas del sitio" title="Estadísticas">
+                        <i class="fas fa-chart-bar"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -911,8 +914,32 @@
         </div>
     </div>
 
+    <!-- Stats Dashboard -->
+    <div class="stats-overlay" id="statsOverlay">
+        <div class="stats-dashboard" id="statsDashboard">
+            <div class="stats-header">
+                <h2><i class="fas fa-chart-bar"></i> Estadísticas del Sitio</h2>
+                <button class="stats-close" id="statsClose" aria-label="Cerrar estadísticas">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="stats-content" id="statsContent">
+                <p>Cargando estadísticas...</p>
+            </div>
+            <div class="stats-actions">
+                <button class="btn btn-secondary" id="exportStatsBtn">
+                    <i class="fas fa-download"></i> Exportar Datos
+                </button>
+                <button class="btn btn-secondary" id="clearStatsBtn">
+                    <i class="fas fa-trash"></i> Borrar Estadísticas
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script src="js/instagram_posts.js?v=2026-02-07_1"></script>
-    <script src="js/index.js?v=2026-02-07_4"></script>
+    <script src="js/analytics.js?v=2026-02-07_1"></script>
+    <script src="js/index.js?v=2026-02-07_7"></script>
     
     <!-- Service Worker Registration -->
     <script>
