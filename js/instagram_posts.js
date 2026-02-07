@@ -1,5 +1,5 @@
 // ========== DATOS DE POSTS DE INSTAGRAM ==========
-// Archivo con los posts simulados de Instagram para Ropavejero Retro
+// Archivo con los posts de Instagram de @Ropavejero.Retro
 
 const INSTAGRAM_POSTS_DATA = [
     {
@@ -87,19 +87,19 @@ L: Loose: Suelto: Solo Juego`,
 [✅] 3717 GTA Vice City (BL-L) [PS2 (L)] $10K
 [✅] 3718 GTA Vice City (BL-L) [PS2 (L)] $10K
 [❌] 3719 Dragon Ball Z Budokai 3 (GH-L) [PS2 (L)] $18K
-[✅] 3720 Star Wars Episode III Revenge of the Sith (BL-L) [PS2 (L)] $8K
+[❌] 3720 Star Wars Episode III Revenge of the Sith (BL-L) [PS2 (L)] $8K
 [✅] 3721 Star Wars Episode III Revenge of the Sith (BL-L) [PS2 (L)] $8K
 [✅] 3722 Sly 2 (GH-L) [PS2 (L)] $8K
 [✅] 3723 Sly 3 (GH-L) [PS2 (L)] $8K
 [✅] 3724 Tony Hawk Proving Ground (BL-L) [PS2 (L)] $7K
 [✅] 3725 Tony Hawk Project 8 (BL-L) [PS2 (L)] $7K
 [✅] 3726 Jak 3 (GH-L) [PS2 (L)] $7K
-[✅] 3727 Gran Turismo 3 (BL-L) [PS2 (L)] $5K
+[❌] 3727 Gran Turismo 3 (BL-L) [PS2 (L)] $5K
 [✅] 3728 Crash Bandicoot The Wrath of Cortex (BL-L) [PS2 (L)] $10K
 [✅] 3729 Zone of the Enders 2nd Runner (BL-L) [PS2 (L)] $20K
 [❌] 3730 Winning Eleven 7 (BL-L) [PS2 (L)] $7K
 [✅] 3731 Rainbow Six Lockdown (BL-L) [PS2 (L)] $5K
-[✅] 3732 Star Wars Starfighter (BL-L) [PS2 (L)] $5K
+[❌] 3732 Star Wars Starfighter (BL-L) [PS2 (L)] $5K
 [✅] 3733 Ghost Recon 2 (BL-L) [PS2 (L)] $5K
 [✅] 3734 Spiderman (BL-L-PAL) [PS2 (L)] $8K
 
@@ -127,7 +127,7 @@ PAL: Europeo`,
 [✅] 1966 Scooby Doo Mystery Mayhem (BL-L) [PS2 (L)] $10K
 [✅] 1967 Marvel Ultimate Alliance (BL-L) [PS2 (L)] $10K
 [✅] 1968 Naruto Ultimate Ninja (GH-L) [PS2 (L)] $5K
-[✅] 3735 Gran Turismo 4 (GH-L) [PS2 (L)] $7K
+[❌] 3735 Gran Turismo 4 (GH-L) [PS2 (L)] $7K
 [✅] 3736 Test Drive (BL-L) [PS2 (L)] $6K
 [✅] 3737 Motocross Mania 3 (BL-L) [PS2 (L)] $3K
 [✅] 3738 Scooby Doo Night of 100 Frights (GH-L) [PS2 (L)] $12K
@@ -199,9 +199,11 @@ L: Loose: Suelto: Solo Juego`,
 [✅] 3767 Saints Row The Third disc 2 (BL-L) [X360 (L)] $3K
 [✅] 3768 Dishonored (BL-L) [X360 (L)] $5K
 [✅] 3769 Disney Infinity 3.0 (BL-L) [X360 (L)] $5K
+
 [❌]: VENDIDO
 [R]: RESERVADO
 [✅]: DISPONIBLE
+
 Siglas:
 BL: Black Label
 PH: Platinum Hits
@@ -248,9 +250,11 @@ L: Loose: Suelto: Solo Juego`,
 [✅] 3791 Your Shape Fitness Evolved (CIB-K) [X360] $5K
 [✅] 3792 Your Shape Fitness Evolved (MM-K) [X360] $4K
 [✅] 3793 Your Shape Fitness Evolved 2012 (CIB+-K) [X360] $5K
+
 [❌]: VENDIDO
 [R]: RESERVADO
 [✅]: DISPONIBLE
+
 Siglas:
 BL: Black Label
 PH: Platinum Hits
@@ -274,6 +278,86 @@ Muchas gracias 2025 por todo y allá vamos 2026!`,
         link: "https://www.instagram.com/p/DS82t4FFa2x/",
         media_type: 'IMAGE',
         date: '2025-12-31'
+    },
+    {
+        id: 'ig_10',
+        image: "img/Post10.jpeg?v=2026-02-07",
+        title: "Xbox 360 [2] | 01/Feb/26",
+        description: `[✅] 3794 Splinter Cell Chaos Theory (BL-CIB) [Xbox] $10K
+[✅] 3795 Forza Motorsport 2 (MM) [X360] $8K
+[✅] 3796 Forza Horizon (MM) [X360] $15K
+[✅] 3797 PES 2014 (CIB) [X360] $8K
+[✅] 3798 Lego Star Wars Complete Saga (PH-MM) [X360] $8K
+[✅] 3799 Lego Star Wars III (PH-MM) [X360] $8K
+[✅] 3800 Lego Jurassic World (CIB) [X360] $8K
+[✅] 3801 Cars 2 (MM) [X360] $8K
+[✅] 3802 Star Ocean The Last Hope (MM-3D) [X360] $12K
+
+[❌]: VENDIDO
+[R]: RESERVADO
+[✅]: DISPONIBLE
+
+Siglas:
+BL: Black Label
+PH: Platinum Hits
+CIB: Caja, Juego, Manual
+CIB+: Caja, Juego, Manual, Insertos
+MM: Sin Manual
+S: Sealed: Sellado de Fábrica
+DC: Daño en Carátula
+3D: Tres Discos`,
+        link: "https://www.instagram.com/p/DUPCLjAFaIJ/",
+        media_type: 'IMAGE',
+        date: '2026-02-01'
+    },
+    {
+        id: 'ig_11',
+        image: "img/Post11.jpeg?v=2026-02-07",
+        title: "Wii [1] | 01/Feb/26",
+        description: `[✅] 3803 Ben 10 Protector Of Earth (CIB-PAL) [Wii] $10K
+[✅] 3804 Guitar Hero World Tour (CIB-PAL) [Wii] $12K
+[✅] 3805 Penny Racers Party Turbo-Q Speedway (CIB) [Wii] $8K
+[✅] 3806 Skylanders Superchargers Racing (MM) [Wii] $8K
+[✅] 3807 Super Paper Mario (MM) [Wii] $12K
+
+[❌]: VENDIDO
+[R]: RESERVADO
+[✅]: DISPONIBLE
+
+Siglas:
+CIB: Caja, Juego, Manual
+MM: Sin Manual
+PAL: Europeo`,
+        link: "https://www.instagram.com/p/DUPEeHAFWjh/",
+        media_type: 'IMAGE',
+        date: '2026-02-01'
+    },
+    {
+        id: 'ig_12',
+        image: "img/Post12.jpeg?v=2026-02-07",
+        title: "PS2 | 01/Feb/26",
+        description: `[❌] 3808 Harry Potter Chamber of Secrets (BL-CIB) [PS2] $15K
+[❌] 3809 Harry Potter and the Goblet of Fire (BL-CIB) [PS2] $15K
+[❌] 3810 Harry Potter Prisoner of Azkaban (BL-CIB) [PS2] $15K
+[❌] 3811 Soul Calibur II (BL-CIB-2D) [PS2] $25K
+[✅] 3812 Street Fighter Anniversary (BL-CIB) [PS2] $25K
+[✅] 3813 Naruto Uzumaki Chronicles (BL-MM) [PS2] $10K
+[❌] 3814 Dragon Ball Z Budokai 2 (BL-MM) [PS2] $20K
+[❌] 3815 GTA San Andreas (BL-MM) [PS2] $20K
+
+[❌]: VENDIDO
+[R]: RESERVADO
+[✅]: DISPONIBLE
+
+Siglas:
+BL: Black Label
+GH: Greatest Hits
+CIB: Caja, Juego, Manual
+MM: Sin Manual
+2D: Dos Discos`,
+        link: "https://www.instagram.com/p/DUPGu_hlQu3/",
+        media_type: 'IMAGE',
+        date: '2026-02-01'
     }
 ];
 
