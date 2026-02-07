@@ -1208,19 +1208,17 @@ function renderProductsTable() {
         if (!safeProduct || !safeProduct.Num) return;
         
         const statusClass = safeProduct.Sold == 1 ? 'status-sold' : 'status-available';
-        const statusText = safeProduct.Sold == 1 ? 
-            (currentLang === 'es' ? 'Vendido' : 'Sold') : 
-            (currentLang === 'es' ? 'Disponible' : 'Available');
+        const statusIcon = safeProduct.Sold == 1 ? '[❌]' : '[✅]';
         
         // HTML para tabla (desktop)
         tableHtml += `
             <tr data-product-id="${safeProduct.Num}">
+                <td><span class="status-badge ${statusClass}">${statusIcon}</span></td>
                 <td>${safeProduct.Num}</td>
                 <td>${safeProduct.Product}</td>
                 <td>${safeProduct.Platform}</td>
                 <td>${safeProduct.Neto !== 'X' ? safeProduct.Neto : '0'}</td>
                 <td><span class="stock-badge">${safeProduct.Stock}</span></td>
-                <td><span class="status-badge ${statusClass}">${statusText}</span></td>
                 <td class="actions-cell">
                     <button class="btn btn-primary btn-small view-product-btn" data-product-id="${safeProduct.Num}" title="Ver detalles">
                         <i class="fas fa-eye" aria-hidden="true"></i>
@@ -1243,6 +1241,9 @@ function renderProductsTable() {
         cardsHtml += `
             <div class="product-card" data-product-id="${safeProduct.Num}">
                 <div class="product-card-header">
+                    <div class="product-card-status">
+                        <span class="status-badge ${statusClass}">${statusIcon}</span>
+                    </div>
                     <div class="product-card-number">#${safeProduct.Num}</div>
                     <h3 class="product-card-title">${safeProduct.Product}</h3>
                 </div>
@@ -1259,12 +1260,6 @@ function renderProductsTable() {
                         <div class="product-card-label">${stockText}</div>
                         <div class="product-card-value">
                             <span class="stock-badge">${safeProduct.Stock}</span>
-                        </div>
-                    </div>
-                    <div class="product-card-field">
-                        <div class="product-card-label">${statusTextLabel}</div>
-                        <div class="product-card-value">
-                            <span class="status-badge ${statusClass}">${statusText}</span>
                         </div>
                     </div>
                 </div>
@@ -1790,23 +1785,23 @@ function showProductModal(product) {
     }
     
     const statusClass = safeProduct.Sold == 1 ? 'status-sold' : 'status-available';
-    const statusText = safeProduct.Sold == 1 ? 
-        (currentLang === 'es' ? 'Vendido' : 'Sold') : 
-        (currentLang === 'es' ? 'Disponible' : 'Available');
+    const statusIcon = safeProduct.Sold == 1 ? '[❌]' : '[✅]';
     
     // Crear contenido del modal de forma segura
     const modalHeader = document.createElement('div');
     modalHeader.className = 'modal-header';
     
+    const statusBadge = document.createElement('span');
+    statusBadge.className = `status-badge ${statusClass}`;
+    statusBadge.textContent = statusIcon;
+    statusBadge.style.fontSize = '24px';
+    statusBadge.style.marginRight = '10px';
+    
     const productTitle = document.createElement('h3');
     productTitle.textContent = safeProduct.Product;
     
-    const statusBadge = document.createElement('span');
-    statusBadge.className = `status-badge ${statusClass}`;
-    statusBadge.textContent = statusText;
-    
-    modalHeader.appendChild(productTitle);
     modalHeader.appendChild(statusBadge);
+    modalHeader.appendChild(productTitle);
     
     const modalDetails = document.createElement('div');
     modalDetails.className = 'modal-details';
