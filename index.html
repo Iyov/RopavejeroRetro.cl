@@ -104,11 +104,11 @@
       .hero-buttons{display:flex;justify-content:center;gap:15px}
     </style>
 
-    <link rel="preload" href="css/index.min.css?v=2026-02-16_6" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="css/index.min.css?v=2026-02-16_6"></noscript>
+    <link rel="preload" href="css/index.min.css?v=2026-02-16_7" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/index.min.css?v=2026-02-16_7"></noscript>
     
     <!-- Preload de recursos críticos -->
-    <link rel="preload" href="js/index.min.js?v=2026-02-16_6" as="script" />
+    <link rel="preload" href="js/index.min.js?v=2026-02-16_7" as="script" />
     <!-- Preload LCP: imagen principal del hero (local WebP) -->
     <link rel="preload" href="img/hero-1920.webp" as="image" />
     <!--<link rel="preload" href="img/RopavejeroLogo_256.png" as="image" type="image/png" />--> 
@@ -126,13 +126,13 @@
     "url": "https://ropavejeroretro.cl",
     "logo": {
         "@type": "ImageObject",
-        "url": "https://ropavejeroretro.cl/img/RopavejeroLogo_All.png",
+        "url": "https://ropavejeroretro.cl/img/RopavejeroLogo_500.webp",
         "width": 500,
         "height": 500
     },
     "image": [
         "https://ropavejeroretro.cl/img/RopavejeroLogo_256.png",
-        "https://ropavejeroretro.cl/img/RopavejeroLogo_All.png"
+        "https://ropavejeroretro.cl/img/RopavejeroLogo_500.webp"
     ],
     "telephone": "+56967691585",
     "email": "contacto@ropavejeroretro.cl",
@@ -406,7 +406,7 @@
             <!-- Hero LCP image (responsive WebP local) -->
             <picture class="hero-media" aria-hidden="true">
                 <source type="image/webp" 
-                    srcset="img/hero-400.webp 400w, img/hero-800.webp 800w, img/hero-1200.webp 1200w, img/hero-1920.webp 1920w"
+                    srcset="img/hero-400.webp 400w, img/hero-600.webp 600w, img/hero-800.webp 800w, img/hero-1200.webp 1200w, img/hero-1920.webp 1920w"
                     sizes="100vw">
                 <img class="hero-lcp" src="img/hero-1200.jpg" alt="Estética retro - Ropavejero Retro" loading="eager" decoding="async" width="512" height="512">
             </picture>
@@ -483,7 +483,7 @@
                     </div>
                     <div class="about-image">
                         <div class="image-container">
-                            <img src="img/RopavejeroLogo_All.png" 
+                            <img src="img/RopavejeroLogo_500.webp" 
                                  alt="Ropavejero.Retro Logo - Tienda de videojuegos retro en Chile" 
                                  width="500" 
                                  height="500"
@@ -952,7 +952,7 @@
                 if (window._instagramScriptLoaded) return;
                 window._instagramScriptLoaded = true;
                 const s = document.createElement('script');
-                s.src = 'js/instagram_posts.min.js?v=2026-02-16_4';
+                s.src = 'js/instagram_posts.min.js?v=2026-02-16_7';
                 s.async = true;
                 s.onload = function(){
                     console.info('📸 instagram_posts.js cargado (lazy)');
@@ -977,7 +977,7 @@
             }
         })();
     </script>
-    <script src="js/index.min.js?v=2026-02-16_6" defer></script>
+    <script src="js/index.min.js?v=2026-02-16_7" defer></script>
     
     <!-- Service Worker Registration (defer to not block page load) -->
     <script defer>
