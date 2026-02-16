@@ -201,8 +201,9 @@ document.addEventListener('DOMContentLoaded', function() {
     initMobileMenu();
     initFAQ();
     initBlogDialogs();
-    initProducts();
-    loadInstagramPosts();
+    // Productos se inicializan de forma 'lazy' (IntersectionObserver)
+    lazyInitProducts();
+    // `instagram_posts.js` se carga de forma lazy desde index.html; NO invocar aquí
     loadEfemerides();
     
     // Aplicar configuraciones guardadas
@@ -945,6 +946,10 @@ let selectedPlatforms = new Set(['all']); // Plataformas seleccionadas
 let searchTimeout = null; // Para debounce de búsqueda
 
 function initProducts() {
+    // Evitar inicialización doble
+    if (window._productsInitialized) return;
+    window._productsInitialized = true;
+
     const searchFilter = document.getElementById('searchFilter');
     const statusFilter = document.getElementById('statusFilter');
     const clearFiltersBtn = document.getElementById('clearFilters');
@@ -977,7 +982,34 @@ function initProducts() {
     
     // Inicializar filtro múltiple de plataformas
     initMultiSelectPlatform();
-}
+} // fin initProducts
+
+// Inicialización 'lazy' de productos: usa IntersectionObserver con fallback
+function lazyInitProducts() {
+    const productsSection = document.getElementById('productos');
+    if (!productsSection) {
+        // Si no existe la sección, inicializar tras un corto timeout
+        setTimeout(() => { if (!window._productsInitialized) initProducts(); }, 1000);
+        return;
+    }
+
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    initProducts();
+                    obs.disconnect();
+                }
+            });
+        }, { rootMargin: '400px' });
+        observer.observe(productsSection);
+
+        // Safety fallback: for very slow viewports, inicializar después de 3s
+        setTimeout(() => { if (!window._productsInitialized) { initProducts(); observer.disconnect(); } }, 3000);
+    } else {
+        setTimeout(() => { if (!window._productsInitialized) initProducts(); }, 1500);
+    }
+} 
 
 // Inicializar filtro múltiple de plataformas
 function initMultiSelectPlatform() {
@@ -2064,9 +2096,26 @@ function renderInstagramPosts(posts) {
             console.debug(`📸 Renderizando post: ${post.title?.substring(0, 30)}... con imagen: ${safeImage}`);
         }
         
+        // Construir <picture> responsive (WebP local) cuando la imagen es local (img/...)
+        let imageHtml = '';
+        if (safeImage && safeImage.startsWith('img/')) {
+            // eliminar query string si existe
+            const imageNoQuery = safeImage.split('?')[0];
+            const baseName = imageNoQuery.replace(/\.(jpe?g|png)$/i, '');
+            const webpSrcset = `${baseName}-400.webp 400w, ${baseName}-800.webp 800w, ${baseName}-1200.webp 1200w`;
+            imageHtml = `
+                <picture>
+                    <source type="image/webp" srcset="${webpSrcset}" sizes="(max-width:600px) 400px, (max-width:1000px) 800px, 1200px">
+                    <img src="${safeImage}" alt="${safeTitle}" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='img/RopavejeroLogo_256.png'; this.alt='Imagen no disponible'; console.warn('Error cargando imagen:', '${safeImage}');">
+                </picture>
+            `;
+        } else {
+            imageHtml = `<img src="${safeImage}" alt="${safeTitle}" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='img/RopavejeroLogo_256.png'; this.alt='Imagen no disponible'; console.warn('Error cargando imagen:', '${safeImage}');">`;
+        }
+        
         postElement.innerHTML = `
             <div class="instagram-image">
-                <img src="${safeImage}" alt="${safeTitle}" loading="lazy" onerror="this.onerror=null; this.src='img/RopavejeroLogo_256.png'; this.alt='Imagen no disponible'; console.warn('Error cargando imagen:', '${safeImage}');">
+                ${imageHtml}
                 ${post.media_type === 'VIDEO' ? '<div class="video-indicator"><i class="fas fa-play"></i></div>' : ''}
             </div>
             <div class="instagram-content">

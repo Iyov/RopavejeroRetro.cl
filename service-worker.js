@@ -1,6 +1,6 @@
 // ========== SERVICE WORKER - ROPAVEJERO RETRO ==========
 // Versión del caché - Incrementar cuando actualices recursos
-const CACHE_VERSION = 'ropavejero-v1.0.0';
+const CACHE_VERSION = 'ropavejero-v1.0.6';
 const CACHE_NAME = `${CACHE_VERSION}-static`;
 const DATA_CACHE_NAME = `${CACHE_VERSION}-data`;
 
@@ -8,10 +8,22 @@ const DATA_CACHE_NAME = `${CACHE_VERSION}-data`;
 const STATIC_RESOURCES = [
     '/',
     '/index.html',
+    '/css/index.min.css',
     '/css/index.css',
     '/css/font-awesome_6.5.1_all.min.css',
+    '/js/index.min.js',
     '/js/index.js',
+    '/js/instagram_posts.min.js',
     '/js/instagram_posts.js',
+    '/js/app.min.js',
+    '/js/app.js',
+    '/img/hero-400.webp',
+    '/img/hero-800.webp',
+    '/img/hero-1200.webp',
+    '/img/hero-1920.webp',
+    '/img/hero-800.jpg',
+    '/img/hero-1200.jpg',
+    '/img/hero-1920.jpg',
     '/img/RopavejeroLogo_256.png',
     '/img/RopavejeroLogo_150.png',
     '/img/RopavejeroLogo_100.png',
@@ -20,14 +32,44 @@ const STATIC_RESOURCES = [
     '/manifest.json'
 ];
 
-// Recursos de Instagram (imágenes de posts)
+// Recursos de Instagram (imágenes de posts WebP responsive y fallbacks)
 const INSTAGRAM_IMAGES = [
-    '/img/Post01.jpeg',
-    '/img/Post02.jpeg',
-    '/img/Post03.jpeg',
-    '/img/Post04.jpeg',
-    '/img/Post05.jpeg',
-    '/img/Post06.jpeg'
+    '/img/Post01-400.webp',
+    '/img/Post01-800.webp',
+    '/img/Post01-1200.webp',
+    '/img/Post02-400.webp',
+    '/img/Post02-800.webp',
+    '/img/Post02-1200.webp',
+    '/img/Post03-400.webp',
+    '/img/Post03-800.webp',
+    '/img/Post03-1200.webp',
+    '/img/Post04-400.webp',
+    '/img/Post04-800.webp',
+    '/img/Post04-1200.webp',
+    '/img/Post05-400.webp',
+    '/img/Post05-800.webp',
+    '/img/Post05-1200.webp',
+    '/img/Post06-400.webp',
+    '/img/Post06-800.webp',
+    '/img/Post06-1200.webp',
+    '/img/Post07-400.webp',
+    '/img/Post07-800.webp',
+    '/img/Post07-1200.webp',
+    '/img/Post08-400.webp',
+    '/img/Post08-800.webp',
+    '/img/Post08-1200.webp',
+    '/img/Post09-400.webp',
+    '/img/Post09-800.webp',
+    '/img/Post09-1200.webp',
+    '/img/Post10-400.webp',
+    '/img/Post10-800.webp',
+    '/img/Post10-1200.webp',
+    '/img/Post11-400.webp',
+    '/img/Post11-800.webp',
+    '/img/Post11-1200.webp',
+    '/img/Post12-400.webp',
+    '/img/Post12-800.webp',
+    '/img/Post12-1200.webp'
 ];
 
 // URLs que NO deben cachearse

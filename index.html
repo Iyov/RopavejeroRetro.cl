@@ -76,18 +76,42 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://static.cloudflareinsights.com" crossorigin />
+    <!-- Preconnect para imágenes de hero (Unsplash) -->
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
     
-    <!-- DNS Prefetch para recursos secundarios -->
+    <!-- DNS Prefetch + Preconnect para recursos secundarios -->
+    <link rel="preconnect" href="https://docs.google.com" crossorigin />
     <link rel="dns-prefetch" href="//cloudflareinsights.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
-    <!-- CSS con preload para recursos críticos -->
+    <!-- CSS con preload para recursos críticos + inline critical CSS -->
     <link rel="preload" href="css/font-awesome_6.5.1_all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="css/font-awesome_6.5.1_all.min.css"></noscript>
-    <link rel="stylesheet" href="css/index.css?v=2026-02-07_8" type="text/css" />
+
+    <!-- Inline critical CSS (header + hero) to speed up FCP/LCP -->
+    <style>
+      /* critical: header & hero */
+      .header{position:sticky;top:0;background-color:rgba(26,26,46,0.9);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,0,0,0.08);z-index:100;transition:all .3s}
+      .header-content{display:flex;justify-content:space-between;align-items:center;padding:15px 0}
+      .logo{display:flex;align-items:center;gap:8px;cursor:pointer}
+      .nav{display:flex;gap:25px}
+      .hero{position:relative;height:80vh;min-height:500px;display:flex;align-items:center;background:linear-gradient(135deg, rgba(25,25,230,0.8), rgba(20,20,184,0.9));background-size:cover}
+      .hero-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(rgba(17,17,33,0.7), rgba(17,17,33,0.9))}
+      .hero-content{position:relative;z-index:1;max-width:1200px;text-align:center;margin:0 auto}
+      .hero h1{font-size:3.5rem;font-weight:800;margin-bottom:20px;line-height:1.2;color:rgba(255,255,255,.9)}
+      .hero p{font-size:1.2rem;margin-bottom:30px;color:rgba(255,255,255,.9)}
+      .hero-buttons{display:flex;justify-content:center;gap:15px}
+    </style>
+
+    <link rel="preload" href="css/index.min.css?v=2026-02-16_6" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/index.min.css?v=2026-02-16_6"></noscript>
     
     <!-- Preload de recursos críticos -->
-    <link rel="preload" href="js/index.js?v=2026-02-07_8" as="script" />
-    <!--<link rel="preload" href="img/RopavejeroLogo_256.png" as="image" type="image/png" />-->
+    <link rel="preload" href="js/index.min.js?v=2026-02-16_6" as="script" />
+    <!-- Preload LCP: imagen principal del hero (local WebP) -->
+    <link rel="preload" href="img/hero-1920.webp" as="image" />
+    <!--<link rel="preload" href="img/RopavejeroLogo_256.png" as="image" type="image/png" />--> 
     
 
 
@@ -379,7 +403,14 @@
     <main class="main" id="main-content" role="main">
         <!-- Hero Section -->
         <section class="hero" id="hero">
-            <div class="hero-overlay"></div>
+            <!-- Hero LCP image (responsive WebP local) -->
+            <picture class="hero-media" aria-hidden="true">
+                <source type="image/webp" 
+                    srcset="img/hero-400.webp 400w, img/hero-800.webp 800w, img/hero-1200.webp 1200w, img/hero-1920.webp 1920w"
+                    sizes="100vw">
+                <img class="hero-lcp" src="img/hero-1200.jpg" alt="Estética retro - Ropavejero Retro" loading="eager" decoding="async" width="512" height="512">
+            </picture>
+            <div class="hero-overlay" aria-hidden="true"></div>
             <div class="container">
                 <div class="hero-content">
                     <h1 data-translate="hero-title">Bienvenidos a @Ropavejero.Retro<br/>Todo lo Retro en un solo lugar</h1>
@@ -911,49 +942,50 @@
         </div>
     </div>
 
-    <script src="js/instagram_posts.js?v=2026-02-07_1"></script>
-    <script src="js/index.js?v=2026-02-07_8"></script>
-    
-    <!-- Service Worker Registration -->
+    <!-- Instagram posts: lazy-load cuando la sección esté cerca (mejora PageSpeed) -->
     <script>
-        // Registrar Service Worker para funcionalidad offline
+        (function(){
+            const instagramSection = document.getElementById('instagram');
+            if (!instagramSection) return;
+
+            function loadInstagramBundle(){
+                if (window._instagramScriptLoaded) return;
+                window._instagramScriptLoaded = true;
+                const s = document.createElement('script');
+                s.src = 'js/instagram_posts.min.js?v=2026-02-16_4';
+                s.async = true;
+                s.onload = function(){
+                    console.info('📸 instagram_posts.js cargado (lazy)');
+                    if (typeof loadInstagramPosts === 'function') {
+                        try { loadInstagramPosts(); } catch(e){ console.warn('loadInstagramPosts() fallo después de lazy-load', e); }
+                    }
+                };
+                s.onerror = function(){ console.warn('No se pudo cargar instagram_posts.js'); };
+                document.body.appendChild(s);
+            }
+
+            if ('IntersectionObserver' in window) {
+                const io = new IntersectionObserver((entries, obs) => {
+                    entries.forEach(en => { if (en.isIntersecting) { loadInstagramBundle(); obs.disconnect(); } });
+                }, { rootMargin: '300px' });
+                io.observe(instagramSection);
+            } else {
+                // Fallback simple: cargar en el primer scroll o al cabo de 2s
+                const onScroll = function(){ loadInstagramBundle(); window.removeEventListener('scroll', onScroll); };
+                window.addEventListener('scroll', onScroll, { passive: true });
+                setTimeout(loadInstagramBundle, 2000);
+            }
+        })();
+    </script>
+    <script src="js/index.min.js?v=2026-02-16_6" defer></script>
+    
+    <!-- Service Worker Registration (defer to not block page load) -->
+    <script defer>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js')
-                    .then((registration) => {
-                        console.log('✅ Service Worker registrado:', registration.scope);
-                        
-                        // Verificar actualizaciones cada hora
-                        setInterval(() => {
-                            registration.update();
-                        }, 60 * 60 * 1000);
-                        
-                        // Escuchar actualizaciones
-                        registration.addEventListener('updatefound', () => {
-                            const newWorker = registration.installing;
-                            newWorker.addEventListener('statechange', () => {
-                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                                    // Hay una nueva versión disponible
-                                    if (confirm('¡Hay una nueva versión disponible! ¿Deseas actualizar?')) {
-                                        newWorker.postMessage({ type: 'SKIP_WAITING' });
-                                        window.location.reload();
-                                    }
-                                }
-                            });
-                        });
-                    })
-                    .catch((error) => {
-                        console.warn('❌ Service Worker no se pudo registrar:', error);
-                    });
-            });
-            
-            // Recargar cuando el Service Worker tome control
-            let refreshing = false;
-            navigator.serviceWorker.addEventListener('controllerchange', () => {
-                if (!refreshing) {
-                    refreshing = true;
-                    window.location.reload();
-                }
+                navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
+                    .then(() => console.log('✅ Service Worker registrado'))
+                    .catch((error) => console.warn('⚠️ Service Worker error:', error));
             });
         }
     </script>

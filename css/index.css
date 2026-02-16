@@ -277,8 +277,10 @@ body {
     min-height: 500px;
     display: flex;
     align-items: center;
-    background: linear-gradient(135deg, rgba(25, 25, 230, 0.8), rgba(20, 20, 184, 0.9)), url('https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&h=1080&q=80') no-repeat center center;
+    /* Usar solo gradiente; la imagen LCP se sirve vía <picture> para srcset/webp */
+    background: linear-gradient(135deg, rgba(25, 25, 230, 0.8), rgba(20, 20, 184, 0.9));
     background-size: cover;
+    overflow: hidden;
 }
 
 .hero-overlay {
@@ -288,13 +290,27 @@ body {
     width: 100%;
     height: 100%;
     /*background: linear-gradient(135deg, rgba(25, 25, 230, 0.8), rgba(20, 20, 184, 0.9));*/
-    background: linear-gradient(rgba(17, 17, 33, 0.7) 0%, rgba(17, 17, 33, 0.9) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuBE0CAdiwu-V-JGbG_hz8b6KtEdL17R4F-GkMWCnMDZcoMPCTzl1Zwwr88bS7zmPgnvMdDdNwVXZIBFPmkYvsH_m-_w8G7VOGU0Rwa1PxY9WXrb80tpcw-f-0f5xcgU01sRtbMO-RXzpif6AWehGw9zamvVgHP3mJuXo-Vy_lDSPUYUjIiyUoBLdErgYVQO1hjG2iPtBQUsHd3shjDVQMCVJi7mSotyDr1xEZ9wWGqBA5yl38vIW9xtKSG3vfbKf94AgEixXyLCkdM");
-    background-size: contain;
+    /* Overlay: usar solo gradiente para reducir requests y mejorar LCP */
+    background: linear-gradient(rgba(17, 17, 33, 0.7) 0%, rgba(17, 17, 33, 0.9) 100%);
+    background-size: cover;
+    z-index: 1;
+}
+
+/* Imagen LCP colocada detrás del overlay y contenido */
+.hero-lcp {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    z-index: 0;
 }
 
 .hero-content {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     max-width: 1200px;
     text-align: center;
     margin: 0 auto;
