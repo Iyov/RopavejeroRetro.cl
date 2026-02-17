@@ -1,103 +1,226 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="dark-mode">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Política de Seguridad - Ropavejero Retro</title>
-    <meta name="description" content="Política de seguridad y divulgación responsable de vulnerabilidades de Ropavejero Retro." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>🔒 Política de Seguridad - Ropavejero Retro</title>
+    <meta name="description" content="Política de seguridad y divulgación responsable de vulnerabilidades de Ropavejero Retro. Reporta vulnerabilidades de forma segura." />
+    <meta name="keywords" content="política de seguridad, divulgación responsable, vulnerabilidades, seguridad web, ropavejero retro" />
+    <meta name="author" content="Ropavejero Retro" />
     <meta name="robots" content="index, follow" />
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://tagmanager.google.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://www.googletagmanager.com https://tagmanager.google.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#1919e6" />
     <link rel="canonical" href="https://ropavejeroretro.cl/security-policy.html" />
+    <link rel="icon" href="img/favicon.png" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="img/RopavejeroLogo_150.png" />
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ropavejeroretro.cl/security-policy.html" />
+    <meta property="og:title" content="🔒 Política de Seguridad - Ropavejero Retro" />
+    <meta property="og:description" content="Política de seguridad y divulgación responsable de vulnerabilidades." />
+    <meta property="og:image" content="https://ropavejeroretro.cl/img/RopavejeroLogo_256.png" />
+    
+    <!-- CSS -->
+    <link rel="preload" href="css/font-awesome_6.5.1_all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="css/font-awesome_6.5.1_all.min.css"></noscript>
+    
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            color: #333;
-        }
-        h1, h2 { color: #1919e6; }
-        .contact-info {
-            background: #f5f5f5;
-            padding: 15px;
-            border-radius: 5px;
-            margin: 20px 0;
-        }
-        .warning {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            padding: 15px;
-            border-radius: 5px;
-            margin: 20px 0;
-        }
+      .header{position:sticky;top:0;background-color:rgba(26,26,46,0.9);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,0,0,0.08);z-index:100;transition:all .3s}
+      .header-content{display:flex;justify-content:space-between;align-items:center;padding:15px 0}
+      .logo{display:flex;align-items:center;gap:8px;cursor:pointer}
     </style>
+    
+    <link rel="preload" href="css/index.min.css?v=2026-02-17_3" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/index.min.css?v=2026-02-17_3"></noscript>
     
     <!-- Google Tag Manager -->
     <script src="js/gtm.min.js?v=2026-02-17_3"></script>
 </head>
+
 <body>
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5D6LZB66" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
     
-    <h1>🔒 Política de Seguridad</h1>
+    <!-- Skip to content link -->
+    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
     
-    <h2>Divulgación Responsable de Vulnerabilidades</h2>
-    <p>En Ropavejero Retro, tomamos la seguridad muy en serio. Si has encontrado una vulnerabilidad de seguridad en nuestro sitio web, te agradecemos que nos la reportes de manera responsable.</p>
-    
-    <div class="contact-info">
-        <h3>📧 Contacto de Seguridad</h3>
-        <p><strong>Email:</strong> contacto@ropavejeroretro.cl</p>
-        <p><strong>Asunto:</strong> [SEGURIDAD] Reporte de Vulnerabilidad</p>
-        <p><strong>Respuesta esperada:</strong> 48-72 horas</p>
+    <!-- Barra de progreso -->
+    <div class="progress-bar" id="progressBar">
+        <div class="progress" id="progress"></div>
     </div>
-    
-    <h2>Proceso de Reporte</h2>
-    <ol>
-        <li><strong>Descripción detallada:</strong> Explica la vulnerabilidad encontrada</li>
-        <li><strong>Pasos para reproducir:</strong> Incluye instrucciones paso a paso</li>
-        <li><strong>Impacto potencial:</strong> Describe el riesgo asociado</li>
-        <li><strong>Evidencia:</strong> Screenshots o videos si es necesario</li>
-        <li><strong>Información de contacto:</strong> Para poder comunicarnos contigo</li>
-    </ol>
-    
-    <h2>Alcance</h2>
-    <p>Esta política cubre:</p>
-    <ul>
-        <li>ropavejeroretro.cl y todos sus subdominios</li>
-        <li>Aplicaciones web y móviles oficiales</li>
-        <li>APIs públicas</li>
-    </ul>
-    
-    <div class="warning">
-        <h3>⚠️ Restricciones</h3>
-        <p>Por favor, NO hagas lo siguiente:</p>
-        <ul>
-            <li>Acceder a datos que no te pertenecen</li>
-            <li>Realizar ataques de denegación de servicio</li>
-            <li>Comprometer la privacidad de otros usuarios</li>
-            <li>Divulgar públicamente la vulnerabilidad antes de que sea corregida</li>
-        </ul>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-gamepad"></i>
+                    <h2>Ropavejero.Retro</h2>
+                </a>
+
+                <nav class="nav">
+                    <a href="index.html">Inicio</a>
+                    <a href="index.html#about">Nosotros</a>
+                    <a href="index.html#productos">Productos</a>
+                    <a href="index.html#contact">Contacto</a>
+                </nav>
+
+                <div class="header-controls">
+                    <button class="control-btn" id="themeBtn" aria-label="Cambiar tema claro/oscuro" title="Cambiar tema">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú de navegación">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Menú móvil -->
+    <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true">
+        <div class="mobile-menu-content">
+            <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Cerrar menú">
+                <i class="fas fa-times"></i>
+            </button>
+            <a href="index.html">Inicio</a>
+            <a href="index.html#about">Nosotros</a>
+            <a href="index.html#productos">Productos</a>
+            <a href="index.html#contact">Contacto</a>
+        </div>
     </div>
-    
-    <h2>Reconocimientos</h2>
-    <p>Los investigadores que reporten vulnerabilidades válidas serán reconocidos en nuestra página de agradecimientos (con su consentimiento).</p>
-    
-    <h2>Tipos de Vulnerabilidades</h2>
-    <p>Estamos especialmente interesados en:</p>
-    <ul>
-        <li>Cross-Site Scripting (XSS)</li>
-        <li>Inyección SQL</li>
-        <li>Cross-Site Request Forgery (CSRF)</li>
-        <li>Vulnerabilidades de autenticación</li>
-        <li>Exposición de datos sensibles</li>
-        <li>Configuraciones de seguridad incorrectas</li>
-    </ul>
-    
-    <p><a href="/">← Volver al sitio principal</a></p>
-    
-    <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; font-size: 0.9em; color: #666;">
-        <p>© 2026 Ropavejero Retro. Esta política fue actualizada por última vez el 22 de enero de 2026.</p>
+
+    <!-- Main Content -->
+    <main class="main" id="main-content" role="main">
+        <section class="section" style="padding-top: 100px;">
+            <div class="container">
+                <div style="max-width: 900px; margin: 0 auto;">
+                    <h1 style="font-size: 2.5rem; margin-bottom: 20px;">🔒 Política de Seguridad</h1>
+                    
+                    <div style="background: var(--card-bg); padding: 30px; border-radius: 12px; margin-bottom: 30px; border: 1px solid var(--border-color);">
+                        <h2 style="color: var(--primary-color); margin-top: 0;">Divulgación Responsable de Vulnerabilidades</h2>
+                        <p style="line-height: 1.8;">En Ropavejero Retro, tomamos la seguridad muy en serio. Si has encontrado una vulnerabilidad de seguridad en nuestro sitio web, te agradecemos que nos la reportes de manera responsable.</p>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); padding: 25px; border-radius: 12px; margin-bottom: 30px; color: white;">
+                        <h3 style="margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-envelope"></i>
+                            Contacto de Seguridad
+                        </h3>
+                        <p style="margin: 10px 0;"><strong>Email:</strong> contacto@ropavejeroretro.cl</p>
+                        <p style="margin: 10px 0;"><strong>Asunto:</strong> [SEGURIDAD] Reporte de Vulnerabilidad</p>
+                        <p style="margin: 10px 0;"><strong>Respuesta esperada:</strong> 48-72 horas</p>
+                    </div>
+                    
+                    <div style="background: var(--card-bg); padding: 30px; border-radius: 12px; margin-bottom: 30px; border: 1px solid var(--border-color);">
+                        <h2 style="color: var(--primary-color);">Proceso de Reporte</h2>
+                        <ol style="line-height: 2;">
+                            <li><strong>Descripción detallada:</strong> Explica la vulnerabilidad encontrada</li>
+                            <li><strong>Pasos para reproducir:</strong> Incluye instrucciones paso a paso</li>
+                            <li><strong>Impacto potencial:</strong> Describe el riesgo asociado</li>
+                            <li><strong>Evidencia:</strong> Screenshots o videos si es necesario</li>
+                            <li><strong>Información de contacto:</strong> Para poder comunicarnos contigo</li>
+                        </ol>
+                    </div>
+                    
+                    <div style="background: var(--card-bg); padding: 30px; border-radius: 12px; margin-bottom: 30px; border: 1px solid var(--border-color);">
+                        <h2 style="color: var(--primary-color);">Alcance</h2>
+                        <p>Esta política cubre:</p>
+                        <ul style="line-height: 2;">
+                            <li>ropavejeroretro.cl y todos sus subdominios</li>
+                            <li>Aplicaciones web y móviles oficiales</li>
+                            <li>APIs públicas</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: #fff3cd; border: 2px solid #ffc107; padding: 25px; border-radius: 12px; margin-bottom: 30px; color: #856404;">
+                        <h3 style="margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            Restricciones
+                        </h3>
+                        <p>Por favor, NO hagas lo siguiente:</p>
+                        <ul style="line-height: 2;">
+                            <li>Acceder a datos que no te pertenecen</li>
+                            <li>Realizar ataques de denegación de servicio</li>
+                            <li>Comprometer la privacidad de otros usuarios</li>
+                            <li>Divulgar públicamente la vulnerabilidad antes de que sea corregida</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: var(--card-bg); padding: 30px; border-radius: 12px; margin-bottom: 30px; border: 1px solid var(--border-color);">
+                        <h2 style="color: var(--primary-color);">Reconocimientos</h2>
+                        <p style="line-height: 1.8;">Los investigadores que reporten vulnerabilidades válidas serán reconocidos en nuestra <a href="security-acknowledgments.html" style="color: var(--primary-color); text-decoration: underline;">página de agradecimientos</a> (con su consentimiento).</p>
+                    </div>
+                    
+                    <div style="background: var(--card-bg); padding: 30px; border-radius: 12px; margin-bottom: 30px; border: 1px solid var(--border-color);">
+                        <h2 style="color: var(--primary-color);">Tipos de Vulnerabilidades</h2>
+                        <p>Estamos especialmente interesados en:</p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px;">
+                            <span style="background: var(--primary-color); color: white; padding: 8px 15px; border-radius: 20px; font-size: 0.9rem;">Cross-Site Scripting (XSS)</span>
+                            <span style="background: var(--primary-color); color: white; padding: 8px 15px; border-radius: 20px; font-size: 0.9rem;">Inyección SQL</span>
+                            <span style="background: var(--primary-color); color: white; padding: 8px 15px; border-radius: 20px; font-size: 0.9rem;">CSRF</span>
+                            <span style="background: var(--primary-color); color: white; padding: 8px 15px; border-radius: 20px; font-size: 0.9rem;">Vulnerabilidades de autenticación</span>
+                            <span style="background: var(--primary-color); color: white; padding: 8px 15px; border-radius: 20px; font-size: 0.9rem;">Exposición de datos sensibles</span>
+                            <span style="background: var(--primary-color); color: white; padding: 8px 15px; border-radius: 20px; font-size: 0.9rem;">Configuraciones incorrectas</span>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin: 40px 0;">
+                        <a href="index.html" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-arrow-left"></i>
+                            Volver al sitio principal
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>© 2026 @Ropavejero.Retro Todos los derechos reservados.</p>
+                <div class="footer-links">
+                    <a href="old.html">Versión Antigua</a>
+                    <span>|</span>
+                    <a href="security-policy.html">Política de Seguridad</a>
+                    <span>|</span>
+                    <a href="security-acknowledgments.html">Agradecimientos de Seguridad</a>
+                </div>
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/ropavejero.retro/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/ropavejero.retro/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="https://tiktok.com/@ropavejero.retro/" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
     </footer>
+
+    <!-- Floating Buttons -->
+    <div class="floating-buttons">
+        <div class="whatsapp-btn tooltip">
+            <a href="https://wa.me/56967691585" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <span class="tooltip-text">Comunícate con nosotros</span>
+        </div>
+        <button class="back-to-top-btn" id="backToTopBtn">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <script src="js/index.min.js?v=2026-02-17_3" defer></script>
 </body>
+
 </html>
