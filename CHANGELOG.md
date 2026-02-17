@@ -7,6 +7,21 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ---
 
+## [1.0.9] - 2026-02-17
+
+### Corregido
+- Regenerados todos los archivos minificados (.min.js y .min.css)
+- Eliminada declaración duplicada de CACHE_CONFIG en index.min.js
+- Optimización de gtm.min.js
+
+### Cambiado
+- Service Worker actualizado a v1.0.9
+- Query strings actualizados a v=2026-02-17_3
+- Cache localStorage actualizado a v1_0_9
+- Limpieza automática de cachés antiguos (v1_0_8 y anteriores)
+
+---
+
 ## [1.0.8] - 2026-02-17
 
 ### Agregado
