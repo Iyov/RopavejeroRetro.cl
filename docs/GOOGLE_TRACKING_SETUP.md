@@ -2,7 +2,7 @@
 
 ## Implementación Actual
 
-El proyecto utiliza una implementación unificada de Google Tag Manager (GTM) y Google Analytics 4 (GA4) a través del archivo `js/google-tracking.js`.
+El proyecto utiliza código inline de Google Analytics 4 (GA4) y Google Tag Manager (GTM) directamente en el HTML, siguiendo las recomendaciones oficiales de Google.
 
 ### IDs Configurados
 
@@ -11,37 +11,60 @@ El proyecto utiliza una implementación unificada de Google Tag Manager (GTM) y 
 
 ### Implementación en HTML
 
+El código se inserta justo después de la etiqueta `<head>` en todas las páginas:
+
 ```html
-<!-- Google Tracking (GTM + GA4) -->
-<script src="js/google-tracking.min.js?v=2026-02-17_3" defer data-gtm-id="GTM-5D6LZB66" data-ga-id="G-GCE8SP8NBZ"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GCE8SP8NBZ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GCE8SP8NBZ');
+    </script>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5D6LZB66');</script>
+    <!-- End Google Tag Manager -->
+    
+    <title>...</title>
 ```
 
 ### Noscript Fallback
 
+Justo después de la etiqueta `<body>`:
+
 ```html
-<!-- Google Tag Manager (noscript) -->
-<noscript>
-  <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5D6LZB66" 
-          height="0" width="0" style="display:none;visibility:hidden">
-  </iframe>
-</noscript>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5D6LZB66" 
+              height="0" width="0" style="display:none;visibility:hidden">
+      </iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
 ```
 
 ## Verificación de Funcionamiento
 
 ### 1. Verificar en la Consola del Navegador
 
-Abre la consola de desarrollo (F12) y busca estos mensajes:
+Abre la consola de desarrollo (F12) y verifica:
 
-```
-✅ Google Tag Manager inicializado: GTM-5D6LZB66
-✅ Google Analytics 4 inicializado: G-GCE8SP8NBZ
-📊 Google Tracking completamente inicializado
-   - GTM ID: GTM-5D6LZB66
-   - GA4 ID: G-GCE8SP8NBZ
+```javascript
+console.log(window.dataLayer);
 ```
 
-**Nota**: Estos mensajes solo aparecen en `localhost` o `127.0.0.1`.
+Deberías ver un array con eventos de GTM y GA4.
 
 ### 2. Verificar dataLayer
 
@@ -97,26 +120,19 @@ En las DevTools, ve a la pestaña "Network":
 ### El tracking no funciona
 
 1. **Verifica que los scripts se carguen**:
-   ```javascript
-   console.log(window.GoogleTracking);
-   ```
-   Debería mostrar un objeto con `gtmId`, `gaId`, `gtag`, y `dataLayer`.
+   Abre DevTools → Network y busca:
+   - `googletagmanager.com/gtag/js?id=G-GCE8SP8NBZ`
+   - `googletagmanager.com/gtm.js?id=GTM-5D6LZB66`
 
-2. **Verifica los IDs**:
-   ```javascript
-   console.log(window.GoogleTracking.gtmId); // GTM-5D6LZB66
-   console.log(window.GoogleTracking.gaId);  // G-GCE8SP8NBZ
-   ```
-
-3. **Verifica que dataLayer exista**:
+2. **Verifica dataLayer**:
    ```javascript
    console.log(window.dataLayer);
    ```
 
-4. **Verifica Content Security Policy**:
+3. **Verifica Content Security Policy**:
    Asegúrate de que el CSP permita:
-   - `script-src: https://www.googletagmanager.com`
-   - `connect-src: https://www.googletagmanager.com`
+   - `script-src: https://www.googletagmanager.com https://www.google-analytics.com`
+   - `connect-src: https://www.google-analytics.com https://analytics.google.com`
 
 ### Los eventos no se registran
 
@@ -133,27 +149,28 @@ Los bloqueadores de anuncios pueden bloquear GTM y GA4. Para testing:
 
 ## API Pública
 
-El script expone una API global:
+Google Analytics y GTM exponen APIs globales:
 
 ```javascript
-window.GoogleTracking = {
-  gtmId: 'GTM-5D6LZB66',      // ID del contenedor GTM
-  gaId: 'G-GCE8SP8NBZ',        // ID de medición GA4
-  gtag: function() { ... },    // Función gtag para eventos personalizados
-  dataLayer: window.dataLayer  // Referencia al dataLayer
+// dataLayer para eventos personalizados
+window.dataLayer = window.dataLayer || [];
+
+// Función gtag para GA4
+window.gtag = function() {
+  window.dataLayer.push(arguments);
 };
 ```
 
 ### Enviar Eventos Personalizados
 
 ```javascript
-// Usando gtag
-window.GoogleTracking.gtag('event', 'button_click', {
+// Usando gtag (GA4)
+gtag('event', 'button_click', {
   'event_category': 'engagement',
   'event_label': 'cta_button'
 });
 
-// Usando dataLayer
+// Usando dataLayer (GTM)
 window.dataLayer.push({
   'event': 'custom_event',
   'eventCategory': 'engagement',
@@ -164,42 +181,37 @@ window.dataLayer.push({
 
 ## Archivos del Proyecto
 
-- `js/google-tracking.js` - Código fuente
-- `js/google-tracking.min.js` - Versión minificada
-- Implementado en:
-  - `index.html`
-  - `old.html`
-  - `404.html`
-  - `security-policy.html`
-  - `security-acknowledgments.html`
+El tracking se implementa mediante código inline en:
+- `index.html`
+- `old.html`
+- `404.html`
+- `security-policy.html`
+- `security-acknowledgments.html`
 
-## Actualización de Versión
+**No hay archivos JavaScript externos para el tracking.**
 
-Para actualizar la versión del cache:
+## Actualización de IDs
 
-1. Edita el query string en todos los archivos HTML:
-   ```html
-   <script src="js/google-tracking.min.js?v=NUEVA-VERSION" ...>
-   ```
+Para cambiar los IDs de GTM o GA4:
 
-2. Regenera el minificado:
-   ```bash
-   npm run minify:js
-   ```
+1. Edita el código inline en cada archivo HTML
+2. Busca y reemplaza:
+   - `GTM-5D6LZB66` por tu nuevo GTM ID
+   - `G-GCE8SP8NBZ` por tu nuevo GA4 ID
 
 ## Configuración de GA4
 
-El script configura GA4 con:
-- `send_page_view: true` - Envía pageviews automáticamente
-- `anonymize_ip: true` - Anonimiza IPs para privacidad
-
-Para modificar la configuración, edita `js/google-tracking.js`:
-
+El código inline configura GA4 automáticamente:
 ```javascript
-window.gtag('config', GA_ID, {
+gtag('config', 'G-GCE8SP8NBZ');
+```
+
+Para agregar configuración adicional, modifica el código inline:
+```javascript
+gtag('config', 'G-GCE8SP8NBZ', {
   'send_page_view': true,
   'anonymize_ip': true,
-  // Agrega más opciones aquí
+  'cookie_flags': 'SameSite=None;Secure'
 });
 ```
 
