@@ -1,6 +1,6 @@
 // ========== SERVICE WORKER - ROPAVEJERO RETRO ==========
 // Versión del caché - Incrementar cuando actualices recursos
-const CACHE_VERSION = 'ropavejero-v1.0.6';
+const CACHE_VERSION = 'ropavejero-v1.0.7';
 const CACHE_NAME = `${CACHE_VERSION}-static`;
 const DATA_CACHE_NAME = `${CACHE_VERSION}-data`;
 
@@ -9,14 +9,10 @@ const STATIC_RESOURCES = [
     '/',
     '/index.html',
     '/css/index.min.css',
-    '/css/index.css',
     '/css/font-awesome_6.5.1_all.min.css',
     '/js/index.min.js',
-    '/js/index.js',
     '/js/instagram_posts.min.js',
-    '/js/instagram_posts.js',
     '/js/app.min.js',
-    '/js/app.js',
     '/img/hero-400.webp',
     '/img/hero-800.webp',
     '/img/hero-1200.webp',
