@@ -438,6 +438,9 @@ const translations = {
         
         // Footer
         'footer-copyright': '© 2026 @Ropavejero.Retro Todos los derechos reservados.',
+        'footer-old-version': 'Versión Antigua',
+        'footer-security-policy': 'Política de Seguridad',
+        'footer-security-acknowledgments': 'Agradecimientos de Seguridad',
         
         // Tooltip
         'whatsapp-tooltip': 'Comunícate con nosotros'
@@ -594,6 +597,9 @@ const translations = {
         
         // Footer
         'footer-copyright': '© 2026 @Ropavejero.Retro All rights reserved.',
+        'footer-old-version': 'Old Version',
+        'footer-security-policy': 'Security Policy',
+        'footer-security-acknowledgments': 'Security Acknowledgments',
         
         // Tooltip
         'whatsapp-tooltip': 'Contact us'
