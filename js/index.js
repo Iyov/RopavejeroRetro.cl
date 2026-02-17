@@ -24,9 +24,9 @@
 
 // ========== SISTEMA DE CACHÉ INTELIGENTE ==========
 const CACHE_CONFIG = {
-    VERSION: '1.0.0', // Versión del caché
-    PRODUCTS_KEY: 'ropavejero_products_cache_v1',
-    TIMESTAMP_KEY: 'ropavejero_cache_timestamp_v1',
+    VERSION: '1.0.8', // Versión del caché
+    PRODUCTS_KEY: 'ropavejero_products_cache_v1_0_8',
+    TIMESTAMP_KEY: 'ropavejero_cache_timestamp_v1_0_8',
     CACHE_DURATION: 5 * 60 * 1000, // 5 minutos en milisegundos
     MAX_RETRIES: 3,
     RETRY_DELAY: 2000 // 2 segundos
@@ -35,8 +35,13 @@ const CACHE_CONFIG = {
 // Limpiar cachés antiguos al cargar
 function cleanOldCaches() {
     try {
-        // Limpiar cachés sin versión
-        const oldKeys = ['ropavejero_products_cache', 'ropavejero_cache_timestamp'];
+        // Limpiar cachés antiguos
+        const oldKeys = [
+            'ropavejero_products_cache',
+            'ropavejero_cache_timestamp',
+            'ropavejero_products_cache_v1',
+            'ropavejero_cache_timestamp_v1'
+        ];
         oldKeys.forEach(key => {
             if (localStorage.getItem(key)) {
                 localStorage.removeItem(key);
