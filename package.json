@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "minify:js": "terser js/index.js -o js/index.min.js -c -m && terser js/instagram_posts.js -o js/instagram_posts.min.js -c -m && terser js/app.js -o js/app.min.js -c -m && terser js/gtm.js -o js/gtm.min.js -c -m",
+    "minify:js": "terser js/index.js -o js/index.min.js -c -m && terser js/instagram_posts.js -o js/instagram_posts.min.js -c -m && terser js/app.js -o js/app.min.js -c -m && terser js/google-tracking.js -o js/google-tracking.min.js -c -m",
     "minify:css": "csso css/index.css --output css/index.min.css && csso css/app.css --output css/app.min.css",
     "build": "npm run minify:js && npm run minify:css",
     "watch": "node watcher.js"
