@@ -1470,33 +1470,55 @@ function updateAvailablePlatforms(filteredProducts) {
     // Obtener todas las opciones de plataforma (excepto "Todas")
     const platformOptions = platformDropdown.querySelectorAll('.multi-select-option:not([data-value="all"])');
     
-    platformOptions.forEach(option => {
-        const platform = option.getAttribute('data-value');
-        const checkbox = option.querySelector('input[type="checkbox"]');
-        
-        if (availablePlatforms.has(platform)) {
-            // Mostrar opción si la plataforma tiene productos
+    // Si no hay búsqueda activa, mostrar todas las plataformas
+    if (!searchFilter) {
+        platformOptions.forEach(option => {
             option.style.display = 'flex';
             option.classList.remove('filtered-out');
             option.classList.add('available');
-        } else {
-            // Ocultar opción si no hay productos de esta plataforma
-            option.style.display = 'none';
-            option.classList.add('filtered-out');
-            option.classList.remove('available');
+        });
+        
+        // Si no hay plataformas seleccionadas o solo hay inválidas, resetear a "Todas"
+        const validSelected = Array.from(selectedPlatforms).filter(p => p === 'all' || availablePlatforms.has(p));
+        if (validSelected.length === 0 || (validSelected.length === 1 && validSelected[0] !== 'all' && !availablePlatforms.has(validSelected[0]))) {
+            selectedPlatforms.clear();
+            selectedPlatforms.add('all');
+            document.getElementById('platform-all').checked = true;
             
-            // Si la plataforma oculta estaba seleccionada, deseleccionarla
-            if (checkbox.checked) {
-                checkbox.checked = false;
-                selectedPlatforms.delete(platform);
-            }
+            // Desmarcar todos los demás checkboxes
+            platformOptions.forEach(option => {
+                const checkbox = option.querySelector('input[type="checkbox"]');
+                if (checkbox) checkbox.checked = false;
+            });
         }
-    });
-    
-    // Si no hay plataformas seleccionadas después del filtrado, seleccionar "Todas"
-    if (selectedPlatforms.size === 0 || (selectedPlatforms.size === 1 && !selectedPlatforms.has('all'))) {
-        const remainingSelected = Array.from(selectedPlatforms).filter(p => p !== 'all' && availablePlatforms.has(p));
-        if (remainingSelected.length === 0) {
+    } else {
+        // Si hay búsqueda activa, filtrar plataformas
+        platformOptions.forEach(option => {
+            const platform = option.getAttribute('data-value');
+            const checkbox = option.querySelector('input[type="checkbox"]');
+            
+            if (availablePlatforms.has(platform)) {
+                // Mostrar opción si la plataforma tiene productos
+                option.style.display = 'flex';
+                option.classList.remove('filtered-out');
+                option.classList.add('available');
+            } else {
+                // Ocultar opción si no hay productos de esta plataforma
+                option.style.display = 'none';
+                option.classList.add('filtered-out');
+                option.classList.remove('available');
+                
+                // Si la plataforma oculta estaba seleccionada, deseleccionarla
+                if (checkbox.checked) {
+                    checkbox.checked = false;
+                    selectedPlatforms.delete(platform);
+                }
+            }
+        });
+        
+        // Si no hay plataformas seleccionadas después del filtrado, seleccionar "Todas"
+        const remainingSelected = Array.from(selectedPlatforms).filter(p => p === 'all' || availablePlatforms.has(p));
+        if (remainingSelected.length === 0 || (remainingSelected.length === 1 && remainingSelected[0] !== 'all')) {
             selectedPlatforms.clear();
             selectedPlatforms.add('all');
             document.getElementById('platform-all').checked = true;
