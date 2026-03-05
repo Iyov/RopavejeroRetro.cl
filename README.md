@@ -20,17 +20,17 @@
 - [Sobre Nosotros](#-sobre-nosotros)
 - [Características del Sitio](#-características-del-sitio)
 - [Automatización de Instagram](#-automatización-de-instagram)
-- [Tecnologías Utilizadas](#-tecnologias-utilizadas)
+- [Tecnologías Utilizadas](#tecnologías-utilizadas)
 - [Estructura del Proyecto](#-estructura-del-proyecto)
 - [Funcionalidades](#-funcionalidades)
 - [Marcas Disponibles](#-marcas-disponibles)
 - [Preguntas Frecuentes](#-preguntas-frecuentes)
 - [Redes Sociales](#-redes-sociales)
 - [Instalación y Uso](#-instalación-y-uso)
-- [Contribuir](#-contribuir)
-- [Licencia](#-licencia)
 - [Últimos Cambios](#-últimos-cambios)
 - [Otros Cambios](#-otros-cambios)
+- [Contribuir](#-contribuir)
+- [Licencia](#-licencia)
 - [Desarrollador](#-desarrollador)
 - [Agradecimientos](#-agradecimientos)
 
@@ -108,7 +108,7 @@ Para la ejecución en GitHub, se requiere configurar:
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologías Utilizadas
 
 ### Frontend
 - **HTML5**: Estructura semántica
@@ -351,20 +351,22 @@ python api/update_instagram.py
 
 ---
 
-## 🆕 Últimos Cambios (v1.1.0 - Mar 2026)
+## 🆕 Últimos Cambios
+### Versión: v1.1.0 | Mar 2026
 
-### Añadido
+#### Añadido
 - ✅ Sistema de automatización de Instagram con filtrado por hashtag.
 - ✅ Generación automática de imágenes WebP responsive (400/800/1200px).
 - ✅ Flujo de trabajo en GitHub Actions para actualizaciones automáticas.
 - ✅ Busting de caché automático en index.html y service-worker.js.
 
-### Corregido
+#### Corregido
 - ✅ Mejoras en el rendimiento de carga de posts de Instagram.
 
 ---
 
-## 🆕 Otros Cambios (v1.0.9 - Feb 2026)
+## 🆕 Otros Cambios
+### Versión: v1.0.9 | Feb 2026
 
 ### Corregido
 - ✅ Regenerados todos los archivos minificados (.min.js y .min.css)
