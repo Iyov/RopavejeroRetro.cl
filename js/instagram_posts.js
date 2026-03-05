@@ -1,25 +1,7 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-03-05 00:15:02
+// Última actualización: 2026-03-05 14:26:10
 
 const INSTAGRAM_POSTS_DATA = [
-    {
-        "id": "ig_auto_17910866976163779",
-        "image": "img/IG_17910866976163779.jpeg",
-        "title": "PS2 Japón: Hoy es el 26 aniversario de la PlayStation 2 lanzada en Japón, la consola que lo cambió todo cumple 26 años. Larga vida para la PS2.",
-        "description": "\nCréditos a @playstation y @estarland",
-        "link": "https://www.instagram.com/p/DVeQpGhFRlt/",
-        "media_type": "IMAGE",
-        "date": "2026-03-04"
-    },
-    {
-        "id": "ig_auto_18095328058804878",
-        "image": "img/IG_18095328058804878.jpeg",
-        "title": "🎮 Lanzamiento de DS Lite",
-        "description": "📅 2 de marzo de 2006\n✅ Diseño plegable\n🖥️ Dos pantallas\n\nLa consola que lo cambió todo cumple 20 años. ¿Cuál fue el primer juego que tuviste en tu DS Lite? Yo empiezo: New Super Mario Bros.\n\n#NintendoDSLite #NintendoChile #20Años #GamersLatam",
-        "link": "https://www.instagram.com/p/DVZs9RTgdSh/",
-        "media_type": "IMAGE",
-        "date": "2026-03-03"
-    },
     {
         "id": "ig_auto_18122212840518134",
         "image": "img/IG_18122212840518134.jpeg",
