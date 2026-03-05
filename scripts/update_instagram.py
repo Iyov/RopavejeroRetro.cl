@@ -21,7 +21,7 @@ MIN_JS_FILE_PATH = 'js/instagram_posts.min.js'
 INDEX_FILE_PATH = 'index.html'
 SW_FILE_PATH = 'service-worker.js'
 IMAGE_DIR = 'img/'
-MAX_POSTS = 50  # Número máximo de posts a obtener
+MAX_POSTS = 100  # Número máximo de posts a obtener
 
 def fetch_instagram_media():
     """Obtiene los posts recientes del usuario con paginación."""
@@ -166,6 +166,33 @@ def load_existing_posts():
     
     return []
 
+def calculate_changes(old_posts, new_posts):
+    """Calcula los cambios entre posts antiguos y nuevos."""
+    old_ids = {post['id'] for post in old_posts}
+    new_ids = {post['id'] for post in new_posts}
+    
+    added = len(new_ids - old_ids)
+    deleted = len(old_ids - new_ids)
+    
+    # Calcular modificados (posts que existen en ambos pero con contenido diferente)
+    modified = 0
+    common_ids = old_ids & new_ids
+    
+    old_posts_dict = {post['id']: post for post in old_posts}
+    new_posts_dict = {post['id']: post for post in new_posts}
+    
+    for post_id in common_ids:
+        old_post = old_posts_dict[post_id]
+        new_post = new_posts_dict[post_id]
+        
+        if (old_post['title'] != new_post['title'] or 
+            old_post['description'] != new_post['description'] or
+            old_post['image'] != new_post['image'] or
+            old_post['link'] != new_post['link']):
+            modified += 1
+    
+    return added, modified, deleted
+
 def posts_have_changed(old_posts, new_posts):
     """Compara los posts para detectar cambios significativos."""
     if len(old_posts) != len(new_posts):
@@ -200,9 +227,34 @@ def update_files(new_posts):
     
     if not posts_have_changed(existing_posts, new_posts):
         print("No hay cambios en los posts de Instagram. No se requiere actualización.")
+        # Crear archivo vacío para indicar que no hay cambios
+        with open('commit_message.txt', 'w', encoding='utf-8') as f:
+            f.write("")
         return
     
-    print(f"Se detectaron cambios en los posts. Actualizando archivos...")
+    # Calcular estadísticas de cambios
+    added, modified, deleted = calculate_changes(existing_posts, new_posts)
+    
+    print(f"Se detectaron cambios en los posts:")
+    print(f"  - Agregados: {added}")
+    print(f"  - Modificados: {modified}")
+    print(f"  - Eliminados: {deleted}")
+    
+    # Guardar mensaje de commit
+    commit_parts = []
+    if added > 0:
+        commit_parts.append(f"agregaron {added} post{'s' if added != 1 else ''}")
+    if modified > 0:
+        commit_parts.append(f"modificaron {modified} post{'s' if modified != 1 else ''}")
+    if deleted > 0:
+        commit_parts.append(f"eliminaron {deleted} post{'s' if deleted != 1 else ''}")
+    
+    commit_message = f"Se {', '.join(commit_parts)} desde Instagram"
+    
+    with open('commit_message.txt', 'w', encoding='utf-8') as f:
+        f.write(commit_message)
+    
+    print(f"Actualizando archivos...")
 
     # 1. Generar JS Normal
     js_content = "// ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========\n"

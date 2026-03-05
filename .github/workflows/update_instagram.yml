@@ -35,4 +35,18 @@ jobs:
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
         git add .
-        git diff --quiet && git diff --staged --quiet || (git commit -m "Automated Instagram update" && git push)
+        
+        # Verificar si hay cambios
+        if git diff --quiet && git diff --staged --quiet; then
+          echo "No hay cambios para commitear"
+        else
+          # Leer el mensaje de commit generado por el script
+          if [ -f commit_message.txt ] && [ -s commit_message.txt ]; then
+            COMMIT_MSG=$(cat commit_message.txt)
+            git commit -m "$COMMIT_MSG"
+            git push
+            echo "Cambios pusheados: $COMMIT_MSG"
+          else
+            echo "No se generó mensaje de commit, no hay cambios en Instagram"
+          fi
+        fi
