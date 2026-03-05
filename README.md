@@ -330,7 +330,7 @@ pip install Pillow requests python-dotenv --break-system-packages
 echo "INSTAGRAM_TOKEN=tu_token_aqui" > .env
 
 # Ejecutar actualización
-python3 api/update_instagram.py
+python api/update_instagram.py
 ```
 
 5. **Configurar Google Sheets (Opcional)**
