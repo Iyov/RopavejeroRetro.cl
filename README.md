@@ -108,7 +108,7 @@ Para la ejecución en GitHub, se requiere configurar:
 
 ---
 
-## 🛠️ Tecnologías Utilizadas
+## 🛠️ Tecnologias Utilizadas
 
 ### Frontend
 - **HTML5**: Estructura semántica
