@@ -21,15 +21,30 @@ MIN_JS_FILE_PATH = 'js/instagram_posts.min.js'
 INDEX_FILE_PATH = 'index.html'
 SW_FILE_PATH = 'service-worker.js'
 IMAGE_DIR = 'img/'
+MAX_POSTS = 50  # Número máximo de posts a obtener
 
 def fetch_instagram_media():
-    """Obtiene los posts recientes del usuario."""
-    url = f"https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,timestamp&access_token={ACCESS_TOKEN}"
-    response = requests.get(url)
-    if response.status_code != 200:
-        print(f"Error al conectar con Instagram: {response.text}")
-        return []
-    return response.json().get('data', [])
+    """Obtiene los posts recientes del usuario con paginación."""
+    all_media = []
+    url = f"https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,timestamp&limit=25&access_token={ACCESS_TOKEN}"
+    
+    while url and len(all_media) < MAX_POSTS:
+        response = requests.get(url)
+        if response.status_code != 200:
+            print(f"Error al conectar con Instagram: {response.text}")
+            break
+        
+        data = response.json()
+        all_media.extend(data.get('data', []))
+        
+        # Obtener la siguiente página si existe
+        url = data.get('paging', {}).get('next')
+        
+        if url:
+            print(f"Obtenidos {len(all_media)} posts, continuando con la siguiente página...")
+    
+    print(f"Total de posts obtenidos de Instagram: {len(all_media)}")
+    return all_media[:MAX_POSTS]  # Limitar al máximo configurado
 
 def process_image_variants(source_path, post_id):
     """Genera versiones WebP en diferentes tamaños (400, 800, 1200)."""
