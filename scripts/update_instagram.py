@@ -3,11 +3,23 @@ import json
 import requests
 import re
 from datetime import datetime
+from PIL import Image
+
+# Intentar leer .env localmente si existe
+if os.path.exists('.env'):
+    with open('.env') as f:
+        for line in f:
+            if '=' in line:
+                key, value = line.strip().split('=', 1)
+                os.environ[key] = value
 
 # CONFIGURACIÓN
 ACCESS_TOKEN = os.getenv('INSTAGRAM_TOKEN')
 HASHTAG_FILTER = '#RopavejeroRetroWeb'
 JS_FILE_PATH = 'js/instagram_posts.js'
+MIN_JS_FILE_PATH = 'js/instagram_posts.min.js'
+INDEX_FILE_PATH = 'index.html'
+SW_FILE_PATH = 'service-worker.js'
 IMAGE_DIR = 'img/'
 
 def fetch_instagram_media():
@@ -19,20 +31,71 @@ def fetch_instagram_media():
         return []
     return response.json().get('data', [])
 
-def download_image(url, post_id):
-    """Descarga la imagen si no existe localmente."""
-    img_name = f"IG_{post_id}.jpeg"
-    img_path = os.path.join(IMAGE_DIR, img_name)
+def process_image_variants(source_path, post_id):
+    """Genera versiones WebP en diferentes tamaños (400, 800, 1200)."""
+    sizes = [400, 800, 1200]
+    generated_files = []
     
-    if not os.path.exists(img_path):
-        response = requests.get(url)
-        if response.status_code == 200:
-            with open(img_path, 'wb') as f:
-                f.write(response.content)
-            print(f"Imagen descargada: {img_name}")
-        else:
-            print(f"Error al descargar imagen {post_id}")
-    return img_name
+    try:
+        with Image.open(source_path) as img:
+            # Asegurarse de que esté en RGB (por si es RGBA)
+            if img.mode in ("RGBA", "P"):
+                img = img.convert("RGB")
+            
+            for size in sizes:
+                target_name = f"IG_{post_id}-{size}.webp"
+                target_path = os.path.join(IMAGE_DIR, target_name)
+                
+                # Redimensionar manteniendo aspecto
+                # Usamos un ratio para no deformar
+                w_percent = (size / float(img.size[0]))
+                h_size = int((float(img.size[1]) * float(w_percent)))
+                
+                # Solo redimensionar si la imagen original es más grande que el target
+                if img.size[0] > size:
+                    resized_img = img.resize((size, h_size), Image.Resampling.LANCZOS)
+                else:
+                    resized_img = img
+                
+                resized_img.save(target_path, "WEBP", quality=85)
+                generated_files.append(f"/img/{target_name}")
+                
+        print(f"Variantes WebP generadas para post {post_id}")
+    except Exception as e:
+        print(f"Error procesando variantes de imagen {post_id}: {e}")
+    
+    return generated_files
+
+def download_image(url, post_id):
+    """Descarga la imagen original y genera sus variantes optimizadas."""
+    temp_name = f"temp_{post_id}.jpg"
+    temp_path = os.path.join(IMAGE_DIR, temp_name)
+    final_image_name = f"IG_{post_id}.jpeg"
+    final_path = os.path.join(IMAGE_DIR, final_image_name)
+    
+    # Si ya existen las variantes, no descargamos de nuevo
+    if os.path.exists(os.path.join(IMAGE_DIR, f"IG_{post_id}-400.webp")):
+        return final_image_name
+
+    response = requests.get(url)
+    if response.status_code == 200:
+        with open(temp_path, 'wb') as f:
+            f.write(response.content)
+        
+        # Guardar una copia como JPEG original por si acaso (tu JS la usa como fallback)
+        with Image.open(temp_path) as img:
+            img.convert("RGB").save(final_path, "JPEG", quality=90)
+            
+        # Generar los WebP optimizados
+        process_image_variants(temp_path, post_id)
+        
+        # Borrar el temporal
+        os.remove(temp_path)
+        print(f"Imagen e imágenes WebP procesadas para: {post_id}")
+    else:
+        print(f"Error al descargar imagen {post_id}")
+        
+    return final_image_name
 
 def process_posts(media_list):
     """Filtra y procesa los posts con el hashtag especificado."""
@@ -40,18 +103,15 @@ def process_posts(media_list):
     for post in media_list:
         caption = post.get('caption', '')
         if HASHTAG_FILTER.lower() in caption.lower():
-            # Limpiar el hashtag del texto
             clean_caption = caption.replace(HASHTAG_FILTER, '').replace(HASHTAG_FILTER.lower(), '').strip()
             
-            # Dividir en título (primera línea) y descripción (resto)
             lines = clean_caption.split('\n', 1)
             title = lines[0] if lines else "Nuevo Post"
             description = lines[1] if len(lines) > 1 else ""
             
-            # Formatear fecha
-            date_str = post['timestamp'][:10] # YYYY-MM-DD
+            date_str = post['timestamp'][:10]
             
-            # Descargar imagen
+            # Esto ahora descarga Y genera los WebP
             img_filename = download_image(post['media_url'], post['id'])
             
             selected_posts.append({
@@ -65,30 +125,69 @@ def process_posts(media_list):
             })
     return selected_posts
 
-def update_js_file(new_posts):
-    """Actualiza el archivo js/instagram_posts.js con los nuevos datos."""
+def update_files(new_posts):
+    """Actualiza los archivos JS, MIN.JS, INDEX.HTML y SERVICE-WORKER.JS."""
     if not new_posts:
         print("No se encontraron posts nuevos con el hashtag.")
         return
 
-    # Leer el archivo actual para no perder lo que ya hay (opcional)
-    # Por ahora vamos a REEMPLAZAR con los de Instagram que tengan el hashtag
-    # o podrías mezclarlos si quisieras.
-    
-    content = "// ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========\n"
-    content += f"// Última actualización: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n"
-    content += "const INSTAGRAM_POSTS_DATA = " + json.dumps(new_posts, indent=4, ensure_ascii=False) + ";\n\n"
-    content += "// Función para obtener los posts de Instagram\n"
-    content += "function getInstagramPostsData() {\n    return INSTAGRAM_POSTS_DATA;\n}"
+    # 1. Generar JS Normal
+    js_content = "// ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========\n"
+    js_content += f"// Última actualización: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n"
+    js_content += "const INSTAGRAM_POSTS_DATA = " + json.dumps(new_posts, indent=4, ensure_ascii=False) + ";\n\n"
+    js_content += "function getInstagramPostsData() {\n    return INSTAGRAM_POSTS_DATA;\n}"
 
     with open(JS_FILE_PATH, 'w', encoding='utf-8') as f:
-        f.write(content)
-    print(f"Archivo {JS_FILE_PATH} actualizado con {len(new_posts)} posts.")
+        f.write(js_content)
+
+    # 2. Generar MIN.JS
+    min_js_content = "const INSTAGRAM_POSTS_DATA=" + json.dumps(new_posts, separators=(',', ':'), ensure_ascii=False) + ";"
+    min_js_content += "function getInstagramPostsData(){return INSTAGRAM_POSTS_DATA}"
+
+    with open(MIN_JS_FILE_PATH, 'w', encoding='utf-8') as f:
+        f.write(min_js_content)
+
+    # 3. Actualizar Index.html
+    new_version = datetime.now().strftime('%Y-%m-%d_%H%M')
+    if os.path.exists(INDEX_FILE_PATH):
+        with open(INDEX_FILE_PATH, 'r', encoding='utf-8') as f:
+            html = f.read()
+        pattern = r"instagram_posts\.min\.js\?v=[^']+"
+        replacement = f"instagram_posts.min.js?v={new_version}"
+        new_html = re.sub(pattern, replacement, html)
+        with open(INDEX_FILE_PATH, 'w', encoding='utf-8') as f:
+            f.write(new_html)
+
+    # 4. Actualizar Service Worker con TODAS las variantes WebP
+    if os.path.exists(SW_FILE_PATH):
+        with open(SW_FILE_PATH, 'r', encoding='utf-8') as f:
+            sw_content = f.read()
+        
+        sw_version = datetime.now().strftime('%Y-%m-%d_%H%M')
+        sw_content = re.sub(r"const CACHE_VERSION = 'ropavejero-v[^']+';", f"const CACHE_VERSION = 'ropavejero-v{sw_version}';", sw_content)
+        
+        # Generar lista extendida de imágenes (JPEG + todas las variantes WebP)
+        full_images_list = []
+        for p in new_posts:
+            base_id = p['image'].split('/')[-1].replace('.jpeg', '')
+            full_images_list.append(f"    '/img/{base_id}.jpeg'")
+            full_images_list.append(f"    '/img/{base_id}-400.webp'")
+            full_images_list.append(f"    '/img/{base_id}-800.webp'")
+            full_images_list.append(f"    '/img/{base_id}-1200.webp'")
+        
+        new_images_js = "const INSTAGRAM_IMAGES = [\n" + ",\n".join(full_images_list) + "\n];"
+        sw_content = re.sub(r"const INSTAGRAM_IMAGES = \[.*?\];", new_images_js, sw_content, flags=re.DOTALL)
+        
+        with open(SW_FILE_PATH, 'w', encoding='utf-8') as f:
+            f.write(sw_content)
+        print(f"Service Worker actualizado con variantes WebP")
+
+    print(f"Proceso completado. Archivos y variantes de imagen generados.")
 
 if __name__ == "__main__":
     if not ACCESS_TOKEN:
-        print("Error: No se encontró INSTAGRAM_TOKEN en las variables de entorno.")
+        print("Error: No se encontró INSTAGRAM_TOKEN.")
     else:
         media = fetch_instagram_media()
         processed = process_posts(media)
-        update_js_file(processed)
+        update_files(processed)

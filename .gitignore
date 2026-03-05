@@ -22,7 +22,5 @@ node_modules/
 .idea/
 *.sublime-project
 
-# ========== CERTIFICADOS ==========
-*.pem
-*.key
-*.crt
+# ========== SECRETOS ==========
+.env

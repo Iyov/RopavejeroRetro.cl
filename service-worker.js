@@ -1,6 +1,6 @@
 // ========== SERVICE WORKER - ROPAVEJERO RETRO ==========
 // Versión del caché - Incrementar cuando actualices recursos
-const CACHE_VERSION = 'ropavejero-v2026-03-02_1';
+const CACHE_VERSION = 'ropavejero-v2026-03-04_2233';
 const CACHE_NAME = `${CACHE_VERSION}-static`;
 const DATA_CACHE_NAME = `${CACHE_VERSION}-data`;
 
@@ -30,42 +30,34 @@ const STATIC_RESOURCES = [
 
 // Recursos de Instagram (imágenes de posts WebP responsive y fallbacks)
 const INSTAGRAM_IMAGES = [
-    '/img/Post01-400.webp',
-    '/img/Post01-800.webp',
-    '/img/Post01-1200.webp',
-    '/img/Post02-400.webp',
-    '/img/Post02-800.webp',
-    '/img/Post02-1200.webp',
-    '/img/Post03-400.webp',
-    '/img/Post03-800.webp',
-    '/img/Post03-1200.webp',
-    '/img/Post04-400.webp',
-    '/img/Post04-800.webp',
-    '/img/Post04-1200.webp',
-    '/img/Post05-400.webp',
-    '/img/Post05-800.webp',
-    '/img/Post05-1200.webp',
-    '/img/Post06-400.webp',
-    '/img/Post06-800.webp',
-    '/img/Post06-1200.webp',
-    '/img/Post07-400.webp',
-    '/img/Post07-800.webp',
-    '/img/Post07-1200.webp',
-    '/img/Post08-400.webp',
-    '/img/Post08-800.webp',
-    '/img/Post08-1200.webp',
-    '/img/Post09-400.webp',
-    '/img/Post09-800.webp',
-    '/img/Post09-1200.webp',
-    '/img/Post10-400.webp',
-    '/img/Post10-800.webp',
-    '/img/Post10-1200.webp',
-    '/img/Post11-400.webp',
-    '/img/Post11-800.webp',
-    '/img/Post11-1200.webp',
-    '/img/Post12-400.webp',
-    '/img/Post12-800.webp',
-    '/img/Post12-1200.webp'
+    '/img/IG_17910866976163779.jpeg',
+    '/img/IG_17910866976163779-400.webp',
+    '/img/IG_17910866976163779-800.webp',
+    '/img/IG_17910866976163779-1200.webp',
+    '/img/IG_18095328058804878.jpeg',
+    '/img/IG_18095328058804878-400.webp',
+    '/img/IG_18095328058804878-800.webp',
+    '/img/IG_18095328058804878-1200.webp',
+    '/img/IG_18122212840518134.jpeg',
+    '/img/IG_18122212840518134-400.webp',
+    '/img/IG_18122212840518134-800.webp',
+    '/img/IG_18122212840518134-1200.webp',
+    '/img/IG_18071761007140852.jpeg',
+    '/img/IG_18071761007140852-400.webp',
+    '/img/IG_18071761007140852-800.webp',
+    '/img/IG_18071761007140852-1200.webp',
+    '/img/IG_17902748031199245.jpeg',
+    '/img/IG_17902748031199245-400.webp',
+    '/img/IG_17902748031199245-800.webp',
+    '/img/IG_17902748031199245-1200.webp',
+    '/img/IG_18110866735659338.jpeg',
+    '/img/IG_18110866735659338-400.webp',
+    '/img/IG_18110866735659338-800.webp',
+    '/img/IG_18110866735659338-1200.webp',
+    '/img/IG_18323105596217851.jpeg',
+    '/img/IG_18323105596217851-400.webp',
+    '/img/IG_18323105596217851-800.webp',
+    '/img/IG_18323105596217851-1200.webp'
 ];
 
 // URLs que NO deben cachearse
