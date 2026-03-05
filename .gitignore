@@ -16,6 +16,7 @@ secrets.js
 # ========== CARPETAS DE DESARROLLO ==========
 node_modules/
 .cache/
+logs/
 
 # ========== EDITORES ==========
 .vscode/settings.json
