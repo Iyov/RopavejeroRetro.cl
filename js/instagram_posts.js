@@ -1,5 +1,5 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-03-05 14:46:15
+// Última actualización: 2026-03-05 14:54:12
 
 const INSTAGRAM_POSTS_DATA = [
     {
@@ -154,15 +154,6 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DT9A2Ytleo0/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-01-26"
-    },
-    {
-        "id": "ig_auto_18352991074204039",
-        "image": "img/IG_18352991074204039.jpeg",
-        "title": "Feliz Navidad y Próspero Año Nuevo 2026. Esperamos que pasen un feliz año 2026, lleno de bendiciones, éxito y salud. Muchas gracias 2025 por todo y allá vamos 2026!",
-        "description": "",
-        "link": "https://www.instagram.com/p/DS82t4FFa2x/",
-        "media_type": "IMAGE",
-        "date": "2026-01-01"
     },
     {
         "id": "ig_auto_18141904729458404",
