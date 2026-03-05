@@ -360,7 +360,7 @@ python3 scripts/update_instagram.py
 
 ---
 
-## 🆕 Últimos Cambios (v1.0.9 - Feb 2026)
+## 🆕 Otros Cambios (v1.0.9 - Feb 2026)
 
 ### Corregido
 - ✅ Regenerados todos los archivos minificados (.min.js y .min.css)
