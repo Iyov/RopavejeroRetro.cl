@@ -67,16 +67,25 @@ def process_image_variants(source_path, post_id):
     return generated_files
 
 def download_image(url, post_id):
-    """Descarga la imagen original y genera sus variantes optimizadas."""
+    """Descarga la imagen original y genera sus variantes optimizadas solo si no existen."""
     temp_name = f"temp_{post_id}.jpg"
     temp_path = os.path.join(IMAGE_DIR, temp_name)
     final_image_name = f"IG_{post_id}.jpeg"
     final_path = os.path.join(IMAGE_DIR, final_image_name)
     
-    # Si ya existen las variantes, no descargamos de nuevo
-    if os.path.exists(os.path.join(IMAGE_DIR, f"IG_{post_id}-400.webp")):
+    # Si ya existen todas las variantes, no descargamos de nuevo
+    variants_exist = all([
+        os.path.exists(os.path.join(IMAGE_DIR, f"IG_{post_id}-400.webp")),
+        os.path.exists(os.path.join(IMAGE_DIR, f"IG_{post_id}-800.webp")),
+        os.path.exists(os.path.join(IMAGE_DIR, f"IG_{post_id}-1200.webp")),
+        os.path.exists(final_path)
+    ])
+    
+    if variants_exist:
+        print(f"Imágenes ya existen para post {post_id}, omitiendo descarga.")
         return final_image_name
 
+    print(f"Descargando nueva imagen para post {post_id}...")
     response = requests.get(url)
     if response.status_code == 200:
         with open(temp_path, 'wb') as f:
@@ -125,11 +134,60 @@ def process_posts(media_list):
             })
     return selected_posts
 
+def load_existing_posts():
+    """Carga los posts existentes desde el archivo JS."""
+    if not os.path.exists(JS_FILE_PATH):
+        return []
+    
+    try:
+        with open(JS_FILE_PATH, 'r', encoding='utf-8') as f:
+            content = f.read()
+            # Extraer el JSON del archivo JS
+            match = re.search(r'const INSTAGRAM_POSTS_DATA = (\[.*?\]);', content, re.DOTALL)
+            if match:
+                return json.loads(match.group(1))
+    except Exception as e:
+        print(f"Error al leer posts existentes: {e}")
+    
+    return []
+
+def posts_have_changed(old_posts, new_posts):
+    """Compara los posts para detectar cambios significativos."""
+    if len(old_posts) != len(new_posts):
+        return True
+    
+    # Crear sets de IDs para comparación rápida
+    old_ids = {post['id'] for post in old_posts}
+    new_ids = {post['id'] for post in new_posts}
+    
+    if old_ids != new_ids:
+        return True
+    
+    # Comparar contenido de cada post (sin la fecha de actualización)
+    for old_post, new_post in zip(sorted(old_posts, key=lambda x: x['id']), 
+                                   sorted(new_posts, key=lambda x: x['id'])):
+        if (old_post['title'] != new_post['title'] or 
+            old_post['description'] != new_post['description'] or
+            old_post['image'] != new_post['image'] or
+            old_post['link'] != new_post['link']):
+            return True
+    
+    return False
+
 def update_files(new_posts):
-    """Actualiza los archivos JS, MIN.JS, INDEX.HTML y SERVICE-WORKER.JS."""
+    """Actualiza los archivos JS, MIN.JS, INDEX.HTML y SERVICE-WORKER.JS solo si hay cambios."""
     if not new_posts:
         print("No se encontraron posts nuevos con el hashtag.")
         return
+
+    # Cargar posts existentes y comparar
+    existing_posts = load_existing_posts()
+    
+    if not posts_have_changed(existing_posts, new_posts):
+        print("No hay cambios en los posts de Instagram. No se requiere actualización.")
+        return
+    
+    print(f"Se detectaron cambios en los posts. Actualizando archivos...")
 
     # 1. Generar JS Normal
     js_content = "// ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========\n"
