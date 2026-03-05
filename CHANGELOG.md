@@ -7,6 +7,51 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ---
 
+## [1.1.0] - 2026-03-05
+
+### Agregado
+- Sistema completo de automatización de Instagram con filtrado por hashtag `#RopavejeroRetroWeb`
+- Script Python (`api/update_instagram.py`) para sincronización automática de posts de Instagram
+- Generación automática de imágenes WebP responsive en 3 tamaños (400px, 800px, 1200px) usando Pillow
+- Flujo de trabajo en GitHub Actions (`.github/workflows/update_instagram.yml`) para actualizaciones automáticas cada 12 horas
+- Ejecución manual del workflow desde la pestaña Actions de GitHub
+- Sistema de detección inteligente de cambios (posts agregados, modificados, eliminados)
+- Generación automática de mensajes de commit descriptivos basados en cambios detectados
+- Busting de caché automático en `index.html` con versionado dinámico
+- Actualización automática del Service Worker con nuevas imágenes y versión
+- Soporte para hasta 100 posts de Instagram con paginación automática
+- Procesamiento de imágenes con conversión RGB y redimensionamiento proporcional
+- Caché inteligente de imágenes (evita re-descargas innecesarias)
+- Lazy loading de script de Instagram posts con IntersectionObserver
+- Documentación completa del sistema de automatización en README.md
+
+### Cambiado
+- Service Worker actualizado a v2026-03-05_1454 con soporte para variantes WebP
+- Array `INSTAGRAM_IMAGES` en Service Worker ahora incluye todas las variantes (JPEG + 400/800/1200 WebP)
+- Query string de `instagram_posts.min.js` actualizado a v=2026-03-05_1454
+- Estructura de datos de posts de Instagram ahora incluye ID único con prefijo `ig_auto_`
+- Mejora en la estrategia de caché del Service Worker para imágenes de Instagram
+- Optimización del proceso de carga de posts con lazy loading basado en viewport
+
+### Mejorado
+- Performance de carga de imágenes de Instagram con formato WebP (reducción ~70% en tamaño)
+- Rendimiento general del sitio con imágenes responsive adaptadas a cada dispositivo
+- Experiencia de usuario con actualizaciones automáticas sin intervención manual
+- Gestión de caché con limpieza automática de versiones antiguas
+- Proceso de deployment con commits automáticos descriptivos
+- Escalabilidad del sistema para manejar grandes cantidades de posts
+
+### Técnico
+- Dependencias Python: `Pillow`, `requests`, `python-dotenv`
+- Configuración de secretos en GitHub: `INSTAGRAM_TOKEN` (Instagram Basic Display API / Graph API)
+- Integración con Instagram Graph API para obtención de media
+- Procesamiento de imágenes con calidad optimizada (WebP quality=85, JPEG quality=90)
+- Sistema de versionado automático basado en timestamp
+- Manejo robusto de errores en descarga y procesamiento de imágenes
+- Compatibilidad con imágenes RGBA y P (conversión automática a RGB)
+
+---
+
 ## [1.0.9] - 2026-02-17
 
 ### Corregido
