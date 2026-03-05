@@ -148,7 +148,7 @@ RopavejeroRetro.cl/
 ├── watcher.js                # Minificación automática
 ├── package.json              # Dependencias del proyecto
 ├── CHANGELOG.md              # Historial de cambios
-├── scripts/
+├── api/
 │   └── update_instagram.py   # Motor de automatización (Python)
 ├── .github/workflows/
 │   └── update_instagram.yml  # Configuración de GitHub Actions
@@ -330,7 +330,7 @@ pip install Pillow requests python-dotenv --break-system-packages
 echo "INSTAGRAM_TOKEN=tu_token_aqui" > .env
 
 # Ejecutar actualización
-python3 scripts/update_instagram.py
+python3 api/update_instagram.py
 ```
 
 5. **Configurar Google Sheets (Opcional)**

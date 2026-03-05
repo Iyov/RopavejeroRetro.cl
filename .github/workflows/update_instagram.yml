@@ -28,7 +28,7 @@ jobs:
     - name: Ejecutar script de actualización
       env:
         INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
-      run: python scripts/update_instagram.py
+      run: python api/update_instagram.py
 
     - name: Commit y Push de los cambios
       run: |
