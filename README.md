@@ -20,7 +20,7 @@
 - [Sobre Nosotros](#-sobre-nosotros)
 - [Características del Sitio](#-características-del-sitio)
 - [Automatización de Instagram](#-automatización-de-instagram)
-- [Tecnologías Utilizadas](#-tecnologías-utilizadas)
+- [Tecnologías Utilizadas](#-tecnologias-utilizadas)
 - [Estructura del Proyecto](#-estructura-del-proyecto)
 - [Funcionalidades](#-funcionalidades)
 - [Marcas Disponibles](#-marcas-disponibles)
@@ -29,6 +29,10 @@
 - [Instalación y Uso](#-instalación-y-uso)
 - [Contribuir](#-contribuir)
 - [Licencia](#-licencia)
+- [Últimos Cambios](#-últimos-cambios)
+- [Otros Cambios](#-otros-cambios)
+- [Desarrollador](#-desarrollador)
+- [Agradecimientos](#-agradecimientos)
 
 ---
 
@@ -113,8 +117,8 @@ Para la ejecución en GitHub, se requiere configurar:
 - **Font Awesome 6.5.1**: Iconografía
 
 ### Backend y Automatización
-- **Python 3**: Script de procesamiento de imágenes y datos (`Pillow`, `requests`).
-- **GitHub Actions**: Orquestación de tareas programadas.
+- **Python 3 (api/ folder)**: Script de actualización de Instagram y procesamiento de imágenes (`Pillow`, `requests`, `python-dotenv`).
+- **GitHub Actions**: Orquestación de tareas programadas cada 12 horas o manuales.
 
 ### APIs y Servicios
 - **Google Sheets API**: Base de datos de productos en tiempo real
