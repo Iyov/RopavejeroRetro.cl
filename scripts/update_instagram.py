@@ -227,9 +227,7 @@ def update_files(new_posts):
     
     if not posts_have_changed(existing_posts, new_posts):
         print("No hay cambios en los posts de Instagram. No se requiere actualización.")
-        # Crear archivo vacío para indicar que no hay cambios
-        with open('commit_message.txt', 'w', encoding='utf-8') as f:
-            f.write("")
+        # No tocar commit_message.txt si no hay cambios
         return
     
     # Calcular estadísticas de cambios
