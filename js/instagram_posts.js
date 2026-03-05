@@ -1,5 +1,5 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-03-04 22:33:59
+// Última actualización: 2026-03-05 00:15:02
 
 const INSTAGRAM_POSTS_DATA = [
     {
@@ -64,6 +64,42 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DUUKn8LFcvp/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-02-04"
+    },
+    {
+        "id": "ig_auto_18119567194606230",
+        "image": "img/IG_18119567194606230.jpeg",
+        "title": "[✅] 3816 Álbum Robotech 22 LN/2 LE + 71 LSR $100K",
+        "description": "\n- Álbum Robotech amarillo original Salo 1985.\n- Sin páginas sueltas o recortadas, buen estado.\n- LN: 22/180, LE: 2/25.\n- 71 LSR: Láminas sin Repetir recicladas incluidas, algunos escudos además.\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nLN: Láminas Normales\nLE: Láminas Especiales\nLSR: Láminas sin Repetir",
+        "link": "https://www.instagram.com/p/DUPMjQqDN6K/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-02-02"
+    },
+    {
+        "id": "ig_auto_18069122702551196",
+        "image": "img/IG_18069122702551196.jpeg",
+        "title": "PS2 | 01/Feb/26",
+        "description": "\n[❌] 3808\tHarry Potter Chamber of Secrets (BL-CIB) [PS2] $15K\n[❌] 3809\tHarry Potter and the Goblet of Fire (BL-CIB) [PS2] $15K\n[❌] 3810\tHarry Potter Prisoner of Azkaban (BL-CIB) [PS2] $15K\n[❌] 3811\tSoul Calibur II (BL-CIB-2D) [PS2] $25K\n[✅] 3812\tStreet Fighter Anniversary (BL-CIB) [PS2] $25K\n[✅] 3813\tNaruto Uzumaki Chronicles (BL-MM) [PS2] $10K\n[❌] 3814\tDragon Ball Z Budokai 2 (BL-MM) [PS2] $20K\n[❌] 3815\tGTA San Andreas (BL-MM) [PS2] $20K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nGH: Greatest Hits\nCIB: Caja, Juego, Manual\nMM: Sin Manual\n2D: Dos Discos",
+        "link": "https://www.instagram.com/p/DUPGu_hlQu3/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-02-02"
+    },
+    {
+        "id": "ig_auto_18016290578646891",
+        "image": "img/IG_18016290578646891.jpeg",
+        "title": "Wii [1] | 01/Feb/26",
+        "description": "\n[✅] 3803\tBen 10 Protector Of Earth (CIB-PAL) [Wii] $10K\n[✅] 3804\tGuitar Hero World Tour (CIB-PAL) [Wii] $12K\n[✅] 3805\tPenny Racers Party Turbo-Q Speedway (CIB) [Wii] $8K\n[✅] 3806\tSkylanders Superchargers Racing (MM) [Wii] $8K\n[❌️] 3807\tSuper Paper Mario (MM) [Wii] $12K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual\nMM: Sin Manual\nPAL: Europeo",
+        "link": "https://www.instagram.com/p/DUPEeHAFWjh/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-02-02"
+    },
+    {
+        "id": "ig_auto_18357988195201613",
+        "image": "img/IG_18357988195201613.jpeg",
+        "title": "Xbox 360 [2] | 01/Feb/26",
+        "description": "\n[✅] 3794\tSplinter Cell Chaos Theory (BL-CIB) [Xbox] $10K\n[✅] 3795\tForza Motorsport 2 (MM) [X360] $8K\n[❌] 3796\tForza Horizon (MM) [X360] $15K\n[✅] 3797\tPES 2014 (CIB) [X360] $8K\n[✅] 3798\tLego Star Wars Complete Saga (PH-MM) [X360] $8K\n[✅] 3799\tLego Star Wars III (PH-MM) [X360] $8K\n[✅] 3800\tLego Jurassic World (CIB) [X360] $8K\n[✅] 3801\tCars 2 (MM) [X360] $8K\n[✅] 3802\tStar Ocean The Last Hope (MM-3D) [X360] $12K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nPH: Platinum Hits\nCIB: Caja, Juego, Manual\nCIB+: Caja, Juego, Manual, Insertos\nMM: Sin Manual\nS: Sealed: Sellado de Fábrica\nDC: Daño en Carátula\n3D: Tres Discos",
+        "link": "https://www.instagram.com/p/DUPCLjAFaIJ/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-02-02"
     }
 ];
 
