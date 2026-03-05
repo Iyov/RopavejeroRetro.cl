@@ -8,6 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Permite escribir en el repositorio
 
     steps:
     - name: Checkout del código
