@@ -22,11 +22,14 @@
     }
 })();
 
+// ========== SIGLAS HANDLER ==========
+let siglasData = {};
+
 // ========== SISTEMA DE CACHÉ INTELIGENTE ==========
 const CACHE_CONFIG = {
-    VERSION: '1.0.9', // Versión del caché
-    PRODUCTS_KEY: 'ropavejero_products_cache_v1_0_9',
-    TIMESTAMP_KEY: 'ropavejero_cache_timestamp_v1_0_9',
+    VERSION: '1.1.1', // Versión del caché
+    PRODUCTS_KEY: 'ropavejero_products_cache_v1_1_1',
+    TIMESTAMP_KEY: 'ropavejero_cache_timestamp_v1_1_1',
     CACHE_DURATION: 5 * 60 * 1000, // 5 minutos en milisegundos
     MAX_RETRIES: 3,
     RETRY_DELAY: 2000 // 2 segundos
@@ -42,7 +45,9 @@ function cleanOldCaches() {
             'ropavejero_products_cache_v1',
             'ropavejero_cache_timestamp_v1',
             'ropavejero_products_cache_v1_0_8',
-            'ropavejero_cache_timestamp_v1_0_8'
+            'ropavejero_cache_timestamp_v1_0_8',
+            'ropavejero_products_cache_v1_0_9',
+            'ropavejero_cache_timestamp_v1_0_9'
         ];
         oldKeys.forEach(key => {
             if (localStorage.getItem(key)) {
@@ -108,6 +113,74 @@ function clearAllCache() {
     clearProductsCache();
     console.info('🗑️ Todo el caché limpiado');
 }
+
+// ========== FUNCIONES DE SIGLAS ==========
+// Cargar siglas desde JSON
+async function loadSiglas() {
+    try {
+        const response = await fetch('js/siglas.json');
+        if (!response.ok) {
+            throw new Error('Error loading siglas');
+        }
+        siglasData = await response.json();
+        console.info('✅ Siglas cargadas correctamente');
+        return siglasData;
+    } catch (error) {
+        console.error('Error cargando siglas:', error);
+        return {};
+    }
+}
+
+// Extraer siglas de un texto de producto
+function extractSiglas(productText) {
+    if (!productText || typeof productText !== 'string') return [];
+    
+    const foundSiglas = [];
+    const foundSiglasSet = new Set(); // Para evitar duplicados
+    
+    // Ordenar siglas por longitud descendente para detectar primero las más largas
+    // Esto evita que "CIB" se detecte cuando el texto dice "CIB+"
+    const sortedSiglas = Object.entries(siglasData).sort((a, b) => b[0].length - a[0].length);
+    
+    // Buscar cada sigla en el texto
+    for (const [sigla, descripcion] of sortedSiglas) {
+        // Escapar caracteres especiales en la sigla para regex
+        const escapedSigla = sigla.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        
+        // Buscar la sigla como palabra completa con diferentes delimitadores
+        const patterns = [
+            // Entre paréntesis: (BL-CIB) o (BL)
+            new RegExp(`\\((?:[^)]*-)?${escapedSigla}(?:-[^)]*)?\\)`, 'i'),
+            // Entre corchetes: [BL-CIB] o [BL]
+            new RegExp(`\\[(?:[^\\]]*-)?${escapedSigla}(?:-[^\\]]*)?\\]`, 'i'),
+            // Con guiones: -BL- o BL-CIB
+            new RegExp(`(?:^|\\s|-)${escapedSigla}(?:-|\\s|$)`, 'i'),
+            // Palabra completa con límites
+            new RegExp(`\\b${escapedSigla}\\b(?!\\+)`, 'i')
+        ];
+        
+        if (patterns.some(pattern => pattern.test(productText)) && !foundSiglasSet.has(sigla)) {
+            foundSiglas.push({ sigla, descripcion });
+            foundSiglasSet.add(sigla);
+        }
+    }
+    
+    return foundSiglas;
+}
+
+// Crear HTML para tooltip de siglas
+function createSiglasTooltip(siglas) {
+    if (!siglas || siglas.length === 0) return '';
+    
+    const items = siglas.map(item => 
+        `<div class="sigla-item">
+            <strong>${item.sigla}:</strong> ${item.descripcion}
+        </div>`
+    ).join('');
+    
+    return `<div class="siglas-tooltip">${items}</div>`;
+}
+
 // Función para sanitizar HTML y prevenir XSS
 function sanitizeHTML(str) {
     if (typeof str !== 'string') return '';
@@ -224,21 +297,24 @@ function handleSecureError(error, context = 'general') {
 document.addEventListener('DOMContentLoaded', function() {
     // Analytics module removed
     
-    // Inicializar todas las funcionalidades
-    initTheme();
-    initLanguage();
-    initProgressBar();
-    initBackToTop();
-    initMobileMenu();
-    initFAQ();
-    initBlogDialogs();
-    // Productos se inicializan de forma 'lazy' (IntersectionObserver)
-    lazyInitProducts();
-    // `instagram_posts.js` se carga de forma lazy desde index.html; NO invocar aquí
-    loadEfemerides();
-    
-    // Aplicar configuraciones guardadas
-    applySavedSettings();
+    // Cargar siglas primero
+    loadSiglas().then(() => {
+        // Inicializar todas las funcionalidades
+        initTheme();
+        initLanguage();
+        initProgressBar();
+        initBackToTop();
+        initMobileMenu();
+        initFAQ();
+        initBlogDialogs();
+        // Productos se inicializan de forma 'lazy' (IntersectionObserver)
+        lazyInitProducts();
+        // `instagram_posts.js` se carga de forma lazy desde index.html; NO invocar aquí
+        loadEfemerides();
+        
+        // Aplicar configuraciones guardadas
+        applySavedSettings();
+    });
 });
 
 // ========== TEMA CLARO/OSCURO ==========
@@ -1338,12 +1414,20 @@ function renderProductsTable() {
         const statusClass = safeProduct.Sold == 1 ? 'status-sold' : 'status-available';
         const statusIcon = safeProduct.Sold == 1 ? '[❌]' : '[✅]';
         
+        // Extraer siglas del producto
+        const siglas = extractSiglas(safeProduct.Product);
+        const hasSiglas = siglas.length > 0;
+        const siglasTooltip = hasSiglas ? createSiglasTooltip(siglas) : '';
+        
         // HTML para tabla (desktop)
         tableHtml += `
             <tr data-product-id="${safeProduct.Num}">
                 <td><span class="status-badge ${statusClass}">${statusIcon}</span></td>
                 <td>${safeProduct.Num}</td>
-                <td>${safeProduct.Product}</td>
+                <td class="${hasSiglas ? 'has-siglas-tooltip' : ''}" ${hasSiglas ? 'data-has-siglas="true"' : ''}>
+                    ${safeProduct.Product}
+                    ${hasSiglas ? `<div class="siglas-tooltip-container">${siglasTooltip}</div>` : ''}
+                </td>
                 <td>${safeProduct.Platform}</td>
                 <td>${safeProduct.Neto !== 'X' ? safeProduct.Neto : '0'}</td>
                 <td><span class="stock-badge">${safeProduct.Stock}</span></td>
@@ -1371,6 +1455,7 @@ function renderProductsTable() {
         const statusTextLabel = currentLang === 'es' ? 'Estado' : 'Status';
         const viewDetailsText = currentLang === 'es' ? 'Ver detalles' : 'View details';
         const viewInstagramText = currentLang === 'es' ? 'Ver en Instagram' : 'View on Instagram';
+        const siglasTitle = currentLang === 'es' ? 'Siglas' : 'Abbreviations';
         
         cardsHtml += `
             <div class="product-card" data-product-id="${safeProduct.Num}">
@@ -1379,7 +1464,9 @@ function renderProductsTable() {
                         <span class="status-badge ${statusClass}">${statusIcon}</span>
                     </div>
                     <div class="product-card-number">#${safeProduct.Num}</div>
-                    <h3 class="product-card-title">${safeProduct.Product}</h3>
+                    <h3 class="product-card-title">
+                        ${safeProduct.Product}
+                    </h3>
                 </div>
                 <div class="product-card-body">
                     <div class="product-card-field">
@@ -1396,8 +1483,25 @@ function renderProductsTable() {
                             <span class="stock-badge">${safeProduct.Stock}</span>
                         </div>
                     </div>
+                    ${hasSiglas ? `
+                    <div class="product-card-siglas">
+                        <div class="product-card-siglas-title">${siglasTitle}:</div>
+                        <div class="product-card-siglas-list">
+                            ${siglas.map(({ sigla, descripcion }) => 
+                                `<div class="product-card-sigla-item"><strong>${sigla}:</strong> ${descripcion}</div>`
+                            ).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
                 </div>
                 <div class="product-card-actions">
+                    <button class="btn btn-primary btn-small view-product-btn" 
+                            data-product-id="${safeProduct.Num}" 
+                            aria-label="Ver ${safeProduct.Product}"
+                            title="${viewDetailsText}">
+                        <i class="fas fa-eye" aria-hidden="true"></i>
+                        <span>${viewDetailsText}</span>
+                    </button>
                     <button class="btn btn-primary btn-small link-product-btn" 
                             data-product-link="${safeProduct.Link}" 
                             aria-label="Ver ${safeProduct.Product} en Instagram"
@@ -1961,6 +2065,10 @@ function showProductModal(product) {
     const statusClass = safeProduct.Sold == 1 ? 'status-sold' : 'status-available';
     const statusIcon = safeProduct.Sold == 1 ? '[❌]' : '[✅]';
     
+    // Extraer siglas del producto
+    const siglas = extractSiglas(safeProduct.Product);
+    const hasSiglas = siglas.length > 0;
+    
     // Crear contenido del modal de forma segura
     const modalHeader = document.createElement('div');
     modalHeader.className = 'modal-header';
@@ -1988,8 +2096,7 @@ function showProductModal(product) {
         { label: currentLang === 'es' ? 'Producto' : 'Product', value: safeProduct.Product },
         { label: currentLang === 'es' ? 'Plataforma' : 'Platform', value: safeProduct.Platform },
         { label: currentLang === 'es' ? 'Precio de Venta' : 'Sale Price', value: safeProduct.Neto !== 'X' ? safeProduct.Neto : '0' },
-        { label: currentLang === 'es' ? 'Stock' : 'Stock', value: safeProduct.Stock },
-        { label: 'Link', value: getLinkProductInstagram(safeProduct.Link) }
+        { label: currentLang === 'es' ? 'Stock' : 'Stock', value: safeProduct.Stock }
     ];
     
     details.forEach(detail => {
@@ -2006,6 +2113,50 @@ function showProductModal(product) {
         detailItem.appendChild(span);
         modalDetails.appendChild(detailItem);
     });
+    
+    // Agregar sección de siglas si existen
+    if (hasSiglas) {
+        const siglasInfo = document.createElement('div');
+        siglasInfo.className = 'siglas-info';
+        
+        const siglasTitle = document.createElement('div');
+        siglasTitle.className = 'siglas-info-title';
+        siglasTitle.textContent = currentLang === 'es' ? '📋 Siglas del Producto:' : '📋 Product Abbreviations:';
+        
+        const siglasList = document.createElement('div');
+        siglasList.className = 'siglas-list';
+        
+        siglas.forEach(({ sigla, descripcion }) => {
+            const siglaDetail = document.createElement('div');
+            siglaDetail.className = 'sigla-detail';
+            siglaDetail.innerHTML = `<strong>${sigla}:</strong> ${descripcion}`;
+            siglasList.appendChild(siglaDetail);
+        });
+        
+        siglasInfo.appendChild(siglasTitle);
+        siglasInfo.appendChild(siglasList);
+        modalDetails.appendChild(siglasInfo);
+    }
+    
+    // Agregar link de Instagram mejorado
+    const instagramLink = getLinkProductInstagram(safeProduct.Link);
+    if (instagramLink && instagramLink !== '#') {
+        const linkContainer = document.createElement('div');
+        linkContainer.style.marginTop = '15px';
+        
+        const link = document.createElement('a');
+        link.href = sanitizeURL(instagramLink);
+        link.className = 'modal-instagram-link';
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.innerHTML = `
+            <i class="fab fa-instagram"></i>
+            <span>${currentLang === 'es' ? 'Ver en Instagram' : 'View on Instagram'}</span>
+        `;
+        
+        linkContainer.appendChild(link);
+        modalDetails.appendChild(linkContainer);
+    }
     
     const modalActions = document.createElement('div');
     modalActions.className = 'modal-actions';

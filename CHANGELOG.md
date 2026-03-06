@@ -7,6 +7,39 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ---
 
+## [1.1.1] - 2026-03-06
+
+### Agregado
+- Sistema completo de siglas para productos del catálogo
+- Tooltips interactivos en tabla desktop al hacer hover sobre productos
+- Sección visible de siglas en tarjetas móviles (sin tooltips)
+- Diccionario de siglas en `js/siglas.json` con 40+ abreviaturas
+- Funciones `loadSiglas()`, `extractSiglas()`, `createSiglasTooltip()` en index.js
+- Detección inteligente de siglas con ordenamiento por longitud
+- Sección de siglas en modal de detalles de producto
+- Link de Instagram mejorado con gradiente de colores oficial
+
+### Mejorado
+- Modal de detalles de producto con mejor organización visual
+- Detección precisa de siglas (CIB+ no detecta CIB, evita duplicados)
+- Extracción de múltiples siglas por producto (ej: BL-CIB detecta ambas)
+- Experiencia de usuario en móvil con información siempre visible
+- Presentación de información técnica de productos
+
+### Cambiado
+- Query strings actualizados a v=2026-03-06_1 en index.html
+- Tarjetas móviles ahora muestran siglas directamente (no requieren interacción)
+- Estructura de tarjetas móviles con nueva sección de siglas
+
+### Técnico
+- Patrones regex mejorados para detección de siglas
+- Escape de caracteres especiales en búsqueda de siglas
+- Set para evitar duplicados en detección
+- Estilos CSS responsive para siglas en móvil y desktop
+- Documentación completa en `docs/SIGLAS_IMPLEMENTATION.md`
+
+---
+
 ## [1.1.0] - 2026-03-05
 
 ### Agregado

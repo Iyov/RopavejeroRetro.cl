@@ -2406,3 +2406,179 @@ textarea:focus {
 
 
 /* Stats dashboard styles removed */
+
+/* ========== SIGLAS TOOLTIPS ========== */
+.sigla-highlight {
+    color: var(--primary-color);
+    font-weight: 600;
+    cursor: help;
+    border-bottom: 1px dotted var(--primary-color);
+    transition: all 0.2s;
+}
+
+.sigla-highlight:hover {
+    color: var(--primary-light);
+    border-bottom-color: var(--primary-light);
+}
+
+.siglas-tooltip-container {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.has-siglas-tooltip:hover .siglas-tooltip-container {
+    opacity: 1;
+    visibility: visible;
+}
+
+.siglas-tooltip {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: var(--shadow-lg);
+    min-width: 200px;
+    max-width: 350px;
+}
+
+.sigla-item {
+    padding: 6px 0;
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--text-color);
+}
+
+.sigla-item:not(:last-child) {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sigla-item strong {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-right: 4px;
+}
+
+/* Tooltip para tabla de productos */
+.products-table td[data-has-siglas] {
+    position: relative;
+}
+
+/* Tooltip para tarjetas móviles */
+.product-card[data-has-siglas] {
+    position: relative;
+}
+
+.product-card-title[data-has-siglas] {
+    position: relative;
+}
+
+/* Sección de siglas en tarjetas móviles */
+.product-card-siglas {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-color);
+}
+
+.product-card-siglas-title {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.product-card-siglas-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.product-card-sigla-item {
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--text-secondary);
+    padding-left: 8px;
+    border-left: 2px solid var(--primary-color);
+}
+
+.product-card-sigla-item strong {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Estilos para modal de detalles */
+.modal-details .siglas-info {
+    background-color: var(--card-bg);
+    border-left: 3px solid var(--primary-color);
+    padding: 12px;
+    margin: 15px 0;
+    border-radius: 4px;
+}
+
+.modal-details .siglas-info-title {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.modal-details .siglas-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.modal-details .sigla-detail {
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.modal-details .sigla-detail strong {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Link de Instagram mejorado en modal */
+.modal-instagram-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 10px;
+}
+
+.modal-instagram-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(225, 48, 108, 0.4);
+}
+
+.modal-instagram-link i {
+    font-size: 18px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .siglas-tooltip {
+        max-width: 280px;
+        font-size: 12px;
+    }
+    
+    .siglas-tooltip-container {
+        left: 10px;
+        right: 10px;
+        transform: none;
+    }
+}

@@ -5,7 +5,7 @@
 [![Website](https://img.shields.io/badge/Website-ropavejeroretro.cl-blue)](https://ropavejeroretro.cl/)
 [![Instagram](https://img.shields.io/badge/Instagram-@ropavejero.retro-E4405F?logo=instagram&logoColor=white)](https://www.instagram.com/ropavejero.retro/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/Version-1.1.0-brightgreen.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/Version-1.1.1-brightgreen.svg)](CHANGELOG.md)
 
 > **Todo lo Retro en un solo lugar** - Consolas, juegos y accesorios retro originales americanos. Revive la nostalgia de los videojuegos clásicos.
 
@@ -352,6 +352,23 @@ python api/update_instagram.py
 ---
 
 ## 🆕 Últimos Cambios
+### Versión: v1.1.1 | Mar 2026
+
+#### Añadido
+- ✅ Sistema completo de siglas para productos del catálogo.
+- ✅ Tooltips interactivos en tabla desktop (hover sobre productos).
+- ✅ Sección visible de siglas en tarjetas móviles.
+- ✅ Diccionario de siglas con 40+ abreviaturas (CIB, BL, GH, MM, etc.).
+- ✅ Link de Instagram mejorado con gradiente oficial.
+
+#### Mejorado
+- ✅ Modal de detalles con sección dedicada de siglas.
+- ✅ Detección precisa de múltiples siglas por producto.
+- ✅ Experiencia de usuario en móvil con información siempre visible.
+
+---
+
+## 🆕 Otros Cambios
 ### Versión: v1.1.0 | Mar 2026
 
 #### Añadido
@@ -435,7 +452,7 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más det
 - 👥 **Clientes Satisfechos**: 150+
 - ⭐ **Rating Promedio**: 4.8/5
 - 🚚 **Envíos Realizados**: A todo Chile
-- 📦 **Versión Actual**: v1.1.0
+- 📦 **Versión Actual**: v1.1.1
 - 🔍 **SEO Score**: 100% de páginas indexadas
 - ⚡ **Performance**: 60-70% más rápido que v1.0.0
 
