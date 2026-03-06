@@ -26,7 +26,7 @@ MAX_POSTS = 100  # Número máximo de posts a obtener
 def fetch_instagram_media():
     """Obtiene los posts recientes del usuario con paginación."""
     all_media = []
-    url = f"https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,timestamp&limit=25&access_token={ACCESS_TOKEN}"
+    url = f"https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,timestamp,children{{media_url,media_type}}&limit=25&access_token={ACCESS_TOKEN}"
     
     while url and len(all_media) < MAX_POSTS:
         response = requests.get(url)
@@ -127,6 +127,35 @@ def process_posts(media_list):
     for post in media_list:
         caption = post.get('caption', '')
         if HASHTAG_FILTER.lower() in caption.lower():
+            media_type = post.get('media_type', '')
+            media_url = post.get('media_url', '')
+            
+            # Omitir videos directos
+            if media_type == 'VIDEO':
+                print(f"Omitiendo post {post['id']} (tipo: VIDEO)")
+                continue
+            
+            # Para carruseles, obtener la primera imagen
+            if media_type == 'CAROUSEL_ALBUM':
+                children = post.get('children', {}).get('data', [])
+                if children:
+                    # Buscar la primera imagen en el carrusel
+                    first_image = None
+                    for child in children:
+                        if child.get('media_type') == 'IMAGE':
+                            first_image = child.get('media_url')
+                            break
+                    
+                    if first_image:
+                        media_url = first_image
+                        print(f"Procesando carrusel {post['id']} (usando primera imagen)")
+                    else:
+                        print(f"Omitiendo carrusel {post['id']} (sin imágenes)")
+                        continue
+                else:
+                    print(f"Omitiendo carrusel {post['id']} (sin hijos)")
+                    continue
+            
             clean_caption = caption.replace(HASHTAG_FILTER, '').replace(HASHTAG_FILTER.lower(), '').strip()
             
             lines = clean_caption.split('\n', 1)
@@ -136,7 +165,7 @@ def process_posts(media_list):
             date_str = post['timestamp'][:10]
             
             # Esto ahora descarga Y genera los WebP
-            img_filename = download_image(post['media_url'], post['id'])
+            img_filename = download_image(media_url, post['id'])
             
             selected_posts.append({
                 'id': f"ig_auto_{post['id']}",
