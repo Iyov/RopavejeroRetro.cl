@@ -1,7 +1,16 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-03-05 14:54:12
+// Última actualización: 2026-03-08 01:05:49
 
 const INSTAGRAM_POSTS_DATA = [
+    {
+        "id": "ig_auto_17920957479266936",
+        "image": "img/IG_17920957479266936.jpeg",
+        "title": "Instalados hoy Sábado 07/Mar en Feria Retro Beer & Toys",
+        "description": "📍 Cervecería La Grifería\n📌 Loreley 87, La Reina\n🚇 Metro Fernando Castillo Velasco, L3\n\n🕒 De 13:00 a 19:00 hrs\n🎟 Entrada liberada\n🎮 Trajimos nuestros juegos\n¡Nos vemos!\n\n#FeriaRetro #FeriaRetroLaGriferia #FeriaRetroRojasMagallanes",
+        "link": "https://www.instagram.com/p/DVlypJblQNp/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-03-07"
+    },
     {
         "id": "ig_auto_18122212840518134",
         "image": "img/IG_18122212840518134.jpeg",
