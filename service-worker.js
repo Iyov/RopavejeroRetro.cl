@@ -1,6 +1,6 @@
 // ========== SERVICE WORKER - ROPAVEJERO RETRO ==========
 // Versión del caché - Incrementar cuando actualices recursos
-const CACHE_VERSION = 'ropavejero-v2026-03-13_0104';
+const CACHE_VERSION = 'ropavejero-v2026-03-16_0114';
 const CACHE_NAME = `${CACHE_VERSION}-static`;
 const DATA_CACHE_NAME = `${CACHE_VERSION}-data`;
 
@@ -113,11 +113,7 @@ const INSTAGRAM_IMAGES = [
     '/img/IG_18089179990985222.jpeg',
     '/img/IG_18089179990985222-400.webp',
     '/img/IG_18089179990985222-800.webp',
-    '/img/IG_18089179990985222-1200.webp',
-    '/img/IG_18089539607120889.jpeg',
-    '/img/IG_18089539607120889-400.webp',
-    '/img/IG_18089539607120889-800.webp',
-    '/img/IG_18089539607120889-1200.webp'
+    '/img/IG_18089179990985222-1200.webp'
 ];
 
 // URLs que NO deben cachearse

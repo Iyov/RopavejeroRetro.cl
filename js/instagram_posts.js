@@ -1,5 +1,5 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-03-13 01:04:09
+// Última actualización: 2026-03-16 01:14:18
 
 const INSTAGRAM_POSTS_DATA = [
     {
@@ -188,15 +188,6 @@ const INSTAGRAM_POSTS_DATA = [
         "title": "[✅] 3683\tDragon Ball Super Card Game x6 (sellado) [Cartas] $10K",
         "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE",
         "link": "https://www.instagram.com/p/DSdtW3ZFRty/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2025-12-19"
-    },
-    {
-        "id": "ig_auto_18089539607120889",
-        "image": "img/IG_18089539607120889.jpeg",
-        "title": "[✅] 3680\tMario Bros / Duck Hunt [NES] $15K",
-        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE",
-        "link": "https://www.instagram.com/p/DSdrjwdFRcf/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2025-12-19"
     }
