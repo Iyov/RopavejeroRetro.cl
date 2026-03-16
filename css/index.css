@@ -149,14 +149,6 @@ body {
     color: var(--primary-color);
 }
 
-.nav a.nav-active {
-    color: var(--primary-color);
-}
-
-.nav a.nav-active::after {
-    width: 100%;
-}
-
 .nav a::after {
     content: '';
     position: absolute;
@@ -168,8 +160,13 @@ body {
     transition: width 0.3s;
 }
 
-.nav a:hover::after {
+.nav a:hover::after,
+.nav a.nav-active::after {
     width: 100%;
+}
+
+.nav a.nav-active {
+    color: var(--primary-color);
 }
 
 .header-controls {

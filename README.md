@@ -5,7 +5,7 @@
 [![Website](https://img.shields.io/badge/Website-ropavejeroretro.cl-blue)](https://ropavejeroretro.cl/)
 [![Instagram](https://img.shields.io/badge/Instagram-@ropavejero.retro-E4405F?logo=instagram&logoColor=white)](https://www.instagram.com/ropavejero.retro/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/Version-1.1.2-brightgreen.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/Version-1.1.6-brightgreen.svg)](CHANGELOG.md)
 
 > **Todo lo Retro en un solo lugar** - Consolas, juegos y accesorios retro originales americanos. Revive la nostalgia de los videojuegos clásicos.
 
@@ -354,6 +354,51 @@ python api/update_instagram.py
 ---
 
 ## 🆕 Últimos Cambios
+### Versión: v1.1.5 | Mar 2026
+
+#### Agregado
+- ✅ `initNavActive()` — marca el ítem activo del nav al hacer scroll en `index.html`.
+- ✅ En `productos.html` el ítem "Productos" queda siempre marcado con la línea activa.
+
+#### Corregido
+- ✅ Orden CSS de `.nav-active::after` — la regla base sobreescribía el estado activo.
+
+#### Cambiado
+- ✅ Query strings actualizados a `v=2026-03-16_4`.
+- ✅ Service Worker actualizado a `ropavejero-v2026-03-16_4`.
+
+---
+
+## 🆕 Otros Cambios
+### Versión: v1.1.4 | Mar 2026
+
+#### Corregido
+- ✅ Guards de null en `.then` y `.catch` de `loadEfemerides()` para llamadas desde `setLanguage()`.
+- ✅ Minificado regenerado correctamente (terser no estaba instalado en la iteración anterior).
+
+#### Cambiado
+- ✅ Query strings actualizados a `v=2026-03-16_3`.
+- ✅ Service Worker actualizado a `ropavejero-v2026-03-16_3`.
+
+---
+
+## 🆕 Otros Cambios
+### Versión: v1.1.3 | Mar 2026
+
+#### Corregido
+- ✅ `initBackToTop()` — guard de null para páginas sin logo-botón (ej: `productos.html`).
+- ✅ `loadEfemerides()` — guard de null al no existir `#efemeridesCard`.
+- ✅ `initBlogDialogs()` — guard de null al no existir `#blogDialogOverlay`.
+- ✅ `updateProductsCounter()` — guard de null en contextos sin el contador.
+
+#### Cambiado
+- ✅ Query strings actualizados a `v=2026-03-16_2` en todos los HTML.
+- ✅ Service Worker actualizado a `ropavejero-v2026-03-16_2`.
+- ✅ `index.min.js` regenerado con los guards de null.
+
+---
+
+## 🆕 Otros Cambios
 ### Versión: v1.1.2 | Mar 2026
 
 #### Añadido
@@ -472,7 +517,7 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más det
 - 👥 **Clientes Satisfechos**: 150+
 - ⭐ **Rating Promedio**: 4.8/5
 - 🚚 **Envíos Realizados**: A todo Chile
-- 📦 **Versión Actual**: v1.1.2
+- 📦 **Versión Actual**: v1.1.6
 - 🔍 **SEO Score**: 100% de páginas indexadas
 - ⚡ **Performance**: 60-70% más rápido que v1.0.0
 

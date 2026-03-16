@@ -7,6 +7,63 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ---
 
+## [1.1.6] - 2026-03-16
+
+### Corregido
+- Link "Productos" en el nav apunta a `productos.html` en lugar de `/productos` — la URL limpia solo funciona en producción con Apache, no en desarrollo local
+- `initNavActive()` detecta ahora tanto `/productos` como `productos.html` para marcar el ítem activo
+
+### Cambiado
+- Query strings actualizados a `v=2026-03-16_5`
+- Versión del caché del service worker actualizada a `ropavejero-v2026-03-16_5`
+
+---
+
+## [1.1.5] - 2026-03-16
+
+### Agregado
+- `initNavActive()`: marca el ítem activo del nav según la sección visible al hacer scroll en `index.html`
+- En `productos.html` el ítem "Productos" queda siempre marcado con la línea activa
+
+### Corregido
+- Orden de declaración CSS de `.nav-active::after` — la regla base `width: 0` sobreescribía el `width: 100%` del active
+- `.nav a:hover::after` y `.nav a.nav-active::after` unificados en una sola regla
+
+### Cambiado
+- Query strings actualizados a `v=2026-03-16_4`
+- Versión del caché del service worker actualizada a `ropavejero-v2026-03-16_4`
+- `js/index.min.js` y `css/index.min.css` regenerados
+
+---
+
+## [1.1.4] - 2026-03-16
+
+### Corregido
+- Guards de null en `.then` y `.catch` de `loadEfemerides()` para cubrir llamadas desde `setLanguage()`
+- El minificado anterior no se había generado correctamente (terser no estaba instalado)
+
+### Cambiado
+- Query strings actualizados a `v=2026-03-16_3`
+- Versión del caché del service worker actualizada a `ropavejero-v2026-03-16_3`
+- `js/index.min.js` regenerado correctamente
+
+---
+
+## [1.1.3] - 2026-03-16
+
+### Corregido
+- `initBackToTop()` falla con null en páginas sin el logo como botón (ej: `productos.html`)
+- `loadEfemerides()` falla con null al no existir `#efemeridesCard` fuera de `index.html`
+- `initBlogDialogs()` falla con null al no existir `#blogDialogOverlay` fuera de `index.html`
+- `updateProductsCounter()` falla con null en contextos sin el contador visible
+
+### Cambiado
+- Query strings actualizados a `v=2026-03-16_2` en todos los archivos HTML
+- Versión del caché del service worker actualizada a `ropavejero-v2026-03-16_2`
+- `js/index.min.js` regenerado con los guards de null
+
+---
+
 ## [1.1.2] - 2026-03-16
 
 ### Agregado

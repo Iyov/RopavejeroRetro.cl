@@ -303,6 +303,7 @@ document.addEventListener('DOMContentLoaded', function() {
         initTheme();
         initLanguage();
         initProgressBar();
+        initNavActive();
         initBackToTop();
         initMobileMenu();
         initFAQ();
@@ -903,10 +904,50 @@ function initProgressBar() {
     });
 }
 
+// ========== NAV ACTIVO POR SECCIÓN ==========
+function initNavActive() {
+    const navLinks = document.querySelectorAll('.nav a, .mobile-menu-content a');
+
+    // Si la URL es /productos, marcar ese ítem y salir
+    if (window.location.pathname.startsWith('/productos') || window.location.pathname.includes('productos.html')) {
+        navLinks.forEach(link => {
+            link.classList.remove('nav-active');
+            const href = link.getAttribute('href') || '';
+            if (href === '/productos' || href.includes('productos.html')) link.classList.add('nav-active');
+        });
+        return;
+    }
+
+    // En index.html: marcar el ítem según la sección visible al hacer scroll
+    const sections = document.querySelectorAll('section[id]');
+    if (!sections.length) return;
+
+    function updateActiveNav() {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            if (window.scrollY >= sectionTop) current = section.getAttribute('id');
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('nav-active');
+            const href = link.getAttribute('href') || '';
+            if (current && (href === `#${current}` || href.endsWith(`#${current}`))) {
+                link.classList.add('nav-active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', updateActiveNav, { passive: true });
+    updateActiveNav();
+}
+
 // ========== BOTÓN VOLVER ARRIBA ==========
 function initBackToTop() {
     const backToTopBtn = document.getElementById('backToTopBtn');
     const backToTopLogo = document.getElementById('backToTopLogo');
+
+    if (!backToTopBtn) return;
     
     // Mostrar/ocultar botón según scroll
     window.addEventListener('scroll', function() {
@@ -926,12 +967,14 @@ function initBackToTop() {
     });
     
     // Funcionalidad del logo
-    backToTopLogo.addEventListener('click', function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
+    if (backToTopLogo) {
+        backToTopLogo.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
-    });
+    }
 }
 
 // ========== MENÚ MÓVIL ==========
@@ -1008,6 +1051,8 @@ function initBlogDialogs() {
     const blogDialogOverlay = document.getElementById('blogDialogOverlay');
     const blogDialogClose = document.getElementById('blogDialogClose');
     const readMoreBtns = document.querySelectorAll('.read-more-btn');
+
+    if (!blogDialogOverlay) return;
     
     // Abrir dialog de blog
     readMoreBtns.forEach(btn => {
@@ -1994,9 +2039,9 @@ function clearFilters() {
     filterProducts();
 }
 
-// Actualizar contador de productos
 function updateProductsCounter() {
     const productsCounter = document.getElementById('productsCounter');
+    if (!productsCounter) return;
     const currentLang = localStorage.getItem('language') || 'es';
     const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
     
@@ -2457,8 +2502,8 @@ function formatInstagramDate(dateString) {
 function loadEfemerides() {
     const currentDateElement = document.getElementById('currentDate');
     const efemeridesCard = document.getElementById('efemeridesCard');
-    
-    // Obtener fecha actual
+
+    if (!efemeridesCard) return;
     const now = new Date();
     const day = String(now.getDate()).padStart(2, '0');
     const month = String(now.getMonth() + 1).padStart(2, '0');
@@ -2492,8 +2537,8 @@ function loadEfemerides() {
             if (!data || !Array.isArray(data.efemerides)) {
                 throw new Error('Invalid efemerides data structure');
             }
-            
-            // Buscar la efeméride para la fecha actual
+
+            if (!efemeridesCard) return;
             const efemeridesArr = data.efemerides;
             const efemerideHoy = efemeridesArr.find(item => item.date === dateKey);
             
@@ -2561,6 +2606,8 @@ function loadEfemerides() {
         .catch(error => {
             const errorMessage = handleSecureError(error, 'efemerides');
             
+            if (!efemeridesCard) return;
+
             const headerDiv = document.createElement('div');
             headerDiv.className = 'efemerides-header';
             
