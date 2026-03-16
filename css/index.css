@@ -149,6 +149,14 @@ body {
     color: var(--primary-color);
 }
 
+.nav a.nav-active {
+    color: var(--primary-color);
+}
+
+.nav a.nav-active::after {
+    width: 100%;
+}
+
 .nav a::after {
     content: '';
     position: absolute;

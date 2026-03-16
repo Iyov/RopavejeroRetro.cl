@@ -5,7 +5,7 @@
 [![Website](https://img.shields.io/badge/Website-ropavejeroretro.cl-blue)](https://ropavejeroretro.cl/)
 [![Instagram](https://img.shields.io/badge/Instagram-@ropavejero.retro-E4405F?logo=instagram&logoColor=white)](https://www.instagram.com/ropavejero.retro/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/Version-1.1.1-brightgreen.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/Version-1.1.2-brightgreen.svg)](CHANGELOG.md)
 
 > **Todo lo Retro en un solo lugar** - Consolas, juegos y accesorios retro originales americanos. Revive la nostalgia de los videojuegos clásicos.
 
@@ -82,7 +82,7 @@
 - **Página de Agradecimientos**: Reconocimiento a investigadores de seguridad
 
 ### 🔍 SEO y Indexación
-- **Sitemap.xml**: 13 URLs indexables
+- **Sitemap.xml**: 14 URLs indexables
 - **Robots.txt**: Configuración optimizada para crawlers
 - **Meta Tags**: Open Graph, Twitter Cards, Schema.org
 - **Enlaces Internos**: Arquitectura de información mejorada
@@ -141,6 +141,7 @@ Para la ejecución en GitHub, se requiere configurar:
 ```
 RopavejeroRetro.cl/
 ├── index.html                 # Página principal
+├── productos.html             # Catálogo de productos (URL: /productos)
 ├── 404.html                   # Página de error personalizada
 ├── old.html                   # Versión antigua del sitio
 ├── security-policy.html       # Política de seguridad
@@ -193,6 +194,7 @@ RopavejeroRetro.cl/
 ## 🎯 Funcionalidades
 
 ### 1. **Catálogo de Productos**
+- Página independiente accesible en `https://ropavejeroretro.cl/productos`
 - Búsqueda en tiempo real con debouncing (300ms)
 - Filtros por plataforma (múltiple selección)
 - Filtro por estado (disponible/vendido)
@@ -352,6 +354,24 @@ python api/update_instagram.py
 ---
 
 ## 🆕 Últimos Cambios
+### Versión: v1.1.2 | Mar 2026
+
+#### Añadido
+- ✅ Página independiente `productos.html` accesible en `/productos`.
+- ✅ URL limpia `https://ropavejeroretro.cl/productos` vía `.htaccess`.
+- ✅ Breadcrumb de navegación en la página de productos.
+- ✅ Schema.org `CollectionPage` para SEO en página de productos.
+- ✅ Clase CSS `.nav-active` para resaltar ítem activo en el nav.
+
+#### Cambiado
+- ✅ Link "Productos" en el nav apunta a `/productos` (URL independiente).
+- ✅ Query strings actualizados a `v=2026-03-16_1` en todos los HTML.
+- ✅ Service Worker actualizado a `ropavejero-v2026-03-16_1`.
+- ✅ Sitemap actualizado con la nueva URL `/productos`.
+
+---
+
+## 🆕 Otros Cambios
 ### Versión: v1.1.1 | Mar 2026
 
 #### Añadido
@@ -452,7 +472,7 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más det
 - 👥 **Clientes Satisfechos**: 150+
 - ⭐ **Rating Promedio**: 4.8/5
 - 🚚 **Envíos Realizados**: A todo Chile
-- 📦 **Versión Actual**: v1.1.1
+- 📦 **Versión Actual**: v1.1.2
 - 🔍 **SEO Score**: 100% de páginas indexadas
 - ⚡ **Performance**: 60-70% más rápido que v1.0.0
 

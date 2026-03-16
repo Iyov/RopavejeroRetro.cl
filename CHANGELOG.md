@@ -7,6 +7,24 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ---
 
+## [1.1.2] - 2026-03-16
+
+### Agregado
+- Página independiente `productos.html` accesible en `https://ropavejeroretro.cl/productos`
+- Regla en `.htaccess` para URL limpia `/productos` → `productos.html`
+- Breadcrumb de navegación en la página de productos
+- Clase CSS `.nav-active` para resaltar el ítem activo en el nav
+- Entradas en `sitemap.xml` para la nueva URL `/productos`
+- Caché del service worker para `/productos` y `/productos.html`
+- Schema.org `CollectionPage` en la página de productos
+
+### Cambiado
+- Link "Productos" en el nav de `index.html` apunta ahora a `/productos` (URL independiente)
+- Query strings actualizados a `v=2026-03-16_1` en todos los archivos HTML
+- Versión del caché del service worker actualizada a `ropavejero-v2026-03-16_1`
+
+---
+
 ## [1.1.1] - 2026-03-06
 
 ### Agregado

@@ -195,6 +195,9 @@ ErrorDocument 403 /404.html
 RewriteRule ^security\.txt$ /.well-known/security.txt [L]
 RewriteRule ^\.well-known/security\.txt$ /.well-known/security.txt [L]
 
+# Clean URL: /productos → productos.html
+RewriteRule ^productos/?$ /productos.html [L]
+
 # Disable server signature
 ServerSignature Off
 
