@@ -1,5 +1,5 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-03-17 01:06:09
+// Última actualización: 2026-03-17 01:20:39
 
 const INSTAGRAM_POSTS_DATA = [
     {
@@ -253,33 +253,6 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DT9A2Ytleo0/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-01-26"
-    },
-    {
-        "id": "ig_auto_18141904729458404",
-        "image": "img/IG_18141904729458404.jpeg",
-        "title": "Álbumes | 22/Dic/25",
-        "description": "\n[❌] 3691\tDigimon 1 (LN: 161/216, LE: 8/16) [Álbum] $25K\n[❌] 3692\tDigimon 1 (LN: 133/216, LE: 10/16) [Álbum] $20K\n[✅] 3693\tDigimon 1 (LN: 57/216, LE: 6/16, Hojas Sueltas) [Álbum] $18K\n[✅] 3694\tDigimon 2 (LN: 41/201, LE: 0/23) [Álbum] $20K\n[✅] 3695\tDigimon 2 (LN: 46/201, LE: 1/23, Faltan Páginas 16-21) [Álbum] $15K\n[✅] 3696\tChile a Francia 98 (LN: 70/286, LE: 13/19, LMDLR: 10/14) [Álbum] $40K\n[✅] 3697\tCopa América 99 (LN: 64/185, LE: 8/24) [Álbum] $30K\n[✅] 3698\tFutbol 2002 TC (LN: 156/240, LE: 8/10, LPC: 7/12) [Álbum] $25K\n[✅] 3699\tFutbol 2002 TC (LN: 169/240, LE: 4/10, LPC: 3/12) [Álbum] $20K\n[✅] 3700\tFutbol 2003 (LN: 160/210, LE: 4/12, Sticker: 6/16, Poster) [Álbum] $25K\n[✅] 3701\tNaruto Shippuden (LN: 85/165, LE: 15/28) [Álbum] $15K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nLN: Láminas Normales\nLE: Láminas Especiales\nLR: Láminas Recortadas\nCP: Colillas de Premios\nLMDLR: Lo Mejor De La Roja",
-        "link": "https://www.instagram.com/p/DSldMVNFVwo/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2025-12-23"
-    },
-    {
-        "id": "ig_auto_17985987068763430",
-        "image": "img/IG_17985987068763430.jpeg",
-        "title": "Álbumes | 19/Dic/25",
-        "description": "\n[✅] 3684\tPokémon 1 (LN: 99/200, LE: 0/24, 4 LR, Hojas Sueltas, 4 CP) [Álbum] $20K\n[❌] 3685\tPokémon 1 (LN: 72/200, LE: 3/24, 3 CP) [Álbum] $25K\n[✅] 3686\tLos nuevos Pokémon (LN: 147/153, LE: 13/16, Stickers: 10/10) [Álbum] $25K\n[✅] 3687\tPokémon 3 (LN: 72/146, LE: 7/22, LQEEP: 5/10) [Álbum] $25K\n[✅] 3688\tPokémon 3 (LN: 9/146, LE: 0/22, LQEEP: 1/10) [Álbum] $25K\n[✅] 3689\tPokémon 3 La Película (LN: 26/89, LE: 2/26, Hojas Sueltas) [Álbum] $18K\n[❌] 3690\tPokémon Advanced (LN: 43/158, LE: 2/12) [Álbum] $10K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nLN: Láminas Normales\nLE: Láminas Especiales\nLR: Láminas Recortadas\nCP: Colillas de Premios\nLQEEP: Láminas Quién Es Ese Pokémon?",
-        "link": "https://www.instagram.com/p/DSdv4zxlfn0/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2025-12-20"
-    },
-    {
-        "id": "ig_auto_18089179990985222",
-        "image": "img/IG_18089179990985222.jpeg",
-        "title": "[✅] 3683\tDragon Ball Super Card Game x6 (sellado) [Cartas] $10K",
-        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE",
-        "link": "https://www.instagram.com/p/DSdtW3ZFRty/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2025-12-19"
     }
 ];
 
