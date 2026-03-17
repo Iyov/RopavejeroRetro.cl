@@ -134,19 +134,25 @@ async function loadSiglas() {
 // Extraer siglas de un texto de producto
 function extractSiglas(productText) {
     if (!productText || typeof productText !== 'string') return [];
-    
+
     const foundSiglas = [];
     const foundSiglasSet = new Set(); // Para evitar duplicados
-    
+    const currentLang = localStorage.getItem('language') || 'es';
+
     // Ordenar siglas por longitud descendente para detectar primero las más largas
     // Esto evita que "CIB" se detecte cuando el texto dice "CIB+"
     const sortedSiglas = Object.entries(siglasData).sort((a, b) => b[0].length - a[0].length);
-    
+
     // Buscar cada sigla en el texto
-    for (const [sigla, descripcion] of sortedSiglas) {
+    for (const [sigla, value] of sortedSiglas) {
+        // Resolver descripción según idioma activo
+        const descripcion = (typeof value === 'object' && value !== null)
+            ? (value[currentLang] || value['es'] || '')
+            : value;
+
         // Escapar caracteres especiales en la sigla para regex
         const escapedSigla = sigla.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        
+
         // Buscar la sigla como palabra completa con diferentes delimitadores
         const patterns = [
             // Entre paréntesis: (BL-CIB) o (BL)
@@ -158,13 +164,13 @@ function extractSiglas(productText) {
             // Palabra completa con límites
             new RegExp(`\\b${escapedSigla}\\b(?!\\+)`, 'i')
         ];
-        
+
         if (patterns.some(pattern => pattern.test(productText)) && !foundSiglasSet.has(sigla)) {
             foundSiglas.push({ sigla, descripcion });
             foundSiglasSet.add(sigla);
         }
     }
-    
+
     return foundSiglas;
 }
 
@@ -353,15 +359,15 @@ function initLanguage() {
     const languageBtn = document.getElementById('languageBtn');
     const languageSelectorOverlay = document.getElementById('languageSelectorOverlay');
     const languageOptions = document.querySelectorAll('.language-option');
-    
+
     // Verificar idioma guardado
     const savedLanguage = localStorage.getItem('language') || 'es';
     setLanguage(savedLanguage);
-    
+
     // Mostrar selector de idioma
     languageBtn.addEventListener('click', function() {
         languageSelectorOverlay.classList.add('active');
-        
+
         // Marcar la opción activa
         languageOptions.forEach(option => {
             if (option.dataset.lang === savedLanguage) {
@@ -371,19 +377,17 @@ function initLanguage() {
             }
         });
     });
-    
-    // Seleccionar idioma
+
+    // Seleccionar idioma — guardar ANTES de llamar setLanguage para que extractSiglas use el idioma correcto
     languageOptions.forEach(option => {
         option.addEventListener('click', function() {
             const lang = this.dataset.lang;
-            setLanguage(lang);
             localStorage.setItem('language', lang);
+            setLanguage(lang);
             languageSelectorOverlay.classList.remove('active');
-            
-
         });
     });
-    
+
     // Cerrar selector al hacer clic fuera
     languageSelectorOverlay.addEventListener('click', function(e) {
         if (e.target === languageSelectorOverlay) {
