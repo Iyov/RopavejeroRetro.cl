@@ -412,7 +412,7 @@ const translations = {
         
         // Hero
         'hero-title': 'Bienvenidos a @Ropavejero.Retro<br/>Todo lo Retro en un solo lugar',
-        'hero-subtitle': 'Consolas, juegos y accesorios retro originales americanos. Revive la nostalgia de los videojuegos clásicos.',
+        'hero-subtitle': 'Tienda de videojuegos, consolas, accesorios y coleccionables retro. Revive la nostalgia de los videojuegos clásicos.',
         'instagram-button': 'Ir a Instagram',
         
         // Instagram
@@ -571,7 +571,7 @@ const translations = {
         
         // Hero
         'hero-title': 'Welcome to @Ropavejero.Retro<br/>Everything Retro in one place',
-        'hero-subtitle': 'Original American retro consoles, games and accessories. Relive the nostalgia of classic video games.',
+        'hero-subtitle': 'Video game store with consoles, accessories, and retro collectibles. Relive the nostalgia of classic video games.',
         'instagram-button': 'Go to Instagram',
         
         // Instagram
