@@ -1,7 +1,106 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-03-16 01:14:18
+// Última actualización: 2026-03-17 01:06:09
 
 const INSTAGRAM_POSTS_DATA = [
+    {
+        "id": "ig_auto_18175707910377145",
+        "image": "img/IG_18175707910377145.jpeg",
+        "title": "Nintendo Wii | 13/Mar/26",
+        "description": "\n[✅] 3877 Harry Potter Deathly Hallows Part 1 (CIB) [Wii] $15K\n[✅] 3878 Mario Kart Wii (MM) [Wii] $15K\n[✅] 3879 WWE Smackdown vs Raw 2008 (CIB) [Wii] $15K\n[✅] 3880 WWE Smackdown vs Raw 2010 (MM) [Wii] $12K\n[❌] 3881 Crash of the Titans (CIB) [Wii] $12K\n[❌] 3882 Disney Epic Mickey (CIB) [Wii] $8K\n[✅] 3883 PES 2012 (MM-CR) [Wii] $6K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual\nMM: Sin Manual\nCR: Carátula Rayada",
+        "link": "https://www.instagram.com/p/DV2NTXbFfaq/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-03-14"
+    },
+    {
+        "id": "ig_auto_18104183341887528",
+        "image": "img/IG_18104183341887528.jpeg",
+        "title": "PlayStation 2 | 13/Mar/26",
+        "description": "\n[✅] 3870 Sega Soccer Slam (BL-CIB) [PS2] $15K\n[✅] 3871 Ratchet & Clank (GH-MM) [PS2] $10K\n[✅] 3872 Chronicles of Narnia (BL-MM) [PS2] $8K\n[✅] 3873 Singstar Pop (BL-MM) [PS2] $8K\n[✅] 3874 Atv Offroad Fury (BL-MM) [PS2] $7K\n[✅] 3875 Duel Masters (BL-MM-WD) [PS2] $6K\n[✅] 3876 ESPN International Winter Sports 2002 (BL-MM) [PS2] $4K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nGH: Greatest Hits\nCIB: Caja, Juego, Manual\nMM: Sin Manual\nWD: Water Damaged / Daño de Agua",
+        "link": "https://www.instagram.com/p/DV2LjIflX7U/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-03-14"
+    },
+    {
+        "id": "ig_auto_17888398707446498",
+        "image": "img/IG_17888398707446498.jpeg",
+        "title": "Nintendo 64 | 13/Mar/26",
+        "description": "\n[✅] 3867 Mario Tennis (Japo) [N64] $8K\n[✅] 3868 Mario Golf (Japo) [N64] $8K\n[✅] 3869 Pokemon Snap (Japo) [N64] $8K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nJapo: Japonés",
+        "link": "https://www.instagram.com/p/DV2JvBZFWIH/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-03-14"
+    },
+    {
+        "id": "ig_auto_18039043958769550",
+        "image": "img/IG_18039043958769550.jpeg",
+        "title": "[✅] 3864 Silent Hill HD Collection (BL-CIB) [PS3] $30K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nCIB: Caja, Juego, Manual",
+        "link": "https://www.instagram.com/p/DV2Gkh1FRsD/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-03-14"
+    },
+    {
+        "id": "ig_auto_18258015586295629",
+        "image": "img/IG_18258015586295629.jpeg",
+        "title": "[✅] 3863 Virtua Tennis (CIB) [DreamCast] $42K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual",
+        "link": "https://www.instagram.com/p/DV2F6WjFWuQ/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-03-14"
+    },
+    {
+        "id": "ig_auto_17984388509956269",
+        "image": "img/IG_17984388509956269.jpeg",
+        "title": "[✅] 3862 Power Stone (CIB) [DreamCast] $90K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual",
+        "link": "https://www.instagram.com/p/DV2FQcClXpO/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-03-14"
+    },
+    {
+        "id": "ig_auto_18001713173907575",
+        "image": "img/IG_18001713173907575.jpeg",
+        "title": "Nintendo GameCube | 13/Mar/26",
+        "description": "\n[✅] 3859 Super Mario Strikers (MM) [GC] $45K\n[✅] 3860 Metroid Prime (MM) [GC] $42K\n[✅] 3861 Star Wars Rebel Strike (MM) [GC] $32K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nMM: Sin Manual",
+        "link": "https://www.instagram.com/p/DV2D-V_FbKm/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-03-14"
+    },
+    {
+        "id": "ig_auto_18070865726227512",
+        "image": "img/IG_18070865726227512.jpeg",
+        "title": "[✅] 3858 Resident Evil 2 (BL-MM-2D) [PS1] $70K",
+        "description": "\nSiglas:\nBL: Black Label\nMM: Sin Manual\n2D: Dos Discos",
+        "link": "https://www.instagram.com/p/DV2DMCqFbNp/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-03-14"
+    },
+    {
+        "id": "ig_auto_17881039875387202",
+        "image": "img/IG_17881039875387202.jpeg",
+        "title": "[✅] 3856 Daffy Duck Marvin Missions (LW) [SNES] $20K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nLW: Label Dañado",
+        "link": "https://www.instagram.com/p/DV2CHU_lcZa/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-03-14"
+    },
+    {
+        "id": "ig_auto_17999589350910911",
+        "image": "img/IG_17999589350910911.jpeg",
+        "title": "Somos 8.000! Gracias a todos los ropavejeros, esperamos seguir creciendo juntos! 🙌🏻👏🏻💪🏻",
+        "description": "",
+        "link": "https://www.instagram.com/p/DVwEmp4gT0C/",
+        "media_type": "IMAGE",
+        "date": "2026-03-11"
+    },
+    {
+        "id": "ig_auto_18170813791392948",
+        "image": "img/IG_18170813791392948.jpeg",
+        "title": "🎮 ¿Tienes juegos o coleccionables para vender? En @Ropavejero.Retro te ayudamos. 🔥",
+        "description": "\n✅ Cómo funciona:\n1. 📩 Escríbenos por DM con fotos de lo que quieras vender.\n2. 🔍 Evaluamos si es algo que nos interese (nos reservamos el derecho de aceptar).\n3. 📦 Tú nos entregas o envías los productos (costo de envío por tu cuenta).\n4. 🛠️ Nosotros nos encargamos de: publicidad, packing, envío y postventa.\n5. ⏳ Publicamos por máximo 1 o 2 mes. Si no se vende, se devuelve (costo de devolución por tú cuenta).\n6. 💰 Por cada venta, aplicamos una comisión (mínimo $5.000 por artículo).\n7. 🔁 Si no se vende y nos interesa, podemos permutarlo o comprarlo.\n8. 💸 Pagos rápidos y reporte vía Excel con valores finales.\n\n⚠️ Importante:\n- No hacemos listas de precios (nuestro conocimiento también tiene valor).\n- Nos reservamos el derecho de admisión (no vendemos a posibles estafadores).\n- Servicio ideal para personas o tiendas que están empezando o necesitan liquidar rápido.\n\n📲 ¿Te interesa? Escríbenos por DM.",
+        "link": "https://www.instagram.com/p/DVtW5nLAVHd/",
+        "media_type": "IMAGE",
+        "date": "2026-03-10"
+    },
     {
         "id": "ig_auto_17920957479266936",
         "image": "img/IG_17920957479266936.jpeg",
@@ -62,15 +161,6 @@ const INSTAGRAM_POSTS_DATA = [
         "title": "[✅] 3816 Álbum Robotech 22 LN/2 LE + 71 LSR $100K",
         "description": "\n- Álbum Robotech amarillo original Salo 1985.\n- Sin páginas sueltas o recortadas, buen estado.\n- LN: 22/180, LE: 2/25.\n- 71 LSR: Láminas sin Repetir recicladas incluidas, algunos escudos además.\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nLN: Láminas Normales\nLE: Láminas Especiales\nLSR: Láminas sin Repetir",
         "link": "https://www.instagram.com/p/DUPMjQqDN6K/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-02-02"
-    },
-    {
-        "id": "ig_auto_18069122702551196",
-        "image": "img/IG_18069122702551196.jpeg",
-        "title": "PS2 | 01/Feb/26",
-        "description": "\n[❌] 3808\tHarry Potter Chamber of Secrets (BL-CIB) [PS2] $15K\n[❌] 3809\tHarry Potter and the Goblet of Fire (BL-CIB) [PS2] $15K\n[❌] 3810\tHarry Potter Prisoner of Azkaban (BL-CIB) [PS2] $15K\n[❌] 3811\tSoul Calibur II (BL-CIB-2D) [PS2] $25K\n[❌] 3812\tStreet Fighter Anniversary (BL-CIB) [PS2] $25K\n[✅] 3813\tNaruto Uzumaki Chronicles (BL-MM) [PS2] $10K\n[❌] 3814\tDragon Ball Z Budokai 2 (BL-MM) [PS2] $20K\n[❌] 3815\tGTA San Andreas (BL-MM) [PS2] $20K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nGH: Greatest Hits\nCIB: Caja, Juego, Manual\nMM: Sin Manual\n2D: Dos Discos",
-        "link": "https://www.instagram.com/p/DUPGu_hlQu3/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-02-02"
     },
@@ -141,7 +231,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_17867016285552189",
         "image": "img/IG_17867016285552189.jpeg",
         "title": "PS2 Sueltos [2] | 25/Ene/26",
-        "description": "\n[❌] 3711\tMortal Kombat Deadly Alliance (GH-L) [PS2 (L)] $12K\n[✅] 3712\tMortal Kombat Shaolin Monks (BL-L) [PS2 (L)] $25K\n[❌] 3713\tWWE Smackdown Here Comes the Pain (GH-L) [PS2 (L)] $20K\n[✅] 3714\tWWE Smackdown vs Raw 2007 (GH-L) [PS2 (L)] $12K\n[✅] 3715\tWWE Smackdown vs Raw 2008 (GH-L) [PS2 (L)] $12K\n[✅] 3716\tGTA III (BL-L) [PS2 (L)] $8K\n[✅] 3717\tGTA Vice City (BL-L) [PS2 (L)] $10K\n[✅] 3718\tGTA Vice City (BL-L) [PS2 (L)] $10K\n[❌] 3719\tDragon Ball Z Budokai 3 (GH-L) [PS2 (L)] $18K\n[❌] 3720\tStar Wars Episode III Revenge of the Sith (BL-L) [PS2 (L)] $8K\n[✅] 3721\tStar Wars Episode III Revenge of the Sith (BL-L) [PS2 (L)] $8K\n[✅] 3722\tSly 2 (GH-L) [PS2 (L)] $8K\n[✅] 3723\tSly 3 (GH-L) [PS2 (L)] $8K\n[✅] 3724\tTony Hawk Proving Ground (BL-L) [PS2 (L)] $7K\n[✅] 3725\tTony Hawk Project 8 (BL-L) [PS2 (L)] $7K\n[✅] 3726\tJak 3 (GH-L) [PS2 (L)] $7K\n[❌] 3727\tGran Turismo 3 (BL-L) [PS2 (L)] $5K\n[✅] 3728\tCrash Bandicoot The Wrath of Cortex (BL-L) [PS2 (L)] $10K\n[✅] 3729\tZone of the Enders 2nd Runner (BL-L) [PS2 (L)] $20K\n[❌] 3730\tWinning Eleven 7 (BL-L) [PS2 (L)] $7K\n[✅] 3731\tRainbow Six Lockdown (BL-L) [PS2 (L)] $5K\n[❌] 3732\tStar Wars Starfighter (BL-L) [PS2 (L)] $5K\n[✅] 3733\tGhost Recon 2 (BL-L) [PS2 (L)] $5K\n[✅] 3734\tSpiderman (BL-L-PAL) [PS2 (L)] $8K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nGH: Greatest Hits\nCE: Collector's Edition\nL: Loose: Suelto: Solo Juego\nPAL: Europeo",
+        "description": "\n[❌] 3711\tMortal Kombat Deadly Alliance (GH-L) [PS2 (L)] $12K\n[❌] 3712\tMortal Kombat Shaolin Monks (BL-L) [PS2 (L)] $25K\n[❌] 3713\tWWE Smackdown Here Comes the Pain (GH-L) [PS2 (L)] $20K\n[✅] 3714\tWWE Smackdown vs Raw 2007 (GH-L) [PS2 (L)] $12K\n[✅] 3715\tWWE Smackdown vs Raw 2008 (GH-L) [PS2 (L)] $12K\n[✅] 3716\tGTA III (BL-L) [PS2 (L)] $8K\n[✅] 3717\tGTA Vice City (BL-L) [PS2 (L)] $10K\n[✅] 3718\tGTA Vice City (BL-L) [PS2 (L)] $10K\n[❌] 3719\tDragon Ball Z Budokai 3 (GH-L) [PS2 (L)] $18K\n[❌] 3720\tStar Wars Episode III Revenge of the Sith (BL-L) [PS2 (L)] $8K\n[✅] 3721\tStar Wars Episode III Revenge of the Sith (BL-L) [PS2 (L)] $8K\n[✅] 3722\tSly 2 (GH-L) [PS2 (L)] $8K\n[✅] 3723\tSly 3 (GH-L) [PS2 (L)] $8K\n[❌] 3724\tTony Hawk Proving Ground (BL-L) [PS2 (L)] $7K\n[❌] 3725\tTony Hawk Project 8 (BL-L) [PS2 (L)] $7K\n[✅] 3726\tJak 3 (GH-L) [PS2 (L)] $7K\n[❌] 3727\tGran Turismo 3 (BL-L) [PS2 (L)] $5K\n[✅] 3728\tCrash Bandicoot The Wrath of Cortex (BL-L) [PS2 (L)] $10K\n[✅] 3729\tZone of the Enders 2nd Runner (BL-L) [PS2 (L)] $20K\n[❌] 3730\tWinning Eleven 7 (BL-L) [PS2 (L)] $7K\n[✅] 3731\tRainbow Six Lockdown (BL-L) [PS2 (L)] $5K\n[❌] 3732\tStar Wars Starfighter (BL-L) [PS2 (L)] $5K\n[✅] 3733\tGhost Recon 2 (BL-L) [PS2 (L)] $5K\n[✅] 3734\tSpiderman (BL-L-PAL) [PS2 (L)] $8K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nGH: Greatest Hits\nCE: Collector's Edition\nL: Loose: Suelto: Solo Juego\nPAL: Europeo",
         "link": "https://www.instagram.com/p/DT9E3WLFVc_/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-01-26"
