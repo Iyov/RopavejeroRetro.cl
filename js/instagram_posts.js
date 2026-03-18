@@ -1,7 +1,16 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-03-18 01:10:02
+// Última actualización: 2026-03-18 15:23:31
 
 const INSTAGRAM_POSTS_DATA = [
+    {
+        "id": "ig_auto_18110774335702799",
+        "image": "img/IG_18110774335702799.jpeg",
+        "title": "Ferias Retro de Marzo/2026:",
+        "description": "\nDom 29/Mar: Feria Retro Back To School\n📍 Centro Cultural Rojas Magallanes\n📌 Estados Unidos 8741, La Florida\n🚇 Metro Rojas Magallanes, L4\n\n🕒 De 12:00 a 19:00 hrs\n🎟 Entrada liberada\n🎮 Llevaremos nuestros juegos\n¡Nos vemos!\n\n#FeriaRetro #FeriaRetroRojasMagallanes",
+        "link": "https://www.instagram.com/p/DWBxEtfgXPa/",
+        "media_type": "IMAGE",
+        "date": "2026-03-18"
+    },
     {
         "id": "ig_auto_17879258121393287",
         "image": "img/IG_17879258121393287.jpeg",
@@ -109,24 +118,6 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DVlypJblQNp/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-03-07"
-    },
-    {
-        "id": "ig_auto_18071761007140852",
-        "image": "img/IG_18071761007140852.jpeg",
-        "title": "DVD Musicales | 03/Feb/26",
-        "description": "\n[✅] 3847\tKISS Love Gun (2007-Sellado) [DVD] $4K\n[❌] 3848\tNirvana Nevermind (2004) [DVD] $5K\n[❌] 3849\tBon Jovi This Left Feels Right Live (2004) [DVD] $3K\n[✅] 3850\tWhitesnake Live at Seibu, Tokyo (2008) [DVD] $3K\n[❌️] 3851\tRoger Waters in the flesh - live (2007) [DVD] $4K\n[✅] 3852\tJoe Satriani, Eric Johnson, Steve Vai, G3 Live in Concert (1997) [DVD] $3K\n[✅] 3853\t5 alarm music (2D) [DVD] $2K\n[✅] 3854\tGreen Day Life without Warning (Live in the US & UK 1999) [DVD] $4K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\n2D: Dos Discos",
-        "link": "https://www.instagram.com/p/DUUcB2KDJmM/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-02-04"
-    },
-    {
-        "id": "ig_auto_17902748031199245",
-        "image": "img/IG_17902748031199245.jpeg",
-        "title": "DVD | 03/Feb/26",
-        "description": "\n[✅] 3840\t31 Minutos - La Primera Temporada (4D)\tDVD\t$8K\n[✅] 3841\t31 Minutos - La Segunda Temporada (Falta disc 1-4D)\tDVD\t$8K\n[✅] 3842\t31 Minutos - La Primera Temporada (4D)\tDVD\t$8K\n[✅] 3843\tBatman y Superman La Película\tDVD\t$2K\n[✅] 3844\tLiga de la Justicia Crisis en Dos Mundos\tDVD\t$2K\n[❌] 3845\tSuperman El Último Hijo de Krypton (Sellado)\tDVD\t$3K\n[❌] 3846\tBatman El Caballero de Ciudad Gótica (Sellado)\tDVD\t$3K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\n4D: Cuatro Discos",
-        "link": "https://www.instagram.com/p/DUUXgvFjBph/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-02-04"
     },
     {
         "id": "ig_auto_18110866735659338",

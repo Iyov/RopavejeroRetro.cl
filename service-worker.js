@@ -1,6 +1,6 @@
 // ========== SERVICE WORKER - ROPAVEJERO RETRO ==========
 // Versión del caché - Incrementar cuando actualices recursos
-const CACHE_VERSION = 'ropavejero-v2026-03-18_0110';
+const CACHE_VERSION = 'ropavejero-v2026-03-18_1523';
 const CACHE_NAME = `${CACHE_VERSION}-static`;
 const DATA_CACHE_NAME = `${CACHE_VERSION}-data`;
 
@@ -32,6 +32,10 @@ const STATIC_RESOURCES = [
 
 // Recursos de Instagram (imágenes de posts WebP responsive y fallbacks)
 const INSTAGRAM_IMAGES = [
+    '/img/IG_18110774335702799.jpeg',
+    '/img/IG_18110774335702799-400.webp',
+    '/img/IG_18110774335702799-800.webp',
+    '/img/IG_18110774335702799-1200.webp',
     '/img/IG_17879258121393287.jpeg',
     '/img/IG_17879258121393287-400.webp',
     '/img/IG_17879258121393287-800.webp',
@@ -80,14 +84,6 @@ const INSTAGRAM_IMAGES = [
     '/img/IG_17920957479266936-400.webp',
     '/img/IG_17920957479266936-800.webp',
     '/img/IG_17920957479266936-1200.webp',
-    '/img/IG_18071761007140852.jpeg',
-    '/img/IG_18071761007140852-400.webp',
-    '/img/IG_18071761007140852-800.webp',
-    '/img/IG_18071761007140852-1200.webp',
-    '/img/IG_17902748031199245.jpeg',
-    '/img/IG_17902748031199245-400.webp',
-    '/img/IG_17902748031199245-800.webp',
-    '/img/IG_17902748031199245-1200.webp',
     '/img/IG_18110866735659338.jpeg',
     '/img/IG_18110866735659338-400.webp',
     '/img/IG_18110866735659338-800.webp',
