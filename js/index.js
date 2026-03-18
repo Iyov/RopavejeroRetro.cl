@@ -118,7 +118,7 @@ function clearAllCache() {
 // Cargar siglas desde JSON
 async function loadSiglas() {
     try {
-        const response = await fetch('js/siglas.json?v=2026-03-18_1');
+        const response = await fetch('js/siglas.json?v=2026-03-18_2');
         if (!response.ok) {
             throw new Error('Error loading siglas');
         }
@@ -274,6 +274,78 @@ function validateProductData(product) {
         Link: sanitizeHTML(String(product.Link || '')),
         Sold: soldValue
     };
+}
+
+function parseProductPrice(value) {
+    if (value === null || value === undefined) return null;
+
+    const normalized = String(value).trim().toUpperCase();
+    if (!normalized || normalized === 'X') return null;
+
+    const match = normalized.match(/(\d+(?:[.,]\d+)?)/);
+    if (!match) return null;
+
+    let amount = parseFloat(match[1].replace(',', '.'));
+    if (Number.isNaN(amount)) return null;
+
+    if (normalized.includes('K')) {
+        amount *= 1000;
+    }
+
+    return amount;
+}
+
+function compareNullableNumbers(a, b, direction = 'asc') {
+    const aIsNull = a === null || a === undefined || Number.isNaN(a);
+    const bIsNull = b === null || b === undefined || Number.isNaN(b);
+
+    if (aIsNull && bIsNull) return 0;
+    if (aIsNull) return 1;
+    if (bIsNull) return -1;
+
+    return direction === 'desc' ? b - a : a - b;
+}
+
+function sortProducts(products, sortValue) {
+    const collator = new Intl.Collator('es', { sensitivity: 'base', numeric: true });
+    const sortableProducts = [...products];
+
+    sortableProducts.sort((a, b) => {
+        const safeA = validateProductData(a);
+        const safeB = validateProductData(b);
+
+        switch (sortValue) {
+            case 'price-asc': {
+                const priceComparison = compareNullableNumbers(
+                    parseProductPrice(safeA?.Neto),
+                    parseProductPrice(safeB?.Neto),
+                    'asc'
+                );
+                return priceComparison || ((safeA?.Num || 0) - (safeB?.Num || 0));
+            }
+            case 'price-desc': {
+                const priceComparison = compareNullableNumbers(
+                    parseProductPrice(safeA?.Neto),
+                    parseProductPrice(safeB?.Neto),
+                    'desc'
+                );
+                return priceComparison || ((safeA?.Num || 0) - (safeB?.Num || 0));
+            }
+            case 'name-asc':
+                return collator.compare(safeA?.Product || '', safeB?.Product || '') || ((safeA?.Num || 0) - (safeB?.Num || 0));
+            case 'name-desc':
+                return collator.compare(safeB?.Product || '', safeA?.Product || '') || ((safeA?.Num || 0) - (safeB?.Num || 0));
+            case 'platform-asc':
+                return collator.compare(safeA?.Platform || '', safeB?.Platform || '') ||
+                    collator.compare(safeA?.Product || '', safeB?.Product || '') ||
+                    ((safeA?.Num || 0) - (safeB?.Num || 0));
+            case 'id-asc':
+            default:
+                return (safeA?.Num || 0) - (safeB?.Num || 0);
+        }
+    });
+
+    return sortableProducts;
 }
 
 // Función para manejo seguro de errores
@@ -444,10 +516,13 @@ const translations = {
         'filter-platform': 'Plataforma:',
         'filter-platform-search': 'Buscar plataforma...',
         'filter-all': 'Todas',
-        'filter-status': 'Estado:',
-        'filter-all-status': 'Todos',
-        'filter-available': 'Disponibles',
-        'filter-sold': 'Vendidos',
+        'filter-sort': 'Ordenar por:',
+        'sort-id-asc': 'Número ID',
+        'sort-price-asc': 'Precio: Ascendente',
+        'sort-price-desc': 'Precio: Descendente',
+        'sort-name-asc': 'Nombre: A-Z',
+        'sort-name-desc': 'Nombre: Z-A',
+        'sort-platform-asc': 'Plataforma',
         'clear-filters': 'Limpiar',
         'clear-cache': 'Actualizar',
         'platforms-selected': 'plataformas seleccionadas',
@@ -603,10 +678,13 @@ const translations = {
         'filter-platform': 'Platform:',
         'filter-platform-search': 'Search platform...',
         'filter-all': 'All',
-        'filter-status': 'Status:',
-        'filter-all-status': 'All',
-        'filter-available': 'Available',
-        'filter-sold': 'Sold',
+        'filter-sort': 'Sort by:',
+        'sort-id-asc': 'ID number',
+        'sort-price-asc': 'Price: Low to high',
+        'sort-price-desc': 'Price: High to low',
+        'sort-name-asc': 'Name: A-Z',
+        'sort-name-desc': 'Name: Z-A',
+        'sort-platform-asc': 'Platform',
         'clear-filters': 'Clear',
         'clear-cache': 'Refresh',
         'platforms-selected': 'platforms selected',
@@ -1111,7 +1189,7 @@ let searchTimeout = null; // Para debounce de búsqueda
 function getProductsUrlState() {
     const params = new URLSearchParams(window.location.search);
     const search = params.get('q') || '';
-    const status = params.get('status') || 'all';
+    const sort = params.get('sort') || 'id-asc';
     const page = Math.max(parseInt(params.get('page') || '1', 10) || 1, 1);
     const platforms = (params.get('platform') || '')
         .split(',')
@@ -1120,7 +1198,7 @@ function getProductsUrlState() {
 
     return {
         search,
-        status: ['all', 'available', 'sold'].includes(status) ? status : 'all',
+        sort: ['id-asc', 'price-asc', 'price-desc', 'name-asc', 'name-desc', 'platform-asc'].includes(sort) ? sort : 'id-asc',
         page,
         platforms
     };
@@ -1132,15 +1210,15 @@ function replaceProductsUrlState() {
     }
 
     const searchValue = (document.getElementById('searchFilter')?.value || '').trim();
-    const statusValue = document.getElementById('statusFilter')?.value || 'all';
+    const sortValue = document.getElementById('sortFilter')?.value || 'id-asc';
     const params = new URLSearchParams();
 
     if (searchValue) {
         params.set('q', searchValue);
     }
 
-    if (statusValue !== 'all') {
-        params.set('status', statusValue);
+    if (sortValue !== 'id-asc') {
+        params.set('sort', sortValue);
     }
 
     if (!selectedPlatforms.has('all')) {
@@ -1158,14 +1236,14 @@ function replaceProductsUrlState() {
 function applyProductsUrlState() {
     const state = getProductsUrlState();
     const searchFilter = document.getElementById('searchFilter');
-    const statusFilter = document.getElementById('statusFilter');
+    const sortFilter = document.getElementById('sortFilter');
 
     if (searchFilter) {
         searchFilter.value = state.search;
     }
 
-    if (statusFilter) {
-        statusFilter.value = state.status;
+    if (sortFilter) {
+        sortFilter.value = state.sort;
     }
 
     currentPage = state.page;
@@ -1178,7 +1256,7 @@ function initProducts() {
     window._productsInitialized = true;
 
     const searchFilter = document.getElementById('searchFilter');
-    const statusFilter = document.getElementById('statusFilter');
+    const sortFilter = document.getElementById('sortFilter');
     const clearFiltersBtn = document.getElementById('clearFilters');
     const prevPageBtn = document.getElementById('prevPage');
     const nextPageBtn = document.getElementById('nextPage');
@@ -1198,10 +1276,8 @@ function initProducts() {
             const searchTerm = searchFilter.value.trim();
         }, 300); // Espera 300ms después de dejar de escribir
     });
-    statusFilter.addEventListener('change', () => {
+    sortFilter.addEventListener('change', () => {
         filterProducts();
-        
-
     });
     clearFiltersBtn.addEventListener('click', clearFilters);
     
@@ -1302,8 +1378,7 @@ async function loadProducts() {
         allProducts = cachedProducts;
         filteredProducts = [...cachedProducts];
         updatePlatformFilter(cachedProducts);
-        renderProductsTable();
-        updateProductsCounter();
+        filterProducts();
         return;
     }
     
@@ -1359,12 +1434,8 @@ async function loadProducts() {
             
             // Actualizar filtro de plataformas
             updatePlatformFilter(products);
-            
-            // Renderizar tabla
-            renderProductsTable();
-            
-            // Actualizar contador
-            updateProductsCounter();
+
+            filterProducts();
             
             console.info(`✅ ${products.length} productos cargados exitosamente`);
             return; // Éxito, salir del bucle
@@ -2030,9 +2101,9 @@ function removePlatformSelection(platform) {
 // Filtrar productos - MULTI-SELECT CON FILTRADO DINÁMICO
 function filterProducts() {
     const searchFilter = document.getElementById('searchFilter').value.toLowerCase();
-    const statusFilter = document.getElementById('statusFilter').value;
+    const sortFilter = document.getElementById('sortFilter').value;
     
-    // Primero filtrar por búsqueda de texto y estado para obtener productos relevantes
+    // Primero filtrar por búsqueda de texto para obtener productos relevantes
     let searchFilteredProducts = allProducts.filter(product => {
         // Filtrar por búsqueda de texto
         if (searchFilter) {
@@ -2044,15 +2115,6 @@ function filterProducts() {
                 return false;
             }
         }
-        
-        // Filtrar por estado
-        if (statusFilter === 'available' && product.Sold === 1) {
-            return false;
-        }
-        if (statusFilter === 'sold' && product.Sold === 0) {
-            return false;
-        }
-        
         return true;
     });
     
@@ -2070,6 +2132,8 @@ function filterProducts() {
         
         return true;
     });
+
+    filteredProducts = sortProducts(filteredProducts, sortFilter);
     
     // Resetear a página 1
     const requestedPage = currentPage;
@@ -2090,8 +2154,8 @@ function clearFilters() {
     // Limpiar búsqueda
     document.getElementById('searchFilter').value = '';
     
-    // Limpiar estado
-    document.getElementById('statusFilter').value = 'all';
+    // Restaurar orden por defecto
+    document.getElementById('sortFilter').value = 'id-asc';
     
     // Limpiar búsqueda de plataformas
     const platformSearchInput = document.getElementById('platformSearchInput');

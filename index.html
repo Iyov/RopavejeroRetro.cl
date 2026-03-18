@@ -105,11 +105,11 @@
       .hero-buttons{display:flex;justify-content:center;gap:15px}
     </style>
 
-    <link rel="preload" href="css/index.min.css?v=2026-03-18_1" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="css/index.min.css?v=2026-03-18_1"></noscript>
+    <link rel="preload" href="css/index.min.css?v=2026-03-18_2" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/index.min.css?v=2026-03-18_2"></noscript>
     
     <!-- Preload de recursos críticos -->
-    <link rel="preload" href="js/index.min.js?v=2026-03-18_1" as="script" />
+    <link rel="preload" href="js/index.min.js?v=2026-03-18_2" as="script" />
     <!-- Preload LCP: imagen principal del hero (local WebP) - solo tamaño apropiado -->
     <link rel="preload" href="img/hero-1200.webp" as="image" media="(min-width: 768px)" />
     <link rel="preload" href="img/hero-800.webp" as="image" media="(max-width: 767px)" />
@@ -667,11 +667,14 @@
                         </div>
                     </div>
                     <div class="filter-group">
-                        <label for="statusFilter" data-translate="filter-status">Estado:</label>
-                        <select id="statusFilter" class="filter-select" aria-label="Filtrar por estado del producto">
-                            <option value="all" data-translate="filter-all-status">Todos</option>
-                            <option value="available" data-translate="filter-available">Disponibles</option>
-                            <option value="sold" data-translate="filter-sold">Vendidos</option>
+                        <label for="sortFilter" data-translate="filter-sort">Ordenar por:</label>
+                        <select id="sortFilter" class="filter-select" aria-label="Ordenar listado de productos">
+                            <option value="id-asc" data-translate="sort-id-asc">Número ID</option>
+                            <option value="price-asc" data-translate="sort-price-asc">Precio: Ascendente</option>
+                            <option value="price-desc" data-translate="sort-price-desc">Precio: Descendente</option>
+                            <option value="name-asc" data-translate="sort-name-asc">Nombre: A-Z</option>
+                            <option value="name-desc" data-translate="sort-name-desc">Nombre: Z-A</option>
+                            <option value="platform-asc" data-translate="sort-platform-asc">Plataforma</option>
                         </select>
                     </div>
                     <button id="clearFilters" class="btn btn-secondary" data-translate="clear-filters" aria-label="Limpiar todos los filtros">Limpiar</button>
@@ -1073,7 +1076,7 @@
                 if (window._instagramScriptLoaded) return;
                 window._instagramScriptLoaded = true;
                 const s = document.createElement('script');
-                s.src = 'js/instagram_posts.min.js?v=2026-03-18_1';
+                s.src = 'js/instagram_posts.min.js?v=2026-03-18_2';
                 s.async = true;
                 s.onload = function(){
                     console.info('📸 instagram_posts.js cargado (lazy)');
@@ -1098,8 +1101,8 @@
             }
         })();
     </script>
-    <script src="js/seo-analytics.js?v=2026-03-18_1" defer></script>
-    <script src="js/index.min.js?v=2026-03-18_1" defer></script>
+    <script src="js/seo-analytics.js?v=2026-03-18_2" defer></script>
+    <script src="js/index.min.js?v=2026-03-18_2" defer></script>
     
     <!-- Service Worker Registration (defer to not block page load) -->
     <script defer>
