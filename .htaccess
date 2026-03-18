@@ -71,7 +71,7 @@ RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 # Headers de rendimiento mejorados
 <IfModule mod_headers.c>
     # Content Security Policy (Producción)
-    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://docs.google.com https://static.cloudflareinsights.com https://cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https://docs.google.com https://cloudflareinsights.com https://static.cloudflareinsights.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://docs.google.com https://static.cloudflareinsights.com https://cloudflareinsights.com https://www.googletagmanager.com https://tagmanager.google.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https://docs.google.com https://cloudflareinsights.com https://static.cloudflareinsights.com https://www.googletagmanager.com https://tagmanager.google.com https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://region1.analytics.google.com; frame-src https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
     
     # Security Headers
     Header always set X-Content-Type-Options nosniff

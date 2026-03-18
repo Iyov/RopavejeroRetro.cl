@@ -9,10 +9,10 @@
     <meta name="description" content="Política de seguridad y divulgación responsable de vulnerabilidades de Ropavejero Retro. Reporta vulnerabilidades de forma segura." />
     <meta name="keywords" content="política de seguridad, divulgación responsable, vulnerabilidades, seguridad web, ropavejero retro" />
     <meta name="author" content="Ropavejero Retro" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="noindex, follow" />
     
     <!-- Security Headers -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://tagmanager.google.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://www.googletagmanager.com https://tagmanager.google.com https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://region1.analytics.google.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://tagmanager.google.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://www.googletagmanager.com https://tagmanager.google.com https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://region1.analytics.google.com; frame-src https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
@@ -40,28 +40,13 @@
       .logo{display:flex;align-items:center;gap:8px;cursor:pointer}
     </style>
     
-    <link rel="preload" href="css/index.min.css?v=2026-03-16_5" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="css/index.min.css?v=2026-03-16_5"></noscript>
-    
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GCE8SP8NBZ"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-GCE8SP8NBZ');
-    </script>
-    
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-5D6LZB66');</script>
-    <!-- End Google Tag Manager -->
+    <link rel="preload" href="css/index.min.css?v=2026-03-18_1" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/index.min.css?v=2026-03-18_1"></noscript>
     
     <!-- CSS -->
-    
+</head>
+
+<body data-page-type="security-policy">
     <!-- Skip to content link -->
     <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
     
@@ -231,7 +216,8 @@
         </button>
     </div>
 
-    <script src="js/index.min.js?v=2026-03-16_5" defer></script>
+    <script src="js/seo-analytics.js?v=2026-03-18_1" defer></script>
+    <script src="js/index.min.js?v=2026-03-18_1" defer></script>
 </body>
 
 </html>

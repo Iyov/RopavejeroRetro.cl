@@ -2,8 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /private/
-Disallow: /*.json$
-Disallow: /js/efemerides.json
 
 # Crawl-delay for specific bots
 User-agent: Bingbot

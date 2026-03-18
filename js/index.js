@@ -118,7 +118,7 @@ function clearAllCache() {
 // Cargar siglas desde JSON
 async function loadSiglas() {
     try {
-        const response = await fetch('js/siglas.json?v=2026-03-17_1');
+        const response = await fetch('js/siglas.json?v=2026-03-18_1');
         if (!response.ok) {
             throw new Error('Error loading siglas');
         }
@@ -894,6 +894,7 @@ function setLanguage(lang) {
     // Recargar productos con el nuevo idioma
     if (window.productsData && window.productsData.length > 0) {
         renderProductsTable();
+        replaceProductsUrlState();
     }
 }
 // ========== BARRA DE PROGRESO ==========
@@ -1107,6 +1108,70 @@ const productsPerPage = 25;
 let selectedPlatforms = new Set(['all']); // Plataformas seleccionadas
 let searchTimeout = null; // Para debounce de búsqueda
 
+function getProductsUrlState() {
+    const params = new URLSearchParams(window.location.search);
+    const search = params.get('q') || '';
+    const status = params.get('status') || 'all';
+    const page = Math.max(parseInt(params.get('page') || '1', 10) || 1, 1);
+    const platforms = (params.get('platform') || '')
+        .split(',')
+        .map(value => decodeURIComponent(value.trim()))
+        .filter(Boolean);
+
+    return {
+        search,
+        status: ['all', 'available', 'sold'].includes(status) ? status : 'all',
+        page,
+        platforms
+    };
+}
+
+function replaceProductsUrlState() {
+    if (window.location.pathname !== '/productos' && !window.location.pathname.endsWith('/productos.html')) {
+        return;
+    }
+
+    const searchValue = (document.getElementById('searchFilter')?.value || '').trim();
+    const statusValue = document.getElementById('statusFilter')?.value || 'all';
+    const params = new URLSearchParams();
+
+    if (searchValue) {
+        params.set('q', searchValue);
+    }
+
+    if (statusValue !== 'all') {
+        params.set('status', statusValue);
+    }
+
+    if (!selectedPlatforms.has('all')) {
+        params.set('platform', Array.from(selectedPlatforms).sort().join(','));
+    }
+
+    if (currentPage > 1) {
+        params.set('page', String(currentPage));
+    }
+
+    const nextUrl = `${window.location.pathname}${params.toString() ? `?${params.toString()}` : ''}`;
+    window.history.replaceState({}, '', nextUrl);
+}
+
+function applyProductsUrlState() {
+    const state = getProductsUrlState();
+    const searchFilter = document.getElementById('searchFilter');
+    const statusFilter = document.getElementById('statusFilter');
+
+    if (searchFilter) {
+        searchFilter.value = state.search;
+    }
+
+    if (statusFilter) {
+        statusFilter.value = state.status;
+    }
+
+    currentPage = state.page;
+    window._pendingProductsPlatforms = state.platforms;
+}
+
 function initProducts() {
     // Evitar inicialización doble
     if (window._productsInitialized) return;
@@ -1118,6 +1183,8 @@ function initProducts() {
     const prevPageBtn = document.getElementById('prevPage');
     const nextPageBtn = document.getElementById('nextPage');
     
+    applyProductsUrlState();
+
     // Cargar productos
     loadProducts();
     
@@ -1803,6 +1870,30 @@ function updatePlatformFilter(products) {
         allCheckbox.removeEventListener('change', handleAllPlatformsSelection);
         allCheckbox.addEventListener('change', handleAllPlatformsSelection);
     }
+
+    if (Array.isArray(window._pendingProductsPlatforms) && window._pendingProductsPlatforms.length > 0) {
+        selectedPlatforms.clear();
+
+        window._pendingProductsPlatforms.forEach(platform => {
+            const checkbox = platformDropdown.querySelector(`input[value="${platform}"]`);
+            if (checkbox) {
+                checkbox.checked = true;
+                selectedPlatforms.add(platform);
+            }
+        });
+
+        if (selectedPlatforms.size === 0) {
+            selectedPlatforms.add('all');
+            if (allCheckbox) {
+                allCheckbox.checked = true;
+            }
+        } else if (allCheckbox) {
+            allCheckbox.checked = false;
+        }
+
+        window._pendingProductsPlatforms = [];
+        updatePlatformDisplay();
+    }
 }
 
 // Manejar selección de plataforma individual
@@ -1829,6 +1920,7 @@ function handlePlatformSelection(e) {
     
     updatePlatformDisplay();
     filterProducts();
+    replaceProductsUrlState();
 }
 
 // Manejar selección de "Todas las plataformas"
@@ -1980,15 +2072,17 @@ function filterProducts() {
     });
     
     // Resetear a página 1
-    currentPage = 1;
-    
+    const requestedPage = currentPage;
+    const totalPages = Math.max(Math.ceil(filteredProducts.length / productsPerPage), 1);
 
-    
+    currentPage = Math.min(requestedPage, totalPages);
+
     // Renderizar productos filtrados
     renderProductsTable();
     
     // Actualizar contador
     updateProductsCounter();
+    replaceProductsUrlState();
 }
 
 // Limpiar filtros - MULTI-SELECT CON RESET DE PLATAFORMAS Y BÚSQUEDA
