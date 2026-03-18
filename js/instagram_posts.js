@@ -1,7 +1,16 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-03-17 12:41:46
+// Última actualización: 2026-03-18 01:10:02
 
 const INSTAGRAM_POSTS_DATA = [
+    {
+        "id": "ig_auto_17879258121393287",
+        "image": "img/IG_17879258121393287.jpeg",
+        "title": "Ferias Friki de Marzo - Abril 2026:",
+        "description": "\nDom 22/Mar: Feria Friki Estación Central\n📍 Estadio Las Rejas\n📌 Los Maitenes 5820, Estación Central\n🚇 Metro Las Rejas, L1\n\nDom 12/Abr: Mega Feria Friki Cerrillos\n📍 Parque Bicentenario de Cerrillos\n📌 Av. Pedro Aguirre Cerda 6100, Cerrillos\n🚇 Metro Cerrillos, L6\n\n🕒 De 12:00 a 19:00 hrs\n🎟 Entrada liberada\n🎮 Llevaremos nuestros juegos\n¡Nos vemos!\n\n#FeriaFriki #FeriaFrikiEstacionCentral #MegaFeriaFriki",
+        "link": "https://www.instagram.com/p/DV_19aXAT5F/",
+        "media_type": "IMAGE",
+        "date": "2026-03-17"
+    },
     {
         "id": "ig_auto_18175707910377145",
         "image": "img/IG_18175707910377145.jpeg",
@@ -100,15 +109,6 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DVlypJblQNp/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-03-07"
-    },
-    {
-        "id": "ig_auto_18122212840518134",
-        "image": "img/IG_18122212840518134.jpeg",
-        "title": "@feriaretro.cl de Marzo/2026:",
-        "description": "\nSáb 07/Mar: Feria Retro Beer & Toys\n📍 Cervecería La Grifería\n📌 Loreley 87, La Reina\n🚇 Metro Fernando Castillo Velasco, L3\n\nDom 29/Mar: Feria Retro Back To School\n📍 Centro Cultural Rojas Magallanes\n📌 Estados Unidos 8741, La Florida\n🚇 Metro Rojas Magallanes, L4\n\n🕒 De 12:00 a 19:00 hrs\n🎟 Entrada liberada\n🎮 Llevaremos nuestros juegos\n¡Nos vemos!\n\n#FeriaRetro #FeriaRetroLaGriferia #FeriaRetroRojasMagallanes #RopavejeroRetro",
-        "link": "https://www.instagram.com/p/DVXJRFBlfs7/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-03-02"
     },
     {
         "id": "ig_auto_18071761007140852",
