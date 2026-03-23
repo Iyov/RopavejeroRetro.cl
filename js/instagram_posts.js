@@ -1,5 +1,5 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-03-22 01:09:04
+// Última actualización: 2026-03-23 01:10:25
 
 const INSTAGRAM_POSTS_DATA = [
     {
@@ -80,15 +80,6 @@ const INSTAGRAM_POSTS_DATA = [
         "title": "Nintendo GameCube | 13/Mar/26",
         "description": "\n[✅] 3859 Super Mario Strikers (MM) [GC] $45K\n[✅] 3860 Metroid Prime (MM) [GC] $42K\n[✅] 3861 Star Wars Rebel Strike (MM) [GC] $32K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nMM: Sin Manual",
         "link": "https://www.instagram.com/p/DV2D-V_FbKm/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-03-14"
-    },
-    {
-        "id": "ig_auto_18070865726227512",
-        "image": "img/IG_18070865726227512.jpeg",
-        "title": "[✅] 3858 Resident Evil 2 (BL-MM-2D) [PS1] $70K",
-        "description": "\nSiglas:\nBL: Black Label\nMM: Sin Manual\n2D: Dos Discos",
-        "link": "https://www.instagram.com/p/DV2DMCqFbNp/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-03-14"
     },
