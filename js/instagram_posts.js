@@ -1,12 +1,12 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-03-31 01:15:24
+// Última actualización: 2026-03-31 12:49:05
 
 const INSTAGRAM_POSTS_DATA = [
     {
         "id": "ig_auto_18046375097729709",
         "image": "img/IG_18046375097729709.jpeg",
         "title": "Nintendo Wii | 20/Mar/26",
-        "description": "\n[❌] 0527 Zumba Fitness (CIB) [Wii] $6K\n[✅] 0528 PES 2008 (MM) [Wii] $7K\n[✅] 0536 Ultimate Duck Hunting (CIB) [Wii] $10K\n[✅] 0540 Marvel Ultimate Alliance (CIB) [Wii] $15K\n[✅] 0542 Star Wars Force Unleashed (CIB) [Wii] $15K\n[✅] 0544 The Last Airbender (CIB) [Wii] $15K\n[✅] 1003 Ben 10 Omniverse 2 (MM) [Wii] $10K\n[✅] 1004 Championship Boxing (CIB) [Wii] $10K\n[✅] 1005 Angry Birds (MM) [Wii] $12K\n[✅] 2339 Deca Sports 3 (MM) [Wii] $8K\n[✅] 2948 Hannah Montana The Movie (CIB) [Wii] $4K\n[❌] 2949 Monster 4x4: Stunt Racer (CIB) [Wii] $5K\n[✅] 2958 Bakugan Battle Brawlers (CIB) [Wii] $10K\n[✅] 3026 Star Wars Force Unleashed 2 (CIB) [Wii] $15K\n[✅] 3323 Monster Trux Arenas (CIB) [Wii] $7K\n[✅] 3326 Deca Sports 2 (MM) [Wii] $8K\n[✅] 3327 FIFA Soccer 09 (CIB) [Wii] $8K\n[✅] 3328 Game Party 1 (CIB) [Wii] $8K\n[✅] 3329 Game Party 3 (CIB) [Wii] $8K\n[✅] 3331 My Sims (MM) [Wii] $8K\n[✅] 3332 Bakugan Battle Brawlers (CIB) [Wii] $10K\n[✅] 3402 PES 2012 (MM) [Wii] $8K\n[✅] 3427 Guitar Hero World Tour (CIB) [Wii] $12K\n[✅] 3725 Harry Potter Order of the Phoenix (CIB) [Wii] $15K\n[✅] 3803 Ben 10 Protector Of Earth (CIB-PAL) [Wii] $10K\n[✅] 3804 Guitar Hero World Tour (CIB-PAL) [Wii] $12K\n[✅] 3805 Penny Racers Party Turbo-Q Speedway (CIB) [Wii] $8K\n[✅] 3806 Skylanders Superchargers Racing (MM) [Wii] $8K\n[✅] 3877 Harry Potter Deathly Hallows Part 1 (CIB) [Wii] $15K\n[✅] 3878 Mario Kart Wii (MM) [Wii] $15K\n[✅] 3879 WWE Smackdown vs Raw 2008 (CIB) [Wii] $15K\n[✅] 3880 WWE Smackdown vs Raw 2010 (MM) [Wii] $12K\n[✅] 3883 PES 2012 (MM-CR) [Wii] $6K\n[✅] 3913 Transformers The Game (MM) [Wii] $12K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual\nMM: Sin Manual\nPAL: Europeo\nCR: Carátula Rayada",
+        "description": "\n[❌] 0527 Zumba Fitness (CIB) [Wii] $6K\n[✅] 0528 PES 2008 (MM) [Wii] $7K\n[✅] 0536 Ultimate Duck Hunting (CIB) [Wii] $10K\n[✅] 0540 Marvel Ultimate Alliance (CIB) [Wii] $15K\n[✅] 0542 Star Wars Force Unleashed (CIB) [Wii] $15K\n[✅] 0544 The Last Airbender (CIB) [Wii] $15K\n[✅] 1003 Ben 10 Omniverse 2 (MM) [Wii] $10K\n[✅] 1004 Championship Boxing (CIB) [Wii] $10K\n[✅] 1005 Angry Birds (MM) [Wii] $12K\n[✅] 2339 Deca Sports 3 (MM) [Wii] $8K\n[✅] 2948 Hannah Montana The Movie (CIB) [Wii] $4K\n[❌] 2949 Monster 4x4: Stunt Racer (CIB) [Wii] $5K\n[✅] 2958 Bakugan Battle Brawlers (CIB) [Wii] $10K\n[✅] 3026 Star Wars Force Unleashed 2 (CIB) [Wii] $15K\n[✅] 3323 Monster Trux Arenas (CIB) [Wii] $7K\n[✅] 3326 Deca Sports 2 (MM) [Wii] $8K\n[✅] 3327 FIFA Soccer 09 (CIB) [Wii] $8K\n[✅] 3328 Game Party 1 (CIB) [Wii] $8K\n[✅] 3329 Game Party 3 (CIB) [Wii] $8K\n[✅] 3331 My Sims (MM) [Wii] $8K\n[✅] 3332 Bakugan Battle Brawlers (CIB) [Wii] $10K\n[✅] 3402 PES 2012 (MM) [Wii] $8K\n[✅] 3427 Guitar Hero World Tour (CIB) [Wii] $12K\n[✅] 3725 Harry Potter Order of the Phoenix (CIB) [Wii] $15K\n[✅] 3803 Ben 10 Protector Of Earth (CIB-PAL) [Wii] $10K\n[✅] 3804 Guitar Hero World Tour (CIB-PAL) [Wii] $12K\n[✅] 3805 Penny Racers Party Turbo-Q Speedway (CIB) [Wii] $8K\n[✅] 3806 Skylanders Superchargers Racing (MM) [Wii] $8K\n[✅] 3877 Harry Potter Deathly Hallows Part 1 (CIB) [Wii] $15K\n[❌] 3878 Mario Kart Wii (MM) [Wii] $15K\n[✅] 3879 WWE Smackdown vs Raw 2008 (CIB) [Wii] $15K\n[✅] 3880 WWE Smackdown vs Raw 2010 (MM) [Wii] $12K\n[✅] 3883 PES 2012 (MM-CR) [Wii] $6K\n[✅] 3913 Transformers The Game (MM) [Wii] $12K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual\nMM: Sin Manual\nPAL: Europeo\nCR: Carátula Rayada",
         "link": "https://www.instagram.com/p/DWIRXRslV--/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-03-21"
@@ -51,7 +51,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_18175707910377145",
         "image": "img/IG_18175707910377145.jpeg",
         "title": "Nintendo Wii | 13/Mar/26",
-        "description": "\n[✅] 3877 Harry Potter Deathly Hallows Part 1 (CIB) [Wii] $15K\n[✅] 3878 Mario Kart Wii (MM) [Wii] $15K\n[✅] 3879 WWE Smackdown vs Raw 2008 (CIB) [Wii] $15K\n[✅] 3880 WWE Smackdown vs Raw 2010 (MM) [Wii] $12K\n[❌] 3881 Crash of the Titans (CIB) [Wii] $12K\n[❌] 3882 Disney Epic Mickey (CIB) [Wii] $8K\n[✅] 3883 PES 2012 (MM-CR) [Wii] $6K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual\nMM: Sin Manual\nCR: Carátula Rayada",
+        "description": "\n[✅] 3877 Harry Potter Deathly Hallows Part 1 (CIB) [Wii] $15K\n[❌] 3878 Mario Kart Wii (MM) [Wii] $15K\n[✅] 3879 WWE Smackdown vs Raw 2008 (CIB) [Wii] $15K\n[✅] 3880 WWE Smackdown vs Raw 2010 (MM) [Wii] $12K\n[❌] 3881 Crash of the Titans (CIB) [Wii] $12K\n[❌] 3882 Disney Epic Mickey (CIB) [Wii] $8K\n[✅] 3883 PES 2012 (MM-CR) [Wii] $6K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual\nMM: Sin Manual\nCR: Carátula Rayada",
         "link": "https://www.instagram.com/p/DV2NTXbFfaq/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-03-14"
@@ -60,7 +60,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_18104183341887528",
         "image": "img/IG_18104183341887528.jpeg",
         "title": "PlayStation 2 | 13/Mar/26",
-        "description": "\n[✅] 3870 Sega Soccer Slam (BL-CIB) [PS2] $15K\n[✅] 3871 Ratchet & Clank (GH-MM) [PS2] $10K\n[✅] 3872 Chronicles of Narnia (BL-MM) [PS2] $8K\n[✅] 3873 Singstar Pop (BL-MM) [PS2] $8K\n[✅] 3874 Atv Offroad Fury (BL-MM) [PS2] $7K\n[✅] 3875 Duel Masters (BL-MM-WD) [PS2] $6K\n[✅] 3876 ESPN International Winter Sports 2002 (BL-MM) [PS2] $4K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nGH: Greatest Hits\nCIB: Caja, Juego, Manual\nMM: Sin Manual\nWD: Water Damaged / Daño de Agua",
+        "description": "\n[✅] 3870 Sega Soccer Slam (BL-CIB) [PS2] $15K\n[❌] 3871 Ratchet & Clank (GH-MM) [PS2] $10K\n[✅] 3872 Chronicles of Narnia (BL-MM) [PS2] $8K\n[✅] 3873 Singstar Pop (BL-MM) [PS2] $8K\n[✅] 3874 Atv Offroad Fury (BL-MM) [PS2] $7K\n[✅] 3875 Duel Masters (BL-MM-WD) [PS2] $6K\n[✅] 3876 ESPN International Winter Sports 2002 (BL-MM) [PS2] $4K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nGH: Greatest Hits\nCIB: Caja, Juego, Manual\nMM: Sin Manual\nWD: Water Damaged / Daño de Agua",
         "link": "https://www.instagram.com/p/DV2LjIflX7U/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-03-14"
@@ -69,7 +69,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_17888398707446498",
         "image": "img/IG_17888398707446498.jpeg",
         "title": "Nintendo 64 | 13/Mar/26",
-        "description": "\n[✅] 3867 Mario Tennis (Japo) [N64] $8K\n[✅] 3868 Mario Golf (Japo) [N64] $8K\n[✅] 3869 Pokemon Snap (Japo) [N64] $8K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nJapo: Japonés",
+        "description": "\n[❌] 3867 Mario Tennis (Japo) [N64] $8K\n[✅] 3868 Mario Golf (Japo) [N64] $8K\n[❌] 3869 Pokemon Snap (Japo) [N64] $8K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nJapo: Japonés",
         "link": "https://www.instagram.com/p/DV2JvBZFWIH/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-03-14"
@@ -104,7 +104,7 @@ const INSTAGRAM_POSTS_DATA = [
     {
         "id": "ig_auto_17881039875387202",
         "image": "img/IG_17881039875387202.jpeg",
-        "title": "[✅] 3856 Daffy Duck Marvin Missions (LW) [SNES] $20K",
+        "title": "[❌] 3856 Daffy Duck Marvin Missions (LW) [SNES] $20K",
         "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nLW: Label Dañado",
         "link": "https://www.instagram.com/p/DV2CHU_lcZa/",
         "media_type": "CAROUSEL_ALBUM",
@@ -141,7 +141,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_17902748031199245",
         "image": "img/IG_17902748031199245.jpeg",
         "title": "DVD | 03/Feb/26",
-        "description": "\n[✅] 3840\t31 Minutos - La Primera Temporada (4D)\tDVD\t$8K\n[✅] 3841\t31 Minutos - La Segunda Temporada (Falta disc 1-4D)\tDVD\t$8K\n[✅] 3842\t31 Minutos - La Primera Temporada (4D)\tDVD\t$8K\n[✅] 3843\tBatman y Superman La Película\tDVD\t$2K\n[✅] 3844\tLiga de la Justicia Crisis en Dos Mundos\tDVD\t$2K\n[❌] 3845\tSuperman El Último Hijo de Krypton (Sellado)\tDVD\t$3K\n[❌] 3846\tBatman El Caballero de Ciudad Gótica (Sellado)\tDVD\t$3K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\n4D: Cuatro Discos",
+        "description": "\n[❌] 3840\t31 Minutos - La Primera Temporada (4D)\tDVD\t$8K\n[❌] 3841\t31 Minutos - La Segunda Temporada (Falta disc 1-4D)\tDVD\t$8K\n[❌] 3842\t31 Minutos - La Tercera Temporada (4D)\tDVD\t$8K\n[✅] 3843\tBatman y Superman La Película\tDVD\t$2K\n[✅] 3844\tLiga de la Justicia Crisis en Dos Mundos\tDVD\t$2K\n[❌] 3845\tSuperman El Último Hijo de Krypton (Sellado)\tDVD\t$3K\n[❌] 3846\tBatman El Caballero de Ciudad Gótica (Sellado)\tDVD\t$3K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\n4D: Cuatro Discos",
         "link": "https://www.instagram.com/p/DUUXgvFjBph/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-02-04"
@@ -177,7 +177,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_18357988195201613",
         "image": "img/IG_18357988195201613.jpeg",
         "title": "Xbox 360 [2] | 01/Feb/26",
-        "description": "\n[❌] 3794\tSplinter Cell Chaos Theory (BL-CIB) [Xbox] $10K\n[✅] 3795\tForza Motorsport 2 (MM) [X360] $8K\n[❌] 3796\tForza Horizon (MM) [X360] $15K\n[✅] 3797\tPES 2014 (CIB) [X360] $8K\n[❌] 3798\tLego Star Wars Complete Saga (PH-MM) [X360] $8K\n[✅] 3799\tLego Star Wars III (PH-MM) [X360] $8K\n[✅] 3800\tLego Jurassic World (CIB) [X360] $8K\n[✅] 3801\tCars 2 (MM) [X360] $8K\n[❌] 3802\tStar Ocean The Last Hope (MM-3D) [X360] $12K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nPH: Platinum Hits\nCIB: Caja, Juego, Manual\nCIB+: Caja, Juego, Manual, Insertos\nMM: Sin Manual\nS: Sealed: Sellado de Fábrica\nDC: Daño en Carátula\n3D: Tres Discos",
+        "description": "\n[❌] 3794\tSplinter Cell Chaos Theory (BL-CIB) [Xbox] $10K\n[✅] 3795\tForza Motorsport 2 (MM) [X360] $8K\n[❌] 3796\tForza Horizon (MM) [X360] $15K\n[❌] 3797\tPES 2014 (CIB) [X360] $8K\n[❌] 3798\tLego Star Wars Complete Saga (PH-MM) [X360] $8K\n[❌] 3799\tLego Star Wars III (PH-MM) [X360] $8K\n[❌] 3800\tLego Jurassic World (CIB) [X360] $8K\n[✅] 3801\tCars 2 (MM) [X360] $8K\n[❌] 3802\tStar Ocean The Last Hope (MM-3D) [X360] $12K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nPH: Platinum Hits\nCIB: Caja, Juego, Manual\nCIB+: Caja, Juego, Manual, Insertos\nMM: Sin Manual\nS: Sealed: Sellado de Fábrica\nDC: Daño en Carátula\n3D: Tres Discos",
         "link": "https://www.instagram.com/p/DUPCLjAFaIJ/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-02-02"
@@ -186,7 +186,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_18055811306380269",
         "image": "img/IG_18055811306380269.jpeg",
         "title": "Xbox 360 [1] | 26/Ene/26",
-        "description": "\n[✅] 3771\tKinect Nat Geo TV (Sealed-K) [X360] $8K\n[✅] 3772\tBiggest Loser Ultimate Workout (Sealed-K) [X360] $8K\n[❌] 3773\tDance Central 1 (CIB+-K) [X360] $7K\n[✅] 3774\tDance Central 1 (CIB+-K) [X360] $7K\n[❌] 3775\tDance Central 2 (CIB+-K) [X360] $8K\n[✅] 3776\tDance Central 2 (CIB+-K) [X360] $8K\n[✅] 3777\tDance Central 2 (CIB+-K) [X360] $8K\n[✅] 3778\tDance Central 2 (CIB+-K) [X360] $8K\n[❌] 3779\tDance Central 3 (CIB+-K) [X360] $8K\n[❌] 3780\tJust Dance 4 (MM-K) [X360] $4K\n[✅] 3781\tNBA Baller Beats (CIB+-K) [X360] $5K\n[✅] 3782\tNike + Kinect Trainning (CIB+-K) [X360] $7K\n[✅] 3783\tKinect Sports (CIB+-K) [X360] $5K\n[✅] 3784\tKinect Sports (CIB+-K) [X360] $5K\n[✅] 3785\tKinect Sports (CIB+-K) [X360] $5K\n[✅] 3786\tKinect Sports (MM-K) [X360] $4K\n[✅] 3787\tKinect Sports 2da Temporada (CIB-K-DC) [X360] $5K\n[❌] 3788\tKinect Disneyland Adventures (CIB+-K) [X360] $6K\n[✅] 3789\tKinect Sesame Street TV (MM-K-2D) [X360] $7K\n[✅] 3790\tYour Shape Fitness Evolved (CIB+-K) [X360] $5K\n[✅] 3791\tYour Shape Fitness Evolved (CIB-K) [X360] $5K\n[✅] 3792\tYour Shape Fitness Evolved (MM-K) [X360] $4K\n[✅] 3793\tYour Shape Fitness Evolved 2012 (CIB+-K) [X360] $5K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nPH: Platinum Hits\nCIB: Caja, Juego, Manual\nCIB+: Caja, Juego, Manual, Insertos\nMM: Sin Manual\nS: Sealed: Sellado de Fábrica\nK: Kinect\nDC: Daño en Carátula\n2D: Dos Discos",
+        "description": "\n[✅] 3771\tKinect Nat Geo TV (Sealed-K) [X360] $8K\n[✅] 3772\tBiggest Loser Ultimate Workout (Sealed-K) [X360] $8K\n[❌] 3773\tDance Central 1 (CIB+-K) [X360] $7K\n[✅] 3774\tDance Central 1 (CIB+-K) [X360] $7K\n[❌] 3775\tDance Central 2 (CIB+-K) [X360] $8K\n[✅] 3776\tDance Central 2 (CIB+-K) [X360] $8K\n[❌] 3777\tDance Central 2 (CIB+-K) [X360] $8K\n[❌] 3778\tDance Central 2 (CIB+-K) [X360] $8K\n[❌] 3779\tDance Central 3 (CIB+-K) [X360] $8K\n[❌] 3780\tJust Dance 4 (MM-K) [X360] $4K\n[✅] 3781\tNBA Baller Beats (CIB+-K) [X360] $5K\n[❌] 3782\tNike + Kinect Trainning (CIB+-K) [X360] $7K\n[❌] 3783\tKinect Sports (CIB+-K) [X360] $5K\n[❌] 3784\tKinect Sports (CIB+-K) [X360] $5K\n[✅] 3785\tKinect Sports (CIB+-K) [X360] $5K\n[✅] 3786\tKinect Sports (MM-K) [X360] $4K\n[✅] 3787\tKinect Sports 2da Temporada (CIB-K-DC) [X360] $5K\n[❌] 3788\tKinect Disneyland Adventures (CIB+-K) [X360] $6K\n[✅] 3789\tKinect Sesame Street TV (MM-K-2D) [X360] $7K\n[❌] 3790\tYour Shape Fitness Evolved (CIB+-K) [X360] $5K\n[✅] 3791\tYour Shape Fitness Evolved (CIB-K) [X360] $5K\n[✅] 3792\tYour Shape Fitness Evolved (MM-K) [X360] $4K\n[✅] 3793\tYour Shape Fitness Evolved 2012 (CIB+-K) [X360] $5K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nPH: Platinum Hits\nCIB: Caja, Juego, Manual\nCIB+: Caja, Juego, Manual, Insertos\nMM: Sin Manual\nS: Sealed: Sellado de Fábrica\nK: Kinect\nDC: Daño en Carátula\n2D: Dos Discos",
         "link": "https://www.instagram.com/p/DT_tCk9jHOH/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-01-27"
@@ -222,7 +222,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_18119768341583465",
         "image": "img/IG_18119768341583465.jpeg",
         "title": "PS2 Sueltos [3] | 25/Ene/26",
-        "description": "\n[✅] 1962\tNBA Street (BL-L) [PS2 (L)] $5K\n[✅] 1963\tNBA Street vol 2 (BL-L) [PS2 (L)] $5K\n[✅] 1965\tStar Ocean Till The End Of Time disc 1 (BL-L) [PS2 (L)] $6K\n[✅] 1966\tScooby Doo Mystery Mayhem (BL-L) [PS2 (L)] $10K\n[✅] 1967\tMarvel Ultimate Alliance (BL-L) [PS2 (L)] $10K\n[✅] 1968\tNaruto Ultimate Ninja (GH-L) [PS2 (L)] $5K\n[❌] 3735\tGran Turismo 4 (GH-L) [PS2 (L)] $7K\n[✅] 3736\tTest Drive (BL-L) [PS2 (L)] $6K\n[✅] 3737\tMotocross Mania 3 (BL-L) [PS2 (L)] $3K\n[✅] 3738\tScooby Doo Night of 100 Frights (GH-L) [PS2 (L)] $12K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nGH: Greatest Hits\nCE: Collector's Edition\nL: Loose: Suelto: Solo Juego",
+        "description": "\n[❌] 1962\tNBA Street (BL-L) [PS2 (L)] $5K\n[❌] 1963\tNBA Street vol 2 (BL-L) [PS2 (L)] $5K\n[✅] 1965\tStar Ocean Till The End Of Time disc 1 (BL-L) [PS2 (L)] $6K\n[✅] 1966\tScooby Doo Mystery Mayhem (BL-L) [PS2 (L)] $10K\n[✅] 1967\tMarvel Ultimate Alliance (BL-L) [PS2 (L)] $10K\n[✅] 1968\tNaruto Ultimate Ninja (GH-L) [PS2 (L)] $5K\n[❌] 3735\tGran Turismo 4 (GH-L) [PS2 (L)] $7K\n[✅] 3736\tTest Drive (BL-L) [PS2 (L)] $6K\n[✅] 3737\tMotocross Mania 3 (BL-L) [PS2 (L)] $3K\n[✅] 3738\tScooby Doo Night of 100 Frights (GH-L) [PS2 (L)] $12K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nGH: Greatest Hits\nCE: Collector's Edition\nL: Loose: Suelto: Solo Juego",
         "link": "https://www.instagram.com/p/DT9KnueDCRX/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-01-26"
@@ -240,7 +240,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_18020656073803699",
         "image": "img/IG_18020656073803699.jpeg",
         "title": "PS2 Sueltos [1] | 25/Ene/26",
-        "description": "\n[❌] 1919\tMetal Gear Solid 2 [Trial Edition Demo Disc] (BL-L) [PS2 (L)] $12K\n[❌] 1920\tTeenage Mutant Ninja Turtles 2: Battle Nexus (BL-L) [PS2 (L)] $15K\n[❌] 1922\tGran Turismo 3 (GH-CIB) [PS2 (L)] $4K\n[✅] 1923\tDynasty Warriors 6 (BL-L) [PS2 (L)] $4K\n[✅] 1924\tSamurai Warriors 2 (BL-L) [PS2 (L)] $5K\n[❌] 1925\tTrue Crime New York City (BL-L) [PS2 (L)] $4K\n[✅] 1926\tRed Faction (BL-L) [PS2 (L)] $4K\n[❌] 1927\tJak and Daxter The Precursor Legacy (GH-L) [PS2 (L)] $4K\n[✅] 1929\tMx Unleashed (BL-L) [PS2 (L)] $3K\n[❌] 1930\tOpen Season (BL-L) [PS2 (L)] $3K\n[❌] 1931\tNicktoons Unite! (BL-L) [PS2 (L)] $2K\n[✅] 1932\tATV Offroad Fury 2 (GH-L) [PS2 (L)] $4K\n[❌] 1937\tTomb Raider Legend (BL-L) [PS2 (L)] $6K\n[❌] 1938\tRobotech Battlecry (BL-L) [PS2 (L)] $6K\n[✅] 1944\tSOCOM II (BL-L) [PS2 (L)] $4K\n[✅] 1945\tMark Of Kri (BL-L) [PS2 (L)] $5K\n[✅] 1946\tFrequency (BL-L) [PS2 (L)] $4K\n[✅] 1947\tNascar 07 (BL-L) [PS2 (L)] $2K\n[✅] 1953\tNascar 08 (BL-L) [PS2 (L)] $3K\n[❌] 1955\tGTA Vice City (BL-L) [PS2 (L)] $10K\n[❌] 1958\tJak 3 (BL-L) [PS2 (L)] $5K\n[❌] 1959\tJak and Daxter The Precursor Legacy (GH-L) [PS2 (L)] $4K\n[✅] 1960\tDDR Supernova (BL-L) [PS2 (L)] $5K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nGH: Greatest Hits\nCE: Collector's Edition\nL: Loose: Suelto: Solo Juego",
+        "description": "\n[❌] 1919\tMetal Gear Solid 2 [Trial Edition Demo Disc] (BL-L) [PS2 (L)] $12K\n[❌] 1920\tTeenage Mutant Ninja Turtles 2: Battle Nexus (BL-L) [PS2 (L)] $15K\n[❌] 1922\tGran Turismo 3 (GH-CIB) [PS2 (L)] $4K\n[✅] 1923\tDynasty Warriors 6 (BL-L) [PS2 (L)] $4K\n[✅] 1924\tSamurai Warriors 2 (BL-L) [PS2 (L)] $5K\n[❌] 1925\tTrue Crime New York City (BL-L) [PS2 (L)] $4K\n[✅] 1926\tRed Faction (BL-L) [PS2 (L)] $4K\n[❌] 1927\tJak and Daxter The Precursor Legacy (GH-L) [PS2 (L)] $4K\n[✅] 1929\tMx Unleashed (BL-L) [PS2 (L)] $3K\n[❌] 1930\tOpen Season (BL-L) [PS2 (L)] $3K\n[❌] 1931\tNicktoons Unite! (BL-L) [PS2 (L)] $2K\n[✅] 1932\tATV Offroad Fury 2 (GH-L) [PS2 (L)] $4K\n[❌] 1937\tTomb Raider Legend (BL-L) [PS2 (L)] $6K\n[❌] 1938\tRobotech Battlecry (BL-L) [PS2 (L)] $6K\n[✅] 1944\tSOCOM II (BL-L) [PS2 (L)] $4K\n[✅] 1945\tMark Of Kri (BL-L) [PS2 (L)] $5K\n[✅] 1946\tFrequency (BL-L) [PS2 (L)] $4K\n[✅] 1947\tNascar 07 (BL-L) [PS2 (L)] $2K\n[✅] 1953\tNascar 08 (BL-L) [PS2 (L)] $3K\n[❌] 1955\tGTA Vice City (BL-L) [PS2 (L)] $10K\n[❌] 1958\tJak 3 (BL-L) [PS2 (L)] $5K\n[❌] 1959\tJak and Daxter The Precursor Legacy (GH-L) [PS2 (L)] $4K\n[❌] 1960\tDDR Supernova (BL-L) [PS2 (L)] $5K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nGH: Greatest Hits\nCE: Collector's Edition\nL: Loose: Suelto: Solo Juego",
         "link": "https://www.instagram.com/p/DT9DcoHFd2v/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-01-26"
