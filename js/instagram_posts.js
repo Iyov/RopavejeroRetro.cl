@@ -1,7 +1,16 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-04-07 01:16:12
+// Última actualización: 2026-04-07 12:53:46
 
 const INSTAGRAM_POSTS_DATA = [
+    {
+        "id": "ig_auto_17944335083997696",
+        "image": "img/IG_17944335083997696.jpeg",
+        "title": "Ferias Friki de Abril 2026:",
+        "description": "\nDom 12/Abr: Mega Feria Friki Cerrillos\n📍 Parque Bicentenario de Cerrillos\n📌 Av. Pedro Aguirre Cerda 6100, Cerrillos\n🚇 Metro Cerrillos, L6\n\n🕒 De 12:00 a 19:00 hrs\n🎟 Entrada liberada\n🎮 Llevaremos nuestros juegos\n¡Nos vemos!\n\n#FeriaFriki #MegaFeriaFriki",
+        "link": "https://www.instagram.com/p/DW1A2WZlQ9w/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-04-07"
+    },
     {
         "id": "ig_auto_18319887493265053",
         "image": "img/IG_18319887493265053.jpeg",
@@ -271,15 +280,6 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DWIDLlpler5/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-03-21"
-    },
-    {
-        "id": "ig_auto_17879258121393287",
-        "image": "img/IG_17879258121393287.jpeg",
-        "title": "Ferias Friki de Marzo - Abril 2026:",
-        "description": "\nDom 12/Abr: Mega Feria Friki Cerrillos\n📍 Parque Bicentenario de Cerrillos\n📌 Av. Pedro Aguirre Cerda 6100, Cerrillos\n🚇 Metro Cerrillos, L6\n\n🕒 De 12:00 a 19:00 hrs\n🎟 Entrada liberada\n🎮 Llevaremos nuestros juegos\n¡Nos vemos!\n\n#FeriaFriki #MegaFeriaFriki",
-        "link": "https://www.instagram.com/p/DV_19aXAT5F/",
-        "media_type": "IMAGE",
-        "date": "2026-03-17"
     },
     {
         "id": "ig_auto_18175707910377145",
