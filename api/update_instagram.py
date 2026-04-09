@@ -21,7 +21,7 @@ MIN_JS_FILE_PATH = 'js/instagram_posts.min.js'
 INDEX_FILE_PATH = 'index.html'
 SW_FILE_PATH = 'service-worker.js'
 IMAGE_DIR = 'img/'
-MAX_POSTS = 400  # Número máximo de posts a obtener
+MAX_POSTS = 500  # Número máximo de posts a obtener
 
 def fetch_instagram_media():
     """Obtiene los posts recientes del usuario con paginación."""
