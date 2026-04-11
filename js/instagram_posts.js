@@ -1,7 +1,16 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-04-07 12:53:46
+// Última actualización: 2026-04-11 01:12:29
 
 const INSTAGRAM_POSTS_DATA = [
+    {
+        "id": "ig_auto_18050717042723876",
+        "image": "img/IG_18050717042723876.jpeg",
+        "title": "Actividades próximo fin de semana de Abril 2026:",
+        "description": "\nSáb 11/Abr: Persa Bio Bio\n📍 La Eskina FC @BioBioSantiagoConcha\n📌 Bio Bio esquina Santiago Concha, Stgo\n🚇 Metro Bio Bio, L3\n🕒 De 09:00 a 15:00 hrs\n\nDom 12/Abr: Mega @FeriaFriki Cerrillos\n📍 Parque Bicentenario de Cerrillos\n📌 Av. Pedro Aguirre Cerda 6100, Cerrillos\n🚇 Metro Cerrillos, L6\n🕒 De 11:00 a 19:00 hrs\n\n🎟 Entrada liberada\n🎮 Llevaremos nuestros juegos\n¡Nos vemos!\n\n#EskinaFC #MegaFeriaFriki",
+        "link": "https://www.instagram.com/p/DW9XI0NFawW/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-04-10"
+    },
     {
         "id": "ig_auto_17944335083997696",
         "image": "img/IG_17944335083997696.jpeg",
