@@ -1,7 +1,16 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-04-14 01:21:58
+// Última actualización: 2026-04-15 01:18:29
 
 const INSTAGRAM_POSTS_DATA = [
+    {
+        "id": "ig_auto_18114957424683383",
+        "image": "img/IG_18114957424683383.jpeg",
+        "title": "Actividades Próximo Fin de Semana de Abril 2026:",
+        "description": "\nSáb 18/Abr: Feria Retro Rancagua\n➡ Stand Nº5\n📍 Play & Coffe restobar\n📌 San Martín 145, Rancagua\n\nDom 19/Abr: Fiesta del Coleccionismo\n📍 Parque Pablo Neruda\n📌 Av. Clotario Blest esquina Lucila Godoy, Lo Espejo\n🚇 Metro Tren Lo Espejo\n\n🕒 De 11:00 a 19:00 hrs\n🎟 Entrada liberada\n🎮 Llevaremos nuestros juegos\n¡Nos vemos!\n\n#FeriaRetro #MataControles",
+        "link": "https://www.instagram.com/p/DXIbtc0la7F/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-04-15"
+    },
     {
         "id": "ig_auto_18050717042723876",
         "image": "img/IG_18050717042723876.jpeg",
