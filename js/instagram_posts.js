@@ -1,5 +1,5 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-04-15 01:18:29
+// Última actualización: 2026-04-15 13:51:07
 
 const INSTAGRAM_POSTS_DATA = [
     {
@@ -10,24 +10,6 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DXIbtc0la7F/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-04-15"
-    },
-    {
-        "id": "ig_auto_18050717042723876",
-        "image": "img/IG_18050717042723876.jpeg",
-        "title": "Actividades próximo fin de semana de Abril 2026:",
-        "description": "\nSáb 11/Abr: Persa Bio Bio\n📍 La Eskina FC @BioBioSantiagoConcha\n📌 Bio Bio esquina Santiago Concha, Stgo\n🚇 Metro Bio Bio, L3\n🕒 De 09:00 a 15:00 hrs\n\nDom 12/Abr: Mega @FeriaFriki Cerrillos\n📍 Parque Bicentenario de Cerrillos\n📌 Av. Pedro Aguirre Cerda 6100, Cerrillos\n🚇 Metro Cerrillos, L6\n🕒 De 11:00 a 19:00 hrs\n\n🎟 Entrada liberada\n🎮 Llevaremos nuestros juegos\n¡Nos vemos!\n\n#EskinaFC #MegaFeriaFriki",
-        "link": "https://www.instagram.com/p/DW9XI0NFawW/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-04-10"
-    },
-    {
-        "id": "ig_auto_17944335083997696",
-        "image": "img/IG_17944335083997696.jpeg",
-        "title": "Ferias Friki de Abril 2026:",
-        "description": "\nDom 12/Abr: Mega Feria Friki Cerrillos\n📍 Parque Bicentenario de Cerrillos\n📌 Av. Pedro Aguirre Cerda 6100, Cerrillos\n🚇 Metro Cerrillos, L6\n\n🕒 De 12:00 a 19:00 hrs\n🎟 Entrada liberada\n🎮 Llevaremos nuestros juegos\n¡Nos vemos!\n\n#FeriaFriki #MegaFeriaFriki",
-        "link": "https://www.instagram.com/p/DW1A2WZlQ9w/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-04-07"
     },
     {
         "id": "ig_auto_18319887493265053",
@@ -44,15 +26,6 @@ const INSTAGRAM_POSTS_DATA = [
         "title": "Manuales SNES | 05/Abr/26",
         "description": "\n[✅] 1573\tPGA Tour Golf (M) [SNES (M)] $3K\n[✅] 1576\tSuper Bowling (M) [SNES (M)] $4K\n[✅] 1581\tWizard Of Oz (M) [SNES (M)] $10K\n[✅] 1590\tPieces (M) [SNES (M)] $20K\n[✅] 1740\tABC Monday Night Football (7/10) [SNES (M)] $2K\n[✅] 1741\tBill Laimbeer's Combat Basketball (7/10) [SNES (M)] $3K\n[✅] 1742\tChampionship Pool (7/10) [SNES (M)] $3K\n[✅] 1743\tNHL 95 (7/10) [SNES (M)] $3K\n[✅] 1744\tNHLPA Hockey 93 (8/10) [SNES (M)] $3K\n[✅] 1746\tSuper Battletank (9/10) [SNES (M)] $3K\n[✅] 1747\tSuper Battleship (7/10) [SNES (M)] $3K\n[✅] 1748\tPaperboy 2 (8/10) [SNES (M)] $4K\n[✅] 1749\tNBA Live 95 (7/10) [SNES (M)] $5K\n[✅] 1750\tBattleclash (5/10) [SNES (M)] $5K\n[✅] 1753\tZoop (8/10) [SNES (M)] $5K\n[✅] 1754\tFrogger (8/10) [SNES (M)] $6K\n[✅] 1755\tHome Alone 2 (6/10) [SNES (M)] $6K\n[✅] 1756\tSuper Off Road (9.5/10) [SNES (M)] $7K\n[✅] 1758\tSuper NES Scope 6 (9/10) [SNES (M)] $8K\n[✅] 1759\tAmerican Gladiators (8/10) [SNES (M)] $8K\n[✅] 1760\tCleaning Kit (10/10) [SNES (M)] $8K\n[✅] 1762\tWolfchild (7/10) [SNES (M)] $8K\n[✅] 1763\tJames Bond Jr (8/10) [SNES (M)] $9K\n[✅] 1765\tTetris & Dr. Mario (10/10) [SNES (M)] $12K\n[✅] 1766\tJim Power The Lost Dimension in 3D (9/10) [SNES (M)] $12K\n[✅] 1767\tSuper Adventure Island (8/10) [SNES (M)] $12K\n[❌️] 1769\tSuper GameBoy (8.5/10) [SNES (M)] $14K\n\n[❌] 3956\tStarfox (M) [SNES (M)] $10K\n[❌] 3994\tSuper Mario World (M) [SNES (M)] $15K\n[❌] 3995\tSuper Mario Kart (M) [SNES (M)] $15K\n[❌] 3996\tSuper Mario Kart (M) [SNES (M)] $13K\n[❌] 3997\tSuper Mario All Stars (M) [SNES (M)] $12K\n[✅] 3998\tStarfox (M) [SNES (M)] $15K\n[❌] 3999\tKiller Instict (M) [SNES (M)] $15K\n[❌️] 4000\tSuper Street Fighter II (M) [SNES (M)] $15K\n[❌] 4001\tZelda A Link To The Past (M) [SNES (M)] $20K\n[❌] 4002\tMegaman X (M) [SNES (M)] $20K\n[❌] 4003\tSNES System Fat Console (M) [SNES (M)] $15K\n[❌] 4004\tSuper Star Wars (M) [SNES (M)] $12K\n[❌️] 4005\tDuffy Duck Marvin Missions (M) [SNES (M)] $10K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nM: sólo Manual",
         "link": "https://www.instagram.com/p/DWxaXgXladN/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-04-06"
-    },
-    {
-        "id": "ig_auto_18043782038763893",
-        "image": "img/IG_18043782038763893.jpeg",
-        "title": "PlayStation 3, 4 | 05/Abr/26",
-        "description": "\n[❌] 3990\tStreet Fighter X Tekken (BL-CIB) [PS3] $12K\n[❌] 3991\tDead Island (GH-CIB-GotY) [PS3] $7K\n[✅] 3992\tPES 2011 (BL-CIB) [PS3] $5K\n[❌] 3993\tBatman Arkham Knight (BL-CIB) [PS4] $10K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nGH: Greatest Hits\nCIB: Caja, Juego, Manual\nMM: Sin Manual\nGotY: Game of the Year",
-        "link": "https://www.instagram.com/p/DWxYwxDFezK/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-04-06"
     },
@@ -147,47 +120,11 @@ const INSTAGRAM_POSTS_DATA = [
         "date": "2026-04-02"
     },
     {
-        "id": "ig_auto_18080158754387395",
-        "image": "img/IG_18080158754387395.jpeg",
-        "title": "[❌] 3963\tWacky Worlds Creativity Studio [Genesis] $15K",
-        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE",
-        "link": "https://www.instagram.com/p/DWpgElVGBsr/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-04-02"
-    },
-    {
-        "id": "ig_auto_18384214489095982",
-        "image": "img/IG_18384214489095982.jpeg",
-        "title": "[❌] 3962\tEcco the Dolphin [Genesis] $15K",
-        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE",
-        "link": "https://www.instagram.com/p/DWpfyKnGNR_/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-04-02"
-    },
-    {
-        "id": "ig_auto_18347840878241019",
-        "image": "img/IG_18347840878241019.jpeg",
-        "title": "[❌] 3961 Toy Story [Genesis] $15K",
-        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE",
-        "link": "https://www.instagram.com/p/DWpffk4GJ5V/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-04-02"
-    },
-    {
         "id": "ig_auto_17876155668439654",
         "image": "img/IG_17876155668439654.jpeg",
         "title": "[✅] 3960\tMs Pacman [Genesis] $12K",
         "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE",
         "link": "https://www.instagram.com/p/DWpe-4AmJ1x/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-04-02"
-    },
-    {
-        "id": "ig_auto_17988376982966993",
-        "image": "img/IG_17988376982966993.jpeg",
-        "title": "[❌] 3956\tManual Starfox [SNES] $10K",
-        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE",
-        "link": "https://www.instagram.com/p/DWpdyWnmC7_/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-04-02"
     },
