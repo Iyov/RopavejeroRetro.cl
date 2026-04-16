@@ -1,5 +1,5 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-04-15 13:51:07
+// Última actualización: 2026-04-16 01:23:43
 
 const INSTAGRAM_POSTS_DATA = [
     {
@@ -33,7 +33,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_17893407120304412",
         "image": "img/IG_17893407120304412.jpeg",
         "title": "Nintendo 3DS | 05/Abr/26",
-        "description": "\n[✅] 3987\tLego Lord Of The Rings (CIB) [3DS] $12K\n[✅] 3988\tLego Star Wars 3 (CIB) [3DS] $12K\n[✅] 3989\tLego Ninjago Nindroids (CIB) [3DS] $12K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual",
+        "description": "\n[❌] 3987\tLego Lord Of The Rings (CIB) [3DS] $12K\n[❌] 3988\tLego Star Wars 3 (CIB) [3DS] $12K\n[✅] 3989\tLego Ninjago Nindroids (CIB) [3DS] $12K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual",
         "link": "https://www.instagram.com/p/DWxXrmPlXj4/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-04-06"
