@@ -1,5 +1,5 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-04-16 01:23:43
+// Última actualización: 2026-04-17 01:21:38
 
 const INSTAGRAM_POSTS_DATA = [
     {
@@ -280,6 +280,15 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DVwEmp4gT0C/",
         "media_type": "IMAGE",
         "date": "2026-03-11"
+    },
+    {
+        "id": "ig_auto_18170813791392948",
+        "image": "img/IG_18170813791392948.jpeg",
+        "title": "🎮 ¿Tienes juegos o coleccionables para vender? En @Ropavejero.Retro te ayudamos. 🔥",
+        "description": "\n✅ Cómo funciona:\n1. 📩 Escríbenos por DM con fotos de lo que quieras vender.\n2. 🔍 Evaluamos si es algo que nos interese (nos reservamos el derecho de aceptar).\n3. 📦 Tú nos entregas o envías los productos (costo de envío por tu cuenta).\n4. 🛠️ Nosotros nos encargamos de: publicidad, packing, envío y postventa.\n5. ⏳ Publicamos por máximo 1 o 2 mes. Si no se vende, se devuelve (costo de devolución por tú cuenta).\n6. 💰 Por cada venta, aplicamos una comisión (mínimo $5.000 por artículo).\n7. 🔁 Si no se vende y nos interesa, podemos permutarlo o comprarlo.\n8. 💸 Pagos rápidos y reporte vía Excel con valores finales.\n\n⚠️ Importante:\n- No hacemos listas de precios (nuestro conocimiento también tiene valor).\n- Nos reservamos el derecho de admisión (no vendemos a posibles estafadores).\n- Servicio ideal para personas o tiendas que están empezando o necesitan liquidar rápido.\n\n📲 ¿Te interesa? Escríbenos por DM.",
+        "link": "https://www.instagram.com/p/DVtW5nLAVHd/",
+        "media_type": "IMAGE",
+        "date": "2026-03-10"
     },
     {
         "id": "ig_auto_17920957479266936",
