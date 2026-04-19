@@ -1,7 +1,16 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-04-17 01:21:38
+// Última actualización: 2026-04-19 01:24:20
 
 const INSTAGRAM_POSTS_DATA = [
+    {
+        "id": "ig_auto_18154108828458099",
+        "image": "img/IG_18154108828458099.jpeg",
+        "title": "Instalados en Feria Retro Rancagua",
+        "description": "➡ Stand Nº5\n📍 Play & Coffe restobar\n📌 San Martín 145, Rancagua\n\n🕒 De 11:00 a 19:00 hrs\n🎟 Entrada liberada\n🎮 Llevaremos nuestros juegos\n¡Nos vemos!\n\n#FeriaRetro #MataControles",
+        "link": "https://www.instagram.com/p/DXSHTr9lcOj/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-04-18"
+    },
     {
         "id": "ig_auto_18114957424683383",
         "image": "img/IG_18114957424683383.jpeg",
