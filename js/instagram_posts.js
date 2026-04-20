@@ -1,5 +1,5 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-04-19 01:24:20
+// Última actualización: 2026-04-20 13:02:00
 
 const INSTAGRAM_POSTS_DATA = [
     {
@@ -276,7 +276,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_18001713173907575",
         "image": "img/IG_18001713173907575.jpeg",
         "title": "Nintendo GameCube | 13/Mar/26",
-        "description": "\n[✅] 3859 Super Mario Strikers (MM) [GC] $45K\n[✅] 3860 Metroid Prime (MM) [GC] $42K\n[✅] 3861 Star Wars Rebel Strike (MM) [GC] $32K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nMM: Sin Manual",
+        "description": "\n[✅] 3859 Super Mario Strikers (MM) [GC] $45K\n[❌️] 3860 Metroid Prime (MM) [GC] $42K\n[✅] 3861 Star Wars Rebel Strike (MM) [GC] $32K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nMM: Sin Manual",
         "link": "https://www.instagram.com/p/DV2D-V_FbKm/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-03-14"
