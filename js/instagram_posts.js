@@ -1,5 +1,5 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-04-21 12:56:58
+// Última actualización: 2026-04-24 01:24:16
 
 const INSTAGRAM_POSTS_DATA = [
     {
@@ -213,7 +213,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_17888398707446498",
         "image": "img/IG_17888398707446498.jpeg",
         "title": "Nintendo 64 | 13/Mar/26",
-        "description": "\n[❌] 3867 Mario Tennis (Japo) [N64] $8K\n[✅] 3868 Mario Golf (Japo) [N64] $8K\n[❌] 3869 Pokemon Snap (Japo) [N64] $8K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nJapo: Japonés",
+        "description": "\n[❌] 3867 Mario Tennis (Japo) [N64] $8K\n[❌] 3868 Mario Golf (Japo) [N64] $8K\n[❌] 3869 Pokemon Snap (Japo) [N64] $8K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nJapo: Japonés",
         "link": "https://www.instagram.com/p/DV2JvBZFWIH/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-03-14"
@@ -240,7 +240,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_18001713173907575",
         "image": "img/IG_18001713173907575.jpeg",
         "title": "Nintendo GameCube | 13/Mar/26",
-        "description": "\n[✅] 3859 Super Mario Strikers (MM) [GC] $45K\n[❌️] 3860 Metroid Prime (MM) [GC] $42K\n[✅] 3861 Star Wars Rebel Strike (MM) [GC] $32K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nMM: Sin Manual",
+        "description": "\n[✅] 3859 Super Mario Strikers (MM) [GC] $45K\n[✅] 3860 Metroid Prime (MM) [GC] $42K\n[❌️] 3861 Star Wars Rebel Strike (MM) [GC] $32K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nMM: Sin Manual",
         "link": "https://www.instagram.com/p/DV2D-V_FbKm/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-03-14"
