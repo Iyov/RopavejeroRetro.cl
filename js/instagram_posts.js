@@ -1,5 +1,5 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-04-25 12:36:39
+// Última actualización: 2026-04-28 01:47:21
 
 const INSTAGRAM_POSTS_DATA = [
     {
@@ -24,7 +24,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_18319887493265053",
         "image": "img/IG_18319887493265053.jpeg",
         "title": "Manuales NES | 05/Abr/26",
-        "description": "\n[✅] 1627\tNES Open Tournament Golf (M) [NES (M)] $5K\n[✅] 1628\tNES Open Tournament Golf (M) [NES (M)] $7K\n[✅] 1629\tSmash TV (M) [NES (M)] $10K\n[✅] 1630\tBlack Bass + Blue Marlin (M) [NES (M)] $3K\n[✅] 1712\tDr. Mario (8/10) [NES (M)] $4K\n[✅] 1713\tNES Four Score (6/10) [NES (M)] $5K\n[✅] 1714\tSilent Service (8/10) [NES (M)] $5K\n[✅] 1715\tMarble Madness (9/10) [NES (M)] $5K\n[✅] 1716\tSkate or Die (7/10) [NES (M)] $6K\n[✅] 1720\tWWF WrestleMania Challenge (8/10) [NES (M)] $7K\n[✅] 1721\tLife Force (6/10) [NES (M)] $7K\n[✅] 1722\tKlax (8/10) [NES (M)] $8K\n[✅] 1723\tSkull & Crossbones (8/10) [NES (M)] $8K\n[✅] 1724\tPac-Man (7/10) [NES (M)] $8K\n[✅] 1725\tThe Karate Kid (9.5/10) [NES (M)] $10K\n[✅] 1726\tCaptain Commando (9/10) [NES (M)] $12K\n[✅] 1728\tAdventure Island 3 (6/10) [NES (M)] $25K\n\n[✅] 4006\tManual Donkey Kong Classics [NES (M)] $12K\n[❌] 4007\tManual Ninja Gaiden [NES (M)] $12K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nM: sólo Manual",
+        "description": "\n[✅] 1627\tNES Open Tournament Golf (M) [NES (M)] $5K\n[❌] 1628\tNES Open Tournament Golf (M) [NES (M)] $7K\n[✅] 1629\tSmash TV (M) [NES (M)] $10K\n[❌] 1630\tBlack Bass + Blue Marlin (M) [NES (M)] $3K\n[✅] 1712\tDr. Mario (8/10) [NES (M)] $4K\n[✅] 1713\tNES Four Score (6/10) [NES (M)] $5K\n[✅] 1714\tSilent Service (8/10) [NES (M)] $5K\n[✅] 1715\tMarble Madness (9/10) [NES (M)] $5K\n[✅] 1716\tSkate or Die (7/10) [NES (M)] $6K\n[✅] 1720\tWWF WrestleMania Challenge (8/10) [NES (M)] $7K\n[✅] 1721\tLife Force (6/10) [NES (M)] $7K\n[✅] 1722\tKlax (8/10) [NES (M)] $8K\n[✅] 1723\tSkull & Crossbones (8/10) [NES (M)] $8K\n[✅] 1724\tPac-Man (7/10) [NES (M)] $8K\n[✅] 1725\tThe Karate Kid (9.5/10) [NES (M)] $10K\n[❌] 1726\tCaptain Commando (9/10) [NES (M)] $12K\n[❌] 1728\tAdventure Island 3 (6/10) [NES (M)] $25K\n\n[✅] 4006\tManual Donkey Kong Classics [NES (M)] $12K\n[❌] 4007\tManual Ninja Gaiden [NES (M)] $12K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nM: sólo Manual",
         "link": "https://www.instagram.com/p/DWxdOCllVq4/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-04-06"
@@ -80,15 +80,6 @@ const INSTAGRAM_POSTS_DATA = [
         "title": "[✅] 3967\tCool Boarders 2 (BL-CIB) [PS1] $12K",
         "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nCIB: Caja, Juego, Manual",
         "link": "https://www.instagram.com/p/DWphm-yFa3o/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-04-03"
-    },
-    {
-        "id": "ig_auto_18092722895142241",
-        "image": "img/IG_18092722895142241.jpeg",
-        "title": "[✅] 3966\tGameshark (L) [PS1] $8K",
-        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nL: Loose: Suelto: Solo Juego",
-        "link": "https://www.instagram.com/p/DWphcXWFdbv/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-04-03"
     },
@@ -332,15 +323,6 @@ const INSTAGRAM_POSTS_DATA = [
         "title": "Xbox 360 [1] | 26/Ene/26",
         "description": "\n[✅] 3771\tKinect Nat Geo TV (Sealed-K) [X360] $8K\n[✅] 3772\tBiggest Loser Ultimate Workout (Sealed-K) [X360] $8K\n[❌] 3773\tDance Central 1 (CIB+-K) [X360] $7K\n[❌] 3774\tDance Central 1 (CIB+-K) [X360] $7K\n[❌] 3775\tDance Central 2 (CIB+-K) [X360] $8K\n[❌] 3776\tDance Central 2 (CIB+-K) [X360] $8K\n[❌] 3777\tDance Central 2 (CIB+-K) [X360] $8K\n[❌] 3778\tDance Central 2 (CIB+-K) [X360] $8K\n[❌] 3779\tDance Central 3 (CIB+-K) [X360] $8K\n[❌] 3780\tJust Dance 4 (MM-K) [X360] $4K\n[✅] 3781\tNBA Baller Beats (CIB+-K) [X360] $5K\n[❌] 3782\tNike + Kinect Trainning (CIB+-K) [X360] $7K\n[❌] 3783\tKinect Sports (CIB+-K) [X360] $5K\n[❌] 3784\tKinect Sports (CIB+-K) [X360] $5K\n[❌] 3785\tKinect Sports (CIB+-K) [X360] $5K\n[✅] 3786\tKinect Sports (MM-K) [X360] $4K\n[✅] 3787\tKinect Sports 2da Temporada (CIB-K-DC) [X360] $5K\n[❌] 3788\tKinect Disneyland Adventures (CIB+-K) [X360] $6K\n[✅] 3789\tKinect Sesame Street TV (MM-K-2D) [X360] $7K\n[❌] 3790\tYour Shape Fitness Evolved (CIB+-K) [X360] $5K\n[✅] 3791\tYour Shape Fitness Evolved (CIB-K) [X360] $5K\n[✅] 3792\tYour Shape Fitness Evolved (MM-K) [X360] $4K\n[✅] 3793\tYour Shape Fitness Evolved 2012 (CIB+-K) [X360] $5K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nPH: Platinum Hits\nCIB: Caja, Juego, Manual\nCIB+: Caja, Juego, Manual, Insertos\nMM: Sin Manual\nS: Sealed: Sellado de Fábrica\nK: Kinect\nDC: Daño en Carátula\n2D: Dos Discos",
         "link": "https://www.instagram.com/p/DT_tCk9jHOH/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-01-27"
-    },
-    {
-        "id": "ig_auto_17995638653859879",
-        "image": "img/IG_17995638653859879.jpeg",
-        "title": "[✅] 3770\tRad Racer [NES] $12K",
-        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE",
-        "link": "https://www.instagram.com/p/DT_mzZsFQYD/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-01-27"
     },
