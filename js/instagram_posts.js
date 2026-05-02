@@ -1,7 +1,16 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-05-01 01:52:13
+// Última actualización: 2026-05-02 12:42:29
 
 const INSTAGRAM_POSTS_DATA = [
+    {
+        "id": "ig_auto_18101138897055906",
+        "image": "img/IG_18101138897055906.jpeg",
+        "title": "Actividades Próximo Fin de Semana de Mayo 2026:",
+        "description": "\nSáb 02/May: Feria Retro San José de Maipo\n📍 Plaza San José de Maipo\n📌 Calle Inmaculada\n\nDom 03/May: Feria Friki Mallplaza Tobalaba\n📍 Mallplaza Tobalaba\n📌 Av. Camilo Henríquez 3692, Puente Alto\n\n🕒 De 12:00 a 19:00 hrs\n🎟 Entrada liberada\n🎮 Llevaremos nuestros juegos\n¡Nos vemos!\n\n#FeriaRetro #FeriaFriki",
+        "link": "https://www.instagram.com/p/DX0YDV5lY9-/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-05-02"
+    },
     {
         "id": "ig_auto_18154108828458099",
         "image": "img/IG_18154108828458099.jpeg",
@@ -95,7 +104,7 @@ const INSTAGRAM_POSTS_DATA = [
     {
         "id": "ig_auto_17876155668439654",
         "image": "img/IG_17876155668439654.jpeg",
-        "title": "[✅] 3960\tMs Pacman [Genesis] $12K",
+        "title": "[❌️] 3960\tMs Pacman [Genesis] $12K",
         "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE",
         "link": "https://www.instagram.com/p/DWpe-4AmJ1x/",
         "media_type": "CAROUSEL_ALBUM",
