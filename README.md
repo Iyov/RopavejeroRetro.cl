@@ -5,7 +5,7 @@
 [![Website](https://img.shields.io/badge/Website-ropavejeroretro.cl-blue)](https://ropavejeroretro.cl/)
 [![Instagram](https://img.shields.io/badge/Instagram-@ropavejero.retro-E4405F?logo=instagram&logoColor=white)](https://www.instagram.com/ropavejero.retro/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/Version-1.1.6-brightgreen.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/Version-1.1.7-brightgreen.svg)](CHANGELOG.md)
 
 > **Todo lo Retro en un solo lugar** - Consolas, juegos y accesorios retro originales americanos. Revive la nostalgia de los videojuegos clásicos.
 
@@ -290,7 +290,7 @@ Síguenos en todas nuestras plataformas:
 - 🐦 **Twitter (X)**: [@RopavejeroRetro](https://twitter.com/RopavejeroRetro/)
 - 💬 **WhatsApp**: [+56 9 6769 1585](https://wa.me/56967691585)
 - 🌐 **Website**: [ropavejeroretro.cl](https://ropavejeroretro.cl/)
-- 📊 **Catálogo Excel**: [Google Sheets](https://docs.google.com/spreadsheets/d/18kZ6wyheBWMmoa5yb1PR_XqhqzHCTAlT/)
+- 📊 **Catálogo Excel**: [Google Sheets](https://docs.google.com/spreadsheets/d/1ZDQQFeCeL3gw2qgO5_xusTKP0GiY94XVTnR_Amphbek/)
 
 ---
 
@@ -354,7 +354,18 @@ python api/update_instagram.py
 ---
 
 ## 🆕 Últimos Cambios
-### Versión: v1.1.5 | Mar 2026
+### Versión: v1.1.7 | Mar 2026
+
+#### Cambiado
+- ✅ Google Sheets actualizado al nuevo ID `1ZDQQFeCeL3gw2qgO5_xusTKP0GiY94XVTnR_Amphbek`.
+- ✅ Actualizado en `js/index.js`, `index.html`, `old.html` y `README.md`.
+- ✅ Query strings actualizados a `v=2026-03-16_6`.
+- ✅ Service Worker actualizado a `ropavejero-v2026-03-16_6`.
+
+---
+
+## 🆕 Otros Cambios
+### Versión: v1.1.6 | Mar 2026
 
 #### Agregado
 - ✅ `initNavActive()` — marca el ítem activo del nav al hacer scroll en `index.html`.
@@ -517,7 +528,7 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más det
 - 👥 **Clientes Satisfechos**: 150+
 - ⭐ **Rating Promedio**: 4.8/5
 - 🚚 **Envíos Realizados**: A todo Chile
-- 📦 **Versión Actual**: v1.1.6
+- 📦 **Versión Actual**: v1.1.7
 - 🔍 **SEO Score**: 100% de páginas indexadas
 - ⚡ **Performance**: 60-70% más rápido que v1.0.0
 

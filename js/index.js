@@ -1390,7 +1390,7 @@ async function loadProducts() {
             console.info(`🔄 Cargando productos desde Google Sheets (intento ${retryCount + 1}/${CACHE_CONFIG.MAX_RETRIES})`);
             
             // URL de tu Google Sheet (formato CSV) - ID fijo
-            const sheetId = '18kZ6wyheBWMmoa5yb1PR_XqhqzHCTAlT';
+            const sheetId = '1ZDQQFeCeL3gw2qgO5_xusTKP0GiY94XVTnR_Amphbek';
             const sheetUrl = `https://docs.google.com/spreadsheets/d/${encodeURIComponent(sheetId)}/gviz/tq?tqx=out:csv&headers=1&tq=${encodeURIComponent('SELECT *')}`;
             
             const controller = new AbortController();
