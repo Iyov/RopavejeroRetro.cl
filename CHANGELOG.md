@@ -7,6 +7,25 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ---
 
+## [1.1.9] - 2026-05-09
+
+### Cambiado
+- Google Sheets actualizado al nuevo ID `1ZDQQFeCeL3gw2qgO5_xusTKP0GiY94XVTnR_Amphbek` en todo el sistema
+- Query strings actualizados a `v=2026-05-09_1` en todos los archivos HTML
+- Versión del caché del service worker actualizada a `ropavejero-v2026-05-09_1`
+- `js/index.min.js` regenerado con el nuevo Sheet ID
+
+---
+
+## [1.1.8] - 2026-03-16
+
+### Cambiado
+- Versión unificada a `v=2026-03-16_7` en todos los archivos HTML, JS y service worker
+- Archivos actualizados: `index.html`, `productos.html`, `404.html`, `security-policy.html`, `security-acknowledgments.html`, `old.html`, `service-worker.js`, `js/index.js`, `js/index.min.js`, `css/index.min.css`
+- `js/index.min.js` y `css/index.min.css` regenerados con el nuevo Sheet ID y todos los fixes acumulados
+
+---
+
 ## [1.1.7] - 2026-03-16
 
 ### Cambiado

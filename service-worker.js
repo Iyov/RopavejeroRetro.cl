@@ -1,6 +1,6 @@
 // ========== SERVICE WORKER - ROPAVEJERO RETRO ==========
 // Versión del caché - Incrementar cuando actualices recursos
-const CACHE_VERSION = 'ropavejero-v2026-05-02_1242';
+const CACHE_VERSION = 'ropavejero-v2026-05-09_1';
 const CACHE_NAME = `${CACHE_VERSION}-static`;
 const DATA_CACHE_NAME = `${CACHE_VERSION}-data`;
 

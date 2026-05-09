@@ -5,7 +5,7 @@
 [![Website](https://img.shields.io/badge/Website-ropavejeroretro.cl-blue)](https://ropavejeroretro.cl/)
 [![Instagram](https://img.shields.io/badge/Instagram-@ropavejero.retro-E4405F?logo=instagram&logoColor=white)](https://www.instagram.com/ropavejero.retro/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/Version-1.1.7-brightgreen.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/Version-1.1.9-brightgreen.svg)](CHANGELOG.md)
 
 > **Todo lo Retro en un solo lugar** - Consolas, juegos y accesorios retro originales americanos. Revive la nostalgia de los videojuegos clásicos.
 
@@ -354,6 +354,27 @@ python api/update_instagram.py
 ---
 
 ## 🆕 Últimos Cambios
+### Versión: v1.1.9 | May 2026
+
+#### Cambiado
+- ✅ Google Sheets actualizado al nuevo ID `1ZDQQFeCeL3gw2qgO5_xusTKP0GiY94XVTnR_Amphbek` en todo el sistema.
+- ✅ Query strings actualizados a `v=2026-05-09_1` en todos los archivos HTML.
+- ✅ Service Worker actualizado a `ropavejero-v2026-05-09_1`.
+- ✅ `js/index.min.js` regenerado con el nuevo Sheet ID.
+
+---
+
+## 🆕 Otros Cambios
+### Versión: v1.1.8 | Mar 2026
+
+#### Cambiado
+- ✅ Versión unificada a `v=2026-03-16_7` en todos los archivos del sistema.
+- ✅ `index.html`, `productos.html`, `404.html`, `security-policy.html`, `security-acknowledgments.html`, `old.html`, `service-worker.js` actualizados.
+- ✅ `js/index.min.js` y `css/index.min.css` regenerados con todos los cambios acumulados.
+
+---
+
+## 🆕 Otros Cambios
 ### Versión: v1.1.7 | Mar 2026
 
 #### Cambiado
@@ -528,7 +549,7 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más det
 - 👥 **Clientes Satisfechos**: 150+
 - ⭐ **Rating Promedio**: 4.8/5
 - 🚚 **Envíos Realizados**: A todo Chile
-- 📦 **Versión Actual**: v1.1.7
+- 📦 **Versión Actual**: v1.1.9
 - 🔍 **SEO Score**: 100% de páginas indexadas
 - ⚡ **Performance**: 60-70% más rápido que v1.0.0
 
