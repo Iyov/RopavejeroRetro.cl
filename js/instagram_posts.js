@@ -1,5 +1,5 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-05-17 01:54:02
+// Última actualización: 2026-05-19 02:04:08
 
 const INSTAGRAM_POSTS_DATA = [
     {
@@ -41,7 +41,7 @@ const INSTAGRAM_POSTS_DATA = [
     {
         "id": "ig_auto_18023063159657070",
         "image": "img/IG_18023063159657070.jpeg",
-        "title": "[✅] 4175\tTiny Toon Adventures Wacky Sports Challenge [SNES] $30K",
+        "title": "[❌] 4175\tTiny Toon Adventures Wacky Sports Challenge [SNES] $30K",
         "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE",
         "link": "https://www.instagram.com/p/DYGgOKDFR9L/",
         "media_type": "CAROUSEL_ALBUM",
@@ -141,7 +141,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_18089193371204319",
         "image": "img/IG_18089193371204319.jpeg",
         "title": "Nintendo Wii | 30/Abr/26",
-        "description": "\n[✅] 4139\tWWE All Stars (CIB) [Wii] $15K\n[✅] 4140\tTransformers Revenge of the Fallen (CIB) [Wii] $12K\n[✅] 4141\tPES 2013 (MM) [Wii] $6K\n[✅] 4142\tPES 2011 (CIB) [Wii] $7K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual\nMM: Sin Manual",
+        "description": "\n[❌] 4139\tWWE All Stars (CIB) [Wii] $15K\n[✅] 4140\tTransformers Revenge of the Fallen (CIB) [Wii] $12K\n[✅] 4141\tPES 2013 (MM) [Wii] $6K\n[✅] 4142\tPES 2011 (CIB) [Wii] $7K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual\nMM: Sin Manual",
         "link": "https://www.instagram.com/p/DXxqucCFZ_S/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-05-01"
@@ -158,7 +158,7 @@ const INSTAGRAM_POSTS_DATA = [
     {
         "id": "ig_auto_18069983498664410",
         "image": "img/IG_18069983498664410.jpeg",
-        "title": "[✅] 4136\tConduit 2 (CIB) [Wii] $30K",
+        "title": "[❌] 4136\tConduit 2 (CIB) [Wii] $30K",
         "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual",
         "link": "https://www.instagram.com/p/DXxpE1_FXiw/",
         "media_type": "CAROUSEL_ALBUM",
@@ -179,15 +179,6 @@ const INSTAGRAM_POSTS_DATA = [
         "title": "[❌] 4134\tKirby's Dream Collection Special Edition (CIB+-2D-C/L) [Wii] $45K",
         "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB+: Caja, Juego, Manual, Inserto(s)\n2D: Dos Discos\nC/L: Con Libro",
         "link": "https://www.instagram.com/p/DXxoeEzlach/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-05-01"
-    },
-    {
-        "id": "ig_auto_17980028633840478",
-        "image": "img/IG_17980028633840478.jpeg",
-        "title": "[✅] 4133\tKirby Air Ride (CIB+-PC) [Gamecube] $80K",
-        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB+: Caja, Juego, Manual, Inserto(s)\nPC: Players Choice",
-        "link": "https://www.instagram.com/p/DXxoRxiFSO6/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-05-01"
     },
@@ -231,7 +222,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_18174258253360197",
         "image": "img/IG_18174258253360197.jpeg",
         "title": "Accesorios | 16/Abr/26",
-        "description": "\n[✅] 3104\tNyko Trigger Back Button (Sellado) [PS4] $10K\n[✅] 4058\tCargador DS - L nuevo atl. [Transfo] $5K\n[✅] 4059\tCargador 3DS - DSi nuevo atl. [Transfo] $5K\n[✅] 4060\tCargador 3DS - DSi nuevo atl. [Transfo] $5K\n[✅] 4061\tCargador GBA SP - DS nuevo atl. [Transfo] $5K\n[✅] 4062\tMemory Card Gamecube nueva alt [Acc] $5K\n[✅] 4063\tMemory Card Gamecube nueva alt [Acc] $5K\n[✅] 4064\tCable AV RCA Sony PS1 - PS2 org. [Acc] $5K\n[✅] 4065\tCable AV RCA Sony PS1 - PS2 org. [Acc] $5K\n[✅] 4066\tCable AV Sega Dreamcast 3 colores [Acc] $10K\n[❌] 4067\tCable alargador Gamecube control [Acc] $5K\n[❌] 4068\tBarra sensor Nintendo Wii org. [Acc] $5K\n[❌] 4069\tTransfo 220V Nintendo Wii org. [Transfo] $10K\n[✅] 4070\tTransfo 110V Sega Genesis v2 org (requiere Minwa) [Transfo] $15K\n[❌] 4071\tTransfo 220V Sony PSOne org. [Transfo] $10K\n[❌] 4072\tNunchuk negro Nintendo Wii org. [Acc] $7K\n[✅] 4073\tCable AV RCA Nintendo Wii org. [Acc] $3K\n[✅] 4074\tCable AV RCA Nintendo Wii org. [Acc] $3K\n[❌] 4075\t3D surround Speaker to PSP alt. [Acc] $10K\n[❌] 4076\tAudífonos Xbox 360 Microsoft org. [Acc] $5K\n[✅] 4077\tCable alargador PS1 control [Acc] $5K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nAcc: Accesorio\norg: original\nalt: Alternativo",
+        "description": "\n[✅] 3104\tNyko Trigger Back Button (Sellado) [PS4] $10K\n[✅] 4058\tCargador DS - L nuevo atl. [Transfo] $5K\n[✅] 4059\tCargador 3DS - DSi nuevo atl. [Transfo] $5K\n[✅] 4060\tCargador 3DS - DSi nuevo atl. [Transfo] $5K\n[✅] 4061\tCargador GBA SP - DS nuevo atl. [Transfo] $5K\n[✅] 4062\tMemory Card Gamecube nueva alt [Acc] $5K\n[✅] 4063\tMemory Card Gamecube nueva alt [Acc] $5K\n[✅] 4064\tCable AV RCA Sony PS1 - PS2 org. [Acc] $5K\n[❌] 4065\tCable AV RCA Sony PS1 - PS2 org. [Acc] $5K\n[✅] 4066\tCable AV Sega Dreamcast 3 colores [Acc] $10K\n[❌] 4067\tCable alargador Gamecube control [Acc] $5K\n[❌] 4068\tBarra sensor Nintendo Wii org. [Acc] $5K\n[❌] 4069\tTransfo 220V Nintendo Wii org. [Transfo] $10K\n[✅] 4070\tTransfo 110V Sega Genesis v2 org (requiere Minwa) [Transfo] $15K\n[❌] 4071\tTransfo 220V Sony PSOne org. [Transfo] $10K\n[❌] 4072\tNunchuk negro Nintendo Wii org. [Acc] $7K\n[✅] 4073\tCable AV RCA Nintendo Wii org. [Acc] $3K\n[✅] 4074\tCable AV RCA Nintendo Wii org. [Acc] $3K\n[❌] 4075\t3D surround Speaker to PSP alt. [Acc] $10K\n[❌] 4076\tAudífonos Xbox 360 Microsoft org. [Acc] $5K\n[❌] 4077\tCable alargador PS1 control [Acc] $5K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nAcc: Accesorio\norg: original\nalt: Alternativo",
         "link": "https://www.instagram.com/p/DXNrPSxlZ-e/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-04-17"
@@ -267,7 +258,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_18312173050277861",
         "image": "img/IG_18312173050277861.jpeg",
         "title": "Manuales Super Nintendo | 09/Abr/26",
-        "description": "\n[❌] 3956\tStarfox (M) [SNES (M)] $10K\n[❌] 3994\tSuper Mario World (M) [SNES (M)] $15K\n[❌] 3996\tSuper Mario Kart (M) [SNES (M)] $13K\n[✅] 3998\tStarfox (M) [SNES (M)] $15K\n\n[❌] 4013\tZelda A Link To The Past (M) [SNES (M)] $20K\n[✅] 4014\tFinal Fantasy Mystic Quest (M) [SNES (M)] $18K\n[✅] 4015\tF-Zero (M) [SNES (M)] $15K\n[❌] 4016\tSuper Mario All Stars (M) [SNES (M)] $15K\n[✅] 4017\tRoad Runner's Death Valley Rally (M) [SNES (M)] $15K\n[❌] 4018\tStreet Fighter II (M) [SNES (M)] $15K\n[✅] 4019\tSNES System Fat Console (M) [SNES (M)] $15K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nM: Manual",
+        "description": "\n[❌] 3956\tStarfox (M) [SNES (M)] $10K\n[❌] 3994\tSuper Mario World (M) [SNES (M)] $15K\n[❌] 3996\tSuper Mario Kart (M) [SNES (M)] $13K\n[✅] 3998\tStarfox (M) [SNES (M)] $15K\n\n[❌] 4013\tZelda A Link To The Past (M) [SNES (M)] $20K\n[❌] 4014\tFinal Fantasy Mystic Quest (M) [SNES (M)] $18K\n[✅] 4015\tF-Zero (M) [SNES (M)] $15K\n[❌] 4016\tSuper Mario All Stars (M) [SNES (M)] $15K\n[✅] 4017\tRoad Runner's Death Valley Rally (M) [SNES (M)] $15K\n[❌] 4018\tStreet Fighter II (M) [SNES (M)] $15K\n[✅] 4019\tSNES System Fat Console (M) [SNES (M)] $15K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nM: Manual",
         "link": "https://www.instagram.com/p/DW7pk1zFYPk/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-04-10"
@@ -402,7 +393,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_18046375097729709",
         "image": "img/IG_18046375097729709.jpeg",
         "title": "Nintendo Wii | 20/Mar/26",
-        "description": "\n[❌] 0527 Zumba Fitness (CIB) [Wii] $6K\n[✅] 0528 PES 2008 (MM) [Wii] $7K\n[✅] 0536 Ultimate Duck Hunting (CIB) [Wii] $10K\n[❌] 0540 Marvel Ultimate Alliance (CIB) [Wii] $15K\n[❌] 0542 Star Wars Force Unleashed (CIB) [Wii] $15K\n[❌] 0544 The Last Airbender (CIB) [Wii] $15K\n[❌] 1003 Ben 10 Omniverse 2 (MM) [Wii] $10K\n[✅] 1004 Championship Boxing (CIB) [Wii] $10K\n[✅] 1005 Angry Birds (MM) [Wii] $12K\n[✅] 2339 Deca Sports 3 (MM) [Wii] $8K\n[✅] 2948 Hannah Montana The Movie (CIB) [Wii] $4K\n[❌] 2949 Monster 4x4: Stunt Racer (CIB) [Wii] $5K\n[✅] 2958 Bakugan Battle Brawlers (CIB) [Wii] $10K\n[❌] 3026 Star Wars Force Unleashed 2 (CIB) [Wii] $15K\n[✅] 3323 Monster Trux Arenas (CIB) [Wii] $7K\n[✅] 3326 Deca Sports 2 (MM) [Wii] $8K\n[✅] 3327 FIFA Soccer 09 (CIB) [Wii] $8K\n[✅] 3328 Game Party 1 (CIB) [Wii] $8K\n[✅] 3329 Game Party 3 (CIB) [Wii] $8K\n[✅] 3331 My Sims (MM) [Wii] $8K\n[✅] 3332 Bakugan Battle Brawlers (CIB) [Wii] $10K\n[✅] 3402 PES 2012 (MM) [Wii] $8K\n[✅] 3427 Guitar Hero World Tour (CIB) [Wii] $12K\n[✅] 3725 Harry Potter Order of the Phoenix (CIB) [Wii] $15K\n[✅] 3803 Ben 10 Protector Of Earth (CIB-PAL) [Wii] $10K\n[✅] 3804 Guitar Hero World Tour (CIB-PAL) [Wii] $12K\n[❌] 3805 Penny Racers Party Turbo-Q Speedway (CIB) [Wii] $8K\n[❌] 3806 Skylanders Superchargers Racing (MM) [Wii] $8K\n[✅] 3877 Harry Potter Deathly Hallows Part 1 (CIB) [Wii] $15K\n[❌] 3878 Mario Kart Wii (MM) [Wii] $15K\n[✅] 3879 WWE Smackdown vs Raw 2008 (CIB) [Wii] $15K\n[✅] 3880 WWE Smackdown vs Raw 2010 (MM) [Wii] $12K\n[✅] 3883 PES 2012 (MM-CR) [Wii] $6K\n[✅] 3913 Transformers The Game (MM) [Wii] $12K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual\nMM: Sin Manual\nPAL: Europeo\nCR: Carátula Rayada",
+        "description": "\n[❌] 0527 Zumba Fitness (CIB) [Wii] $6K\n[✅] 0528 PES 2008 (MM) [Wii] $7K\n[✅] 0536 Ultimate Duck Hunting (CIB) [Wii] $10K\n[❌] 0540 Marvel Ultimate Alliance (CIB) [Wii] $15K\n[❌] 0542 Star Wars Force Unleashed (CIB) [Wii] $15K\n[❌] 0544 The Last Airbender (CIB) [Wii] $15K\n[❌] 1003 Ben 10 Omniverse 2 (MM) [Wii] $10K\n[✅] 1004 Championship Boxing (CIB) [Wii] $10K\n[✅] 1005 Angry Birds (MM) [Wii] $12K\n[✅] 2339 Deca Sports 3 (MM) [Wii] $8K\n[✅] 2948 Hannah Montana The Movie (CIB) [Wii] $4K\n[❌] 2949 Monster 4x4: Stunt Racer (CIB) [Wii] $5K\n[✅] 2958 Bakugan Battle Brawlers (CIB) [Wii] $10K\n[❌] 3026 Star Wars Force Unleashed 2 (CIB) [Wii] $15K\n[✅] 3323 Monster Trux Arenas (CIB) [Wii] $7K\n[✅] 3326 Deca Sports 2 (MM) [Wii] $8K\n[✅] 3327 FIFA Soccer 09 (CIB) [Wii] $8K\n[✅] 3328 Game Party 1 (CIB) [Wii] $8K\n[✅] 3329 Game Party 3 (CIB) [Wii] $8K\n[✅] 3331 My Sims (MM) [Wii] $8K\n[✅] 3332 Bakugan Battle Brawlers (CIB) [Wii] $10K\n[✅] 3402 PES 2012 (MM) [Wii] $8K\n[✅] 3427 Guitar Hero World Tour (CIB) [Wii] $12K\n[✅] 3725 Harry Potter Order of the Phoenix (CIB) [Wii] $15K\n[✅] 3803 Ben 10 Protector Of Earth (CIB-PAL) [Wii] $10K\n[✅] 3804 Guitar Hero World Tour (CIB-PAL) [Wii] $12K\n[❌] 3805 Penny Racers Party Turbo-Q Speedway (CIB) [Wii] $8K\n[❌] 3806 Skylanders Superchargers Racing (MM) [Wii] $8K\n[✅] 3877 Harry Potter Deathly Hallows Part 1 (CIB) [Wii] $15K\n[❌] 3878 Mario Kart Wii (MM) [Wii] $15K\n[❌] 3879 WWE Smackdown vs Raw 2008 (CIB) [Wii] $15K\n[✅] 3880 WWE Smackdown vs Raw 2010 (MM) [Wii] $12K\n[✅] 3883 PES 2012 (MM-CR) [Wii] $6K\n[✅] 3913 Transformers The Game (MM) [Wii] $12K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual\nMM: Sin Manual\nPAL: Europeo\nCR: Carátula Rayada",
         "link": "https://www.instagram.com/p/DWIRXRslV--/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-03-21"
