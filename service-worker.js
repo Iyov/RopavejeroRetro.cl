@@ -1,6 +1,6 @@
 // ========== SERVICE WORKER - ROPAVEJERO RETRO ==========
 // Versión del caché - Incrementar cuando actualices recursos
-const CACHE_VERSION = 'ropavejero-v2026-05-20_1430';
+const CACHE_VERSION = 'ropavejero-v2026-05-21_0202';
 const CACHE_NAME = `${CACHE_VERSION}-static`;
 const DATA_CACHE_NAME = `${CACHE_VERSION}-data`;
 
@@ -32,6 +32,10 @@ const STATIC_RESOURCES = [
 
 // Recursos de Instagram (imágenes de posts WebP responsive y fallbacks)
 const INSTAGRAM_IMAGES = [
+    '/img/IG_18048180407548431.jpeg',
+    '/img/IG_18048180407548431-400.webp',
+    '/img/IG_18048180407548431-800.webp',
+    '/img/IG_18048180407548431-1200.webp',
     '/img/IG_17990010884968060.jpeg',
     '/img/IG_17990010884968060-400.webp',
     '/img/IG_17990010884968060-800.webp',
@@ -235,7 +239,55 @@ const INSTAGRAM_IMAGES = [
     '/img/IG_17920957479266936.jpeg',
     '/img/IG_17920957479266936-400.webp',
     '/img/IG_17920957479266936-800.webp',
-    '/img/IG_17920957479266936-1200.webp'
+    '/img/IG_17920957479266936-1200.webp',
+    '/img/IG_18071761007140852.jpeg',
+    '/img/IG_18071761007140852-400.webp',
+    '/img/IG_18071761007140852-800.webp',
+    '/img/IG_18071761007140852-1200.webp',
+    '/img/IG_17902748031199245.jpeg',
+    '/img/IG_17902748031199245-400.webp',
+    '/img/IG_17902748031199245-800.webp',
+    '/img/IG_17902748031199245-1200.webp',
+    '/img/IG_18110866735659338.jpeg',
+    '/img/IG_18110866735659338-400.webp',
+    '/img/IG_18110866735659338-800.webp',
+    '/img/IG_18110866735659338-1200.webp',
+    '/img/IG_18119567194606230.jpeg',
+    '/img/IG_18119567194606230-400.webp',
+    '/img/IG_18119567194606230-800.webp',
+    '/img/IG_18119567194606230-1200.webp',
+    '/img/IG_18055811306380269.jpeg',
+    '/img/IG_18055811306380269-400.webp',
+    '/img/IG_18055811306380269-800.webp',
+    '/img/IG_18055811306380269-1200.webp',
+    '/img/IG_17996237519906325.jpeg',
+    '/img/IG_17996237519906325-400.webp',
+    '/img/IG_17996237519906325-800.webp',
+    '/img/IG_17996237519906325-1200.webp',
+    '/img/IG_17909902839309642.jpeg',
+    '/img/IG_17909902839309642-400.webp',
+    '/img/IG_17909902839309642-800.webp',
+    '/img/IG_17909902839309642-1200.webp',
+    '/img/IG_18119768341583465.jpeg',
+    '/img/IG_18119768341583465-400.webp',
+    '/img/IG_18119768341583465-800.webp',
+    '/img/IG_18119768341583465-1200.webp',
+    '/img/IG_17867016285552189.jpeg',
+    '/img/IG_17867016285552189-400.webp',
+    '/img/IG_17867016285552189-800.webp',
+    '/img/IG_17867016285552189-1200.webp',
+    '/img/IG_18020656073803699.jpeg',
+    '/img/IG_18020656073803699-400.webp',
+    '/img/IG_18020656073803699-800.webp',
+    '/img/IG_18020656073803699-1200.webp',
+    '/img/IG_18098015590916334.jpeg',
+    '/img/IG_18098015590916334-400.webp',
+    '/img/IG_18098015590916334-800.webp',
+    '/img/IG_18098015590916334-1200.webp',
+    '/img/IG_17913121242031125.jpeg',
+    '/img/IG_17913121242031125-400.webp',
+    '/img/IG_17913121242031125-800.webp',
+    '/img/IG_17913121242031125-1200.webp'
 ];
 
 // URLs que NO deben cachearse
