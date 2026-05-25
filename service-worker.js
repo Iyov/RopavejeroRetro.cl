@@ -1,6 +1,6 @@
 // ========== SERVICE WORKER - ROPAVEJERO RETRO ==========
 // Versión del caché - Incrementar cuando actualices recursos
-const CACHE_VERSION = 'ropavejero-v2026-05-25_0209';
+const CACHE_VERSION = 'ropavejero-v2026-05-25_1429';
 const CACHE_NAME = `${CACHE_VERSION}-static`;
 const DATA_CACHE_NAME = `${CACHE_VERSION}-data`;
 
@@ -68,10 +68,6 @@ const INSTAGRAM_IMAGES = [
     '/img/IG_17988580403976701-400.webp',
     '/img/IG_17988580403976701-800.webp',
     '/img/IG_17988580403976701-1200.webp',
-    '/img/IG_17923971198336054.jpeg',
-    '/img/IG_17923971198336054-400.webp',
-    '/img/IG_17923971198336054-800.webp',
-    '/img/IG_17923971198336054-1200.webp',
     '/img/IG_18075540410552150.jpeg',
     '/img/IG_18075540410552150-400.webp',
     '/img/IG_18075540410552150-800.webp',
