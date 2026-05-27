@@ -1,15 +1,15 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-05-27 02:08:19
+// Última actualización: 2026-05-27 13:57:50
 
 const INSTAGRAM_POSTS_DATA = [
     {
-        "id": "ig_auto_18048180407548431",
-        "image": "img/IG_18048180407548431.jpeg",
+        "id": "ig_auto_17952526862980600",
+        "image": "img/IG_17952526862980600.jpeg",
         "title": "Actividades Próximo Fin de Semana de Mayo 2026:",
-        "description": "\nSáb 23/May: Feria Retro San Antonio\n📍 Centro Cultural San Antonio\n📌 Av. Antofagasta 545, San Antonio, Valparaíso\n🕒 De 12:00 a 19:00 hrs\n\nDom 24/May: Persa Bio Bio\n📍 La Eskina FC\n📌 Bio Bio esquina Santiago Concha, Stgo\n🚇 Metro Bio Bio, L3\n🕒 De 09:00 a 14:00 hrs\n\n🎟 Entrada liberada\n🎮 Llevaremos nuestros juegos\n¡Nos vemos!\n\n#FeriaRetro #EskinaFC",
-        "link": "https://www.instagram.com/p/DYkFnzKFRGk/",
+        "description": "\nSáb 30/May: Persa Bio Bio\n📍 La Eskina FC\n📌 Bio Bio esquina Santiago Concha, Stgo\n🚇 Metro Bio Bio, L3\n🕒 De 09:00 a 14:00 hrs\n\nDom 31/May: Feria Friki Vicente Valdés\n📍 Espacio Vicente Valdés\n📌 Vicente Valdés 395, La Florida\n🕒 De 12:00 a 19:00 hrs\n\n🎟 Entrada liberada\n🎮 Llevaremos nuestros juegos\n¡Nos vemos!\n\n#FeriaFriki #FeriaFrikiVicenteValdes",
+        "link": "https://www.instagram.com/p/DY2UMbnlfip/",
         "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-05-20"
+        "date": "2026-05-27"
     },
     {
         "id": "ig_auto_17990010884968060",
