@@ -9,18 +9,18 @@
     <image:image>
       <image:loc>https://ropavejeroretro.cl/img/RopavejeroLogo_500.webp</image:loc>
       <image:title>Ropavejero Retro</image:title>
-      <image:caption>Tienda de videojuegos retro en Chile</image:caption>
+      <image:caption>Tienda de videojuegos retro en Santiago de Chile</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://ropavejeroretro.cl/productos</loc>
-    <lastmod>2026-03-17</lastmod>
+    <loc>https://ropavejeroretro.cl/productos.html</loc>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
     <image:image>
       <image:loc>https://ropavejeroretro.cl/img/RopavejeroLogo_256.png</image:loc>
       <image:title>Productos Destacados - Ropavejero Retro</image:title>
-      <image:caption>Catalogo de videojuegos retro disponibles en Chile</image:caption>
+      <image:caption>Catalogo de videojuegos retro disponibles en Santiago de Chile</image:caption>
     </image:image>
   </url>
   <url>
