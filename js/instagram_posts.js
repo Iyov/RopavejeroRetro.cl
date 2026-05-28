@@ -1,7 +1,16 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-05-27 13:57:50
+// Última actualización: 2026-05-28 01:51:09
 
 const INSTAGRAM_POSTS_DATA = [
+    {
+        "id": "ig_auto_18141687913516219",
+        "image": "img/IG_18141687913516219.jpeg",
+        "title": "Agradecemos a todos los ropavejeros que nos han acompañado en este viaje, ya somos 9K. Esperamos seguir creciendo juntos.",
+        "description": "Muchas gracias 🙌🏻",
+        "link": "https://www.instagram.com/p/DY2iZ0KhGOv/",
+        "media_type": "IMAGE",
+        "date": "2026-05-27"
+    },
     {
         "id": "ig_auto_17952526862980600",
         "image": "img/IG_17952526862980600.jpeg",
