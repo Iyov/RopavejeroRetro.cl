@@ -1,7 +1,16 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-05-28 01:51:09
+// Última actualización: 2026-05-29 14:35:28
 
 const INSTAGRAM_POSTS_DATA = [
+    {
+        "id": "ig_auto_17853611076675869",
+        "image": "img/IG_17853611076675869.jpeg",
+        "title": "🎮 Actualización Viernes 29/May/26 20:00 hrs!",
+        "description": "\n✅ Se venderán lotes de juegos y más.\n🔔 Activen las notificaciones.\n\n✋ Se subirán distintos lotes en un post que contendrá en su descripción el listado con:\nEj: [✅] 125 Gungrave (BL-CIB) $55K\n1) Estado: [✅️] Disponible ó [❌️] Vendido\n2) Número (identificador): 125\n3) Nombre: Gungrave (BL-CIB)\n4) Precio: $55K, dónde K=1.000",
+        "link": "https://www.instagram.com/p/DY6F1OEFdPX/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-05-29"
+    },
     {
         "id": "ig_auto_18141687913516219",
         "image": "img/IG_18141687913516219.jpeg",
