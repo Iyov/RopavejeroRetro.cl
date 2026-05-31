@@ -1,5 +1,5 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-05-29 14:35:28
+// Última actualización: 2026-05-31 02:09:35
 
 const INSTAGRAM_POSTS_DATA = [
     {
@@ -573,7 +573,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_18098015590916334",
         "image": "img/IG_18098015590916334.jpeg",
         "title": "PS1 Sueltos | 25/Ene/26",
-        "description": "\n[❌] 1912\tTekken 3 (BL-L-Piquete) [PS1 (L)] $6K\n[✅] 1914\tFinal Fantasy VII Disc 1 (GH-L) [PS1 (L)] $8K\n[✅] 1915\tLegend Of Dragoon Disc 1 (BL-L) [PS1 (L)] $8K\n[✅] 1918\tNBA Live 2002 (BL-L) [PS1 (L)] $3K\n[❌] 3702\tParasite Eve disc-1&2 (BL-L) [PS1 (L)] $50K\n[❌] 3703\tBrave Fencer Musashi (BL-L) [PS1 (L)] $50K\n[✅] 3704\tFighting Force [Collector's Edition] (CE-L) [PS1 (L)] $15K\n[✅] 3705\tSpongebob Squarepants Supersponge (BL-L) [PS1 (L)] $7K\n[❌] 3706\tDuke Nukem Total Meltdown (BL-L) [PS1 (L)] $10K\n[✅] 3707\tDriver (GH-L) [PS1 (L)] $8K\n[❌] 3708\tGran Turismo (GH-L) [PS1 (L)] $10K\n[❌] 3709\tCrash Bash (GH-L) [PS1 (L)] $12K\n[✅] 3710\tViewpoint (BL-L) [PS1 (L)] $15K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nGH: Greatest Hits\nCE: Collector's Edition\nL: Loose: Suelto: Solo Juego",
+        "description": "\n[❌] 1912\tTekken 3 (BL-L-Piquete) [PS1 (L)] $6K\n[✅] 1914\tFinal Fantasy VII Disc 1 (GH-L) [PS1 (L)] $8K\n[✅] 1915\tLegend Of Dragoon Disc 1 (BL-L) [PS1 (L)] $8K\n[❌] 1918\tNBA Live 2002 (BL-L) [PS1 (L)] $3K\n[❌] 3702\tParasite Eve disc-1&2 (BL-L) [PS1 (L)] $50K\n[❌] 3703\tBrave Fencer Musashi (BL-L) [PS1 (L)] $50K\n[✅] 3704\tFighting Force [Collector's Edition] (CE-L) [PS1 (L)] $15K\n[✅] 3705\tSpongebob Squarepants Supersponge (BL-L) [PS1 (L)] $7K\n[❌] 3706\tDuke Nukem Total Meltdown (BL-L) [PS1 (L)] $10K\n[✅] 3707\tDriver (GH-L) [PS1 (L)] $8K\n[❌] 3708\tGran Turismo (GH-L) [PS1 (L)] $10K\n[❌] 3709\tCrash Bash (GH-L) [PS1 (L)] $12K\n[✅] 3710\tViewpoint (BL-L) [PS1 (L)] $15K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nGH: Greatest Hits\nCE: Collector's Edition\nL: Loose: Suelto: Solo Juego",
         "link": "https://www.instagram.com/p/DT9A2Ytleo0/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-01-26"
