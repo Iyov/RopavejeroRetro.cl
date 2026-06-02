@@ -1,5 +1,5 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-06-01 17:12:53
+// Última actualización: 2026-06-02 02:30:46
 
 const INSTAGRAM_POSTS_DATA = [
     {
@@ -8,6 +8,15 @@ const INSTAGRAM_POSTS_DATA = [
         "title": "Hola! desde ahora comenzaremos a subir productos en oferta a propósito del Cyber Day! 👀",
         "description": "\n#CyberDay",
         "link": "https://www.instagram.com/p/DZDQURNBVWj/",
+        "media_type": "IMAGE",
+        "date": "2026-06-01"
+    },
+    {
+        "id": "ig_auto_18098479436276879",
+        "image": "img/IG_18098479436276879.jpeg",
+        "title": "Hola mi gente, gracias a los que fueron ayer a la Friki y a la esquina el fds, los queremos mucho! Cariños! 🤗",
+        "description": "",
+        "link": "https://www.instagram.com/p/DZDLZ7VBDjQ/",
         "media_type": "IMAGE",
         "date": "2026-06-01"
     },
@@ -113,7 +122,7 @@ const INSTAGRAM_POSTS_DATA = [
     {
         "id": "ig_auto_18075540410552150",
         "image": "img/IG_18075540410552150.jpeg",
-        "title": "[✅] 4166\tLegendary Wings [NES] $15K",
+        "title": "[❌] 4166\tLegendary Wings [NES] $15K",
         "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE",
         "link": "https://www.instagram.com/p/DYGX3ITFUT4/",
         "media_type": "CAROUSEL_ALBUM",
@@ -420,7 +429,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_18046375097729709",
         "image": "img/IG_18046375097729709.jpeg",
         "title": "Nintendo Wii | 20/Mar/26",
-        "description": "\n[❌] 0527 Zumba Fitness (CIB) [Wii] $6K\n[✅] 0528 PES 2008 (MM) [Wii] $7K\n[✅] 0536 Ultimate Duck Hunting (CIB) [Wii] $10K\n[❌] 0540 Marvel Ultimate Alliance (CIB) [Wii] $15K\n[❌] 0542 Star Wars Force Unleashed (CIB) [Wii] $15K\n[❌] 0544 The Last Airbender (CIB) [Wii] $15K\n[❌] 1003 Ben 10 Omniverse 2 (MM) [Wii] $10K\n[✅] 1004 Championship Boxing (CIB) [Wii] $10K\n[❌] 1005 Angry Birds (MM) [Wii] $12K\n\n[✅] 2339 Deca Sports 3 (MM) [Wii] $8K\n[✅] 2948 Hannah Montana The Movie (CIB) [Wii] $4K\n[❌] 2949 Monster 4x4: Stunt Racer (CIB) [Wii] $5K\n[✅] 2958 Bakugan Battle Brawlers (CIB) [Wii] $10K\n[❌] 3026 Star Wars Force Unleashed 2 (CIB) [Wii] $15K\n\n[✅] 3323 Monster Trux Arenas (CIB) [Wii] $7K\n[❌] 3326 Deca Sports 2 (MM) [Wii] $8K\n[✅] 3327 FIFA Soccer 09 (CIB) [Wii] $8K\n[✅] 3328 Game Party 1 (CIB) [Wii] $8K\n[✅] 3329 Game Party 3 (CIB) [Wii] $8K\n[✅] 3331 My Sims (MM) [Wii] $8K\n[✅] 3332 Bakugan Battle Brawlers (CIB) [Wii] $10K\n[✅] 3402 PES 2012 (MM) [Wii] $8K\n[✅] 3427 Guitar Hero World Tour (CIB) [Wii] $12K\n[✅] 3725 Harry Potter Order of the Phoenix (CIB) [Wii] $15K\n[❌] 3803 Ben 10 Protector Of Earth (CIB-PAL) [Wii] $10K\n[✅] 3804 Guitar Hero World Tour (CIB-PAL) [Wii] $12K\n[❌] 3805 Penny Racers Party Turbo-Q Speedway (CIB) [Wii] $8K\n[❌] 3806 Skylanders Superchargers Racing (MM) [Wii] $8K\n[✅] 3877 Harry Potter Deathly Hallows Part 1 (CIB) [Wii] $15K\n[❌] 3878 Mario Kart Wii (MM) [Wii] $15K\n[❌] 3879 WWE Smackdown vs Raw 2008 (CIB) [Wii] $15K\n[✅] 3880 WWE Smackdown vs Raw 2010 (MM) [Wii] $12K\n[✅] 3883 PES 2012 (MM-CR) [Wii] $6K\n[✅] 3913 Transformers The Game (MM) [Wii] $12K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual\nMM: Sin Manual\nPAL: Europeo\nCR: Carátula Rayada",
+        "description": "\n[❌] 0527 Zumba Fitness (CIB) [Wii] $6K\n[✅] 0528 PES 2008 (MM) [Wii] $7K\n[✅] 0536 Ultimate Duck Hunting (CIB) [Wii] $10K\n[❌] 0540 Marvel Ultimate Alliance (CIB) [Wii] $15K\n[❌] 0542 Star Wars Force Unleashed (CIB) [Wii] $15K\n[❌] 0544 The Last Airbender (CIB) [Wii] $15K\n[❌] 1003 Ben 10 Omniverse 2 (MM) [Wii] $10K\n[✅] 1004 Championship Boxing (CIB) [Wii] $10K\n[❌] 1005 Angry Birds (MM) [Wii] $12K\n\n[✅] 2339 Deca Sports 3 (MM) [Wii] $8K\n[✅] 2948 Hannah Montana The Movie (CIB) [Wii] $4K\n[❌] 2949 Monster 4x4: Stunt Racer (CIB) [Wii] $5K\n[✅] 2958 Bakugan Battle Brawlers (CIB) [Wii] $10K\n[❌] 3026 Star Wars Force Unleashed 2 (CIB) [Wii] $15K\n\n[✅] 3323 Monster Trux Arenas (CIB) [Wii] $7K\n[❌] 3326 Deca Sports 2 (MM) [Wii] $8K\n[✅] 3327 FIFA Soccer 09 (CIB) [Wii] $8K\n[✅] 3328 Game Party 1 (CIB) [Wii] $8K\n[✅] 3329 Game Party 3 (CIB) [Wii] $8K\n[✅] 3331 My Sims (MM) [Wii] $8K\n[✅] 3332 Bakugan Battle Brawlers (CIB) [Wii] $10K\n[✅] 3402 PES 2012 (MM) [Wii] $8K\n[❌] 3427 Guitar Hero World Tour (CIB) [Wii] $12K\n[✅] 3725 Harry Potter Order of the Phoenix (CIB) [Wii] $15K\n[❌] 3803 Ben 10 Protector Of Earth (CIB-PAL) [Wii] $10K\n[✅] 3804 Guitar Hero World Tour (CIB-PAL) [Wii] $12K\n[❌] 3805 Penny Racers Party Turbo-Q Speedway (CIB) [Wii] $8K\n[❌] 3806 Skylanders Superchargers Racing (MM) [Wii] $8K\n[✅] 3877 Harry Potter Deathly Hallows Part 1 (CIB) [Wii] $15K\n[❌] 3878 Mario Kart Wii (MM) [Wii] $15K\n[❌] 3879 WWE Smackdown vs Raw 2008 (CIB) [Wii] $15K\n[✅] 3880 WWE Smackdown vs Raw 2010 (MM) [Wii] $12K\n[✅] 3883 PES 2012 (MM-CR) [Wii] $6K\n[✅] 3913 Transformers The Game (MM) [Wii] $12K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual\nMM: Sin Manual\nPAL: Europeo\nCR: Carátula Rayada",
         "link": "https://www.instagram.com/p/DWIRXRslV--/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-03-21"
