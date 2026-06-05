@@ -1,5 +1,5 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-06-04 14:30:37
+// Última actualización: 2026-06-05 02:06:59
 
 const INSTAGRAM_POSTS_DATA = [
     {
@@ -19,15 +19,6 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DZJdkpnlY2e/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-06-04"
-    },
-    {
-        "id": "ig_auto_18346406701301208",
-        "image": "img/IG_18346406701301208.jpeg",
-        "title": "Hola! desde ahora comenzaremos a subir productos en oferta a propósito del Cyber Day! 👀",
-        "description": "\n#CyberDay",
-        "link": "https://www.instagram.com/p/DZDQURNBVWj/",
-        "media_type": "IMAGE",
-        "date": "2026-06-01"
     },
     {
         "id": "ig_auto_18098479436276879",
