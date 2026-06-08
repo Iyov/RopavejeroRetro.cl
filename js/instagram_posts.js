@@ -1,5 +1,5 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-06-08 02:30:46
+// Última actualización: 2026-06-08 15:23:42
 
 const INSTAGRAM_POSTS_DATA = [
     {
@@ -8,15 +8,6 @@ const INSTAGRAM_POSTS_DATA = [
         "title": "🎮 Actualización Jueves 04/Jun/26 20:00 hrs!",
         "description": "\n✅ Se venderán lotes de juegos y más.\n🔔 Activen las notificaciones.\n\n✋ Se subirán distintos lotes en un post que contendrá en su descripción el listado con:\nEj: [✅] 125 Gungrave (BL-CIB) $55K\n1) Estado: [✅️] Disponible ó [❌️] Vendido\n2) Número (identificador): 125\n3) Nombre: Gungrave (BL-CIB)\n4) Precio: $55K, dónde K=1.000\n\nSi deseas comprar algo, basta con que comentes en el post el número del juego con un: \"Yo 125\" o \"Mio 125\", por ejemplo. En tal caso te responderemos a la brevedad y enviaremos los datos para concretar la venta. Se le da prioridad al primer comentario. Se esperan unos minutos, luego pasa al siguiente. Ten listos nuestros datos para que pueda ser lo más rápido posible.\n\n💰 Medios de Pago: Efectivo, Transferencia.\n\n🚚 Entregas en metro San Joaquín L5 o envío vía Starken a todo Chile.\n\n📷 Una vez que se concreten las ventas, enviaremos las fotos y detalles de los productos.\n\n🤞🏻 Mucha suerte en sus compras, cariños!",
         "link": "https://www.instagram.com/p/DZJfjTTFRFL/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-06-04"
-    },
-    {
-        "id": "ig_auto_18115955272836589",
-        "image": "img/IG_18115955272836589.jpeg",
-        "title": "Actividades Próximo Fin de Semana de Junio 2026:",
-        "description": "\nSáb 06/Jun: Feria Retro San Bernardo\n📍 Casa de la Cultura, San Bernardo\n📌 Av. América 504, Parque García de la Huerta, Sn Bdo\n🚇 Metro Tren Estación San Bernardo\n🕒 De 12:00 a 19:00 hrs\n\nDom 07/Jun: Banda del Paño\n📍 No definido aún\n📌 No definido aún\n🕒 De 10:00 a 15:00 hrs\n\n🎟 Entrada liberada\n🎮 Llevaremos nuestros juegos\n¡Nos vemos!\n\n#FeriaRetro #FeriaRetroSanBernardo",
-        "link": "https://www.instagram.com/p/DZJdkpnlY2e/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-06-04"
     },
