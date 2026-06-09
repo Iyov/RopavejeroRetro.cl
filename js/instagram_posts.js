@@ -1,34 +1,7 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-06-08 15:23:42
+// Última actualización: 2026-06-08 21:02:00
 
 const INSTAGRAM_POSTS_DATA = [
-    {
-        "id": "ig_auto_18116294569871362",
-        "image": "img/IG_18116294569871362.jpeg",
-        "title": "🎮 Actualización Jueves 04/Jun/26 20:00 hrs!",
-        "description": "\n✅ Se venderán lotes de juegos y más.\n🔔 Activen las notificaciones.\n\n✋ Se subirán distintos lotes en un post que contendrá en su descripción el listado con:\nEj: [✅] 125 Gungrave (BL-CIB) $55K\n1) Estado: [✅️] Disponible ó [❌️] Vendido\n2) Número (identificador): 125\n3) Nombre: Gungrave (BL-CIB)\n4) Precio: $55K, dónde K=1.000\n\nSi deseas comprar algo, basta con que comentes en el post el número del juego con un: \"Yo 125\" o \"Mio 125\", por ejemplo. En tal caso te responderemos a la brevedad y enviaremos los datos para concretar la venta. Se le da prioridad al primer comentario. Se esperan unos minutos, luego pasa al siguiente. Ten listos nuestros datos para que pueda ser lo más rápido posible.\n\n💰 Medios de Pago: Efectivo, Transferencia.\n\n🚚 Entregas en metro San Joaquín L5 o envío vía Starken a todo Chile.\n\n📷 Una vez que se concreten las ventas, enviaremos las fotos y detalles de los productos.\n\n🤞🏻 Mucha suerte en sus compras, cariños!",
-        "link": "https://www.instagram.com/p/DZJfjTTFRFL/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-06-04"
-    },
-    {
-        "id": "ig_auto_18098479436276879",
-        "image": "img/IG_18098479436276879.jpeg",
-        "title": "Hola mi gente, gracias a los que fueron ayer a la Friki y a la esquina el fds, los queremos mucho! Cariños! 🤗",
-        "description": "",
-        "link": "https://www.instagram.com/p/DZDLZ7VBDjQ/",
-        "media_type": "IMAGE",
-        "date": "2026-06-01"
-    },
-    {
-        "id": "ig_auto_17853611076675869",
-        "image": "img/IG_17853611076675869.jpeg",
-        "title": "🎮 Actualización Viernes 29/May/26 20:00 hrs!",
-        "description": "\n✅ Se venderán lotes de juegos y más.\n🔔 Activen las notificaciones.\n\n✋ Se subirán distintos lotes en un post que contendrá en su descripción el listado con:\nEj: [✅] 125 Gungrave (BL-CIB) $55K\n1) Estado: [✅️] Disponible ó [❌️] Vendido\n2) Número (identificador): 125\n3) Nombre: Gungrave (BL-CIB)\n4) Precio: $55K, dónde K=1.000",
-        "link": "https://www.instagram.com/p/DY6F1OEFdPX/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-05-29"
-    },
     {
         "id": "ig_auto_18141687913516219",
         "image": "img/IG_18141687913516219.jpeg",
@@ -36,15 +9,6 @@ const INSTAGRAM_POSTS_DATA = [
         "description": "Muchas gracias 🙌🏻",
         "link": "https://www.instagram.com/p/DY2iZ0KhGOv/",
         "media_type": "IMAGE",
-        "date": "2026-05-27"
-    },
-    {
-        "id": "ig_auto_17952526862980600",
-        "image": "img/IG_17952526862980600.jpeg",
-        "title": "Actividades Próximo Fin de Semana de Mayo 2026:",
-        "description": "\nSáb 30/May: Persa Bio Bio\n📍 La Eskina FC\n📌 Bio Bio esquina Santiago Concha, Stgo\n🚇 Metro Bio Bio, L3\n🕒 De 09:00 a 14:00 hrs\n\nDom 31/May: Feria Friki Vicente Valdés\n📍 Espacio Vicente Valdés\n📌 Vicente Valdés 395, La Florida\n🕒 De 12:00 a 19:00 hrs\n\n🎟 Entrada liberada\n🎮 Llevaremos nuestros juegos\n¡Nos vemos!\n\n#FeriaFriki #FeriaFrikiVicenteValdes",
-        "link": "https://www.instagram.com/p/DY2UMbnlfip/",
-        "media_type": "CAROUSEL_ALBUM",
         "date": "2026-05-27"
     },
     {
