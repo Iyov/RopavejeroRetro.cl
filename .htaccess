@@ -198,6 +198,9 @@ RewriteRule ^\.well-known/security\.txt$ /.well-known/security.txt [L]
 # Clean URL: /productos → productos.html
 RewriteRule ^productos/?$ /productos.html [L]
 
+# Clean URL: /ps3 → redirige directo a la guía HEN
+RewriteRule ^ps3/?$ https://videogamesscz.github.io/videohost/ [R=301,L]
+
 # Disable server signature
 ServerSignature Off
 
