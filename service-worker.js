@@ -1,6 +1,6 @@
 // ========== SERVICE WORKER - ROPAVEJERO RETRO ==========
 // Versión del caché - Incrementar cuando actualices recursos
-const CACHE_VERSION = 'ropavejero-v2026-06-23_0202';
+const CACHE_VERSION = 'ropavejero-v2026-07-07_0154';
 const CACHE_NAME = `${CACHE_VERSION}-static`;
 const DATA_CACHE_NAME = `${CACHE_VERSION}-data`;
 
@@ -64,18 +64,10 @@ const INSTAGRAM_IMAGES = [
     '/img/IG_18082195955411131-400.webp',
     '/img/IG_18082195955411131-800.webp',
     '/img/IG_18082195955411131-1200.webp',
-    '/img/IG_17988580403976701.jpeg',
-    '/img/IG_17988580403976701-400.webp',
-    '/img/IG_17988580403976701-800.webp',
-    '/img/IG_17988580403976701-1200.webp',
     '/img/IG_18075540410552150.jpeg',
     '/img/IG_18075540410552150-400.webp',
     '/img/IG_18075540410552150-800.webp',
     '/img/IG_18075540410552150-1200.webp',
-    '/img/IG_18087580358343094.jpeg',
-    '/img/IG_18087580358343094-400.webp',
-    '/img/IG_18087580358343094-800.webp',
-    '/img/IG_18087580358343094-1200.webp',
     '/img/IG_18436444705137216.jpeg',
     '/img/IG_18436444705137216-400.webp',
     '/img/IG_18436444705137216-800.webp',
@@ -112,10 +104,6 @@ const INSTAGRAM_IMAGES = [
     '/img/IG_18080748431416203-400.webp',
     '/img/IG_18080748431416203-800.webp',
     '/img/IG_18080748431416203-1200.webp',
-    '/img/IG_17879353851567402.jpeg',
-    '/img/IG_17879353851567402-400.webp',
-    '/img/IG_17879353851567402-800.webp',
-    '/img/IG_17879353851567402-1200.webp',
     '/img/IG_18154108828458099.jpeg',
     '/img/IG_18154108828458099-400.webp',
     '/img/IG_18154108828458099-800.webp',
