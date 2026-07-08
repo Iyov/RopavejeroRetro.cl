@@ -5,7 +5,7 @@
 [![Website](https://img.shields.io/badge/Website-ropavejeroretro.cl-blue)](https://ropavejeroretro.cl/)
 [![Instagram](https://img.shields.io/badge/Instagram-@ropavejero.retro-E4405F?logo=instagram&logoColor=white)](https://www.instagram.com/ropavejero.retro/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/Version-1.1.9-brightgreen.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/Version-2.0.0-brightgreen.svg)](CHANGELOG.md)
 
 > **Todo lo Retro en un solo lugar** - Consolas, juegos y accesorios retro originales americanos. Revive la nostalgia de los videojuegos clásicos.
 
@@ -38,13 +38,15 @@
 
 ## 🎯 Sobre Nosotros
 
-**Ropavejero Retro** es una tienda especializada en videojuegos retro originales americanos ubicada en Santiago, Chile. Nuestra pasión por los videojuegos clásicos nos impulsa a buscar y ofrecer los mejores productos para los amantes de la nostalgia gaming.
+**Ropavejero Retro** es una tienda especializada en videojuegos retro originales americanos ubicada en Santiago, Chile. Ofrecemos también **servicio técnico de consolas retro** y **pulido profesional de discos ópticos**. Nuestra pasión por los videojuegos clásicos nos impulsa a buscar y ofrecer los mejores productos para los amantes de la nostalgia gaming.
 
 ### ¿Qué Ofrecemos?
 
 - 🎮 **Consolas Retro**: NES, SNES, PlayStation 1, Sega Genesis, y más
 - 🕹️ **Juegos Originales**: Títulos clásicos verificados y garantizados
 - 🎯 **Accesorios**: Controles, cables, memory cards y más
+- 🔧 **Servicio Técnico**: Diagnóstico y reparación de consolas retro
+- 💿 **Pulido de Discos**: Eliminación de rayaduras en discos ópticos (PS1, PS2, Xbox, GameCube, Wii)
 - ✅ **Garantía**: 30 días en todos los productos, 90 días en consolas reacondicionadas
 - 🚚 **Envío Nacional**: A todo Chile vía Starken
 - 🔍 **Productos Verificados**: Cada artículo es revisado minuciosamente
@@ -239,6 +241,11 @@ RopavejeroRetro.cl/
 - Acceso al catálogo en Excel
 - Footer con enlaces adicionales
 
+### 8. **Servicios Adicionales**
+- Servicio técnico de consolas retro (diagnóstico, reparación, limpieza)
+- Pulido profesional de discos ópticos (PS1, PS2, Xbox, GameCube, Wii)
+- Contacto directo vía WhatsApp e Instagram para presupuestos
+
 ### 8. **PWA (Progressive Web App)**
 - Instalable en dispositivos
 - Funciona offline
@@ -261,8 +268,8 @@ RopavejeroRetro.cl/
 
 ## ❓ Preguntas Frecuentes
 
-### ¿Qué tipos de productos venden?
-Vendemos consolas, juegos y accesorios retro originales americanos. Trabajamos con marcas como Nintendo (NES, SNES, N64, Gamecube, GameBoy, Wii, DS, 3DS), PlayStation (PS1, PS2, PSP, PS3, PS4), Sega (Genesis, GameGear, Dreamcast), Xbox (Classic, 360, One) y Atari.
+### ¿Qué tipos de productos y servicios ofrecen?
+Vendemos consolas, juegos y accesorios retro originales americanos. Trabajamos con marcas como Nintendo (NES, SNES, N64, Gamecube, GameBoy, Wii, DS, 3DS), PlayStation (PS1, PS2, PSP, PS3, PS4), Sega (Genesis, GameGear, Dreamcast), Xbox (Classic, 360, One) y Atari. Además ofrecemos **servicio técnico de consolas retro** y **pulido profesional de discos ópticos**.
 
 ### ¿Los productos son originales?
 Sí, todos nuestros productos son 100% originales americanos. Cada artículo es revisado minuciosamente y garantizamos su funcionamiento. El estado varía desde productos como nuevos hasta usados en buen estado, siempre especificando claramente las condiciones en cada listing.
@@ -272,6 +279,9 @@ Sí, realizamos envíos a todo Chile a través de Starken. El costo de envío va
 
 ### ¿Ofrecen garantía?
 Todos nuestros productos incluyen 30 días de garantía por defectos de funcionamiento. Para consolas reacondicionadas por nosotros, ofrecemos 90 días de garantía. La garantía cubre problemas técnicos pero no daños físicos por mal uso.
+
+### ¿En qué consiste el servicio técnico y el pulido de discos?
+El servicio técnico incluye diagnóstico y reparación de consolas retro (limpieza de conectores, cambio de condensadores, reemplazo de lector óptico, entre otros). El pulido de discos elimina rayaduras superficiales de discos ópticos (PS1, PS2, Xbox, GameCube, Wii, etc.) restaurando su capacidad de lectura. Contáctanos por WhatsApp o Instagram para presupuesto.
 
 ### ¿Puedo ver los productos antes de comprar?
 Actualmente no tenemos showroom físico, pero puedes agendar una cita para ver productos específicos en nuestras oficinas en Santiago. También publicamos videos demostrativos de todos nuestros productos en Instagram y YouTube.
@@ -354,6 +364,22 @@ python api/update_instagram.py
 ---
 
 ## 🆕 Últimos Cambios
+### Versión: v2.0.0 | May 2026
+
+#### Agregado
+- ✅ Servicio técnico de consolas retro y pulido de discos mencionados en todo el sitio.
+- ✅ Nueva pregunta FAQ (ES+EN) sobre ambos servicios.
+- ✅ 2 nuevos feature items en sección "Sobre Nosotros".
+- ✅ Schema.org `knowsAbout` con los nuevos servicios para SEO.
+
+#### Cambiado
+- ✅ Meta tags, og:description y twitter:description de `index.html` y `productos.html`.
+- ✅ Traducciones ES/EN actualizadas en `js/index.js`.
+- ✅ `schema.json`, `structured-data.json` y `manifest.json` actualizados.
+
+---
+
+## 🆕 Otros Cambios
 ### Versión: v1.1.9 | May 2026
 
 #### Cambiado
@@ -549,7 +575,7 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más det
 - 👥 **Clientes Satisfechos**: 150+
 - ⭐ **Rating Promedio**: 4.8/5
 - 🚚 **Envíos Realizados**: A todo Chile
-- 📦 **Versión Actual**: v1.1.9
+- 📦 **Versión Actual**: v2.0.0
 - 🔍 **SEO Score**: 100% de páginas indexadas
 - ⚡ **Performance**: 60-70% más rápido que v1.0.0
 

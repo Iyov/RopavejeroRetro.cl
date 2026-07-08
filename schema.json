@@ -3,7 +3,7 @@
     "@type": ["Store", "LocalBusiness", "Organization"],
     "name": "Ropavejero Retro",
     "alternateName": "@Ropavejero.Retro",
-    "description": "Tienda especializada en videojuegos retro originales americanos. Consolas, juegos y accesorios de Nintendo, PlayStation, Sega, Xbox, Atari con garantía.",
+    "description": "Tienda de videojuegos retro originales americanos en Santiago de Chile. Venta de consolas, juegos y accesorios de Nintendo, PlayStation, Sega, Xbox y Atari. Servicio técnico de consolas retro y pulido profesional de discos ópticos.",
     "url": "https://ropavejeroretro.cl",
     "logo": {
         "@type": "ImageObject",
@@ -100,6 +100,9 @@
         "Tienda de Videojuegos Retro",
         "Venta de Consolas Retro",
         "Venta de Juegos Retro",
+        "Servicio Técnico de Consolas Retro",
+        "Pulido de Discos Ópticos",
+        "Reparación de Consolas Retro",
         "Nintendo NES SNES N64 GameCube Wii",
         "PlayStation PS1 PS2 PS3 PS4 PSP",
         "Sega Genesis Master System Dreamcast",

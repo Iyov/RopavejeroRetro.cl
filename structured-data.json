@@ -5,10 +5,10 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "¿Qué tipos de productos venden?",
+        "name": "¿Qué tipos de productos y servicios ofrecen?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Vendemos consolas, juegos y accesorios retro originales americanos. Trabajamos con marcas como Nintendo (NES, SNES, N64, Gamecube, GameBoy, Wii, DS, 3DS), PlayStation (PS1, PS2, PSP, PS3, PS4), Sega (Genesis, GameGear, Dreamcast), Xbox (Classic, 360, One) y Atari."
+          "text": "Vendemos consolas, juegos y accesorios retro originales americanos. Trabajamos con marcas como Nintendo (NES, SNES, N64, Gamecube, GameBoy, Wii, DS, 3DS), PlayStation (PS1, PS2, PSP, PS3, PS4), Sega (Genesis, GameGear, Dreamcast), Xbox (Classic, 360, One) y Atari. Además ofrecemos servicio técnico de consolas retro y pulido profesional de discos ópticos."
         }
       },
       {
@@ -34,10 +34,17 @@
           "@type": "Answer",
           "text": "Todos nuestros productos incluyen 30 días de garantía por defectos de funcionamiento. Para consolas reacondicionadas por nosotros, ofrecemos 90 días de garantía. La garantía cubre problemas técnicos pero no daños físicos por mal uso."
         }
+      },
+      {
+        "@type": "Question",
+        "name": "¿En qué consiste el servicio técnico y el pulido de discos?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "El servicio técnico incluye diagnóstico y reparación de consolas retro: limpieza de conectores, cambio de condensadores, reemplazo de lector óptico, entre otros. El pulido de discos elimina rayaduras superficiales de discos ópticos (PS1, PS2, Xbox, GameCube, Wii, etc.) restaurando su capacidad de lectura. Contáctanos por WhatsApp o Instagram para presupuesto."
+        }
       }
     ]
   },
-  "breadcrumb": {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [

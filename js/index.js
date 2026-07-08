@@ -118,7 +118,7 @@ function clearAllCache() {
 // Cargar siglas desde JSON
 async function loadSiglas() {
     try {
-        const response = await fetch('js/siglas.json?v=2026-05-09_1');
+        const response = await fetch('js/siglas.json?v=2026-05-09_2');
         if (!response.ok) {
             throw new Error('Error loading siglas');
         }
@@ -484,7 +484,7 @@ const translations = {
         
         // Hero
         'hero-title': 'Bienvenidos a @Ropavejero.Retro<br/>Todo lo Retro en un solo lugar',
-        'hero-subtitle': 'Tienda de videojuegos, consolas, accesorios y coleccionables retro. Revive la nostalgia de los videojuegos clásicos.',
+        'hero-subtitle': 'Venta de videojuegos retro, servicio técnico de consolas y pulido de discos en Santiago de Chile. Consolas, juegos y accesorios originales americanos.',
         'instagram-button': 'Ir a Instagram',
         
         // Instagram
@@ -493,14 +493,16 @@ const translations = {
         // Nosotros
         'about-title': 'Sobre Nosotros',
         'about-subtitle-1': '¿Quiénes Somos?',
-        'about-text-1': 'Ropavejero Retro es una tienda especializada en videojuegos retro originales americanos. Nuestra pasión por los videojuegos clásicos nos impulsa a buscar y ofrecer los mejores productos para los amantes de la nostalgia gaming.',
-        'about-subtitle-2': 'Nuestros Productos',
-        'about-text-2': 'Desde consolas clásicas como NES, SNES, PlayStation 1 y Sega Genesis, hasta juegos y accesorios originales, todo cuidadosamente revisado y garantizado. Trabajamos directamente con proveedores en Estados Unidos para asegurar la autenticidad de nuestros productos.',
+        'about-text-1': 'Ropavejero Retro es una tienda especializada en videojuegos retro originales americanos, con servicio técnico de consolas y pulido de discos en Santiago de Chile. Nuestra pasión por los videojuegos clásicos nos impulsa a buscar y ofrecer los mejores productos para los amantes de la nostalgia gaming.',
+        'about-subtitle-2': 'Nuestros Productos y Servicios',
+        'about-text-2': 'Desde consolas clásicas como NES, SNES, PlayStation 1 y Sega Genesis, hasta juegos y accesorios originales, todo cuidadosamente revisado y garantizado. Además ofrecemos servicio técnico de consolas retro y pulido profesional de discos ópticos. Trabajamos directamente con proveedores en Estados Unidos para asegurar la autenticidad de nuestros productos.',
         'about-subtitle-3': 'Nuestra Misión',
         'about-text-3': 'Nuestro objetivo es que revivas aquellos maravillosos momentos de tu infancia con la misma calidad y emoción de entonces.',
         'about-btn-1': 'Garantía 30 días',
         'about-btn-2': 'Envío a todo Chile',
         'about-btn-3': 'Productos originales',
+        'about-btn-4': 'Servicio Técnico',
+        'about-btn-5': 'Pulido de Discos',
         'explore-store': 'Explora la Tienda',
         
         // Efemérides
@@ -588,8 +590,8 @@ const translations = {
 
         // FAQ
         'faq-title': 'Preguntas Frecuentes (FAQ)',
-        'faq-question-1': '¿Qué tipos de productos venden?',
-        'faq-answer-1': 'Vendemos consolas, juegos y accesorios retro originales americanos. Trabajamos con marcas como Nintendo (NES, SNES, N64, Gamecube, GameBoy, Wii, DS, 3DS), PlayStation (PS1, PS2, PSP, PS3, PS4), Sega (Genesis, GameGear, Dreamcast), Xbox (Classic, 360, One) y Atari.',
+        'faq-question-1': '¿Qué tipos de productos y servicios ofrecen?',
+        'faq-answer-1': 'Vendemos consolas, juegos y accesorios retro originales americanos (Nintendo, PlayStation, Sega, Xbox, Atari). Además ofrecemos servicio técnico de consolas retro y pulido profesional de discos ópticos (PS1, PS2, Xbox, GameCube, Wii, etc.).',
         'faq-question-2': '¿Los productos son originales y en qué estado están?',
         'faq-answer-2': 'Todos nuestros productos son 100% originales americanos. Revisamos cada artículo minuciosamente y garantizamos su funcionamiento. El estado varía desde productos como nuevos hasta usados en buen estado, siempre especificando claramente las condiciones en cada listing.',
         'faq-question-3': '¿Realizan envíos a todo Chile?',
@@ -598,6 +600,8 @@ const translations = {
         'faq-answer-4': 'Todos nuestros productos incluyen 30 días de garantía por defectos de funcionamiento. Para consolas reacondicionadas por nosotros, ofrecemos 90 días de garantía. La garantía cubre problemas técnicos pero no daños físicos por mal uso.',
         'faq-question-5': '¿Puedo ver los productos antes de comprar?',
         'faq-answer-5': 'Actualmente no tenemos showroom físico, pero puedes agendar una cita para ver productos específicos en nuestras oficinas en Santiago. También publicamos videos demostrativos de todos nuestros productos en Instagram y YouTube.',
+        'faq-question-6': '¿En qué consiste el servicio técnico y el pulido de discos?',
+        'faq-answer-6': 'El servicio técnico incluye diagnóstico y reparación de consolas retro (limpieza de conectores, cambio de condensadores, reemplazo de lector óptico, entre otros). El pulido de discos elimina rayaduras superficiales de discos ópticos (PS1, PS2, Xbox, GameCube, Wii, etc.) restaurando su capacidad de lectura. Contáctanos por WhatsApp o Instagram para presupuesto.',
         
         // Blog
         'blog-title': 'Nuestro Blog',
@@ -646,7 +650,7 @@ const translations = {
         
         // Hero
         'hero-title': 'Welcome to @Ropavejero.Retro<br/>Everything Retro in one place',
-        'hero-subtitle': 'Video game store with consoles, accessories, and retro collectibles. Relive the nostalgia of classic video games.',
+        'hero-subtitle': 'Retro video game sales, console repair service and disc polishing in Santiago, Chile. Original American consoles, games and accessories.',
         'instagram-button': 'Go to Instagram',
         
         // Instagram
@@ -655,9 +659,9 @@ const translations = {
         // Nosotros
         'about-title': 'About Us',
         'about-subtitle-1': 'Who are we?',
-        'about-text-1': 'Ropavejero Retro is a store specialized in original American retro video games. Our passion for classic video games drives us to search for and offer the best products for nostalgia gaming lovers.',
-        'about-subtitle-2': 'Our Products',
-        'about-text-2': 'From classic consoles like NES, SNES, PlayStation 1 and Sega Genesis, to original games and accessories, all carefully reviewed and guaranteed. We work directly with suppliers in the United States to ensure the authenticity of our products.',
+        'about-text-1': 'Ropavejero Retro is a store specialized in original American retro video games, with console repair service and professional disc polishing in Santiago, Chile. Our passion for classic video games drives us to find and offer the best products for nostalgia gaming lovers.',
+        'about-subtitle-2': 'Our Products and Services',
+        'about-text-2': 'From classic consoles like NES, SNES, PlayStation 1 and Sega Genesis, to original games and accessories, all carefully reviewed and guaranteed. We also offer retro console repair service and professional optical disc polishing. We work directly with suppliers in the United States to ensure product authenticity.',
         'about-subtitle-3': 'Our Mission',
         'about-text-3': 'Our goal is for you to relive those wonderful moments of your childhood with the same quality and excitement as then.',
         'about-btn-1': '30-day warranty',
@@ -750,8 +754,8 @@ const translations = {
 
         // FAQ
         'faq-title': 'Frequently Asked Questions (FAQ)',
-        'faq-question-1': 'What types of products do you sell?',
-        'faq-answer-1': 'We sell original American retro consoles, games and accessories. We work with brands like Nintendo (NES, SNES, N64, Gamecube, GameBoy, Wii, DS, 3DS), PlayStation (PS1, PS2, PSP, PS3, PS4), Sega (Genesis, GameGear, Dreamcast), Xbox (Classic, 360, One) and Atari.',
+        'faq-question-1': 'What products and services do you offer?',
+        'faq-answer-1': 'We sell original American retro consoles, games and accessories (Nintendo, PlayStation, Sega, Xbox, Atari). We also offer retro console repair service and professional disc polishing (PS1, PS2, Xbox, GameCube, Wii, etc.).',
         'faq-question-2': 'Are the products original and in what condition are they?',
         'faq-answer-2': 'All our products are 100% original American. We carefully review each item and guarantee its operation. The condition varies from like-new products to used in good condition, always clearly specifying the conditions in each listing.',
         'faq-question-3': 'Do you ship throughout Chile?',
@@ -760,6 +764,8 @@ const translations = {
         'faq-answer-4': 'All our products include 30 days warranty for operational defects. For consoles refurbished by us, we offer 90 days warranty. The warranty covers technical problems but not physical damage from misuse.',
         'faq-question-5': 'Can I see the products before buying?',
         'faq-answer-5': 'We currently do not have a physical showroom, but you can schedule an appointment to see specific products at our offices in Santiago. We also publish demonstration videos of all our products on Instagram and YouTube.',
+        'faq-question-6': 'What does the repair service and disc polishing consist of?',
+        'faq-answer-6': 'The repair service includes diagnosis and repair of retro consoles (connector cleaning, capacitor replacement, optical drive replacement, etc.). Disc polishing removes surface scratches from optical discs (PS1, PS2, Xbox, GameCube, Wii, etc.) restoring their readability. Contact us via WhatsApp or Instagram for a quote.',
         
         // Blog
         'blog-title': 'Our Blog',

@@ -7,7 +7,21 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ---
 
-## [1.1.9] - 2026-05-09
+## [2.0.0] - 2026-05-09
+
+### Agregado
+- Servicio técnico de consolas retro y pulido de discos documentados en todo el sitio
+- Nueva pregunta FAQ (ES+EN): "¿En qué consiste el servicio técnico y el pulido de discos?"
+- 2 nuevos feature items en sección "Sobre Nosotros": Servicio Técnico y Pulido de Discos
+- `knowsAbout` en Schema.org actualizado con "Servicio Técnico de Consolas Retro", "Pulido de Discos Ópticos" y "Reparación de Consolas Retro"
+
+### Cambiado
+- Meta description, og:description y twitter:description de `index.html` y `productos.html` incluyen los nuevos servicios
+- Traducciones ES/EN en `js/index.js`: hero-subtitle, about-text-1/2, faq-question-1/answer-1 actualizados
+- `schema.json`, `structured-data.json` y `manifest.json` actualizados con los nuevos servicios
+- `README.md` actualizado con sección de servicios adicionales y FAQ
+
+---
 
 ### Cambiado
 - Google Sheets actualizado al nuevo ID `1ZDQQFeCeL3gw2qgO5_xusTKP0GiY94XVTnR_Amphbek` en todo el sistema

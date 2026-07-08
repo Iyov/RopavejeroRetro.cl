@@ -1,7 +1,7 @@
 {
   "name": "Ropavejero Retro - Tienda de Videojuegos Retro",
   "short_name": "Ropavejero Retro",
-  "description": "Tienda especializada en videojuegos retro originales americanos. Nintendo, PlayStation, Sega, Xbox, Atari.",
+  "description": "Tienda de videojuegos retro en Santiago de Chile. Venta de consolas, juegos y accesorios originales. Servicio técnico de consolas y pulido de discos ópticos.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#111121",
