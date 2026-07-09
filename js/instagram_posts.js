@@ -1,5 +1,5 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-07-09 01:46:46
+// Última actualización: 2026-07-09 14:25:59
 
 const INSTAGRAM_POSTS_DATA = [
     {
@@ -309,15 +309,6 @@ const INSTAGRAM_POSTS_DATA = [
         "date": "2026-06-13"
     },
     {
-        "id": "ig_auto_18077094959275704",
-        "image": "img/IG_18077094959275704.jpeg",
-        "title": "[✅] 4297 Assassin's Creed IV Black Flag (BL-CIB) [PS3] $8K",
-        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nCIB: Caja, Juego, Manual",
-        "link": "https://www.instagram.com/p/DZgiImjlb1E/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-06-13"
-    },
-    {
         "id": "ig_auto_17872389108528500",
         "image": "img/IG_17872389108528500.jpeg",
         "title": "[✅] 4295 GTA V (GH-MM) [PS3] $10K",
@@ -404,15 +395,6 @@ const INSTAGRAM_POSTS_DATA = [
         "title": "[✅] 4268 Call of Duty Black Ops II (BL-CIB) [PS3] $8K",
         "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nCIB: Caja, Juego, Manual",
         "link": "https://www.instagram.com/p/DZL07OeFTxe/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-06-05"
-    },
-    {
-        "id": "ig_auto_18090653012047311",
-        "image": "img/IG_18090653012047311.jpeg",
-        "title": "[✅] 4267 Assassin's Creed III (BL-CIB) [PS3] $8K",
-        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nCIB: Caja, Juego, Manual",
-        "link": "https://www.instagram.com/p/DZLz6MbFXXj/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-06-05"
     },
