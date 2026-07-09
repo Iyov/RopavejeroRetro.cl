@@ -1,5 +1,5 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-07-08 12:26:06
+// Última actualización: 2026-07-09 01:46:46
 
 const INSTAGRAM_POSTS_DATA = [
     {
@@ -883,15 +883,6 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DUPMjQqDN6K/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-02-02"
-    },
-    {
-        "id": "ig_auto_18055811306380269",
-        "image": "img/IG_18055811306380269.jpeg",
-        "title": "Xbox 360 [1] | 26/Ene/26",
-        "description": "\n[❌] 3771\tKinect Nat Geo TV (Sealed-K) [X360] $8K\n[✅] 3772\tBiggest Loser Ultimate Workout (Sealed-K) [X360] $8K\n[❌] 3773\tDance Central 1 (CIB+-K) [X360] $7K\n[❌] 3774\tDance Central 1 (CIB+-K) [X360] $7K\n[❌] 3775\tDance Central 2 (CIB+-K) [X360] $8K\n[❌] 3776\tDance Central 2 (CIB+-K) [X360] $8K\n[❌] 3777\tDance Central 2 (CIB+-K) [X360] $8K\n[❌] 3778\tDance Central 2 (CIB+-K) [X360] $8K\n[❌] 3779\tDance Central 3 (CIB+-K) [X360] $8K\n[❌] 3780\tJust Dance 4 (MM-K) [X360] $4K\n[✅] 3781\tNBA Baller Beats (CIB+-K) [X360] $5K\n[❌] 3782\tNike + Kinect Trainning (CIB+-K) [X360] $7K\n[❌] 3783\tKinect Sports (CIB+-K) [X360] $5K\n[❌] 3784\tKinect Sports (CIB+-K) [X360] $5K\n[❌] 3785\tKinect Sports (CIB+-K) [X360] $5K\n[❌] 3786\tKinect Sports (MM-K) [X360] $4K\n[❌] 3787\tKinect Sports 2da Temporada (CIB-K-DC) [X360] $5K\n[❌] 3788\tKinect Disneyland Adventures (CIB+-K) [X360] $6K\n[❌] 3789\tKinect Sesame Street TV (MM-K-2D) [X360] $7K\n[❌] 3790\tYour Shape Fitness Evolved (CIB+-K) [X360] $5K\n[✅] 3791\tYour Shape Fitness Evolved (CIB-K) [X360] $5K\n[✅] 3792\tYour Shape Fitness Evolved (MM-K) [X360] $4K\n[✅] 3793\tYour Shape Fitness Evolved 2012 (CIB+-K) [X360] $5K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nPH: Platinum Hits\nCIB: Caja, Juego, Manual\nCIB+: Caja, Juego, Manual, Insertos\nMM: Sin Manual\nS: Sealed: Sellado de Fábrica\nK: Kinect\nDC: Daño en Carátula\n2D: Dos Discos",
-        "link": "https://www.instagram.com/p/DT_tCk9jHOH/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-01-27"
     },
     {
         "id": "ig_auto_17996237519906325",
