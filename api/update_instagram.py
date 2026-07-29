@@ -5,6 +5,31 @@ import re
 from datetime import datetime
 from PIL import Image
 
+
+def detect_instagram_error(payload):
+    """Detecta si la respuesta de Instagram indica un token expirado o inválido."""
+    error = payload.get('error', {}) if isinstance(payload, dict) else {}
+    message = error.get('message', '')
+    error_type = error.get('type', '')
+    code = error.get('code')
+
+    if error_type == 'OAuthException' and code == 190:
+        return {
+            'is_expired_token': True,
+            'message': 'El token de Instagram ha expirado o es inválido. Renueva el token y vuelve a ejecutar el script.'
+        }
+
+    if 'access token' in message.lower() or 'token' in message.lower():
+        return {
+            'is_expired_token': True,
+            'message': message or 'El token de Instagram ha expirado o es inválido.'
+        }
+
+    return {
+        'is_expired_token': False,
+        'message': message or 'Error inesperado al consultar Instagram.'
+    }
+
 # Intentar leer .env localmente si existe
 if os.path.exists('.env'):
     with open('.env') as f:
@@ -27,22 +52,33 @@ def fetch_instagram_media():
     """Obtiene los posts recientes del usuario con paginación."""
     all_media = []
     url = f"https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,timestamp,children{{media_url,media_type}}&limit=25&access_token={ACCESS_TOKEN}"
-    
+
     while url and len(all_media) < MAX_POSTS:
         response = requests.get(url)
         if response.status_code != 200:
+            error_payload = response.json() if response.headers.get('content-type', '').startswith('application/json') else {}
+            error_info = detect_instagram_error(error_payload)
             print(f"Error al conectar con Instagram: {response.text}")
+            if error_info['is_expired_token']:
+                print(error_info['message'])
             break
-        
+
         data = response.json()
+        if 'error' in data:
+            error_info = detect_instagram_error(data)
+            print(f"Error al conectar con Instagram: {json.dumps(data, ensure_ascii=False)}")
+            if error_info['is_expired_token']:
+                print(error_info['message'])
+            break
+
         all_media.extend(data.get('data', []))
-        
+
         # Obtener la siguiente página si existe
         url = data.get('paging', {}).get('next')
-        
+
         if url:
             print(f"Obtenidos {len(all_media)} posts, continuando con la siguiente página...")
-    
+
     print(f"Total de posts obtenidos de Instagram: {len(all_media)}")
     return all_media[:MAX_POSTS]  # Limitar al máximo configurado
 
