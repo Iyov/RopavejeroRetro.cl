@@ -15,6 +15,65 @@ jobs:
     - name: Checkout del código
       uses: actions/checkout@v3
 
+    - name: Renovar token de Instagram
+      id: renovar_token
+      env:
+        INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
+      run: |
+        echo "Intentando renovar el token de Instagram..."
+        RESPONSE=$(curl -s "https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=${INSTAGRAM_TOKEN}")
+        
+        # Verificar si la renovación fue exitosa
+        if echo "$RESPONSE" | grep -q '"access_token"'; then
+          NEW_TOKEN=$(echo "$RESPONSE" | python3 -c "import sys, json; print(json.load(sys.stdin)['access_token'])")
+          EXPIRES_IN=$(echo "$RESPONSE" | python3 -c "import sys, json; print(json.load(sys.stdin).get('expires_in', 'desconocido'))")
+          echo "Token renovado exitosamente. Expira en: ${EXPIRES_IN} segundos (~60 días)"
+          echo "new_token=${NEW_TOKEN}" >> $GITHUB_OUTPUT
+          echo "token_renovado=true" >> $GITHUB_OUTPUT
+        else
+          echo "No se pudo renovar el token (puede ser normal si tiene menos de 24h). Usando token actual."
+          echo "$RESPONSE"
+          echo "new_token=${INSTAGRAM_TOKEN}" >> $GITHUB_OUTPUT
+          echo "token_renovado=false" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Actualizar secret INSTAGRAM_TOKEN en GitHub
+      if: steps.renovar_token.outputs.token_renovado == 'true'
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NEW_TOKEN: ${{ steps.renovar_token.outputs.new_token }}
+      run: |
+        # Obtener la clave pública del repositorio para cifrar el secret
+        REPO="${{ github.repository }}"
+        
+        PUBLIC_KEY_RESPONSE=$(curl -s -H "Authorization: token ${GH_TOKEN}" \
+          "https://api.github.com/repos/${REPO}/actions/secrets/public-key")
+        
+        KEY_ID=$(echo "$PUBLIC_KEY_RESPONSE" | python3 -c "import sys, json; print(json.load(sys.stdin)['key_id'])")
+        PUBLIC_KEY=$(echo "$PUBLIC_KEY_RESPONSE" | python3 -c "import sys, json; print(json.load(sys.stdin)['key'])")
+        
+        # Cifrar el nuevo token con la clave pública usando PyNaCl
+        pip install PyNaCl -q
+        
+        ENCRYPTED=$(python3 -c "
+        import base64
+        from nacl import encoding, public
+
+        public_key_bytes = base64.b64decode('${PUBLIC_KEY}')
+        sealed_box = public.SealedBox(public.PublicKey(public_key_bytes))
+        encrypted = sealed_box.encrypt('${NEW_TOKEN}'.encode('utf-8'))
+        print(base64.b64encode(encrypted).decode('utf-8'))
+        ")
+        
+        # Actualizar el secret en GitHub
+        curl -s -X PUT \
+          -H "Authorization: token ${GH_TOKEN}" \
+          -H "Content-Type: application/json" \
+          "https://api.github.com/repos/${REPO}/actions/secrets/INSTAGRAM_TOKEN" \
+          -d "{\"encrypted_value\":\"${ENCRYPTED}\",\"key_id\":\"${KEY_ID}\"}"
+        
+        echo "Secret INSTAGRAM_TOKEN actualizado en GitHub automáticamente."
+
     - name: Configurar Python
       uses: actions/setup-python@v4
       with:
@@ -27,7 +86,7 @@ jobs:
 
     - name: Ejecutar script de actualización
       env:
-        INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
+        INSTAGRAM_TOKEN: ${{ steps.renovar_token.outputs.new_token }}
       run: python api/update_instagram.py
 
     - name: Commit y Push de los cambios
