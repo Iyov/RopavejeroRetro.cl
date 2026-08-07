@@ -51,7 +51,7 @@ MAX_POSTS = 1000  # Número máximo de posts a obtener
 def fetch_instagram_media():
     """Obtiene los posts recientes del usuario con paginación."""
     all_media = []
-    url = f"https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,timestamp,children{{media_url,media_type}}&limit=25&access_token={ACCESS_TOKEN}"
+    url = f"https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,timestamp,like_count,children{{media_url,media_type}}&limit=25&access_token={ACCESS_TOKEN}"
 
     while url and len(all_media) < MAX_POSTS:
         response = requests.get(url)
@@ -210,7 +210,8 @@ def process_posts(media_list):
                 'description': description,
                 'link': post['permalink'],
                 'media_type': post['media_type'],
-                'date': date_str
+                'date': date_str,
+                'likes': post.get('like_count', 0)
             })
     return selected_posts
 
@@ -253,7 +254,8 @@ def calculate_changes(old_posts, new_posts):
         if (old_post['title'] != new_post['title'] or 
             old_post['description'] != new_post['description'] or
             old_post['image'] != new_post['image'] or
-            old_post['link'] != new_post['link']):
+            old_post['link'] != new_post['link'] or
+            old_post.get('likes') != new_post.get('likes')):
             modified += 1
     
     return added, modified, deleted
@@ -276,7 +278,8 @@ def posts_have_changed(old_posts, new_posts):
         if (old_post['title'] != new_post['title'] or 
             old_post['description'] != new_post['description'] or
             old_post['image'] != new_post['image'] or
-            old_post['link'] != new_post['link']):
+            old_post['link'] != new_post['link'] or
+            old_post.get('likes') != new_post.get('likes')):
             return True
     
     return False

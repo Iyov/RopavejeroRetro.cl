@@ -591,8 +591,28 @@ body {
     color: var(--text-muted);
     white-space: nowrap;
     font-style: italic;
-    margin-bottom: 10px;
     display: block;
+}
+
+.post-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.post-likes {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+}
+
+.post-likes i {
+    color: #e0245e;
+    font-size: 0.75rem;
 }
 
 .instagram-loading {

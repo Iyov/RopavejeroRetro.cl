@@ -2543,7 +2543,10 @@ function renderInstagramPosts(posts) {
             </div>
             <div class="instagram-content">
                 <h3>${safeTitle}</h3>
-                ${post.date ? `<div class="post-date">${formatInstagramDate(post.date)}</div>` : ''}
+                <div class="post-meta">
+                    ${post.date ? `<div class="post-date">${formatInstagramDate(post.date)}</div>` : ''}
+                    ${post.likes != null ? `<div class="post-likes"><i class="fas fa-heart"></i> ${post.likes.toLocaleString()}</div>` : ''}
+                </div>
                 <p>${safeDescription}</p>
                 <div class="instagram-actions">
                     <a href="${safeLink}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
