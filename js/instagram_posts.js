@@ -1,7 +1,196 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-08-05 17:03:45
+// Última actualización: 2026-08-07 09:59:25
 
 const INSTAGRAM_POSTS_DATA = [
+    {
+        "id": "ig_auto_18099384254360725",
+        "image": "img/IG_18099384254360725.jpeg",
+        "title": "Damos por finalizada la actualización de hoy, lamentablemente no alcanzamos a subir los juegos de GBC, GBA Y DS, mañana seguiremos, gracias. Buenas noches! 🙌🏻",
+        "description": "",
+        "link": "https://www.instagram.com/p/DbuZGXeFbpW/",
+        "media_type": "IMAGE",
+        "date": "2026-08-07"
+    },
+    {
+        "id": "ig_auto_18101525171223871",
+        "image": "img/IG_18101525171223871.jpeg",
+        "title": "PlayStation 4 | 06/Ago/26",
+        "description": "\n[✅] 4421 Fifa 19 (BL-CIB) [PS4] $5K\n[✅] 4422 Destiny (BL-CIB) [PS4] $10K\n[✅] 4423 Rainbow Six Siege (BL-MM) [PS4] $10K\n[✅] 4424 Epic Chef (BL-MM) [PS4] $12K\n[✅] 4425 Horizon Zero Dawn (BL-CIB) [PS4] $12K\n[✅] 4426 Horizon Zero Dawn (BL-CIB) [PS4] $12K\n[✅] 4427 Mirror's Edge Catalyst (BL-MM) [PS4] $12K\n[✅] 4428 Witcher 3 Wild Hunt (BL-CIB) [PS4] $12K\n[✅] 4429 Embr Uber Firefighters (BL-MM) [PS4] $15K\n[✅] 4430 Naruto Shippuden Ultimate Ninja Storm 4 (BL-MM) [PS4] $15K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nGH: Greatest Hits\nCIB: Caja, Juego, Manual\nMM: Sin Manual",
+        "link": "https://www.instagram.com/p/DbuYdn8lTVI/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-07"
+    },
+    {
+        "id": "ig_auto_18083290445259495",
+        "image": "img/IG_18083290445259495.jpeg",
+        "title": "PlayStation 3 | 06/Ago/26",
+        "description": "\n[✅] 4410 Call of Duty Black Ops (BL-CIB) [PS3] $8K\n[✅] 4411 Call of Duty Ghosts (BL-CIB) [PS3] $8K\n[✅] 4412 Assassin's Creed IV Black Flag (BL-CIB) [PS3] $8K\n[✅] 4413 Assassin's Creed IV Black Flag (BL-CIB) [PS3] $8K\n[✅] 4414 Uncharted 1 (GH-CIB) [PS3] $8K\n[✅] 4415 Dead Island Riptide (BL-MM) [PS3] $8K\n[✅] 4416 Just Dance 3 (GH-Sellado) [PS3] $8K\n[✅] 4417 Mortal Kombat Komplete Edition (GH-MM) [PS3] $10K\n[✅] 4418 God of War 3 (GH-CIB) [PS3] $12K\n[✅] 4419 Mercenaries 2 (BL-CIB) [PS3] $12K\n[✅] 4420 Metal Gear Solid 4 (GH-CIB) [PS3] $12K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nGH: Greatest Hits\nCIB: Caja, Juego, Manual\nMM: Sin Manual",
+        "link": "https://www.instagram.com/p/DbuU9sflbRl/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-07"
+    },
+    {
+        "id": "ig_auto_18019950710856583",
+        "image": "img/IG_18019950710856583.jpeg",
+        "title": "[✅] 4408 Disney Princess Enchanted Journey (BL-CIB) [PS2] $15K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nCIB: Caja, Juego, Manual",
+        "link": "https://www.instagram.com/p/DbuRAeXFRDZ/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-07"
+    },
+    {
+        "id": "ig_auto_18059338853783101",
+        "image": "img/IG_18059338853783101.jpeg",
+        "title": "[✅] 4407 Kengo Master Bushido (BL-MM) [PS2] $15K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nMM: Sin Manual",
+        "link": "https://www.instagram.com/p/DbuQg6tFQZi/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-07"
+    },
+    {
+        "id": "ig_auto_18610102309063434",
+        "image": "img/IG_18610102309063434.jpeg",
+        "title": "[✅] 4406 Veggie Tales LarryBoy and the Bad Apple (BL-CIB) [PS2] $12K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nCIB: Caja, Juego, Manual",
+        "link": "https://www.instagram.com/p/DbuP76UFekP/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-07"
+    },
+    {
+        "id": "ig_auto_18130910356664958",
+        "image": "img/IG_18130910356664958.jpeg",
+        "title": "[✅] 4405 Bionicle Heroes (BL-CIB) [PS2] $10K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nCIB: Caja, Juego, Manual",
+        "link": "https://www.instagram.com/p/DbuPkN-lUi2/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-07"
+    },
+    {
+        "id": "ig_auto_17973296387922777",
+        "image": "img/IG_17973296387922777.jpeg",
+        "title": "[✅] 4404 Ultimate Board Game (BL-CIB) [PS2] $7K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nCIB: Caja, Juego, Manual",
+        "link": "https://www.instagram.com/p/DbuPLe6FboU/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-07"
+    },
+    {
+        "id": "ig_auto_18208601029357992",
+        "image": "img/IG_18208601029357992.jpeg",
+        "title": "[✅] 4403 007 Tomorrow Never Dies (BL-CIB) [PS1] $18K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nCIB: Caja, Juego, Manual",
+        "link": "https://www.instagram.com/p/DbuNzngFVdw/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-07"
+    },
+    {
+        "id": "ig_auto_17865842730637221",
+        "image": "img/IG_17865842730637221.jpeg",
+        "title": "[✅️] 4402 Sonic 1 The Hedgehog (CIB) [Genesis] $35K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual",
+        "link": "https://www.instagram.com/p/DbuLxBpFS7u/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-07"
+    },
+    {
+        "id": "ig_auto_17880204096500783",
+        "image": "img/IG_17880204096500783.jpeg",
+        "title": "[✅] 4401 Fatal Labyrinth (MM) [Genesis] $25K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nMM: Sin Manual",
+        "link": "https://www.instagram.com/p/DbuKtyaFV8t/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-07"
+    },
+    {
+        "id": "ig_auto_18034340552648988",
+        "image": "img/IG_18034340552648988.jpeg",
+        "title": "[✅] 4400 Ms Pacman (CIB) [Genesis] $18K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual",
+        "link": "https://www.instagram.com/p/DbuKE3dlagF/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-07"
+    },
+    {
+        "id": "ig_auto_18017625290860579",
+        "image": "img/IG_18017625290860579.jpeg",
+        "title": "[✅] 4399 Ms Pacman (MM) [Genesis] $15K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nMM: Sin Manual",
+        "link": "https://www.instagram.com/p/DbuJhIOlTe4/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-07"
+    },
+    {
+        "id": "ig_auto_17900929116518491",
+        "image": "img/IG_17900929116518491.jpeg",
+        "title": "[✅] 4398 NHL 94 (MM) [Genesis] $10K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nMM: Sin Manual\n(*) Caja Rota",
+        "link": "https://www.instagram.com/p/DbuIgzvFdtn/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-07"
+    },
+    {
+        "id": "ig_auto_18063570485502687",
+        "image": "img/IG_18063570485502687.jpeg",
+        "title": "[✅] 4397 College Basketball (CIB) [Genesis] $10K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual",
+        "link": "https://www.instagram.com/p/DbuH-4HlTYo/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-07"
+    },
+    {
+        "id": "ig_auto_18405162232089464",
+        "image": "img/IG_18405162232089464.jpeg",
+        "title": "[✅] 4396 College Football 96 (CIB) [Genesis] $10K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual",
+        "link": "https://www.instagram.com/p/DbuHfCCFZGZ/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-07"
+    },
+    {
+        "id": "ig_auto_18079560557679684",
+        "image": "img/IG_18079560557679684.jpeg",
+        "title": "[✅] 4395 NBA Jam TE [Genesis] $15K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE",
+        "link": "https://www.instagram.com/p/DbuGhWYFcnK/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-07"
+    },
+    {
+        "id": "ig_auto_17890144305416118",
+        "image": "img/IG_17890144305416118.jpeg",
+        "title": "[✅] 4394 Frogger [Genesis] $15K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE",
+        "link": "https://www.instagram.com/p/DbuF12YFYbb/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-07"
+    },
+    {
+        "id": "ig_auto_18112342928064657",
+        "image": "img/IG_18112342928064657.jpeg",
+        "title": "[✅] 4393 Shaq Fu [Genesis] $10K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE",
+        "link": "https://www.instagram.com/p/DbuFe1dFYL7/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-07"
+    },
+    {
+        "id": "ig_auto_18021516065856230",
+        "image": "img/IG_18021516065856230.jpeg",
+        "title": "[✅] 4392 Ms Pacman [Genesis] $8K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE",
+        "link": "https://www.instagram.com/p/DbuE8CRFTJD/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-07"
+    },
+    {
+        "id": "ig_auto_17916702312220685",
+        "image": "img/IG_17916702312220685.jpeg",
+        "title": "🎮 Actualización Jueves 06/Ago/26 21:00 hrs!",
+        "description": "\n✅ Se venderán lotes de juegos de PS2, 3, 4 y más.\n🔔 Activen las notificaciones.\n\n✋ Se subirán distintos lotes en un post que contendrá en su descripción el listado con:\nEj: [✅] 125 Gungrave (BL-CIB) $55K\n1) Estado: [✅️] Disponible ó [❌️] Vendido\n2) Número (identificador): 125\n3) Nombre: Gungrave (BL-CIB)\n4) Precio: $55K, dónde K=1.000\n\nSi deseas comprar algo, basta con que comentes en el post el número del juego con un: \"Yo 125\" o \"Mio 125\", por ejemplo. En tal caso te responderemos a la brevedad y enviaremos los datos para concretar la venta. Se le da prioridad al primer comentario. Se esperan unos minutos, luego pasa al siguiente. Ten listos nuestros datos para que pueda ser lo más rápido posible.\n\n💰 Medios de Pago: Efectivo, Transferencia.\n\n🚚 Entregas en metro San Joaquín L5 o envío vía Starken a todo Chile.\n\n📷 Una vez que se concreten las ventas, enviaremos las fotos y detalles de los productos.\n\n🤞🏻 Mucha suerte en sus compras, cariños!",
+        "link": "https://www.instagram.com/p/DbrqosWlTIe/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-06"
+    },
     {
         "id": "ig_auto_18064010813751482",
         "image": "img/IG_18064010813751482.jpeg",
