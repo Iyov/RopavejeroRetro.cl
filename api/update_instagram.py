@@ -281,7 +281,39 @@ def posts_have_changed(old_posts, new_posts):
     
     return False
 
-def update_files(new_posts):
+def cleanup_removed_images(old_posts, new_posts):
+    """Elimina las imágenes IG_ de posts que ya no están en la lista activa."""
+    new_ids = set()
+    for post in new_posts:
+        # Extraer el ID real del Instagram desde el id del post (formato: ig_auto_XXXXXXXXX)
+        raw_id = post['id'].replace('ig_auto_', '')
+        new_ids.add(raw_id)
+
+    removed = 0
+    for post in old_posts:
+        raw_id = post['id'].replace('ig_auto_', '')
+        if raw_id not in new_ids:
+            # Eliminar todas las variantes de imagen para este post
+            variants = [
+                os.path.join(IMAGE_DIR, f"IG_{raw_id}.jpeg"),
+                os.path.join(IMAGE_DIR, f"IG_{raw_id}-400.webp"),
+                os.path.join(IMAGE_DIR, f"IG_{raw_id}-800.webp"),
+                os.path.join(IMAGE_DIR, f"IG_{raw_id}-1200.webp"),
+            ]
+            for path in variants:
+                if os.path.exists(path):
+                    os.remove(path)
+                    print(f"  🗑️  Eliminada imagen: {path}")
+                    removed += 1
+
+    if removed > 0:
+        print(f"Total imágenes eliminadas: {removed}")
+    else:
+        print("No hay imágenes huérfanas que eliminar.")
+
+    return removed
+
+
     """Actualiza los archivos JS, MIN.JS, INDEX.HTML y SERVICE-WORKER.JS solo si hay cambios."""
     if not new_posts:
         print("No se encontraron posts nuevos con el hashtag.")
@@ -302,6 +334,11 @@ def update_files(new_posts):
     print(f"  - Agregados: {added}")
     print(f"  - Modificados: {modified}")
     print(f"  - Eliminados: {deleted}")
+
+    # Eliminar imágenes de posts que ya no están activos
+    if deleted > 0:
+        print("Limpiando imágenes de posts eliminados...")
+        cleanup_removed_images(existing_posts, new_posts)
     
     # Guardar mensaje de commit
     commit_parts = []
@@ -310,7 +347,7 @@ def update_files(new_posts):
     if modified > 0:
         commit_parts.append(f"modificaron {modified} post{'s' if modified != 1 else ''}")
     if deleted > 0:
-        commit_parts.append(f"eliminaron {deleted} post{'s' if deleted != 1 else ''}")
+        commit_parts.append(f"eliminaron {deleted} post{'s' if deleted != 1 else ''} (imágenes limpiadas)")
     
     commit_message = f"Se {', '.join(commit_parts)} desde Instagram"
     
