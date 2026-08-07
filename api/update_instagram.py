@@ -314,6 +314,7 @@ def cleanup_removed_images(old_posts, new_posts):
     return removed
 
 
+def update_files(new_posts):
     """Actualiza los archivos JS, MIN.JS, INDEX.HTML y SERVICE-WORKER.JS solo si hay cambios."""
     if not new_posts:
         print("No se encontraron posts nuevos con el hashtag.")
