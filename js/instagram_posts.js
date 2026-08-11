@@ -1,5 +1,5 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-08-10 12:40:26
+// Última actualización: 2026-08-11 00:49:18
 
 const INSTAGRAM_POSTS_DATA = [
     {
@@ -70,7 +70,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DbuPkN-lUi2/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-07",
-        "likes": 18
+        "likes": 19
     },
     {
         "id": "ig_auto_17973296387922777",
@@ -90,7 +90,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DbuNzngFVdw/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-07",
-        "likes": 13
+        "likes": 14
     },
     {
         "id": "ig_auto_17865842730637221",
@@ -100,22 +100,22 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DbuLxBpFS7u/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-07",
-        "likes": 37
+        "likes": 38
     },
     {
         "id": "ig_auto_17880204096500783",
         "image": "img/IG_17880204096500783.jpeg",
-        "title": "[✅] 4401 Fatal Labyrinth (MM) [Genesis] $25K",
+        "title": "[❌] 4401 Fatal Labyrinth (MM) [Genesis] $25K",
         "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nMM: Sin Manual",
         "link": "https://www.instagram.com/p/DbuKtyaFV8t/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-07",
-        "likes": 14
+        "likes": 15
     },
     {
         "id": "ig_auto_18034340552648988",
         "image": "img/IG_18034340552648988.jpeg",
-        "title": "[✅] 4400 Ms Pacman (CIB) [Genesis] $18K",
+        "title": "[❌] 4400 Ms Pacman (CIB) [Genesis] $18K",
         "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual",
         "link": "https://www.instagram.com/p/DbuKE3dlagF/",
         "media_type": "CAROUSEL_ALBUM",
@@ -140,7 +140,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DbuIgzvFdtn/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-07",
-        "likes": 11
+        "likes": 12
     },
     {
         "id": "ig_auto_18063570485502687",
@@ -150,7 +150,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DbuH-4HlTYo/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-07",
-        "likes": 10
+        "likes": 11
     },
     {
         "id": "ig_auto_18405162232089464",
@@ -170,7 +170,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DbuGhWYFcnK/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-07",
-        "likes": 12
+        "likes": 13
     },
     {
         "id": "ig_auto_17890144305416118",
@@ -385,7 +385,7 @@ const INSTAGRAM_POSTS_DATA = [
     {
         "id": "ig_auto_17856410811692990",
         "image": "img/IG_17856410811692990.jpeg",
-        "title": "[✅] 4374 Minecraft (MM) [X360] $12K",
+        "title": "[❌] 4374 Minecraft (MM) [X360] $12K",
         "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nMM: Sin Manual",
         "link": "https://www.instagram.com/p/DbMoyjBlVKu/",
         "media_type": "CAROUSEL_ALBUM",
@@ -505,7 +505,7 @@ const INSTAGRAM_POSTS_DATA = [
     {
         "id": "ig_auto_17895201561518421",
         "image": "img/IG_17895201561518421.jpeg",
-        "title": "[✅] 4358 Metal Gear Solid 4 Guns of the Patriots (GH-CIB) [PS3] $13K",
+        "title": "[❌] 4358 Metal Gear Solid 4 Guns of the Patriots (GH-CIB) [PS3] $13K",
         "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nGH: Greatest Hits\nCIB: Caja, Juego, Manual",
         "link": "https://www.instagram.com/p/DaRYhsRFbbF/",
         "media_type": "CAROUSEL_ALBUM",
@@ -865,7 +865,7 @@ const INSTAGRAM_POSTS_DATA = [
     {
         "id": "ig_auto_18376574647160139",
         "image": "img/IG_18376574647160139.jpeg",
-        "title": "[✅] 4266 Batman Arkham City (BL-CIB+) [PS3] $10K",
+        "title": "[❌] 4266 Batman Arkham City (BL-CIB+) [PS3] $10K",
         "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nCIB+: Caja, Juego, Manual, Inserto(s)",
         "link": "https://www.instagram.com/p/DZLysGYlUwK/",
         "media_type": "CAROUSEL_ALBUM",
