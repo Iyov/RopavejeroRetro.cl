@@ -2445,6 +2445,58 @@ function getLinkProductInstagram(productLink) {
 }
 
 // ========== POSTS DE INSTAGRAM ==========
+
+// Mapa de aliases para detectar consola desde el título o description del post
+const CONSOLE_ALIASES = {
+    'PS1':     ['[PS1]', 'PlayStation 1', 'PlayStation1', 'PSX'],
+    'PS2':     ['[PS2]', 'PlayStation 2', 'PlayStation2'],
+    'PS3':     ['[PS3]', 'PlayStation 3', 'PlayStation3'],
+    'PS4':     ['[PS4]', 'PlayStation 4', 'PlayStation4'],
+    'NES':     ['[NES]', ' NES '],
+    'SNES':    ['[SNES]', 'Super Nintendo', 'Super NES'],
+    'N64':     ['[N64]', 'Nintendo 64'],
+    'GCN':     ['[GCN]', '[GC]', 'GameCube', 'Gamecube', 'Game Cube'],
+    'Wii':     ['[Wii]', ' Wii '],
+    'GBA':     ['[GBA]', 'Game Boy Advance', 'GameBoy Advance'],
+    'DS':      ['[DS]', 'Nintendo DS', '[NDS]', '[3DS]'],
+    'Xbox':    ['[Xbox]', '[XBOX]', '[X360]', 'Xbox 360', 'Xbox360'],
+};
+
+function detectConsole(post) {
+    const text = (post.title + ' ' + post.description).toUpperCase();
+    for (const [key, aliases] of Object.entries(CONSOLE_ALIASES)) {
+        for (const alias of aliases) {
+            if (text.includes(alias.toUpperCase())) return key;
+        }
+    }
+    return null;
+}
+
+// Almacena todos los posts cargados para poder re-filtrar sin volver a leer
+let _allInstagramPosts = [];
+
+function initInstagramFilters() {
+    const filters = document.getElementById('instagramFilters');
+    if (!filters) return;
+
+    filters.addEventListener('click', function(e) {
+        const btn = e.target.closest('.ig-filter-btn');
+        if (!btn) return;
+
+        // Marcar activo
+        filters.querySelectorAll('.ig-filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const selected = btn.dataset.console;
+        if (selected === 'all') {
+            renderInstagramPosts(_allInstagramPosts);
+        } else {
+            const filtered = _allInstagramPosts.filter(p => detectConsole(p) === selected);
+            renderInstagramPosts(filtered, true);
+        }
+    });
+}
+
 function loadInstagramPosts() {
     const instagramGrid = document.getElementById('instagramGrid');
     
@@ -2462,15 +2514,15 @@ function loadInstagramPosts() {
     `;
     
     try {
-        // Usar datos simulados directamente
         if (window.location.hostname === 'localhost') {
             console.info('📋 Cargando posts de Instagram simulados');
         }
         const simulatedPosts = getSimulatedInstagramPosts();
         if (window.location.hostname === 'localhost') {
             console.debug('📸 Posts simulados cargados:', simulatedPosts.length);
-            console.debug('📸 Rutas de imágenes:', simulatedPosts.map(p => `${p.title?.substring(0, 20)}... -> ${p.image}`));
         }
+        _allInstagramPosts = simulatedPosts;
+        initInstagramFilters();
         renderInstagramPosts(simulatedPosts);
         
     } catch (error) {
@@ -2481,10 +2533,19 @@ function loadInstagramPosts() {
 
 
 // Función para renderizar posts de Instagram
-function renderInstagramPosts(posts) {
+function renderInstagramPosts(posts, isFiltered = false) {
     const instagramGrid = document.getElementById('instagramGrid');
     
     if (!posts || posts.length === 0) {
+        if (isFiltered) {
+            const lang = localStorage.getItem('language') || 'es';
+            instagramGrid.innerHTML = `
+                <div class="instagram-no-results" style="grid-column:1/-1;text-align:center;padding:40px;color:var(--text-secondary);">
+                    <i class="fas fa-gamepad" style="font-size:2.5rem;margin-bottom:15px;opacity:0.4;display:block;"></i>
+                    <p>${lang === 'es' ? 'No hay posts para esta consola.' : 'No posts for this console.'}</p>
+                </div>`;
+            return;
+        }
         showInstagramError();
         return;
     }
