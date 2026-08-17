@@ -2446,21 +2446,27 @@ function getLinkProductInstagram(productLink) {
 
 // ========== POSTS DE INSTAGRAM ==========
 
-// Mapa de aliases para detectar consola desde el título o description del post
-const CONSOLE_ALIASES = {
-    'PS1':     ['[PS1]', 'PlayStation 1', 'PlayStation1', 'PSX'],
-    'PS2':     ['[PS2]', 'PlayStation 2', 'PlayStation2'],
-    'PS3':     ['[PS3]', 'PlayStation 3', 'PlayStation3'],
-    'PS4':     ['[PS4]', 'PlayStation 4', 'PlayStation4'],
-    'NES':     ['[NES]', ' NES '],
-    'SNES':    ['[SNES]', 'Super Nintendo', 'Super NES'],
-    'N64':     ['[N64]', 'Nintendo 64'],
-    'GCN':     ['[GCN]', '[GC]', 'GameCube', 'Gamecube', 'Game Cube'],
-    'Wii':     ['[Wii]', ' Wii '],
-    'GBA':     ['[GBA]', 'Game Boy Advance', 'GameBoy Advance'],
-    'DS':      ['[DS]', 'Nintendo DS', '[NDS]', '[3DS]'],
-    'Xbox':    ['[Xbox]', '[XBOX]', '[X360]', 'Xbox 360', 'Xbox360'],
-};
+// CONSOLE_ALIASES se carga desde js/console_aliases.json
+let CONSOLE_ALIASES = {};
+
+async function loadConsoleAliases() {
+    try {
+        const response = await fetch(`js/console_aliases.json?v=2026-05-09_3`);
+        if (!response.ok) throw new Error('No se pudo cargar console_aliases.json');
+        CONSOLE_ALIASES = await response.json();
+        console.info('✅ Console aliases cargados correctamente');
+    } catch (e) {
+        console.warn('⚠️ Error cargando console_aliases.json, usando fallback:', e);
+        // Fallback mínimo por si el JSON falla
+        CONSOLE_ALIASES = {
+            'PS1': ['[PS1]'], 'PS2': ['[PS2]'], 'PS3': ['[PS3]'], 'PS4': ['[PS4]'],
+            'NES': ['[NES]'], 'SNES': ['[SNES]'], 'N64': ['[N64]'],
+            'GCN': ['[GCN]'], 'Wii': ['[Wii]'], 'Xbox': ['[Xbox]'], 'X360': ['[X360]'],
+            'Genesis': ['[Genesis]'], 'GB': ['[GB]'], 'GBC': ['[GBC]'], 'GBA': ['[GBA]'],
+            'DS': ['[DS]'], '3DS': ['[3DS]'], 'PSP': ['[PSP]']
+        };
+    }
+}
 
 function detectConsole(post) {
     const text = (post.title + ' ' + post.description).toUpperCase();
@@ -2497,7 +2503,7 @@ function initInstagramFilters() {
     });
 }
 
-function loadInstagramPosts() {
+async function loadInstagramPosts() {
     const instagramGrid = document.getElementById('instagramGrid');
     
     if (!instagramGrid) {
@@ -2522,6 +2528,7 @@ function loadInstagramPosts() {
             console.debug('📸 Posts simulados cargados:', simulatedPosts.length);
         }
         _allInstagramPosts = simulatedPosts;
+        await loadConsoleAliases();
         initInstagramFilters();
         renderInstagramPosts(simulatedPosts);
         
