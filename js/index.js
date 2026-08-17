@@ -118,7 +118,7 @@ function clearAllCache() {
 // Cargar siglas desde JSON
 async function loadSiglas() {
     try {
-        const response = await fetch('js/siglas.json?v=2026-05-09_2');
+        const response = await fetch('js/siglas.json?v=2026-08-17_1');
         if (!response.ok) {
             throw new Error('Error loading siglas');
         }
@@ -2451,7 +2451,7 @@ let CONSOLE_ALIASES = {};
 
 async function loadConsoleAliases() {
     try {
-        const response = await fetch(`js/console_aliases.json?v=2026-03-17_1`);
+        const response = await fetch(`js/console_aliases.json?v=2026-08-17_1`);
         if (!response.ok) throw new Error('No se pudo cargar console_aliases.json');
         CONSOLE_ALIASES = await response.json();
         console.info('✅ Console aliases cargados correctamente');
