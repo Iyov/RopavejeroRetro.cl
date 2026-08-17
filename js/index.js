@@ -2451,26 +2451,60 @@ let CONSOLE_ALIASES = {};
 
 async function loadConsoleAliases() {
     try {
-        const response = await fetch(`js/console_aliases.json?v=2026-05-09_3`);
+        const response = await fetch(`js/console_aliases.json?v=2026-03-17_1`);
         if (!response.ok) throw new Error('No se pudo cargar console_aliases.json');
         CONSOLE_ALIASES = await response.json();
         console.info('✅ Console aliases cargados correctamente');
     } catch (e) {
         console.warn('⚠️ Error cargando console_aliases.json, usando fallback:', e);
-        // Fallback mínimo por si el JSON falla
+        // Fallback con estructura { label, aliases }
         CONSOLE_ALIASES = {
-            'PS1': ['[PS1]'], 'PS2': ['[PS2]'], 'PS3': ['[PS3]'], 'PS4': ['[PS4]'],
-            'NES': ['[NES]'], 'SNES': ['[SNES]'], 'N64': ['[N64]'],
-            'GCN': ['[GCN]'], 'Wii': ['[Wii]'], 'Xbox': ['[Xbox]'], 'X360': ['[X360]'],
-            'Genesis': ['[Genesis]'], 'GB': ['[GB]'], 'GBC': ['[GBC]'], 'GBA': ['[GBA]'],
-            'DS': ['[DS]'], '3DS': ['[3DS]'], 'PSP': ['[PSP]']
+            'PS1':     { label: 'PS1',      aliases: ['[PS1]'] },
+            'PS2':     { label: 'PS2',      aliases: ['[PS2]'] },
+            'PS3':     { label: 'PS3',      aliases: ['[PS3]'] },
+            'PS4':     { label: 'PS4',      aliases: ['[PS4]'] },
+            'NES':     { label: 'NES',      aliases: ['[NES]'] },
+            'SNES':    { label: 'SNES',     aliases: ['[SNES]'] },
+            'N64':     { label: 'N64',      aliases: ['[N64]'] },
+            'GCN':     { label: 'GameCube', aliases: ['[GCN]'] },
+            'Wii':     { label: 'Wii',      aliases: ['[Wii]'] },
+            'Xbox':    { label: 'Xbox OG',  aliases: ['[Xbox]'] },
+            'X360':    { label: 'Xbox 360', aliases: ['[X360]'] },
+            'Genesis': { label: 'Genesis',  aliases: ['[Genesis]'] },
+            'GB':      { label: 'GameBoy',  aliases: ['[GB]'] },
+            'GBC':     { label: 'GBC',      aliases: ['[GBC]'] },
+            'GBA':     { label: 'GBA',      aliases: ['[GBA]'] },
+            'DS':      { label: 'DS',       aliases: ['[DS]'] },
+            '3DS':     { label: '3DS',      aliases: ['[3DS]'] },
+            'PSP':     { label: 'PSP',      aliases: ['[PSP]'] },
+            'DVD':     { label: 'DVD/VHS',  aliases: ['[DVD]'] }
         };
+    }
+}
+
+// Construir los botones de filtro dinámicamente desde CONSOLE_ALIASES
+function buildFilterButtons() {
+    const filters = document.getElementById('instagramFilters');
+    if (!filters) return;
+
+    // Eliminar botones previos excepto el "Todas"
+    filters.querySelectorAll('.ig-filter-btn:not([data-console="all"])').forEach(b => b.remove());
+
+    for (const [key, entry] of Object.entries(CONSOLE_ALIASES)) {
+        const label = (typeof entry === 'object' && entry.label) ? entry.label : key;
+        const btn = document.createElement('button');
+        btn.className = 'ig-filter-btn';
+        btn.dataset.console = key;
+        btn.textContent = label;
+        filters.appendChild(btn);
     }
 }
 
 function detectConsole(post) {
     const text = (post.title + ' ' + post.description).toUpperCase();
-    for (const [key, aliases] of Object.entries(CONSOLE_ALIASES)) {
+    for (const [key, entry] of Object.entries(CONSOLE_ALIASES)) {
+        // Soporta tanto { label, aliases } como ['alias1', 'alias2'] (legacy)
+        const aliases = Array.isArray(entry) ? entry : (entry.aliases || []);
         for (const alias of aliases) {
             if (text.includes(alias.toUpperCase())) return key;
         }
@@ -2529,6 +2563,7 @@ async function loadInstagramPosts() {
         }
         _allInstagramPosts = simulatedPosts;
         await loadConsoleAliases();
+        buildFilterButtons();
         initInstagramFilters();
         renderInstagramPosts(simulatedPosts);
         
