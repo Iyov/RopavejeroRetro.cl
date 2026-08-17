@@ -1,5 +1,5 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-08-16 22:48:34
+// Última actualización: 2026-08-16 23:18:45
 
 const INSTAGRAM_POSTS_DATA = [
     {
@@ -91,26 +91,6 @@ const INSTAGRAM_POSTS_DATA = [
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-07",
         "likes": 40
-    },
-    {
-        "id": "ig_auto_17880204096500783",
-        "image": "img/IG_17880204096500783.jpeg",
-        "title": "[❌] 4401 Fatal Labyrinth (MM) [Genesis] $25K",
-        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nMM: Sin Manual",
-        "link": "https://www.instagram.com/p/DbuKtyaFV8t/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-08-07",
-        "likes": 15
-    },
-    {
-        "id": "ig_auto_18034340552648988",
-        "image": "img/IG_18034340552648988.jpeg",
-        "title": "[❌] 4400 Ms Pacman (CIB) [Genesis] $18K",
-        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual",
-        "link": "https://www.instagram.com/p/DbuKE3dlagF/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-08-07",
-        "likes": 12
     },
     {
         "id": "ig_auto_18017625290860579",
@@ -253,16 +233,6 @@ const INSTAGRAM_POSTS_DATA = [
         "likes": 12
     },
     {
-        "id": "ig_auto_18345973360247099",
-        "image": "img/IG_18345973360247099.jpeg",
-        "title": "[❌] 4385 Just Dance 4 (CIB) [X360] $8K",
-        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual",
-        "link": "https://www.instagram.com/p/DbMzmJHFbxA/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-07-25",
-        "likes": 12
-    },
-    {
         "id": "ig_auto_18161520454462773",
         "image": "img/IG_18161520454462773.jpeg",
         "title": "[✅] 4384 Kinect Sports Ultimate Collection (CIB-2D) [X360] $10K",
@@ -313,16 +283,6 @@ const INSTAGRAM_POSTS_DATA = [
         "likes": 17
     },
     {
-        "id": "ig_auto_18116390245908514",
-        "image": "img/IG_18116390245908514.jpeg",
-        "title": "[❌] 4379 Fifa 17 (CIB) [X360] $8K",
-        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual",
-        "link": "https://www.instagram.com/p/DbMtBiClXme/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-07-25",
-        "likes": 13
-    },
-    {
         "id": "ig_auto_18009292307936084",
         "image": "img/IG_18009292307936084.jpeg",
         "title": "[✅] 4378 Fifa 16 (MM) [X360] $6K",
@@ -361,16 +321,6 @@ const INSTAGRAM_POSTS_DATA = [
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-07-25",
         "likes": 17
-    },
-    {
-        "id": "ig_auto_17856410811692990",
-        "image": "img/IG_17856410811692990.jpeg",
-        "title": "[❌] 4374 Minecraft (MM) [X360] $12K",
-        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nMM: Sin Manual",
-        "link": "https://www.instagram.com/p/DbMoyjBlVKu/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-07-25",
-        "likes": 20
     },
     {
         "id": "ig_auto_18075489200696001",
@@ -423,16 +373,6 @@ const INSTAGRAM_POSTS_DATA = [
         "likes": 20
     },
     {
-        "id": "ig_auto_18604960858021189",
-        "image": "img/IG_18604960858021189.jpeg",
-        "title": "[❌] 4366 MotorStorm Apocalypse (BL-CIB) [PS3] $20K",
-        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nCIB: Caja, Juego, Manual",
-        "link": "https://www.instagram.com/p/DaRcFkJlRgy/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-07-02",
-        "likes": 18
-    },
-    {
         "id": "ig_auto_18078697145277808",
         "image": "img/IG_18078697145277808.jpeg",
         "title": "[✅] 4364 Crysis 2 (GH-CIB) [PS3] $10K",
@@ -443,16 +383,6 @@ const INSTAGRAM_POSTS_DATA = [
         "likes": 17
     },
     {
-        "id": "ig_auto_17943938514249914",
-        "image": "img/IG_17943938514249914.jpeg",
-        "title": "[❌] 4362 Mortal Kombat Komplete Edition (GH-CIB) [PS3] $12K",
-        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nGH: Greatest Hits\nCIB: Caja, Juego, Manual",
-        "link": "https://www.instagram.com/p/DaRaMhmlfoS/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-07-02",
-        "likes": 14
-    },
-    {
         "id": "ig_auto_18097437857245247",
         "image": "img/IG_18097437857245247.jpeg",
         "title": "[✅] 4360 God of War 3 (GH-CIB-GotY) [PS3] $15K",
@@ -461,16 +391,6 @@ const INSTAGRAM_POSTS_DATA = [
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-07-02",
         "likes": 22
-    },
-    {
-        "id": "ig_auto_17895201561518421",
-        "image": "img/IG_17895201561518421.jpeg",
-        "title": "[❌] 4358 Metal Gear Solid 4 Guns of the Patriots (GH-CIB) [PS3] $13K",
-        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nGH: Greatest Hits\nCIB: Caja, Juego, Manual",
-        "link": "https://www.instagram.com/p/DaRYhsRFbbF/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-07-02",
-        "likes": 18
     },
     {
         "id": "ig_auto_18134732296514374",
@@ -893,26 +813,6 @@ const INSTAGRAM_POSTS_DATA = [
         "likes": 32
     },
     {
-        "id": "ig_auto_18140429098517323",
-        "image": "img/IG_18140429098517323.jpeg",
-        "title": "[❌] 4180\tLemmings [SNES] $20K",
-        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE",
-        "link": "https://www.instagram.com/p/DYGli7qlVyV/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-05-09",
-        "likes": 13
-    },
-    {
-        "id": "ig_auto_18094612081936792",
-        "image": "img/IG_18094612081936792.jpeg",
-        "title": "[❌] 4174\tAir Fortress [NES] $15K",
-        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE",
-        "link": "https://www.instagram.com/p/DYGeEi7lWKM/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-05-09",
-        "likes": 12
-    },
-    {
         "id": "ig_auto_18082195955411131",
         "image": "img/IG_18082195955411131.jpeg",
         "title": "[✅] 4171\tAdventures in the Magic Kingdom [NES] $15K",
@@ -971,36 +871,6 @@ const INSTAGRAM_POSTS_DATA = [
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-05-01",
         "likes": 17
-    },
-    {
-        "id": "ig_auto_17985386828814208",
-        "image": "img/IG_17985386828814208.jpeg",
-        "title": "[❌] 4137\tPokemon Battle Revolution (MM) [Wii] $25K",
-        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nMM: Sin Manual",
-        "link": "https://www.instagram.com/p/DXxpP99FSrb/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-05-01",
-        "likes": 18
-    },
-    {
-        "id": "ig_auto_18069983498664410",
-        "image": "img/IG_18069983498664410.jpeg",
-        "title": "[❌] 4136\tConduit 2 (CIB) [Wii] $30K",
-        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual",
-        "link": "https://www.instagram.com/p/DXxpE1_FXiw/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-05-01",
-        "likes": 13
-    },
-    {
-        "id": "ig_auto_17914340775362643",
-        "image": "img/IG_17914340775362643.jpeg",
-        "title": "[❌️] 4135\tResident Evil Archives - Resident Evil Zero (CIB) [Wii] $30K",
-        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual",
-        "link": "https://www.instagram.com/p/DXxo9r2lS_P/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-05-01",
-        "likes": 45
     },
     {
         "id": "ig_auto_18080748431416203",
@@ -1153,16 +1023,6 @@ const INSTAGRAM_POSTS_DATA = [
         "likes": 17
     },
     {
-        "id": "ig_auto_18063426764341950",
-        "image": "img/IG_18063426764341950.jpeg",
-        "title": "[❌] 3971 God of War (GH-MM) [PS2] $20K",
-        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nGH: Greatest Hits\nCIB: Caja, Juego, Manual\nMM: Sin Manual",
-        "link": "https://www.instagram.com/p/DWpjaH8lQEg/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-04-03",
-        "likes": 32
-    },
-    {
         "id": "ig_auto_18005375426710787",
         "image": "img/IG_18005375426710787.jpeg",
         "title": "[✅] 3951\tScooby Doo Mystery Mayhem [GBA] $10K",
@@ -1171,16 +1031,6 @@ const INSTAGRAM_POSTS_DATA = [
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-04-02",
         "likes": 15
-    },
-    {
-        "id": "ig_auto_17972823113858508",
-        "image": "img/IG_17972823113858508.jpeg",
-        "title": "[❌] 3948\tDuck Hunt (5 screw) [NES] $18K",
-        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE",
-        "link": "https://www.instagram.com/p/DWpaWTpGOx-/",
-        "media_type": "CAROUSEL_ALBUM",
-        "date": "2026-04-02",
-        "likes": 16
     },
     {
         "id": "ig_auto_18071324624541843",
