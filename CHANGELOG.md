@@ -7,6 +7,36 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ---
 
+## [2.1.0] - 2026-08-17
+
+### Refactorización
+- `js/index.js` (3300+ líneas) descompuesto en 9 módulos independientes bajo `js/modules/`
+  - `logger.js` — IIFE de control de logs por ambiente (24 líneas)
+  - `cache.js` — `CACHE_CONFIG`, `cleanOldCaches`, `getCachedProducts`, `setCachedProducts`, `clearProductsCache`, `clearAllCache` (93 líneas)
+  - `siglas.js` — `loadSiglas`, `extractSiglas`, `createSiglasTooltip` (74 líneas)
+  - `utils.js` — `sanitizeHTML`, `sanitizeURL`, `validateProductData`, `parseProductPrice`, `compareNullableNumbers`, `sortProducts`, `handleSecureError` (185 líneas)
+  - `ui.js` — `initTheme`, `initLanguage`, `setLanguage`, `translations`, `blogContent`, `initBlogDialogs`, `initProgressBar`, `initNavActive`, `initBackToTop`, `initMobileMenu`, `initFAQ`, `applySavedSettings` (798 líneas)
+  - `products.js` — todo el sistema de catálogo: tabla, tarjetas móviles, filtros, paginación, modal de detalles (1276 líneas)
+  - `instagram.js` — `loadConsoleAliases`, `buildFilterButtons`, `detectConsole`, `initInstagramFilters`, `loadInstagramPosts`, `renderInstagramPosts` (334 líneas)
+  - `efemerides.js` — `loadEfemerides` (129 líneas)
+  - `analytics.js` — detección de recursos bloqueados, CSP violation handler, fallback analytics (418 líneas)
+- `js/index.js` reducido a 16 líneas: solo el orquestador `DOMContentLoaded`
+- `index.html` carga los 9 módulos en orden de dependencia con `defer` y versión `v=2026-08-17_2`
+
+### Corregido
+- Botones de filtro de Instagram (`ig-filter-btn`) no se generaban al cargar la página — faltaba llamar `buildFilterButtons()` después de `loadConsoleAliases()`
+- `detectConsole()` fallaba silenciosamente: el JSON `console_aliases.json` usa estructura `{ label, aliases }` pero el código esperaba arrays planos
+- `extractSiglas()` usaba el idioma anterior al cambiar de idioma — `localStorage.setItem('language')` se ejecutaba después de `setLanguage()`, no antes
+
+### Cambiado
+- `js/siglas.json`: cada entrada ahora tiene estructura bilingüe `{ "es": "...", "en": "..." }` en lugar de string plano
+- `extractSiglas()`: resuelve la descripción según `localStorage.getItem('language')` en tiempo de ejecución
+- `initLanguage()`: guarda el idioma en `localStorage` **antes** de invocar `setLanguage()` para que el re-render de siglas use el idioma correcto
+- `api/update_instagram.py`: corregido para procesar `CAROUSEL_ALBUM` (extrae primera imagen) y omitir `VIDEO` sin tirar error de Pillow
+- Query strings actualizados a `v=2026-08-17_1` y `v=2026-08-17_2` en todos los archivos HTML y JS
+
+---
+
 ## [2.0.0] - 2026-05-09
 
 ### Agregado

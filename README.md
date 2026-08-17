@@ -5,7 +5,7 @@
 [![Website](https://img.shields.io/badge/Website-ropavejeroretro.cl-blue)](https://ropavejeroretro.cl/)
 [![Instagram](https://img.shields.io/badge/Instagram-@ropavejero.retro-E4405F?logo=instagram&logoColor=white)](https://www.instagram.com/ropavejero.retro/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/Version-2.0.0-brightgreen.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/Version-2.1.0-brightgreen.svg)](CHANGELOG.md)
 
 > **Todo lo Retro en un solo lugar** - Consolas, juegos y accesorios retro originales americanos. Revive la nostalgia de los videojuegos clásicos.
 
@@ -151,44 +151,55 @@ RopavejeroRetro.cl/
 ├── manifest.json              # Configuración PWA
 ├── service-worker.js          # Service Worker para caché
 ├── robots.txt                 # Configuración para bots
-├── sitemap.xml               # Mapa del sitio (13 URLs)
-├── watcher.js                # Minificación automática
-├── package.json              # Dependencias del proyecto
-├── CHANGELOG.md              # Historial de cambios
+├── sitemap.xml                # Mapa del sitio (13 URLs)
+├── watcher.js                 # Minificación automática
+├── package.json               # Dependencias del proyecto
+├── CHANGELOG.md               # Historial de cambios
 ├── api/
-│   └── update_instagram.py   # Motor de automatización (Python)
+│   └── update_instagram.py    # Motor de automatización (Python)
 ├── .github/workflows/
-│   └── update_instagram.yml  # Configuración de GitHub Actions
+│   └── update_instagram.yml   # Configuración de GitHub Actions
 ├── css/
-│   ├── index.css             # Estilos principales
-│   ├── index.min.css         # Estilos minificados
-│   ├── app.css               # Estilos adicionales
+│   ├── index.css              # Estilos principales
+│   ├── index.min.css          # Estilos minificados
+│   ├── app.css                # Estilos adicionales
 │   └── font-awesome_6.5.1_all.min.css
 ├── js/
-│   ├── index.js              # Lógica principal
-│   ├── index.min.js          # JavaScript minificado
-│   ├── app.js                # Lógica adicional
-│   ├── instagram_posts.js    # Datos de posts de Instagram
+│   ├── index.js               # Entry point — solo el DOMContentLoaded (16 líneas)
+│   ├── index.min.js           # Minificado del entry point
+│   ├── modules/               # Módulos separados por responsabilidad
+│   │   ├── logger.js          # Control de logs por ambiente
+│   │   ├── cache.js           # Sistema de caché con localStorage
+│   │   ├── siglas.js          # Diccionario y detección de siglas
+│   │   ├── utils.js           # Utilidades: sanitize, validate, sort
+│   │   ├── ui.js              # Tema, idioma, traducciones, FAQ, Blog, menú
+│   │   ├── products.js        # Catálogo: tabla, filtros, paginación, modal
+│   │   ├── instagram.js       # Posts de Instagram y filtros por consola
+│   │   ├── efemerides.js      # Efemérides del día
+│   │   └── analytics.js       # CSP, AdBlock, fallback analytics
+│   ├── app.js                 # Lógica adicional
+│   ├── instagram_posts.js     # Datos de posts de Instagram
 │   ├── instagram_posts.min.js # Datos minificados de Instagram
-│   └── efemerides.json       # Efemérides del día
+│   ├── siglas.json            # Diccionario de siglas ES/EN (40+ entradas)
+│   ├── console_aliases.json   # Aliases de consolas para filtros de Instagram
+│   └── efemerides.json        # Efemérides del día
 ├── img/
-│   ├── RopavejeroLogo_*.png  # Logos en varios tamaños
-│   ├── Post*-*.webp          # Imágenes optimizadas legacy
-│   ├── IG_*-400.webp         # Variantes optimizadas Instagram (Móvil)
-│   ├── IG_*-800.webp         # Variantes optimizadas Instagram (Tablet)
-│   ├── IG_*-1200.webp        # Variantes optimizadas Instagram (Desktop)
-│   ├── hero-*.webp           # Hero images responsive
-│   ├── bg.svg                # Fondo
-│   └── favicon.png           # Favicon
-├── webfonts/                 # Fuentes de Font Awesome
-├── docs/                     # Documentación técnica
+│   ├── RopavejeroLogo_*.png   # Logos en varios tamaños
+│   ├── IG_*-400.webp          # Variantes optimizadas Instagram (Móvil)
+│   ├── IG_*-800.webp          # Variantes optimizadas Instagram (Tablet)
+│   ├── IG_*-1200.webp         # Variantes optimizadas Instagram (Desktop)
+│   ├── hero-*.webp            # Hero images responsive
+│   ├── bg.svg                 # Fondo
+│   └── favicon.png            # Favicon
+├── webfonts/                  # Fuentes de Font Awesome
+├── docs/                      # Documentación técnica
 │   ├── SEO_INDEXATION_IMPROVEMENTS_v1.0.7.md
 │   ├── OPTIMIZACIONES_RENDIMIENTO.md
 │   ├── OPTIMIZACIONES_MOBILE.md
 │   └── GOOGLE_TRACKING_SETUP.md
 ├── .well-known/
-│   └── security.txt          # Política de seguridad
-└── README.md                 # Este archivo
+│   └── security.txt           # Política de seguridad
+└── README.md                  # Este archivo
 ```
 
 ---
@@ -364,7 +375,34 @@ python api/update_instagram.py
 ---
 
 ## 🆕 Últimos Cambios
-### Versión: v2.0.0 | May 2026
+### Versión: v2.1.0 | Agosto 2026
+
+#### Refactorización
+- ✅ `js/index.js` descompuesto en 9 módulos independientes bajo `js/modules/`
+- ✅ `js/modules/logger.js` — control de logs por ambiente (producción/desarrollo)
+- ✅ `js/modules/cache.js` — sistema de caché con localStorage
+- ✅ `js/modules/siglas.js` — carga, detección y renderizado de siglas
+- ✅ `js/modules/utils.js` — sanitize, validate, sort y manejo de errores
+- ✅ `js/modules/ui.js` — tema, idioma, traducciones ES/EN, FAQ, Blog, menú móvil
+- ✅ `js/modules/products.js` — catálogo completo: tabla, filtros, paginación, modal
+- ✅ `js/modules/instagram.js` — posts y filtros por consola con `console_aliases.json`
+- ✅ `js/modules/efemerides.js` — efemérides del día
+- ✅ `js/modules/analytics.js` — CSP, AdBlock y fallback analytics
+- ✅ `js/index.js` reducido a 16 líneas (solo el orquestador DOMContentLoaded)
+- ✅ `index.html` actualizado para cargar módulos en orden de dependencia (`v=2026-08-17_2`)
+
+#### Corregido
+- ✅ Botones de filtro de Instagram no aparecían al cargar (función `buildFilterButtons()` faltante)
+- ✅ `detectConsole()` fallaba silenciosamente con la estructura `{ label, aliases }` de `console_aliases.json`
+- ✅ `localStorage.setItem('language')` se ejecutaba después de `setLanguage()`, causando que `extractSiglas()` usara el idioma anterior
+
+#### Cambiado
+- ✅ `js/siglas.json` ahora tiene estructura bilingüe `{ "es": "...", "en": "..." }` por entrada
+- ✅ `extractSiglas()` resuelve la descripción según el idioma activo en tiempo de ejecución
+- ✅ `initLanguage()` guarda el idioma en localStorage **antes** de llamar `setLanguage()`
+- ✅ Query strings actualizados a `v=2026-08-17_1` y `v=2026-08-17_2`
+
+
 
 #### Agregado
 - ✅ Servicio técnico de consolas retro y pulido de discos mencionados en todo el sitio.
@@ -575,7 +613,7 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más det
 - 👥 **Clientes Satisfechos**: 150+
 - ⭐ **Rating Promedio**: 4.8/5
 - 🚚 **Envíos Realizados**: A todo Chile
-- 📦 **Versión Actual**: v2.0.0
+- 📦 **Versión Actual**: v2.1.0
 - 🔍 **SEO Score**: 100% de páginas indexadas
 - ⚡ **Performance**: 60-70% más rápido que v1.0.0
 
