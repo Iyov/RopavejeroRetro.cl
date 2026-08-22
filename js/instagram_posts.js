@@ -1,7 +1,17 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-08-21 12:21:41
+// Última actualización: 2026-08-22 00:32:46
 
 const INSTAGRAM_POSTS_DATA = [
+    {
+        "id": "ig_auto_17985411237104572",
+        "image": "img/IG_17985411237104572.jpeg",
+        "title": "🎮 Actualización Viernes 21/Ago/26 21:00 hrs!",
+        "description": "\n✅ Se venderán lotes de juegos de Xbox 360, PS4 y más.\n🔔 Activen las notificaciones.\n\n✋ Se subirán distintos lotes en un post que contendrá en su descripción el listado con:\nEj: [✅] 125 Gungrave (BL-CIB) $55K\n1) Estado: [✅️] Disponible ó [❌️] Vendido\n2) Número (identificador): 125\n3) Nombre: Gungrave (BL-CIB)\n4) Precio: $55K, dónde K=1.000\n\nSi deseas comprar algo, basta con que comentes en el post el número del juego con un: \"Yo 125\" o \"Mio 125\", por ejemplo. En tal caso te responderemos a la brevedad y enviaremos los datos para concretar la venta. Se le da prioridad al primer comentario. Se esperan unos minutos, luego pasa al siguiente. Ten listos nuestros datos para que pueda ser lo más rápido posible.\n\n💰 Medios de Pago: Efectivo, Transferencia.\n\n🚚 Entregas en metro San Joaquín L5 o envío vía Starken a todo Chile.\n\n📷 Una vez que se concreten las ventas, enviaremos las fotos y detalles de los productos.\n\n🤞🏻 Mucha suerte en sus compras, cariños!",
+        "link": "https://www.instagram.com/p/DcTm2RIlfkC/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-21",
+        "likes": 5
+    },
     {
         "id": "ig_auto_18101525171223871",
         "image": "img/IG_18101525171223871.jpeg",
@@ -1160,7 +1170,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DUUXgvFjBph/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-02-04",
-        "likes": 26
+        "likes": 27
     },
     {
         "id": "ig_auto_18110866735659338",
@@ -1270,7 +1280,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DPU_RqCjJYG/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2025-10-03",
-        "likes": 5875
+        "likes": 5874
     },
     {
         "id": "ig_auto_18320707375210014",
