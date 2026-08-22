@@ -1,7 +1,117 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-08-22 00:32:46
+// Última actualización: 2026-08-22 12:15:35
 
 const INSTAGRAM_POSTS_DATA = [
+    {
+        "id": "ig_auto_18100600127219278",
+        "image": "img/IG_18100600127219278.jpeg",
+        "title": "PlayStation 4 | 21/Ago/26",
+        "description": "\n[✅] 4490 Mortal Kombat X (CIB) [PS4] $15K\n[✅] 4491 Star Wars Battlefront II (MM) [PS4] $15K\n[✅] 4492 Injustice 2 (CIB) [PS4] $15K\n[✅] 4493 GTA V (CIB-C/M) [PS4] $15K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual\nMM: Sin Manual\nC/M: Con Mapa",
+        "link": "https://www.instagram.com/p/DcVGeZElWIl/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-22",
+        "likes": 4
+    },
+    {
+        "id": "ig_auto_18093190739121120",
+        "image": "img/IG_18093190739121120.jpeg",
+        "title": "Nintendo DS [2] | 21/Ago/26",
+        "description": "\n[✅] 4480 Fab 5 Soccer (CIB) [DS] $8K\n[✅] 4481 Rock Revolution (CIB) [DS] $8K\n[✅] 4482 My Amusement Park & Digging for Dinosaurs (CIB) [DS] $8K\n[✅] 4483 Playmobil Pirates (CIB) [DS] $8K\n[✅] 4484 Ping Pals (CIB) [DS] $8K\n[✅] 4485 Brain Age 2 (MM) [DS] $5K\n[✅] 4486 Backyard Football 09 (MM) [DS] $5K\n[✅] 4487 MLB Power Pros 2008 (CIB) [DS] $5K\n[✅] 4488 Lovely Lisa and Friends (CIB) [DS] $5K\n[✅] 4489 Open Season (L) [DS] $5K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual\nMM: Sin Manual",
+        "link": "https://www.instagram.com/p/DcVE2UrFfA1/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-22",
+        "likes": 4
+    },
+    {
+        "id": "ig_auto_18151922629510156",
+        "image": "img/IG_18151922629510156.jpeg",
+        "title": "Nintendo DS [1] | 21/Ago/26",
+        "description": "\n[✅] 4469 SmackDown vs Raw 2009 (CIB) [DS] $15K\n[✅] 4470 Star Wars The Force Unleashed I (CIB) [DS] $15K\n[✅] 4471 Barbie Groom and Glam Pups (CIB) [DS] $15K\n[✅] 4472 Tony Hawk Downhill Jam (CIB) [DS] $15K\n[✅] 4473 Guitar Hero On Tour (CIB) [DS] $15K\n[✅] 4474 SpongeBob vs The Big One Beach Party Cook-Off (CIB) [DS] $12K\n[✅] 4475 Purr Pals (CIB) [DS] $12K\n[✅] 4476 LEGO Indiana Jones 2 The Adventure Continues (CIB) [DS] $10K\n[✅] 4477 LEGO Battles Ninjago (CIB) [DS] $10K\n[✅] 4478 Cars 2 (CIB) [DS] $10K\n[✅] 4479 Phineas and Ferb (CIB) [DS] $10K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual",
+        "link": "https://www.instagram.com/p/DcVAzjolds4/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-22",
+        "likes": 11
+    },
+    {
+        "id": "ig_auto_18091198223390424",
+        "image": "img/IG_18091198223390424.jpeg",
+        "title": "Xbox 360 [2] | 21/Ago/26",
+        "description": "\n[✅] 4461 Guitar Hero 3 (CIB) [X360] $20K\n[✅] 4462 Perfect Dark Zero (CIB) [X360] $20K\n[❌] 4463 SmackDown vs Raw 2008 (MM) [X360] $15K\n[✅] 4464 Gears of War 2 (CIB) [X360] $15K\n[✅] 4465 Assassin's Creed (CIB) [X360] $12K\n[✅] 4466 Two Worlds (CIB) [X360] $12K\n[✅] 4467 Project Gotham Racing 3 (CIB) [X360] $15K\n[✅] 4468 Project Gotham Racing 4 (CIB-Piquete) [X360] $10K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual\nMM: Sin Manual",
+        "link": "https://www.instagram.com/p/DcU6jnklakC/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-22",
+        "likes": 16
+    },
+    {
+        "id": "ig_auto_18147514984537319",
+        "image": "img/IG_18147514984537319.jpeg",
+        "title": "Xbox 360 [1] | 21/Ago/26",
+        "description": "\n[✅] 4450 Star Wars The Force Unleashed I (MM) [X360] $15K\n[✅] 4451 Kinect Star Wars (CIB-2D) [X360] $12K\n[❌] 4452 LEGO Star Wars II Original Trilogy (CIB) [X360] $8K\n[✅] 4453 LEGO Star Wars The Force Awakens (CIB) [X360] $8K\n[✅] 4454 Wipeout 2 (CIB) [X360] $8K\n[✅] 4455 NBA Baller Beats (MM) [X360] $5K\n[✅] 4456 High School Musical 3 Senior Year Dance (CIB) [X360] $5K\n[✅] 4457 Madden 16 (CIB) [X360] $3K\n[✅] 4458 MLB 2K10 (MM) [X360] $3K\n[✅] 4459 NHL 15 (MM-CR) [X360] $3K\n[✅] 4460 Body & Brain Connection (MM-CR) [X360] $3K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual\nMM: Sin Manual\n2D: Dos Discos\nCR: Caja Repro",
+        "link": "https://www.instagram.com/p/DcU1wpRlYXX/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-22",
+        "likes": 7
+    },
+    {
+        "id": "ig_auto_17933591445366264",
+        "image": "img/IG_17933591445366264.jpeg",
+        "title": "[❌] 4449\tPersona 5 (BL-Sellado) [PS3] $55K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nPS3: PlayStation 3\nBL: Black Label\nS: Sealed: Sellado de Fábrica",
+        "link": "https://www.instagram.com/p/DcUxkIiFbGc/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-22",
+        "likes": 13
+    },
+    {
+        "id": "ig_auto_18093614240532887",
+        "image": "img/IG_18093614240532887.jpeg",
+        "title": "[✅] 4448\tTales of Zestiria (BL-Sellado) [PS3] $35K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nPS3: PlayStation 3\nBL: Black Label\nS: Sealed: Sellado de Fábrica",
+        "link": "https://www.instagram.com/p/DcUxB8sFfp8/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-22",
+        "likes": 4
+    },
+    {
+        "id": "ig_auto_18071865887441908",
+        "image": "img/IG_18071865887441908.jpeg",
+        "title": "[✅] 4447\tRed Dead Redemption (GH-Sellado) [PS3] $30K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nPS3: PlayStation 3\nBL: Black Label\nS: Sealed: Sellado de Fábrica",
+        "link": "https://www.instagram.com/p/DcUwdt6FXM8/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-22",
+        "likes": 12
+    },
+    {
+        "id": "ig_auto_18616812919027782",
+        "image": "img/IG_18616812919027782.jpeg",
+        "title": "[✅] 4446\tSpy Hunter (Sellado) [3DS] $25K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\n3DS: Nintendo 3DS\nS: Sealed: Sellado de Fábrica",
+        "link": "https://www.instagram.com/p/DcUv763lYob/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-22",
+        "likes": 3
+    },
+    {
+        "id": "ig_auto_18089150498238111",
+        "image": "img/IG_18089150498238111.jpeg",
+        "title": "[✅] 4445\tLEGO Lord Of The Rings (Sellado) [DS] $25K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nDS: Nintendo DS\nS: Sealed: Sellado de Fábrica",
+        "link": "https://www.instagram.com/p/DcUvY4olXpo/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-22",
+        "likes": 9
+    },
+    {
+        "id": "ig_auto_18111290540085034",
+        "image": "img/IG_18111290540085034.jpeg",
+        "title": "Portátiles Sueltos | 21/Ago/26",
+        "description": "\n[✅] 4431 Zebco Fishing [GBC] $7K\n[✅] 4432 Disney's Dinosaur [GBC] $8K\n[✅] 4433 NBA Jam 99 [GBC] $8K\n[✅] 4434 007 World Is Not Enough [GBC] $12K\n\n[✅] 4435 Midway's Greatest Arcade Hits [GBA] $5K\n[✅] 4438 Super Monkey Ball Jr [GBA] $10K\n[✅] 4439 SpongeBob's Atlantis SquarePantis [GBA] $10K\n\n[✅] 4440 Big Brain Academy [DS] $4K\n[✅] 4441 Lego Battles [DS] $4K\n[✅] 4442 Crash Boom Bang [DS] $8K\n\n[✅] 4443 NFS Most Wanted [PSVita] $5K\n[✅] 4444 Jeopardy [GameGear] $5K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nGBC: GameBoy Color\nGBA: GameBoy Advance\nDS: Nintendo DS",
+        "link": "https://www.instagram.com/p/DcUurX-FZQy/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-08-22",
+        "likes": 14
+    },
     {
         "id": "ig_auto_17985411237104572",
         "image": "img/IG_17985411237104572.jpeg",
@@ -10,7 +120,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DcTm2RIlfkC/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-21",
-        "likes": 5
+        "likes": 12
     },
     {
         "id": "ig_auto_18101525171223871",
@@ -20,7 +130,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DbuYdn8lTVI/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-07",
-        "likes": 24
+        "likes": 25
     },
     {
         "id": "ig_auto_18083290445259495",
@@ -30,7 +140,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DbuU9sflbRl/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-07",
-        "likes": 35
+        "likes": 36
     },
     {
         "id": "ig_auto_18019950710856583",
@@ -400,7 +510,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DaRZbUulVye/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-07-02",
-        "likes": 22
+        "likes": 23
     },
     {
         "id": "ig_auto_18134732296514374",
@@ -1280,7 +1390,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DPU_RqCjJYG/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2025-10-03",
-        "likes": 5874
+        "likes": 5873
     },
     {
         "id": "ig_auto_18320707375210014",
@@ -1590,7 +1700,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DDPJbZkOqwF/",
         "media_type": "IMAGE",
         "date": "2024-12-06",
-        "likes": 47
+        "likes": 48
     },
     {
         "id": "ig_auto_18065209705701833",

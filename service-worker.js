@@ -1,6 +1,6 @@
 // ========== SERVICE WORKER - ROPAVEJERO RETRO ==========
 // Versión del caché - Incrementar cuando actualices recursos
-const CACHE_VERSION = 'ropavejero-v2026-08-22_0032';
+const CACHE_VERSION = 'ropavejero-v2026-08-22_1215';
 const CACHE_NAME = `${CACHE_VERSION}-static`;
 const DATA_CACHE_NAME = `${CACHE_VERSION}-data`;
 
@@ -33,6 +33,50 @@ const STATIC_RESOURCES = [
 
 // Recursos de Instagram (imágenes de posts WebP responsive y fallbacks)
 const INSTAGRAM_IMAGES = [
+    '/img/IG_18100600127219278.jpeg',
+    '/img/IG_18100600127219278-400.webp',
+    '/img/IG_18100600127219278-800.webp',
+    '/img/IG_18100600127219278-1200.webp',
+    '/img/IG_18093190739121120.jpeg',
+    '/img/IG_18093190739121120-400.webp',
+    '/img/IG_18093190739121120-800.webp',
+    '/img/IG_18093190739121120-1200.webp',
+    '/img/IG_18151922629510156.jpeg',
+    '/img/IG_18151922629510156-400.webp',
+    '/img/IG_18151922629510156-800.webp',
+    '/img/IG_18151922629510156-1200.webp',
+    '/img/IG_18091198223390424.jpeg',
+    '/img/IG_18091198223390424-400.webp',
+    '/img/IG_18091198223390424-800.webp',
+    '/img/IG_18091198223390424-1200.webp',
+    '/img/IG_18147514984537319.jpeg',
+    '/img/IG_18147514984537319-400.webp',
+    '/img/IG_18147514984537319-800.webp',
+    '/img/IG_18147514984537319-1200.webp',
+    '/img/IG_17933591445366264.jpeg',
+    '/img/IG_17933591445366264-400.webp',
+    '/img/IG_17933591445366264-800.webp',
+    '/img/IG_17933591445366264-1200.webp',
+    '/img/IG_18093614240532887.jpeg',
+    '/img/IG_18093614240532887-400.webp',
+    '/img/IG_18093614240532887-800.webp',
+    '/img/IG_18093614240532887-1200.webp',
+    '/img/IG_18071865887441908.jpeg',
+    '/img/IG_18071865887441908-400.webp',
+    '/img/IG_18071865887441908-800.webp',
+    '/img/IG_18071865887441908-1200.webp',
+    '/img/IG_18616812919027782.jpeg',
+    '/img/IG_18616812919027782-400.webp',
+    '/img/IG_18616812919027782-800.webp',
+    '/img/IG_18616812919027782-1200.webp',
+    '/img/IG_18089150498238111.jpeg',
+    '/img/IG_18089150498238111-400.webp',
+    '/img/IG_18089150498238111-800.webp',
+    '/img/IG_18089150498238111-1200.webp',
+    '/img/IG_18111290540085034.jpeg',
+    '/img/IG_18111290540085034-400.webp',
+    '/img/IG_18111290540085034-800.webp',
+    '/img/IG_18111290540085034-1200.webp',
     '/img/IG_17985411237104572.jpeg',
     '/img/IG_17985411237104572-400.webp',
     '/img/IG_17985411237104572-800.webp',
