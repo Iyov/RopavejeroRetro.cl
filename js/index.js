@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
         initMobileMenu();
         initFAQ();
         initBlogDialogs();
-        lazyInitProducts();
+        if (typeof lazyInitProducts === 'function') lazyInitProducts();
         loadEfemerides();
         applySavedSettings();
     });

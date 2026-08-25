@@ -105,11 +105,11 @@
       .hero-buttons{display:flex;justify-content:center;gap:15px}
     </style>
 
-    <link rel="preload" href="css/index.min.css?v=2026-08-17_1" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="css/index.min.css?v=2026-08-17_1"></noscript>
+    <link rel="preload" href="css/index.min.css?v=2026-08-25_1" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/index.min.css?v=2026-08-25_1"></noscript>
     
     <!-- Preload de recursos críticos -->
-    <link rel="preload" href="js/index.min.js?v=2026-08-17_2" as="script" />
+    <link rel="preload" href="js/index.min.js?v=2026-08-25_1" as="script" />
     <!-- Preload LCP: imagen principal del hero (local WebP) - solo tamaño apropiado -->
     <link rel="preload" href="img/hero-1200.webp" as="image" media="(min-width: 768px)" />
     <link rel="preload" href="img/hero-800.webp" as="image" media="(max-width: 767px)" />
@@ -652,134 +652,39 @@
         <section class="section" id="productos">
             <div class="container">
                 <div class="section-header">
-                    <h2 data-translate="products-title">Productos Disponibles</h2>
-                    <p data-translate="products-subtitle">Explora nuestra colección de videojuegos retro disponibles para venta.</p>
+                    <h2 data-translate="featured-products-title">Productos destacados</h2>
+                    <p data-translate="featured-products-subtitle">Explora el catálogo completo en Google Sheets</p>
                 </div>
 
-                <!-- Filtros de productos -->
-                <div class="products-filters" id="productsFilters" role="search" aria-label="Filtros de productos">
-                    <div class="filter-group">
-                        <label for="searchFilter" data-translate="filter-search">Buscar producto:</label>
-                        <input type="text" 
-                               id="searchFilter" 
-                               class="filter-input" 
-                               placeholder="Escribe para buscar..."
-                               aria-describedby="search-help">
-                        <span id="search-help" class="sr-only">Busca productos por nombre o plataforma</span>
-                    </div>
-                    <div class="filter-group">
-                        <label for="comboBoxMulti" data-translate="filter-platform">Plataforma:</label>
-                        <div class="multi-select-container" id="comboBoxMulti" role="combobox" aria-expanded="false" aria-haspopup="listbox">
-                            <div class="multi-select-display" id="platformDisplay" tabindex="0" aria-label="Seleccionar plataformas">
-                                <span class="placeholder" data-translate="filter-all">Todas</span>
-                                <i class="fas fa-chevron-down"></i>
-                            </div>
-                            <div class="multi-select-dropdown" id="platformDropdown" role="listbox" aria-label="Lista de plataformas">
-                                <div class="platform-search-container">
-                                    <input type="text" 
-                                           class="platform-search-input" 
-                                           id="platformSearchInput" 
-                                           data-translate-placeholder="filter-platform-search" 
-                                           placeholder="Buscar plataforma..."
-                                           aria-label="Buscar en plataformas">
-                                    <i class="fas fa-search"></i>
-                                </div>
-                                <div class="multi-select-option" data-value="all" role="option">
-                                    <input type="checkbox" id="platform-all" checked>
-                                    <label for="platform-all" data-translate="filter-all">Todas</label>
-                                </div>
-                                <!-- Las opciones se cargarán dinámicamente -->
-                            </div>
-                        </div>
-                    </div>
-                    <div class="filter-group">
-                        <label for="sortFilter" data-translate="filter-sort">Ordenar por:</label>
-                        <select id="sortFilter" class="filter-select" aria-label="Ordenar listado de productos">
-                            <option value="id-asc" data-translate="sort-id-asc">Número ID</option>
-                            <option value="price-asc" data-translate="sort-price-asc">Precio: Ascendente</option>
-                            <option value="price-desc" data-translate="sort-price-desc">Precio: Descendente</option>
-                            <option value="name-asc" data-translate="sort-name-asc">Nombre: A-Z</option>
-                            <option value="name-desc" data-translate="sort-name-desc">Nombre: Z-A</option>
-                            <option value="platform-asc" data-translate="sort-platform-asc">Plataforma</option>
-                        </select>
-                    </div>
-                    <button id="clearFilters" class="btn btn-secondary" data-translate="clear-filters" aria-label="Limpiar todos los filtros">Limpiar</button>
-                    <button id="clearCache" 
-                            class="btn btn-secondary" 
-                            onclick="clearProductsCache(); location.reload();" 
-                            title="Limpiar caché y recargar datos"
-                            aria-label="Actualizar lista de productos">
-                        <i class="fas fa-sync-alt"></i>
-                        <span data-translate="clear-cache">Actualizar</span>
-                    </button>
+                <div class="featured-products-grid">
+                    <a class="featured-product-card" href="productos.html">
+                        <i class="fas fa-gamepad" aria-hidden="true"></i>
+                        <h3 data-translate="featured-nintendo-title">Nintendo</h3>
+                        <p data-translate="featured-nintendo-platforms">NES · SNES · N64 · GameCube · Game Boy / Color / Advance · Wii / U · DS · 3DS</p>
+                    </a>
+                    <a class="featured-product-card" href="productos.html">
+                        <i class="fas fa-compact-disc" aria-hidden="true"></i>
+                        <h3 data-translate="featured-playstation-title">PlayStation</h3>
+                        <p data-translate="featured-playstation-platforms">PS1 · PS2 · PSP · PS3 · PS4</p>
+                    </a>
+                    <a class="featured-product-card" href="productos.html">
+                        <i class="fas fa-ghost" aria-hidden="true"></i>
+                        <h3 data-translate="featured-sega-title">Sega</h3>
+                        <p data-translate="featured-sega-platforms">Genesis · GameGear · Dreamcast</p>
+                    </a>
+                    <a class="featured-product-card" href="productos.html">
+                        <i class="fab fa-xbox" aria-hidden="true"></i>
+                        <h3 data-translate="featured-xbox-title">Xbox</h3>
+                        <p data-translate="featured-xbox-platforms">OG Classic · 360 · One</p>
+                    </a>
+                    <a class="featured-product-card" href="productos.html">
+                        <i class="fas fa-microchip" aria-hidden="true"></i>
+                        <h3 data-translate="featured-atari-title">Atari y más</h3>
+                        <p data-translate="featured-atari-platforms">Atari · Odyssey · Pong · y otras consolas retro</p>
+                    </a>
                 </div>
+                <a class="btn btn-primary featured-products-button" href="productos.html" data-translate="featured-products-button">Ir al catálogo</a>
 
-                <!-- Contador de productos -->
-                <div class="products-counter" id="productsCounter" role="status" aria-live="polite">
-                    <span data-translate="products-count">Cargando productos...</span>
-                </div>
-
-                <!-- Tabla de productos -->
-                <div class="products-container">
-                    <!-- Vista de tabla para desktop -->
-                    <div class="table-responsive desktop-table">
-                        <table class="products-table" id="productsTable">
-                            <thead>
-                                <tr>
-                                    <th data-translate="table-status">Estado</th>
-                                    <th data-translate="table-num">#</th>
-                                    <th data-translate="table-product">Producto</th>
-                                    <th data-translate="table-platform">Plataforma</th>
-                                    <th data-translate="table-price">Precio</th>
-                                    <th data-translate="table-stock">Stock</th>
-                                    <th data-translate="table-actions">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody id="productsTableBody">
-                                <!-- Los productos se cargarán dinámicamente -->
-                                <tr>
-                                    <td colspan="7" class="loading-cell" data-translate="loading-products">Cargando productos...</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <!-- Vista de tarjetas para móvil -->
-                    <div class="mobile-cards" id="mobileCards">
-                        <div class="loading-card" data-translate="loading-products">Cargando productos...</div>
-                        <!-- Las tarjetas se cargarán dinámicamente -->
-                    </div>
-                </div>
-
-                <!-- Paginación -->
-                <div class="pagination" id="pagination" role="navigation" aria-label="Paginación de productos">
-                    <button class="pagination-btn" id="prevPage" disabled aria-label="Página anterior">
-                        <i class="fas fa-chevron-left"></i>
-                        <span data-translate="pagination-prev">Anterior</span>
-                    </button>
-                    <div class="pagination-info" id="paginationInfo" aria-live="polite" aria-atomic="true">
-                        <span data-translate="pagination-page">Página</span>
-                        <span id="currentPage">1</span>
-                        <span data-translate="pagination-of">de</span>
-                        <span id="totalPages">1</span>
-                    </div>
-                    <button class="pagination-btn" id="nextPage" disabled aria-label="Página siguiente">
-                        <span data-translate="pagination-next">Siguiente</span>
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
-
-                <!-- Modal para ver detalles del producto -->
-                <div class="modal-overlay" id="productModalOverlay" role="dialog" aria-modal="true" aria-labelledby="product-modal-title">
-                    <div class="modal" id="productModal">
-                        <button class="modal-close" id="productModalClose" aria-label="Cerrar detalles del producto">
-                            <i class="fas fa-times"></i>
-                        </button>
-                        <div class="modal-content" id="productModalContent">
-                            <!-- El contenido del modal se cargará dinámicamente -->
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -1111,7 +1016,7 @@
                 if (window._instagramScriptLoaded) return;
                 window._instagramScriptLoaded = true;
                 const s = document.createElement('script');
-                s.src = 'js/instagram_posts.min.js?v=2026-08-25_0034';
+                s.src = 'js/instagram_posts.min.js?v=2026-08-25_1';
                 s.async = true;
                 s.onload = function(){
                     console.info('📸 instagram_posts.js cargado (lazy)');
@@ -1137,16 +1042,15 @@
         })();
     </script>
     <script src="js/seo-analytics.js?v=2026-08-17_1" defer></script>
-    <script src="js/modules/logger.js?v=2026-08-17_2" defer></script>
-    <script src="js/modules/cache.js?v=2026-08-17_2" defer></script>
-    <script src="js/modules/siglas.js?v=2026-08-17_2" defer></script>
-    <script src="js/modules/utils.js?v=2026-08-17_2" defer></script>
-    <script src="js/modules/ui.js?v=2026-08-17_2" defer></script>
-    <script src="js/modules/products.js?v=2026-08-17_2" defer></script>
-    <script src="js/modules/instagram.js?v=2026-08-17_2" defer></script>
-    <script src="js/modules/efemerides.js?v=2026-08-17_2" defer></script>
-    <script src="js/modules/analytics.js?v=2026-08-17_2" defer></script>
-    <script src="js/index.min.js?v=2026-08-17_2" defer></script>
+    <script src="js/modules/logger.js?v=2026-08-25_1" defer></script>
+    <script src="js/modules/cache.js?v=2026-08-25_1" defer></script>
+    <script src="js/modules/siglas.js?v=2026-08-25_1" defer></script>
+    <script src="js/modules/utils.js?v=2026-08-25_1" defer></script>
+    <script src="js/modules/ui.js?v=2026-08-25_1" defer></script>
+    <script src="js/modules/instagram.js?v=2026-08-25_1" defer></script>
+    <script src="js/modules/efemerides.js?v=2026-08-25_1" defer></script>
+    <script src="js/modules/analytics.js?v=2026-08-25_1" defer></script>
+    <script src="js/index.min.js?v=2026-08-25_1" defer></script>
     
     <!-- Service Worker Registration (defer to not block page load) -->
     <script defer>

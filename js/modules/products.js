@@ -76,6 +76,7 @@ function applyProductsUrlState() {
 function initProducts() {
     // Evitar inicialización doble
     if (window._productsInitialized) return;
+    if (!document.getElementById('searchFilter')) return;
     window._productsInitialized = true;
 
     const searchFilter = document.getElementById('searchFilter');
