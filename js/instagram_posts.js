@@ -1,5 +1,5 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-08-24 12:22:34
+// Última actualización: 2026-08-25 00:34:26
 
 const INSTAGRAM_POSTS_DATA = [
     {
@@ -30,7 +30,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DcVAzjolds4/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-22",
-        "likes": 28
+        "likes": 29
     },
     {
         "id": "ig_auto_18091198223390424",
@@ -50,7 +50,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DcU1wpRlYXX/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-22",
-        "likes": 18
+        "likes": 20
     },
     {
         "id": "ig_auto_17933591445366264",
@@ -80,7 +80,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DcUwdt6FXM8/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-22",
-        "likes": 25
+        "likes": 26
     },
     {
         "id": "ig_auto_18616812919027782",
@@ -665,7 +665,7 @@ const INSTAGRAM_POSTS_DATA = [
     {
         "id": "ig_auto_18393075559083487",
         "image": "img/IG_18393075559083487.jpeg",
-        "title": "[✅] 4308 Aliens vs Predator (CIB) [X360] $20K",
+        "title": "[❌️] 4308 Aliens vs Predator (CIB) [X360] $20K",
         "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual",
         "link": "https://www.instagram.com/p/DZgqBvNFbDA/",
         "media_type": "CAROUSEL_ALBUM",
@@ -1250,7 +1250,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DVtW5nLAVHd/",
         "media_type": "IMAGE",
         "date": "2026-03-10",
-        "likes": 37
+        "likes": 38
     },
     {
         "id": "ig_auto_17920957479266936",
