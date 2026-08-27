@@ -1,12 +1,12 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-08-27 05:28:27
+// Última actualización: 2026-08-27 21:23:48
 
 const INSTAGRAM_POSTS_DATA = [
     {
         "id": "ig_auto_18100600127219278",
         "image": "img/IG_18100600127219278.jpeg",
         "title": "PlayStation 4 | 21/Ago/26",
-        "description": "\n[✅] 4490 Mortal Kombat X (CIB) [PS4] $15K\n[✅] 4491 Star Wars Battlefront II (MM) [PS4] $15K\n[✅] 4492 Injustice 2 (CIB) [PS4] $15K\n[❌️] 4493 GTA V (CIB-C/M) [PS4] $15K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual\nMM: Sin Manual\nC/M: Con Mapa",
+        "description": "\n[✅] 4490 Mortal Kombat X (CIB) [PS4] $15K\n[❌️] 4491 Star Wars Battlefront II (MM) [PS4] $15K\n[✅] 4492 Injustice 2 (CIB) [PS4] $15K\n[❌️] 4493 GTA V (CIB-C/M) [PS4] $15K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual\nMM: Sin Manual\nC/M: Con Mapa",
         "link": "https://www.instagram.com/p/DcVGeZElWIl/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-22",
@@ -20,7 +20,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DcVE2UrFfA1/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-22",
-        "likes": 19
+        "likes": 20
     },
     {
         "id": "ig_auto_18151922629510156",
@@ -30,7 +30,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DcVAzjolds4/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-22",
-        "likes": 31
+        "likes": 32
     },
     {
         "id": "ig_auto_18091198223390424",
@@ -60,7 +60,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DcUxkIiFbGc/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-22",
-        "likes": 27
+        "likes": 28
     },
     {
         "id": "ig_auto_18093614240532887",
@@ -80,7 +80,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DcUwdt6FXM8/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-22",
-        "likes": 29
+        "likes": 31
     },
     {
         "id": "ig_auto_18616812919027782",
@@ -106,7 +106,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_18111290540085034",
         "image": "img/IG_18111290540085034.jpeg",
         "title": "Portátiles Sueltos | 21/Ago/26",
-        "description": "\n[✅] 4431 Zebco Fishing [GBC] $7K\n[❌] 4432 Disney's Dinosaur [GBC] $8K\n[❌] 4433 NBA Jam 99 [GBC] $8K\n[❌] 4434 007 World Is Not Enough [GBC] $12K\n\n[✅] 4435 Midway's Greatest Arcade Hits [GBA] $5K\n[✅] 4438 Super Monkey Ball Jr [GBA] $10K\n[✅] 4439 SpongeBob's Atlantis SquarePantis [GBA] $10K\n\n[✅] 4440 Big Brain Academy [DS] $4K\n[✅] 4441 Lego Battles [DS] $4K\n[✅] 4442 Crash Boom Bang [DS] $8K\n\n[✅] 4443 NFS Most Wanted [PSVita] $5K\n[✅] 4444 Jeopardy [GameGear] $5K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nGBC: GameBoy Color\nGBA: GameBoy Advance\nDS: Nintendo DS",
+        "description": "\n[✅] 4431 Zebco Fishing [GBC] $7K\n[❌] 4432 Disney's Dinosaur [GBC] $8K\n[❌] 4433 NBA Jam 99 [GBC] $8K\n[❌] 4434 007 World Is Not Enough [GBC] $12K\n\n[✅] 4435 Midway's Greatest Arcade Hits [GBA] $5K\n[✅] 4438 Super Monkey Ball Jr [GBA] $10K\n[✅] 4439 SpongeBob's Atlantis SquarePantis [GBA] $10K\n\n[❌] 4440 Big Brain Academy [DS] $4K\n[✅] 4441 Lego Battles [DS] $4K\n[✅] 4442 Crash Boom Bang [DS] $8K\n\n[✅] 4443 NFS Most Wanted [PSVita] $5K\n[✅] 4444 Jeopardy [GameGear] $5K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nGBC: GameBoy Color\nGBA: GameBoy Advance\nDS: Nintendo DS",
         "link": "https://www.instagram.com/p/DcUurX-FZQy/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-22",
@@ -120,13 +120,13 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DcTm2RIlfkC/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-21",
-        "likes": 12
+        "likes": 13
     },
     {
         "id": "ig_auto_18101525171223871",
         "image": "img/IG_18101525171223871.jpeg",
         "title": "PlayStation 4 | 06/Ago/26",
-        "description": "\n[✅] 4421 Fifa 19 (BL-CIB) [PS4] $5K\n[✅] 4422 Destiny (BL-CIB) [PS4] $10K\n[❌] 4423 Rainbow Six Siege (BL-MM) [PS4] $10K\n[✅] 4424 Epic Chef (BL-MM) [PS4] $12K\n[✅] 4425 Horizon Zero Dawn (BL-CIB) [PS4] $12K\n[✅] 4426 Horizon Zero Dawn (BL-CIB) [PS4] $12K\n[❌] 4427 Mirror's Edge Catalyst (BL-MM) [PS4] $12K\n[❌] 4428 Witcher 3 Wild Hunt (BL-CIB) [PS4] $12K\n[✅] 4429 Embr Uber Firefighters (BL-MM) [PS4] $15K\n[✅] 4430 Naruto Shippuden Ultimate Ninja Storm 4 (BL-MM) [PS4] $15K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nGH: Greatest Hits\nCIB: Caja, Juego, Manual\nMM: Sin Manual",
+        "description": "\n[✅] 4421 Fifa 19 (BL-CIB) [PS4] $5K\n[✅] 4422 Destiny (BL-CIB) [PS4] $10K\n[❌] 4423 Rainbow Six Siege (BL-MM) [PS4] $10K\n[✅] 4424 Epic Chef (BL-MM) [PS4] $12K\n[✅] 4425 Horizon Zero Dawn (BL-CIB) [PS4] $12K\n[❌] 4426 Horizon Zero Dawn (BL-CIB) [PS4] $12K\n[❌] 4427 Mirror's Edge Catalyst (BL-MM) [PS4] $12K\n[❌] 4428 Witcher 3 Wild Hunt (BL-CIB) [PS4] $12K\n[✅] 4429 Embr Uber Firefighters (BL-MM) [PS4] $15K\n[✅] 4430 Naruto Shippuden Ultimate Ninja Storm 4 (BL-MM) [PS4] $15K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nGH: Greatest Hits\nCIB: Caja, Juego, Manual\nMM: Sin Manual",
         "link": "https://www.instagram.com/p/DbuYdn8lTVI/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-07",
@@ -305,7 +305,7 @@ const INSTAGRAM_POSTS_DATA = [
     {
         "id": "ig_auto_18027904652832682",
         "image": "img/IG_18027904652832682.jpeg",
-        "title": "[✅] 4390 Wii Sports Resort (MM) [Wii] $10K",
+        "title": "[❌] 4390 Wii Sports Resort (MM) [Wii] $10K",
         "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nMM: Sin Manual",
         "link": "https://www.instagram.com/p/DbM5U0SFfSq/",
         "media_type": "CAROUSEL_ALBUM",
@@ -505,7 +505,7 @@ const INSTAGRAM_POSTS_DATA = [
     {
         "id": "ig_auto_18097437857245247",
         "image": "img/IG_18097437857245247.jpeg",
-        "title": "[✅] 4360 God of War 3 (GH-CIB-GotY) [PS3] $15K",
+        "title": "[❌] 4360 God of War 3 (GH-CIB-GotY) [PS3] $15K",
         "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nGH: Greatest Hits\nCIB: Caja, Juego, Manual\nGotY: Game of the Year",
         "link": "https://www.instagram.com/p/DaRZbUulVye/",
         "media_type": "CAROUSEL_ALBUM",
@@ -595,7 +595,7 @@ const INSTAGRAM_POSTS_DATA = [
     {
         "id": "ig_auto_18101717978327095",
         "image": "img/IG_18101717978327095.jpeg",
-        "title": "[✅] 4321 Mass Effect (CIB-2D) [X360] $8K",
+        "title": "[❌] 4321 Mass Effect (CIB-2D) [X360] $8K",
         "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual\n2D: Dos Discos",
         "link": "https://www.instagram.com/p/DZgxYF6lT6Y/",
         "media_type": "CAROUSEL_ALBUM",
@@ -926,7 +926,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_18026618264820152",
         "image": "img/IG_18026618264820152.jpeg",
         "title": "Nintendo 64 | 08/May/26",
-        "description": "\n[❌] 4181\t007 World Is Not Enough [N64] $20K\n[❌️] 4182\tArmy Men Sarge's Heroes 2 [N64] $15K\n[❌️] 4183\tArmy Men Air Combat [N64] $25K\n[❌️] 4184\tGauntlet Legends [N64] $55K\n[✅] 4185\tKnife Edge Nose Gunner [N64] $20K\n[❌️] 4186\tMRC Multi Racing Championship [N64] $10K\n[✅] 4187\tWipeout 64 [N64] $15K\n[❌] 4188\tWaialae Country Club [N64] $8K\n[❌] 4189\tWWF Warzone [N64] $15K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE",
+        "description": "\n[❌] 4181\t007 World Is Not Enough [N64] $20K\n[❌️] 4182\tArmy Men Sarge's Heroes 2 [N64] $15K\n[❌️] 4183\tArmy Men Air Combat [N64] $25K\n[❌️] 4184\tGauntlet Legends [N64] $55K\n[✅] 4185\tKnife Edge Nose Gunner [N64] $20K\n[❌️] 4186\tMRC Multi Racing Championship [N64] $10K\n[❌] 4187\tWipeout 64 [N64] $15K\n[❌] 4188\tWaialae Country Club [N64] $8K\n[❌] 4189\tWWF Warzone [N64] $15K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE",
         "link": "https://www.instagram.com/p/DYGnt0flea5/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-05-09",
@@ -1390,7 +1390,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DPU_RqCjJYG/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2025-10-03",
-        "likes": 5869
+        "likes": 5868
     },
     {
         "id": "ig_auto_18320707375210014",
@@ -1626,7 +1626,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_18075610312661070",
         "image": "img/IG_18075610312661070.jpeg",
         "title": "PlayStation 2 [5] | 21/Ene/25",
-        "description": "\n[✅] 848\tRed Faction (GH-CIB) [PS2] $10K\n[❌️] 849\tSmash Cars (BL-CIB) [PS2] $10K\n[❌] 855\tMidnight Club Street Racing (BL-CIB) [PS2] $12K\n[✅] 872\tThe Shield (BL-CIB) [PS2] $15K\n[✅] 877\tTMNT (GH-CIB) [PS2] $20K\n[❌] 878\tTwisted Metal Black (BL-CIB) [PS2] $20K\n[❌] 893\tCAPCOM Classics Collection Volume 2 (BL-Sealed) [PS2] $35K\n[✅] 1162\tFrogger (BL-CIB) [PS2] $10K\n[❌️] 1173\tMark Of Kri (BL-CIB) [PS2] $12K\n[✅] 1174\tSecret Agent Clank (BL-MM) [PS2] $10K\n[❌] 1332\tJak X Combat Racing (BL-MM) [PS2] $10K\n[❌] 1428\tDevil May Cry 2 (BL-CIB-2D) [PS2] $20K\n[❌] 1477\tNBA Live 2005 (BL-CIB) [PS2] $5K\n[❌] 1479\tNamco Museum (BL-MM) [PS2] $5K\n[❌] 1485\tMidway Arcade Treasures (BL-CIB) [PS2] $10K\n[❌] 1486\tState of Emergency (BL-CIB) [PS2] $10K\n[❌] 1502\tStar Wars Clone Wars (BL-CIB) [PS2] $15K\n[❌] 1511\tTwisted Metal Black (BL-MM) [PS2] $15K\n[❌] 1530\tSpiderman Web Of Shadows (BL-CIB) [PS2] $25K\n[❌] 1683\tLord of the Rings Two Towers (BL-CIB-C/R) [PS2] $10K\n[❌] 1831\tTwisted Metal Black (GH-MM) [PS2] $15K\n[❌] 1834\tNaturo Uzumaki Chronicles (BL-MM-WD) [PS2] $10K\n[✅] 1836\tNascar 06 (BL-CIB) [PS2] $8K\n[✅] 1837\tGreg Hastings Tournament Paintball Maxed (BL-CIB) [PS2] $6K\n[✅] 1838\tPinball (BL-MM) [PS2] $4K\n[✅] 1906\tSOCOM US Navy Seals (GH-CIB) [PS2] $8K\n[✅] 2003\tSyphon Filter Dark Mirror (BL-Sealed) [PS2] $20K\n[❌️] 2004\tGran Turismo 4 (GH-Sealed) [PS2] $25K\n[✅] 2005\tSly 2 Band Of Thieves (GH-Sealed) [PS2] $25K\n[❌️] 2006\tRatchet & Clank (GH-Sealed) [PS2] $25K\n[❌] 2116\tTaito Legends 2 (BL-CIB) [PS2] $18K\n[✅] 2117\tRogue Ops (BL-MM) [PS2] $12K\n[✅] 2118\tATV Offroad Fury 4 (GH-MM) [PS2] $10K\n[❌] 2119\tUnlimited Saga (BL-CIB-Jap) [PS2] $7K\n[❌] 2120\tDynasty Warriors 4 Empires (BL-CIB-Jap) [PS2] $5K\n[❌] 2121\tDynasty Warriors 3 (BL-CIB-Jap) [PS2] $5K\n[❌] 2122\tSangokushi VIII (BL-MM-Jap) [PS2] $4K\n[✅] 2124\tBaseball 3 (BL-CIB-Jap) [PS2] $3K\n[❌] 2125\tSengoku Musou 1 (BL-CIB-Jap) [PS2] $5K\n[❌] 2126\tShin Sangoku Musou 2 (BL-CIB-Jap) [PS2] $5K\n[✅] 2127\tSoccer Life (BL-CIB-Jap) [PS2] $5K\n[❌] 2229\tBurnout 3 Takedown (GH-MM) [PS2] $13K\n[❌️] 2306\tNBA Live 2003 (BL-MM) [PS2] $3K\n[✅] 2307\tThrillville (BL-MM) [PS2] $5K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE",
+        "description": "\n[✅] 848\tRed Faction (GH-CIB) [PS2] $10K\n[❌️] 849\tSmash Cars (BL-CIB) [PS2] $10K\n[❌] 855\tMidnight Club Street Racing (BL-CIB) [PS2] $12K\n[✅] 872\tThe Shield (BL-CIB) [PS2] $15K\n[✅] 877\tTMNT (GH-CIB) [PS2] $20K\n[❌] 878\tTwisted Metal Black (BL-CIB) [PS2] $20K\n[❌] 893\tCAPCOM Classics Collection Volume 2 (BL-Sealed) [PS2] $35K\n[✅] 1162\tFrogger (BL-CIB) [PS2] $10K\n[❌️] 1173\tMark Of Kri (BL-CIB) [PS2] $12K\n[❌️] 1174\tSecret Agent Clank (BL-MM) [PS2] $10K\n[❌] 1332\tJak X Combat Racing (BL-MM) [PS2] $10K\n[❌] 1428\tDevil May Cry 2 (BL-CIB-2D) [PS2] $20K\n[❌] 1477\tNBA Live 2005 (BL-CIB) [PS2] $5K\n[❌] 1479\tNamco Museum (BL-MM) [PS2] $5K\n[❌] 1485\tMidway Arcade Treasures (BL-CIB) [PS2] $10K\n[❌] 1486\tState of Emergency (BL-CIB) [PS2] $10K\n[❌] 1502\tStar Wars Clone Wars (BL-CIB) [PS2] $15K\n[❌] 1511\tTwisted Metal Black (BL-MM) [PS2] $15K\n[❌] 1530\tSpiderman Web Of Shadows (BL-CIB) [PS2] $25K\n[❌] 1683\tLord of the Rings Two Towers (BL-CIB-C/R) [PS2] $10K\n[❌] 1831\tTwisted Metal Black (GH-MM) [PS2] $15K\n[❌] 1834\tNaturo Uzumaki Chronicles (BL-MM-WD) [PS2] $10K\n[✅] 1836\tNascar 06 (BL-CIB) [PS2] $8K\n[✅] 1837\tGreg Hastings Tournament Paintball Maxed (BL-CIB) [PS2] $6K\n[✅] 1838\tPinball (BL-MM) [PS2] $4K\n[✅] 1906\tSOCOM US Navy Seals (GH-CIB) [PS2] $8K\n[✅] 2003\tSyphon Filter Dark Mirror (BL-Sealed) [PS2] $20K\n[❌️] 2004\tGran Turismo 4 (GH-Sealed) [PS2] $25K\n[✅] 2005\tSly 2 Band Of Thieves (GH-Sealed) [PS2] $25K\n[❌️] 2006\tRatchet & Clank (GH-Sealed) [PS2] $25K\n[❌] 2116\tTaito Legends 2 (BL-CIB) [PS2] $18K\n[✅] 2117\tRogue Ops (BL-MM) [PS2] $12K\n[✅] 2118\tATV Offroad Fury 4 (GH-MM) [PS2] $10K\n[❌] 2119\tUnlimited Saga (BL-CIB-Jap) [PS2] $7K\n[❌] 2120\tDynasty Warriors 4 Empires (BL-CIB-Jap) [PS2] $5K\n[❌] 2121\tDynasty Warriors 3 (BL-CIB-Jap) [PS2] $5K\n[❌] 2122\tSangokushi VIII (BL-MM-Jap) [PS2] $4K\n[✅] 2124\tBaseball 3 (BL-CIB-Jap) [PS2] $3K\n[❌] 2125\tSengoku Musou 1 (BL-CIB-Jap) [PS2] $5K\n[❌] 2126\tShin Sangoku Musou 2 (BL-CIB-Jap) [PS2] $5K\n[✅] 2127\tSoccer Life (BL-CIB-Jap) [PS2] $5K\n[❌] 2229\tBurnout 3 Takedown (GH-MM) [PS2] $13K\n[❌️] 2306\tNBA Live 2003 (BL-MM) [PS2] $3K\n[✅] 2307\tThrillville (BL-MM) [PS2] $5K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE",
         "link": "https://www.instagram.com/p/DFG3CPrudxM/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2025-01-22",
@@ -1666,7 +1666,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_17862847173324659",
         "image": "img/IG_17862847173324659.jpeg",
         "title": "PlayStation 2 [1] | 20/Ene/25",
-        "description": "\n[❌] 04\tCabela's African Safari (BL-CIB) [PS2] $2K\n[❌️] 06\tCabela's Alaskan Adventures (BL-MM-CR) [PS2] $2K\n[❌️] 07\tCabela's Big Game Hunter (GH-CIB) [PS2] $2K\n[❌] 08\tCabela's Big Game Hunter (BL-CIB) [PS2] $2K\n[❌️] 09\tCabela's Big Game Hunter 2005 Adventures (BL-MM) [PS2] $2K\n[✅] 11\tCabela's Trophy Bucks (BL-MM) [PS2] $2K\n[❌️] 12\tCabela's Trophy Bucks (BL-MM) [PS2] $2K\n[✅] 13\tMadden 2005 (BL-CIB) [PS2] $2K\n[❌️] 14\tMadden 2005 (BL-CIB) [PS2] $2K\n[✅] 15\tWorld Championship Poker (BL-CIB-CR) [PS2] $3K\n[❌️] 16\tAnt Bully (BL-MM-CR) [PS2] $4K\n[❌️] 17\tHerdy Gerdy (BL-MM) [PS2] $4K\n[✅] 18\tJeopardy (BL-CIB) [PS2] $4K\n[✅] 19\tLet's Ride Silver Buckle Stables (BL-CIB) [PS2] $4K\n[❌️] 20\tNBA Hoopz (BL-MM) [PS2] $4K\n[❌️] 21\tNFL Blitz 2003 (BL-CIB) [PS2] $4K\n[✅] 22\tMojo (BL-MM) [PS2] $4K\n[❌️] 24\tWorld Poker Tour (BL-CIB) [PS2] $4K\n[❌️] 26\tDora Saves The Mermaids (BL-MM-CR) [PS2] $4K\n[❌️] 27\tGhost Recon (BL-MM) [PS2] $5K\n[✅] 28\tPuzzle Challenge (BL-MM) [PS2] $5K\n[❌️] 29\tRebel Raiders Operation Nighthawk (BL-CIB) [PS2] $5K\n[✅] 30\tRebel Raiders Operation Nighthawk (BL-CIB) [PS2] $5K\n[✅] 31\tRiding Star (BL-CIB) [PS2] $5K\n[❌️] 32\tSecret Weapons Over Normandy (BL-MM-CR) [PS2] $5K\n[❌] 34\tSocom 3 (BL-MM) [PS2] $5K\n[✅] 36\tSurf's Up (BL-MM) [PS2] $5K\n[✅] 37\tSki And Shoot (BL-MM) [PS2] $5K\n[✅] 38\tSub Rebellion (BL-MM) [PS2] $5K\n[❌] 39\tWhirl Tour (BL-CIB) [PS2] $5K\n[❌] 40\tWDL Thunder Tanks (BL-CIB-CR) [PS2] $5K\n[✅] 42\tBreeders' Cup WTC (BL-CIB) [PS2] $5K\n[❌] 43\tFinding Nemo (BL-CIB) [PS2] $6K\n[✅] 44\tKaraoke Revolution Presents: AmKerican Idol (BL-CIB) [PS2] $6K\n[❌] 47\tTiger Woods 2003 (BL-CIB) [PS2] $5K\n[✅] 49\tDora Journey To The Purple Planet (BL-CIB) [PS2] $6K\n[❌] 51\tFord Vs Chevy (BL-CIB) [PS2] $6K\n[✅] 52\tHigh School Musical Sing It (BL-CIB) [PS2] $6K\n[❌️] 54\tSphinx and the Cursed Mummy (BL-CIB) [PS2] $6K\n[❌️] 55\tThe Plan (BL-CIB) [PS2] $6K\n[❌] 56\tTrigger Man (BL-CIB) [PS2] $6K\n[✅] 57\tWave Rally (BL-MM) [PS2] $6K\n[✅] 58\tAlvin And The Chipmunks (BL-CIB) [PS2] $7K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nBL: Black Label\nGH: Greatest Hits\nCIB: Caja, Juego, Manual\nMM: Sin Manual\nCR: Caja Repro",
+        "description": "\n[❌] 04\tCabela's African Safari (BL-CIB) [PS2] $2K\n[❌️] 06\tCabela's Alaskan Adventures (BL-MM-CR) [PS2] $2K\n[❌️] 07\tCabela's Big Game Hunter (GH-CIB) [PS2] $2K\n[❌] 08\tCabela's Big Game Hunter (BL-CIB) [PS2] $2K\n[❌️] 09\tCabela's Big Game Hunter 2005 Adventures (BL-MM) [PS2] $2K\n[✅] 11\tCabela's Trophy Bucks (BL-MM) [PS2] $2K\n[❌️] 12\tCabela's Trophy Bucks (BL-MM) [PS2] $2K\n[❌️] 13\tMadden 2005 (BL-CIB) [PS2] $2K\n[❌️] 14\tMadden 2005 (BL-CIB) [PS2] $2K\n[✅] 15\tWorld Championship Poker (BL-CIB-CR) [PS2] $3K\n[❌️] 16\tAnt Bully (BL-MM-CR) [PS2] $4K\n[❌️] 17\tHerdy Gerdy (BL-MM) [PS2] $4K\n[✅] 18\tJeopardy (BL-CIB) [PS2] $4K\n[✅] 19\tLet's Ride Silver Buckle Stables (BL-CIB) [PS2] $4K\n[❌️] 20\tNBA Hoopz (BL-MM) [PS2] $4K\n[❌️] 21\tNFL Blitz 2003 (BL-CIB) [PS2] $4K\n[✅] 22\tMojo (BL-MM) [PS2] $4K\n[❌️] 24\tWorld Poker Tour (BL-CIB) [PS2] $4K\n[❌️] 26\tDora Saves The Mermaids (BL-MM-CR) [PS2] $4K\n[❌️] 27\tGhost Recon (BL-MM) [PS2] $5K\n[✅] 28\tPuzzle Challenge (BL-MM) [PS2] $5K\n[❌️] 29\tRebel Raiders Operation Nighthawk (BL-CIB) [PS2] $5K\n[✅] 30\tRebel Raiders Operation Nighthawk (BL-CIB) [PS2] $5K\n[✅] 31\tRiding Star (BL-CIB) [PS2] $5K\n[❌️] 32\tSecret Weapons Over Normandy (BL-MM-CR) [PS2] $5K\n[❌] 34\tSocom 3 (BL-MM) [PS2] $5K\n[✅] 36\tSurf's Up (BL-MM) [PS2] $5K\n[✅] 37\tSki And Shoot (BL-MM) [PS2] $5K\n[✅] 38\tSub Rebellion (BL-MM) [PS2] $5K\n[❌] 39\tWhirl Tour (BL-CIB) [PS2] $5K\n[❌] 40\tWDL Thunder Tanks (BL-CIB-CR) [PS2] $5K\n[✅] 42\tBreeders' Cup WTC (BL-CIB) [PS2] $5K\n[❌] 43\tFinding Nemo (BL-CIB) [PS2] $6K\n[✅] 44\tKaraoke Revolution Presents: AmKerican Idol (BL-CIB) [PS2] $6K\n[❌] 47\tTiger Woods 2003 (BL-CIB) [PS2] $5K\n[✅] 49\tDora Journey To The Purple Planet (BL-CIB) [PS2] $6K\n[❌] 51\tFord Vs Chevy (BL-CIB) [PS2] $6K\n[✅] 52\tHigh School Musical Sing It (BL-CIB) [PS2] $6K\n[❌️] 54\tSphinx and the Cursed Mummy (BL-CIB) [PS2] $6K\n[❌️] 55\tThe Plan (BL-CIB) [PS2] $6K\n[❌] 56\tTrigger Man (BL-CIB) [PS2] $6K\n[✅] 57\tWave Rally (BL-MM) [PS2] $6K\n[✅] 58\tAlvin And The Chipmunks (BL-CIB) [PS2] $7K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nBL: Black Label\nGH: Greatest Hits\nCIB: Caja, Juego, Manual\nMM: Sin Manual\nCR: Caja Repro",
         "link": "https://www.instagram.com/p/DFEUDjcs7za/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2025-01-21",
