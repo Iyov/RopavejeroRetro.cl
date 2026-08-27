@@ -3,7 +3,7 @@
     "@type": ["Store", "LocalBusiness", "Organization"],
     "name": "Ropavejero Retro",
     "alternateName": "@Ropavejero.Retro",
-    "description": "Tienda de videojuegos retro originales americanos en Santiago de Chile. Venta de consolas, juegos y accesorios de Nintendo, PlayStation, Sega, Xbox y Atari. Servicio técnico de consolas retro y pulido profesional de discos ópticos.",
+    "description": "Tienda de Instagram de videojuegos, consolas, accesorios y coleccionables retro. Junto con @NekketsuStore formó el local físico @DoubleImpactStore en Persa Bio Bio.",
     "url": "https://ropavejeroretro.cl",
     "logo": {
         "@type": "ImageObject",
@@ -17,22 +17,6 @@
     ],
     "telephone": "+56967691585",
     "email": "contacto@ropavejeroretro.cl",
-    "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Santiago",
-        "addressRegion": "Región Metropolitana",
-        "addressCountry": "CL",
-        "postalCode": "8320000"
-    },
-    "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": -33.4489,
-        "longitude": -70.6693
-    },
-    "openingHours": [
-        "Mo-Fr 10:00-19:00",
-        "Sa 11:00-17:00"
-    ],
     "priceRange": "$$",
     "currenciesAccepted": "CLP",
     "paymentAccepted": ["Cash", "Credit Card", "Bank Transfer"],
@@ -66,6 +50,28 @@
         "https://twitter.com/RopavejeroRetro/",
         "https://www.threads.com/@ropavejero.retro/"
     ],
+    "location": {
+        "@type": "Store",
+        "name": "DoubleImpactStore",
+        "alternateName": "@DoubleImpactStore",
+        "url": "https://doubleimpactstore.cl/",
+        "description": "Local comercial de videojuegos retro formado por @Ropavejero.Retro y @NekketsuStore en Persa Bio Bio. Está cerca de Víctor Manuel, frente al McDonald's, y a pasos del Metro Bio Bio L6.",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Bio Bio 654, Local 58, Galpón Nuevo Bio Bio",
+            "addressLocality": "Santiago",
+            "addressRegion": "Región Metropolitana",
+            "addressCountry": "CL"
+        },
+        "openingHours": "Sa-Su 11:00-18:00",
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["https://schema.org/Saturday", "https://schema.org/Sunday"],
+            "opens": "11:00",
+            "closes": "18:00",
+            "description": "También atiende festivos."
+        }
+    },
     "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "Catálogo de Videojuegos Retro",

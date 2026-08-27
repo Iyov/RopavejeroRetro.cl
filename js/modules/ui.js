@@ -200,7 +200,7 @@ const translations = {
         
         // Hero
         'hero-title': 'Bienvenidos a @Ropavejero.Retro<br/>Todo lo Retro en un solo lugar',
-        'hero-subtitle': 'Venta de videojuegos retro, servicio técnico de consolas y pulido de discos en Santiago de Chile. Consolas, juegos y accesorios originales americanos.',
+        'hero-subtitle': '@Ropavejero.Retro es una tienda de Instagram de videojuegos, consolas, accesorios y coleccionables retro. Además, junto con @NekketsuStore, formó el local físico @DoubleImpactStore en Persa Bio Bio.',
         'instagram-button': 'Ir a Instagram',
         
         // Instagram
@@ -209,9 +209,9 @@ const translations = {
         // Nosotros
         'about-title': 'Sobre Nosotros',
         'about-subtitle-1': '¿Quiénes Somos?',
-        'about-text-1': 'Ropavejero Retro es una tienda especializada en videojuegos retro originales americanos, con servicio técnico de consolas y pulido de discos en Santiago de Chile. Nuestra pasión por los videojuegos clásicos nos impulsa a buscar y ofrecer los mejores productos para los amantes de la nostalgia gaming.',
+        'about-text-1': '@Ropavejero.Retro es una tienda de Instagram especializada en videojuegos, consolas, accesorios y coleccionables retro originales americanos. Junto con @NekketsuStore, también formó el local físico @DoubleImpactStore en Persa Bio Bio.',
         'about-subtitle-2': 'Nuestros Productos y Servicios',
-        'about-text-2': 'Desde consolas clásicas como NES, SNES, PlayStation 1 y Sega Genesis, hasta juegos y accesorios originales, todo cuidadosamente revisado y garantizado. Además ofrecemos servicio técnico de consolas retro y pulido profesional de discos ópticos. Trabajamos directamente con proveedores en Estados Unidos para asegurar la autenticidad de nuestros productos.',
+        'about-text-2': 'Vendemos juegos, consolas, accesorios y coleccionables retro originales de Nintendo, PlayStation, Sega, Xbox y Atari. Además ofrecemos servicio técnico de consolas retro y pulido profesional de discos ópticos, con productos cuidadosamente revisados y garantizados.',
         'about-subtitle-3': 'Nuestra Misión',
         'about-text-3': 'Nuestro objetivo es que revivas aquellos maravillosos momentos de tu infancia con la misma calidad y emoción de entonces.',
         'about-btn-1': 'Garantía 30 días',
@@ -355,6 +355,13 @@ const translations = {
         'contact-whatsapp': 'WhatsApp',
         'contact-website': 'Sitio Web',
         'contact-excel': 'Excel Disponibles',
+
+        // DoubleImpactStore
+        'store-announcement-title': '@DoubleImpactStore',
+        'store-announcement-new': 'Nueva tienda de videojuegos retro',
+        'store-announcement-description': '@Ropavejero.Retro es una tienda de Instagram de videojuegos, consolas, accesorios y coleccionables retro. Junto con @NekketsuStore formó el local físico @DoubleImpactStore.',
+        'store-announcement-address': 'Bio Bio 654, Local 58, Galpón Nuevo Bio Bio (cerca de Víctor Manuel, frente al McDonald\'s).',
+        'store-announcement-transport-hours': 'Metro Bio Bio L6 | Sábados, domingos y festivos, de 11:00 a 18:00 hrs.',
         
         // Footer
         'footer-copyright': '© 2026 @Ropavejero.Retro Todos los derechos reservados.',
@@ -379,7 +386,7 @@ const translations = {
         
         // Hero
         'hero-title': 'Welcome to @Ropavejero.Retro<br/>Everything Retro in one place',
-        'hero-subtitle': 'Retro video game sales, console repair service and disc polishing in Santiago, Chile. Original American consoles, games and accessories.',
+        'hero-subtitle': '@Ropavejero.Retro is an Instagram store selling retro video games, consoles, accessories and collectibles. Together with @NekketsuStore, it also formed the @DoubleImpactStore physical location at Persa Bio Bio.',
         'instagram-button': 'Go to Instagram',
         
         // Instagram
@@ -388,9 +395,9 @@ const translations = {
         // Nosotros
         'about-title': 'About Us',
         'about-subtitle-1': 'Who are we?',
-        'about-text-1': 'Ropavejero Retro is a store specialized in original American retro video games, with console repair service and professional disc polishing in Santiago, Chile. Our passion for classic video games drives us to find and offer the best products for nostalgia gaming lovers.',
+        'about-text-1': '@Ropavejero.Retro is an Instagram store specializing in original American retro video games, consoles, accessories and collectibles. Together with @NekketsuStore, it also formed the @DoubleImpactStore physical location at Persa Bio Bio.',
         'about-subtitle-2': 'Our Products and Services',
-        'about-text-2': 'From classic consoles like NES, SNES, PlayStation 1 and Sega Genesis, to original games and accessories, all carefully reviewed and guaranteed. We also offer retro console repair service and professional optical disc polishing. We work directly with suppliers in the United States to ensure product authenticity.',
+        'about-text-2': 'We sell original retro games, consoles, accessories and collectibles from Nintendo, PlayStation, Sega, Xbox and Atari. We also offer retro console repair and professional optical disc polishing, with products carefully checked and guaranteed.',
         'about-subtitle-3': 'Our Mission',
         'about-text-3': 'Our goal is for you to relive those wonderful moments of your childhood with the same quality and excitement as then.',
         'about-btn-1': '30-day warranty',
@@ -532,6 +539,13 @@ const translations = {
         'contact-whatsapp': 'WhatsApp',
         'contact-website': 'Website',
         'contact-excel': 'Available Excel',
+
+        // DoubleImpactStore
+        'store-announcement-title': '@DoubleImpactStore',
+        'store-announcement-new': 'New retro video game store',
+        'store-announcement-description': '@Ropavejero.Retro is an Instagram store selling retro video games, consoles, accessories and collectibles. Together with @NekketsuStore, it formed the @DoubleImpactStore physical location.',
+        'store-announcement-address': 'Bio Bio 654, Store 58, Galpón Nuevo Bio Bio (near Víctor Manuel, across from McDonald\'s).',
+        'store-announcement-transport-hours': 'Bio Bio Metro Station, Line 6 | Saturdays, Sundays and holidays, 11:00 AM to 6:00 PM.',
         
         // Footer
         'footer-copyright': '© 2026 @Ropavejero.Retro All rights reserved.',

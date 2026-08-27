@@ -45,6 +45,7 @@
       }
     ]
   },
+  "breadcrumb": {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
@@ -75,6 +76,28 @@
       "https://www.youtube.com/@RopavejeroRetro",
       "https://www.facebook.com/ropavejero.retro/",
       "https://twitter.com/RopavejeroRetro/"
-    ]
+    ],
+    "location": {
+      "@type": "Store",
+      "name": "DoubleImpactStore",
+      "alternateName": "@DoubleImpactStore",
+      "url": "https://doubleimpactstore.cl/",
+      "description": "Local comercial de videojuegos retro formado por @Ropavejero.Retro y @NekketsuStore en Persa Bio Bio. Está cerca de Víctor Manuel, frente al McDonald's, y a pasos del Metro Bio Bio L6.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Bio Bio 654, Local 58, Galpón Nuevo Bio Bio",
+        "addressLocality": "Santiago",
+        "addressRegion": "Región Metropolitana",
+        "addressCountry": "CL"
+      },
+      "openingHours": "Sa-Su 11:00-18:00",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["https://schema.org/Saturday", "https://schema.org/Sunday"],
+        "opens": "11:00",
+        "closes": "18:00",
+        "description": "También atiende festivos."
+      }
+    }
   }
 }
