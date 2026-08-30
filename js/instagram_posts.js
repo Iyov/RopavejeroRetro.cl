@@ -1,5 +1,5 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-08-30 02:06:08
+// Última actualización: 2026-08-30 15:38:04
 
 const INSTAGRAM_POSTS_DATA = [
     {
@@ -30,7 +30,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DcVAzjolds4/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-22",
-        "likes": 33
+        "likes": 34
     },
     {
         "id": "ig_auto_18091198223390424",
@@ -50,7 +50,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DcU1wpRlYXX/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-22",
-        "likes": 23
+        "likes": 24
     },
     {
         "id": "ig_auto_17933591445366264",
@@ -110,7 +110,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DcUurX-FZQy/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-22",
-        "likes": 30
+        "likes": 31
     },
     {
         "id": "ig_auto_17985411237104572",
@@ -1390,7 +1390,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DPU_RqCjJYG/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2025-10-03",
-        "likes": 5868
+        "likes": 5867
     },
     {
         "id": "ig_auto_18320707375210014",
