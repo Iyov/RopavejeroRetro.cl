@@ -1,5 +1,5 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-09-01 02:22:55
+// Última actualización: 2026-09-01 15:41:08
 
 const INSTAGRAM_POSTS_DATA = [
     {
@@ -30,7 +30,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DcVAzjolds4/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-22",
-        "likes": 34
+        "likes": 35
     },
     {
         "id": "ig_auto_18091198223390424",
@@ -645,7 +645,7 @@ const INSTAGRAM_POSTS_DATA = [
     {
         "id": "ig_auto_18109715416864353",
         "image": "img/IG_18109715416864353.jpeg",
-        "title": "[✅] 4314 GTA IV (MM-C/M) [X360] $10K",
+        "title": "[❌️] 4314 GTA IV (MM-C/M) [X360] $10K",
         "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nMM: Sin Manual\nC/M: Con Mapa",
         "link": "https://www.instagram.com/p/DZgsigoldkj/",
         "media_type": "CAROUSEL_ALBUM",
@@ -836,7 +836,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_18074451332306748",
         "image": "img/IG_18074451332306748.jpeg",
         "title": "Nintendo NES | 29/May/26",
-        "description": "\n[✅] 4233 Eliminator Cleaning Kit [NES] $10K\n[❌] 4234 Snake Rattle'n Roll [NES] $10K\n[❌] 4235 RBI Baseball (c/Dust Cover) [NES] $10K\n[❌] 4236 Marble Madness [NES] $10K\n[❌] 4237 Bo Jackson Baseball [NES] $10K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE",
+        "description": "\n[❌️] 4233 Eliminator Cleaning Kit [NES] $10K\n[❌] 4234 Snake Rattle'n Roll [NES] $10K\n[❌] 4235 RBI Baseball (c/Dust Cover) [NES] $10K\n[❌] 4236 Marble Madness [NES] $10K\n[❌] 4237 Bo Jackson Baseball [NES] $10K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE",
         "link": "https://www.instagram.com/p/DY8dyDwFR_n/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-05-30",
@@ -1810,7 +1810,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/C-oZpyjtSUE/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2024-08-14",
-        "likes": 41
+        "likes": 40
     },
     {
         "id": "ig_auto_17912145200968221",
