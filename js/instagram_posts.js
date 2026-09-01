@@ -1,5 +1,5 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-08-31 18:20:42
+// Última actualización: 2026-09-01 02:22:55
 
 const INSTAGRAM_POSTS_DATA = [
     {
@@ -195,7 +195,7 @@ const INSTAGRAM_POSTS_DATA = [
     {
         "id": "ig_auto_18208601029357992",
         "image": "img/IG_18208601029357992.jpeg",
-        "title": "[✅] 4403 007 Tomorrow Never Dies (BL-CIB) [PS1] $18K",
+        "title": "[❌] 4403 007 Tomorrow Never Dies (BL-CIB) [PS1] $18K",
         "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nCIB: Caja, Juego, Manual",
         "link": "https://www.instagram.com/p/DbuNzngFVdw/",
         "media_type": "CAROUSEL_ALBUM",
@@ -1390,7 +1390,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DPU_RqCjJYG/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2025-10-03",
-        "likes": 5866
+        "likes": 5865
     },
     {
         "id": "ig_auto_18320707375210014",
