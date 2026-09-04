@@ -1,7 +1,17 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-09-03 15:23:35
+// Última actualización: 2026-09-04 01:44:39
 
 const INSTAGRAM_POSTS_DATA = [
+    {
+        "id": "ig_auto_17965170821962909",
+        "image": "img/IG_17965170821962909.jpeg",
+        "title": "Actividades Próximo Fin de Semana de Septiembre 2026:",
+        "description": "\nSáb 05/Sept: Grayskull Fest\n📍 Liceo Aplicación\n📌 Av. Ricardo Cumming 21, Santiago\n🚇 Metro República L1\n🕒 De 11:00 a 18:00 hrs\n\nDom 06/Sept: Mega Feria Friki\n📍 Parque Bicentenario de Cerrillos\n📌 Av. Pedro Aguirre Cerda 6100, Cerrillos\n🚇 Metro Cerrillos L6\n🕒 De 12:00 a 19:00 hrs\n\n🎟 Entrada liberada\n🎮 Llevaremos nuestros juegos\n¡Nos vemos!\n\n#GrayskullFest #FeriaFriki",
+        "link": "https://www.instagram.com/p/Dc1kDICGMM_/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-09-03",
+        "likes": 16
+    },
     {
         "id": "ig_auto_18100600127219278",
         "image": "img/IG_18100600127219278.jpeg",
@@ -60,7 +70,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DcUxkIiFbGc/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-22",
-        "likes": 30
+        "likes": 31
     },
     {
         "id": "ig_auto_18093614240532887",
@@ -90,7 +100,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DcUv763lYob/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-22",
-        "likes": 14
+        "likes": 15
     },
     {
         "id": "ig_auto_18089150498238111",
@@ -110,7 +120,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DcUurX-FZQy/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-22",
-        "likes": 31
+        "likes": 32
     },
     {
         "id": "ig_auto_17985411237104572",
