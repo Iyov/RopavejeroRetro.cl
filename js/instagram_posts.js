@@ -1,7 +1,17 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-09-08 01:48:06
+// Última actualización: 2026-09-08 15:33:09
 
 const INSTAGRAM_POSTS_DATA = [
+    {
+        "id": "ig_auto_18126163030799246",
+        "image": "img/IG_18126163030799246.jpeg",
+        "title": "Actividades Próximo Fin de Semana de Septiembre 2026:",
+        "description": "\nSáb 12/Sept: Feria Retro Rancagua\n📍 Play and Coffee Restobar (@playandcoffeerancagua)\n📌 San Martín 145, Rancagua\n➡ Puesto Nº9\n\nDom 13/Sept: Feria Retro Fonda\n📍 Centro Cultural Rojas Magallanes\n📌 Estados Unidos 8741, La Florida\n🚇 Metro Rojas Magallanes, L4\n➡ Stand Nº6\n\n🕒 De 12:00 a 19:00 hrs\n🎟 Entrada liberada\n🎮 Llevaremos nuestros juegos\n¡Nos vemos!\n\n#FeriaRetro",
+        "link": "https://www.instagram.com/p/DdAi0goFVXo/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-09-08",
+        "likes": 20
+    },
     {
         "id": "ig_auto_17965170821962909",
         "image": "img/IG_17965170821962909.jpeg",
@@ -10,7 +20,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/Dc1kDICGMM_/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-09-03",
-        "likes": 30
+        "likes": 31
     },
     {
         "id": "ig_auto_18100600127219278",
@@ -1410,7 +1420,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DPU8g8JjE5g/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2025-10-03",
-        "likes": 306
+        "likes": 307
     },
     {
         "id": "ig_auto_17895332295180674",
