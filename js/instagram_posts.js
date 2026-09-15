@@ -1,5 +1,5 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-09-15 02:12:19
+// Última actualización: 2026-09-15 15:50:00
 
 const INSTAGRAM_POSTS_DATA = [
     {
@@ -455,7 +455,7 @@ const INSTAGRAM_POSTS_DATA = [
     {
         "id": "ig_auto_18070388459415230",
         "image": "img/IG_18070388459415230.jpeg",
-        "title": "[✅] 4375 Lego Star Wars III The Clone Wars (MM) [X360] $8K",
+        "title": "[❌] 4375 Lego Star Wars III The Clone Wars (MM) [X360] $8K",
         "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nMM: Sin Manual",
         "link": "https://www.instagram.com/p/DbMpZ40lY-i/",
         "media_type": "CAROUSEL_ALBUM",
@@ -645,7 +645,7 @@ const INSTAGRAM_POSTS_DATA = [
     {
         "id": "ig_auto_17940876870238887",
         "image": "img/IG_17940876870238887.jpeg",
-        "title": "[✅] 4318 Assassin's Creed II (MM) [X360] $8K",
+        "title": "[❌] 4318 Assassin's Creed II (MM) [X360] $8K",
         "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nMM: Sin Manual",
         "link": "https://www.instagram.com/p/DZgutcTFQLv/",
         "media_type": "CAROUSEL_ALBUM",
@@ -1006,7 +1006,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_18089193371204319",
         "image": "img/IG_18089193371204319.jpeg",
         "title": "Nintendo Wii | 30/Abr/26",
-        "description": "\n[❌] 4139\tWWE All Stars (CIB) [Wii] $15K\n[❌] 4140\tTransformers Revenge of the Fallen (CIB) [Wii] $12K\n[✅] 4141\tPES 2013 (MM) [Wii] $6K\n[❌] 4142\tPES 2011 (CIB) [Wii] $7K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual\nMM: Sin Manual",
+        "description": "\n[❌] 4139\tWWE All Stars (CIB) [Wii] $15K\n[❌] 4140\tTransformers Revenge of the Fallen (CIB) [Wii] $12K\n[❌] 4141\tPES 2013 (MM) [Wii] $6K\n[❌] 4142\tPES 2011 (CIB) [Wii] $7K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual\nMM: Sin Manual",
         "link": "https://www.instagram.com/p/DXxqucCFZ_S/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-05-01",
@@ -1036,7 +1036,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_17871784602663700",
         "image": "img/IG_17871784602663700.jpeg",
         "title": "Manuales Varios | 16/Abr/26",
-        "description": "\n[❌] 4100\tPokemon TCG 2004 (M) [TCG (M)] $3K\n[❌] 4101\tTetris (M) [NES (M)] $5K\n[❌] 4102\tYoshi's Cookie (M) [NES (M)] $5K\n[✅] 4103\tSuper Mario Bros Deluxe (M-DA) [GBC (M)] $8K\n[✅] 4104\tMario and Luigi Superstar Saga (M) [GBA (M)] $12K\n[✅] 4105\tGTA V (M) [PS4 (M)] $2K\n[✅] 4106\tPES 2011 (M) [PC (M)] $2K\n[❌] 4107\tCyberpunk 2077 (M) [PC (M)] $3K\n[✅] 4108\tGamecube Inserto blanco (I) [GC (M)] $3K\n[✅] 4109\tGamecube Inserto blanco (I) [GC (M)] $3K\n[✅] 4110\tGamecube Inserto blanco (I) [GC (M)] $3K\n[✅] 4111\tGamecube Inserto blanco (I) [GC (M)] $3K\n[✅] 4112\tGamecube Inserto blanco (I) [GC (M)] $3K\n[✅] 4113\tGamecube Inserto blanco (I) [GC (M)] $3K\n[✅] 4114\tGamecube Inserto blanco (I) [GC (M)] $3K\n[✅] 4115\tGamecube Inserto blanco (I) [GC (M)] $3K\n[❌] 4116\tSuper Mario World (M) [SNES (M)] $15K\n[✅] 4117\tTetris 2 (M) [SNES (M)] $8K\n[✅] 4118\tTop Gear Rally (M) [N64 (M)] $12K\n[✅] 4119\tTop Spin (M) [PS2 (M)] $3K\n[❌] 4120\tNaruto Ultimate Ninja (M) [PS2 (M)] $4K\n[✅] 4121\tNFS Undercover (M) [PS2 (M)] $3K\n[✅] 4122\tOnimusha Blade Warriors (M) [PS2 (M)] $3K\n[✅] 4123\tDuel Masters (M-DA) [PS2 (M)] $1K\n[✅] 4124\tTurok Evolution (M) [PS2 (M)] $3K\n[✅] 4125\tATV Offroad Fury 2 (M) [PS2 (M)] $2K\n[✅] 4126\tPoker (M) [PS2 (M)] $1K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nM: Manual\nDA: Daño de Agua\nI: Inserto",
+        "description": "\n[❌] 4100\tPokemon TCG 2004 (M) [TCG (M)] $3K\n[❌] 4101\tTetris (M) [NES (M)] $5K\n[❌] 4102\tYoshi's Cookie (M) [NES (M)] $5K\n[✅] 4103\tSuper Mario Bros Deluxe (M-DA) [GBC (M)] $8K\n[✅] 4104\tMario and Luigi Superstar Saga (M) [GBA (M)] $12K\n[✅] 4105\tGTA V (M) [PS4 (M)] $2K\n[✅] 4106\tPES 2011 (M) [PC (M)] $2K\n[❌] 4107\tCyberpunk 2077 (M) [PC (M)] $3K\n[❌] 4108\tGamecube Inserto blanco (I) [GC (M)] $3K\n[❌] 4109\tGamecube Inserto blanco (I) [GC (M)] $3K\n[❌] 4110\tGamecube Inserto blanco (I) [GC (M)] $3K\n[❌] 4111\tGamecube Inserto blanco (I) [GC (M)] $3K\n[❌] 4112\tGamecube Inserto blanco (I) [GC (M)] $3K\n[❌] 4113\tGamecube Inserto blanco (I) [GC (M)] $3K\n[❌] 4114\tGamecube Inserto blanco (I) [GC (M)] $3K\n[❌] 4115\tGamecube Inserto blanco (I) [GC (M)] $3K\n[❌] 4116\tSuper Mario World (M) [SNES (M)] $15K\n[✅] 4117\tTetris 2 (M) [SNES (M)] $8K\n[✅] 4118\tTop Gear Rally (M) [N64 (M)] $12K\n[✅] 4119\tTop Spin (M) [PS2 (M)] $3K\n[❌] 4120\tNaruto Ultimate Ninja (M) [PS2 (M)] $4K\n[✅] 4121\tNFS Undercover (M) [PS2 (M)] $3K\n[✅] 4122\tOnimusha Blade Warriors (M) [PS2 (M)] $3K\n[✅] 4123\tDuel Masters (M-DA) [PS2 (M)] $1K\n[✅] 4124\tTurok Evolution (M) [PS2 (M)] $3K\n[✅] 4125\tATV Offroad Fury 2 (M) [PS2 (M)] $2K\n[✅] 4126\tPoker (M) [PS2 (M)] $1K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nM: Manual\nDA: Daño de Agua\nI: Inserto",
         "link": "https://www.instagram.com/p/DXN6-p-lS50/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-04-17",
@@ -1410,7 +1410,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DPU_RqCjJYG/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2025-10-03",
-        "likes": 5861
+        "likes": 5860
     },
     {
         "id": "ig_auto_18320707375210014",
@@ -1616,7 +1616,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_17974849583820214",
         "image": "img/IG_17974849583820214.jpeg",
         "title": "Películas DVD | 21/Feb/25",
-        "description": "\n[✅] 2718\tLa Profecia del 11-11-11 [DVD] $2K\n[✅] 2719\tApocalypto [DVD] $2K\n[❌] 2720\tSherlock Holmes [DVD] $2K\n[❌] 2721\tEvangelion [DVD] $2K\n[✅] 2722\tNeon Genesis Evangelion [DVD] $2K\n[❌] 2723\tToy Story 3 [DVD] $2K\n[✅] 2724\tLa máquina de hacer tareas [DVD] $2K\n[✅] 2725\tCaballeros del Zodiaco [DVD] $2K\n[❌] 2726\tLooney Tunes [DVD] $2K\n[❌] 2727\tEl Correcaminos [DVD] $2K\n[✅] 2728\tRobots [DVD] $2K\n[✅] 2729\tCars Disparates de Mate [DVD] $2K\n[✅] 2730\tUltimate Spiderman [DVD] $2K\n[❌] 2731\tComo entrenar a tu dragón 2 [DVD] $2K\n[❌] 2732\tComo entrenar a tu dragón 1 [DVD] $2K\n[✅] 2733\tComo entrenar a tu dragón 1 [DVD] $2K\n[✅] 2734\tLos 4 fantasticos [DVD] $2K\n[✅] 2735\tLego Batman La película [DVD] $2K\n[✅] 2736\tMi villano favorito [DVD] $2K\n[❌] 2737\tDream Theater Metropolis 2000 [DVD] $3K\n[❌] 2738\tLos Atletas de la Risa 1992 [DVD] $3K\n[❌] 2739\tLos Atletas de la Risa 1997 [DVD] $3K\n[❌] 2740\tLos Atletas de la Risa 1998 [DVD] $3K\n[❌] 2741\tEl Chavo del 8 vol 3 (sellado) [DVD] $3K\n[❌] 2742\tEl Chavo del 8 Eso, eso eso [DVD] $2K\n[✅] 2743\tMegamente [DVD] $2K\n[✅] 2744\tBuscando a Nemo [DVD] $2K\n[❌] 2745\tValiente [DVD] $2K\n[❌] 2746\tLa Era del Hielo 2 [DVD] $2K\n[✅] 2747\tBarbie La Magia de Pegaso [DVD] $3K\n[❌] 2748\tLa Huerfana [DVD] $3K\n[❌] 2749\tTrainspotting [DVD] $3K\n[❌] 2750\tTitanic [DVD] $3K\n[❌] 2751\tThe Wrestler [DVD] $4K\n[❌] 2752\tYo Robot [DVD] $4K\n[❌] 2753\tMatilda [DVD] $4K\n[✅] 2754\tRush Hour 2 [DVD] $4K\n[✅] 2755\tRush Hour 3 [DVD] $4K\n[❌] 2756\tThe Mummy (La Momia) [DVD] $4K\n[✅] 2757\tScary Movie 2 [DVD] $5K\n[❌] 2758\t8 Mile [DVD] $5K\n[❌] 2759\tUnderworld [DVD] $4K\n[❌] 2760\tSeñor de los Anillos [DVD] $5K\n[❌] 2761\tVikings (1º Season) [BlueRay] $8K\n[❌] 2762\tThe Lost Boys [DVD] $8K\n[❌] 2763\tFast Furious [DVD] $6K\n[✅] 2764\t2 Fast 2 Furious [DVD] $6K\n[✅] 2765\tBlade [DVD] $8K\n[❌] 2766\tInception [BlueRay] $8K\n[✅] 2767\tWithout a Trace (S01, solo disco 2) [DVD] $2K\n[✅] 2768\tWithout a Trace (S02) [DVD] $4K\n[❌] 2769\tX-Men Trilogy [DVD] $15K\n[❌] 2770\tPrison Break 1era Temp [DVD] $4K\n[✅] 2771\tLos Mundiales de Futbol Col [DVD] $8K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE",
+        "description": "\n[✅] 2718\tLa Profecia del 11-11-11 [DVD] $2K\n[✅] 2719\tApocalypto [DVD] $2K\n[❌] 2720\tSherlock Holmes [DVD] $2K\n[❌] 2721\tEvangelion [DVD] $2K\n[✅] 2722\tNeon Genesis Evangelion [DVD] $2K\n[❌] 2723\tToy Story 3 [DVD] $2K\n[✅] 2724\tLa máquina de hacer tareas [DVD] $2K\n[✅] 2725\tCaballeros del Zodiaco [DVD] $2K\n[❌] 2726\tLooney Tunes [DVD] $2K\n[❌] 2727\tEl Correcaminos [DVD] $2K\n[✅] 2728\tRobots [DVD] $2K\n[✅] 2729\tCars Disparates de Mate [DVD] $2K\n[✅] 2730\tUltimate Spiderman [DVD] $2K\n[❌] 2731\tComo entrenar a tu dragón 2 [DVD] $2K\n[❌] 2732\tComo entrenar a tu dragón 1 [DVD] $2K\n[✅] 2733\tComo entrenar a tu dragón 1 [DVD] $2K\n[✅] 2734\tLos 4 fantasticos [DVD] $2K\n[✅] 2735\tLego Batman La película [DVD] $2K\n[✅] 2736\tMi villano favorito [DVD] $2K\n[❌] 2737\tDream Theater Metropolis 2000 [DVD] $3K\n[❌] 2738\tLos Atletas de la Risa 1992 [DVD] $3K\n[❌] 2739\tLos Atletas de la Risa 1997 [DVD] $3K\n[❌] 2740\tLos Atletas de la Risa 1998 [DVD] $3K\n[❌] 2741\tEl Chavo del 8 vol 3 (sellado) [DVD] $3K\n[❌] 2742\tEl Chavo del 8 Eso, eso eso [DVD] $2K\n[✅] 2743\tMegamente [DVD] $2K\n[✅] 2744\tBuscando a Nemo [DVD] $2K\n[❌] 2745\tValiente [DVD] $2K\n[❌] 2746\tLa Era del Hielo 2 [DVD] $2K\n[✅] 2747\tBarbie La Magia de Pegaso [DVD] $3K\n[❌] 2748\tLa Huerfana [DVD] $3K\n[❌] 2749\tTrainspotting [DVD] $3K\n[❌] 2750\tTitanic [DVD] $3K\n[❌] 2751\tThe Wrestler [DVD] $4K\n[❌] 2752\tYo Robot [DVD] $4K\n[❌] 2753\tMatilda [DVD] $4K\n[✅] 2754\tRush Hour 2 [DVD] $4K\n[✅] 2755\tRush Hour 3 [DVD] $4K\n[❌] 2756\tThe Mummy (La Momia) [DVD] $4K\n[✅] 2757\tScary Movie 2 [DVD] $5K\n[❌] 2758\t8 Mile [DVD] $5K\n[❌] 2759\tUnderworld [DVD] $4K\n[❌] 2760\tSeñor de los Anillos [DVD] $5K\n[❌] 2761\tVikings (1º Season) [BlueRay] $8K\n[❌] 2762\tThe Lost Boys [DVD] $8K\n[❌] 2763\tFast Furious [DVD] $6K\n[❌] 2764\t2 Fast 2 Furious [DVD] $6K\n[✅] 2765\tBlade [DVD] $8K\n[❌] 2766\tInception [BlueRay] $8K\n[✅] 2767\tWithout a Trace (S01, solo disco 2) [DVD] $2K\n[✅] 2768\tWithout a Trace (S02) [DVD] $4K\n[❌] 2769\tX-Men Trilogy [DVD] $15K\n[❌] 2770\tPrison Break 1era Temp [DVD] $4K\n[✅] 2771\tLos Mundiales de Futbol Col [DVD] $8K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE",
         "link": "https://www.instagram.com/p/DGWwZl5MxZQ/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2025-02-22",
