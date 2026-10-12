@@ -317,7 +317,7 @@ Todos nuestros productos incluyen 30 días de garantía por defectos de funciona
 El servicio técnico incluye diagnóstico y reparación de consolas retro (limpieza de conectores, cambio de condensadores, reemplazo de lector óptico, entre otros). El pulido de discos elimina rayaduras superficiales de discos ópticos (PS1, PS2, Xbox, GameCube, Wii, etc.) restaurando su capacidad de lectura. Contáctanos por WhatsApp o Instagram para presupuesto.
 
 ### ¿Puedo ver los productos antes de comprar?
-Actualmente no tenemos showroom físico, pero puedes agendar una cita para ver productos específicos en nuestras oficinas en Santiago. También publicamos videos demostrativos de todos nuestros productos en Instagram y YouTube.
+Sí. Puedes visitarnos en nuestro local @DoubleImpactStore, en el Persa Bio Bio: Bio Bio 654, Local 58, Galpón Nuevo Bio Bio, a pasos del Metro Bio Bio L6. Atendemos sábados, domingos y festivos de 11:00 a 18:00 hrs. Si buscas un producto específico, escríbenos antes por Instagram o WhatsApp para confirmar que esté en el local. También publicamos videos demostrativos de nuestros productos en Instagram y YouTube.
 
 ---
 
@@ -432,9 +432,11 @@ El detalle de arquitectura, orden de carga de módulos y precauciones está en [
 
 #### Corregido
 - ✅ `productos.html` no cargaba el catálogo tras la refactorización: faltaba incluir los módulos de `js/modules/`.
+- ✅ La FAQ "¿Puedo ver los productos antes de comprar?" ahora indica el local del Persa Bio Bio en vez de decir que no hay showroom.
+- ✅ Los posts de Instagram sincronizados por el bot ahora se despliegan automáticamente.
 
 #### Cambiado
-- ✅ Query strings actualizados a `v=2026-08-26_1`.
+- ✅ Query strings actualizados a `v=2026-10-12_1`.
 
 ### Versión: v2.1.0 | Agosto 2026
 

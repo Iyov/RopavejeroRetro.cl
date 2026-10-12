@@ -19,13 +19,19 @@ Memoria del proyecto: acuerdos y decisiones tomados con Francisco que no se dedu
 - **Memoria consolidada aquí (2026-10-12):** todo lo que se vaya acordando se registra en este archivo, para que esté disponible para cualquier agente y no solo en la memoria privada de una herramienta.
 - **Documentos históricos (2026-10-12):** los documentos antiguos de `docs/` y `SECURITY.md` no se reescriben; se les agrega una nota de vigencia y `docs/README.md` indica cuáles siguen siendo válidos.
 - **Versión del changelog (2026-10-12):** los cambios posteriores a la 2.1.0 están en `CHANGELOG.md` bajo "[Sin publicar]". El número de versión lo decide Francisco; hasta entonces no se toca el badge de versión de `README.md`.
-- **Sin SDD (2026-10-12):** no existe ninguna especificación (SDD) en el repositorio y no se creó una a partir del código. Se escribirá cuando haya una funcionalidad concreta que especificar.
+
+## Trabajo acordado para más adelante
+
+Francisco lo pedirá cuando corresponda; no empezarlo antes.
+
+- **Rediseñar el anuncio del local del Persa Bio Bio (2026-10-12).** El sitio debe comunicar que hay un nuevo local (@DoubleImpactStore, Persa Bio Bio), pero la implementación actual (agosto de 2026: bloque `store-announcement` y textos repartidos por el sitio) quedó fea y a Francisco no le gustó. Hay que rehacerla mejor.
+- **Agente especialista en front-end (2026-10-12).** Se agregará un agente dedicado al front-end; será el encargado del rediseño anterior.
+- **SDD (2026-10-12).** Se escribirá una especificación bien hecha para que las funcionalidades nuevas y los arreglos se hagan de forma profesional, especificando antes de implementar. Reemplaza la decisión anterior de "sin SDD".
 
 ## Pendientes por decidir
 
 Inconsistencias detectadas el 2026-10-12 al revisar el proyecto completo. Están documentadas pero sin corregir. Al resolver una, mover aquí la decisión tomada y registrar el cambio en `CHANGELOG.md`.
 
-3. **La FAQ contradice al resto del sitio.** `faq-answer-5` (en `index.html` y `js/modules/ui.js`, ES y EN) dice que no hay showroom físico, mientras el sitio anuncia el local @DoubleImpactStore en Persa Bio Bio. El mismo texto está copiado en la FAQ de `README.md`.
 4. **`sitemap.xml` lista páginas `noindex`:** `old.html`, `ps3` y las dos páginas de seguridad.
 5. **Los headers de seguridad de `.htaccess` no aplican en GitHub Pages.** La única CSP efectiva es la del `<meta>` que llevan `index.html`, `productos.html`, `404.html` y las dos páginas de seguridad; `old.html` y `ps3.html` no tienen CSP. Falta decidir si `.htaccess` y `.htaccess.development` se conservan.
 
@@ -33,3 +39,4 @@ Inconsistencias detectadas el 2026-10-12 al revisar el proyecto completo. Están
 
 1. **Los posts de Instagram no se desplegaban solos (resuelto 2026-10-12).** Los commits de `github-actions[bot]` no disparan `deploy-pages.yml`; había 32 sin publicar desde el 2026-09-04. Decisión: `update_instagram.yml` lanza el despliegue con `gh workflow run deploy-pages.yml` después de pushear, solo cuando hubo cambios. Se descartó disparar el despliegue con `workflow_run` porque desplegaría cada 12 horas aunque no hubiera posts nuevos. Falta confirmarlo en la primera ejecución del bot que traiga cambios.
 2. **`npm run build` vacía `js/app.min.js` (descartado 2026-10-12: era un falso hallazgo).** `js/app.js` no está vacío: pesa 7.717 bytes en una sola línea, y se leyó mal un conteo de 0 líneas como 0 bytes. Minificarlo reproduce `js/app.min.js` byte a byte, así que no había nada que corregir en el código; solo se retiró la advertencia de `CLAUDE.md`, `AGENTS.md` y `README.md`. Tras este error se auditó el resto de lo documentado ese día y se corrigieron tres afirmaciones más (CSP "en cada HTML", `generate_cache_version.py` "no modifica nada" y el motivo por el que hay que cambiar `CACHE_VERSION`).
+3. **La FAQ contradecía al resto del sitio (resuelto 2026-10-12).** `faq-answer-5` decía que no hay showroom físico. Decisión de Francisco: debe indicar el local del Persa Bio Bio. Se cambió el texto en `index.html`, `js/modules/ui.js` (ES y EN) y la FAQ de `README.md`, usando la dirección y el horario que el sitio ya publicaba (sábados, domingos y festivos, 11:00 a 18:00). Es solo una corrección de texto: el rediseño de cómo se anuncia el local está en "Trabajo acordado para más adelante".

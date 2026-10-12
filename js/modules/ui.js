@@ -328,7 +328,7 @@ const translations = {
         'faq-question-4': '¿Ofrecen garantía en sus productos?',
         'faq-answer-4': 'Todos nuestros productos incluyen 30 días de garantía por defectos de funcionamiento. Para consolas reacondicionadas por nosotros, ofrecemos 90 días de garantía. La garantía cubre problemas técnicos pero no daños físicos por mal uso.',
         'faq-question-5': '¿Puedo ver los productos antes de comprar?',
-        'faq-answer-5': 'Actualmente no tenemos showroom físico, pero puedes agendar una cita para ver productos específicos en nuestras oficinas en Santiago. También publicamos videos demostrativos de todos nuestros productos en Instagram y YouTube.',
+        'faq-answer-5': 'Sí. Puedes visitarnos en nuestro local @DoubleImpactStore, en el Persa Bio Bio: Bio Bio 654, Local 58, Galpón Nuevo Bio Bio, a pasos del Metro Bio Bio L6. Atendemos sábados, domingos y festivos de 11:00 a 18:00 hrs. Si buscas un producto específico, escríbenos antes por Instagram o WhatsApp para confirmar que esté en el local. También publicamos videos demostrativos de nuestros productos en Instagram y YouTube.',
         'faq-question-6': '¿En qué consiste el servicio técnico y el pulido de discos?',
         'faq-answer-6': 'El servicio técnico incluye diagnóstico y reparación de consolas retro (limpieza de conectores, cambio de condensadores, reemplazo de lector óptico, entre otros). El pulido de discos elimina rayaduras superficiales de discos ópticos (PS1, PS2, Xbox, GameCube, Wii, etc.) restaurando su capacidad de lectura. Contáctanos por WhatsApp o Instagram para presupuesto.',
         
@@ -512,7 +512,7 @@ const translations = {
         'faq-question-4': 'Do you offer warranty on your products?',
         'faq-answer-4': 'All our products include 30 days warranty for operational defects. For consoles refurbished by us, we offer 90 days warranty. The warranty covers technical problems but not physical damage from misuse.',
         'faq-question-5': 'Can I see the products before buying?',
-        'faq-answer-5': 'We currently do not have a physical showroom, but you can schedule an appointment to see specific products at our offices in Santiago. We also publish demonstration videos of all our products on Instagram and YouTube.',
+        'faq-answer-5': 'Yes. You can visit us at our @DoubleImpactStore shop in Persa Bio Bio: Bio Bio 654, Local 58, Galpón Nuevo Bio Bio, steps away from Metro Bio Bio L6. We are open Saturdays, Sundays and holidays from 11:00 to 18:00. If you are looking for a specific product, message us first on Instagram or WhatsApp to confirm it is at the shop. We also publish demonstration videos of our products on Instagram and YouTube.',
         'faq-question-6': 'What does the repair service and disc polishing consist of?',
         'faq-answer-6': 'The repair service includes diagnosis and repair of retro consoles (connector cleaning, capacitor replacement, optical drive replacement, etc.). Disc polishing removes surface scratches from optical discs (PS1, PS2, Xbox, GameCube, Wii, etc.) restoring their readability. Contact us via WhatsApp or Instagram for a quote.',
         
