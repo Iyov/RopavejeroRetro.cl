@@ -7,3 +7,4 @@ El flujo completo está en [`../README.md`](../README.md). En resumen: se especi
 | Fecha | Cambio | Estado |
 |-------|--------|--------|
 | 2026-10-12 | [Línea base de especificación y tests](2026-10-12-linea-base-tests.md) | Entregado |
+| 2026-10-12 | [Arreglos del catálogo: búsqueda, filtro de plataformas y nombres con "&"](2026-10-12-arreglos-catalogo.md) | Entregado |

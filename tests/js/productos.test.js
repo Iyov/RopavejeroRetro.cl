@@ -9,6 +9,12 @@ const { HOJA_URL, PRODUCTOS, csvHoja, muchosProductos } = require('./helpers/dat
 
 const URL_CATALOGO = 'https://ropavejeroretro.cl/productos';
 
+// Claves vigentes del caché de productos y las de la versión anterior (ver specs/base/02-cache-productos.md)
+const CLAVE_DATOS = 'ropavejero_products_cache_v1_1_2';
+const CLAVE_TIEMPO = 'ropavejero_cache_timestamp_v1_1_2';
+const CLAVE_DATOS_ANTERIOR = 'ropavejero_products_cache_v1_1_1';
+const CLAVE_TIEMPO_ANTERIOR = 'ropavejero_cache_timestamp_v1_1_1';
+
 let pagina;
 afterEach(async () => { if (pagina) await pagina.cerrar(); pagina = null; });
 
@@ -81,6 +87,12 @@ function marcarPlataforma(plataforma, marcada = true) {
 
 const plataformasMarcadas = () => $$('#platformDropdown input[type="checkbox"]').filter(c => c.checked).map(c => (c.id === 'platform-all' ? 'all' : c.value));
 const etiquetas = () => $$('#platformDisplay .platform-tag').map(tag => limpio(tag.textContent));
+
+// Errores de JavaScript sin capturar que registró la página (excepciones en eventos y temporizadores)
+const erroresJs = () => pagina.errores.map(error => (error && error.message) || String(error));
+// Valor de un dato del modal de detalles, por su etiqueta
+const detalleModal = etiqueta => $$('#productModalContent .detail-item')
+    .find(item => item.querySelector('label').textContent === etiqueta).querySelector('span').textContent;
 
 // ---------- Estado en la URL ----------
 
@@ -188,18 +200,38 @@ test('[PRD-004] el CSV de la hoja se convierte en productos válidos y descarta 
 });
 
 test('[PRD-005] con un caché vigente el catálogo se muestra sin consultar la hoja', async () => {
+    // El caché guarda el texto tal como viene en la hoja, sin escapar
     const enCache = [
-        { Num: 1, Product: 'Desde caché', Platform: 'NES', Sale: '$1', Neto: '$1.000', Stock: '1', Link: '', Sold: 0 }
+        { Num: 1, Product: 'Desde caché & Cía <3', Platform: 'NES', Sale: '$1', Neto: '$1.000', Stock: '1', Link: '', Sold: 0 }
     ];
     await abrirCatalogo({
         almacenamiento: {
-            ropavejero_products_cache_v1_1_1: JSON.stringify(enCache),
-            ropavejero_cache_timestamp_v1_1_1: String(Date.now())
+            [CLAVE_DATOS]: JSON.stringify(enCache),
+            [CLAVE_TIEMPO]: String(Date.now())
         }
     });
 
-    assert.deepEqual(filas().map(f => f.producto), ['Desde caché']);
+    assert.deepEqual(filas().map(f => f.producto), ['Desde caché & Cía <3']);
+    assert.equal(limpio(tarjetas()[0].querySelector('.product-card-title').textContent), 'Desde caché & Cía <3');
     assert.equal(cargasHoja(), 0);
+});
+
+test('[PRD-005] un caché guardado con la versión anterior de las claves no se usa: se consulta la hoja', async () => {
+    // Forma antigua: el texto se guardaba ya escapado
+    const formaAntigua = [
+        { Num: 1, Product: 'Ratchet &amp; Clank', Platform: 'PS2', Sale: '$1', Neto: '$1.000', Stock: '1', Link: '', Sold: 0 }
+    ];
+    await abrirCatalogo({
+        almacenamiento: {
+            [CLAVE_DATOS_ANTERIOR]: JSON.stringify(formaAntigua),
+            [CLAVE_TIEMPO_ANTERIOR]: String(Date.now())
+        }
+    });
+
+    assert.equal(cargasHoja(), 1);
+    assert.deepEqual(nums(), [23, 50, 101, 102, 200, 300]);
+    assert.equal(pagina.window.localStorage.getItem(CLAVE_DATOS_ANTERIOR), null);
+    assert.equal(pagina.window.localStorage.getItem(CLAVE_TIEMPO_ANTERIOR), null);
 });
 
 test('[PRD-006] sin caché los productos se piden a la hoja de Google, se muestran y quedan en caché', async () => {
@@ -211,8 +243,26 @@ test('[PRD-006] sin caché los productos se piden a la hoja de Google, se muestr
     assert.match(peticion.url, /tqx=out:csv/);
     assert.equal(peticion.opciones.method, 'GET');
     assert.equal(nums().length, PRODUCTOS.length);
-    assert.deepEqual(JSON.parse(w.localStorage.getItem('ropavejero_products_cache_v1_1_1')).map(p => p.Num), [23, 50, 101, 102, 200, 300]);
-    assert.ok(w.localStorage.getItem('ropavejero_cache_timestamp_v1_1_1'));
+    const guardado = w.localStorage.getItem(CLAVE_DATOS);
+    assert.ok(guardado, `los productos quedan en ${CLAVE_DATOS}`);
+    assert.deepEqual(JSON.parse(guardado).map(p => p.Num), [23, 50, 101, 102, 200, 300]);
+    assert.ok(w.localStorage.getItem(CLAVE_TIEMPO));
+});
+
+test('[PRD-006] lo que queda en caché es el texto tal como viene en la hoja, sin escapar', async () => {
+    await abrirCatalogo({
+        productos: [
+            { ...PRODUCTOS[2], num: 1, producto: 'Ratchet & Clank', plataforma: 'PS2' },
+            { ...PRODUCTOS[2], num: 2, producto: 'Juego <3', plataforma: 'PS2' }
+        ]
+    });
+
+    const guardado = pagina.window.localStorage.getItem(CLAVE_DATOS);
+    assert.ok(guardado, `los productos quedan en ${CLAVE_DATOS}`);
+    assert.deepEqual(JSON.parse(guardado), [
+        { Num: 1, Product: 'Ratchet & Clank', Platform: 'PS2', Sale: '$30', Neto: '$30.000', Stock: '2', Link: '', Sold: 0 },
+        { Num: 2, Product: 'Juego <3', Platform: 'PS2', Sale: '$30', Neto: '$30.000', Stock: '2', Link: '', Sold: 0 }
+    ]);
 });
 
 test('[PRD-007] si la hoja falla se reintenta hasta 3 veces y luego se muestra un error con botón de reintento', async () => {
@@ -233,7 +283,8 @@ test('[PRD-007] si la hoja falla se reintenta hasta 3 veces y luego se muestra u
         assert.match($('#mobileCards').textContent, /No se pudieron cargar los productos/, caso.nombre);
         assert.equal(limpio($('#productsTableBody button').textContent), 'Reintentar', caso.nombre);
         assert.match($('#productsTableBody button').getAttribute('onclick'), /location\.reload\(\)/, caso.nombre);
-        assert.equal(pagina.window.localStorage.getItem('ropavejero_products_cache_v1_1_1'), null, caso.nombre);
+        assert.equal(pagina.window.localStorage.getItem(CLAVE_DATOS), null, caso.nombre);
+        assert.deepEqual(Object.keys(pagina.window.localStorage).filter(clave => clave.includes('products_cache')), [], caso.nombre);
         await pagina.cerrar();
     }
     pagina = null;
@@ -336,18 +387,158 @@ test('[PRD-010] el contenido de la hoja no puede inyectar HTML ni atributos en l
     assert.equal($$('.stock-badge i').length, 0);
     assert.ok($('#productsTableBody').textContent.includes('img src=x onerror=alert(1)'), 'el texto se muestra como texto');
 
+    // Escapado una sola vez: el visitante lee exactamente lo que dice la hoja
+    const [primero, segundo] = filas();
+    assert.equal(primero.producto, '<img src=x onerror=alert(1)>');
+    assert.equal(primero.plataforma, '<script>alert(2)</script>');
+    assert.equal(segundo.precio, '<b>gratis</b>');
+    assert.equal(segundo.stock, '<i>9</i>');
+    const tarjeta = tarjetas()[0];
+    assert.equal(limpio(tarjeta.querySelector('.product-card-title').textContent), '<img src=x onerror=alert(1)>');
+    assert.equal(limpio(tarjeta.querySelector('.product-card-value').textContent), '<script>alert(2)</script>');
+    assert.equal(limpio(tarjetas()[1].querySelector('.product-card-price').textContent), '<b>gratis</b>');
+    assert.equal(limpio(tarjetas()[1].querySelector('.stock-badge').textContent), '<i>9</i>');
+
     // El modal de detalles tampoco interpreta el contenido
     pagina.click($('#productsTableBody .view-product-btn'));
     assert.equal($('#productModalContent').querySelectorAll('img, script, svg').length, 0);
+    assert.equal($('#product-modal-title').textContent, '<img src=x onerror=alert(1)>');
+    assert.equal(detalleModal('Producto'), '<img src=x onerror=alert(1)>');
+    assert.equal(detalleModal('Plataforma'), '<script>alert(2)</script>');
+    assert.deepEqual(erroresJs(), []);
 });
 
-test('[PRD-011] los nombres con "&" se muestran tal como vienen en la hoja', { todo: 'PEND-09: doble escape de HTML' }, async () => {
-    await abrirCatalogo({ productos: [{ ...PRODUCTOS[2], num: 1, producto: 'Ratchet & Clank' }] });
+test('[PRD-010] un producto que llega desde el caché con comillas en el nombre y en el enlace no crea atributos en la página', async () => {
+    // El CSV de la hoja pierde las comillas al leerse; en el caché (localStorage) el texto llega tal cual
+    const enCache = [
+        { Num: 1, Product: 'Juego" onmouseover="alert(1)', Platform: 'NES', Sale: '$1', Neto: '$1.000', Stock: '1', Link: 'x" onclick="alert(2)', Sold: 0 },
+        { Num: 2, Product: "Juego' onfocus='alert(3)", Platform: 'NES', Sale: '$1', Neto: '$1.000', Stock: '1', Link: "y' onload='alert(4)", Sold: 0 },
+        { Num: 3, Product: '"><img src=x onerror=alert(5)>', Platform: 'NES', Sale: '$1', Neto: '$1.000', Stock: '1', Link: '"><svg onload=alert(6)>', Sold: 1 }
+    ];
+    await abrirCatalogo({
+        almacenamiento: {
+            [CLAVE_DATOS]: JSON.stringify(enCache),
+            [CLAVE_TIEMPO]: String(Date.now())
+        }
+    });
+    assert.equal(cargasHoja(), 0, 'los productos vienen del caché');
 
-    assert.equal(filas()[0].producto, 'Ratchet & Clank');
-    assert.equal(limpio(tarjetas()[0].querySelector('.product-card-title').textContent), 'Ratchet & Clank');
-    pagina.click($('#productsTableBody .view-product-btn'));
-    assert.equal($('#product-modal-title').textContent, 'Ratchet & Clank');
+    const nombres = enCache.map(p => p.Product);
+    const enlaces = enCache.map(p => p.Link);
+    const contenedores = { tabla: $('#productsTableBody'), tarjetas: $('#mobileCards') };
+    const atributos = elemento => Array.from(elemento.attributes, a => a.name).sort();
+
+    Object.entries(contenedores).forEach(([donde, contenedor]) => {
+        // Ningún elemento lleva manejadores de eventos ni atributos que la plantilla no escribe
+        const conEventos = Array.from(contenedor.querySelectorAll('*'))
+            .filter(elemento => Array.from(elemento.attributes).some(a => /^on/i.test(a.name)));
+        assert.deepEqual(conEventos.map(e => e.outerHTML), [], `sin atributos on* en ${donde}`);
+        assert.equal(contenedor.querySelectorAll('img, svg, script, [autofocus], [src], [href]').length, 0, donde);
+
+        const ver = Array.from(contenedor.querySelectorAll('.view-product-btn'));
+        const instagram = Array.from(contenedor.querySelectorAll('.link-product-btn'));
+        assert.equal(ver.length, 3, donde);
+        assert.equal(instagram.length, 3, donde);
+        ver.forEach(boton => assert.deepEqual(atributos(boton), ['aria-label', 'class', 'data-product-id', 'title'], donde));
+        instagram.forEach(boton => assert.deepEqual(atributos(boton), ['aria-label', 'class', 'data-product-link', 'title'], donde));
+
+        // Los atributos conservan el texto original completo
+        assert.deepEqual(instagram.map(boton => boton.getAttribute('data-product-link')), enlaces, donde);
+        assert.deepEqual(instagram.map(boton => boton.getAttribute('aria-label')), nombres.map(nombre => `Ver ${nombre} en Instagram`), donde);
+        ver.forEach((boton, i) => assert.ok(boton.getAttribute('aria-label').endsWith(nombres[i]), `${donde}: ${boton.getAttribute('aria-label')}`));
+        ver.forEach(boton => assert.equal(boton.className, 'btn btn-primary btn-small view-product-btn', donde));
+        instagram.forEach(boton => assert.equal(boton.className, 'btn btn-primary btn-small link-product-btn', donde));
+    });
+
+    // El nombre se lee literal, en la tabla y en las tarjetas
+    assert.deepEqual(filas().map(f => f.producto), nombres);
+    filas().forEach(f => {
+        assert.equal(f.fila.children.length, 7, 'la fila conserva sus 7 celdas');
+        assert.equal(f.fila.children[2].children.length, 0, 'el nombre no crea elementos');
+        assert.deepEqual(atributos(f.fila), ['data-product-id']);
+    });
+    assert.deepEqual(tarjetas().map(t => limpio(t.querySelector('.product-card-title').textContent)), nombres);
+    tarjetas().forEach(t => {
+        assert.equal(t.querySelector('.product-card-title').children.length, 0);
+        assert.deepEqual(atributos(t), ['class', 'data-product-id']);
+    });
+    assert.equal($$('#productsTableBody tr').length, 3);
+    assert.equal(tarjetas().length, 3);
+
+    // El modal y el botón de Instagram tampoco interpretan el contenido
+    nombres.forEach((nombre, i) => {
+        pagina.click(filas()[i].fila.querySelector('.view-product-btn'));
+        assert.equal($('#product-modal-title').textContent, nombre);
+        assert.equal(detalleModal('Producto'), nombre);
+        assert.equal($('#productModalContent').querySelectorAll('img, svg, script, [onmouseover], [onclick], [onfocus], [onload], [onerror]').length, 0);
+        pagina.click($('#modalCloseBtn'));
+        pagina.click(filas()[i].fila.querySelector('.link-product-btn'));
+        pagina.click(tarjetas()[i].querySelector('.link-product-btn'));
+    });
+    pagina.ventanasAbiertas.forEach(([url, destino, opciones]) => {
+        assert.ok(url.startsWith('https://www.instagram.com/p/'), url);
+        assert.equal(new URL(url).hostname, 'www.instagram.com');
+        assert.equal(destino, '_blank');
+        assert.equal(opciones, 'noopener,noreferrer');
+    });
+    assert.deepEqual(erroresJs(), []);
+});
+
+test('[PRD-010] una plataforma con comillas o etiquetas, al elegirla, se muestra como texto en su etiqueta y no crea atributos', async () => {
+    const plataformas = ['PS"2" onmouseover="alert(1)', "N'64' onclick='alert(2)", '<img src=x onerror=alert(3)>'];
+    const enCache = plataformas.map((Platform, i) => (
+        { Num: i + 1, Product: `Juego ${i + 1}`, Platform, Sale: '$1', Neto: '$1.000', Stock: '1', Link: '', Sold: 0 }
+    ));
+    await abrirCatalogo({
+        almacenamiento: {
+            [CLAVE_DATOS]: JSON.stringify(enCache),
+            [CLAVE_TIEMPO]: String(Date.now())
+        }
+    });
+
+    plataformas.forEach(plataforma => marcarPlataforma(plataforma));
+
+    assert.deepEqual(etiquetas(), plataformas.map(plataforma => `${plataforma} ×`));
+    const quitar = $$('#platformDisplay .platform-tag .remove');
+    assert.deepEqual(quitar.map(x => x.getAttribute('data-platform')), plataformas);
+    quitar.forEach(x => assert.deepEqual(Array.from(x.attributes, a => a.name).sort(), ['class', 'data-platform']));
+    $$('#platformDisplay .platform-tag').forEach(tag => {
+        assert.deepEqual(Array.from(tag.attributes, a => a.name), ['class']);
+        assert.equal(tag.children.length, 1, 'solo el botón de quitar');
+    });
+    const sospechosos = $$('#platformDisplay *, #platformDropdown *, #productsTableBody *, #mobileCards *')
+        .filter(elemento => elemento.tagName === 'IMG' || Array.from(elemento.attributes).some(a => /^on/i.test(a.name)));
+    assert.deepEqual(sospechosos.map(e => e.outerHTML), []);
+    assert.deepEqual(filas().map(f => f.plataforma), plataformas);
+    assert.deepEqual(erroresJs(), []);
+});
+
+test('[PRD-011] los nombres con "&", "<" o ">" se muestran tal como vienen en la hoja, en la tabla, la tarjeta y el modal', async () => {
+    // El último ya trae "&amp;" escrito en la hoja: se muestra literal, no se convierte en "&"
+    const nombres = ['Ratchet & Clank', 'Juego <3', 'Mayor > Menor', 'Uno &amp; Dos'];
+    await abrirCatalogo({ productos: nombres.map((producto, i) => ({ ...PRODUCTOS[2], num: i + 1, producto })) });
+
+    // Tabla de escritorio
+    assert.deepEqual(filas().map(f => f.producto), nombres);
+    filas().forEach(f => assert.equal(f.fila.children[2].children.length, 0, `"${f.producto}" no crea elementos en la celda`));
+    assert.deepEqual(
+        filas().map(f => f.fila.querySelector('.view-product-btn').getAttribute('aria-label')),
+        nombres.map(nombre => `Ver detalles de ${nombre}`)
+    );
+
+    // Tarjetas móviles
+    assert.deepEqual(tarjetas().map(t => limpio(t.querySelector('.product-card-title').textContent)), nombres);
+    tarjetas().forEach(t => assert.equal(t.querySelector('.product-card-title').children.length, 0));
+
+    // Modal de detalles
+    nombres.forEach((nombre, i) => {
+        pagina.click(filas()[i].fila.querySelector('.view-product-btn'));
+        assert.equal($('#product-modal-title').textContent, nombre);
+        assert.equal($('#product-modal-title').children.length, 0);
+        assert.equal(detalleModal('Producto'), nombre);
+        pagina.click($('#modalCloseBtn'));
+    });
+    assert.deepEqual(erroresJs(), []);
 });
 
 test('[PRD-012] si ningún producto coincide con los filtros se informa en la tabla y en las tarjetas', async () => {
@@ -368,7 +559,7 @@ test('[PRD-012] si ningún producto coincide con los filtros se informa en la ta
     assert.equal(limpio($('#mobileCards').textContent), 'No products available.');
 });
 
-test('[PRD-034] después de una búsqueda sin resultados se puede corregir el texto y seguir buscando', { todo: 'PEND-10: el catálogo queda bloqueado' }, async () => {
+test('[PRD-034] después de una búsqueda sin resultados se puede corregir el texto y seguir buscando', async () => {
     await abrirCatalogo();
 
     await buscar('zeldaa');
@@ -376,23 +567,63 @@ test('[PRD-034] después de una búsqueda sin resultados se puede corregir el te
     await buscar('zelda');
 
     assert.deepEqual(nums(), [102]);
+    assert.equal($('#productsCounter').textContent, 'Mostrando 1 de 1 productos');
+    assert.equal(pagina.window.location.search, '?q=zelda');
+    assert.deepEqual(erroresJs(), [], 'sin errores de JavaScript');
+
+    // Con el desplegable de plataformas abierto y sin resultados, un clic fuera tampoco falla
+    await buscar('zeldaa');
+    pagina.click($('#platformDisplay'));
+    pagina.click(pagina.document.body);
+    assert.ok(!$('#platformDropdown').classList.contains('active'));
+    assert.deepEqual(erroresJs(), [], 'sin errores al hacer clic fuera del desplegable');
+
+    await buscar('mario');
+    assert.deepEqual(nums(), [101]);
+    assert.deepEqual(erroresJs(), []);
 });
 
-test('[PRD-035] "Limpiar" restablece el catálogo también después de una búsqueda sin resultados', { todo: 'PEND-10: el catálogo queda bloqueado' }, async () => {
+test('[PRD-035] "Limpiar" restablece el catálogo también después de una búsqueda sin resultados', async () => {
     await abrirCatalogo();
 
     await buscar('no existe este juego');
+    assert.equal(nums().length, 0);
     pagina.click($('#clearFilters'));
 
     assert.equal(nums().length, PRODUCTOS.length);
     assert.equal(pagina.window.location.search, '');
+    assert.equal($('#searchFilter').value, '');
+    assert.equal($('#productsCounter').textContent, 'Mostrando 6 de 6 productos');
+    assert.deepEqual(plataformasMarcadas(), ['all']);
+    assert.equal($('#platformDropdown .no-platforms-message'), null, 'desaparece el aviso de "sin plataformas"');
+    assert.deepEqual(erroresJs(), [], 'sin errores de JavaScript');
+
+    // El catálogo sigue respondiendo después de limpiar
+    await buscar('zelda');
+    assert.deepEqual(nums(), [102]);
+    assert.deepEqual(erroresJs(), []);
 });
 
-test('[PRD-036] la búsqueda ignora los espacios al inicio y al final del texto', { todo: 'PEND-11: los espacios cuentan como texto' }, async () => {
+test('[PRD-036] la búsqueda ignora los espacios al inicio y al final del texto', async () => {
     await abrirCatalogo();
 
     await buscar(' zelda ');
+    assert.deepEqual(nums(), [102]);
+    assert.equal(pagina.window.location.search, '?q=zelda');
 
+    await buscar('\tSNES  ');
+    assert.deepEqual(nums(), [101, 102], 'también al buscar por plataforma');
+
+    await buscar('  mario world ');
+    assert.deepEqual(nums(), [101], 'los espacios entre palabras sí cuentan');
+
+    await buscar('   ');
+    assert.equal(nums().length, PRODUCTOS.length, 'solo espacios equivale a no buscar');
+    assert.equal(pagina.window.location.search, '');
+    await pagina.cerrar();
+
+    // También al llegar con un enlace
+    await abrirCatalogo({ query: '?q=%20zelda%20' });
     assert.deepEqual(nums(), [102]);
 });
 
@@ -415,6 +646,25 @@ test('[PRD-013] la búsqueda filtra por nombre o plataforma, sin distinguir may�
 
     await buscar('');
     assert.equal(nums().length, PRODUCTOS.length);
+});
+
+test('[PRD-013] la búsqueda usa el texto tal como está en la hoja: "&" encuentra los nombres que lo llevan', async () => {
+    await abrirCatalogo({ productos: PRODUCTOS.concat({ ...PRODUCTOS[2], num: 400, producto: 'Ratchet & Clank', plataforma: 'PS2' }) });
+
+    await buscar('&');
+    assert.deepEqual(nums(), [400]);
+
+    await buscar('ratchet & c');
+    assert.deepEqual(nums(), [400]);
+
+    await buscar('T & CL');
+    assert.deepEqual(nums(), [400], 'sin distinguir mayúsculas');
+
+    // El nombre no contiene "amp": eso solo existe en su forma escapada (&amp;)
+    await buscar('amp');
+    assert.deepEqual(nums(), []);
+    await buscar('&amp;');
+    assert.deepEqual(nums(), []);
 });
 
 // ---------- Filtro de plataformas ----------
@@ -546,7 +796,7 @@ test('[PRD-019] la búsqueda y el filtro de plataformas se combinan', async () =
     assert.deepEqual(plataformasMarcadas().sort(), ['PS1', 'SNES']);
 });
 
-test('[PRD-020] la búsqueda se puede combinar con una sola plataforma elegida', { todo: 'PEND-08: se pierde la plataforma' }, async () => {
+test('[PRD-020] la búsqueda se puede combinar con una sola plataforma elegida', async () => {
     await abrirCatalogo();
 
     marcarPlataforma('SNES');
@@ -554,6 +804,105 @@ test('[PRD-020] la búsqueda se puede combinar con una sola plataforma elegida',
 
     assert.deepEqual(plataformasMarcadas(), ['SNES']);
     assert.deepEqual(nums(), [101, 102]);
+
+    // "the" está en Zelda (SNES) y en Sonic (Genesis): la búsqueda descarta a Mario y la plataforma a Sonic
+    await buscar('the');
+    assert.deepEqual(plataformasMarcadas(), ['SNES']);
+    assert.deepEqual(etiquetas(), ['SNES ×']);
+    assert.deepEqual(nums(), [102]);
+    const params = new URLSearchParams(pagina.window.location.search);
+    assert.equal(params.get('q'), 'the');
+    assert.equal(params.get('platform'), 'SNES');
+
+    // Al borrar la búsqueda la plataforma sigue elegida
+    await buscar('');
+    assert.deepEqual(plataformasMarcadas(), ['SNES']);
+    assert.deepEqual(nums(), [101, 102]);
+    assert.deepEqual(erroresJs(), []);
+});
+
+test('[PRD-020] con una búsqueda ya escrita se puede elegir una sola plataforma', async () => {
+    await abrirCatalogo();
+
+    await buscar('the');
+    assert.deepEqual(nums(), [102, 200]);
+    marcarPlataforma('SNES');
+
+    assert.deepEqual(plataformasMarcadas(), ['SNES']);
+    assert.deepEqual(etiquetas(), ['SNES ×']);
+    assert.deepEqual(nums(), [102]);
+});
+
+test('[PRD-020] un enlace con búsqueda y una sola plataforma abre el catálogo filtrado por ambas', async () => {
+    await abrirCatalogo({ query: '?q=the&platform=SNES' });
+
+    assert.equal($('#searchFilter').value, 'the');
+    assert.deepEqual(plataformasMarcadas(), ['SNES']);
+    assert.deepEqual(etiquetas(), ['SNES ×']);
+    assert.deepEqual(nums(), [102]);
+    const params = new URLSearchParams(pagina.window.location.search);
+    assert.equal(params.get('q'), 'the');
+    assert.equal(params.get('platform'), 'SNES');
+});
+
+test('[PRD-037] el aviso "No hay plataformas para esta búsqueda" no es una opción del filtro y desaparece al volver a haber resultados', async () => {
+    await abrirCatalogo();
+    const avisos = () => $$('#platformDropdown .no-platforms-message');
+    // Una opción del filtro es un elemento con data-value
+    const opciones = () => $$('#platformDropdown [data-value]');
+    const valores = () => opciones().map(o => o.getAttribute('data-value'));
+    const ofrecidas = () => opciones().filter(o => o.getAttribute('data-value') !== 'all' && o.style.display !== 'none')
+        .map(o => o.getAttribute('data-value'));
+
+    await buscar('zzzz');
+    assert.equal(avisos().length, 1);
+    const aviso = avisos()[0];
+    assert.equal(limpio(aviso.textContent), 'No hay plataformas para esta búsqueda');
+
+    // No se puede marcar ni cuenta como plataforma
+    assert.equal(aviso.querySelector('input'), null, 'no lleva casilla');
+    assert.equal(aviso.hasAttribute('data-value'), false);
+    assert.equal(aviso.closest('[data-value]'), null);
+    assert.deepEqual(valores(), ['all', 'Genesis', 'PS1', 'SNES', 'Xbox 360'], 'las opciones siguen siendo las plataformas');
+    assert.ok(opciones().every(o => !o.textContent.includes('No hay plataformas')));
+    assert.equal($$('#platformDropdown input[type="checkbox"]').length, 5);
+
+    pagina.click(aviso);
+    assert.deepEqual(plataformasMarcadas(), ['all']);
+    assert.deepEqual(etiquetas(), []);
+    assert.equal(pagina.window.location.search, '?q=zzzz');
+
+    // El buscador interno del desplegable no lo trata como plataforma
+    pagina.click($('#platformDisplay'));
+    escribir('#platformSearchInput', 's');
+    escribir('#platformSearchInput', '');
+    assert.deepEqual(erroresJs(), [], 'sin errores al usar el buscador de plataformas');
+
+    // Desaparece cuando la búsqueda vuelve a tener resultados, sin vaciar el buscador
+    await buscar('zelda');
+    assert.deepEqual(avisos(), []);
+    assert.deepEqual(nums(), [102]);
+    assert.deepEqual(ofrecidas(), ['SNES']);
+    assert.deepEqual(erroresJs(), []);
+
+    // Varias búsquedas seguidas sin resultados muestran un solo aviso
+    await buscar('zzzz');
+    await buscar('yyyy');
+    assert.equal(avisos().length, 1);
+    await buscar('halo');
+    assert.deepEqual(avisos(), []);
+    assert.deepEqual(ofrecidas(), ['Xbox 360']);
+    assert.deepEqual(erroresJs(), []);
+    await pagina.cerrar();
+
+    // En inglés
+    await abrirCatalogo({ almacenamiento: { language: 'en' } });
+    await buscar('zzzz');
+    assert.equal(limpio(avisos()[0].textContent), 'No platforms for this search');
+    assert.equal(avisos()[0].querySelector('input'), null);
+    await buscar('zelda');
+    assert.deepEqual(avisos(), []);
+    assert.deepEqual(nums(), [102]);
 });
 
 // ---------- Orden ----------

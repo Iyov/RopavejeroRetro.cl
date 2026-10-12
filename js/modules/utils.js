@@ -58,8 +58,18 @@ function sanitizeURL(url) {
     }
 }
 
-// Función para validar datos de productos
-function validateProductData(product) {
+// Función para escapar texto que se interpola en un atributo HTML ("..." o '...')
+// Además de &, < y >, escapa las comillas para que el valor no pueda cerrar el atributo
+function sanitizeAttribute(str) {
+    return sanitizeHTML(str)
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+// Función para normalizar datos de productos: tipos y valores por defecto, SIN escapar.
+// Es la forma en que los productos se guardan en memoria y en caché; el texto se escapa
+// una sola vez al insertarlo como HTML (sanitizeHTML / sanitizeAttribute / validateProductData)
+function normalizeProductData(product) {
     if (!product || typeof product !== 'object') return null;
     
     // Lógica corregida para el campo Sold:
@@ -79,13 +89,31 @@ function validateProductData(product) {
     
     return {
         Num: parseInt(product.Num) || 0,
-        Product: sanitizeHTML(String(product.Product || '')),
-        Platform: sanitizeHTML(String(product.Platform || '')),
-        Sale: sanitizeHTML(String(product.Sale || 'X')),
-        Neto: sanitizeHTML(String(product.Neto || 'X')),
-        Stock: sanitizeHTML(String(product.Stock || '0')),
-        Link: sanitizeHTML(String(product.Link || '')),
+        Product: String(product.Product || ''),
+        Platform: String(product.Platform || ''),
+        Sale: String(product.Sale || 'X'),
+        Neto: String(product.Neto || 'X'),
+        Stock: String(product.Stock || '0'),
+        Link: String(product.Link || ''),
         Sold: soldValue
+    };
+}
+
+// Función para validar datos de productos: normaliza y sanitiza el texto para insertarlo como HTML.
+// Se aplica sobre el producto sin escapar, una sola vez (aplicarla dos veces escapa dos veces)
+function validateProductData(product) {
+    const normalized = normalizeProductData(product);
+    if (!normalized) return null;
+
+    return {
+        Num: normalized.Num,
+        Product: sanitizeHTML(normalized.Product),
+        Platform: sanitizeHTML(normalized.Platform),
+        Sale: sanitizeHTML(normalized.Sale),
+        Neto: sanitizeHTML(normalized.Neto),
+        Stock: sanitizeHTML(normalized.Stock),
+        Link: sanitizeHTML(normalized.Link),
+        Sold: normalized.Sold
     };
 }
 
@@ -124,8 +152,9 @@ function sortProducts(products, sortValue) {
     const sortableProducts = [...products];
 
     sortableProducts.sort((a, b) => {
-        const safeA = validateProductData(a);
-        const safeB = validateProductData(b);
+        // Se compara el texto sin escapar (tal como está en la hoja)
+        const safeA = normalizeProductData(a);
+        const safeB = normalizeProductData(b);
 
         switch (sortValue) {
             case 'price-asc': {

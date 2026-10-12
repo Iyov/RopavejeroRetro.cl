@@ -19,25 +19,26 @@
 
 - **PRD-008** — Cada producto se muestra en la tabla de escritorio y en una tarjeta móvil, con número, nombre, plataforma, precio, stock y estado (disponible `[✅]` o vendido `[❌]`). Un precio sin definir (`X`) se muestra como `0`.
 - **PRD-009** — Las siglas del nombre se explican en un tooltip en la tabla y en una lista en la tarjeta móvil. Un producto sin siglas no lleva ninguno de los dos.
-- **PRD-010** — El contenido de la hoja no puede inyectar HTML ni atributos en la página: en la tabla, las tarjetas y el modal se muestra siempre como texto.
-- **PRD-011** — Los nombres con `&` se muestran tal como están en la hoja (por ejemplo "Ratchet & Clank"). ⚠ PEND-09
+- **PRD-010** — El contenido de la hoja no puede inyectar HTML ni atributos en la página: en la tabla, las tarjetas y el modal se muestra siempre como texto, escapado una sola vez.
+- **PRD-011** — Los nombres con `&` se muestran tal como están en la hoja (por ejemplo "Ratchet & Clank").
 - **PRD-012** — Si ningún producto coincide con los filtros se informa en la tabla y en las tarjetas, en el idioma activo; el contador queda en cero y la paginación deshabilitada.
 
 ### Búsqueda y filtros
 
-- **PRD-013** — La búsqueda filtra por nombre o plataforma, con coincidencia parcial y sin distinguir mayúsculas, 300 ms después de dejar de escribir.
-- **PRD-036** — La búsqueda ignora los espacios al inicio y al final del texto. ⚠ PEND-11
-- **PRD-034** — Después de una búsqueda sin resultados se puede corregir el texto y seguir buscando. ⚠ PEND-10
+- **PRD-013** — La búsqueda filtra por nombre o plataforma, con coincidencia parcial y sin distinguir mayúsculas, 300 ms después de dejar de escribir. Busca sobre el texto tal como está en la hoja, de modo que `&` encuentra los nombres que lo llevan.
+- **PRD-036** — La búsqueda ignora los espacios al inicio y al final del texto.
+- **PRD-034** — Después de una búsqueda sin resultados se puede corregir el texto y seguir buscando.
 - **PRD-014** — El filtro de plataformas ofrece "Todas" más cada plataforma del catálogo, sin repetir y en orden alfabético.
 - **PRD-015** — Se pueden elegir varias plataformas a la vez. "Todas" y las plataformas concretas se excluyen entre sí: elegir una desmarca "Todas", quitarlas todas vuelve a "Todas", y "Todas" no se puede desmarcar si no hay otra elegida.
 - **PRD-016** — Las plataformas elegidas se muestran como etiquetas: hasta 3, más un contador con el resto. Cada etiqueta se puede quitar con su `×`.
 - **PRD-017** — El desplegable de plataformas se abre y se cierra con su control, y se cierra con un clic fuera. Su buscador interno filtra las opciones, avisa si ninguna coincide y se limpia al cerrar.
 - **PRD-018** — Con una búsqueda activa, el desplegable solo ofrece las plataformas que tienen resultados, y avisa si no hay ninguna.
+- **PRD-037** — El aviso "No hay plataformas para esta búsqueda" no es una opción del filtro: no se puede marcar, no cuenta como plataforma y desaparece cuando la búsqueda vuelve a tener resultados.
 - **PRD-019** — La búsqueda y el filtro de plataformas se combinan: se muestran los productos que cumplen ambos.
-- **PRD-020** — La búsqueda se puede combinar con una sola plataforma elegida. ⚠ PEND-08
+- **PRD-020** — La búsqueda se puede combinar con una sola plataforma elegida.
 - **PRD-021** — El selector de orden reordena el catálogo por número, precio, nombre o plataforma. Los productos sin precio quedan al final al ordenar por precio.
 - **PRD-022** — "Limpiar" restablece la búsqueda, el orden y las plataformas, y vuelve a mostrar todo el catálogo.
-- **PRD-035** — "Limpiar" restablece el catálogo también después de una búsqueda sin resultados. ⚠ PEND-10
+- **PRD-035** — "Limpiar" restablece el catálogo también después de una búsqueda sin resultados.
 
 ### Paginación y contador
 

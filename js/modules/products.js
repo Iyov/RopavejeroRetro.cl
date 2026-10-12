@@ -365,9 +365,10 @@ function parseCSVSecure(csvText) {
                 Sold: values[7] || ''  // Cambiado: dejar vacío en lugar de '0'
             };
             
-            // Validar y sanitizar producto
-            const product = validateProductData(rawProduct);
-            
+            // Normalizar producto (tipos y valores por defecto). El texto se guarda tal como
+            // viene en la hoja, sin escapar: se escapa una sola vez al dibujarlo
+            const product = normalizeProductData(rawProduct);
+
             // Debug temporal: solo en desarrollo
             if (window.location.hostname === 'localhost' && product && product.Num <= 5) {
                 console.log(`Producto #${product.Num}: Sold original="${rawProduct.Sold}", Sold procesado=${product.Sold}`);
@@ -418,15 +419,20 @@ function renderProductsTable() {
     let cardsHtml = '';
     
     productsToShow.forEach(product => {
-        // Validar y sanitizar producto
-        const safeProduct = validateProductData(product);
+        // Validar y sanitizar producto: "product" trae el texto sin escapar y aquí se escapa una sola vez
+        const plainProduct = normalizeProductData(product);
+        const safeProduct = validateProductData(plainProduct);
         if (!safeProduct || !safeProduct.Num) return;
-        
+
+        // Valores para atributos HTML: escapados también para comillas
+        const attrProduct = sanitizeAttribute(plainProduct.Product);
+        const attrLink = sanitizeAttribute(plainProduct.Link);
+
         const statusClass = safeProduct.Sold == 1 ? 'status-sold' : 'status-available';
         const statusIcon = safeProduct.Sold == 1 ? '[❌]' : '[✅]';
-        
-        // Extraer siglas del producto
-        const siglas = extractSiglas(safeProduct.Product);
+
+        // Extraer siglas del producto (sobre el texto sin escapar)
+        const siglas = extractSiglas(plainProduct.Product);
         const hasSiglas = siglas.length > 0;
         const siglasTooltip = hasSiglas ? createSiglasTooltip(siglas) : '';
         
@@ -445,13 +451,13 @@ function renderProductsTable() {
                 <td class="actions-cell">
                     <button class="btn btn-primary btn-small view-product-btn" 
                             data-product-id="${safeProduct.Num}" 
-                            aria-label="Ver detalles de ${safeProduct.Product}"
+                            aria-label="Ver detalles de ${attrProduct}"
                             title="Ver detalles">
                         <i class="fas fa-eye" aria-hidden="true"></i>
                     </button>
                     <button class="btn btn-primary btn-small link-product-btn" 
-                            data-product-link="${safeProduct.Link}"
-                            aria-label="Ver ${safeProduct.Product} en Instagram"
+                            data-product-link="${attrLink}"
+                            aria-label="Ver ${attrProduct} en Instagram"
                             title="Ver en Instagram">
                         <i class="fab fa-instagram" aria-hidden="true"></i>
                     </button>
@@ -508,14 +514,14 @@ function renderProductsTable() {
                 <div class="product-card-actions">
                     <button class="btn btn-primary btn-small view-product-btn" 
                             data-product-id="${safeProduct.Num}" 
-                            aria-label="Ver ${safeProduct.Product}"
+                            aria-label="Ver ${attrProduct}"
                             title="${viewDetailsText}">
                         <i class="fas fa-eye" aria-hidden="true"></i>
                         <span>${viewDetailsText}</span>
                     </button>
                     <button class="btn btn-primary btn-small link-product-btn" 
-                            data-product-link="${safeProduct.Link}" 
-                            aria-label="Ver ${safeProduct.Product} en Instagram"
+                            data-product-link="${attrLink}"
+                            aria-label="Ver ${attrProduct} en Instagram"
                             title="${viewInstagramText}">
                         <i class="fab fa-instagram" aria-hidden="true"></i>
                         <span>Instagram</span>
@@ -565,7 +571,8 @@ function renderProductsTable() {
 function updateAvailablePlatforms(filteredProducts) {
     const platformDropdown = document.getElementById('platformDropdown');
     const platformDisplay = document.getElementById('platformDisplay');
-    const searchFilter = document.getElementById('searchFilter').value.toLowerCase();
+    // Los espacios al inicio y al final no cuentan como búsqueda
+    const searchFilter = document.getElementById('searchFilter').value.trim().toLowerCase();
     const availablePlatforms = new Set();
     
     // Obtener plataformas de productos filtrados
@@ -582,9 +589,10 @@ function updateAvailablePlatforms(filteredProducts) {
         platformDisplay.classList.remove('filtered');
     }
     
-    // Obtener todas las opciones de plataforma (excepto "Todas")
-    const platformOptions = platformDropdown.querySelectorAll('.multi-select-option:not([data-value="all"])');
-    
+    // Obtener todas las opciones de plataforma (excepto "Todas").
+    // Una opción lleva data-value; el aviso de "no hay plataformas" no, y queda fuera
+    const platformOptions = platformDropdown.querySelectorAll('.multi-select-option[data-value]:not([data-value="all"])');
+
     // Si no hay búsqueda activa, mostrar todas las plataformas
     if (!searchFilter) {
         platformOptions.forEach(option => {
@@ -624,16 +632,17 @@ function updateAvailablePlatforms(filteredProducts) {
                 option.classList.remove('available');
                 
                 // Si la plataforma oculta estaba seleccionada, deseleccionarla
-                if (checkbox.checked) {
+                if (checkbox && checkbox.checked) {
                     checkbox.checked = false;
                     selectedPlatforms.delete(platform);
                 }
             }
         });
-        
-        // Si no hay plataformas seleccionadas después del filtrado, seleccionar "Todas"
+
+        // Si no hay plataformas seleccionadas después del filtrado, seleccionar "Todas".
+        // Una sola plataforma elegida es una selección válida y se conserva
         const remainingSelected = Array.from(selectedPlatforms).filter(p => p === 'all' || availablePlatforms.has(p));
-        if (remainingSelected.length === 0 || (remainingSelected.length === 1 && remainingSelected[0] !== 'all')) {
+        if (remainingSelected.length === 0) {
             selectedPlatforms.clear();
             selectedPlatforms.add('all');
             document.getElementById('platform-all').checked = true;
@@ -658,7 +667,9 @@ function updatePlatformDropdownMessage(availablePlatformsCount) {
         existingMessage.remove();
     }
     
-    // Si no hay plataformas disponibles (excepto "Todas"), mostrar mensaje
+    // Si no hay plataformas disponibles (excepto "Todas"), mostrar mensaje.
+    // Comparte la clase multi-select-option solo por su aspecto: no es una opción del filtro
+    // (no lleva data-value, casilla ni label) y quienes recorren las opciones lo excluyen
     if (availablePlatformsCount === 0) {
         const messageDiv = document.createElement('div');
         messageDiv.className = 'no-platforms-message multi-select-option';
@@ -676,9 +687,9 @@ function updatePlatformDropdownMessage(availablePlatformsCount) {
 // Filtrar opciones de plataforma basado en búsqueda
 function filterPlatformOptions(searchTerm) {
     const platformDropdown = document.getElementById('platformDropdown');
-    const platformOptions = platformDropdown.querySelectorAll('.multi-select-option:not([data-value="all"])');
+    const platformOptions = platformDropdown.querySelectorAll('.multi-select-option[data-value]:not([data-value="all"])');
     const currentLang = localStorage.getItem('language') || 'es';
-    
+
     let visibleCount = 0;
     
     // Remover mensaje de "no hay resultados" existente
@@ -877,7 +888,7 @@ function updatePlatformDisplay() {
             tag.className = 'platform-tag';
             tag.innerHTML = `
                 ${sanitizeHTML(platform)}
-                <span class="remove" data-platform="${platform}">×</span>
+                <span class="remove" data-platform="${sanitizeAttribute(platform)}">×</span>
             `;
             
             // Event listener para remover tag
@@ -925,7 +936,8 @@ function removePlatformSelection(platform) {
 
 // Filtrar productos - MULTI-SELECT CON FILTRADO DINÁMICO
 function filterProducts() {
-    const searchFilter = document.getElementById('searchFilter').value.toLowerCase();
+    // Los espacios al inicio y al final no cuentan como búsqueda (solo espacios = sin búsqueda)
+    const searchFilter = document.getElementById('searchFilter').value.trim().toLowerCase();
     const sortFilter = document.getElementById('sortFilter').value;
     
     // Primero filtrar por búsqueda de texto para obtener productos relevantes
@@ -1001,7 +1013,7 @@ function clearFilters() {
     });
     
     // Mostrar todas las opciones de plataforma
-    const platformOptions = platformDropdown.querySelectorAll('.multi-select-option:not([data-value="all"])');
+    const platformOptions = platformDropdown.querySelectorAll('.multi-select-option[data-value]:not([data-value="all"])');
     platformOptions.forEach(option => {
         option.style.display = 'flex';
         option.classList.remove('search-hidden');
@@ -1087,8 +1099,9 @@ function showProductModal(product) {
     const modalContent = document.getElementById('productModalContent');
     const currentLang = localStorage.getItem('language') || 'es';
     
-    // Validar y sanitizar producto
-    const safeProduct = validateProductData(product);
+    // Validar producto. El modal inserta todo con textContent, que no interpreta HTML,
+    // así que recibe el texto sin escapar (escaparlo aquí lo mostraría como &amp;)
+    const safeProduct = normalizeProductData(product);
     if (!safeProduct) {
         console.error('Invalid product data for modal');
         return;

@@ -5,8 +5,8 @@ const { test, afterEach } = require('node:test');
 const assert = require('node:assert/strict');
 const { abrirPagina, leer, respuesta } = require('./helpers/pagina');
 
-const CLAVE_DATOS = 'ropavejero_products_cache_v1_1_1';
-const CLAVE_TIEMPO = 'ropavejero_cache_timestamp_v1_1_1';
+const CLAVE_DATOS = 'ropavejero_products_cache_v1_1_2';
+const CLAVE_TIEMPO = 'ropavejero_cache_timestamp_v1_1_2';
 
 let pagina;
 afterEach(async () => { if (pagina) await pagina.cerrar(); pagina = null; });
@@ -19,13 +19,19 @@ test('[CCH-001] los productos guardados se recuperan desde las claves versionada
 
     assert.equal(w.getCachedProducts(), null);
 
-    w.setCachedProducts([{ Num: 1, Product: 'Zelda' }]);
+    // El texto se guarda tal cual, sin escapar
+    w.setCachedProducts([{ Num: 1, Product: 'Ratchet & Clank <3' }]);
 
-    assert.deepEqual(JSON.parse(w.localStorage.getItem(CLAVE_DATOS)), [{ Num: 1, Product: 'Zelda' }]);
-    assert.match(w.localStorage.getItem(CLAVE_TIEMPO), /^\d+$/);
-    assert.deepEqual(JSON.parse(JSON.stringify(w.getCachedProducts())), [{ Num: 1, Product: 'Zelda' }]);
     assert.equal(pagina.evaluar('CACHE_CONFIG.PRODUCTS_KEY'), CLAVE_DATOS);
     assert.equal(pagina.evaluar('CACHE_CONFIG.TIMESTAMP_KEY'), CLAVE_TIEMPO);
+    assert.deepEqual(JSON.parse(w.localStorage.getItem(CLAVE_DATOS)), [{ Num: 1, Product: 'Ratchet & Clank <3' }]);
+    assert.match(w.localStorage.getItem(CLAVE_TIEMPO), /^\d+$/);
+    assert.deepEqual(JSON.parse(JSON.stringify(w.getCachedProducts())), [{ Num: 1, Product: 'Ratchet & Clank <3' }]);
+    assert.deepEqual(
+        Object.keys(w.localStorage).filter(clave => clave.startsWith('ropavejero_')).sort(),
+        [CLAVE_TIEMPO, CLAVE_DATOS],
+        'no escribe en claves de otra versión'
+    );
 });
 
 test('[CCH-002] el caché vence a los 5 minutos y al vencer se eliminan sus claves', async () => {
@@ -36,7 +42,7 @@ test('[CCH-002] el caché vence a los 5 minutos y al vencer se eliminan sus clav
 
     w.localStorage.setItem(CLAVE_DATOS, JSON.stringify([{ Num: 1 }]));
     w.localStorage.setItem(CLAVE_TIEMPO, String(Date.now() - cincoMinutos + 30000));
-    assert.equal(w.getCachedProducts().length, 1, 'a los 4:30 sigue vigente');
+    assert.deepEqual(JSON.parse(JSON.stringify(w.getCachedProducts())), [{ Num: 1 }], 'a los 4:30 sigue vigente');
 
     w.localStorage.setItem(CLAVE_TIEMPO, String(Date.now() - cincoMinutos - 1000));
     assert.equal(w.getCachedProducts(), null);
@@ -62,7 +68,8 @@ test('[CCH-004] al cargar el módulo se eliminan las claves de versiones anterio
         'ropavejero_products_cache', 'ropavejero_cache_timestamp',
         'ropavejero_products_cache_v1', 'ropavejero_cache_timestamp_v1',
         'ropavejero_products_cache_v1_0_8', 'ropavejero_cache_timestamp_v1_0_8',
-        'ropavejero_products_cache_v1_0_9', 'ropavejero_cache_timestamp_v1_0_9'
+        'ropavejero_products_cache_v1_0_9', 'ropavejero_cache_timestamp_v1_0_9',
+        'ropavejero_products_cache_v1_1_1', 'ropavejero_cache_timestamp_v1_1_1'
     ];
     const almacenamiento = Object.fromEntries(antiguas.map(clave => [clave, 'viejo']));
     almacenamiento[CLAVE_DATOS] = '[]';
@@ -75,6 +82,7 @@ test('[CCH-004] al cargar el módulo se eliminan las claves de versiones anterio
 
     antiguas.forEach(clave => assert.equal(w.localStorage.getItem(clave), null, clave));
     assert.equal(w.localStorage.getItem(CLAVE_DATOS), '[]');
+    assert.equal(w.localStorage.getItem(CLAVE_TIEMPO), almacenamiento[CLAVE_TIEMPO]);
     assert.equal(w.localStorage.getItem('theme'), 'light');
     assert.equal(w.localStorage.getItem('language'), 'en');
 });
@@ -84,11 +92,13 @@ test('[CCH-005] clearProductsCache y clearAllCache vacían el caché de producto
     const { window: w } = pagina;
 
     w.setCachedProducts([{ Num: 1 }]);
+    assert.notEqual(w.localStorage.getItem(CLAVE_DATOS), null, 'hay algo que vaciar');
     w.clearProductsCache();
     assert.equal(w.localStorage.getItem(CLAVE_DATOS), null);
     assert.equal(w.localStorage.getItem(CLAVE_TIEMPO), null);
 
     w.setCachedProducts([{ Num: 1 }]);
+    assert.notEqual(w.localStorage.getItem(CLAVE_DATOS), null, 'hay algo que vaciar');
     w.clearAllCache();
     assert.equal(w.getCachedProducts(), null);
     assert.equal(w.localStorage.getItem('theme'), 'light');

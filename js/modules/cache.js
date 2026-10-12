@@ -5,9 +5,9 @@ let siglasData = {};
 
 // ========== SISTEMA DE CACHÉ INTELIGENTE ==========
 const CACHE_CONFIG = {
-    VERSION: '1.1.1', // Versión del caché
-    PRODUCTS_KEY: 'ropavejero_products_cache_v1_1_1',
-    TIMESTAMP_KEY: 'ropavejero_cache_timestamp_v1_1_1',
+    VERSION: '1.1.2', // Versión del caché
+    PRODUCTS_KEY: 'ropavejero_products_cache_v1_1_2',
+    TIMESTAMP_KEY: 'ropavejero_cache_timestamp_v1_1_2',
     CACHE_DURATION: 5 * 60 * 1000, // 5 minutos en milisegundos
     MAX_RETRIES: 3,
     RETRY_DELAY: 2000 // 2 segundos
@@ -25,7 +25,10 @@ function cleanOldCaches() {
             'ropavejero_products_cache_v1_0_8',
             'ropavejero_cache_timestamp_v1_0_8',
             'ropavejero_products_cache_v1_0_9',
-            'ropavejero_cache_timestamp_v1_0_9'
+            'ropavejero_cache_timestamp_v1_0_9',
+            // v1_1_1 guardaba el texto de los productos ya escapado
+            'ropavejero_products_cache_v1_1_1',
+            'ropavejero_cache_timestamp_v1_1_1'
         ];
         oldKeys.forEach(key => {
             if (localStorage.getItem(key)) {
