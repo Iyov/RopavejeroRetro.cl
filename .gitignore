@@ -23,5 +23,9 @@ logs/
 .idea/
 *.sublime-project
 
+# ========== PYTHON ==========
+__pycache__/
+.pytest_cache/
+
 # ========== SECRETOS ==========
 .env

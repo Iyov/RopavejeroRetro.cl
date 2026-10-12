@@ -140,7 +140,8 @@ Para la ejecución en GitHub, se requiere configurar:
 - **Open Graph**: Optimización para redes sociales
 - **terser / csso**: Minificación de JS y CSS (`npm run build`)
 - **Watcher.js**: Minificación automática de archivos
-- **pytest**: Tests del script de Instagram
+- **node:test + jsdom**: Tests del front-end sobre los HTML y scripts reales (`npm run test:js`)
+- **pytest**: Tests de los scripts Python (`npm run test:py`)
 - **Python Scripts**: Análisis de performance y optimización
 
 ---
@@ -175,8 +176,14 @@ RopavejeroRetro.cl/
 │   ├── update_instagram.py    # Motor de automatización (Python)
 │   └── bump_version.py        # Versión de caché única (AAAA-MM-DD_N) para todo el sitio
 ├── tests/
+│   ├── js/                        # Tests del front-end (node:test + jsdom) y su arnés
 │   ├── test_update_instagram.py   # Tests del script de Instagram (pytest)
 │   └── test_bump_version.py       # Tests del versionado de caché
+├── specs/
+│   ├── README.md              # Proceso de desarrollo guiado por especificación (SDD)
+│   ├── base/                  # Requisitos vigentes del sitio, uno por línea con identificador
+│   └── cambios/               # Especificación de cada cambio
+├── .claude/agents/            # Agentes de Claude Code: orquestador, frontend y tester
 ├── .github/workflows/
 │   ├── update_instagram.yml   # Actualización de Instagram cada 12 horas
 │   └── deploy-pages.yml       # Despliegue a GitHub Pages en cada push a main
@@ -410,7 +417,10 @@ npm run build        # ambos
 npm run watch        # minifica automáticamente al guardar
 
 pip install pytest
-python -m pytest tests/      # tests de los scripts Python
+npm test                     # todos los tests: JavaScript (jsdom) y Python (pytest)
+npm run test:js              # solo los del front-end
+npm run test:py              # solo los de los scripts Python
+npm run trace                # matriz de trazabilidad requisito -> tests
 
 npm run bump                 # sube la versión de caché en todo el sitio
 npm run check:version        # verifica que la versión sea consistente
@@ -423,6 +433,7 @@ A tener en cuenta:
 - **Versionado de caché:** el sitio usa una sola versión con el esquema `AAAA-MM-DD_N` (ej. `2026-10-12_2`), igual en todos los `?v=` y en `CACHE_VERSION` del service worker. Después de cada cambio se sube con `npm run bump` (o `python api/bump_version.py`): si ya hubo cambios ese día aumenta el correlativo, y si es un día nuevo parte en `_1`. `npm run check:version` verifica que no quede ninguna referencia con otra versión o sin `?v=`. El bot de Instagram usa el mismo mecanismo. Para que no se olvide, un hook `pre-commit` rechaza los commits que modifican el sitio sin subir la versión (activarlo una vez con `git config core.hooksPath .githooks`), y el despliegue no publica si la versión no cambió.
 - **Despliegue:** cada push a `main` publica la raíz del repositorio en GitHub Pages, sin build en CI.
 - **Textos:** todo texto visible debe existir en español e inglés en `translations` (`js/modules/ui.js`).
+- **Especificación y tests:** todo cambio se especifica antes de implementarse y cada requisito tiene un test ([specs/README.md](specs/README.md)). `npm test` debe pasar antes de commitear. Los tests en `todo` corresponden a defectos conocidos, listados en [MEMORY.md](MEMORY.md).
 
 El detalle de arquitectura, orden de carga de módulos y precauciones está en [CLAUDE.md](CLAUDE.md); el índice de documentación técnica, en [docs/README.md](docs/README.md).
 
@@ -432,6 +443,9 @@ El detalle de arquitectura, orden de carga de módulos y precauciones está en [
 ### Sin versionar | Agosto – Octubre 2026
 
 #### Agregado
+- **Tests de todo el sitio**: 164 tests del front-end (`node:test` + `jsdom`) y 45 de los scripts Python; `npm test` y workflow de CI
+- **Desarrollo guiado por especificación**: `specs/` con 180 requisitos numerados y trazabilidad requisito → test
+- **Agentes de Claude Code**: `orquestador`, `frontend` y `tester` en `.claude/agents/`
 - ✅ Local físico **@DoubleImpactStore** (junto a @NekketsuStore, Persa Bio Bio) en textos, meta tags y datos estructurados de todo el sitio.
 - ✅ Documentación para desarrollo: `CLAUDE.md`, `AGENTS.md`, `MEMORY.md` y `docs/README.md`.
 

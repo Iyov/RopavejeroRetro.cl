@@ -16,6 +16,11 @@ npm run build        # ejecuta ambos anteriores
 npm run watch        # watcher.js: observa js/ y css/ (archivos no .min) y corre el minify correspondiente al detectar cambios
 npm run bump         # sube la versión de caché (AAAA-MM-DD_N) en todo el sitio; requiere Python
 npm run check:version  # verifica que todo el sitio use la misma versión
+npm test             # todos los tests: JavaScript (node:test + jsdom) y Python (pytest)
+npm run test:js      # solo tests/js/*.test.js
+npm run test:py      # solo tests/test_*.py
+npm run trace        # matriz de trazabilidad requisito -> tests
+npm run test:coverage  # tests de JavaScript con cobertura de líneas del código del sitio
 ```
 
 `npm run minify:js` (y el watcher, que lo dispara ante cualquier cambio en `js/`) también regenera `js/instagram_posts.min.js` con terser, cuyo resultado difiere del que escribe el bot de Instagram. Es un diff inofensivo, pero conviene no commitearlo (`git checkout js/instagram_posts.min.js`) para no chocar con el bot; para minificar solo el entry point: `npx terser js/index.js -o js/index.min.js -c -m`. `js/app.js` (el script de `old.html`) está en una sola línea, y minificarlo reproduce `js/app.min.js` byte a byte.
@@ -30,12 +35,35 @@ pip install -r requirements.txt
 python api/update_instagram.py     # requiere INSTAGRAM_TOKEN en .env
 ```
 
-Tests (Python, `tests/`):
+Tests (`tests/`):
 ```bash
-python -m pytest tests/            # o: python -m pytest tests/test_bump_version.py
+npm test                                            # todo; debe pasar antes de cada commit
+node --test tests/js/productos.test.js              # un archivo de JavaScript
+node --test --test-name-pattern="PRD-013" tests/js/productos.test.js   # un solo requisito
+python -m pytest tests/test_bump_version.py         # un archivo de Python
 python -m pytest tests/test_update_instagram.py::test_detects_expired_instagram_token   # un solo test
 ```
-`pytest` no está en `requirements.txt` (instalarlo aparte). No existe suite de tests ni linter para JS.
+`npm install` trae `jsdom`; `pytest` no está en `requirements.txt` (instalarlo aparte). No hay linter para JS. `.github/workflows/tests.yml` corre la suite en cada push y pull request, pero no bloquea el despliegue.
+
+## Forma de trabajo: SDD, orquestador y agentes
+
+Todo cambio al sitio (funcionalidad nueva, arreglo o rediseño) sigue el flujo de [specs/README.md](specs/README.md): **especificar → acordar con Francisco → tests → implementar → verificar → integrar la especificación → cerrar**. No se escribe código del sitio sin una especificación acordada en `specs/cambios/`, y nada se da por terminado sin su requisito en `specs/base/` y su test.
+
+La sesión principal actúa como **orquestador**: un desarrollador senior que especifica, delega, integra y responde por el resultado. Su guía completa está en [.claude/agents/orquestador.md](.claude/agents/orquestador.md) y hay que leerla antes de empezar un cambio. Delega en dos agentes (`.claude/agents/`):
+
+- **`frontend`** — implementa HTML, CSS y JavaScript del sitio. No modifica tests ni especificaciones.
+- **`tester`** — escribe los tests de una especificación antes de implementarla y verifica cada cambio antes de cerrarlo (suite completa, regresiones, trazabilidad). No modifica el código del sitio.
+
+Los scripts de `api/`, los workflows y la documentación los trabaja el orquestador. Las preguntas y los cambios que solo tocan documentación no necesitan este flujo.
+
+### Especificación y tests
+
+- `specs/base/` describe qué hace hoy cada funcionalidad, un requisito por línea con identificador (`PRD-013`, `SW-005`...). `specs/cambios/` guarda la especificación de cada cambio; `specs/_plantilla.md` es la plantilla.
+- Cada test cita su requisito: `test('[PRD-013] ...')` en JavaScript, `"""[VER-001] ..."""` en el docstring en Python. `tests/js/trazabilidad.test.js` falla si un requisito no tiene test o un test cita un requisito que no existe.
+- Los tests de JavaScript usan `node:test` y `jsdom`. El arnés `tests/js/helpers/pagina.js` abre los HTML reales y evalúa los scripts reales, sin modificarlos, en el orden que declara cada página; `MODULOS` de ese archivo repite el orden de carga y hay que actualizarlo al agregar un módulo. La hoja de Google y los posts se simulan con `tests/js/helpers/datos.js`.
+- Los tests de Python no usan la red ni el token real: `requests.get` se simula y los archivos se escriben en un directorio temporal.
+- **Defectos conocidos:** un requisito que el sitio todavía no cumple lleva `⚠ PEND-NN` en la especificación, su test va con `{ todo: 'PEND-NN: ...' }` (se ejecuta, pero no hace fallar la suite) y `PEND-NN` se describe en `MEMORY.md`. No se corrigen sin acordarlo; al corregir uno se quitan las tres marcas.
+- **Qué no cubren:** jsdom no dibuja la página. El aspecto visual (CSS, responsive, temas), la instalación como PWA y los servicios externos reales se revisan a mano en el navegador.
 
 ## Arquitectura
 
@@ -99,7 +127,7 @@ Por qué importa `CACHE_VERSION`: el service worker sirve `/` e `index.html` con
 
 ### Convenciones del frontend
 
-- **Idioma (ES/EN):** todo texto visible lleva `data-translate="clave"` (o `data-translate-placeholder`) y la clave debe existir en ambos idiomas del objeto `translations` de `js/modules/ui.js`; el HTML trae el texto en español como valor inicial. `setLanguage()` reemplaza con `innerHTML` y vuelve a renderizar efemérides y la tabla de productos. Los textos generados desde JS eligen idioma con `localStorage.getItem('language')`.
+- **Idioma (ES/EN):** todo texto visible lleva `data-translate="clave"` (o `data-translate-placeholder`) y la clave debe existir en ambos idiomas del objeto `translations` de `js/modules/ui.js`; el HTML trae el texto en español como valor inicial. `setLanguage()` reemplaza con `innerHTML` y vuelve a cargar las efemérides; el redibujado de la tabla de productos que también intenta no ocurre hoy (PEND-07 en `MEMORY.md`). Los textos generados desde JS eligen idioma con `localStorage.getItem('language')`.
 - **Logs:** `logger.js` anula `console.log` y `console.info` fuera de `localhost`/`127.0.0.1`. Lo que deba verse en producción va con `console.warn`/`console.error`.
 - **Contenido externo:** los datos de la Sheet, de Instagram y de los JSON pasan por `sanitizeHTML()` / `sanitizeURL()` (`utils.js`) antes de llegar al DOM. `sanitizeURL()` tiene una lista blanca de dominios.
 - **CSP:** se declara con `<meta http-equiv="Content-Security-Policy">` (no por headers) en `index.html`, `productos.html`, `404.html`, `old.html` y las dos páginas de seguridad; `ps3.html` no tiene porque solo redirige a un sitio externo. La de `old.html` permite además el iframe de `youtube-nocookie.com`. Agregar un dominio externo implica actualizar ese meta en los seis, y las listas de dominios de `utils.js` (`sanitizeURL`) y `analytics.js` (`isAllowedByCSP`).
@@ -140,8 +168,8 @@ El sitio se sirve desde GitHub Pages detrás de Cloudflare. No hay `.htaccess` (
 
 `docs/` contiene documentos históricos de implementación (SEO, performance, optimización mobile, fix de GitHub Pages, etc.) — revisar ahí antes de reinvestigar una decisión pasada. `docs/README.md` indica cuáles siguen vigentes; varios describen el estado de febrero–marzo 2026 (`js/index.js` monolítico, versiones `v1.0.x`) y no el actual. `docs/SEO_ANALYTICS_PLAYBOOK.md` documenta la configuración actual de GTM/GA4/Search Console impulsada por `js/seo-analytics.js`.
 
-Al cambiar funcionalidad, el proyecto mantiene a mano tres lugares: `CHANGELOG.md` (formato Keep a Changelog, en español), la sección "Últimos Cambios" y el badge de versión de `README.md`. `AGENTS.md` solo apunta a este archivo: las reglas se editan aquí.
+Al cambiar funcionalidad, el proyecto mantiene a mano tres lugares: `CHANGELOG.md` (formato Keep a Changelog, en español), la sección "Últimos Cambios" y el badge de versión de `README.md`. `AGENTS.md` solo apunta a este archivo: las reglas se editan aquí. Un cambio de comportamiento se refleja además en `specs/base/`.
 
 ### Memoria del proyecto
 
-`MEMORY.md` (raíz del repo) reúne los acuerdos tomados con el usuario: reglas de trabajo (cuenta de GitHub permitida, commit y push con cada cambio terminado), decisiones sobre la documentación y la lista de inconsistencias pendientes de decidir. Leerlo antes de trabajar, y registrar ahí cada acuerdo nuevo en el momento en que se toma, con su fecha. No corregir un pendiente de esa lista sin acordarlo antes.
+`MEMORY.md` (raíz del repo) reúne los acuerdos tomados con el usuario: reglas de trabajo (cuenta de GitHub permitida, commit y push con cada cambio terminado), decisiones sobre la documentación y la lista de pendientes por decidir (los defectos conocidos `PEND-NN` y las decisiones abiertas). Leerlo antes de trabajar, y registrar ahí cada acuerdo nuevo en el momento en que se toma, con su fecha. No corregir un pendiente de esa lista sin acordarlo antes.

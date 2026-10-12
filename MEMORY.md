@@ -10,6 +10,9 @@ Memoria del proyecto: acuerdos y decisiones tomados con Francisco que no se dedu
 
 - **Cuenta de GitHub (2026-10-12):** este repositorio solo se sube (commit, push, PR) con la cuenta de GitHub [Iyov](https://github.com/Iyov) (`francisco.barrientos@usach.cl`). En el equipo hay otras identidades configuradas que no deben usarse aquí. Antes de subir, verificar que `git config user.email` sea ese correo y que la credencial activa sea la de `Iyov` (`git config credential.https://github.com.username` y `gh auth status`); si no corresponden, detenerse y avisar en vez de subir con otra cuenta.
 - **Commit y push con cada cambio terminado (2026-10-12):** cada cambio que queda terminado se commitea y se sube a GitHub (`main`) con la cuenta Iyov, sin esperar a que se pida. Un commit por cambio, verificando la identidad antes y haciendo `git pull --rebase` primero, porque el bot de Instagram también commitea a `main`. Cada push a `main` despliega el sitio.
+- **SDD y agentes (2026-10-12):** todo cambio al sitio (funcionalidad nueva, arreglo o rediseño) se hace con desarrollo guiado por especificación, según [specs/README.md](specs/README.md): primero la especificación en `specs/cambios/`, Francisco la acuerda, se escriben los tests, se implementa y los requisitos pasan a `specs/base/`. La sesión principal actúa como **orquestador** (desarrollador senior, [.claude/agents/orquestador.md](.claude/agents/orquestador.md)) y delega en el agente **frontend** (HTML, CSS y JS del sitio) y en el agente **tester** (tests y verificación). El tester no modifica código del sitio y el frontend no modifica tests.
+- **Tests para todo (2026-10-12):** Francisco pidió que toda funcionalidad existente tenga tests, para que un cambio no rompa otra parte sin que se note. Cada requisito de `specs/base/` tiene al menos un test que lo cita por su identificador, y `npm test` debe pasar antes de cada commit. Una funcionalidad nueva sin requisito y sin test no está terminada.
+- **Los defectos que destapan los tests no se corrigen de paso (2026-10-12):** se registran como `PEND-NN` en "Pendientes por decidir", con el requisito marcado en la especificación y su test en `todo`, y se corrigen cuando Francisco lo acuerda.
 - **Orden de trabajo (2026-10-12):** primero se actualiza la documentación; las inconsistencias detectadas se revisan después, una por una, y ninguna se corrige sin acordarlo antes.
 
 ## Versionado de caché
@@ -31,13 +34,29 @@ Memoria del proyecto: acuerdos y decisiones tomados con Francisco que no se dedu
 Francisco lo pedirá cuando corresponda; no empezarlo antes.
 
 - **Rediseñar el anuncio del local del Persa Bio Bio (2026-10-12).** El sitio debe comunicar que hay un nuevo local (@DoubleImpactStore, Persa Bio Bio), pero la implementación actual (agosto de 2026: bloque `store-announcement` y textos repartidos por el sitio) quedó fea y a Francisco no le gustó. Hay que rehacerla mejor.
-- **Agente especialista en front-end (2026-10-12).** Se agregará un agente dedicado al front-end; será el encargado del rediseño anterior.
-- **SDD (2026-10-12).** Se escribirá una especificación bien hecha para que las funcionalidades nuevas y los arreglos se hagan de forma profesional, especificando antes de implementar. Reemplaza la decisión anterior de "sin SDD".
+- **Rediseño a cargo del agente `frontend` (2026-10-12).** El rediseño anterior lo hará el agente especialista en front-end, que ya existe ([.claude/agents/frontend.md](.claude/agents/frontend.md)), siguiendo el flujo SDD: primero su especificación en `specs/cambios/`.
 
 ## Pendientes por decidir
 
-Las cinco inconsistencias detectadas el 2026-10-12 están cerradas (ver "Resueltos"). Queda una decisión abierta:
+### Defectos que destaparon los tests (2026-10-12)
 
+Aparecieron al escribir los tests de todo el sitio. Ninguno está corregido. Cada uno tiene su requisito marcado con `⚠ PEND-NN` en `specs/base/` y su test en `todo`, que se ejecuta en cada corrida sin hacer fallar la suite. Al corregir uno: quitar las dos marcas, moverlo a "Resueltos" y registrarlo en `CHANGELOG.md`. Ordenados por cuánto afectan al visitante.
+
+- **PEND-10** — El catálogo se bloquea después de una búsqueda sin resultados. Si se busca algo que no existe (por ejemplo un nombre mal escrito) y luego se corrige el texto, la tabla no se actualiza; el botón "Limpiar" tampoco funciona. Solo se recupera borrando todo el texto de búsqueda o recargando la página. Causa: el aviso "No hay plataformas para esta búsqueda" se inserta con la clase `multi-select-option`, y `updateAvailablePlatforms()` y `filterPlatformOptions()` lo tratan como una plataforma (`js/modules/products.js`). Requisitos `PRD-034` y `PRD-035`.
+- **PEND-08** — La búsqueda no se puede combinar con una sola plataforma. Con texto en el buscador y exactamente una plataforma elegida, la plataforma se descarta y vuelve a "Todas" (con dos o más sí funciona). También afecta a un enlace como `/productos?q=mario&platform=SNES`. Causa: una condición de `updateAvailablePlatforms()`. Requisito `PRD-020`.
+- **PEND-09** — Los nombres con `&` se muestran mal: "Ratchet & Clank" aparece como "Ratchet &amp; Clank" en la tabla y las tarjetas, y como "Ratchet &amp;amp; Clank" en el modal de detalles. Causa: el producto se sanitiza al leer la hoja y otra vez cada vez que se dibuja (`validateProductData()` se aplica dos y tres veces). Requisito `PRD-011`.
+- **PEND-11** — La búsqueda no ignora los espacios al inicio o al final. "zelda " con un espacio al final (habitual con el autocompletado del teléfono) no encuentra "Zelda, A Link to the Past", y además deja el catálogo en el estado de PEND-10. Requisito `PRD-036`.
+- **PEND-07** — `setLanguage()` consulta `window.productsData`, que nunca se define. Por eso, al cambiar de idioma el catálogo no se vuelve a dibujar (las tarjetas y el contador quedan en el idioma anterior hasta el siguiente filtro), y al pasar de página la URL no refleja la página actual. Requisitos `PRD-025` y `PRD-033`.
+- **PEND-13** — En `404.html` y en las dos páginas de seguridad no funcionan el botón de tema ni el menú móvil, y hay un error de JavaScript al cargar: `index.min.js` llama a `loadSiglas()`, que vive en un módulo que esas páginas no cargan. Requisito `SITE-006`.
+- **PEND-06** — Faltan dos traducciones al inglés: `about-btn-4` ("Servicio Técnico") y `about-btn-5` ("Pulido de Discos"). En inglés esos dos botones de "Sobre Nosotros" quedan en español. Requisitos `I18N-005` e `I18N-007`.
+- **PEND-12** — Cuatro efemérides no tienen versión en inglés: 24 de octubre, 9 de noviembre, 13 de diciembre y 19 de diciembre. Esos días, en inglés, el sitio dice que no hay efeméride. Requisito `EFE-007`.
+- **PEND-16** — El texto que trae el HTML no coincide con el diccionario en español en 8 claves de `index.html` (`hero-subtitle`, `about-text-1`, `about-subtitle-2`, `about-text-2`, `faq-question-1`, `faq-answer-1`, `blog-subtitle`, `store-announcement-transport-hours`) y 4 de `productos.html` (las `store-announcement-*`). Los buscadores leen un texto y el visitante ve otro; en el anuncio del local, además, se pierden los emojis al cargar. Requisito `I18N-008`. Conviene resolverlo junto con el rediseño del anuncio.
+- **PEND-14** — `index.html` tiene dos `h1`: el del inicio y "Efemérides de hoy". Requisito `SITE-018`.
+- **PEND-15** — Los enlaces externos de `old.html` abren otra pestaña sin `rel="noopener"`. Los navegadores actuales ya lo aplican por defecto, así que el riesgo es bajo. Requisito `LEG-004`.
+
+### Decisiones abiertas
+
+- **PEND-17 — ¿Bloquear el despliegue si fallan los tests? (2026-10-12)** Hoy `.github/workflows/tests.yml` corre los tests en cada push y avisa si fallan, pero `deploy-pages.yml` publica igual. Se puede hacer que el despliegue espere a los tests; el costo es que un test inestable o un fallo de GitHub al instalar dependencias dejaría de publicar los posts del bot de Instagram. Falta que Francisco decida.
 - **Headers de seguridad en Cloudflare.** El sitio no envía HSTS, X-Frame-Options, Referrer-Policy ni Permissions-Policy. Solo se pueden agregar desde el panel de Cloudflare, no desde el repositorio. Falta que Francisco decida si los configura.
 
 

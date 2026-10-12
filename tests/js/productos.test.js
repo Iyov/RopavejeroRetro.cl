@@ -1,0 +1,854 @@
+'use strict';
+
+// Spec: specs/base/07-catalogo.md
+// Catálogo de productos sobre productos.html real, con la hoja de cálculo simulada.
+const { test, afterEach } = require('node:test');
+const assert = require('node:assert/strict');
+const { abrirPagina, parsear, respuesta } = require('./helpers/pagina');
+const { HOJA_URL, PRODUCTOS, csvHoja, muchosProductos } = require('./helpers/datos');
+
+const URL_CATALOGO = 'https://ropavejeroretro.cl/productos';
+
+let pagina;
+afterEach(async () => { if (pagina) await pagina.cerrar(); pagina = null; });
+
+const esHoja = url => url.startsWith(HOJA_URL);
+const hojaCon = productos => url => (esHoja(url) ? respuesta(csvHoja(productos), { tipo: 'text/csv' }) : undefined);
+const cargasHoja = () => pagina.peticiones.filter(p => esHoja(p.url)).length;
+
+// Abre el catálogo e inicia la carga de productos sin esperar a la inicialización diferida
+async function abrirCatalogo({ productos = PRODUCTOS, query = '', esperarFilas = true, ...opciones } = {}) {
+    pagina = await abrirPagina({
+        html: 'productos.html',
+        url: URL_CATALOGO + query,
+        scripts: 'declarados',
+        iniciar: true,
+        rutas: hojaCon(productos),
+        ...opciones
+    });
+    pagina.window.initProducts();
+    if (esperarFilas) await pagina.hasta(() => filas().length > 0, 'la tabla con productos');
+    return pagina;
+}
+
+const $ = selector => pagina.document.querySelector(selector);
+const $$ = selector => Array.from(pagina.document.querySelectorAll(selector));
+const limpio = texto => texto.replace(/\s+/g, ' ').trim();
+
+function filas() {
+    return $$('#productsTableBody tr[data-product-id]').map(fila => {
+        const celdas = fila.children;
+        return {
+            num: Number(celdas[1].textContent),
+            producto: limpio(celdas[2].childNodes[0].textContent),
+            plataforma: celdas[3].textContent,
+            precio: celdas[4].textContent,
+            stock: limpio(celdas[5].textContent),
+            estado: limpio(celdas[0].textContent),
+            vendido: celdas[0].querySelector('.status-badge').classList.contains('status-sold'),
+            fila
+        };
+    });
+}
+const nums = () => filas().map(f => f.num);
+const tarjetas = () => $$('#mobileCards .product-card');
+
+function escribir(selector, texto) {
+    const campo = $(selector);
+    campo.value = texto;
+    pagina.despachar(campo, 'input');
+}
+
+// Escribe en el buscador y espera a que pase el debounce de 300 ms
+async function buscar(texto) {
+    escribir('#searchFilter', texto);
+    await pagina.esperar(350);
+}
+
+function ordenar(criterio) {
+    const select = $('#sortFilter');
+    select.value = criterio;
+    pagina.despachar(select, 'change');
+}
+
+function marcarPlataforma(plataforma, marcada = true) {
+    const casilla = plataforma === 'all'
+        ? $('#platform-all')
+        : $$('#platformDropdown input[type="checkbox"]').find(c => c.value === plataforma);
+    casilla.checked = marcada;
+    pagina.despachar(casilla, 'change');
+}
+
+const plataformasMarcadas = () => $$('#platformDropdown input[type="checkbox"]').filter(c => c.checked).map(c => (c.id === 'platform-all' ? 'all' : c.value));
+const etiquetas = () => $$('#platformDisplay .platform-tag').map(tag => limpio(tag.textContent));
+
+// ---------- Estado en la URL ----------
+
+test('[PRD-001] los filtros se leen desde la URL, con valores por defecto si faltan o son inválidos', async () => {
+    pagina = await abrirPagina({ html: 'productos.html', url: URL_CATALOGO, scripts: 'declarados' });
+    const estado = (query) => {
+        pagina.window.history.replaceState({}, '', `/productos${query}`);
+        return pagina.valor('getProductsUrlState()');
+    };
+
+    assert.deepEqual(estado(''), { search: '', sort: 'id-asc', page: 1, platforms: [] });
+    assert.deepEqual(estado('?q=mario&sort=price-desc&page=3&platform=SNES,Xbox%20360'), {
+        search: 'mario', sort: 'price-desc', page: 3, platforms: ['SNES', 'Xbox 360']
+    });
+    ['id-asc', 'price-asc', 'price-desc', 'name-asc', 'name-desc', 'platform-asc'].forEach(criterio => {
+        assert.equal(estado(`?sort=${criterio}`).sort, criterio);
+    });
+    assert.equal(estado('?sort=drop-table').sort, 'id-asc');
+    assert.equal(estado('?page=-2').page, 1);
+    assert.equal(estado('?page=0').page, 1);
+    assert.equal(estado('?page=abc').page, 1);
+    assert.deepEqual(estado('?platform=,%20,PS1,').platforms, ['PS1']);
+});
+
+test('[PRD-002] los filtros activos se escriben en la URL y los valores por defecto se omiten', async () => {
+    await abrirCatalogo({ productos: muchosProductos(30).concat(PRODUCTOS.map(p => ({ ...p, num: p.num + 1000 }))) });
+    const { window: w } = pagina;
+
+    assert.equal(w.location.search, '');
+
+    ordenar('name-desc');
+    assert.equal(w.location.search, '?sort=name-desc');
+
+    marcarPlataforma('SNES');
+    marcarPlataforma('PS1');
+    assert.equal(new URLSearchParams(w.location.search).get('platform'), 'PS1,SNES', 'en orden alfabético');
+
+    marcarPlataforma('all');
+    ordenar('id-asc');
+    await buscar('juego');
+    assert.equal(w.location.search, '?q=juego');
+    assert.equal(w.location.pathname, '/productos');
+
+    pagina.click($('#clearFilters'));
+    assert.equal(w.location.search, '');
+});
+
+test('[PRD-002] fuera de /productos y /productos.html la URL no se modifica', async () => {
+    await abrirCatalogo({ url: 'https://ropavejeroretro.cl/otra-pagina?x=1' });
+
+    ordenar('name-desc');
+
+    assert.equal(nums()[0], 102, 'el filtro sí se aplica');
+    assert.equal(pagina.window.location.search, '?x=1');
+});
+
+test('[PRD-003] un enlace con filtros en la URL abre el catálogo ya filtrado', async () => {
+    await abrirCatalogo({ query: '?q=sonic&sort=name-desc' });
+    assert.equal($('#searchFilter').value, 'sonic');
+    assert.equal($('#sortFilter').value, 'name-desc');
+    assert.deepEqual(nums(), [200]);
+    await pagina.cerrar();
+
+    await abrirCatalogo({ query: '?platform=SNES,PS1&sort=price-desc' });
+    assert.deepEqual(nums(), [102, 101, 23, 50]);
+    assert.deepEqual(plataformasMarcadas().sort(), ['PS1', 'SNES']);
+    assert.deepEqual(etiquetas().sort(), ['PS1 ×', 'SNES ×']);
+    await pagina.cerrar();
+
+    await abrirCatalogo({ query: '?platform=NoExiste' });
+    assert.equal(nums().length, PRODUCTOS.length);
+    assert.deepEqual(plataformasMarcadas(), ['all']);
+});
+
+// ---------- Lectura de la hoja ----------
+
+test('[PRD-004] el CSV de la hoja se convierte en productos válidos y descarta las filas que no lo son', async () => {
+    pagina = await abrirPagina({ html: 'productos.html', url: URL_CATALOGO, scripts: 'declarados' });
+    const parsearCsv = csv => JSON.parse(pagina.evaluar(`JSON.stringify(parseCSVSecure(${JSON.stringify(csv)}))`));
+
+    const productos = parsearCsv(csvHoja());
+    assert.deepEqual(productos.map(p => p.Num), [23, 50, 101, 102, 200, 300], 'omite la fila de título y la de encabezados');
+    assert.deepEqual(productos[0], {
+        Num: 23, Product: 'Grudge Warriors (BL-CIB)', Platform: 'PS1', Sale: '$15', Neto: '$15.000', Stock: '1', Link: 'DMwPmoFsgMg', Sold: 0
+    });
+    assert.equal(productos[1].Sold, 1);
+    assert.equal(productos[3].Product, 'Zelda, A Link to the Past', 'respeta las comas dentro de comillas');
+    assert.equal(productos[4].Neto, 'X');
+
+    // Saltos de línea de Windows, líneas vacías, filas cortas y filas sin número
+    const sucio = [
+        'encabezado',
+        '"7","Juego CRLF","NES","$1","$1.000","1","L","","",""\r',
+        '',
+        '"8","Fila corta","NES"',
+        '"","Sin numero","NES","$1","$1.000","1","L","","",""',
+        '"0","Numero cero","NES","$1","$1.000","1","L","","",""',
+        '"9","Otro","NES","$1","$1.000","1","L","1","",""'
+    ].join('\n');
+    assert.deepEqual(parsearCsv(sucio).map(p => [p.Num, p.Product, p.Sold]), [[7, 'Juego CRLF', 0], [9, 'Otro', 1]]);
+    assert.ok(pagina.mensajes('warn').some(linea => linea.includes('insufficient columns')));
+
+    assert.throws(() => pagina.evaluar('parseCSVSecure(null)'), /Invalid CSV data type/);
+    assert.throws(() => pagina.evaluar('parseCSVSecure("solo una linea")'), /at least header and one data row/);
+});
+
+test('[PRD-005] con un caché vigente el catálogo se muestra sin consultar la hoja', async () => {
+    const enCache = [
+        { Num: 1, Product: 'Desde caché', Platform: 'NES', Sale: '$1', Neto: '$1.000', Stock: '1', Link: '', Sold: 0 }
+    ];
+    await abrirCatalogo({
+        almacenamiento: {
+            ropavejero_products_cache_v1_1_1: JSON.stringify(enCache),
+            ropavejero_cache_timestamp_v1_1_1: String(Date.now())
+        }
+    });
+
+    assert.deepEqual(filas().map(f => f.producto), ['Desde caché']);
+    assert.equal(cargasHoja(), 0);
+});
+
+test('[PRD-006] sin caché los productos se piden a la hoja de Google, se muestran y quedan en caché', async () => {
+    await abrirCatalogo();
+    const { window: w } = pagina;
+    const peticion = pagina.peticiones.find(p => esHoja(p.url));
+
+    assert.equal(cargasHoja(), 1);
+    assert.match(peticion.url, /tqx=out:csv/);
+    assert.equal(peticion.opciones.method, 'GET');
+    assert.equal(nums().length, PRODUCTOS.length);
+    assert.deepEqual(JSON.parse(w.localStorage.getItem('ropavejero_products_cache_v1_1_1')).map(p => p.Num), [23, 50, 101, 102, 200, 300]);
+    assert.ok(w.localStorage.getItem('ropavejero_cache_timestamp_v1_1_1'));
+});
+
+test('[PRD-007] si la hoja falla se reintenta hasta 3 veces y luego se muestra un error con botón de reintento', async () => {
+    const casos = [
+        { nombre: 'HTTP 500', rutas: url => (esHoja(url) ? respuesta('error', { status: 500, tipo: 'text/plain' }) : undefined) },
+        { nombre: 'sin red', rutas: url => (esHoja(url) ? new TypeError('Failed to fetch') : undefined) },
+        { nombre: 'CSV vacío', rutas: url => (esHoja(url) ? respuesta('   ', { tipo: 'text/csv' }) : undefined) },
+        { nombre: 'CSV sin productos', rutas: url => (esHoja(url) ? respuesta('a,b\n"","x"', { tipo: 'text/csv' }) : undefined) }
+    ];
+
+    for (const caso of casos) {
+        await abrirCatalogo({ rutas: caso.rutas, esperarFilas: false, antes: () => {} });
+        pagina.acelerarTemporizadores();
+        await pagina.hasta(() => $('#productsTableBody .fa-exclamation-triangle'), `mensaje de error (${caso.nombre})`, 6000);
+
+        assert.equal(cargasHoja(), 3, caso.nombre);
+        assert.match($('#productsTableBody').textContent, /No se pudieron cargar los productos\. Verifica tu conexión a internet\./, caso.nombre);
+        assert.match($('#mobileCards').textContent, /No se pudieron cargar los productos/, caso.nombre);
+        assert.equal(limpio($('#productsTableBody button').textContent), 'Reintentar', caso.nombre);
+        assert.match($('#productsTableBody button').getAttribute('onclick'), /location\.reload\(\)/, caso.nombre);
+        assert.equal(pagina.window.localStorage.getItem('ropavejero_products_cache_v1_1_1'), null, caso.nombre);
+        await pagina.cerrar();
+    }
+    pagina = null;
+});
+
+test('[PRD-007] el error de carga se muestra en inglés si ese es el idioma activo', async () => {
+    await abrirCatalogo({
+        rutas: url => (esHoja(url) ? respuesta('error', { status: 503, tipo: 'text/plain' }) : undefined),
+        almacenamiento: { language: 'en' },
+        esperarFilas: false
+    });
+    pagina.acelerarTemporizadores();
+    await pagina.hasta(() => $('#productsTableBody .fa-exclamation-triangle'), 'mensaje de error', 6000);
+
+    assert.match($('#productsTableBody').textContent, /Could not load products\. Check your internet connection\./);
+    assert.equal(limpio($('#mobileCards button').textContent), 'Retry');
+});
+
+test('[PRD-007] un fallo pasajero de la hoja se recupera en el reintento', async () => {
+    let intentos = 0;
+    await abrirCatalogo({
+        rutas: (url) => {
+            if (!esHoja(url)) return undefined;
+            intentos++;
+            return intentos === 1 ? respuesta('error', { status: 500, tipo: 'text/plain' }) : respuesta(csvHoja(), { tipo: 'text/csv' });
+        },
+        esperarFilas: false
+    });
+    pagina.acelerarTemporizadores();
+    await pagina.hasta(() => filas().length > 0, 'productos tras el reintento', 6000);
+
+    assert.equal(intentos, 2);
+    assert.equal(nums().length, PRODUCTOS.length);
+});
+
+// ---------- Tabla y tarjetas ----------
+
+test('[PRD-008] cada producto se muestra en la tabla de escritorio y en las tarjetas móviles', async () => {
+    await abrirCatalogo();
+    const tabla = filas();
+
+    assert.deepEqual(tabla.map(f => f.num), [23, 50, 101, 102, 200, 300], 'orden por número');
+    assert.deepEqual(
+        { num: tabla[0].num, producto: tabla[0].producto, plataforma: tabla[0].plataforma, precio: tabla[0].precio, stock: tabla[0].stock },
+        { num: 23, producto: 'Grudge Warriors (BL-CIB)', plataforma: 'PS1', precio: '$15.000', stock: '1' }
+    );
+
+    // Estado disponible / vendido
+    assert.deepEqual(tabla.map(f => f.vendido), [false, true, false, false, false, false]);
+    assert.equal(tabla[0].estado, '[✅]');
+    assert.equal(tabla[1].estado, '[❌]');
+
+    // Un precio "X" se muestra como 0
+    assert.equal(tabla.find(f => f.num === 200).precio, '0');
+
+    const moviles = tarjetas();
+    assert.equal(moviles.length, tabla.length);
+    const primera = moviles[0];
+    assert.equal(primera.getAttribute('data-product-id'), '23');
+    assert.equal(limpio(primera.querySelector('.product-card-number').textContent), '#23');
+    assert.equal(limpio(primera.querySelector('.product-card-title').textContent), 'Grudge Warriors (BL-CIB)');
+    assert.equal(limpio(primera.querySelector('.product-card-price').textContent), '$15.000');
+    assert.deepEqual($$('#mobileCards .product-card:first-child .product-card-label').map(e => e.textContent), ['Plataforma', 'Precio', 'Stock']);
+    assert.ok(moviles[1].querySelector('.status-badge.status-sold'));
+    assert.equal(limpio(moviles[4].querySelector('.product-card-price').textContent), '0');
+});
+
+test('[PRD-009] las siglas del nombre se explican en un tooltip (tabla) y en una lista (tarjeta)', async () => {
+    await abrirCatalogo();
+    const [conSiglas, , sinSiglas] = filas();
+
+    const celda = conSiglas.fila.children[2];
+    assert.ok(celda.classList.contains('has-siglas-tooltip'));
+    assert.equal(celda.getAttribute('data-has-siglas'), 'true');
+    assert.deepEqual(
+        Array.from(celda.querySelectorAll('.siglas-tooltip .sigla-item'), e => limpio(e.textContent)).sort(),
+        ['BL: Black Label', 'CIB: Caja, Juego, Manual']
+    );
+    assert.ok(!sinSiglas.fila.children[2].classList.contains('has-siglas-tooltip'));
+    assert.equal(sinSiglas.fila.querySelector('.siglas-tooltip'), null);
+
+    const tarjeta = tarjetas()[0];
+    assert.equal(limpio(tarjeta.querySelector('.product-card-siglas-title').textContent), 'Siglas:');
+    assert.equal(tarjeta.querySelectorAll('.product-card-sigla-item').length, 2);
+    assert.equal(tarjetas()[2].querySelector('.product-card-siglas'), null);
+});
+
+test('[PRD-010] el contenido de la hoja no puede inyectar HTML ni atributos en la página', async () => {
+    const maliciosos = [
+        { ...PRODUCTOS[0], num: 1, producto: '<img src=x onerror=alert(1)>', plataforma: '<script>alert(2)</script>' },
+        { ...PRODUCTOS[0], num: 2, producto: 'Juego" onmouseover="alert(3)', neto: '<b>gratis</b>', stock: '<i>9</i>', link: '"><svg onload=alert(4)>' }
+    ];
+    await abrirCatalogo({ productos: maliciosos });
+    const contenedores = [$('#productsTableBody'), $('#mobileCards')];
+
+    contenedores.forEach(contenedor => {
+        assert.equal(contenedor.querySelectorAll('img, script, svg, b').length, 0);
+        assert.equal(contenedor.querySelectorAll('[onmouseover], [onerror], [onload]').length, 0);
+    });
+    assert.equal($$('.stock-badge i').length, 0);
+    assert.ok($('#productsTableBody').textContent.includes('img src=x onerror=alert(1)'), 'el texto se muestra como texto');
+
+    // El modal de detalles tampoco interpreta el contenido
+    pagina.click($('#productsTableBody .view-product-btn'));
+    assert.equal($('#productModalContent').querySelectorAll('img, script, svg').length, 0);
+});
+
+test('[PRD-011] los nombres con "&" se muestran tal como vienen en la hoja', { todo: 'PEND-09: doble escape de HTML' }, async () => {
+    await abrirCatalogo({ productos: [{ ...PRODUCTOS[2], num: 1, producto: 'Ratchet & Clank' }] });
+
+    assert.equal(filas()[0].producto, 'Ratchet & Clank');
+    assert.equal(limpio(tarjetas()[0].querySelector('.product-card-title').textContent), 'Ratchet & Clank');
+    pagina.click($('#productsTableBody .view-product-btn'));
+    assert.equal($('#product-modal-title').textContent, 'Ratchet & Clank');
+});
+
+test('[PRD-012] si ningún producto coincide con los filtros se informa en la tabla y en las tarjetas', async () => {
+    await abrirCatalogo();
+    await buscar('no existe este juego');
+
+    assert.equal(filas().length, 0);
+    assert.equal(limpio($('#productsTableBody').textContent), 'No hay productos disponibles.');
+    assert.equal(limpio($('#mobileCards').textContent), 'No hay productos disponibles.');
+    assert.equal($('#productsCounter').textContent, 'Mostrando 0 de 0 productos');
+    assert.ok($('#prevPage').disabled);
+    assert.ok($('#nextPage').disabled);
+    await pagina.cerrar();
+
+    await abrirCatalogo({ query: '?q=nothing+matches', almacenamiento: { language: 'en' }, esperarFilas: false });
+    await pagina.hasta(() => $('#productsCounter').textContent === 'Showing 0 of 0 products', 'el contador en cero');
+    assert.equal(limpio($('#productsTableBody').textContent), 'No products available.');
+    assert.equal(limpio($('#mobileCards').textContent), 'No products available.');
+});
+
+test('[PRD-034] después de una búsqueda sin resultados se puede corregir el texto y seguir buscando', { todo: 'PEND-10: el catálogo queda bloqueado' }, async () => {
+    await abrirCatalogo();
+
+    await buscar('zeldaa');
+    assert.equal(nums().length, 0);
+    await buscar('zelda');
+
+    assert.deepEqual(nums(), [102]);
+});
+
+test('[PRD-035] "Limpiar" restablece el catálogo también después de una búsqueda sin resultados', { todo: 'PEND-10: el catálogo queda bloqueado' }, async () => {
+    await abrirCatalogo();
+
+    await buscar('no existe este juego');
+    pagina.click($('#clearFilters'));
+
+    assert.equal(nums().length, PRODUCTOS.length);
+    assert.equal(pagina.window.location.search, '');
+});
+
+test('[PRD-036] la búsqueda ignora los espacios al inicio y al final del texto', { todo: 'PEND-11: los espacios cuentan como texto' }, async () => {
+    await abrirCatalogo();
+
+    await buscar(' zelda ');
+
+    assert.deepEqual(nums(), [102]);
+});
+
+// ---------- Búsqueda ----------
+
+test('[PRD-013] la búsqueda filtra por nombre o plataforma, sin distinguir mayúsculas, tras 300 ms sin escribir', async () => {
+    await abrirCatalogo();
+
+    escribir('#searchFilter', 'zel');
+    assert.equal(nums().length, PRODUCTOS.length, 'no filtra mientras se escribe');
+    escribir('#searchFilter', 'ZELDA');
+    await pagina.esperar(350);
+    assert.deepEqual(nums(), [102]);
+
+    await buscar('genesis');
+    assert.deepEqual(nums(), [200], 'también busca en la plataforma');
+
+    await buscar('S');
+    assert.deepEqual(nums(), [23, 50, 101, 102, 200], 'coincidencia parcial en nombre o plataforma');
+
+    await buscar('');
+    assert.equal(nums().length, PRODUCTOS.length);
+});
+
+// ---------- Filtro de plataformas ----------
+
+test('[PRD-014] el filtro ofrece "Todas" más cada plataforma del catálogo, sin repetir y en orden alfabético', async () => {
+    await abrirCatalogo();
+
+    assert.deepEqual($$('#platformDropdown .multi-select-option').map(o => o.getAttribute('data-value')), ['all', 'Genesis', 'PS1', 'SNES', 'Xbox 360']);
+    assert.deepEqual(plataformasMarcadas(), ['all']);
+    assert.equal(limpio($('#platformDisplay .placeholder').textContent), 'Todas');
+    assert.ok($('#platformDropdown .platform-search-container'), 'conserva el buscador de plataformas');
+});
+
+test('[PRD-015] se pueden combinar varias plataformas; "Todas" y las plataformas concretas se excluyen entre sí', async () => {
+    await abrirCatalogo();
+
+    marcarPlataforma('SNES');
+    assert.deepEqual(nums(), [101, 102]);
+    assert.deepEqual(plataformasMarcadas(), ['SNES'], 'al elegir una plataforma se desmarca "Todas"');
+
+    marcarPlataforma('Genesis');
+    assert.deepEqual(nums(), [101, 102, 200]);
+
+    marcarPlataforma('SNES', false);
+    assert.deepEqual(nums(), [200]);
+
+    marcarPlataforma('Genesis', false);
+    assert.equal(nums().length, PRODUCTOS.length);
+    assert.deepEqual(plataformasMarcadas(), ['all'], 'sin plataformas elegidas vuelve a "Todas"');
+
+    marcarPlataforma('PS1');
+    marcarPlataforma('all');
+    assert.deepEqual(plataformasMarcadas(), ['all'], 'marcar "Todas" desmarca las demás');
+    assert.equal(nums().length, PRODUCTOS.length);
+
+    marcarPlataforma('all', false);
+    assert.deepEqual(plataformasMarcadas(), ['all'], '"Todas" no se puede desmarcar si no hay otra elegida');
+});
+
+test('[PRD-016] las plataformas elegidas se muestran como etiquetas (máximo 3 y un contador) que se pueden quitar', async () => {
+    await abrirCatalogo();
+    const marcador = $('#platformDisplay .placeholder');
+
+    marcarPlataforma('SNES');
+    assert.deepEqual(etiquetas(), ['SNES ×']);
+    assert.equal(marcador.style.display, 'none');
+
+    marcarPlataforma('PS1');
+    marcarPlataforma('Genesis');
+    marcarPlataforma('Xbox 360');
+    assert.deepEqual(etiquetas(), ['SNES ×', 'PS1 ×', 'Genesis ×', '+1']);
+    assert.equal($('#platformDisplay .counter-tag').title, 'Xbox 360');
+
+    pagina.click($('#platformDisplay .platform-tag .remove'));
+    assert.deepEqual(etiquetas(), ['PS1 ×', 'Genesis ×', 'Xbox 360 ×']);
+    assert.deepEqual(plataformasMarcadas().sort(), ['Genesis', 'PS1', 'Xbox 360']);
+    assert.deepEqual(nums(), [23, 50, 200, 300]);
+
+    $$('#platformDisplay .platform-tag .remove').forEach(() => pagina.click($('#platformDisplay .platform-tag .remove')));
+    assert.deepEqual(etiquetas(), []);
+    assert.deepEqual(plataformasMarcadas(), ['all']);
+    assert.equal(marcador.style.display, 'block');
+    assert.equal(nums().length, PRODUCTOS.length);
+});
+
+test('[PRD-017] el desplegable de plataformas se abre y cierra, y su buscador interno filtra las opciones', async () => {
+    await abrirCatalogo();
+    const desplegable = $('#platformDropdown');
+    const combo = $('#comboBoxMulti');
+    const visibles = () => $$('#platformDropdown .multi-select-option:not([data-value="all"])')
+        .filter(o => !o.classList.contains('search-hidden')).map(o => o.getAttribute('data-value'));
+
+    pagina.click($('#platformDisplay'));
+    assert.ok(desplegable.classList.contains('active'));
+    assert.equal(combo.getAttribute('aria-expanded'), 'true');
+
+    escribir('#platformSearchInput', 'S');
+    assert.deepEqual(visibles(), ['Genesis', 'PS1', 'SNES']);
+    escribir('#platformSearchInput', 'xbox');
+    assert.deepEqual(visibles(), ['Xbox 360']);
+
+    escribir('#platformSearchInput', 'atari');
+    assert.deepEqual(visibles(), []);
+    assert.equal($('#platformDropdown .no-search-results').textContent, 'No se encontraron plataformas que contengan "atari"');
+
+    pagina.click(desplegable);
+    assert.ok(desplegable.classList.contains('active'), 'un clic dentro no lo cierra');
+
+    pagina.click(pagina.document.body);
+    assert.ok(!desplegable.classList.contains('active'));
+    assert.equal(combo.getAttribute('aria-expanded'), 'false');
+    assert.equal($('#platformSearchInput').value, '', 'al cerrar se limpia el buscador');
+    assert.deepEqual(visibles(), ['Genesis', 'PS1', 'SNES', 'Xbox 360']);
+    assert.equal($('#platformDropdown .no-search-results'), null);
+
+    pagina.click($('#platformDisplay'));
+    pagina.click($('#platformDisplay'));
+    assert.ok(!desplegable.classList.contains('active'), 'un segundo clic en el control lo cierra');
+});
+
+test('[PRD-018] con una búsqueda activa el desplegable solo ofrece las plataformas que tienen resultados', async () => {
+    await abrirCatalogo();
+    const ofrecidas = () => $$('#platformDropdown .multi-select-option:not([data-value="all"]):not(.no-platforms-message)')
+        .filter(o => o.style.display !== 'none').map(o => o.getAttribute('data-value'));
+
+    await buscar('s');
+    assert.deepEqual(ofrecidas(), ['Genesis', 'PS1', 'SNES']);
+    assert.ok($('#platformDisplay').classList.contains('filtered'));
+
+    await buscar('nada coincide');
+    assert.deepEqual(ofrecidas(), []);
+    assert.equal($('#platformDropdown .no-platforms-message').textContent, 'No hay plataformas para esta búsqueda');
+
+    await buscar('');
+    assert.deepEqual(ofrecidas(), ['Genesis', 'PS1', 'SNES', 'Xbox 360']);
+    assert.ok(!$('#platformDisplay').classList.contains('filtered'));
+    assert.equal($('#platformDropdown .no-platforms-message'), null);
+});
+
+test('[PRD-019] la búsqueda y el filtro de plataformas se combinan', async () => {
+    await abrirCatalogo();
+
+    marcarPlataforma('SNES');
+    marcarPlataforma('PS1');
+    await buscar('o');
+
+    // "o" descarta Tetris Plus (PS1); la plataforma descarta Sonic (Genesis) y Halo (Xbox 360)
+    assert.deepEqual(nums(), [23, 101, 102]);
+    assert.deepEqual(plataformasMarcadas().sort(), ['PS1', 'SNES']);
+});
+
+test('[PRD-020] la búsqueda se puede combinar con una sola plataforma elegida', { todo: 'PEND-08: se pierde la plataforma' }, async () => {
+    await abrirCatalogo();
+
+    marcarPlataforma('SNES');
+    await buscar('e');
+
+    assert.deepEqual(plataformasMarcadas(), ['SNES']);
+    assert.deepEqual(nums(), [101, 102]);
+});
+
+// ---------- Orden ----------
+
+test('[PRD-021] el selector de orden reordena el catálogo', async () => {
+    await abrirCatalogo();
+
+    ordenar('price-asc');
+    assert.deepEqual(nums(), [300, 50, 23, 101, 102, 200], 'los productos sin precio quedan al final');
+    ordenar('price-desc');
+    assert.deepEqual(nums(), [102, 101, 23, 50, 300, 200]);
+    ordenar('name-asc');
+    assert.deepEqual(nums(), [23, 300, 200, 101, 50, 102]);
+    ordenar('name-desc');
+    assert.deepEqual(nums(), [102, 50, 101, 200, 300, 23]);
+    ordenar('platform-asc');
+    assert.deepEqual(nums(), [200, 23, 50, 101, 102, 300]);
+    ordenar('id-asc');
+    assert.deepEqual(nums(), [23, 50, 101, 102, 200, 300]);
+});
+
+test('[PRD-022] "Limpiar" restablece búsqueda, orden y plataformas', async () => {
+    await abrirCatalogo();
+    marcarPlataforma('SNES');
+    marcarPlataforma('PS1');
+    ordenar('price-desc');
+    await buscar('e');
+    escribir('#platformSearchInput', 'zzz');
+    assert.notEqual(nums().length, PRODUCTOS.length);
+
+    pagina.click($('#clearFilters'));
+
+    assert.equal($('#searchFilter').value, '');
+    assert.equal($('#sortFilter').value, 'id-asc');
+    assert.equal($('#platformSearchInput').value, '');
+    assert.deepEqual(plataformasMarcadas(), ['all']);
+    assert.deepEqual(etiquetas(), []);
+    assert.equal($('#platformDropdown .no-search-results'), null);
+    assert.deepEqual(nums(), [23, 50, 101, 102, 200, 300]);
+    assert.equal($('#productsCounter').textContent, 'Mostrando 6 de 6 productos');
+});
+
+// ---------- Paginación y contador ----------
+
+test('[PRD-023] el catálogo se pagina de a 25 productos, con botones anterior/siguiente', async () => {
+    await abrirCatalogo({ productos: muchosProductos(60) });
+    const pagActual = () => `${$('#currentPage').textContent}/${$('#totalPages').textContent}`;
+
+    assert.equal(nums().length, 25);
+    assert.deepEqual([nums()[0], nums()[24]], [1, 25]);
+    assert.equal(tarjetas().length, 25);
+    assert.equal(pagActual(), '1/3');
+    assert.ok($('#prevPage').disabled);
+    assert.ok(!$('#nextPage').disabled);
+
+    pagina.click($('#nextPage'));
+    assert.deepEqual([nums()[0], nums()[24]], [26, 50]);
+    assert.equal(pagActual(), '2/3');
+    assert.ok(!$('#prevPage').disabled);
+    assert.ok(pagina.scrolls.some(s => s[0] === 'scrollIntoView' && s[1] === 'productos'), 'vuelve al inicio del listado');
+
+    pagina.click($('#nextPage'));
+    assert.deepEqual(nums(), [51, 52, 53, 54, 55, 56, 57, 58, 59, 60]);
+    assert.equal(pagActual(), '3/3');
+    assert.ok($('#nextPage').disabled);
+
+    pagina.click($('#nextPage'));
+    assert.equal(pagActual(), '3/3', 'no avanza más allá de la última página');
+
+    pagina.click($('#prevPage'));
+    pagina.click($('#prevPage'));
+    assert.equal(pagActual(), '1/3');
+    assert.ok($('#prevPage').disabled);
+});
+
+test('[PRD-024] la página indicada en la URL se respeta y se ajusta si excede el total', async () => {
+    await abrirCatalogo({ productos: muchosProductos(60), query: '?page=2' });
+    assert.equal($('#currentPage').textContent, '2');
+    assert.equal(nums()[0], 26);
+    await pagina.cerrar();
+
+    await abrirCatalogo({ productos: muchosProductos(60), query: '?page=99' });
+    assert.equal($('#currentPage').textContent, '3');
+    assert.equal(nums()[0], 51);
+    assert.equal(pagina.window.location.search, '?page=3');
+});
+
+test('[PRD-025] al cambiar de página la URL refleja la página actual', { todo: 'PEND-07: window.productsData nunca se define' }, async () => {
+    await abrirCatalogo({ productos: muchosProductos(60) });
+
+    pagina.click($('#nextPage'));
+
+    assert.equal(pagina.window.location.search, '?page=2');
+});
+
+test('[PRD-026] el contador informa cuántos productos se muestran y cuántos hay, en el idioma activo', async () => {
+    await abrirCatalogo();
+    const contador = $('#productsCounter');
+    assert.equal(contador.textContent, 'Mostrando 6 de 6 productos');
+    assert.equal(contador.dataset.count, '6');
+    assert.equal(contador.dataset.total, '6');
+
+    marcarPlataforma('SNES');
+    assert.equal(contador.textContent, 'Mostrando 2 de 2 productos');
+    await pagina.cerrar();
+
+    await abrirCatalogo({ productos: muchosProductos(60), almacenamiento: { language: 'en' } });
+    assert.equal($('#productsCounter').textContent, 'Showing 25 of 60 products');
+});
+
+// ---------- Detalle del producto ----------
+
+test('[PRD-027] "Ver detalles" abre un modal con los datos del producto, sus siglas y el enlace a Instagram', async () => {
+    await abrirCatalogo();
+    const overlay = $('#productModalOverlay');
+
+    pagina.click(filas()[0].fila.querySelector('.view-product-btn'));
+
+    assert.ok(overlay.classList.contains('active'));
+    assert.equal(pagina.document.body.style.overflow, 'hidden');
+    assert.equal($('#product-modal-title').textContent, 'Grudge Warriors (BL-CIB)');
+    assert.equal($('#productModalContent .status-badge').getAttribute('aria-label'), 'Producto disponible');
+    assert.deepEqual(
+        $$('#productModalContent .detail-item').map(item => [item.querySelector('label').textContent, item.querySelector('span').textContent]),
+        [['Número', '23'], ['Producto', 'Grudge Warriors (BL-CIB)'], ['Plataforma', 'PS1'], ['Precio de Venta', '$15.000'], ['Stock', '1']]
+    );
+    assert.equal($$('#productModalContent .sigla-detail').length, 2);
+
+    const enlace = $('#productModalContent .modal-instagram-link');
+    assert.equal(enlace.href, 'https://www.instagram.com/p/DMwPmoFsgMg/');
+    assert.equal(enlace.target, '_blank');
+    assert.equal(enlace.rel, 'noopener noreferrer');
+    assert.equal(limpio(enlace.textContent), 'Ver en Instagram');
+    assert.equal($('#modalCloseBtn').textContent, 'Cerrar');
+});
+
+test('[PRD-027] el modal refleja vendido, precio sin definir, producto sin publicación e idioma inglés', async () => {
+    await abrirCatalogo({ almacenamiento: { language: 'en' } });
+    const abrir = num => pagina.click(filas().find(f => f.num === num).fila.querySelector('.view-product-btn'));
+    const detalle = etiqueta => $$('#productModalContent .detail-item').find(i => i.querySelector('label').textContent === etiqueta).querySelector('span').textContent;
+
+    abrir(50);
+    assert.equal($('#productModalContent .status-badge').getAttribute('aria-label'), 'Producto vendido');
+    assert.ok($('#productModalContent .status-badge').classList.contains('status-sold'));
+    assert.equal(detalle('Platform'), 'PS1');
+    assert.equal($('#modalCloseBtn').textContent, 'Close');
+    pagina.click($('#modalCloseBtn'));
+
+    abrir(200);
+    assert.equal(detalle('Sale Price'), '0');
+    pagina.click($('#modalCloseBtn'));
+
+    abrir(101);
+    assert.equal($$('#productModalContent .sigla-detail').length, 0);
+    assert.equal($('#productModalContent .modal-instagram-link').href, 'https://www.instagram.com/ropavejero.retro/', 'sin publicación enlaza al perfil');
+    assert.equal(limpio($('#productModalContent .modal-instagram-link').textContent), 'View on Instagram');
+});
+
+test('[PRD-028] el modal se cierra con "Cerrar", con la X, con un clic fuera o con Escape', async () => {
+    await abrirCatalogo();
+    const overlay = $('#productModalOverlay');
+    const abrir = () => {
+        pagina.click(filas()[0].fila.querySelector('.view-product-btn'));
+        assert.ok(overlay.classList.contains('active'));
+    };
+    const cerrado = (como) => {
+        assert.ok(!overlay.classList.contains('active'), como);
+        assert.equal(pagina.document.body.style.overflow, '', como);
+    };
+
+    abrir();
+    pagina.click($('#modalCloseBtn'));
+    cerrado('botón Cerrar');
+
+    abrir();
+    pagina.click($('#productModalClose'));
+    cerrado('botón X');
+
+    abrir();
+    pagina.click($('#productModalContent'));
+    assert.ok(overlay.classList.contains('active'), 'un clic dentro del modal no lo cierra');
+    pagina.click(overlay);
+    cerrado('clic fuera');
+
+    abrir();
+    pagina.despachar(pagina.document, 'keydown', { key: 'Enter' });
+    assert.ok(overlay.classList.contains('active'), 'otras teclas no lo cierran');
+    pagina.despachar(pagina.document, 'keydown', { key: 'Escape' });
+    cerrado('tecla Escape');
+
+    // Tras varios ciclos el modal sigue abriendo y cerrando una sola vez por acción
+    abrir();
+    pagina.click($('#productModalClose'));
+    cerrado('botón X por segunda vez');
+
+    pagina.window.closeProductModal();
+    cerrado('closeProductModal()');
+});
+
+test('[PRD-029] el botón de Instagram abre la publicación del producto en una pestaña nueva', async () => {
+    await abrirCatalogo();
+    const boton = num => filas().find(f => f.num === num).fila.querySelector('.link-product-btn');
+
+    pagina.click(boton(23));
+    pagina.click(boton(101));
+    pagina.click(tarjetas()[3].querySelector('.link-product-btn'));
+
+    assert.deepEqual(pagina.ventanasAbiertas, [
+        ['https://www.instagram.com/p/DMwPmoFsgMg/', '_blank', 'noopener,noreferrer'],
+        ['https://www.instagram.com/ropavejero.retro/', '_blank', 'noopener,noreferrer'],
+        ['https://www.instagram.com/p/ABC123/', '_blank', 'noopener,noreferrer']
+    ]);
+});
+
+// ---------- Inicialización ----------
+
+test('[PRD-030] el catálogo se inicializa cuando la sección entra en pantalla, y una sola vez', async () => {
+    const observadores = [];
+    pagina = await abrirPagina({
+        html: 'productos.html',
+        url: URL_CATALOGO,
+        scripts: 'declarados',
+        rutas: hojaCon(PRODUCTOS),
+        antes: (w) => {
+            w.IntersectionObserver = class {
+                constructor(callback, opciones) { this.callback = callback; this.opciones = opciones; this.desconectado = false; observadores.push(this); }
+                observe(elemento) { this.elemento = elemento; }
+                disconnect() { this.desconectado = true; }
+            };
+        },
+        iniciar: true
+    });
+    const observador = observadores.find(o => o.elemento && o.elemento.id === 'productos');
+
+    assert.ok(observador, 'observa la sección #productos');
+    assert.equal(observador.opciones.rootMargin, '400px');
+    assert.equal(cargasHoja(), 0, 'no carga nada mientras la sección no es visible');
+
+    observador.callback([{ isIntersecting: false }], observador);
+    assert.equal(cargasHoja(), 0);
+
+    observador.callback([{ isIntersecting: true }], observador);
+    await pagina.hasta(() => filas().length > 0, 'la tabla con productos');
+    assert.ok(observador.desconectado);
+
+    pagina.window.initProducts();
+    observador.callback([{ isIntersecting: true }], observador);
+    await pagina.asentar();
+    assert.equal(cargasHoja(), 1, 'no se inicializa dos veces');
+});
+
+test('[PRD-030] sin IntersectionObserver el catálogo se inicializa solo tras una espera', async () => {
+    pagina = await abrirPagina({
+        html: 'productos.html',
+        url: URL_CATALOGO,
+        scripts: 'declarados',
+        rutas: hojaCon(PRODUCTOS),
+        antes: (w) => {
+            const original = w.setTimeout.bind(w);
+            w.setTimeout = (fn, _ms, ...args) => original(fn, 0, ...args);
+        },
+        iniciar: true
+    });
+
+    await pagina.hasta(() => filas().length > 0, 'la tabla con productos');
+    assert.equal(cargasHoja(), 1);
+});
+
+test('[PRD-031] el botón "Actualizar" vacía el caché de productos y recarga la página', () => {
+    const boton = parsear('productos.html').getElementById('clearCache');
+
+    assert.match(boton.getAttribute('onclick'), /clearProductsCache\(\)/);
+    assert.match(boton.getAttribute('onclick'), /location\.reload\(\)/);
+});
+
+// ---------- Idioma ----------
+
+test('[PRD-032] los textos generados del catálogo salen en el idioma activo', async () => {
+    await abrirCatalogo({ almacenamiento: { language: 'en' } });
+
+    assert.deepEqual($$('#mobileCards .product-card:first-child .product-card-label').map(e => e.textContent), ['Platform', 'Price', 'Stock']);
+    assert.equal(limpio(tarjetas()[0].querySelector('.view-product-btn span').textContent), 'View details');
+    assert.equal(limpio(tarjetas()[0].querySelector('.product-card-siglas-title').textContent), 'Abbreviations:');
+    assert.ok(limpio(tarjetas()[0].querySelector('.product-card-siglas-list').textContent).includes('Box, Game, Manual'));
+    assert.equal(limpio($('#platformDisplay .placeholder').textContent), 'All');
+    assert.deepEqual($$('#productsTable thead th').map(th => th.textContent), ['Status', '#', 'Product', 'Platform', 'Price', 'Stock', 'Actions']);
+});
+
+test('[PRD-033] al cambiar de idioma se vuelve a dibujar el catálogo en el idioma nuevo', { todo: 'PEND-07: window.productsData nunca se define' }, async () => {
+    await abrirCatalogo();
+
+    pagina.click($('#languageBtn'));
+    pagina.click($('.language-option[data-lang="en"]'));
+    await pagina.asentar();
+
+    assert.deepEqual($$('#mobileCards .product-card:first-child .product-card-label').map(e => e.textContent), ['Platform', 'Price', 'Stock']);
+    assert.equal($('#productsCounter').textContent, 'Showing 6 of 6 products');
+});

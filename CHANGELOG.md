@@ -10,6 +10,9 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 ## [Sin publicar]
 
 ### Agregado
+- Tests de todo el sitio (2026-10-12): 164 tests de JavaScript con `node:test` y `jsdom` en `tests/js/`, que cargan los HTML y scripts reales (utilidades, caché, siglas, tema, idioma, navegación, FAQ, blog, catálogo, Instagram, efemérides, analytics, GTM, service worker e integridad entre archivos), y 45 tests de Python para `api/bump_version.py` y `api/update_instagram.py`. Scripts `npm test`, `npm run test:js`, `npm run test:py` y `npm run trace`; workflow `.github/workflows/tests.yml` que los corre en cada push y pull request
+- Desarrollo guiado por especificación (2026-10-12): `specs/README.md` con el proceso, `specs/base/` con 180 requisitos numerados que describen lo que hace hoy el sitio, `specs/cambios/` para especificar cada cambio y una prueba de trazabilidad que exige un test por requisito
+- Agentes de Claude Code en `.claude/agents/` (2026-10-12): `orquestador` (desarrollador senior que conduce cada cambio con SDD), `frontend` (especialista en HTML, CSS y JS del sitio) y `tester` (escribe los tests y verifica cada cambio)
 - `api/bump_version.py`: versión de caché única con esquema `AAAA-MM-DD_N` (correlativo por día) para todo el sitio; `--check` detecta referencias con otra versión o sin `?v=`. Scripts `npm run bump` y `npm run check:version`, y tests en `tests/test_bump_version.py` (2026-10-12)
 - Control automático del versionado (2026-10-12): hook `.githooks/pre-commit` y paso "Verificar versión de caché" en `deploy-pages.yml`, que rechazan cambios a archivos del sitio sin subir la versión (`bump_version.py --verify-staged` / `--verify`)
 - Local físico @DoubleImpactStore (junto a @NekketsuStore, Persa Bio Bio) en textos ES/EN, meta tags, `schema.json`, `structured-data.json` y `manifest.json` (2026-08-26)

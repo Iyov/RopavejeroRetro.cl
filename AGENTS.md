@@ -16,7 +16,8 @@ Sitio estático en HTML/CSS/JS puro para Ropavejero Retro, desplegado en GitHub 
 python -m http.server 8000         # servir el sitio localmente
 npm run minify:css                 # css/index.css, css/app.css -> *.min.css
 npx terser js/index.js -o js/index.min.js -c -m   # minificar solo el entry point
-python -m pytest tests/            # tests de los scripts Python (requiere instalar pytest)
+npm test                           # todos los tests: JavaScript (jsdom) y Python (requiere npm install y pytest)
+npm run trace                      # matriz de trazabilidad requisito -> tests
 python api/bump_version.py         # subir la versión de caché en todo el sitio
 python api/bump_version.py --check # verificar que la versión sea consistente
 ```
@@ -33,3 +34,5 @@ python api/bump_version.py --check # verificar que la versión sea consistente
 8. **`console.log` y `console.info` están anulados en producción** (`js/modules/logger.js`); usar `console.warn`/`console.error` para lo que deba verse.
 9. **La CSP vive en un `<meta>`** de `index.html`, `productos.html`, `404.html`, `old.html` y las dos páginas de seguridad (`ps3.html` no tiene). Un dominio externo nuevo hay que agregarlo en los seis, y en las listas de `js/modules/utils.js` y `js/modules/analytics.js`.
 10. **Documentación:** los cambios de funcionalidad se registran en `CHANGELOG.md` y en "Últimos Cambios" de `README.md`. La documentación del proyecto se escribe en español.
+11. **SDD y tests:** todo cambio al sitio sigue [specs/README.md](specs/README.md): primero la especificación en `specs/cambios/`, acordada con el dueño del proyecto; después los tests y la implementación. Cada requisito de `specs/base/` tiene un test que lo cita por su identificador (`[PRD-013]`), y `npm test` debe pasar antes de cada commit.
+12. **Defectos conocidos:** los tests marcados `todo` con `PEND-NN` describen defectos registrados en `MEMORY.md`. No corregirlos de paso: se corrigen cuando se acuerda, quitando la marca del test y la de la especificación.

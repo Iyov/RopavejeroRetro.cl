@@ -5,11 +5,17 @@
     "build": "npm run minify:js && npm run minify:css",
     "watch": "node watcher.js",
     "bump": "python api/bump_version.py",
-    "check:version": "python api/bump_version.py --check"
+    "check:version": "python api/bump_version.py --check",
+    "test": "npm run test:js && npm run test:py",
+    "test:js": "node --test \"tests/js/*.test.js\"",
+    "test:py": "python -m pytest tests/ -q",
+    "test:coverage": "node --test --experimental-test-coverage \"tests/js/*.test.js\"",
+    "trace": "node tests/js/helpers/trazabilidad.js"
   },
   "devDependencies": {
     "csso-cli": "^4.0.2",
     "html-minifier-terser": "^7.2.0",
+    "jsdom": "^29.1.1",
     "terser": "^5.46.0"
   }
 }
