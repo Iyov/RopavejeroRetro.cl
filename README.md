@@ -81,7 +81,7 @@
 - **Content Security Policy**: Protección contra XSS (declarada con `<meta http-equiv>` en todas las páginas salvo `ps3.html`, que solo redirige)
 - **Sanitización**: Validación de todas las entradas de usuario
 - **HTTPS**: Conexión segura obligatoria
-- **Headers de Seguridad**: no hay headers propios activos; el sitio se sirve desde GitHub Pages detrás de Cloudflare y tendrían que configurarse ahí
+- **Headers de Seguridad**: HSTS, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy` y `Permissions-Policy`, agregados por una regla de Cloudflare (el sitio se sirve desde GitHub Pages detrás de Cloudflare)
 - **Política de Seguridad Pública**: Divulgación responsable de vulnerabilidades
 - **Página de Agradecimientos**: Reconocimiento a investigadores de seguridad
 

@@ -10,6 +10,7 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 ## [Sin publicar]
 
 ### Agregado
+- Headers de seguridad en todas las respuestas del sitio (2026-10-12), mediante una regla de Cloudflare: HSTS (6 meses), `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, `Referrer-Policy: strict-origin-when-cross-origin` y `Permissions-Policy` sin cámara, micrófono, geolocalización, pagos ni USB
 - Tests de todo el sitio (2026-10-12): 164 tests de JavaScript con `node:test` y `jsdom` en `tests/js/`, que cargan los HTML y scripts reales (utilidades, caché, siglas, tema, idioma, navegación, FAQ, blog, catálogo, Instagram, efemérides, analytics, GTM, service worker e integridad entre archivos), y 45 tests de Python para `api/bump_version.py` y `api/update_instagram.py`. Scripts `npm test`, `npm run test:js`, `npm run test:py` y `npm run trace`; workflow `.github/workflows/tests.yml` que los corre en cada push y pull request
 - Desarrollo guiado por especificación (2026-10-12): `specs/README.md` con el proceso, `specs/base/` con 180 requisitos numerados que describen lo que hace hoy el sitio, `specs/cambios/` para especificar cada cambio y una prueba de trazabilidad que exige un test por requisito
 - Agentes de Claude Code en `.claude/agents/` (2026-10-12): `orquestador` (desarrollador senior que conduce cada cambio con SDD), `frontend` (especialista en HTML, CSS y JS del sitio) y `tester` (escribe los tests y verifica cada cambio)
