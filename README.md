@@ -78,7 +78,7 @@
 - **Cloudflare Analytics**: Métricas de rendimiento y tráfico
 
 ### 🛡️ Seguridad
-- **Content Security Policy**: Protección contra XSS (declarada con `<meta http-equiv>` en cada HTML)
+- **Content Security Policy**: Protección contra XSS (declarada con `<meta http-equiv>` en las páginas principales; `old.html` y `ps3.html` no la tienen)
 - **Sanitización**: Validación de todas las entradas de usuario
 - **HTTPS**: Conexión segura obligatoria
 - **Headers de Seguridad**: definidos en `.htaccess` (solo aplican en un hosting Apache; GitHub Pages no procesa ese archivo)

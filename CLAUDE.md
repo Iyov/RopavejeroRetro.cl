@@ -64,24 +64,24 @@ Páginas legacy/independientes: `old.html` (sitio anterior, usa `css/app.css` + 
 
 ### Convención de cache-busting / versionado
 
-Cada referencia a un asset estático en el HTML (`css/*.min.css`, `js/*.min.js`, `js/modules/*.js`, `js/seo-analytics.js`, `manifest.json`, `service-worker.js`) lleva un query string `?v=YYYY-MM-DD_N`. Al cambiar un asset cacheado hay que incrementar ese valor en `index.html`, `productos.html`, `404.html`, `old.html`, `security-policy.html` y `security-acknowledgments.html`, **y además** cambiar `CACHE_VERSION` en `service-worker.js` — el service worker sirve `.js`/`.css` con estrategia cache-first, así que sin el cambio de versión seguirá entregando archivos obsoletos.
+Cada referencia a un asset estático en el HTML (`css/*.min.css`, `js/*.min.js`, `js/modules/*.js`, `js/seo-analytics.js`, `manifest.json`, `service-worker.js`) lleva un query string `?v=YYYY-MM-DD_N`. Al cambiar un asset cacheado hay que incrementar ese valor en `index.html`, `productos.html`, `404.html`, `old.html`, `security-policy.html` y `security-acknowledgments.html`, **y además** cambiar `CACHE_VERSION` en `service-worker.js` — el service worker sirve `/` e `index.html` con estrategia cache-first desde un caché cuyo nombre depende de `CACHE_VERSION`, así que sin cambiarla los visitantes que ya tienen el sitio cacheado siguen recibiendo el `index.html` anterior, con sus `?v=` viejos. Los `.js`/`.css` también son cache-first, pero un `?v=` nuevo es una URL distinta y se descarga; `productos.html` y las demás páginas van network-first.
 
 Hay dos series de versión que conviven y no tienen por qué coincidir:
 - La manual, `YYYY-MM-DD_N`, en los `?v=` del HTML.
 - La del bot de Instagram, `YYYY-MM-DD_HHMM`, que el script escribe en `CACHE_VERSION` (`ropavejero-vYYYY-MM-DD_HHMM`) y en el `?v=` de `instagram_posts.min.js` dentro del loader inline de `index.html`. No tocar ese `?v=` en un bump manual masivo (un buscar-y-reemplazar por la versión anterior no lo alcanza, y así debe quedar).
 
-`docs/generate_cache_version.py` solo imprime un reporte (no modifica nada), usa rutas `../` — hay que ejecutarlo con `cd docs` pese a lo que dice su docstring — y su lista de assets está desactualizada.
+`docs/generate_cache_version.py` no cambia ninguna versión: imprime un reporte y lo guarda en `docs/CACHE_VERSION_REPORT.txt`. Usa rutas `../` — hay que ejecutarlo con `cd docs` pese a lo que dice su docstring — y su lista de assets está desactualizada.
 
 ### Convenciones del frontend
 
 - **Idioma (ES/EN):** todo texto visible lleva `data-translate="clave"` (o `data-translate-placeholder`) y la clave debe existir en ambos idiomas del objeto `translations` de `js/modules/ui.js`; el HTML trae el texto en español como valor inicial. `setLanguage()` reemplaza con `innerHTML` y vuelve a renderizar efemérides y la tabla de productos. Los textos generados desde JS eligen idioma con `localStorage.getItem('language')`.
 - **Logs:** `logger.js` anula `console.log` y `console.info` fuera de `localhost`/`127.0.0.1`. Lo que deba verse en producción va con `console.warn`/`console.error`.
 - **Contenido externo:** los datos de la Sheet, de Instagram y de los JSON pasan por `sanitizeHTML()` / `sanitizeURL()` (`utils.js`) antes de llegar al DOM. `sanitizeURL()` tiene una lista blanca de dominios.
-- **CSP:** se declara con `<meta http-equiv="Content-Security-Policy">` en cada HTML (no por headers). Agregar un dominio externo implica actualizar ese meta en todos los HTML, y las listas de dominios de `utils.js` (`sanitizeURL`) y `analytics.js` (`isAllowedByCSP`).
+- **CSP:** se declara con `<meta http-equiv="Content-Security-Policy">` (no por headers) en `index.html`, `productos.html`, `404.html` y las dos páginas de seguridad; `old.html` y `ps3.html` no tienen CSP. Agregar un dominio externo implica actualizar ese meta en los cinco, y las listas de dominios de `utils.js` (`sanitizeURL`) y `analytics.js` (`isAllowedByCSP`).
 - **Versión de los JSON:** `siglas.js` e `instagram.js` piden `js/siglas.json` y `js/console_aliases.json` con un `?v=` escrito a mano dentro del JS, independiente del bump de los HTML; hay que cambiarlo ahí al editar esos JSON. `efemerides.json` se pide sin versión.
 - **Caché de productos:** las claves de localStorage llevan versión propia (`CACHE_CONFIG` en `cache.js`, hoy `v1_1_1`). Si cambia la forma de los datos de producto, subir esa versión y agregar las claves anteriores a `cleanOldCaches()`.
 - **Catálogo:** `products.js` sincroniza filtros con la URL (`?q=`, `sort=`, `platform=`, `page=`) vía `history.replaceState`, solo en `/productos` o `productos.html`.
-- **Analytics:** `js/seo-analytics.js` inyecta GTM (`GTM-5D6LZB66`; GA4 se configura dentro del contenedor) y empuja a `dataLayer` el evento `seo_page_context` usando `data-page-type` del `<body>`, más `outbound_click` y `generate_lead` (enlaces a `wa.me`). Una página nueva necesita su `data-page-type`.
+- **Analytics:** `js/seo-analytics.js` inyecta GTM (`GTM-5D6LZB66`); no carga GA4 directamente, solo pasa su ID por `dataLayer`, y el tag de GA4 debe estar configurado dentro del contenedor (ver `docs/SEO_ANALYTICS_PLAYBOOK.md`) y empuja a `dataLayer` el evento `seo_page_context` usando `data-page-type` del `<body>`, más `outbound_click` y `generate_lead` (enlaces a `wa.me`). Una página nueva necesita su `data-page-type`.
 - **Indexación:** solo `index.html` y `productos.html` son indexables (canonical de productos: `/productos`). `404`, `old`, `ps3` y las páginas de seguridad llevan `noindex`.
 
 ### Pipeline de automatización de Instagram

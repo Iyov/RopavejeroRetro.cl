@@ -19,7 +19,7 @@ Describen el sitio de febrero–marzo de 2026. Desde la versión 2.1.0 (agosto d
 | Documento | Fecha | Qué quedó desactualizado |
 |-----------|-------|--------------------------|
 | [SIGLAS_IMPLEMENTATION.md](SIGLAS_IMPLEMENTATION.md) | Marzo 2026 | El diseño sigue siendo válido, pero las funciones están en `js/modules/siglas.js` y `js/modules/products.js`, y `js/siglas.json` pasó a ser bilingüe (`{ "es": ..., "en": ... }`). |
-| [GOOGLE_TRACKING_SETUP.md](GOOGLE_TRACKING_SETUP.md) | Febrero 2026 | Describe los snippets de GTM y GA4 pegados en cada HTML. Hoy GTM lo carga `js/seo-analytics.js` y GA4 se configura dentro del contenedor. Los IDs siguen siendo los mismos. |
+| [GOOGLE_TRACKING_SETUP.md](GOOGLE_TRACKING_SETUP.md) | Febrero 2026 | Describe los snippets de GTM y GA4 pegados en cada HTML. Hoy GTM lo carga `js/seo-analytics.js`, que no carga GA4 directamente: el tag de GA4 debe estar configurado dentro del contenedor. Los IDs siguen siendo los mismos. |
 | [SEO_INDEXATION_IMPROVEMENTS_v1.0.7.md](SEO_INDEXATION_IMPROVEMENTS_v1.0.7.md) | Febrero 2026 | Pasó las páginas de seguridad y `old.html` a `index, follow`. Después volvieron a `noindex` (ver el playbook de SEO). |
 | [OPTIMIZACIONES_RENDIMIENTO.md](OPTIMIZACIONES_RENDIMIENTO.md) | Febrero 2026 | Tamaños de archivo, versión de caché `v1.0.6` y métricas de ese momento. |
 | [OPTIMIZACIONES_MOBILE.md](OPTIMIZACIONES_MOBILE.md) | Febrero 2026 | Incluye recomendaciones para `.htaccess`, que GitHub Pages no procesa. |
@@ -30,7 +30,7 @@ Todos son de la optimización de febrero de 2026 y ninguno forma parte del flujo
 
 | Script | Qué hace | Nota |
 |--------|----------|------|
-| `generate_cache_version.py` | Imprime un reporte con la versión de caché y los assets cacheados. | No modifica nada. Usa rutas `../`: ejecutarlo con `cd docs`. Su lista de assets está desactualizada. |
+| `generate_cache_version.py` | Imprime un reporte con la versión de caché y los assets cacheados, y lo guarda en `docs/CACHE_VERSION_REPORT.txt`. | No cambia ninguna versión. Usa rutas `../`: ejecutarlo con `cd docs`. Su lista de assets está desactualizada. |
 | `analyze_perf.py` | Compara tamaños de CSS/JS originales y minificados. | Usa rutas `../`: ejecutarlo con `cd docs`. |
 | `SUMMARY.py` | Imprime el resumen de la optimización `v1.0.6`. | Solo texto fijo. |
 | `optimize_performance.sh` | Script de optimización de esa fecha. | Revisarlo antes de ejecutarlo: no se ha usado desde entonces. |
