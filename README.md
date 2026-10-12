@@ -198,7 +198,7 @@ RopavejeroRetro.cl/
 │   │   ├── instagram.js       # Posts de Instagram y filtros por consola
 │   │   ├── efemerides.js      # Efemérides del día
 │   │   └── analytics.js       # CSP, AdBlock, fallback analytics
-│   ├── app.min.js             # Script de la versión antigua (old.html); app.js está vacío
+│   ├── app.js / app.min.js    # Script de la versión antigua (old.html)
 │   ├── instagram_posts.js     # Datos de posts de Instagram (generado)
 │   ├── instagram_posts.min.js # Datos minificados de Instagram (generado)
 │   ├── siglas.json            # Diccionario de siglas ES/EN (40+ entradas)
@@ -414,7 +414,7 @@ python -m pytest tests/      # tests del script de Instagram
 A tener en cuenta:
 
 - **El HTML referencia `js/index.min.js` y `css/index.min.css`**, no los fuentes: después de editar `js/index.js` o `css/index.css` hay que minificar y commitear el resultado. Los módulos de `js/modules/` se sirven tal cual.
-- **`js/app.js` está vacío**, pero `js/app.min.js` contiene el script que usa `old.html`. `npm run minify:js`, `npm run build` y `npm run watch` lo sobrescriben con un archivo vacío: restaurarlo con `git checkout js/app.min.js` antes de commitear.
+- **`npm run minify:js`, `npm run build` y `npm run watch` también regeneran `js/instagram_posts.min.js`**, con un resultado distinto al que escribe el bot de Instagram. No hace falta commitear ese diff: descartarlo con `git checkout js/instagram_posts.min.js`.
 - **Versionado de caché:** cada asset lleva `?v=YYYY-MM-DD_N` en los HTML y el service worker tiene su propio `CACHE_VERSION`. Al cambiar un asset hay que subir ambos, o los visitantes seguirán viendo la versión cacheada.
 - **Despliegue:** cada push a `main` publica la raíz del repositorio en GitHub Pages, sin build en CI.
 - **Textos:** todo texto visible debe existir en español e inglés en `translations` (`js/modules/ui.js`).

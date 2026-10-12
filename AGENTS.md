@@ -21,7 +21,7 @@ python -m pytest tests/            # tests del script de Instagram (requiere ins
 
 ## Reglas que no se deducen del código
 
-1. **No correr `npm run minify:js`, `npm run build` ni `npm run watch` sin revisar el resultado.** `js/app.js` está vacío y esos comandos sobrescriben `js/app.min.js` (lo usa `old.html`) con un archivo vacío. Si ocurre: `git checkout js/app.min.js`.
+1. **`npm run minify:js`, `npm run build` y `npm run watch` también regeneran `js/instagram_posts.min.js`** con un resultado distinto al que escribe el bot. No commitear ese diff: `git checkout js/instagram_posts.min.js`.
 2. **El HTML carga `js/index.min.js` y `css/index.min.css`**, no los fuentes. Tras editar `js/index.js` o `css/index.css` hay que regenerar el `.min` y commitearlo. Los archivos de `js/modules/` se sirven sin minificar.
 3. **Los módulos son scripts globales con `defer`, en orden de dependencia.** Agregar, quitar o reordenar uno exige actualizar `index.html`, `productos.html` y `STATIC_RESOURCES` en `service-worker.js`.
 4. **Cache-busting:** al cambiar un asset, subir el `?v=YYYY-MM-DD_N` en todos los HTML y cambiar `CACHE_VERSION` en `service-worker.js`. No tocar el `?v=` de `instagram_posts.min.js` en `index.html`: lo administra el bot.

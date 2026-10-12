@@ -25,7 +25,6 @@ Memoria del proyecto: acuerdos y decisiones tomados con Francisco que no se dedu
 
 Inconsistencias detectadas el 2026-10-12 al revisar el proyecto completo. Están documentadas pero sin corregir. Al resolver una, mover aquí la decisión tomada y registrar el cambio en `CHANGELOG.md`.
 
-2. **`npm run build` vacía `js/app.min.js`.** `js/app.js` tiene 0 bytes y `minify:js` sobrescribe el minificado que usa `old.html`. Opciones: sacar `app.js` del script de minificación o recuperar el fuente.
 3. **La FAQ contradice al resto del sitio.** `faq-answer-5` (en `index.html` y `js/modules/ui.js`, ES y EN) dice que no hay showroom físico, mientras el sitio anuncia el local @DoubleImpactStore en Persa Bio Bio. El mismo texto está copiado en la FAQ de `README.md`.
 4. **`sitemap.xml` lista páginas `noindex`:** `old.html`, `ps3` y las dos páginas de seguridad.
 5. **Los headers de seguridad de `.htaccess` no aplican en GitHub Pages.** La única CSP efectiva es la del `<meta>` de cada HTML. Falta decidir si `.htaccess` y `.htaccess.development` se conservan.
@@ -33,3 +32,4 @@ Inconsistencias detectadas el 2026-10-12 al revisar el proyecto completo. Están
 ## Resueltos
 
 1. **Los posts de Instagram no se desplegaban solos (resuelto 2026-10-12).** Los commits de `github-actions[bot]` no disparan `deploy-pages.yml`; había 32 sin publicar desde el 2026-09-04. Decisión: `update_instagram.yml` lanza el despliegue con `gh workflow run deploy-pages.yml` después de pushear, solo cuando hubo cambios. Se descartó disparar el despliegue con `workflow_run` porque desplegaría cada 12 horas aunque no hubiera posts nuevos. Falta confirmarlo en la primera ejecución del bot que traiga cambios.
+2. **`npm run build` vacía `js/app.min.js` (descartado 2026-10-12: era un falso hallazgo).** `js/app.js` no está vacío: pesa 7.717 bytes en una sola línea, y se leyó mal un conteo de 0 líneas como 0 bytes. Minificarlo reproduce `js/app.min.js` byte a byte, así que no había nada que corregir en el código; solo se retiró la advertencia de `CLAUDE.md`, `AGENTS.md` y `README.md`. Lección: un hallazgo se comprueba ejecutándolo antes de documentarlo.

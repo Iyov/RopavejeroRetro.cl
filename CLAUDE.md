@@ -16,7 +16,7 @@ npm run build        # ejecuta ambos anteriores
 npm run watch        # watcher.js: observa js/ y css/ (archivos no .min) y corre el minify correspondiente al detectar cambios
 ```
 
-**Cuidado con `minify:js` / `build` / `watch`:** `js/app.js` está vacío (0 bytes) pero `js/app.min.js` tiene contenido real y lo usa `old.html`. Correr `npm run minify:js` (o el watcher, que lo dispara ante cualquier cambio en `js/`) sobrescribe `app.min.js` con un archivo vacío — restaurarlo con `git checkout js/app.min.js` antes de commitear, o minificar solo lo necesario: `npx terser js/index.js -o js/index.min.js -c -m`. El mismo comando también regenera `js/instagram_posts.min.js` (diff inofensivo, pero no hace falta commitearlo).
+`npm run minify:js` (y el watcher, que lo dispara ante cualquier cambio en `js/`) también regenera `js/instagram_posts.min.js` con terser, cuyo resultado difiere del que escribe el bot de Instagram. Es un diff inofensivo, pero conviene no commitearlo (`git checkout js/instagram_posts.min.js`) para no chocar con el bot; para minificar solo el entry point: `npx terser js/index.js -o js/index.min.js -c -m`. `js/app.js` (el script de `old.html`) está en una sola línea, y minificarlo reproduce `js/app.min.js` byte a byte.
 
 Solo `js/index.js`, `css/index.css` y `css/app.css` pasan por minificación. Los archivos de `js/modules/` y `js/seo-analytics.js` se sirven tal cual, sin `.min`.
 
