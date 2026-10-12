@@ -86,7 +86,7 @@
 - **Página de Agradecimientos**: Reconocimiento a investigadores de seguridad
 
 ### 🔍 SEO y Indexación
-- **Sitemap.xml**: 6 URLs
+- **Sitemap.xml**: solo las 2 páginas indexables (`/` y `/productos`)
 - **Robots.txt**: Configuración optimizada para crawlers
 - **Meta Tags**: Open Graph, Twitter Cards, Schema.org
 - **Enlaces Internos**: Arquitectura de información mejorada
@@ -159,7 +159,7 @@ RopavejeroRetro.cl/
 ├── manifest.json              # Configuración PWA
 ├── service-worker.js          # Service Worker para caché
 ├── robots.txt                 # Configuración para bots
-├── sitemap.xml                # Mapa del sitio (6 URLs)
+├── sitemap.xml                # Mapa del sitio (2 URLs indexables)
 ├── schema.json                # Datos estructurados Schema.org
 ├── structured-data.json       # Datos estructurados Schema.org
 ├── watcher.js                 # Minificación automática
@@ -439,6 +439,7 @@ El detalle de arquitectura, orden de carga de módulos y precauciones está en [
 - ✅ `productos.html` no cargaba el catálogo tras la refactorización: faltaba incluir los módulos de `js/modules/`.
 - ✅ La FAQ "¿Puedo ver los productos antes de comprar?" ahora indica el local del Persa Bio Bio en vez de decir que no hay showroom.
 - ✅ Los posts de Instagram sincronizados por el bot ahora se despliegan automáticamente.
+- ✅ `sitemap.xml` ya no lista páginas `noindex` y usa la URL canónica `/productos`.
 
 #### Cambiado
 - ✅ Versionado de caché unificado: un solo valor `AAAA-MM-DD_N` en todo el sitio, administrado por `api/bump_version.py`.

@@ -6,7 +6,7 @@
 - La capa `dataLayer` expone contexto SEO por pagina: `page_type`, `page_title`, `canonical_url`, `meta_description` y `page_language`.
 - Se envian eventos base para `outbound_click` y `generate_lead` cuando el destino es `wa.me`.
 - Las paginas auxiliares (`404`, `old`, `ps3`, `security-policy`, `security-acknowledgments`) quedaron en `noindex`.
-- `sitemap.xml` todavia lista `old.html`, `ps3` y las dos paginas de seguridad aunque son `noindex`: pendiente de alinear (ver "Buenas practicas operativas").
+- `sitemap.xml` lista solo las paginas indexables: `/` y `/productos` (la URL canonica, sin `.html`). Las paginas `noindex` no van en el sitemap.
 
 ## Search Console
 

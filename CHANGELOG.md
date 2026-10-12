@@ -19,6 +19,7 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 - Sección "Desarrollo" en `README.md`
 
 ### Corregido
+- `sitemap.xml` listaba cuatro páginas `noindex` (`old.html`, `ps3` y las dos de seguridad) y apuntaba a `/productos.html` en vez de la URL canónica `/productos`; ahora contiene solo `/` y `/productos`, con `lastmod` actualizado (2026-10-12)
 - FAQ "¿Puedo ver los productos antes de comprar?" (ES/EN): decía que no hay showroom físico; ahora indica el local @DoubleImpactStore en el Persa Bio Bio, con dirección y horario (2026-10-12)
 - Los posts de Instagram sincronizados por el bot no se publicaban: sus pushes no disparan `deploy-pages.yml`, y quedaban sin desplegar hasta el siguiente push manual. `update_instagram.yml` ahora lanza el despliegue después de pushear (2026-10-12)
 - `productos.html` no cargaba el catálogo tras la refactorización de 2.1.0: seguía referenciando solo `index.min.js` y no incluía los módulos de `js/modules/`; además se agregaron los módulos a `STATIC_RESOURCES` del service worker (2026-08-25)

@@ -99,7 +99,7 @@ Por qué importa `CACHE_VERSION`: el service worker sirve `/` e `index.html` con
 - **Caché de productos:** las claves de localStorage llevan versión propia (`CACHE_CONFIG` en `cache.js`, hoy `v1_1_1`). Si cambia la forma de los datos de producto, subir esa versión y agregar las claves anteriores a `cleanOldCaches()`.
 - **Catálogo:** `products.js` sincroniza filtros con la URL (`?q=`, `sort=`, `platform=`, `page=`) vía `history.replaceState`, solo en `/productos` o `productos.html`.
 - **Analytics:** `js/seo-analytics.js` inyecta GTM (`GTM-5D6LZB66`); no carga GA4 directamente, solo pasa su ID por `dataLayer`, y el tag de GA4 debe estar configurado dentro del contenedor (ver `docs/SEO_ANALYTICS_PLAYBOOK.md`) y empuja a `dataLayer` el evento `seo_page_context` usando `data-page-type` del `<body>`, más `outbound_click` y `generate_lead` (enlaces a `wa.me`). Una página nueva necesita su `data-page-type`.
-- **Indexación:** solo `index.html` y `productos.html` son indexables (canonical de productos: `/productos`). `404`, `old`, `ps3` y las páginas de seguridad llevan `noindex`.
+- **Indexación:** solo `index.html` y `productos.html` son indexables (canonical de productos: `/productos`). `404`, `old`, `ps3` y las páginas de seguridad llevan `noindex`. `sitemap.xml` lista solo las indexables: una página `noindex` no va ahí.
 
 ### Pipeline de automatización de Instagram
 
