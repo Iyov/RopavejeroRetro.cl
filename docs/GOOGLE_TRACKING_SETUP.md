@@ -1,5 +1,7 @@
 # Google Tracking Setup (GTM + GA4)
 
+> **Nota de vigencia (octubre 2026):** este documento describe la implementación de febrero de 2026, con los snippets de GTM y GA4 pegados en cada HTML. Hoy GTM lo inyecta `js/seo-analytics.js` y GA4 se configura dentro del contenedor de GTM; en el HTML solo queda el `<noscript>` de GTM. Los IDs (`GTM-5D6LZB66`, `G-GCE8SP8NBZ`) y los pasos de verificación siguen siendo válidos. La referencia vigente es [SEO_ANALYTICS_PLAYBOOK.md](SEO_ANALYTICS_PLAYBOOK.md).
+
 ## Implementación Actual
 
 El proyecto utiliza código inline de Google Analytics 4 (GA4) y Google Tag Manager (GTM) directamente en el HTML, siguiendo las recomendaciones oficiales de Google.

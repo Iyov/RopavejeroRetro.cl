@@ -1,5 +1,9 @@
 # 🔒 Guía de Seguridad - Ropavejero Retro
 
+> **Nota de vigencia (octubre 2026):** este documento es de enero de 2026. Desde entonces cambiaron dos cosas:
+> - El sitio se publica en GitHub Pages, que no procesa `.htaccess`. Los headers de seguridad y el bloqueo de archivos listados más abajo están definidos en ese archivo y solo aplican en un hosting Apache. La CSP efectiva es la del `<meta http-equiv="Content-Security-Policy">` de cada HTML.
+> - La CSP incluye además los dominios de Google Tag Manager y Google Analytics; el valor actual es el de los HTML, no el copiado más abajo. Las funciones citadas viven hoy en `js/modules/utils.js`.
+
 ## 📋 Resumen de Implementaciones de Seguridad
 
 ### ✅ Medidas Implementadas

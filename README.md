@@ -27,6 +27,7 @@
 - [Preguntas Frecuentes](#-preguntas-frecuentes)
 - [Redes Sociales](#-redes-sociales)
 - [Instalación y Uso](#-instalación-y-uso)
+- [Desarrollo](#-desarrollo)
 - [Últimos Cambios](#-últimos-cambios)
 - [Otros Cambios](#-otros-cambios)
 - [Contribuir](#-contribuir)
@@ -71,26 +72,27 @@
 - **WebP Nativo**: Generación automática de variantes (400, 800, 1200px) para máxima velocidad.
 
 ### 📊 Analytics
-- **Google Tag Manager (GTM)**: Gestión centralizada de tags
-- **Google Analytics 4 (GA4)**: Seguimiento de métricas y comportamiento de usuarios
+- **Google Tag Manager (GTM)**: Gestión centralizada de tags, cargado por `js/seo-analytics.js`
+- **Google Analytics 4 (GA4)**: Seguimiento de métricas y comportamiento de usuarios (configurado dentro de GTM)
+- **Eventos propios**: `seo_page_context`, `outbound_click` y `generate_lead` (clics a WhatsApp) vía `dataLayer`
 - **Cloudflare Analytics**: Métricas de rendimiento y tráfico
 
 ### 🛡️ Seguridad
-- **Content Security Policy**: Protección contra XSS
+- **Content Security Policy**: Protección contra XSS (declarada con `<meta http-equiv>` en cada HTML)
 - **Sanitización**: Validación de todas las entradas de usuario
 - **HTTPS**: Conexión segura obligatoria
-- **Headers de Seguridad**: X-Content-Type-Options, X-XSS-Protection
+- **Headers de Seguridad**: definidos en `.htaccess` (solo aplican en un hosting Apache; GitHub Pages no procesa ese archivo)
 - **Política de Seguridad Pública**: Divulgación responsable de vulnerabilidades
 - **Página de Agradecimientos**: Reconocimiento a investigadores de seguridad
 
 ### 🔍 SEO y Indexación
-- **Sitemap.xml**: 14 URLs indexables
+- **Sitemap.xml**: 6 URLs
 - **Robots.txt**: Configuración optimizada para crawlers
 - **Meta Tags**: Open Graph, Twitter Cards, Schema.org
 - **Enlaces Internos**: Arquitectura de información mejorada
 - **Canonical URLs**: Prevención de contenido duplicado
 - **404 Personalizado**: Página de error amigable
-- **Indexación Completa**: 8/8 páginas indexadas en Google (100%)
+- **Páginas indexables**: inicio y `/productos`; las auxiliares (`404`, `old`, `ps3`, seguridad) llevan `noindex`
 
 ---
 
@@ -100,13 +102,16 @@ El sitio cuenta con un sistema de actualización inteligente que sincroniza los 
 
 ### ¿Cómo funciona?
 1. **Control por Hashtag**: El sistema solo selecciona los posts de Instagram que incluyan el hashtag `#RopavejeroRetroWeb`.
-2. **Procesamiento de Imágenes**: El script descarga las imágenes originales y genera automáticamente variantes en formato **WebP** (400px, 800px, 1200px) usando la librería `Pillow`.
-3. **Sincronización Total**: Se actualizan los archivos de datos (`js/instagram_posts.min.js`), la versión en el `index.html` y el manifiesto del `service-worker.js`.
-4. **Ejecución**: Se ejecuta automáticamente cada 12 horas vía **GitHub Actions** o manualmente desde la pestaña *Actions*.
+2. **Tipos de post**: Los videos se omiten; de los carruseles se usa la primera imagen. La primera línea del caption es el título y el resto la descripción.
+3. **Procesamiento de Imágenes**: El script descarga las imágenes originales y genera automáticamente variantes en formato **WebP** (400px, 800px, 1200px) usando la librería `Pillow`. Las imágenes de posts que ya no están se eliminan.
+4. **Sincronización Total**: Solo si hubo cambios (posts agregados, modificados, eliminados o con distinto número de likes) se actualizan los archivos de datos (`js/instagram_posts.js` y `js/instagram_posts.min.js`), la versión en el `index.html` y la versión y lista de imágenes del `service-worker.js`.
+5. **Ejecución**: Se ejecuta automáticamente cada 12 horas vía **GitHub Actions** o manualmente desde la pestaña *Actions*. El workflow commitea el resultado con `github-actions[bot]`.
+
+> **Importante:** los commits del bot no disparan el workflow de despliegue (`deploy-pages.yml`). Los posts nuevos quedan publicados recién con el siguiente push a `main` o al ejecutar manualmente *Deploy to GitHub Pages* desde la pestaña *Actions*.
 
 ### Configuración de Secretos
 Para la ejecución en GitHub, se requiere configurar:
-- `INSTAGRAM_TOKEN`: Token de acceso de larga duración (Instagram Basic Display API / Graph API).
+- `INSTAGRAM_TOKEN`: Token de acceso de larga duración (Instagram Graph API). Cuando expira, el script lo informa en el log del workflow y hay que renovarlo.
 
 ---
 
@@ -119,11 +124,11 @@ Para la ejecución en GitHub, se requiere configurar:
 - **Font Awesome 6.5.1**: Iconografía
 
 ### Backend y Automatización
-- **Python 3 (api/ folder)**: Script de actualización de Instagram y procesamiento de imágenes (`Pillow`, `requests`, `python-dotenv`).
-- **GitHub Actions**: Orquestación de tareas programadas cada 12 horas o manuales.
+- **Python 3 (api/ folder)**: Script de actualización de Instagram y procesamiento de imágenes (`Pillow`, `requests`).
+- **GitHub Actions**: Actualización de Instagram cada 12 horas (o manual) y despliegue a GitHub Pages en cada push a `main`.
 
 ### APIs y Servicios
-- **Google Sheets API**: Base de datos de productos en tiempo real
+- **Google Sheets**: Base de datos de productos, leída como CSV público desde el navegador
 - **Service Worker API**: Caché y funcionalidad offline
 - **LocalStorage API**: Almacenamiento local de preferencias
 - **Google Tag Manager**: Gestión de analytics
@@ -133,7 +138,9 @@ Para la ejecución en GitHub, se requiere configurar:
 - **PWA**: Manifest.json para instalación
 - **Schema.org**: Datos estructurados para SEO
 - **Open Graph**: Optimización para redes sociales
+- **terser / csso**: Minificación de JS y CSS (`npm run build`)
 - **Watcher.js**: Minificación automática de archivos
+- **pytest**: Tests del script de Instagram
 - **Python Scripts**: Análisis de performance y optimización
 
 ---
@@ -146,27 +153,41 @@ RopavejeroRetro.cl/
 ├── productos.html             # Catálogo de productos (URL: /productos)
 ├── 404.html                   # Página de error personalizada
 ├── old.html                   # Versión antigua del sitio
+├── ps3.html                   # Página suelta: guía HEN para PS3 (URL: /ps3)
 ├── security-policy.html       # Política de seguridad
 ├── security-acknowledgments.html  # Agradecimientos de seguridad
 ├── manifest.json              # Configuración PWA
 ├── service-worker.js          # Service Worker para caché
 ├── robots.txt                 # Configuración para bots
-├── sitemap.xml                # Mapa del sitio (13 URLs)
+├── sitemap.xml                # Mapa del sitio (6 URLs)
+├── schema.json                # Datos estructurados Schema.org
+├── structured-data.json       # Datos estructurados Schema.org
 ├── watcher.js                 # Minificación automática
-├── package.json               # Dependencias del proyecto
+├── package.json               # Scripts y dependencias de minificación
+├── requirements.txt           # Dependencias Python del script de Instagram
+├── commit_message.txt         # Mensaje de commit que escribe el script de Instagram
 ├── CHANGELOG.md               # Historial de cambios
+├── CLAUDE.md                  # Guía técnica para agentes de IA (arquitectura y precauciones)
+├── AGENTS.md                  # Puntero a CLAUDE.md para otros agentes de IA
+├── MEMORY.md                  # Acuerdos, decisiones y pendientes del proyecto
+├── SECURITY.md                # Guía de seguridad
 ├── api/
 │   └── update_instagram.py    # Motor de automatización (Python)
+├── tests/
+│   └── test_update_instagram.py   # Tests del script de Instagram (pytest)
 ├── .github/workflows/
-│   └── update_instagram.yml   # Configuración de GitHub Actions
+│   ├── update_instagram.yml   # Actualización de Instagram cada 12 horas
+│   └── deploy-pages.yml       # Despliegue a GitHub Pages en cada push a main
 ├── css/
 │   ├── index.css              # Estilos principales
 │   ├── index.min.css          # Estilos minificados
-│   ├── app.css                # Estilos adicionales
+│   ├── app.css / app.min.css  # Estilos de la versión antigua (old.html)
+│   ├── transition*.min.css    # Transiciones de la versión antigua (old.html)
 │   └── font-awesome_6.5.1_all.min.css
 ├── js/
 │   ├── index.js               # Entry point — solo el DOMContentLoaded (16 líneas)
 │   ├── index.min.js           # Minificado del entry point
+│   ├── seo-analytics.js       # GTM/GA4, consentimiento y eventos de dataLayer
 │   ├── modules/               # Módulos separados por responsabilidad
 │   │   ├── logger.js          # Control de logs por ambiente
 │   │   ├── cache.js           # Sistema de caché con localStorage
@@ -177,14 +198,15 @@ RopavejeroRetro.cl/
 │   │   ├── instagram.js       # Posts de Instagram y filtros por consola
 │   │   ├── efemerides.js      # Efemérides del día
 │   │   └── analytics.js       # CSP, AdBlock, fallback analytics
-│   ├── app.js                 # Lógica adicional
-│   ├── instagram_posts.js     # Datos de posts de Instagram
-│   ├── instagram_posts.min.js # Datos minificados de Instagram
+│   ├── app.min.js             # Script de la versión antigua (old.html); app.js está vacío
+│   ├── instagram_posts.js     # Datos de posts de Instagram (generado)
+│   ├── instagram_posts.min.js # Datos minificados de Instagram (generado)
 │   ├── siglas.json            # Diccionario de siglas ES/EN (40+ entradas)
 │   ├── console_aliases.json   # Aliases de consolas para filtros de Instagram
 │   └── efemerides.json        # Efemérides del día
 ├── img/
 │   ├── RopavejeroLogo_*.png   # Logos en varios tamaños
+│   ├── IG_*.jpeg              # Imagen original de cada post de Instagram (fallback)
 │   ├── IG_*-400.webp          # Variantes optimizadas Instagram (Móvil)
 │   ├── IG_*-800.webp          # Variantes optimizadas Instagram (Tablet)
 │   ├── IG_*-1200.webp         # Variantes optimizadas Instagram (Desktop)
@@ -192,11 +214,7 @@ RopavejeroRetro.cl/
 │   ├── bg.svg                 # Fondo
 │   └── favicon.png            # Favicon
 ├── webfonts/                  # Fuentes de Font Awesome
-├── docs/                      # Documentación técnica
-│   ├── SEO_INDEXATION_IMPROVEMENTS_v1.0.7.md
-│   ├── OPTIMIZACIONES_RENDIMIENTO.md
-│   ├── OPTIMIZACIONES_MOBILE.md
-│   └── GOOGLE_TRACKING_SETUP.md
+├── docs/                      # Documentación técnica (ver docs/README.md)
 ├── .well-known/
 │   └── security.txt           # Política de seguridad
 └── README.md                  # Este archivo
@@ -210,14 +228,18 @@ RopavejeroRetro.cl/
 - Página independiente accesible en `https://ropavejeroretro.cl/productos`
 - Búsqueda en tiempo real con debouncing (300ms)
 - Filtros por plataforma (múltiple selección)
-- Filtro por estado (disponible/vendido)
-- Paginación inteligente
+- Ordenamiento por precio, nombre o plataforma
+- Paginación (25 productos por página)
+- Filtros reflejados en la URL (`?q=`, `sort=`, `platform=`, `page=`) para compartir búsquedas
+- Siglas de estado del producto (CIB, BL, GH, etc.) explicadas en tooltips y en el detalle
 - Vista de detalles completos
 - Integración con Google Sheets
 - Caché local (5 minutos)
 
 ### 2. **Sección de Instagram**
 - Últimos posts de Instagram sincronizados automáticamente
+- Filtro por consola (botones generados desde `js/console_aliases.json`)
+- Número de likes por post
 - Imágenes optimizadas en WebP
 - Enlaces directos a publicaciones
 - Fechas relativas ("Hace X días")
@@ -257,7 +279,7 @@ RopavejeroRetro.cl/
 - Pulido profesional de discos ópticos (PS1, PS2, Xbox, GameCube, Wii)
 - Contacto directo vía WhatsApp e Instagram para presupuestos
 
-### 8. **PWA (Progressive Web App)**
+### 9. **PWA (Progressive Web App)**
 - Instalable en dispositivos
 - Funciona offline
 - Service Worker con caché inteligente
@@ -351,18 +373,18 @@ python -m http.server 8000
 4. **Automatización de Instagram (Nuevo)**
 ```bash
 # Instalar dependencias del script
-pip install Pillow requests python-dotenv --break-system-packages
+pip install -r requirements.txt
 
 # Configurar token
 echo "INSTAGRAM_TOKEN=tu_token_aqui" > .env
 
-# Ejecutar actualización
+# Ejecutar actualización (siempre desde la raíz del repositorio)
 python api/update_instagram.py
 ```
 
 5. **Configurar Google Sheets (Opcional)**
    - El sitio usa Google Sheets como base de datos
-   - Para usar tu propia hoja, actualiza la URL en `js/index.js`
+   - Para usar tu propia hoja, actualiza el `sheetId` en `js/modules/products.js`
    - Asegúrate de que la hoja sea pública o tenga permisos adecuados
 
 ### Instalación como PWA
@@ -374,7 +396,46 @@ python api/update_instagram.py
 
 ---
 
+## 🛠 Desarrollo
+
+No hay paso de build para correr el sitio: basta un servidor estático. `npm run build` solo minifica.
+
+```bash
+npm install          # herramientas de minificación (terser, csso)
+npm run minify:js    # js/index.js, js/instagram_posts.js, js/app.js -> *.min.js
+npm run minify:css   # css/index.css, css/app.css -> *.min.css
+npm run build        # ambos
+npm run watch        # minifica automáticamente al guardar
+
+pip install pytest
+python -m pytest tests/      # tests del script de Instagram
+```
+
+A tener en cuenta:
+
+- **El HTML referencia `js/index.min.js` y `css/index.min.css`**, no los fuentes: después de editar `js/index.js` o `css/index.css` hay que minificar y commitear el resultado. Los módulos de `js/modules/` se sirven tal cual.
+- **`js/app.js` está vacío**, pero `js/app.min.js` contiene el script que usa `old.html`. `npm run minify:js`, `npm run build` y `npm run watch` lo sobrescriben con un archivo vacío: restaurarlo con `git checkout js/app.min.js` antes de commitear.
+- **Versionado de caché:** cada asset lleva `?v=YYYY-MM-DD_N` en los HTML y el service worker tiene su propio `CACHE_VERSION`. Al cambiar un asset hay que subir ambos, o los visitantes seguirán viendo la versión cacheada.
+- **Despliegue:** cada push a `main` publica la raíz del repositorio en GitHub Pages, sin build en CI.
+- **Textos:** todo texto visible debe existir en español e inglés en `translations` (`js/modules/ui.js`).
+
+El detalle de arquitectura, orden de carga de módulos y precauciones está en [CLAUDE.md](CLAUDE.md); el índice de documentación técnica, en [docs/README.md](docs/README.md).
+
+---
+
 ## 🆕 Últimos Cambios
+### Sin versionar | Agosto – Octubre 2026
+
+#### Agregado
+- ✅ Local físico **@DoubleImpactStore** (junto a @NekketsuStore, Persa Bio Bio) en textos, meta tags y datos estructurados de todo el sitio.
+- ✅ Documentación para desarrollo: `CLAUDE.md`, `AGENTS.md`, `MEMORY.md` y `docs/README.md`.
+
+#### Corregido
+- ✅ `productos.html` no cargaba el catálogo tras la refactorización: faltaba incluir los módulos de `js/modules/`.
+
+#### Cambiado
+- ✅ Query strings actualizados a `v=2026-08-26_1`.
+
 ### Versión: v2.1.0 | Agosto 2026
 
 #### Refactorización
@@ -614,7 +675,6 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más det
 - ⭐ **Rating Promedio**: 4.8/5
 - 🚚 **Envíos Realizados**: A todo Chile
 - 📦 **Versión Actual**: v2.1.0
-- 🔍 **SEO Score**: 100% de páginas indexadas
 - ⚡ **Performance**: 60-70% más rápido que v1.0.0
 
 ---
