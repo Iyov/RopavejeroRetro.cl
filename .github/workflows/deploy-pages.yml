@@ -18,7 +18,17 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # En un push a main se corre la suite completa antes de publicar. El despliegue
+  # lanzado con workflow_dispatch (el bot de Instagram, o a mano desde Actions)
+  # no la corre: los posts no deben dejar de publicarse por un fallo de la suite.
+  tests:
+    if: github.event_name == 'push'
+    uses: ./.github/workflows/tests.yml
+
   deploy:
+    needs: tests
+    # Publica si la suite pasó, o si no correspondía correrla (workflow_dispatch)
+    if: ${{ !cancelled() && (needs.tests.result == 'success' || needs.tests.result == 'skipped') }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

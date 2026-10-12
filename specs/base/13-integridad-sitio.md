@@ -34,6 +34,7 @@ Reglas que conectan un archivo con otro. Son las que se rompen "sin querer" al t
 
 - **SITE-014** — `sitemap.xml` lista solo las páginas indexables, por su URL canónica, y `robots.txt` lo anuncia sin bloquear el sitio.
 - **SITE-015** — El despliegue a GitHub Pages conserva lo que el bot de Instagram necesita: `deploy-pages.yml` acepta `workflow_dispatch`, el bot lo lanza después de pushear, y existen `.nojekyll` y `CNAME`.
+- **SITE-020** — En un push a `main`, el despliegue corre la suite completa y publica solo si pasa. El despliegue lanzado a mano o por el bot de Instagram (`workflow_dispatch`) no corre la suite y publica directamente. La suite se define una sola vez, en `tests.yml`, que el despliegue reutiliza.
 - **SITE-016** — Las páginas declaran idioma, título, descripción y viewport.
 - **SITE-017** — Las imágenes de contenido tienen texto alternativo.
 - **SITE-018** — Cada página tiene un único encabezado `h1`.

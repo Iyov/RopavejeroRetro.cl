@@ -1,11 +1,11 @@
 name: Tests
 
+# En los push a main esta suite la corre deploy-pages.yml (workflow_call),
+# que solo publica si pasa. Aquí se dispara en pull requests y a mano.
 on:
-  push:
-    branches:
-      - main
   pull_request:
   workflow_dispatch:
+  workflow_call:
 
 permissions:
   contents: read

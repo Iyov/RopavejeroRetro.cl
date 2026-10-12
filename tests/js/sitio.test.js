@@ -344,6 +344,39 @@ test('[SITE-015] el despliegue a GitHub Pages conserva lo que el bot de Instagra
     assert.equal(leer('CNAME').trim(), 'ropavejeroretro.cl');
 });
 
+test('[SITE-020] en un push el despliegue espera a la suite; el del bot de Instagram publica sin ella', () => {
+    const deploy = leer('.github/workflows/deploy-pages.yml');
+    const tests = leer('.github/workflows/tests.yml');
+    // Bloque de un job: desde "  nombre:" hasta el siguiente job o el final
+    const job = (yaml, nombre) => {
+        const inicio = yaml.search(new RegExp(`^  ${nombre}:\\s*$`, 'm'));
+        assert.notEqual(inicio, -1, `falta el job ${nombre}`);
+        const resto = yaml.slice(inicio + 1);
+        const fin = resto.search(/^  [A-Za-z_][\w-]*:\s*$/m);
+        return fin === -1 ? resto : resto.slice(0, fin);
+    };
+
+    // La suite se define una sola vez y es reutilizable
+    assert.match(tests, /^\s+workflow_call:/m, 'tests.yml debe poder llamarse desde otro workflow');
+    assert.match(tests, /^\s+pull_request:/m);
+    assert.doesNotMatch(tests.split(/^jobs:/m)[0], /^\s+push:/m, 'en los push la suite la corre el despliegue, no dos veces');
+    assert.match(tests, /npm run test:js/);
+    assert.match(tests, /npm run test:py/);
+
+    // El despliegue corre la suite solo en los push...
+    const jobTests = job(deploy, 'tests');
+    assert.match(jobTests, /uses: \.\/\.github\/workflows\/tests\.yml/);
+    assert.match(jobTests, /if: github\.event_name == 'push'/);
+
+    // ...y publica si pasó, o si no correspondía correrla (workflow_dispatch del bot o manual)
+    const jobDeploy = job(deploy, 'deploy');
+    assert.match(jobDeploy, /needs: tests/);
+    assert.match(jobDeploy, /needs\.tests\.result == 'success'/);
+    assert.match(jobDeploy, /needs\.tests\.result == 'skipped'/);
+    assert.doesNotMatch(jobDeploy, /always\(\)\s*$/m, 'no debe publicar cuando la suite falla');
+    assert.match(jobDeploy, /actions\/deploy-pages@/);
+});
+
 test('[SITE-016] las páginas declaran idioma, título, descripción y viewport', () => {
     [...PAGINAS_COMPLETAS, ...PAGINAS_MINIMAS].forEach(html => {
         const documento = parsear(html);

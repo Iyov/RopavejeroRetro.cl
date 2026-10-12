@@ -43,7 +43,7 @@ node --test --test-name-pattern="PRD-013" tests/js/productos.test.js   # un solo
 python -m pytest tests/test_bump_version.py         # un archivo de Python
 python -m pytest tests/test_update_instagram.py::test_detects_expired_instagram_token   # un solo test
 ```
-`npm install` trae `jsdom`; `pytest` no está en `requirements.txt` (instalarlo aparte). No hay linter para JS. `.github/workflows/tests.yml` corre la suite en cada push y pull request, pero no bloquea el despliegue.
+`npm install` trae `jsdom`; `pytest` no está en `requirements.txt` (instalarlo aparte). No hay linter para JS. La suite se define en `.github/workflows/tests.yml`. En cada push a `main` la corre `deploy-pages.yml`, que solo publica si pasa; además corre en pull requests y a mano.
 
 ## Forma de trabajo: SDD, orquestador y agentes
 
@@ -158,7 +158,7 @@ El bot commitea directo a `main` cada 12h y, por el bump de versión, toca todos
 
 ### Despliegue
 
-`.github/workflows/deploy-pages.yml` despliega la raíz del repo tal cual a GitHub Pages en cada push a `main` (sin build en CI — los assets minificados ya deben estar commiteados). `.nojekyll` desactiva el procesamiento de Jekyll ya que este es un sitio estático plano.
+`.github/workflows/deploy-pages.yml` despliega la raíz del repo tal cual a GitHub Pages en cada push a `main` (sin build en CI — los assets minificados ya deben estar commiteados). Antes de publicar corre la suite completa (job `tests`, que reutiliza `tests.yml`) y la verificación de versión de caché: si alguna falla, el sitio queda como estaba. Lanzado con `workflow_dispatch` (el bot de Instagram, o a mano desde Actions) no corre la suite: es también la salida de emergencia si la suite falla por una causa ajena al sitio. `.nojekyll` desactiva el procesamiento de Jekyll ya que este es un sitio estático plano.
 
 Los pushes del bot de Instagram se hacen con el `GITHUB_TOKEN` por defecto, y GitHub no dispara workflows `on: push` desde esos pushes. Por eso `update_instagram.yml` lanza el despliegue explícitamente después de pushear (`gh workflow run deploy-pages.yml --ref main`, que sí funciona con `GITHUB_TOKEN` y requiere el permiso `actions: write` del job). Si se renombra `deploy-pages.yml` o se le quita `workflow_dispatch`, ese paso se rompe y los posts dejan de publicarse.
 
