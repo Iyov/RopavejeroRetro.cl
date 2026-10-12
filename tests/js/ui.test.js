@@ -135,6 +135,62 @@ test('[I18N-003] el selector de idioma se abre, cambia el idioma, lo guarda y se
     pagina = null;
 });
 
+test('[I18N-003] cambiar de idioma ida y vuelta no produce errores de JavaScript, tampoco en la página sin catálogo', async () => {
+    // index.html carga ui.js pero no products.js: el redibujado del catálogo no existe ahí
+    for (const html of ['index.html', 'productos.html']) {
+        await abrirSitio(html);
+        const { document, window: w } = pagina;
+        const elegir = async lang => {
+            pagina.click(document.getElementById('languageBtn'));
+            pagina.click(document.querySelector(`.language-option[data-lang="${lang}"]`));
+            await pagina.asentar();
+        };
+
+        await elegir('en');
+        assert.equal(w.localStorage.getItem('language'), 'en', html);
+        assert.equal(texto('.nav [data-translate="menu-contact"]'), 'Contact', html);
+        await elegir('es');
+        assert.equal(w.localStorage.getItem('language'), 'es', html);
+        assert.equal(texto('.nav [data-translate="menu-contact"]'), 'Contacto', html);
+        await elegir('en');
+        assert.equal(texto('.nav [data-translate="menu-contact"]'), 'Contact', html);
+
+        assert.deepEqual(pagina.errores.map(error => (error && error.message) || String(error)), [], `${html}: sin errores de JavaScript`);
+        assert.ok(!document.getElementById('languageSelectorOverlay').classList.contains('active'), html);
+        await pagina.cerrar();
+    }
+    pagina = null;
+});
+
+test('[I18N-009] al reabrir el selector queda marcado el idioma vigente', { todo: 'PEND-18: al reabrir se marca el idioma con que cargó la página' }, async () => {
+    for (const html of ['index.html', 'productos.html']) {
+        // La página cargó en español y el visitante pasa a inglés
+        await abrirSitio(html);
+        const { document } = pagina;
+        const opcion = lang => document.querySelector(`.language-option[data-lang="${lang}"]`);
+        const marcadas = () => Array.from(document.querySelectorAll('.language-option.active'), o => o.dataset.lang);
+
+        pagina.click(document.getElementById('languageBtn'));
+        pagina.click(opcion('en'));
+        assert.deepEqual(marcadas(), ['en'], `${html}: tras elegir inglés`);
+
+        pagina.click(document.getElementById('languageBtn'));
+        assert.ok(document.getElementById('languageSelectorOverlay').classList.contains('active'), html);
+        assert.deepEqual(marcadas(), ['en'], `${html}: al reabrir el selector sigue marcado inglés`);
+        await pagina.cerrar();
+
+        // Lo mismo en el otro sentido: cargó en inglés y pasa a español
+        await abrirSitio(html, { almacenamiento: { language: 'en' } });
+        const doc = pagina.document;
+        pagina.click(doc.getElementById('languageBtn'));
+        pagina.click(doc.querySelector('.language-option[data-lang="es"]'));
+        pagina.click(doc.getElementById('languageBtn'));
+        assert.deepEqual(Array.from(doc.querySelectorAll('.language-option.active'), o => o.dataset.lang), ['es'], `${html}: al reabrir queda marcado español`);
+        await pagina.cerrar();
+    }
+    pagina = null;
+});
+
 test('[I18N-004] al cambiar de idioma se vuelven a cargar las efemérides en el idioma nuevo', async () => {
     await abrirSitio('index.html', { ahora: [2026, 1, 1] });
     const { document } = pagina;

@@ -778,12 +778,9 @@ function setLanguage(lang) {
     
     // Recargar efemérides con el nuevo idioma
     loadEfemerides();
-    
-    // Recargar productos con el nuevo idioma
-    if (window.productsData && window.productsData.length > 0) {
-        renderProductsTable();
-        replaceProductsUrlState();
-    }
+
+    // El catálogo no se redibuja aquí: renderProductsTable() termina llamando a setLanguage().
+    // Lo redibuja el selector de idioma (initLanguage) cuando el visitante elige uno
 }
 
 // ========== MULTILENGUAJE ==========
@@ -816,6 +813,10 @@ function initLanguage() {
             const lang = this.dataset.lang;
             localStorage.setItem('language', lang);
             setLanguage(lang);
+            // Redibujar el catálogo en el idioma elegido (products.js solo existe en productos.html)
+            if (typeof refreshProductsLanguage === 'function') {
+                refreshProductsLanguage();
+            }
             languageSelectorOverlay.classList.remove('active');
         });
     });

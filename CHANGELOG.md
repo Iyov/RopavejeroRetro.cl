@@ -29,6 +29,12 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 - `old.html` ahora declara Content Security Policy por `<meta>`, igual que el resto del sitio, permitiendo además el video embebido de `youtube-nocookie.com` (2026-10-12)
 
 ### Corregido
+- Catálogo de productos (2026-10-12), segunda tanda:
+  - Al cambiar de idioma, las tarjetas, el contador y el filtro de plataformas quedaban en el idioma anterior hasta el siguiente filtro
+  - Al pasar de página la URL no reflejaba la página, así que un enlace copiado abría siempre la primera
+  - Una plataforma con comillas dobles o barra invertida en el nombre rompía el filtro
+  - Un caché de productos dañado dejaba el catálogo en blanco hasta que vencía
+  - Una plataforma con `%` o coma en el nombre no se conservaba en la URL
 - Catálogo de productos (2026-10-12), cuatro defectos que destaparon los tests:
   - Después de una búsqueda sin resultados el catálogo quedaba bloqueado: corregir el texto no actualizaba la tabla y "Limpiar" no funcionaba
   - Con texto en el buscador y una sola plataforma elegida, la plataforma se descartaba

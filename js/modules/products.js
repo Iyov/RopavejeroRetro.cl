@@ -9,6 +9,34 @@ const productsPerPage = 25;
 let selectedPlatforms = new Set(['all']); // Plataformas seleccionadas
 let searchTimeout = null; // Para debounce de búsqueda
 
+// Nombre de plataforma tal como va dentro del parámetro "platform" de la URL. Solo se codifican
+// los caracteres que chocan con el formato: "%" (marca de codificación) y "," (separador).
+// El resto queda igual, para no cambiar la forma de los enlaces que ya circulan
+function encodePlatformForUrl(platform) {
+    return String(platform).replace(/%/g, '%25').replace(/,/g, '%2C');
+}
+
+// Lectura de un nombre de plataforma desde la URL. Un valor imposible de decodificar
+// (p. ej. un "%" suelto escrito a mano) se toma tal cual, sin lanzar error
+function decodePlatformFromUrl(value) {
+    try {
+        return decodeURIComponent(value);
+    } catch (error) {
+        return value;
+    }
+}
+
+// Busca la casilla de una plataforma comparando su valor, sin armar un selector CSS con el
+// nombre: así funciona con comillas, barra invertida, corchetes o cualquier otro carácter.
+// La casilla "Todas" queda fuera: no declara value (vale "on") y no es una plataforma
+function findPlatformCheckbox(platform) {
+    const platformDropdown = document.getElementById('platformDropdown');
+    if (!platformDropdown) return null;
+
+    return Array.from(platformDropdown.querySelectorAll('input[type="checkbox"]:not(#platform-all)'))
+        .find(checkbox => checkbox.value === platform) || null;
+}
+
 function getProductsUrlState() {
     const params = new URLSearchParams(window.location.search);
     const search = params.get('q') || '';
@@ -16,7 +44,7 @@ function getProductsUrlState() {
     const page = Math.max(parseInt(params.get('page') || '1', 10) || 1, 1);
     const platforms = (params.get('platform') || '')
         .split(',')
-        .map(value => decodeURIComponent(value.trim()))
+        .map(value => decodePlatformFromUrl(value.trim()))
         .filter(Boolean);
 
     return {
@@ -45,7 +73,7 @@ function replaceProductsUrlState() {
     }
 
     if (!selectedPlatforms.has('all')) {
-        params.set('platform', Array.from(selectedPlatforms).sort().join(','));
+        params.set('platform', Array.from(selectedPlatforms).sort().map(encodePlatformForUrl).join(','));
     }
 
     if (currentPage > 1) {
@@ -190,14 +218,36 @@ function initMultiSelectPlatform() {
     });
 }
 
+// Productos válidos del caché. Lo guardado en localStorage puede estar dañado: si no es una
+// lista se descarta entera, y de una lista solo se usan los elementos que son un producto
+// (objeto con número mayor que 0 y plataforma de texto), ya normalizados
+function getValidCachedProducts() {
+    const cached = getCachedProducts();
+    if (!Array.isArray(cached)) return [];
+
+    const products = [];
+    cached.forEach(item => {
+        if (!item || typeof item !== 'object' || Array.isArray(item)) return;
+        if (item.Platform !== undefined && item.Platform !== null && typeof item.Platform !== 'string') return;
+
+        const product = normalizeProductData(item);
+        if (product && product.Num > 0) {
+            products.push(product);
+        }
+    });
+
+    return products;
+}
+
 // Cargar productos desde Google Sheets - SEGURO
 async function loadProducts() {
     const tableBody = document.getElementById('productsTableBody');
     const productsCounter = document.getElementById('productsCounter');
-    
-    // Intentar cargar desde caché primero
-    const cachedProducts = getCachedProducts();
-    if (cachedProducts && Array.isArray(cachedProducts) && cachedProducts.length > 0) {
+
+    // Intentar cargar desde caché primero. Si no queda ningún producto válido,
+    // se consulta la hoja como si no hubiera caché
+    const cachedProducts = getValidCachedProducts();
+    if (cachedProducts.length > 0) {
         console.info('📦 Cargando productos desde caché');
         allProducts = cachedProducts;
         filteredProducts = [...cachedProducts];
@@ -782,7 +832,7 @@ function updatePlatformFilter(products) {
         selectedPlatforms.clear();
 
         window._pendingProductsPlatforms.forEach(platform => {
-            const checkbox = platformDropdown.querySelector(`input[value="${platform}"]`);
+            const checkbox = findPlatformCheckbox(platform);
             if (checkbox) {
                 checkbox.checked = true;
                 selectedPlatforms.add(platform);
@@ -919,7 +969,7 @@ function removePlatformSelection(platform) {
     selectedPlatforms.delete(platform);
     
     // Desmarcar checkbox correspondiente
-    const checkbox = document.querySelector(`input[value="${platform}"]`);
+    const checkbox = findPlatformCheckbox(platform);
     if (checkbox) {
         checkbox.checked = false;
     }
@@ -984,6 +1034,17 @@ function filterProducts() {
     // Actualizar contador
     updateProductsCounter();
     replaceProductsUrlState();
+}
+
+// Redibujar el catálogo cuando el visitante elige un idioma: tabla, tarjetas, contador y textos
+// del filtro de plataformas, conservando página, búsqueda, orden, plataformas y URL, y sin volver
+// a consultar la hoja. La llama el selector de idioma (initLanguage), no setLanguage():
+// renderProductsTable() termina en setLanguage() y se llamarían mutuamente.
+// Si el catálogo todavía no cargó no hace nada, para no anunciar que no hay productos
+function refreshProductsLanguage() {
+    if (!window._productsInitialized || allProducts.length === 0) return;
+
+    filterProducts();
 }
 
 // Limpiar filtros - MULTI-SELECT CON RESET DE PLATAFORMAS Y BÚSQUEDA
@@ -1081,7 +1142,9 @@ function changePage(direction) {
     if (newPage >= 1 && newPage <= totalPages) {
         currentPage = newPage;
         renderProductsTable();
-        
+        // La URL refleja la página actual (la página 1 no lleva "page")
+        replaceProductsUrlState();
+
         // Scroll suave a la sección de productos
         const productosSection = document.getElementById('productos');
         if (productosSection) {

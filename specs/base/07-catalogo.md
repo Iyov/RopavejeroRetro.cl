@@ -9,7 +9,8 @@
 ### Carga de datos
 
 - **PRD-004** — El CSV de la hoja se convierte en productos: se omiten la fila de título, la de encabezados, las líneas vacías, las filas con menos de 8 columnas y las que no tienen número. Las comas dentro de comillas se respetan y los saltos de línea de Windows no afectan.
-- **PRD-005** — Si hay un caché vigente, el catálogo se muestra sin consultar la hoja.
+- **PRD-005** — Si hay un caché vigente y válido, el catálogo se muestra sin consultar la hoja.
+- **PRD-039** — Un caché de productos dañado no deja el catálogo en blanco: si lo guardado no es una lista de productos se descarta y se consulta la hoja; los elementos que no son un producto válido se ignoran. No se produce ningún error de JavaScript.
 - **PRD-006** — Sin caché, los productos se piden a la hoja de Google, se muestran y quedan guardados en caché.
 - **PRD-007** — Si la hoja falla (error HTTP, sin red, CSV vacío o sin productos) se reintenta hasta 3 veces. Si un reintento funciona, el catálogo se muestra normalmente; si todos fallan se muestra un mensaje de error con botón "Reintentar", en el idioma activo, y no se guarda nada en caché.
 - **PRD-030** — El catálogo se inicializa cuando su sección se acerca a la pantalla, o tras una espera si el navegador no puede detectarlo, y nunca dos veces.
@@ -34,6 +35,7 @@
 - **PRD-017** — El desplegable de plataformas se abre y se cierra con su control, y se cierra con un clic fuera. Su buscador interno filtra las opciones, avisa si ninguna coincide y se limpia al cerrar.
 - **PRD-018** — Con una búsqueda activa, el desplegable solo ofrece las plataformas que tienen resultados, y avisa si no hay ninguna.
 - **PRD-037** — El aviso "No hay plataformas para esta búsqueda" no es una opción del filtro: no se puede marcar, no cuenta como plataforma y desaparece cuando la búsqueda vuelve a tener resultados.
+- **PRD-038** — El filtro de plataformas funciona con cualquier nombre de plataforma, incluidos los que llevan comillas dobles, comillas simples, barra invertida o corchetes: se puede marcar, quitar con su etiqueta y abrir desde un enlace.
 - **PRD-019** — La búsqueda y el filtro de plataformas se combinan: se muestran los productos que cumplen ambos.
 - **PRD-020** — La búsqueda se puede combinar con una sola plataforma elegida.
 - **PRD-021** — El selector de orden reordena el catálogo por número, precio, nombre o plataforma. Los productos sin precio quedan al final al ordenar por precio.
@@ -51,7 +53,8 @@
 - **PRD-002** — Los filtros activos se escriben en la URL sin recargar la página y los valores por defecto se omiten. Solo ocurre en `/productos` y `/productos.html`.
 - **PRD-003** — Un enlace con filtros en la URL abre el catálogo ya filtrado. Una plataforma que no existe se ignora.
 - **PRD-024** — La página indicada en la URL se respeta, y se ajusta a la última si excede el total.
-- **PRD-025** — Al cambiar de página la URL refleja la página actual. ⚠ PEND-07
+- **PRD-040** — Una plataforma con `%` o con coma en el nombre se conserva al escribirse en la URL y al abrir ese enlace. Los enlaces anteriores siguen funcionando y la URL de las plataformas sin esos caracteres no cambia de forma (`?platform=PS1,SNES`).
+- **PRD-025** — Al cambiar de página la URL refleja la página actual.
 
 ### Detalle del producto
 
@@ -62,7 +65,7 @@
 ### Idioma
 
 - **PRD-032** — Los textos que el catálogo genera (etiquetas de las tarjetas, botones, siglas, encabezados de la tabla) salen en el idioma activo.
-- **PRD-033** — Al cambiar de idioma el catálogo se vuelve a dibujar en el idioma nuevo, sin esperar a otro filtro. ⚠ PEND-07
+- **PRD-033** — Al cambiar de idioma el catálogo se vuelve a dibujar en el idioma nuevo, sin esperar a otro filtro.
 
 ## Notas
 

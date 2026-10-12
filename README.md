@@ -451,6 +451,7 @@ El detalle de arquitectura, orden de carga de módulos y precauciones está en [
 
 #### Corregido
 - **Catálogo**: tras una búsqueda sin resultados ya no queda bloqueado; la búsqueda se combina con una sola plataforma e ignora espacios sobrantes; los nombres con `&` se muestran bien
+- **Catálogo**: se redibuja al cambiar de idioma, la URL refleja la página del listado, y tolera nombres de plataforma inusuales y un caché dañado
 - ✅ `productos.html` no cargaba el catálogo tras la refactorización: faltaba incluir los módulos de `js/modules/`.
 - ✅ La FAQ "¿Puedo ver los productos antes de comprar?" ahora indica el local del Persa Bio Bio en vez de decir que no hay showroom.
 - ✅ Los posts de Instagram sincronizados por el bot ahora se despliegan automáticamente.
