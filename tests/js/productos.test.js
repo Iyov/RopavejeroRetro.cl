@@ -2050,3 +2050,18 @@ test('[PRD-044] cada casilla de plataforma tiene un id único y su etiqueta apun
     });
     assert.deepEqual(plataformasMarcadas(), ['all']);
 });
+
+test('[PRD-045] el pedido a la hoja no usa la caché del navegador ni obliga a una comprobación previa', async () => {
+    await abrirCatalogo();
+    const { opciones } = pagina.peticiones.find(p => esHoja(p.url));
+    const encabezados = Object.keys(opciones.headers || {}).map(nombre => nombre.toLowerCase());
+    // Encabezados que un navegador envía a otro dominio sin pedir permiso antes (CORS-safelisted)
+    const simples = ['accept', 'accept-language', 'content-language'];
+
+    assert.equal(opciones.cache, 'no-store');
+    assert.deepEqual(encabezados.filter(nombre => !simples.includes(nombre)), [], 'encabezados que obligan a un OPTIONS previo');
+    assert.equal(opciones.headers.Accept, 'text/csv');
+    assert.equal((opciones.method || 'GET').toUpperCase(), 'GET');
+    assert.ok(opciones.signal, 'conserva el tiempo límite');
+    assert.equal(cargasHoja(), 1);
+});

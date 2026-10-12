@@ -272,10 +272,11 @@ async function loadProducts() {
             
             const response = await fetch(sheetUrl, {
                 method: 'GET',
+                // Sin copia en la caché del navegador. Se pide con la opción cache y no con los
+                // encabezados Cache-Control/Pragma: esos obligan a un pedido OPTIONS previo a Google
+                cache: 'no-store',
                 headers: {
-                    'Accept': 'text/csv',
-                    'Cache-Control': 'no-cache, no-store, must-revalidate',
-                    'Pragma': 'no-cache'
+                    'Accept': 'text/csv'
                 },
                 signal: controller.signal
             });

@@ -12,6 +12,7 @@
 - **PRD-005** — Si hay un caché vigente y válido, el catálogo se muestra sin consultar la hoja.
 - **PRD-039** — Un caché de productos dañado no deja el catálogo en blanco: si lo guardado no es una lista de productos se descarta y se consulta la hoja; los elementos que no son un producto válido se ignoran. No se produce ningún error de JavaScript.
 - **PRD-006** — Sin caché, los productos se piden a la hoja de Google, se muestran y quedan guardados en caché.
+- **PRD-045** — El pedido a la hoja de Google no usa la caché HTTP del navegador (`cache: 'no-store'`) y solo lleva encabezados simples, de modo que el navegador no necesita un pedido de comprobación previo.
 - **PRD-007** — Si la hoja falla (error HTTP, sin red, CSV vacío o sin productos) se reintenta hasta 3 veces. Si un reintento funciona, el catálogo se muestra normalmente; si todos fallan se muestra un mensaje de error con botón "Reintentar", en el idioma activo, y no se guarda nada en caché.
 - **PRD-042** — Si los productos no cargaron, el aviso de error y su botón "Reintentar" pasan al idioma nuevo cuando el visitante cambia de idioma.
 - **PRD-030** — El catálogo se inicializa cuando su sección se acerca a la pantalla, o tras una espera si el navegador no puede detectarlo, y nunca dos veces.

@@ -56,6 +56,7 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 - `README.md`: dependencias Python (`python-dotenv` no se usa), ubicación del ID de Google Sheets (`js/modules/products.js`), número de URLs del sitemap, estado de indexación y estructura del proyecto
 
 ### Cambiado
+- El catálogo pide la hoja de Google con un solo pedido (2026-10-12): usa `cache: 'no-store'` en vez de los encabezados `Cache-Control` y `Pragma`, que obligaban al navegador a un pedido de comprobación previo
 - Versionado de caché unificado (2026-10-12): antes convivían el esquema manual `AAAA-MM-DD_N`, el del bot de Instagram `AAAA-MM-DD_HHMM` (en `instagram_posts.min.js` y `CACHE_VERSION`), versiones antiguas escritas dentro de `siglas.js` e `instagram.js`, y referencias sin `?v=` (Font Awesome, CSS de `old.html`, `efemerides.json`, registro del service worker en `productos.html`). Ahora todo usa el mismo valor
 - `api/update_instagram.py` ya no genera su propia versión: usa `bump_version.bump()`
 - Query strings actualizados a `v=2026-08-26_1`, luego `v=2026-10-12_1`, `_2` y `_3`
