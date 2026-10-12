@@ -78,10 +78,10 @@
 - **Cloudflare Analytics**: Métricas de rendimiento y tráfico
 
 ### 🛡️ Seguridad
-- **Content Security Policy**: Protección contra XSS (declarada con `<meta http-equiv>` en las páginas principales; `old.html` y `ps3.html` no la tienen)
+- **Content Security Policy**: Protección contra XSS (declarada con `<meta http-equiv>` en todas las páginas salvo `ps3.html`, que solo redirige)
 - **Sanitización**: Validación de todas las entradas de usuario
 - **HTTPS**: Conexión segura obligatoria
-- **Headers de Seguridad**: definidos en `.htaccess` (solo aplican en un hosting Apache; GitHub Pages no procesa ese archivo)
+- **Headers de Seguridad**: no hay headers propios activos; el sitio se sirve desde GitHub Pages detrás de Cloudflare y tendrían que configurarse ahí
 - **Política de Seguridad Pública**: Divulgación responsable de vulnerabilidades
 - **Página de Agradecimientos**: Reconocimiento a investigadores de seguridad
 
@@ -440,6 +440,10 @@ El detalle de arquitectura, orden de carga de módulos y precauciones está en [
 - ✅ La FAQ "¿Puedo ver los productos antes de comprar?" ahora indica el local del Persa Bio Bio en vez de decir que no hay showroom.
 - ✅ Los posts de Instagram sincronizados por el bot ahora se despliegan automáticamente.
 - ✅ `sitemap.xml` ya no lista páginas `noindex` y usa la URL canónica `/productos`.
+- ✅ `old.html` ahora tiene Content Security Policy.
+
+#### Eliminado
+- ✅ `.htaccess` y `.htaccess.development`: GitHub Pages no los procesa, así que sus headers y redirecciones nunca estuvieron activos.
 
 #### Cambiado
 - ✅ Versionado de caché unificado: un solo valor `AAAA-MM-DD_N` en todo el sitio, administrado por `api/bump_version.py`.

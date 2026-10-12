@@ -35,9 +35,10 @@ Francisco lo pedirá cuando corresponda; no empezarlo antes.
 
 ## Pendientes por decidir
 
-Inconsistencias detectadas el 2026-10-12 al revisar el proyecto completo. Están documentadas pero sin corregir. Al resolver una, mover aquí la decisión tomada y registrar el cambio en `CHANGELOG.md`.
+Las cinco inconsistencias detectadas el 2026-10-12 están cerradas (ver "Resueltos"). Queda una decisión abierta:
 
-5. **Los headers de seguridad de `.htaccess` no aplican en GitHub Pages.** La única CSP efectiva es la del `<meta>` que llevan `index.html`, `productos.html`, `404.html` y las dos páginas de seguridad; `old.html` y `ps3.html` no tienen CSP. Falta decidir si `.htaccess` y `.htaccess.development` se conservan.
+- **Headers de seguridad en Cloudflare.** El sitio no envía HSTS, X-Frame-Options, Referrer-Policy ni Permissions-Policy. Solo se pueden agregar desde el panel de Cloudflare, no desde el repositorio. Falta que Francisco decida si los configura.
+
 
 ## Resueltos
 
@@ -45,3 +46,4 @@ Inconsistencias detectadas el 2026-10-12 al revisar el proyecto completo. Están
 2. **`npm run build` vacía `js/app.min.js` (descartado 2026-10-12: era un falso hallazgo).** `js/app.js` no está vacío: pesa 7.717 bytes en una sola línea, y se leyó mal un conteo de 0 líneas como 0 bytes. Minificarlo reproduce `js/app.min.js` byte a byte, así que no había nada que corregir en el código; solo se retiró la advertencia de `CLAUDE.md`, `AGENTS.md` y `README.md`. Tras este error se auditó el resto de lo documentado ese día y se corrigieron tres afirmaciones más (CSP "en cada HTML", `generate_cache_version.py` "no modifica nada" y el motivo por el que hay que cambiar `CACHE_VERSION`).
 3. **La FAQ contradecía al resto del sitio (resuelto 2026-10-12).** `faq-answer-5` decía que no hay showroom físico. Decisión de Francisco: debe indicar el local del Persa Bio Bio. Se cambió el texto en `index.html`, `js/modules/ui.js` (ES y EN) y la FAQ de `README.md`, usando la dirección y el horario que el sitio ya publicaba (sábados, domingos y festivos, 11:00 a 18:00). Es solo una corrección de texto: el rediseño de cómo se anuncia el local está en "Trabajo acordado para más adelante".
 4. **`sitemap.xml` listaba páginas `noindex` (resuelto 2026-10-12).** Se quitaron `old.html`, `ps3` y las dos páginas de seguridad; quedan solo `/` y `/productos`. De paso se cambió `/productos.html` por la URL canónica `/productos`. Regla que queda: una página `noindex` no va en el sitemap. El sitemap no lleva `?v=`, así que este cambio no requirió bump de versión.
+5. **Los headers de `.htaccess` no aplicaban en GitHub Pages (resuelto 2026-10-12).** Decisión: se eliminaron `.htaccess` y `.htaccess.development`, porque daban una falsa sensación de protección, y `SECURITY.md` ya no los presenta como activos. Se agregó CSP por `<meta>` a `old.html` (la misma del sitio más `youtube-nocookie.com` para su video), probada en navegador sin violaciones. `ps3.html` queda sin CSP a propósito: solo redirige a un sitio externo. Se comprobó que el sitio está detrás de Cloudflare y que hoy no envía ningún header de seguridad propio.

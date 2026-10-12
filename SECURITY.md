@@ -1,7 +1,8 @@
 # 🔒 Guía de Seguridad - Ropavejero Retro
 
-> **Nota de vigencia (octubre 2026):** este documento es de enero de 2026. Desde entonces cambiaron dos cosas:
-> - El sitio se publica en GitHub Pages, que no procesa `.htaccess`. Los headers de seguridad y el bloqueo de archivos listados más abajo están definidos en ese archivo y solo aplican en un hosting Apache. La CSP efectiva es la del `<meta http-equiv="Content-Security-Policy">` de `index.html`, `productos.html`, `404.html` y las dos páginas de seguridad; `old.html` y `ps3.html` no tienen CSP.
+> **Nota de vigencia (octubre 2026):** este documento es de enero de 2026 y describe en parte una configuración que ya no existe. Estado real:
+> - **Headers de seguridad: no están activos.** El sitio se sirve desde GitHub Pages detrás de Cloudflare. Los headers listados más abajo (X-Frame-Options, HSTS, Referrer-Policy, Permissions-Policy, etc.) y el bloqueo de archivos sensibles estaban definidos en `.htaccess`, que GitHub Pages nunca procesó; el archivo se eliminó del repositorio el 2026-10-12. Para tenerlos de verdad hay que configurarlos en Cloudflare (reglas de transformación de headers de respuesta), no en el repositorio.
+> - **CSP: sí está activa**, mediante `<meta http-equiv="Content-Security-Policy">` en `index.html`, `productos.html`, `404.html`, `old.html` y las dos páginas de seguridad. `ps3.html` no lleva CSP porque solo redirige a un sitio externo. Una CSP por `<meta>` no puede declarar `frame-ancestors`, así que la protección contra clickjacking depende de los headers de Cloudflare.
 > - La CSP incluye además los dominios de Google Tag Manager y Google Analytics; el valor actual es el de los HTML, no el copiado más abajo. Las funciones citadas viven hoy en `js/modules/utils.js`.
 
 ## 📋 Resumen de Implementaciones de Seguridad
@@ -124,7 +125,7 @@ function handleSecureError(error, context) {
 - **Vulnerabilidades XSS:** ✅ Mitigadas
 - **Inyección de código:** ✅ Prevenida
 - **Exposición de datos:** ✅ Controlada
-- **Headers de seguridad:** ✅ Implementados
+- **Headers de seguridad:** ⚠️ No activos (ver nota de vigencia al inicio)
 - **HTTPS:** ✅ Forzado
 - **CSP:** ✅ Configurado
 

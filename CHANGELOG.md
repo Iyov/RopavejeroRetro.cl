@@ -18,6 +18,12 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 - `docs/README.md`: índice de la documentación técnica, indicando qué documentos están vigentes y cuáles son históricos
 - Sección "Desarrollo" en `README.md`
 
+### Eliminado
+- `.htaccess` y `.htaccess.development`: GitHub Pages no los procesa, así que sus headers de seguridad, redirecciones y reglas de caché nunca estuvieron activos. `SECURITY.md` deja de presentarlos como implementados (2026-10-12)
+
+### Seguridad
+- `old.html` ahora declara Content Security Policy por `<meta>`, igual que el resto del sitio, permitiendo además el video embebido de `youtube-nocookie.com` (2026-10-12)
+
 ### Corregido
 - `sitemap.xml` listaba cuatro páginas `noindex` (`old.html`, `ps3` y las dos de seguridad) y apuntaba a `/productos.html` en vez de la URL canónica `/productos`; ahora contiene solo `/` y `/productos`, con `lastmod` actualizado (2026-10-12)
 - FAQ "¿Puedo ver los productos antes de comprar?" (ES/EN): decía que no hay showroom físico; ahora indica el local @DoubleImpactStore en el Persa Bio Bio, con dirección y horario (2026-10-12)
@@ -28,7 +34,7 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 ### Cambiado
 - Versionado de caché unificado (2026-10-12): antes convivían el esquema manual `AAAA-MM-DD_N`, el del bot de Instagram `AAAA-MM-DD_HHMM` (en `instagram_posts.min.js` y `CACHE_VERSION`), versiones antiguas escritas dentro de `siglas.js` e `instagram.js`, y referencias sin `?v=` (Font Awesome, CSS de `old.html`, `efemerides.json`, registro del service worker en `productos.html`). Ahora todo usa el mismo valor
 - `api/update_instagram.py` ya no genera su propia versión: usa `bump_version.bump()`
-- Query strings actualizados a `v=2026-08-26_1`, luego `v=2026-10-12_1` y `v=2026-10-12_2`
+- Query strings actualizados a `v=2026-08-26_1`, luego `v=2026-10-12_1`, `_2` y `_3`
 - Notas de vigencia en `SECURITY.md`, `docs/GOOGLE_TRACKING_SETUP.md` y `docs/SEO_ANALYTICS_PLAYBOOK.md`
 
 ---
