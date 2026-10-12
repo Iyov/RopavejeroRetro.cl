@@ -16,7 +16,9 @@ Sitio estático en HTML/CSS/JS puro para Ropavejero Retro, desplegado en GitHub 
 python -m http.server 8000         # servir el sitio localmente
 npm run minify:css                 # css/index.css, css/app.css -> *.min.css
 npx terser js/index.js -o js/index.min.js -c -m   # minificar solo el entry point
-python -m pytest tests/            # tests del script de Instagram (requiere instalar pytest)
+python -m pytest tests/            # tests de los scripts Python (requiere instalar pytest)
+python api/bump_version.py         # subir la versión de caché en todo el sitio
+python api/bump_version.py --check # verificar que la versión sea consistente
 ```
 
 ## Reglas que no se deducen del código
@@ -24,9 +26,9 @@ python -m pytest tests/            # tests del script de Instagram (requiere ins
 1. **`npm run minify:js`, `npm run build` y `npm run watch` también regeneran `js/instagram_posts.min.js`** con un resultado distinto al que escribe el bot. No commitear ese diff: `git checkout js/instagram_posts.min.js`.
 2. **El HTML carga `js/index.min.js` y `css/index.min.css`**, no los fuentes. Tras editar `js/index.js` o `css/index.css` hay que regenerar el `.min` y commitearlo. Los archivos de `js/modules/` se sirven sin minificar.
 3. **Los módulos son scripts globales con `defer`, en orden de dependencia.** Agregar, quitar o reordenar uno exige actualizar `index.html`, `productos.html` y `STATIC_RESOURCES` en `service-worker.js`.
-4. **Cache-busting:** al cambiar un asset, subir el `?v=YYYY-MM-DD_N` en todos los HTML y cambiar `CACHE_VERSION` en `service-worker.js`. No tocar el `?v=` de `instagram_posts.min.js` en `index.html`: lo administra el bot.
+4. **Versión de caché única, `AAAA-MM-DD_N`:** el mismo valor va en todos los `?v=` (HTML, loader de Instagram, registro del service worker, `fetch()` de JSON en `js/modules/`) y en `CACHE_VERSION`. Nunca se edita a mano: todo cambio a un archivo que sirve el sitio termina con `python api/bump_version.py` (mismo día `_N+1`, día nuevo `_1`), y `python api/bump_version.py --check` debe pasar antes de commitear.
 5. **No editar a mano** `js/instagram_posts.js`, `js/instagram_posts.min.js`, el array `INSTAGRAM_IMAGES` de `service-worker.js` ni las imágenes `img/IG_*`: los regenera el script de Instagram.
-6. **El bot de Instagram commitea a `main` cada 12 horas** sobre `index.html` y `service-worker.js`: hacer `git pull --rebase` antes de pushear. Sus pushes no disparan el despliegue por sí solos: `update_instagram.yml` lo lanza con `gh workflow run deploy-pages.yml`, así que no renombrar ese workflow ni quitarle `workflow_dispatch`.
+6. **El bot de Instagram commitea a `main` cada 12 horas** y sube la misma versión de caché, así que toca todos los HTML: hacer `git pull --rebase` antes del bump y antes de pushear. Sus pushes no disparan el despliegue por sí solos: `update_instagram.yml` lo lanza con `gh workflow run deploy-pages.yml`, así que no renombrar ese workflow ni quitarle `workflow_dispatch`.
 7. **Todo texto visible va en español e inglés**: atributo `data-translate` en el HTML y la clave en ambos idiomas de `translations` (`js/modules/ui.js`).
 8. **`console.log` y `console.info` están anulados en producción** (`js/modules/logger.js`); usar `console.warn`/`console.error` para lo que deba verse.
 9. **La CSP vive en un `<meta>`** de `index.html`, `productos.html`, `404.html` y las dos páginas de seguridad (`old.html` y `ps3.html` no tienen). Un dominio externo nuevo hay que agregarlo en los cinco, y en las listas de `js/modules/utils.js` y `js/modules/analytics.js`.

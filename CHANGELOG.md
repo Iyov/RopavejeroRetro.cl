@@ -10,6 +10,7 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 ## [Sin publicar]
 
 ### Agregado
+- `api/bump_version.py`: versión de caché única con esquema `AAAA-MM-DD_N` (correlativo por día) para todo el sitio; `--check` detecta referencias con otra versión o sin `?v=`. Scripts `npm run bump` y `npm run check:version`, y tests en `tests/test_bump_version.py` (2026-10-12)
 - Local físico @DoubleImpactStore (junto a @NekketsuStore, Persa Bio Bio) en textos ES/EN, meta tags, `schema.json`, `structured-data.json` y `manifest.json` (2026-08-26)
 - `CLAUDE.md`: guía de arquitectura y precauciones para agentes de IA (2026-09-04, ampliada 2026-10-12)
 - `AGENTS.md`: puntero a `CLAUDE.md` para otros agentes de IA
@@ -24,7 +25,9 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 - `README.md`: dependencias Python (`python-dotenv` no se usa), ubicación del ID de Google Sheets (`js/modules/products.js`), número de URLs del sitemap, estado de indexación y estructura del proyecto
 
 ### Cambiado
-- Query strings actualizados a `v=2026-08-26_1` y luego a `v=2026-10-12_1` en todos los archivos HTML; `CACHE_VERSION` a `ropavejero-v2026-10-12_1`
+- Versionado de caché unificado (2026-10-12): antes convivían el esquema manual `AAAA-MM-DD_N`, el del bot de Instagram `AAAA-MM-DD_HHMM` (en `instagram_posts.min.js` y `CACHE_VERSION`), versiones antiguas escritas dentro de `siglas.js` e `instagram.js`, y referencias sin `?v=` (Font Awesome, CSS de `old.html`, `efemerides.json`, registro del service worker en `productos.html`). Ahora todo usa el mismo valor
+- `api/update_instagram.py` ya no genera su propia versión: usa `bump_version.bump()`
+- Query strings actualizados a `v=2026-08-26_1`, luego `v=2026-10-12_1` y `v=2026-10-12_2`
 - Notas de vigencia en `SECURITY.md`, `docs/GOOGLE_TRACKING_SETUP.md` y `docs/SEO_ANALYTICS_PLAYBOOK.md`
 
 ---

@@ -14,6 +14,8 @@ npm run minify:js    # terser: js/index.js, js/instagram_posts.js, js/app.js -> 
 npm run minify:css   # csso: css/index.css, css/app.css -> *.min.css
 npm run build        # ejecuta ambos anteriores
 npm run watch        # watcher.js: observa js/ y css/ (archivos no .min) y corre el minify correspondiente al detectar cambios
+npm run bump         # sube la versión de caché (AAAA-MM-DD_N) en todo el sitio; requiere Python
+npm run check:version  # verifica que todo el sitio use la misma versión
 ```
 
 `npm run minify:js` (y el watcher, que lo dispara ante cualquier cambio en `js/`) también regenera `js/instagram_posts.min.js` con terser, cuyo resultado difiere del que escribe el bot de Instagram. Es un diff inofensivo, pero conviene no commitearlo (`git checkout js/instagram_posts.min.js`) para no chocar con el bot; para minificar solo el entry point: `npx terser js/index.js -o js/index.min.js -c -m`. `js/app.js` (el script de `old.html`) está en una sola línea, y minificarlo reproduce `js/app.min.js` byte a byte.
@@ -30,7 +32,7 @@ python api/update_instagram.py     # requiere INSTAGRAM_TOKEN en .env
 
 Tests (Python, `tests/`):
 ```bash
-python -m pytest tests/            # o: python -m pytest tests/test_update_instagram.py
+python -m pytest tests/            # o: python -m pytest tests/test_bump_version.py
 python -m pytest tests/test_update_instagram.py::test_detects_expired_instagram_token   # un solo test
 ```
 `pytest` no está en `requirements.txt` (instalarlo aparte). No existe suite de tests ni linter para JS.
@@ -64,13 +66,29 @@ Páginas legacy/independientes: `old.html` (sitio anterior, usa `css/app.css` + 
 
 ### Convención de cache-busting / versionado
 
-Cada referencia a un asset estático en el HTML (`css/*.min.css`, `js/*.min.js`, `js/modules/*.js`, `js/seo-analytics.js`, `manifest.json`, `service-worker.js`) lleva un query string `?v=YYYY-MM-DD_N`. Al cambiar un asset cacheado hay que incrementar ese valor en `index.html`, `productos.html`, `404.html`, `old.html`, `security-policy.html` y `security-acknowledgments.html`, **y además** cambiar `CACHE_VERSION` en `service-worker.js` — el service worker sirve `/` e `index.html` con estrategia cache-first desde un caché cuyo nombre depende de `CACHE_VERSION`, así que sin cambiarla los visitantes que ya tienen el sitio cacheado siguen recibiendo el `index.html` anterior, con sus `?v=` viejos. Los `.js`/`.css` también son cache-first, pero un `?v=` nuevo es una URL distinta y se descarga; `productos.html` y las demás páginas van network-first.
+El sitio tiene **una sola versión de caché**, con el esquema `AAAA-MM-DD_N` (ej. `2026-10-12_2`): fecha del cambio en Chile y un correlativo que parte en 1 y sube con cada cambio del mismo día. Ese mismo valor aparece en todas partes:
 
-Hay dos series de versión que conviven y no tienen por qué coincidir:
-- La manual, `YYYY-MM-DD_N`, en los `?v=` del HTML.
-- La del bot de Instagram, `YYYY-MM-DD_HHMM`, que el script escribe en `CACHE_VERSION` (`ropavejero-vYYYY-MM-DD_HHMM`) y en el `?v=` de `instagram_posts.min.js` dentro del loader inline de `index.html`. No tocar ese `?v=` en un bump manual masivo (un buscar-y-reemplazar por la versión anterior no lo alcanza, y así debe quedar).
+- En el `?v=` de **toda** referencia a un asset local: `<link>`/`<script>` de los HTML (incluidos Font Awesome y los CSS de `old.html`), el loader inline de `instagram_posts.min.js`, el registro del service worker, y los `fetch()` de JSON dentro de `js/modules/` (`siglas.json`, `console_aliases.json`, `efemerides.json`).
+- En `CACHE_VERSION` de `service-worker.js`, como `ropavejero-vAAAA-MM-DD_N`.
 
-`docs/generate_cache_version.py` no cambia ninguna versión: imprime un reporte y lo guarda en `docs/CACHE_VERSION_REPORT.txt`. Usa rutas `../` — hay que ejecutarlo con `cd docs` pese a lo que dice su docstring — y su lista de assets está desactualizada.
+La versión nunca se edita a mano. `api/bump_version.py` es la única forma de cambiarla:
+
+```bash
+python api/bump_version.py           # o: npm run bump  -> pasa todo a la siguiente versión
+python api/bump_version.py --check   # o: npm run check:version -> falla si algo no calza o le falta ?v=
+python api/bump_version.py --show    # versión actual
+```
+
+Reglas:
+
+- **Cada cambio a un archivo que sirve el sitio (HTML, CSS, JS, JSON) termina con un bump**, antes de commitear. Mismo día: `_N+1`; día nuevo: `_1`. La versión actual se lee de `CACHE_VERSION`.
+- El bot de Instagram usa el mismo script (`bump_version.bump()`), así que sus commits también suben el correlativo y tocan todos los HTML. Por eso hay que hacer `git pull --rebase` **antes** del bump; si aun así hay conflicto en líneas de versión, resolverlo quedándose con cualquiera de los dos lados y volver a correr el bump.
+- Al agregar una referencia nueva a un asset local, escribirla ya con el `?v=` actual; `--check` avisa de las que no lo llevan. Las imágenes no se versionan.
+- Archivos que el script recorre: `*.html` de la raíz, `js/index.js`, `js/index.min.js`, `js/seo-analytics.js`, `js/modules/*.js` y `service-worker.js`. Un archivo nuevo fuera de esa lista que contenga `?v=` hay que agregarlo a `target_files()`.
+
+Por qué importa `CACHE_VERSION`: el service worker sirve `/` e `index.html` con estrategia cache-first desde un caché cuyo nombre depende de ese valor, así que sin cambiarlo los visitantes que ya tienen el sitio cacheado siguen recibiendo el `index.html` anterior, con sus `?v=` viejos. Los `.js`/`.css` también son cache-first, pero un `?v=` nuevo es una URL distinta y se descarga; `productos.html` y las demás páginas van network-first.
+
+`docs/generate_cache_version.py` es un script antiguo que no cambia ninguna versión: imprime un reporte y lo guarda en `docs/CACHE_VERSION_REPORT.txt`. Usa rutas `../` — hay que ejecutarlo con `cd docs` pese a lo que dice su docstring — y su lista de assets está desactualizada. No confundirlo con `api/bump_version.py`.
 
 ### Convenciones del frontend
 
@@ -78,7 +96,6 @@ Hay dos series de versión que conviven y no tienen por qué coincidir:
 - **Logs:** `logger.js` anula `console.log` y `console.info` fuera de `localhost`/`127.0.0.1`. Lo que deba verse en producción va con `console.warn`/`console.error`.
 - **Contenido externo:** los datos de la Sheet, de Instagram y de los JSON pasan por `sanitizeHTML()` / `sanitizeURL()` (`utils.js`) antes de llegar al DOM. `sanitizeURL()` tiene una lista blanca de dominios.
 - **CSP:** se declara con `<meta http-equiv="Content-Security-Policy">` (no por headers) en `index.html`, `productos.html`, `404.html` y las dos páginas de seguridad; `old.html` y `ps3.html` no tienen CSP. Agregar un dominio externo implica actualizar ese meta en los cinco, y las listas de dominios de `utils.js` (`sanitizeURL`) y `analytics.js` (`isAllowedByCSP`).
-- **Versión de los JSON:** `siglas.js` e `instagram.js` piden `js/siglas.json` y `js/console_aliases.json` con un `?v=` escrito a mano dentro del JS, independiente del bump de los HTML; hay que cambiarlo ahí al editar esos JSON. `efemerides.json` se pide sin versión.
 - **Caché de productos:** las claves de localStorage llevan versión propia (`CACHE_CONFIG` en `cache.js`, hoy `v1_1_1`). Si cambia la forma de los datos de producto, subir esa versión y agregar las claves anteriores a `cleanOldCaches()`.
 - **Catálogo:** `products.js` sincroniza filtros con la URL (`?q=`, `sort=`, `platform=`, `page=`) vía `history.replaceState`, solo en `/productos` o `productos.html`.
 - **Analytics:** `js/seo-analytics.js` inyecta GTM (`GTM-5D6LZB66`); no carga GA4 directamente, solo pasa su ID por `dataLayer`, y el tag de GA4 debe estar configurado dentro del contenedor (ver `docs/SEO_ANALYTICS_PLAYBOOK.md`) y empuja a `dataLayer` el evento `seo_page_context` usando `data-page-type` del `<body>`, más `outbound_click` y `generate_lead` (enlaces a `wa.me`). Una página nueva necesita su `data-page-type`.
@@ -90,12 +107,12 @@ Hay dos series de versión que conviven y no tienen por qué coincidir:
 - Trae posts desde la Instagram Graph API, quedándose solo con los que llevan el hashtag `#RopavejeroRetroWeb`.
 - Omite los posts `VIDEO`; de los `CAROUSEL_ALBUM` usa la primera imagen. La primera línea del caption pasa a ser el título y el resto la descripción.
 - Descarga las imágenes a `img/IG_<id>.jpeg` y genera variantes WebP responsive (`-400/-800/-1200.webp`) con Pillow; borra las de posts que ya no están.
-- Solo si hubo cambios (incluye cambios en likes): reescribe `js/instagram_posts.js` y `js/instagram_posts.min.js` (genera el min por su cuenta, sin terser), actualiza el `?v=` de `instagram_posts.min.js` en `index.html`, y regenera `CACHE_VERSION` y el array `INSTAGRAM_IMAGES` de `service-worker.js`.
+- Solo si hubo cambios (incluye cambios en likes): reescribe `js/instagram_posts.js` y `js/instagram_posts.min.js` (genera el min por su cuenta, sin terser), regenera el array `INSTAGRAM_IMAGES` de `service-worker.js` y sube la versión de caché de todo el sitio con `bump_version.bump()` (ver "Convención de cache-busting / versionado").
 - Escribe un mensaje de commit en `commit_message.txt` (archivo versionado), que el workflow lee para commitear y pushear el resultado por su cuenta (vía `github-actions[bot]`).
 
-El script edita `index.html` y `service-worker.js` con regex, así que dependen de la forma exacta de estas líneas: `'js/instagram_posts.min.js?v=...'` entre comillas simples, `const CACHE_VERSION = 'ropavejero-v...';` y `const INSTAGRAM_IMAGES = [ ... ];`. Usa rutas relativas al cwd: correrlo siempre desde la raíz del repo.
+El script y `bump_version.py` editan archivos con regex, así que dependen de la forma exacta de estas líneas de `service-worker.js`: `const CACHE_VERSION = 'ropavejero-v...';` y `const INSTAGRAM_IMAGES = [ ... ];`. Usa rutas relativas al cwd: correrlo siempre desde la raíz del repo.
 
-El bot commitea directo a `main` cada 12h tocando `index.html` y `service-worker.js` — hacer `git pull --rebase` antes de pushear cambios a esos archivos.
+El bot commitea directo a `main` cada 12h y, por el bump de versión, toca todos los HTML, los módulos con `fetch()` versionado y `service-worker.js` — hacer `git pull --rebase` antes de empezar un cambio y antes de pushear.
 
 `detect_instagram_error()` en ese script clasifica los payloads de error de la Graph API (ej. token expirado) — ver `tests/test_update_instagram.py` para la forma esperada.
 

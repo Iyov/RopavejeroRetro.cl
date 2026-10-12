@@ -12,6 +12,11 @@ Memoria del proyecto: acuerdos y decisiones tomados con Francisco que no se dedu
 - **Commit y push con cada cambio terminado (2026-10-12):** cada cambio que queda terminado se commitea y se sube a GitHub (`main`) con la cuenta Iyov, sin esperar a que se pida. Un commit por cambio, verificando la identidad antes y haciendo `git pull --rebase` primero, porque el bot de Instagram también commitea a `main`. Cada push a `main` despliega el sitio.
 - **Orden de trabajo (2026-10-12):** primero se actualiza la documentación; las inconsistencias detectadas se revisan después, una por una, y ninguna se corrige sin acordarlo antes.
 
+## Versionado de caché
+
+- **Un solo esquema en todas partes (2026-10-12):** la versión de los archivos es siempre `?v=AAAA-MM-DD_N` (ej. `?v=2026-10-12_1`), el mismo valor en todo el sitio, sin excepciones: HTML, JS, JSON, service worker y lo que escribe el bot de Instagram. Si hay más cambios el mismo día, se enumeran con el correlativo (`_2`, `_3`, ...); un día nuevo parte en `_1`. Francisco lo pidió expresamente porque el bot usaba `AAAA-MM-DD_HHMM` y había referencias con versiones viejas o sin versión.
+- **Cada cambio lleva su bump (2026-10-12):** todo cambio a un archivo que sirve el sitio termina con `python api/bump_version.py` y con `--check` pasando, antes del commit. La versión no se edita a mano.
+
 ## Decisiones sobre la documentación
 
 - **Idioma (2026-10-12):** toda la documentación del proyecto se escribe en español.

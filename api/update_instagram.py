@@ -1,9 +1,13 @@
 import os
+import sys
 import json
 import requests
 import re
 from datetime import datetime
 from PIL import Image
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import bump_version
 
 
 def detect_instagram_error(payload):
@@ -43,7 +47,6 @@ ACCESS_TOKEN = os.getenv('INSTAGRAM_TOKEN')
 HASHTAG_FILTER = '#RopavejeroRetroWeb'
 JS_FILE_PATH = 'js/instagram_posts.js'
 MIN_JS_FILE_PATH = 'js/instagram_posts.min.js'
-INDEX_FILE_PATH = 'index.html'
 SW_FILE_PATH = 'service-worker.js'
 IMAGE_DIR = 'img/'
 MAX_POSTS = 1000  # Número máximo de posts a obtener
@@ -376,25 +379,11 @@ def update_files(new_posts):
     with open(MIN_JS_FILE_PATH, 'w', encoding='utf-8') as f:
         f.write(min_js_content)
 
-    # 3. Actualizar Index.html
-    new_version = datetime.now().strftime('%Y-%m-%d_%H%M')
-    if os.path.exists(INDEX_FILE_PATH):
-        with open(INDEX_FILE_PATH, 'r', encoding='utf-8') as f:
-            html = f.read()
-        pattern = r"instagram_posts\.min\.js\?v=[^']+"
-        replacement = f"instagram_posts.min.js?v={new_version}"
-        new_html = re.sub(pattern, replacement, html)
-        with open(INDEX_FILE_PATH, 'w', encoding='utf-8') as f:
-            f.write(new_html)
-
-    # 4. Actualizar Service Worker con TODAS las variantes WebP
+    # 3. Actualizar Service Worker con TODAS las variantes WebP
     if os.path.exists(SW_FILE_PATH):
         with open(SW_FILE_PATH, 'r', encoding='utf-8') as f:
             sw_content = f.read()
-        
-        sw_version = datetime.now().strftime('%Y-%m-%d_%H%M')
-        sw_content = re.sub(r"const CACHE_VERSION = 'ropavejero-v[^']+';", f"const CACHE_VERSION = 'ropavejero-v{sw_version}';", sw_content)
-        
+
         # Generar lista extendida de imágenes (JPEG + todas las variantes WebP)
         full_images_list = []
         for p in new_posts:
@@ -410,6 +399,10 @@ def update_files(new_posts):
         with open(SW_FILE_PATH, 'w', encoding='utf-8') as f:
             f.write(sw_content)
         print(f"Service Worker actualizado con variantes WebP")
+
+    # 4. Subir la versión de caché (AAAA-MM-DD_N) en todos los HTML, módulos JS y service worker
+    new_version = bump_version.bump()
+    print(f"Versión de caché actualizada a {new_version}")
 
     print(f"Proceso completado. Archivos y variantes de imagen generados.")
 

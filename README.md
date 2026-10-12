@@ -104,7 +104,7 @@ El sitio cuenta con un sistema de actualización inteligente que sincroniza los 
 1. **Control por Hashtag**: El sistema solo selecciona los posts de Instagram que incluyan el hashtag `#RopavejeroRetroWeb`.
 2. **Tipos de post**: Los videos se omiten; de los carruseles se usa la primera imagen. La primera línea del caption es el título y el resto la descripción.
 3. **Procesamiento de Imágenes**: El script descarga las imágenes originales y genera automáticamente variantes en formato **WebP** (400px, 800px, 1200px) usando la librería `Pillow`. Las imágenes de posts que ya no están se eliminan.
-4. **Sincronización Total**: Solo si hubo cambios (posts agregados, modificados, eliminados o con distinto número de likes) se actualizan los archivos de datos (`js/instagram_posts.js` y `js/instagram_posts.min.js`), la versión en el `index.html` y la versión y lista de imágenes del `service-worker.js`.
+4. **Sincronización Total**: Solo si hubo cambios (posts agregados, modificados, eliminados o con distinto número de likes) se actualizan los archivos de datos (`js/instagram_posts.js` y `js/instagram_posts.min.js`), la lista de imágenes del `service-worker.js` y la versión de caché de todo el sitio (`AAAA-MM-DD_N`).
 5. **Ejecución**: Se ejecuta automáticamente cada 12 horas vía **GitHub Actions** o manualmente desde la pestaña *Actions*. El workflow commitea el resultado con `github-actions[bot]`.
 
 6. **Despliegue**: Cuando hubo cambios, el mismo workflow lanza *Deploy to GitHub Pages* (`deploy-pages.yml`) para publicarlos. Es un paso explícito porque los pushes del bot no disparan por sí solos el despliegue.
@@ -172,9 +172,11 @@ RopavejeroRetro.cl/
 ├── MEMORY.md                  # Acuerdos, decisiones y pendientes del proyecto
 ├── SECURITY.md                # Guía de seguridad
 ├── api/
-│   └── update_instagram.py    # Motor de automatización (Python)
+│   ├── update_instagram.py    # Motor de automatización (Python)
+│   └── bump_version.py        # Versión de caché única (AAAA-MM-DD_N) para todo el sitio
 ├── tests/
-│   └── test_update_instagram.py   # Tests del script de Instagram (pytest)
+│   ├── test_update_instagram.py   # Tests del script de Instagram (pytest)
+│   └── test_bump_version.py       # Tests del versionado de caché
 ├── .github/workflows/
 │   ├── update_instagram.yml   # Actualización de Instagram cada 12 horas
 │   └── deploy-pages.yml       # Despliegue a GitHub Pages en cada push a main
@@ -408,14 +410,17 @@ npm run build        # ambos
 npm run watch        # minifica automáticamente al guardar
 
 pip install pytest
-python -m pytest tests/      # tests del script de Instagram
+python -m pytest tests/      # tests de los scripts Python
+
+npm run bump                 # sube la versión de caché en todo el sitio
+npm run check:version        # verifica que la versión sea consistente
 ```
 
 A tener en cuenta:
 
 - **El HTML referencia `js/index.min.js` y `css/index.min.css`**, no los fuentes: después de editar `js/index.js` o `css/index.css` hay que minificar y commitear el resultado. Los módulos de `js/modules/` se sirven tal cual.
 - **`npm run minify:js`, `npm run build` y `npm run watch` también regeneran `js/instagram_posts.min.js`**, con un resultado distinto al que escribe el bot de Instagram. No hace falta commitear ese diff: descartarlo con `git checkout js/instagram_posts.min.js`.
-- **Versionado de caché:** cada asset lleva `?v=YYYY-MM-DD_N` en los HTML y el service worker tiene su propio `CACHE_VERSION`. Al cambiar un asset hay que subir ambos, o los visitantes seguirán viendo la versión cacheada.
+- **Versionado de caché:** el sitio usa una sola versión con el esquema `AAAA-MM-DD_N` (ej. `2026-10-12_2`), igual en todos los `?v=` y en `CACHE_VERSION` del service worker. Después de cada cambio se sube con `npm run bump` (o `python api/bump_version.py`): si ya hubo cambios ese día aumenta el correlativo, y si es un día nuevo parte en `_1`. `npm run check:version` verifica que no quede ninguna referencia con otra versión o sin `?v=`. El bot de Instagram usa el mismo mecanismo.
 - **Despliegue:** cada push a `main` publica la raíz del repositorio en GitHub Pages, sin build en CI.
 - **Textos:** todo texto visible debe existir en español e inglés en `translations` (`js/modules/ui.js`).
 
@@ -436,7 +441,7 @@ El detalle de arquitectura, orden de carga de módulos y precauciones está en [
 - ✅ Los posts de Instagram sincronizados por el bot ahora se despliegan automáticamente.
 
 #### Cambiado
-- ✅ Query strings actualizados a `v=2026-10-12_1`.
+- ✅ Versionado de caché unificado: un solo valor `AAAA-MM-DD_N` en todo el sitio, administrado por `api/bump_version.py`.
 
 ### Versión: v2.1.0 | Agosto 2026
 

@@ -30,7 +30,7 @@ Todos son de la optimización de febrero de 2026 y ninguno forma parte del flujo
 
 | Script | Qué hace | Nota |
 |--------|----------|------|
-| `generate_cache_version.py` | Imprime un reporte con la versión de caché y los assets cacheados, y lo guarda en `docs/CACHE_VERSION_REPORT.txt`. | No cambia ninguna versión. Usa rutas `../`: ejecutarlo con `cd docs`. Su lista de assets está desactualizada. |
+| `generate_cache_version.py` | Imprime un reporte con la versión de caché y los assets cacheados, y lo guarda en `docs/CACHE_VERSION_REPORT.txt`. | No cambia ninguna versión (para eso está `api/bump_version.py`). Usa rutas `../`: ejecutarlo con `cd docs`. Su lista de assets está desactualizada. |
 | `analyze_perf.py` | Compara tamaños de CSS/JS originales y minificados. | Usa rutas `../`: ejecutarlo con `cd docs`. |
 | `SUMMARY.py` | Imprime el resumen de la optimización `v1.0.6`. | Solo texto fijo. |
 | `optimize_performance.sh` | Script de optimización de esa fecha. | Revisarlo antes de ejecutarlo: no se ha usado desde entonces. |
