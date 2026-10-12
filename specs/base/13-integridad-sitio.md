@@ -10,11 +10,12 @@ Reglas que conectan un archivo con otro. Son las que se rompen "sin querer" al t
 ### Carga de scripts
 
 - **SITE-001** — El inicio y el catálogo cargan `seo-analytics.js`, luego los módulos en orden de dependencia (logger, cache, siglas, utils, ui, products solo en el catálogo, instagram, efemerides, analytics) y al final `index.min.js`; todos con `defer` y versión de caché. Todo archivo de `js/modules/` está contemplado en ese orden.
-- **SITE-002** — La página 404 y las de seguridad cargan solo `seo-analytics.js` e `index.min.js`.
+- **SITE-002** — La página 404 y las de seguridad cargan `seo-analytics.js`, luego `logger.js` y `ui.js`, y al final `index.min.js`; todos con `defer` y versión de caché.
 - **SITE-003** — Los archivos minificados que sirve el sitio corresponden a sus fuentes: `js/index.min.js`, `js/app.min.js`, `css/index.min.css` y `css/app.min.css`.
-- **SITE-004** — Toda función que invoca `index.js` existe en las páginas que cargan los módulos. `lazyInitProducts`, que solo existe en el catálogo, va protegida.
+- **SITE-004** — Toda función que invoca `index.js` existe en las páginas que cargan todos los módulos. Las que pertenecen a un módulo que no todas las páginas cargan (`loadSiglas`, `lazyInitProducts`, `loadEfemerides`) van protegidas, y la interfaz se inicia aunque las siglas no carguen.
 - **SITE-005** — El inicio y el catálogo arrancan sin errores de JavaScript.
-- **SITE-006** — En la página 404 y las de seguridad funcionan el botón de tema y el menú móvil, sin errores de JavaScript. ⚠ PEND-13
+- **SITE-006** — En la página 404 y las de seguridad funcionan el botón de tema y el menú móvil, sin errores de JavaScript.
+- **SITE-019** — En la página 404 y las de seguridad se aplica el tema guardado por el visitante, y funcionan además la barra de progreso y el botón "volver arriba". Esas páginas se muestran siempre en español: no tienen selector de idioma y un idioma guardado no las traduce a medias. No piden siglas ni efemérides.
 
 ### Referencias
 
@@ -35,4 +36,4 @@ Reglas que conectan un archivo con otro. Son las que se rompen "sin querer" al t
 - **SITE-015** — El despliegue a GitHub Pages conserva lo que el bot de Instagram necesita: `deploy-pages.yml` acepta `workflow_dispatch`, el bot lo lanza después de pushear, y existen `.nojekyll` y `CNAME`.
 - **SITE-016** — Las páginas declaran idioma, título, descripción y viewport.
 - **SITE-017** — Las imágenes de contenido tienen texto alternativo.
-- **SITE-018** — Cada página tiene un único encabezado `h1`. ⚠ PEND-14
+- **SITE-018** — Cada página tiene un único encabezado `h1`.

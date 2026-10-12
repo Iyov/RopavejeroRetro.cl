@@ -1,6 +1,10 @@
 // ========== INICIALIZACIÓN ==========
 document.addEventListener('DOMContentLoaded', function() {
-    loadSiglas().then(() => {
+    // Los módulos de siglas, catálogo y efemérides no se cargan en todas las páginas
+    // (404 y páginas de seguridad solo cargan ui.js): sus funciones van protegidas
+    const siglasListas = typeof loadSiglas === 'function' ? loadSiglas() : Promise.resolve();
+
+    siglasListas.then(() => {
         initTheme();
         initLanguage();
         initProgressBar();
@@ -10,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
         initFAQ();
         initBlogDialogs();
         if (typeof lazyInitProducts === 'function') lazyInitProducts();
-        loadEfemerides();
+        if (typeof loadEfemerides === 'function') loadEfemerides();
         applySavedSettings();
     });
 });

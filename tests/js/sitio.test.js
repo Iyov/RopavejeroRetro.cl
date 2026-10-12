@@ -6,7 +6,7 @@ const { test, afterEach } = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
-const { ROOT, MODULOS, abrirPagina, leer, existe, sinQuery, parsear, scriptsDeclarados, scriptsInline } = require('./helpers/pagina');
+const { ROOT, MODULOS, abrirPagina, leer, existe, sinQuery, parsear, scriptsDeclarados, scriptsInline, respuesta } = require('./helpers/pagina');
 
 const PAGINAS_COMPLETAS = ['index.html', 'productos.html'];
 const PAGINAS_MINIMAS = ['404.html', 'security-policy.html', 'security-acknowledgments.html'];
@@ -41,9 +41,14 @@ test('[SITE-001] todo archivo de js/modules/ está contemplado en el orden de ca
     assert.deepEqual(enDisco, [...MODULOS].sort(), 'un módulo nuevo debe agregarse a los HTML, al service worker y a MODULOS del arnés');
 });
 
-test('[SITE-002] la página 404 y las de seguridad cargan solo seo-analytics.js e index.min.js', () => {
+test('[SITE-002] la página 404 y las de seguridad cargan solo seo-analytics.js, logger.js, ui.js e index.min.js', () => {
     PAGINAS_MINIMAS.forEach(html => {
-        assert.deepEqual(scriptsDeclarados(html).map(s => s.ruta), ['js/seo-analytics.js', 'js/index.min.js'], html);
+        const scripts = scriptsDeclarados(html);
+        assert.deepEqual(scripts.map(s => s.ruta), ['js/seo-analytics.js', 'js/modules/logger.js', 'js/modules/ui.js', 'js/index.min.js'], html);
+        scripts.forEach(s => {
+            assert.ok(s.defer, `${html}: ${s.ruta} sin defer`);
+            assert.match(s.src, VERSION, `${html}: ${s.ruta} sin ?v=`);
+        });
     });
 });
 
@@ -60,10 +65,10 @@ test('[SITE-003] los archivos minificados que sirve el sitio corresponden a sus 
     }
 });
 
-test('[SITE-004] toda función que invoca index.js existe en las páginas que cargan los módulos', async () => {
-    const invocadas = [...leer('js/index.js').matchAll(/\b([A-Za-z_]\w*)\(\)/g)].map(m => m[1])
-        .filter(nombre => !['function', 'then'].includes(nombre));
-    assert.ok(invocadas.includes('initTheme') && invocadas.includes('loadEfemerides'));
+test('[SITE-004] toda función que invoca index.js existe en las páginas que cargan todos los módulos', async () => {
+    const fuente = leer('js/index.js');
+    const invocadas = [...new Set([...fuente.matchAll(/\b((?:init|load|apply|lazy)[A-Za-z]\w*)\(/g)].map(m => m[1]))];
+    assert.ok(invocadas.includes('initTheme') && invocadas.includes('loadEfemerides') && invocadas.includes('loadSiglas'));
 
     for (const html of PAGINAS_COMPLETAS) {
         pagina = await abrirPagina({ html, scripts: 'declarados' });
@@ -75,7 +80,26 @@ test('[SITE-004] toda función que invoca index.js existe en las páginas que ca
     }
     pagina = null;
 
-    assert.match(leer('js/index.js'), /typeof lazyInitProducts === 'function'/, 'lazyInitProducts solo existe en productos.html: debe ir protegida');
+    // Las funciones de módulos que no todas las páginas cargan van protegidas
+    ['loadSiglas', 'lazyInitProducts', 'loadEfemerides'].forEach(nombre => {
+        assert.match(fuente, new RegExp(`typeof ${nombre} === 'function'`), `${nombre} debe ir protegida con typeof`);
+    });
+});
+
+test('[SITE-004] la interfaz se inicia aunque las siglas no carguen', async () => {
+    pagina = await abrirPagina({
+        html: 'index.html',
+        scripts: 'declarados',
+        iniciar: true,
+        rutas: url => (url.includes('siglas.json') ? respuesta('error', { status: 500, tipo: 'text/plain' }) : undefined)
+    });
+    const { document } = pagina;
+
+    pagina.click(document.getElementById('themeBtn'));
+    assert.ok(document.documentElement.classList.contains('light-mode'));
+    pagina.click(document.getElementById('mobileMenuBtn'));
+    assert.ok(document.getElementById('mobileMenu').classList.contains('active'));
+    assert.deepEqual(pagina.errores.map(e => e.message), []);
 });
 
 test('[SITE-005] inicio y catálogo arrancan sin errores de JavaScript', async () => {
@@ -91,21 +115,67 @@ test('[SITE-005] inicio y catálogo arrancan sin errores de JavaScript', async (
     pagina = null;
 });
 
-test('[SITE-006] en la página 404 y las de seguridad funcionan el botón de tema y el menú móvil', { todo: 'PEND-13: index.min.js falla sin los módulos' }, async () => {
+test('[SITE-006] en la página 404 y las de seguridad funcionan el botón de tema y el menú móvil', async () => {
     for (const html of PAGINAS_MINIMAS) {
         pagina = await abrirPagina({ html, scripts: 'declarados', iniciar: true });
-        const { document } = pagina;
-        const errores = pagina.errores.map(e => e.message);
+        const { document, window: w } = pagina;
+        const menu = document.getElementById('mobileMenu');
+        const boton = document.getElementById('themeBtn');
 
-        pagina.click(document.getElementById('themeBtn'));
-        const temaCambia = document.documentElement.classList.contains('light-mode');
+        pagina.click(boton);
+        assert.ok(document.documentElement.classList.contains('light-mode'), `${html}: tema claro`);
+        assert.ok(boton.querySelector('i').classList.contains('fa-sun'), `${html}: ícono`);
+        assert.equal(w.localStorage.getItem('theme'), 'light', `${html}: se recuerda`);
+        pagina.click(boton);
+        assert.ok(!document.documentElement.classList.contains('light-mode'), `${html}: tema oscuro`);
+        assert.equal(w.localStorage.getItem('theme'), 'dark', html);
+
         pagina.click(document.getElementById('mobileMenuBtn'));
-        const menuAbre = document.getElementById('mobileMenu').classList.contains('active');
-        await pagina.cerrar();
-        pagina = null;
+        assert.ok(menu.classList.contains('active'), `${html}: menú abre`);
+        assert.equal(document.body.style.overflow, 'hidden', html);
+        pagina.click(document.getElementById('mobileMenuClose'));
+        assert.ok(!menu.classList.contains('active'), `${html}: menú cierra`);
 
-        assert.deepEqual({ html, errores, temaCambia, menuAbre }, { html, errores: [], temaCambia: true, menuAbre: true });
+        pagina.click(document.getElementById('mobileMenuBtn'));
+        pagina.despachar(document, 'keydown', { key: 'Escape' });
+        assert.ok(!menu.classList.contains('active'), `${html}: Escape`);
+        assert.equal(document.body.style.overflow, '', html);
+
+        assert.deepEqual(pagina.errores.map(e => e.message), [], html);
+        assert.deepEqual(pagina.mensajes('error'), [], html);
+        await pagina.cerrar();
     }
+    pagina = null;
+});
+
+test('[SITE-019] la página 404 y las de seguridad aplican el tema guardado y se muestran siempre en español', async () => {
+    for (const html of PAGINAS_MINIMAS) {
+        const original = Array.from(parsear(html).querySelectorAll('[data-translate]'), e => e.innerHTML);
+        pagina = await abrirPagina({ html, scripts: 'declarados', iniciar: true, almacenamiento: { theme: 'light', language: 'en' } });
+        const { document } = pagina;
+
+        assert.ok(document.documentElement.classList.contains('light-mode'), `${html}: tema guardado`);
+        assert.ok(document.querySelector('#themeBtn i').classList.contains('fa-sun'), html);
+
+        // Sin selector de idioma, el idioma guardado no traduce la página a medias
+        assert.deepEqual(Array.from(document.querySelectorAll('[data-translate]'), e => e.innerHTML), original, `${html}: textos`);
+        assert.equal(document.getElementById('languageBtn'), null, html);
+
+        // Barra de progreso y botón "volver arriba"
+        Object.defineProperty(document.documentElement, 'scrollHeight', { value: 2000, configurable: true });
+        Object.defineProperty(document.documentElement, 'clientHeight', { value: 1000, configurable: true });
+        pagina.desplazar(500);
+        assert.equal(document.getElementById('progress').style.width, '50%', html);
+        assert.ok(document.getElementById('backToTopBtn').classList.contains('visible'), html);
+        pagina.click(document.getElementById('backToTopBtn'));
+        assert.equal(pagina.scrolls.length, 1, html);
+
+        // No piden datos que no usan
+        assert.deepEqual(pagina.peticiones.map(p => p.original), [], `${html}: peticiones`);
+        assert.deepEqual(pagina.errores.map(e => e.message), [], html);
+        await pagina.cerrar();
+    }
+    pagina = null;
 });
 
 // ---------- Referencias entre archivos ----------
@@ -284,7 +354,7 @@ test('[SITE-016] las páginas declaran idioma, título, descripción y viewport'
     });
 });
 
-test('[SITE-018] cada página tiene un único encabezado h1', { todo: 'PEND-14: index.html tiene dos h1' }, () => {
+test('[SITE-018] cada página tiene un único encabezado h1', () => {
     const conteo = Object.fromEntries([...PAGINAS_COMPLETAS, ...PAGINAS_MINIMAS].map(html => [html, parsear(html).querySelectorAll('h1').length]));
 
     assert.deepEqual(conteo, Object.fromEntries(Object.keys(conteo).map(html => [html, 1])));
@@ -324,7 +394,7 @@ test('[LEG-002] old.html se abre sin errores de JavaScript', async () => {
     assert.ok(pagina.document.querySelector('a[href^="https://www.instagram.com/ropavejero.retro"]'), 'enlaza al Instagram de la tienda');
 });
 
-test('[LEG-004] los enlaces externos de old.html llevan rel="noopener"', { todo: 'PEND-15: old.html no los lleva' }, () => {
+test('[LEG-004] los enlaces externos de old.html llevan rel="noopener"', () => {
     assert.deepEqual(enlacesSinNoopener(['old.html']), []);
 });
 

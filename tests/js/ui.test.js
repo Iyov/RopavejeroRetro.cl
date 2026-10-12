@@ -206,7 +206,7 @@ test('[I18N-004] al cambiar de idioma se vuelven a cargar las efemérides en el 
     assert.equal(document.querySelector('#efemeridesCard .efemerides-badge').textContent, "Today's Anniversary");
 });
 
-test('[I18N-005] toda clave de traducción existe en español y en inglés', { todo: 'PEND-06: faltan claves en inglés' }, async () => {
+test('[I18N-005] toda clave de traducción existe en español y en inglés', async () => {
     pagina = await abrirPagina({ scripts: ['js/modules/ui.js'] });
     const { es, en } = traducciones();
 
@@ -234,7 +234,7 @@ test('[I18N-006] toda clave data-translate usada en los HTML existe en el diccio
     assert.deepEqual(faltantes, []);
 });
 
-test('[I18N-007] toda clave data-translate usada en los HTML tiene versión en inglés', { todo: 'PEND-06: faltan claves en inglés' }, async () => {
+test('[I18N-007] toda clave data-translate usada en los HTML tiene versión en inglés', async () => {
     pagina = await abrirPagina({ scripts: ['js/modules/ui.js'] });
     const { en } = traducciones();
     const faltantes = new Set();
@@ -384,6 +384,37 @@ test('[NAV-005] el menú móvil se abre y se cierra con el botón, un enlace o E
         await pagina.cerrar();
     }
     pagina = null;
+});
+
+test('[NAV-006] las funciones de interfaz no fallan en una página a la que le falta el elemento que manejan', async () => {
+    const funciones = ['initTheme', 'initLanguage', 'initProgressBar', 'initNavActive', 'initBackToTop', 'initMobileMenu', 'initFAQ', 'initBlogDialogs', 'applySavedSettings'];
+
+    // Página vacía, solo con ui.js (sin efemérides, catálogo ni utilidades)
+    pagina = await abrirPagina({ scripts: ['js/modules/ui.js'], almacenamiento: { theme: 'light', language: 'en' } });
+    funciones.forEach(nombre => assert.doesNotThrow(() => pagina.window[nombre](), nombre));
+    assert.doesNotThrow(() => pagina.window.setLanguage('en'), 'setLanguage sin el módulo de efemérides');
+    assert.deepEqual(pagina.errores.map(e => e.message), []);
+    await pagina.cerrar();
+
+    // Elementos a medias: botones sin su ícono o sin su pareja
+    pagina = await abrirPagina({
+        contenido: `<!DOCTYPE html><html lang="es"><body>
+            <button id="themeBtn"></button>
+            <button id="mobileMenuBtn"></button>
+            <div id="progressBar"></div>
+            <div class="faq-item"><p>sin pregunta</p></div>
+            <div id="blogDialogOverlay"></div>
+            <article class="blog-card" data-blog-id="99"><button class="read-more-btn">Leer</button></article>
+            <button id="languageBtn"></button>
+        </body></html>`,
+        scripts: ['js/modules/ui.js']
+    });
+    funciones.forEach(nombre => assert.doesNotThrow(() => pagina.window[nombre](), `${nombre} con elementos a medias`));
+    ['themeBtn', 'mobileMenuBtn', 'languageBtn'].forEach(id => pagina.click(pagina.document.getElementById(id)));
+    pagina.click(pagina.document.querySelector('.read-more-btn'));
+    pagina.despachar(pagina.document, 'keydown', { key: 'Escape' });
+    pagina.desplazar(500);
+    assert.deepEqual(pagina.errores.map(e => e.message), []);
 });
 
 // ---------- FAQ ----------

@@ -91,7 +91,7 @@ Todos los scripts se cargan con `defer` y `js/seo-analytics.js` va antes que los
 
 `index.html` y `productos.html` declaran esta lista de scripts cada uno por su cuenta (`productos.html` además incluye `products.js`) — al agregar/quitar un módulo o cambiar el orden de carga, hay que actualizar **ambos** HTML, agregar el archivo a `STATIC_RESOURCES` en `service-worker.js`, y regenerar `js/index.min.js`, ya que `index.min.js` (no `index.js`) es el que realmente se referencia en el HTML.
 
-`404.html`, `security-policy.html` y `security-acknowledgments.html` cargan solo `seo-analytics.js` + `index.min.js`, sin los módulos: cualquier función nueva que se invoque desde `index.js` tampoco existirá en esas páginas.
+`404.html`, `security-policy.html` y `security-acknowledgments.html` cargan solo `seo-analytics.js`, `logger.js`, `ui.js` e `index.min.js`: tienen tema, menú móvil, barra de progreso y "volver arriba", pero no siglas, catálogo, Instagram ni efemérides, y se muestran siempre en español (no tienen selector de idioma). Por eso `index.js` protege con `typeof` las funciones de esos módulos (`loadSiglas`, `lazyInitProducts`, `loadEfemerides`), y las funciones de `ui.js` no hacen nada si falta el elemento que manejan. Una función nueva que se invoque desde `index.js` necesita la misma protección si su módulo no está en esas páginas.
 
 `js/instagram_posts.js` / `.min.js` contienen los datos reales de los posts de Instagram (generados por `api/update_instagram.py`, no se editan a mano). No tienen etiqueta `<script>` propia: un script inline al final de `index.html` inyecta `js/instagram_posts.min.js` de forma lazy, y `instagram.js` lo consume a través de `getInstagramPostsData()` (con datos simulados de respaldo si no cargó).
 

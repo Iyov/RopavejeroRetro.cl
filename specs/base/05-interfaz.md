@@ -17,6 +17,7 @@
 - **NAV-003** — En el inicio, el menú marca la sección que se está viendo, y cambia 100 px antes de llegar al borde superior de la siguiente.
 - **NAV-004** — El botón "volver arriba" aparece al bajar más de 300 px y lleva al inicio de la página con desplazamiento suave. En el inicio, el logo hace lo mismo.
 - **NAV-005** — El menú móvil se abre con su botón y se cierra con el botón de cerrar, al elegir un enlace o con la tecla Escape. Mientras está abierto la página de fondo no hace scroll, y `aria-expanded` refleja su estado.
+- **NAV-006** — Las funciones de interfaz (`initTheme`, `initLanguage`, `initProgressBar`, `initMobileMenu`, `initFAQ`, `initBlogDialogs`, `initBackToTop`, `initNavActive`) no fallan en una página a la que le falta el elemento que manejan: simplemente no hacen nada. `ui.js` funciona sin los demás módulos.
 
 ### Preguntas frecuentes
 

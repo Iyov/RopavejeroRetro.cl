@@ -1,6 +1,6 @@
 # Páginas 404 y de seguridad, traducciones faltantes, `h1` y enlaces de `old.html`
 
-- **Estado:** Acordado
+- **Estado:** Entregado
 - **Fecha:** 2026-10-12
 - **Tipo:** Arreglo
 - **Pendientes relacionados:** PEND-06, PEND-12, PEND-13, PEND-14 y PEND-15 (acordado con Francisco el 2026-10-12)
@@ -44,7 +44,7 @@ Cambian de texto:
 
 - Traducir al inglés la página 404 y las de seguridad.
 - PEND-16 (textos del HTML distintos al diccionario) y el rediseño del anuncio del local.
-- Cualquier cambio visual: el título "Efemérides de hoy" debe verse igual que hoy.
+- Cualquier otro cambio visual. El título "Efemérides de hoy", al pasar a `h2`, toma el estilo de los demás títulos de sección (`.section-header h2`): antes era el único con el tamaño por defecto del navegador.
 
 ## Archivos que se tocan
 
@@ -52,7 +52,7 @@ Cambian de texto:
 - `js/index.js` → regenerar `js/index.min.js` (`npx terser js/index.js -o js/index.min.js -c -m`).
 - `js/modules/ui.js` — funciones tolerantes a elementos ausentes; traducciones `about-btn-4` y `about-btn-5` en inglés.
 - `js/efemerides.json` — bloque `EN` de las cuatro fechas. El archivo es JSON compacto en una línea con escapes `\uXXXX`: editarlo con un script que lo cargue y lo vuelva a escribir con `json.dumps(datos, separators=(',', ':'))`, que reproduce el archivo actual byte a byte.
-- `index.html` — "Efemérides de hoy" pasa de `h1` a `h2`; `css/index.css` → `css/index.min.css` solo si hace falta para conservar su aspecto.
+- `index.html` — "Efemérides de hoy" pasa de `h1` a `h2`. No se tocó el CSS.
 - `old.html` — `rel="noopener noreferrer"` en los enlaces externos con `target="_blank"`.
 
 Al cerrar: bump de versión de caché.
@@ -61,7 +61,7 @@ Al cerrar: bump de versión de caché.
 
 - Tests automáticos: `tests/js/sitio.test.js` (`SITE-002`, `004`, `006`, `018`, `019`, `LEG-004`), `tests/js/ui.test.js` (`I18N-005`, `I18N-007`, `NAV-006`), `tests/js/instagram-efemerides.test.js` (`EFE-007`), sin la marca `todo`.
 - `npm test` completo.
-- En el navegador: abrir `404.html` y `security-policy.html` con tema claro guardado, alternar tema, abrir y cerrar el menú móvil; el inicio en inglés (botones de "Sobre Nosotros"); que "Efemérides de hoy" se vea igual.
+- En el navegador: abrir `404.html` y `security-policy.html` con tema claro guardado, alternar tema, abrir y cerrar el menú móvil; el inicio en inglés (botones de "Sobre Nosotros"); que "Efemérides de hoy" se vea como los demás títulos de sección.
 
 ## Decisiones
 

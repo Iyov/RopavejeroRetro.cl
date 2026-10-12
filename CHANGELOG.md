@@ -29,6 +29,10 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 - `old.html` ahora declara Content Security Policy por `<meta>`, igual que el resto del sitio, permitiendo además el video embebido de `youtube-nocookie.com` (2026-10-12)
 
 ### Corregido
+- Páginas 404 y de seguridad (2026-10-12): no funcionaban el botón de tema ni el menú móvil y había un error de JavaScript al cargar. Ahora cargan `logger.js` y `ui.js`, respetan el tema guardado y se muestran siempre en español
+- Inglés (2026-10-12): faltaban las traducciones de los botones "Servicio Técnico" y "Pulido de Discos" y la versión en inglés de cuatro efemérides (24 de octubre, 9 de noviembre, 13 y 19 de diciembre)
+- `index.html` tenía dos `h1`: "Efemérides de hoy" pasa a `h2`, con el estilo de los demás títulos de sección (2026-10-12)
+- `old.html`: los enlaces externos que abren otra pestaña llevan `rel="noopener noreferrer"` (2026-10-12)
 - Catálogo de productos (2026-10-12), segunda tanda:
   - Al cambiar de idioma, las tarjetas, el contador y el filtro de plataformas quedaban en el idioma anterior hasta el siguiente filtro
   - Al pasar de página la URL no reflejaba la página, así que un enlace copiado abría siempre la primera

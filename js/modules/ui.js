@@ -3,28 +3,29 @@
 // ========== TEMA CLARO/OSCURO ==========
 function initTheme() {
     const themeBtn = document.getElementById('themeBtn');
-    const themeIcon = themeBtn.querySelector('i');
-    
-    // Verificar tema guardado
+    const themeIcon = themeBtn ? themeBtn.querySelector('i') : null;
+
+    // Mostrar sol (tema claro) o luna (tema oscuro) en el botón, si tiene ícono
+    function showThemeIcon(isLightMode) {
+        if (!themeIcon) return;
+        themeIcon.classList.toggle('fa-sun', isLightMode);
+        themeIcon.classList.toggle('fa-moon', !isLightMode);
+    }
+
+    // Verificar tema guardado (se aplica aunque la página no tenga botón de tema)
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
         document.documentElement.classList.add('light-mode');
-        themeIcon.classList.remove('fa-moon');
-        themeIcon.classList.add('fa-sun');
+        showThemeIcon(true);
     }
-    
+
+    if (!themeBtn) return;
+
     themeBtn.addEventListener('click', function() {
         const isLightMode = document.documentElement.classList.toggle('light-mode');
-        
-        if (isLightMode) {
-            themeIcon.classList.remove('fa-moon');
-            themeIcon.classList.add('fa-sun');
-            localStorage.setItem('theme', 'light');
-        } else {
-            themeIcon.classList.remove('fa-sun');
-            themeIcon.classList.add('fa-moon');
-            localStorage.setItem('theme', 'dark');
-        }
+
+        showThemeIcon(isLightMode);
+        localStorage.setItem('theme', isLightMode ? 'light' : 'dark');
         
 
     });
@@ -34,7 +35,9 @@ function initTheme() {
 function initProgressBar() {
     const progressBar = document.getElementById('progressBar');
     const progress = document.getElementById('progress');
-    
+
+    if (!progress) return;
+
     window.addEventListener('scroll', function() {
         const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         const scrolled = (window.scrollY / windowHeight) * 100;
@@ -120,6 +123,9 @@ function initMobileMenu() {
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const mobileMenuClose = document.getElementById('mobileMenuClose');
     const mobileMenu = document.getElementById('mobileMenu');
+
+    if (!mobileMenuBtn || !mobileMenuClose || !mobileMenu) return;
+
     const mobileMenuLinks = mobileMenu.querySelectorAll('a');
     
     // Abrir menú
@@ -169,7 +175,9 @@ function initFAQ() {
     
     faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
-        
+
+        if (!question) return;
+
         question.addEventListener('click', function() {
             // Cerrar otros items
             faqItems.forEach(otherItem => {
@@ -403,6 +411,8 @@ const translations = {
         'about-btn-1': '30-day warranty',
         'about-btn-2': 'Shipping throughout Chile',
         'about-btn-3': 'Original products',
+        'about-btn-4': 'Repair Service',
+        'about-btn-5': 'Disc Polishing',
         'explore-store': 'Explore the Store',
         
         // Efemérides
@@ -695,7 +705,7 @@ function initBlogDialogs() {
         btn.addEventListener('click', function() {
             const blogId = this.closest('.blog-card').getAttribute('data-blog-id');
             const currentLang = localStorage.getItem('language') || 'es';
-            const content = blogContent[blogId][currentLang];
+            const content = blogContent[blogId] ? blogContent[blogId][currentLang] : null;
             
             if (content) {
                 document.getElementById('blogDialogContent').innerHTML = `
@@ -716,10 +726,12 @@ function initBlogDialogs() {
     });
     
     // Cerrar dialog de blog
-    blogDialogClose.addEventListener('click', function() {
-        blogDialogOverlay.classList.remove('active');
-        document.body.style.overflow = '';
-    });
+    if (blogDialogClose) {
+        blogDialogClose.addEventListener('click', function() {
+            blogDialogOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }
     
     // Cerrar dialog al hacer clic fuera
     blogDialogOverlay.addEventListener('click', function(e) {
@@ -776,8 +788,10 @@ function setLanguage(lang) {
         }
     });
     
-    // Recargar efemérides con el nuevo idioma
-    loadEfemerides();
+    // Recargar efemérides con el nuevo idioma (efemerides.js no se carga en todas las páginas)
+    if (typeof loadEfemerides === 'function') {
+        loadEfemerides();
+    }
 
     // El catálogo no se redibuja aquí: renderProductsTable() termina llamando a setLanguage().
     // Lo redibuja el selector de idioma (initLanguage) cuando el visitante elige uno
@@ -788,6 +802,10 @@ function initLanguage() {
     const languageBtn = document.getElementById('languageBtn');
     const languageSelectorOverlay = document.getElementById('languageSelectorOverlay');
     const languageOptions = document.querySelectorAll('.language-option');
+
+    // Sin selector de idioma (404 y páginas de seguridad) la página se muestra en español:
+    // aplicar el idioma guardado la traduciría solo a medias
+    if (!languageBtn || !languageSelectorOverlay) return;
 
     // Verificar idioma guardado
     const savedLanguage = localStorage.getItem('language') || 'es';
@@ -835,5 +853,7 @@ function applySavedSettings() {
     // Idioma ya se aplica en initLanguage()
     
     // Cargar efemérides según el idioma
-    loadEfemerides();
+    if (typeof loadEfemerides === 'function') {
+        loadEfemerides();
+    }
 }

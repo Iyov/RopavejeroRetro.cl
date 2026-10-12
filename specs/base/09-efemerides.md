@@ -11,5 +11,5 @@
 - **EFE-004** — Si las efemérides no cargan o vienen mal formadas se muestra un mensaje de error genérico, en el idioma activo.
 - **EFE-005** — En las páginas sin sección de efemérides no se descarga el archivo.
 - **EFE-006** — `js/efemerides.json` cubre los 366 días del año, con fechas `MM/DD` válidas y sin repetir.
-- **EFE-007** — Cada efeméride tiene título, texto y detalle en español y en inglés. ⚠ PEND-12
+- **EFE-007** — Cada efeméride tiene título, texto y detalle en español y en inglés.
 - **EFE-008** — Con el archivo real, la efeméride del día se muestra en español y en inglés.

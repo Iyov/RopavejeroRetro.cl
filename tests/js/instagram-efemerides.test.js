@@ -369,7 +369,7 @@ test('[EFE-006] js/efemerides.json cubre los 366 días del año con fechas váli
     assert.deepEqual([...fechas].sort(), esperadas);
 });
 
-test('[EFE-007] cada efeméride tiene título, texto y detalle en español y en inglés', { todo: 'PEND-12: hay efemérides incompletas' }, () => {
+test('[EFE-007] cada efeméride tiene título, texto y detalle en español y en inglés', () => {
     const { efemerides } = JSON.parse(leer('js/efemerides.json'));
     const incompletas = [];
 
