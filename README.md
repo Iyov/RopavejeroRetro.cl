@@ -420,7 +420,7 @@ A tener en cuenta:
 
 - **El HTML referencia `js/index.min.js` y `css/index.min.css`**, no los fuentes: después de editar `js/index.js` o `css/index.css` hay que minificar y commitear el resultado. Los módulos de `js/modules/` se sirven tal cual.
 - **`npm run minify:js`, `npm run build` y `npm run watch` también regeneran `js/instagram_posts.min.js`**, con un resultado distinto al que escribe el bot de Instagram. No hace falta commitear ese diff: descartarlo con `git checkout js/instagram_posts.min.js`.
-- **Versionado de caché:** el sitio usa una sola versión con el esquema `AAAA-MM-DD_N` (ej. `2026-10-12_2`), igual en todos los `?v=` y en `CACHE_VERSION` del service worker. Después de cada cambio se sube con `npm run bump` (o `python api/bump_version.py`): si ya hubo cambios ese día aumenta el correlativo, y si es un día nuevo parte en `_1`. `npm run check:version` verifica que no quede ninguna referencia con otra versión o sin `?v=`. El bot de Instagram usa el mismo mecanismo.
+- **Versionado de caché:** el sitio usa una sola versión con el esquema `AAAA-MM-DD_N` (ej. `2026-10-12_2`), igual en todos los `?v=` y en `CACHE_VERSION` del service worker. Después de cada cambio se sube con `npm run bump` (o `python api/bump_version.py`): si ya hubo cambios ese día aumenta el correlativo, y si es un día nuevo parte en `_1`. `npm run check:version` verifica que no quede ninguna referencia con otra versión o sin `?v=`. El bot de Instagram usa el mismo mecanismo. Para que no se olvide, un hook `pre-commit` rechaza los commits que modifican el sitio sin subir la versión (activarlo una vez con `git config core.hooksPath .githooks`), y el despliegue no publica si la versión no cambió.
 - **Despliegue:** cada push a `main` publica la raíz del repositorio en GitHub Pages, sin build en CI.
 - **Textos:** todo texto visible debe existir en español e inglés en `translations` (`js/modules/ui.js`).
 
@@ -446,7 +446,7 @@ El detalle de arquitectura, orden de carga de módulos y precauciones está en [
 - ✅ `.htaccess` y `.htaccess.development`: GitHub Pages no los procesa, así que sus headers y redirecciones nunca estuvieron activos.
 
 #### Cambiado
-- ✅ Versionado de caché unificado: un solo valor `AAAA-MM-DD_N` en todo el sitio, administrado por `api/bump_version.py`.
+- ✅ Versionado de caché unificado: un solo valor `AAAA-MM-DD_N` en todo el sitio, administrado por `api/bump_version.py` y verificado antes de cada commit y de cada despliegue.
 
 ### Versión: v2.1.0 | Agosto 2026
 

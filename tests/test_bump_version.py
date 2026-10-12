@@ -62,3 +62,30 @@ def test_check_reports_mismatched_and_missing_versions(tmp_path):
 
     assert any("?v=2026-08-17_1" in problem for problem in problems)
     assert any("css/app.css sin ?v=" in problem for problem in problems)
+
+
+def test_site_files_are_only_what_the_site_serves():
+    names = [
+        "index.html", "css/index.css", "js/modules/ui.js", "js/siglas.json", "manifest.json", "service-worker.js",
+        "README.md", "docs/README.md", "api/bump_version.py", "tests/js/utils.test.js", "package.json",
+        "sitemap.xml", ".github/workflows/deploy-pages.yml", "img/hero-400.webp",
+    ]
+
+    assert bump_version.site_files(names) == [
+        "index.html", "css/index.css", "js/modules/ui.js", "js/siglas.json", "manifest.json", "service-worker.js",
+    ]
+
+
+def test_site_change_without_bump_is_reported():
+    problems = bump_version.missing_bump(["js/modules/ui.js", "README.md"], "2026-10-12_3", "2026-10-12_3")
+
+    assert len(problems) == 1
+    assert "js/modules/ui.js" in problems[0]
+
+
+def test_site_change_with_bump_is_accepted():
+    assert bump_version.missing_bump(["js/modules/ui.js"], "2026-10-12_3", "2026-10-12_4") == []
+
+
+def test_docs_only_change_needs_no_bump():
+    assert bump_version.missing_bump(["README.md", "tests/js/a.test.js"], "2026-10-12_3", "2026-10-12_3") == []

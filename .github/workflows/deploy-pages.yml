@@ -27,6 +27,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # No se publica si la versión de caché es inconsistente, o si el push
+      # modificó archivos del sitio sin subirla (python api/bump_version.py).
+      - name: Verificar versión de caché
+        env:
+          BEFORE: ${{ github.event.before }}
+          EVENT: ${{ github.event_name }}
+        run: |
+          python3 api/bump_version.py --check
+          if [ "$EVENT" = "push" ] && [ -n "$BEFORE" ]; then
+            git fetch --quiet --depth=1 origin "$BEFORE" || true
+            python3 api/bump_version.py --verify "$BEFORE" "$GITHUB_SHA"
+          fi
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 

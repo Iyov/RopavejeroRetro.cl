@@ -1,0 +1,10 @@
+#!/bin/sh
+# Impide commitear cambios a archivos del sitio (HTML, CSS, JS, JSON) sin subir
+# la versión de caché. Se activa una vez por equipo con:
+#   git config core.hooksPath .githooks
+
+PY=python
+command -v python >/dev/null 2>&1 || PY=python3
+
+"$PY" api/bump_version.py --verify-staged || exit 1
+"$PY" api/bump_version.py --check || exit 1

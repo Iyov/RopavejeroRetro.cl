@@ -11,6 +11,7 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ### Agregado
 - `api/bump_version.py`: versión de caché única con esquema `AAAA-MM-DD_N` (correlativo por día) para todo el sitio; `--check` detecta referencias con otra versión o sin `?v=`. Scripts `npm run bump` y `npm run check:version`, y tests en `tests/test_bump_version.py` (2026-10-12)
+- Control automático del versionado (2026-10-12): hook `.githooks/pre-commit` y paso "Verificar versión de caché" en `deploy-pages.yml`, que rechazan cambios a archivos del sitio sin subir la versión (`bump_version.py --verify-staged` / `--verify`)
 - Local físico @DoubleImpactStore (junto a @NekketsuStore, Persa Bio Bio) en textos ES/EN, meta tags, `schema.json`, `structured-data.json` y `manifest.json` (2026-08-26)
 - `CLAUDE.md`: guía de arquitectura y precauciones para agentes de IA (2026-09-04, ampliada 2026-10-12)
 - `AGENTS.md`: puntero a `CLAUDE.md` para otros agentes de IA

@@ -4,10 +4,13 @@ Uso (desde la raíz del repo):
     python api/bump_version.py           # pasa a la siguiente versión en todos los archivos
     python api/bump_version.py --check   # verifica que todo use la misma versión
     python api/bump_version.py --show    # muestra la versión actual
+    python api/bump_version.py --verify-staged        # hook pre-commit: ¿cambió el sitio sin subir la versión?
+    python api/bump_version.py --verify <base> <head> # lo mismo entre dos commits (despliegue)
 """
 import glob
 import os
 import re
+import subprocess
 import sys
 from datetime import datetime
 
@@ -15,6 +18,9 @@ SW_FILE = 'service-worker.js'
 VERSION_RE = r'\d{4}-\d{2}-\d{2}_\d+'
 QUERY_RE = re.compile(r'\?v=' + VERSION_RE)
 SW_VERSION_RE = re.compile(r"(const CACHE_VERSION = 'ropavejero-v)([^']+)(';)")
+
+# Archivos que sirve el sitio: cambiarlos exige subir la versión
+SITE_FILE_RE = re.compile(r'^(?:[^/]+\.html|css/.+\.css|js/.+\.(?:js|json)|manifest\.json|service-worker\.js)$')
 
 # Referencias a assets locales que deberían llevar ?v= y no lo llevan
 UNVERSIONED_PATTERNS = [
@@ -111,11 +117,66 @@ def check(root='.'):
     return problems
 
 
+def site_files(names):
+    """De una lista de rutas, las que son archivos servidos por el sitio."""
+    return [name for name in names if SITE_FILE_RE.match(name.replace(os.sep, '/'))]
+
+
+def version_in(text):
+    """Versión declarada en el contenido de service-worker.js."""
+    match = SW_VERSION_RE.search(text or '')
+    return match.group(2) if match else None
+
+
+def missing_bump(changed_names, version_before, version_after):
+    """Problemas si se modificaron archivos del sitio y la versión no cambió."""
+    changed = site_files(changed_names)
+    if changed and version_before == version_after:
+        listed = ', '.join(changed[:5]) + (' ...' if len(changed) > 5 else '')
+        return [f"Se modificaron archivos del sitio ({listed}) sin subir la versión ({version_after}). "
+                f"Ejecuta: python api/bump_version.py"]
+    return []
+
+
+def _git(*args):
+    result = subprocess.run(['git', *args], capture_output=True, text=True, encoding='utf-8')
+    return result.stdout if result.returncode == 0 else None
+
+
+def verify_staged():
+    """Para el hook pre-commit: compara lo preparado para commit con HEAD."""
+    names = _git('diff', '--cached', '--name-only')
+    if names is None:
+        return []
+    return missing_bump(names.split(), version_in(_git('show', f'HEAD:{SW_FILE}')), version_in(_git('show', f':{SW_FILE}')))
+
+
+def verify_range(base, head):
+    """Para el despliegue: compara dos commits. Si no se puede leer el base, no reporta nada."""
+    names = _git('diff', '--name-only', base, head)
+    before = _git('show', f'{base}:{SW_FILE}')
+    if names is None or before is None:
+        print(f"No se pudo comparar con {base}; se omite la verificación de bump.")
+        return []
+    return missing_bump(names.split(), version_in(before), version_in(_git('show', f'{head}:{SW_FILE}')))
+
+
+def _report(found_problems):
+    for problem in found_problems:
+        print(problem)
+    sys.exit(1 if found_problems else 0)
+
+
 if __name__ == '__main__':
     if hasattr(sys.stdout, 'reconfigure'):
         sys.stdout.reconfigure(encoding='utf-8')
     if '--show' in sys.argv:
         print(current_version())
+    elif '--verify-staged' in sys.argv:
+        _report(verify_staged())
+    elif '--verify' in sys.argv:
+        position = sys.argv.index('--verify')
+        _report(verify_range(sys.argv[position + 1], sys.argv[position + 2]))
     elif '--check' in sys.argv:
         found_problems = check()
         for problem in found_problems:

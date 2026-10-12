@@ -86,6 +86,13 @@ Reglas:
 - Al agregar una referencia nueva a un asset local, escribirla ya con el `?v=` actual; `--check` avisa de las que no lo llevan. Las imágenes no se versionan.
 - Archivos que el script recorre: `*.html` de la raíz, `js/index.js`, `js/index.min.js`, `js/seo-analytics.js`, `js/modules/*.js` y `service-worker.js`. Un archivo nuevo fuera de esa lista que contenga `?v=` hay que agregarlo a `target_files()`.
 
+La regla se hace cumplir en dos puntos, para que no dependa de que alguien la haya leído:
+
+- **Hook `pre-commit`** (`.githooks/pre-commit`): rechaza el commit si hay archivos del sitio preparados y `CACHE_VERSION` no cambió, o si la versión quedó inconsistente. Se activa una vez por equipo con `git config core.hooksPath .githooks`. No saltárselo con `--no-verify`.
+- **Despliegue** (`deploy-pages.yml`, paso "Verificar versión de caché"): corre `--check` y, en cada push, `--verify <antes> <después>`. Si falla, el sitio no se publica y queda como estaba; se arregla con `python api/bump_version.py` y un nuevo push.
+
+"Archivo del sitio" es lo que define `SITE_FILE_RE` en `api/bump_version.py`: `*.html` de la raíz, `css/**/*.css`, `js/**/*.js`, `js/**/*.json`, `manifest.json` y `service-worker.js`. Documentación, tests, workflows, `api/`, imágenes y `sitemap.xml` no exigen bump.
+
 Por qué importa `CACHE_VERSION`: el service worker sirve `/` e `index.html` con estrategia cache-first desde un caché cuyo nombre depende de ese valor, así que sin cambiarlo los visitantes que ya tienen el sitio cacheado siguen recibiendo el `index.html` anterior, con sus `?v=` viejos. Los `.js`/`.css` también son cache-first, pero un `?v=` nuevo es una URL distinta y se descarga; `productos.html` y las demás páginas van network-first.
 
 `docs/generate_cache_version.py` es un script antiguo que no cambia ninguna versión: imprime un reporte y lo guarda en `docs/CACHE_VERSION_REPORT.txt`. Usa rutas `../` — hay que ejecutarlo con `cd docs` pese a lo que dice su docstring — y su lista de assets está desactualizada. No confundirlo con `api/bump_version.py`.

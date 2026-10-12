@@ -16,6 +16,7 @@ Memoria del proyecto: acuerdos y decisiones tomados con Francisco que no se dedu
 
 - **Un solo esquema en todas partes (2026-10-12):** la versión de los archivos es siempre `?v=AAAA-MM-DD_N` (ej. `?v=2026-10-12_1`), el mismo valor en todo el sitio, sin excepciones: HTML, JS, JSON, service worker y lo que escribe el bot de Instagram. Si hay más cambios el mismo día, se enumeran con el correlativo (`_2`, `_3`, ...); un día nuevo parte en `_1`. Francisco lo pidió expresamente porque el bot usaba `AAAA-MM-DD_HHMM` y había referencias con versiones viejas o sin versión.
 - **Cada cambio lleva su bump (2026-10-12):** todo cambio a un archivo que sirve el sitio termina con `python api/bump_version.py` y con `--check` pasando, antes del commit. La versión no se edita a mano.
+- **La regla se hace cumplir, no solo se documenta (2026-10-12):** Francisco preguntó si los agentes siempre la leen antes de implementar; como leerla no garantiza cumplirla, se acordó un control automático en dos puntos: un hook `pre-commit` (se activa por equipo con `git config core.hooksPath .githooks`) y una verificación en el despliegue que no publica si se modificó el sitio sin subir la versión. Cuando se cree el agente de front-end, la regla debe ir también en su definición.
 
 ## Decisiones sobre la documentación
 
