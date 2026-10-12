@@ -63,11 +63,13 @@ Al corregir el defecto se quitan las tres marcas en el mismo commit. Un test en 
 
 1. **Especificar.** Copiar `_plantilla.md` a `cambios/AAAA-MM-DD-nombre-corto.md` y completarla: problema, requisitos nuevos o modificados (con sus identificadores), qué queda fuera, cómo se va a comprobar.
 2. **Acordar.** Francisco aprueba la especificación antes de escribir código.
-3. **Tests primero.** El agente `tester` escribe los tests de los requisitos nuevos o modificados y comprueba que fallan por la razón esperada.
-4. **Implementar.** El agente que corresponda (`frontend` para HTML/CSS/JS del sitio) implementa hasta que esos tests pasan, sin tocar los tests.
-5. **Verificar.** El `tester` corre la suite completa (`npm test`) y revisa que no se rompió nada en otra parte.
+3. **Tests primero.** Se escriben los tests de los requisitos nuevos o modificados y se comprueba que fallan por la razón esperada.
+4. **Implementar.** Se implementa hasta que esos tests pasan, sin acomodar los tests a la implementación.
+5. **Verificar.** El orquestador corre la suite completa (`npm test`) y revisa que no se rompió nada en otra parte.
 6. **Integrar la especificación.** Los requisitos del cambio pasan a `base/` (se agregan, modifican o eliminan líneas) y el archivo de `cambios/` queda como registro, con su estado en "Entregado".
 7. **Cerrar.** Regenerar minificados si corresponde, bump de versión de caché, `CHANGELOG.md`, commit y push.
+
+Quién ejecuta los pasos 3 y 4 depende del tamaño del cambio: los chicos y medianos los hace el orquestador completo en la sesión principal; en los grandes (un rediseño, una página o un módulo nuevo, varias áreas a la vez) los tests los escribe el agente `tester` y la implementación la hace el agente `frontend`. El criterio está en [.claude/agents/orquestador.md](../.claude/agents/orquestador.md).
 
 Un arreglo pequeño sigue el mismo flujo; solo que su especificación cabe en pocas líneas.
 

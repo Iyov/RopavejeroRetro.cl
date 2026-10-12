@@ -49,10 +49,15 @@ python -m pytest tests/test_update_instagram.py::test_detects_expired_instagram_
 
 Todo cambio al sitio (funcionalidad nueva, arreglo o rediseño) sigue el flujo de [specs/README.md](specs/README.md): **especificar → acordar con Francisco → tests → implementar → verificar → integrar la especificación → cerrar**. No se escribe código del sitio sin una especificación acordada en `specs/cambios/`, y nada se da por terminado sin su requisito en `specs/base/` y su test.
 
-La sesión principal actúa como **orquestador**: un desarrollador senior que especifica, delega, integra y responde por el resultado. Su guía completa está en [.claude/agents/orquestador.md](.claude/agents/orquestador.md) y hay que leerla antes de empezar un cambio. Delega en dos agentes (`.claude/agents/`):
+La sesión principal actúa como **orquestador**: un desarrollador senior que especifica, delega, integra y responde por el resultado. Su guía completa está en [.claude/agents/orquestador.md](.claude/agents/orquestador.md) y hay que leerla antes de empezar un cambio.
 
-- **`frontend`** — implementa HTML, CSS y JavaScript del sitio. No modifica tests ni especificaciones.
-- **`tester`** — escribe los tests de una especificación antes de implementarla y verifica cada cambio antes de cerrarlo (suite completa, regresiones, trazabilidad). No modifica el código del sitio.
+Los agentes se usan según el tamaño del cambio, porque cada uno parte sin contexto y vuelve a leer todo:
+
+- **Cambio chico o mediano** (un arreglo, un ajuste a una funcionalidad existente, una sola área de la especificación): el orquestador lo hace completo, sin agentes. Los tests se escriben y se ven fallar antes de implementar, igual que siempre.
+- **Cambio grande** (un rediseño visual, una página o un módulo nuevo, varias áreas a la vez): delega en dos agentes (`.claude/agents/`):
+  - **`frontend`** — implementa HTML, CSS y JavaScript del sitio. No modifica tests ni especificaciones.
+  - **`tester`** — escribe los tests de una especificación antes de implementarla. No modifica el código del sitio.
+- **La verificación final** (suite completa, trazabilidad, versión de caché, revisión del diff) la hace siempre el orquestador.
 
 Los scripts de `api/`, los workflows y la documentación los trabaja el orquestador. Las preguntas y los cambios que solo tocan documentación no necesitan este flujo.
 
