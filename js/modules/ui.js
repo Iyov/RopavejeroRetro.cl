@@ -197,6 +197,7 @@ const translations = {
     es: {
         // Menú
         'menu-instagram': 'Instagram',
+        'menu-local': 'Local',
         'menu-about': 'Nosotros',
         'menu-efemerides': 'Efemérides',
         'menu-products': 'Productos',
@@ -365,12 +366,26 @@ const translations = {
         'contact-website': 'Sitio Web',
         'contact-excel': 'Excel Disponibles',
 
-        // DoubleImpactStore
-        'store-announcement-title': '@DoubleImpactStore',
-        'store-announcement-new': 'Nueva tienda de videojuegos retro',
-        'store-announcement-description': '@Ropavejero.Retro es una tienda de Instagram de videojuegos, consolas, accesorios y coleccionables retro. Junto con @NekketsuStore formó el local físico @DoubleImpactStore.',
-        'store-announcement-address': 'Bio Bio 654, Local 58, Galpón Nuevo Bio Bio (cerca de Víctor Manuel, frente al McDonald\'s).',
-        'store-announcement-transport-hours': 'Metro Bio Bio L6 | Sábados, domingos y festivos, de 11:00 a 18:00 hrs.',
+        // Local físico (@DoubleImpactStore): sección #local del inicio y aviso #storeNotice del catálogo
+        'store-title': 'Visítanos en el Persa Bio Bio',
+        'store-subtitle': 'Ahora también puedes ver los productos en persona.',
+        'store-eyebrow': 'Local físico',
+        'store-name': '@DoubleImpactStore',
+        'store-description': '@Ropavejero.Retro y @NekketsuStore comparten un mismo local: videojuegos, consolas, accesorios y coleccionables retro para ver en persona.',
+        'store-address-label': 'Dirección',
+        'store-address': 'Bio Bio 654, Local 58, Galpón Nuevo Bio Bio',
+        'store-address-note': 'Cerca de Víctor Manuel, frente al McDonald\'s',
+        'store-metro-label': 'Metro más cercano',
+        'store-metro': 'Metro Bio Bio, Línea 6',
+        'store-hours-label': 'Horario',
+        'store-hours': 'Sábados, domingos y festivos',
+        'store-hours-time': 'De 11:00 a 18:00 hrs.',
+        'store-status-open': 'Abierto hoy · 11:00 a 18:00',
+        'store-status-closed': 'Abre sábados, domingos y festivos',
+        'store-directions': 'Cómo llegar',
+        'store-website': 'Sitio del local',
+        'store-notice-text': 'Bio Bio 654, Local 58, Persa Bio Bio · Sáb, dom y festivos, 11:00 a 18:00 hrs.',
+        'store-notice-link': 'Ver cómo llegar',
         
         // Footer
         'footer-copyright': '© 2026 @Ropavejero.Retro Todos los derechos reservados.',
@@ -384,6 +399,7 @@ const translations = {
     en: {
         // Menú
         'menu-instagram': 'Instagram',
+        'menu-local': 'Store',
         'menu-about': 'About Us',
         'menu-efemerides': 'Anniversaries',
         'menu-products': 'Products',
@@ -552,12 +568,26 @@ const translations = {
         'contact-website': 'Website',
         'contact-excel': 'Available Excel',
 
-        // DoubleImpactStore
-        'store-announcement-title': '@DoubleImpactStore',
-        'store-announcement-new': 'New retro video game store',
-        'store-announcement-description': '@Ropavejero.Retro is an Instagram store selling retro video games, consoles, accessories and collectibles. Together with @NekketsuStore, it formed the @DoubleImpactStore physical location.',
-        'store-announcement-address': 'Bio Bio 654, Store 58, Galpón Nuevo Bio Bio (near Víctor Manuel, across from McDonald\'s).',
-        'store-announcement-transport-hours': 'Bio Bio Metro Station, Line 6 | Saturdays, Sundays and holidays, 11:00 AM to 6:00 PM.',
+        // Local físico (@DoubleImpactStore): sección #local del inicio y aviso #storeNotice del catálogo
+        'store-title': 'Visit us at Persa Bio Bio',
+        'store-subtitle': 'Now you can also see the products in person.',
+        'store-eyebrow': 'Physical store',
+        'store-name': '@DoubleImpactStore',
+        'store-description': '@Ropavejero.Retro and @NekketsuStore share one shop: retro video games, consoles, accessories and collectibles to see in person.',
+        'store-address-label': 'Address',
+        'store-address': 'Bio Bio 654, Local 58, Galpón Nuevo Bio Bio',
+        'store-address-note': 'Near Víctor Manuel, across from McDonald\'s',
+        'store-metro-label': 'Nearest metro',
+        'store-metro': 'Metro Bio Bio, Line 6',
+        'store-hours-label': 'Opening hours',
+        'store-hours': 'Saturdays, Sundays and holidays',
+        'store-hours-time': 'From 11:00 to 18:00',
+        'store-status-open': 'Open today · 11:00 to 18:00',
+        'store-status-closed': 'Open Saturdays, Sundays and holidays',
+        'store-directions': 'Get directions',
+        'store-website': 'Store website',
+        'store-notice-text': 'Bio Bio 654, Local 58, Persa Bio Bio · Sat, Sun and holidays, 11:00 to 18:00',
+        'store-notice-link': 'See how to get there',
         
         // Footer
         'footer-copyright': '© 2026 @Ropavejero.Retro All rights reserved.',
@@ -795,8 +825,38 @@ function setLanguage(lang) {
         loadEfemerides();
     }
 
+    // La señal de estado del local no lleva data-translate: se reescribe en el idioma vigente
+    initStoreStatus();
+
     // El catálogo no se redibuja aquí: renderProductsTable() termina llamando a setLanguage().
     // Lo redibuja el selector de idioma (initLanguage) cuando el visitante elige uno
+}
+
+// ========== ESTADO DEL LOCAL ==========
+// Señal de la tarjeta del local (#storeStatus, dentro de #local): "Abierto hoy" sábado y domingo,
+// y cuándo abre el resto de la semana. No conoce los festivos, por eso nunca dice "cerrado".
+// Se reevalúa en cada llamada: al iniciar y cada vez que setLanguage() cambia el idioma
+function initStoreStatus() {
+    const storeStatus = document.querySelector('#local #storeStatus');
+
+    if (!storeStatus) return;
+
+    // El día se calcula en hora de Chile, no en la zona horaria del visitante
+    let isOpenToday = false;
+    try {
+        const weekday = new Intl.DateTimeFormat('en-US', {
+            timeZone: 'America/Santiago',
+            weekday: 'short'
+        }).format(new Date());
+        isOpenToday = weekday === 'Sat' || weekday === 'Sun';
+    } catch (error) {
+        // Navegador sin soporte de zonas horarias: queda el texto neutro, que es cierto todos los días
+        console.warn('No se pudo calcular el día en hora de Chile:', error);
+    }
+
+    const lang = localStorage.getItem('language') === 'en' ? 'en' : 'es';
+    storeStatus.classList.toggle('is-open', isOpenToday);
+    storeStatus.textContent = translations[lang][isOpenToday ? 'store-status-open' : 'store-status-closed'];
 }
 
 // ========== MULTILENGUAJE ==========

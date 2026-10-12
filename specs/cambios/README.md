@@ -13,3 +13,4 @@ El flujo completo está en [`../README.md`](../README.md). En resumen: se especi
 | 2026-10-12 | [Selector de idioma, textos del HTML y robustez menor](2026-10-12-idioma-y-robustez-menor.md) | Entregado |
 | 2026-10-12 | [Pedido a la hoja de Google sin comprobación previa](2026-10-12-pedido-hoja-sin-comprobacion.md) | Entregado |
 | 2026-10-12 | [El despliegue espera a los tests](2026-10-12-despliegue-espera-tests.md) | Entregado |
+| 2026-10-12 | [Rediseño del anuncio del local del Persa Bio Bio](2026-10-12-rediseno-anuncio-local.md) | Entregado |

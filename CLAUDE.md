@@ -95,6 +95,8 @@ Todos los scripts se cargan con `defer` y `js/seo-analytics.js` va antes que los
 
 `js/instagram_posts.js` / `.min.js` contienen los datos reales de los posts de Instagram (generados por `api/update_instagram.py`, no se editan a mano). No tienen etiqueta `<script>` propia: un script inline al final de `index.html` inyecta `js/instagram_posts.min.js` de forma lazy, y `instagram.js` lo consume a través de `getInstagramPostsData()` (con datos simulados de respaldo si no cargó).
 
+El local físico (@DoubleImpactStore) se anuncia en la sección `#local` de `index.html` (después del encabezado principal, antes de Instagram, que mide decenas de miles de píxeles) y en el aviso `#storeNotice` de `productos.html`; no va en la 404 ni en las páginas de seguridad. Sus estilos son las clases `.store-*` de `css/index.css`, y `initStoreStatus()` (`ui.js`) escribe la señal "Abierto hoy" según el día en hora de Chile; `setLanguage()` la vuelve a llamar porque ese elemento no lleva `data-translate`.
+
 Páginas legacy/independientes: `old.html` (sitio anterior, usa `css/app.css` + `js/app.min.js` + `css/transition*.css`) y `ps3.html` (página suelta sin dependencias del sistema de módulos).
 
 ### Convención de cache-busting / versionado

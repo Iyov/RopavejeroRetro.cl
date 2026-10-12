@@ -44,7 +44,7 @@
     <link rel="alternate" hreflang="es-CL" href="https://ropavejeroretro.cl/" />
     <link rel="alternate" hreflang="x-default" href="https://ropavejeroretro.cl/" />
     <link rel="icon" href="img/favicon.png" type="image/x-icon" />
-    <link rel="manifest" href="manifest.json?v=2026-10-12_8" />
+    <link rel="manifest" href="manifest.json?v=2026-10-12_9" />
     <link rel="apple-touch-icon" href="img/RopavejeroLogo_150.png" />
     <link rel="apple-touch-icon" sizes="100x100" href="img/RopavejeroLogo_100.png" />
     <link rel="apple-touch-icon" sizes="150x150" href="img/RopavejeroLogo_150.png" />
@@ -87,8 +87,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
     <!-- CSS con preload para recursos críticos + inline critical CSS -->
-    <link rel="preload" href="css/font-awesome_6.5.1_all.min.css?v=2026-10-12_8" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="css/font-awesome_6.5.1_all.min.css?v=2026-10-12_8"></noscript>
+    <link rel="preload" href="css/font-awesome_6.5.1_all.min.css?v=2026-10-12_9" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="css/font-awesome_6.5.1_all.min.css?v=2026-10-12_9"></noscript>
 
     <!-- Inline critical CSS (header + hero) to speed up FCP/LCP -->
     <style>
@@ -105,17 +105,16 @@
       .hero-buttons{display:flex;justify-content:center;gap:15px}
     </style>
 
-    <link rel="preload" href="css/index.min.css?v=2026-10-12_8" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="css/index.min.css?v=2026-10-12_8"></noscript>
+    <link rel="preload" href="css/index.min.css?v=2026-10-12_9" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/index.min.css?v=2026-10-12_9"></noscript>
     
     <!-- Preload de recursos críticos -->
-    <link rel="preload" href="js/index.min.js?v=2026-10-12_8" as="script" />
+    <link rel="preload" href="js/index.min.js?v=2026-10-12_9" as="script" />
     <!-- Preload LCP: imagen principal del hero (local WebP) - solo tamaño apropiado -->
     <link rel="preload" href="img/hero-1200.webp" as="image" media="(min-width: 768px)" />
     <link rel="preload" href="img/hero-800.webp" as="image" media="(max-width: 767px)" />
     <!-- Preload fuentes críticas -->
     <link rel="preload" href="webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin />
-
 
     <!-- Schema.org Structured Data -->
     <script type="application/json" data-deprecated-structured-data="true">
@@ -512,6 +511,7 @@
                 </div>
 
                 <nav class="nav">
+                    <a href="#local" data-translate="menu-local">Local</a>
                     <a href="#instagram" data-translate="menu-instagram">Instagram</a>
                     <a href="#about" data-translate="menu-about">Nosotros</a>
                     <a href="#efemerides" data-translate="menu-efemerides">Efemérides</a>
@@ -544,6 +544,7 @@
                 <i class="fas fa-times"></i>
             </button>
             <h2 id="mobile-menu-title" class="sr-only">Menú de navegación</h2>
+            <a href="#local" data-translate="menu-local">Local</a>
             <a href="#instagram" data-translate="menu-instagram">Instagram</a>
             <a href="#about" data-translate="menu-about">Nosotros</a>
             <a href="#efemerides" data-translate="menu-efemerides">Efemérides</a>
@@ -575,6 +576,58 @@
                         <a href="https://www.instagram.com/ropavejero.retro/" target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-translate="instagram-button">Ir a Instagram</a>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Local físico Section -->
+        <section class="section" id="local">
+            <div class="container">
+                <div class="section-header">
+                    <h2 data-translate="store-title">Visítanos en el Persa Bio Bio</h2>
+                    <p data-translate="store-subtitle">Ahora también puedes ver los productos en persona.</p>
+                </div>
+
+                <article class="store-card" itemscope itemtype="https://schema.org/LocalBusiness">
+                    <div class="store-card-intro">
+                        <span class="store-card-icon" aria-hidden="true"><i class="fas fa-store"></i></span>
+                        <p class="store-card-eyebrow" data-translate="store-eyebrow">Local físico</p>
+                        <h3 class="store-card-name" itemprop="name" data-translate="store-name">@DoubleImpactStore</h3>
+                        <p class="store-card-description" itemprop="description" data-translate="store-description">@Ropavejero.Retro y @NekketsuStore comparten un mismo local: videojuegos, consolas, accesorios y coleccionables retro para ver en persona.</p>
+                        <!-- El texto y la clase is-open los fija initStoreStatus() (ui.js) según el día en hora de Chile -->
+                        <p class="store-status" id="storeStatus">Abre sábados, domingos y festivos</p>
+                    </div>
+
+                    <ul class="store-card-details">
+                        <li class="store-card-detail">
+                            <span class="store-card-detail-icon" aria-hidden="true"><i class="fas fa-location-dot"></i></span>
+                            <div class="store-card-detail-text">
+                                <span class="store-card-label" data-translate="store-address-label">Dirección</span>
+                                <span class="store-card-value" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress"><span itemprop="streetAddress" data-translate="store-address">Bio Bio 654, Local 58, Galpón Nuevo Bio Bio</span></span>
+                                <span class="store-card-note" data-translate="store-address-note">Cerca de Víctor Manuel, frente al McDonald's</span>
+                            </div>
+                        </li>
+                        <li class="store-card-detail">
+                            <span class="store-card-detail-icon" aria-hidden="true"><i class="fas fa-train-subway"></i></span>
+                            <div class="store-card-detail-text">
+                                <span class="store-card-label" data-translate="store-metro-label">Metro más cercano</span>
+                                <span class="store-card-value" data-translate="store-metro">Metro Bio Bio, Línea 6</span>
+                            </div>
+                        </li>
+                        <li class="store-card-detail">
+                            <span class="store-card-detail-icon" aria-hidden="true"><i class="fas fa-clock"></i></span>
+                            <div class="store-card-detail-text">
+                                <span class="store-card-label" data-translate="store-hours-label">Horario</span>
+                                <span class="store-card-value" data-translate="store-hours">Sábados, domingos y festivos</span>
+                                <span class="store-card-note" data-translate="store-hours-time">De 11:00 a 18:00 hrs.</span>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="store-card-actions">
+                        <a href="https://www.google.com/maps/search/?api=1&amp;query=Bio+Bio+654%2C+Local+58%2C+Santiago%2C+Chile" target="_blank" rel="noopener noreferrer" class="btn btn-primary store-card-btn store-card-btn-directions" itemprop="hasMap" data-translate="store-directions">Cómo llegar</a>
+                        <a href="https://doubleimpactstore.cl/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary store-card-btn store-card-btn-site" itemprop="url" data-translate="store-website">Sitio del local</a>
+                    </div>
+                </article>
             </div>
         </section>
 
@@ -610,6 +663,8 @@
                 </div>
             </div>
         </section>
+
+
 
         <!-- About Section -->
         <section class="section" id="about">
@@ -973,12 +1028,6 @@
                         <span data-translate="contact-excel">Excel Disponibles</span>
                     </a>
                 </div>
-                <div class="store-announcement" itemscope itemtype="https://schema.org/LocalBusiness">
-                    <h3 itemprop="name"><a href="https://doubleimpactstore.cl/" target="_blank" rel="noopener noreferrer"><span data-translate="store-announcement-title">@DoubleImpactStore</span></a></h3>
-                    <p itemprop="description" data-translate="store-announcement-description">@Ropavejero.Retro es una tienda de Instagram de videojuegos, consolas, accesorios y coleccionables retro. Junto con @NekketsuStore formó el local físico @DoubleImpactStore.</p>
-                    <p itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">📍 <span itemprop="streetAddress" data-translate="store-announcement-address">Bio Bio 654, Local 58, Galpón Nuevo Bio Bio (cerca de Víctor Manuel, frente al McDonald's).</span></p>
-                    <p data-translate="store-announcement-transport-hours">Metro Bio Bio L6 | Sábados, domingos y festivos, de 11:00 a 18:00 hrs.</p>
-                </div>
             </div>
         </section>
     </main>
@@ -1054,7 +1103,7 @@
                 if (window._instagramScriptLoaded) return;
                 window._instagramScriptLoaded = true;
                 const s = document.createElement('script');
-                s.src = 'js/instagram_posts.min.js?v=2026-10-12_8';
+                s.src = 'js/instagram_posts.min.js?v=2026-10-12_9';
                 s.async = true;
                 s.onload = function(){
                     console.info('📸 instagram_posts.js cargado (lazy)');
@@ -1079,22 +1128,22 @@
             }
         })();
     </script>
-    <script src="js/seo-analytics.js?v=2026-10-12_8" defer></script>
-    <script src="js/modules/logger.js?v=2026-10-12_8" defer></script>
-    <script src="js/modules/cache.js?v=2026-10-12_8" defer></script>
-    <script src="js/modules/siglas.js?v=2026-10-12_8" defer></script>
-    <script src="js/modules/utils.js?v=2026-10-12_8" defer></script>
-    <script src="js/modules/ui.js?v=2026-10-12_8" defer></script>
-    <script src="js/modules/instagram.js?v=2026-10-12_8" defer></script>
-    <script src="js/modules/efemerides.js?v=2026-10-12_8" defer></script>
-    <script src="js/modules/analytics.js?v=2026-10-12_8" defer></script>
-    <script src="js/index.min.js?v=2026-10-12_8" defer></script>
+    <script src="js/seo-analytics.js?v=2026-10-12_9" defer></script>
+    <script src="js/modules/logger.js?v=2026-10-12_9" defer></script>
+    <script src="js/modules/cache.js?v=2026-10-12_9" defer></script>
+    <script src="js/modules/siglas.js?v=2026-10-12_9" defer></script>
+    <script src="js/modules/utils.js?v=2026-10-12_9" defer></script>
+    <script src="js/modules/ui.js?v=2026-10-12_9" defer></script>
+    <script src="js/modules/instagram.js?v=2026-10-12_9" defer></script>
+    <script src="js/modules/efemerides.js?v=2026-10-12_9" defer></script>
+    <script src="js/modules/analytics.js?v=2026-10-12_9" defer></script>
+    <script src="js/index.min.js?v=2026-10-12_9" defer></script>
     
     <!-- Service Worker Registration (defer to not block page load) -->
     <script defer>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js?v=2026-10-12_8', { scope: '/' })
+                navigator.serviceWorker.register('/service-worker.js?v=2026-10-12_9', { scope: '/' })
                     .then(() => console.log('✅ Service Worker registrado'))
                     .catch((error) => console.warn('⚠️ Service Worker error:', error));
             });

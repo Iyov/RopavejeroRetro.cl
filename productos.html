@@ -31,7 +31,7 @@
     <link rel="alternate" hreflang="es-CL" href="https://ropavejeroretro.cl/productos" />
     <link rel="alternate" hreflang="x-default" href="https://ropavejeroretro.cl/productos" />
     <link rel="icon" href="img/favicon.png" type="image/x-icon" />
-    <link rel="manifest" href="manifest.json?v=2026-10-12_8" />
+    <link rel="manifest" href="manifest.json?v=2026-10-12_9" />
     <link rel="apple-touch-icon" href="img/RopavejeroLogo_150.png" />
 
     <!-- Open Graph -->
@@ -61,8 +61,8 @@
     <link rel="preconnect" href="https://static.cloudflareinsights.com" crossorigin />
 
     <!-- CSS -->
-    <link rel="preload" href="css/font-awesome_6.5.1_all.min.css?v=2026-10-12_8" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="css/font-awesome_6.5.1_all.min.css?v=2026-10-12_8"></noscript>
+    <link rel="preload" href="css/font-awesome_6.5.1_all.min.css?v=2026-10-12_9" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="css/font-awesome_6.5.1_all.min.css?v=2026-10-12_9"></noscript>
 
     <style>
       .header{position:sticky;top:0;background-color:rgba(26,26,46,0.9);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,0,0,0.08);z-index:100;transition:all .3s}
@@ -71,10 +71,10 @@
       .nav{display:flex;gap:25px}
     </style>
 
-    <link rel="preload" href="css/index.min.css?v=2026-10-12_8" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="css/index.min.css?v=2026-10-12_8"></noscript>
+    <link rel="preload" href="css/index.min.css?v=2026-10-12_9" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/index.min.css?v=2026-10-12_9"></noscript>
 
-    <link rel="preload" href="js/index.min.js?v=2026-10-12_8" as="script" />
+    <link rel="preload" href="js/index.min.js?v=2026-10-12_9" as="script" />
     <link rel="preload" href="webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin />
 
     <!-- Schema.org para página de productos -->
@@ -184,6 +184,7 @@ a.",
                 </a>
 
                 <nav class="nav">
+                    <a href="/#local" data-translate="menu-local">Local</a>
                     <a href="/#instagram" data-translate="menu-instagram">Instagram</a>
                     <a href="/#about" data-translate="menu-about">Nosotros</a>
                     <a href="/#efemerides" data-translate="menu-efemerides">Efemérides</a>
@@ -216,6 +217,7 @@ a.",
                 <i class="fas fa-times"></i>
             </button>
             <h2 id="mobile-menu-title" class="sr-only">Menú de navegación</h2>
+            <a href="/#local" data-translate="menu-local">Local</a>
             <a href="/#instagram" data-translate="menu-instagram">Instagram</a>
             <a href="/#about" data-translate="menu-about">Nosotros</a>
             <a href="/#efemerides" data-translate="menu-efemerides">Efemérides</a>
@@ -376,14 +378,19 @@ a.",
         </section>
     </main>
 
-    <section class="section store-announcement" aria-labelledby="store-announcement-title">
+    <!-- Aviso compacto del local físico: la tarjeta completa está en el inicio (/#local) -->
+    <aside class="store-notice" id="storeNotice" aria-labelledby="storeNoticeName">
         <div class="container">
-            <h2 id="store-announcement-title"><a href="https://doubleimpactstore.cl/" target="_blank" rel="noopener noreferrer"><span data-translate="store-announcement-title">@DoubleImpactStore</span></a>: <span data-translate="store-announcement-new">Nueva tienda de videojuegos retro</span></h2>
-            <p><span data-translate="store-announcement-description">@Ropavejero.Retro es una tienda de Instagram de videojuegos, consolas, accesorios y coleccionables retro. Junto con @NekketsuStore formó el local físico @DoubleImpactStore.</span></p>
-            <p data-translate="store-announcement-address">Bio Bio 654, Local 58, Galpón Nuevo Bio Bio (cerca de Víctor Manuel, frente al McDonald's).</p>
-            <p data-translate="store-announcement-transport-hours">Metro Bio Bio L6 | Sábados, domingos y festivos, de 11:00 a 18:00 hrs.</p>
+            <div class="store-notice-content">
+                <p class="store-notice-name">
+                    <i class="fas fa-store store-notice-icon" aria-hidden="true"></i>
+                    <strong id="storeNoticeName" data-translate="store-name">@DoubleImpactStore</strong>
+                </p>
+                <p class="store-notice-info" data-translate="store-notice-text">Bio Bio 654, Local 58, Persa Bio Bio · Sáb, dom y festivos, 11:00 a 18:00 hrs.</p>
+                <a class="store-notice-link" href="/#local" data-translate="store-notice-link">Ver cómo llegar</a>
+            </div>
         </div>
-    </section>
+    </aside>
 
     <!-- Footer -->
     <footer class="footer">
@@ -435,23 +442,23 @@ a.",
     </div>
 
     <!-- JS principal (incluye toda la lógica de productos, tema, idioma, etc.) -->
-    <script src="js/seo-analytics.js?v=2026-10-12_8" defer></script>
-    <script src="js/modules/logger.js?v=2026-10-12_8" defer></script>
-    <script src="js/modules/cache.js?v=2026-10-12_8" defer></script>
-    <script src="js/modules/siglas.js?v=2026-10-12_8" defer></script>
-    <script src="js/modules/utils.js?v=2026-10-12_8" defer></script>
-    <script src="js/modules/ui.js?v=2026-10-12_8" defer></script>
-    <script src="js/modules/products.js?v=2026-10-12_8" defer></script>
-    <script src="js/modules/instagram.js?v=2026-10-12_8" defer></script>
-    <script src="js/modules/efemerides.js?v=2026-10-12_8" defer></script>
-    <script src="js/modules/analytics.js?v=2026-10-12_8" defer></script>
-    <script src="js/index.min.js?v=2026-10-12_8" defer></script>
+    <script src="js/seo-analytics.js?v=2026-10-12_9" defer></script>
+    <script src="js/modules/logger.js?v=2026-10-12_9" defer></script>
+    <script src="js/modules/cache.js?v=2026-10-12_9" defer></script>
+    <script src="js/modules/siglas.js?v=2026-10-12_9" defer></script>
+    <script src="js/modules/utils.js?v=2026-10-12_9" defer></script>
+    <script src="js/modules/ui.js?v=2026-10-12_9" defer></script>
+    <script src="js/modules/products.js?v=2026-10-12_9" defer></script>
+    <script src="js/modules/instagram.js?v=2026-10-12_9" defer></script>
+    <script src="js/modules/efemerides.js?v=2026-10-12_9" defer></script>
+    <script src="js/modules/analytics.js?v=2026-10-12_9" defer></script>
+    <script src="js/index.min.js?v=2026-10-12_9" defer></script>
 
     <!-- Service Worker Registration (defer to not block page load) -->
     <script defer>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js?v=2026-10-12_8', { scope: '/' })
+                navigator.serviceWorker.register('/service-worker.js?v=2026-10-12_9', { scope: '/' })
                     .then(() => console.log('✅ Service Worker registrado'))
                     .catch((error) => console.warn('⚠️ Service Worker error:', error));
             });

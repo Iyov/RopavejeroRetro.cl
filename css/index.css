@@ -2716,3 +2716,360 @@ textarea:focus {
         transform: none;
     }
 }
+
+/* ========== LOCAL FÍSICO (#local) ========== */
+/* Tarjeta destacada del local @DoubleImpactStore: presentación a la izquierda, datos a la derecha
+   y botones abajo. Si más adelante se suma una foto, va como un bloque más de la grilla */
+.store-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 36px 48px;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 44px 40px 36px;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+}
+
+/* Acento superior que la distingue de las demás tarjetas */
+.store-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+}
+
+.store-card-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.store-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    margin-bottom: 20px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    color: var(--accent-color);
+    font-size: 1.5rem;
+}
+
+.store-card-eyebrow {
+    margin-bottom: 6px;
+    color: var(--accent-color);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.store-card-name {
+    margin-bottom: 12px;
+    color: var(--text-color);
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+}
+
+.store-card-description {
+    margin-bottom: 22px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Señal de estado: neutra de lunes a viernes, verde (.is-open) sábado y domingo */
+.store-status {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: auto;
+    padding: 8px 16px 8px 14px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.store-status::before {
+    content: '';
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--text-muted);
+}
+
+.store-status.is-open {
+    border-color: var(--success-color);
+    color: var(--text-color);
+}
+
+.store-status.is-open::before {
+    background-color: var(--success-color);
+}
+
+/* Pulso sobre el punto verde */
+.store-status.is-open::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 14px;
+    width: 8px;
+    height: 8px;
+    margin-top: -4px;
+    border-radius: 50%;
+    background-color: var(--success-color);
+    animation: store-status-pulse 2s ease-out infinite;
+}
+
+@keyframes store-status-pulse {
+    from {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(2.8);
+    }
+}
+
+.store-card-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 22px;
+    margin: 0;
+    padding: 0 0 0 48px;
+    list-style: none;
+    border-left: 1px solid var(--border-color);
+}
+
+.store-card-detail {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.store-card-detail-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    color: var(--accent-color);
+    font-size: 1.1rem;
+}
+
+.store-card-detail-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.store-card-label {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+.store-card-value {
+    color: var(--text-color);
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.store-card-note {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.store-card-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border-color);
+}
+
+.store-card-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Íconos de los botones: su texto lleva data-translate, y setLanguage() reemplazaría un <i> interno */
+.store-card-btn::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    line-height: 1;
+}
+
+.store-card-btn-directions::before {
+    content: "\f5eb";
+}
+
+.store-card-btn-site::before {
+    content: "\f08e";
+}
+
+/* El botón secundario usa el acento: el azul primario no se lee sobre la tarjeta en el tema oscuro */
+.store-card-btn-site {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+.store-card-btn-site:hover {
+    border-color: var(--primary-color);
+}
+
+/* ========== AVISO DEL LOCAL EN EL CATÁLOGO (#storeNotice) ========== */
+.store-notice {
+    padding-bottom: 50px;
+}
+
+.store-notice-content {
+    display: flex;
+    align-items: center;
+    gap: 8px 16px;
+    padding: 14px 20px;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-left: 3px solid var(--accent-color);
+    border-radius: 10px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.store-notice-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-color);
+    white-space: nowrap;
+}
+
+.store-notice-icon {
+    color: var(--accent-color);
+}
+
+.store-notice-info {
+    flex: 1;
+    min-width: 0;
+    color: var(--text-secondary);
+}
+
+.store-notice-link {
+    color: var(--accent-color);
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.store-notice-link::after {
+    content: "›";
+    margin-left: 6px;
+}
+
+.store-notice-link:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 930px) {
+    .store-card {
+        gap: 30px 32px;
+        padding: 36px 28px 28px;
+    }
+
+    .store-card-details {
+        padding-left: 32px;
+    }
+}
+
+@media (max-width: 640px) {
+    /* Una columna: primero el nombre y el estado, después los datos y los botones */
+    .store-card {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 26px;
+        padding: 30px 20px 22px;
+    }
+
+    .store-card-name {
+        font-size: 1.5rem;
+    }
+
+    .store-card-details {
+        gap: 18px;
+        padding: 26px 0 0;
+        border-left: none;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .store-card-actions {
+        padding-top: 22px;
+    }
+
+    .store-card-btn {
+        flex: 1 1 100%;
+    }
+
+    /* El aviso deja de ser una fila: nombre, datos y enlace fluyen como un solo párrafo corto */
+    .store-notice {
+        padding-bottom: 40px;
+    }
+
+    .store-notice-content {
+        display: block;
+        padding: 12px 14px;
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .store-notice-name {
+        display: inline;
+        margin-right: 6px;
+    }
+
+    .store-notice-icon {
+        margin-right: 6px;
+    }
+
+    .store-notice-info {
+        display: inline;
+        margin-right: 8px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .store-status.is-open::after {
+        display: none;
+        animation: none;
+    }
+}

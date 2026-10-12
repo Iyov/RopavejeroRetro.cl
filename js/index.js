@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     siglasListas.then(() => {
         initTheme();
         initLanguage();
+        if (typeof initStoreStatus === 'function') initStoreStatus();
         initProgressBar();
         initNavActive();
         initBackToTop();

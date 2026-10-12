@@ -111,6 +111,7 @@ python -m pytest tests/test_bump_version.py -k same_day
 | `LEG` | Páginas legacy (`old.html`, `ps3.html`) | [14-paginas-legacy.md](base/14-paginas-legacy.md) | `tests/js/sitio.test.js` |
 | `VER` | Versión de caché | [15-version-cache.md](base/15-version-cache.md) | `tests/test_bump_version.py` |
 | `BOT` | Bot de Instagram | [16-bot-instagram.md](base/16-bot-instagram.md) | `tests/test_update_instagram.py` |
+| `LOC` | Local físico (@DoubleImpactStore) | [17-local.md](base/17-local.md) | `tests/js/local.test.js` |
 
 ## Qué no cubren los tests
 

@@ -443,6 +443,7 @@ El detalle de arquitectura, orden de carga de módulos y precauciones está en [
 ### Sin versionar | Agosto – Octubre 2026
 
 #### Agregado
+- **Sección del local físico**: "Visítanos en el Persa Bio Bio", con dirección, horario, cómo llegar y señal de "Abierto hoy"
 - **Tests de todo el sitio**: 164 tests del front-end (`node:test` + `jsdom`) y 45 de los scripts Python; `npm test` y workflow de CI
 - **Desarrollo guiado por especificación**: `specs/` con 180 requisitos numerados y trazabilidad requisito → test
 - **Agentes de Claude Code**: `orquestador`, `frontend` y `tester` en `.claude/agents/`
