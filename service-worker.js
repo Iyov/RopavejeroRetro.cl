@@ -1,6 +1,6 @@
 // ========== SERVICE WORKER - ROPAVEJERO RETRO ==========
 // Versión del caché - Incrementar cuando actualices recursos
-const CACHE_VERSION = 'ropavejero-v2026-10-12_6';
+const CACHE_VERSION = 'ropavejero-v2026-10-12_7';
 const CACHE_NAME = `${CACHE_VERSION}-static`;
 const DATA_CACHE_NAME = `${CACHE_VERSION}-data`;
 
@@ -909,58 +909,85 @@ self.addEventListener('fetch', (event) => {
 
 // ========== ESTRATEGIAS DE CACHÉ ==========
 
+// El almacenamiento de caché puede no estar disponible (cuota agotada, perfil dañado, modo privado).
+// En ese caso las estrategias siguen funcionando solo con la red, en vez de dejar la página sin cargar.
+
+// Abre un caché; devuelve null si el almacenamiento no está disponible
+async function openCache(cacheName) {
+    try {
+        return await caches.open(cacheName);
+    } catch (error) {
+        console.warn('[Service Worker] Caché no disponible, se usa solo la red:', error);
+        return null;
+    }
+}
+
+// Busca en un caché; sin caché, o si la lectura falla, no hay copia
+async function matchInCache(cache, request) {
+    if (!cache) return undefined;
+    try {
+        return await cache.match(request);
+    } catch (error) {
+        return undefined;
+    }
+}
+
+// Guarda una copia de la respuesta sin que un fallo al guardar afecte a quien la espera
+function saveInCache(cache, request, response) {
+    if (!cache || !response.ok) return;
+    const copy = response.clone();
+    Promise.resolve()
+        .then(() => cache.put(request, copy))
+        .catch((error) => console.warn('[Service Worker] No se pudo guardar en caché:', error));
+}
+
+function offlineResponse() {
+    return new Response('Offline', { status: 503, statusText: 'Service Unavailable' });
+}
+
 // Cache First: Busca en caché primero, luego en red
 async function cacheFirst(request) {
-    const cache = await caches.open(CACHE_NAME);
-    const cached = await cache.match(request);
-    
+    const cache = await openCache(CACHE_NAME);
+    const cached = await matchInCache(cache, request);
+
     if (cached) {
         return cached;
     }
-    
+
     try {
         const response = await fetch(request);
-        if (response.ok) {
-            cache.put(request, response.clone());
-        }
+        saveInCache(cache, request, response);
         return response;
     } catch (error) {
         console.error('[Service Worker] Error en fetch:', error);
-        return new Response('Offline', { status: 503, statusText: 'Service Unavailable' });
+        return offlineResponse();
     }
 }
 
 // Network First: Intenta red primero, luego caché
 async function networkFirst(request) {
-    const cache = await caches.open(DATA_CACHE_NAME);
-    
+    const cache = await openCache(DATA_CACHE_NAME);
+
     try {
         const response = await fetch(request);
-        if (response.ok) {
-            cache.put(request, response.clone());
-        }
+        saveInCache(cache, request, response);
         return response;
     } catch (error) {
-        const cached = await cache.match(request);
-        if (cached) {
-            return cached;
-        }
-        return new Response('Offline', { status: 503, statusText: 'Service Unavailable' });
+        const cached = await matchInCache(cache, request);
+        return cached || offlineResponse();
     }
 }
 
 // Stale While Revalidate: Devuelve caché y actualiza en segundo plano
 async function staleWhileRevalidate(request) {
-    const cache = await caches.open(CACHE_NAME);
-    const cached = await cache.match(request);
-    
+    const cache = await openCache(CACHE_NAME);
+    const cached = await matchInCache(cache, request);
+
     const fetchPromise = fetch(request).then((response) => {
-        if (response.ok) {
-            cache.put(request, response.clone());
-        }
+        saveInCache(cache, request, response);
         return response;
-    }).catch(() => cached);
-    
+    }).catch(() => cached || offlineResponse());
+
     return cached || fetchPromise;
 }
 

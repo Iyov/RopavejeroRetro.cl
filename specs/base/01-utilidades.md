@@ -15,7 +15,7 @@ Funciones compartidas por los demás módulos. Todo dato externo (hoja de produc
 
 ### Productos
 
-- **UTL-010** — `normalizeProductData` entrega un producto normalizado sin escapar: número entero, textos tal como vienen y valores por defecto (`Sale` y `Neto` en `X`, `Stock` en `0`). Es la forma en que los productos se guardan en memoria y en caché. Si no recibe un objeto devuelve `null`.
+- **UTL-010** — `normalizeProductData` entrega un producto normalizado sin escapar: número entero, textos tal como vienen (la plataforma, sin espacios al inicio ni al final) y valores por defecto (`Sale` y `Neto` en `X`, `Stock` en `0`). Es la forma en que los productos se guardan en memoria y en caché. Si no recibe un objeto devuelve `null`.
 - **UTL-003** — `validateProductData` entrega el mismo producto normalizado con sus textos sanitizados, listo para insertarse como HTML. Se aplica una sola vez, sobre el producto sin escapar. Si no recibe un objeto devuelve `null`.
 - **UTL-004** — Un producto está vendido solo si su campo `Sold` es `"1"` o `1`. Vacío, `0` o cualquier otro valor significa disponible.
 - **UTL-005** — `parseProductPrice` obtiene el número de un precio escrito como texto. `X`, vacío o sin número devuelven `null`; el sufijo `K` multiplica por mil. Con el formato de la hoja (`$15.000`) el orden entre precios se conserva.

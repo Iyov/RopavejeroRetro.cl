@@ -162,7 +162,7 @@ test('[I18N-003] cambiar de idioma ida y vuelta no produce errores de JavaScript
     pagina = null;
 });
 
-test('[I18N-009] al reabrir el selector queda marcado el idioma vigente', { todo: 'PEND-18: al reabrir se marca el idioma con que cargó la página' }, async () => {
+test('[I18N-009] al reabrir el selector queda marcado el idioma vigente', async () => {
     for (const html of ['index.html', 'productos.html']) {
         // La página cargó en español y el visitante pasa a inglés
         await abrirSitio(html);
@@ -249,7 +249,7 @@ test('[I18N-007] toda clave data-translate usada en los HTML tiene versión en i
     assert.deepEqual([...faltantes], []);
 });
 
-test('[I18N-008] el texto inicial de cada HTML coincide con su traducción al español', { todo: 'PEND-16: hay textos distintos en el HTML y en el diccionario' }, async () => {
+test('[I18N-008] el texto inicial de cada HTML coincide con su traducción al español', async () => {
     pagina = await abrirPagina({ scripts: ['js/modules/ui.js'] });
     const { es } = traducciones();
     const normalizar = html => html.replace(/\s+/g, ' ').trim();

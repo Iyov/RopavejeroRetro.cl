@@ -332,6 +332,9 @@ async function loadProducts() {
 
 // Función para mostrar error de carga
 function showLoadingError() {
+    // Queda anotado para poder traducir el aviso si el visitante cambia de idioma
+    window._productsLoadFailed = true;
+
     const tableBody = document.getElementById('productsTableBody');
     const mobileCards = document.getElementById('mobileCards');
     const currentLang = localStorage.getItem('language') || 'es';
@@ -798,14 +801,15 @@ function updatePlatformFilter(products) {
     platformDropdown.appendChild(allOption);
     
     // Agregar plataformas únicas ordenadas alfabéticamente
-    Array.from(platforms).sort((a, b) => a.localeCompare(b)).forEach(platform => {
+    Array.from(platforms).sort((a, b) => a.localeCompare(b)).forEach((platform, index) => {
         const optionDiv = document.createElement('div');
         optionDiv.className = 'multi-select-option';
         optionDiv.setAttribute('data-value', platform);
         
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
-        checkbox.id = `platform-${platform.replace(/\s+/g, '-').toLowerCase()}`;
+        // id por posición: derivarlo del nombre repetía el id entre "Xbox 360" y "xbox-360"
+        checkbox.id = `platform-option-${index + 1}`;
         checkbox.value = platform;
         
         const label = document.createElement('label');
@@ -1042,6 +1046,12 @@ function filterProducts() {
 // renderProductsTable() termina en setLanguage() y se llamarían mutuamente.
 // Si el catálogo todavía no cargó no hace nada, para no anunciar que no hay productos
 function refreshProductsLanguage() {
+    // Si la carga falló, lo que se ve es el aviso de error: se vuelve a escribir en el idioma nuevo
+    if (window._productsLoadFailed) {
+        showLoadingError();
+        return;
+    }
+
     if (!window._productsInitialized || allProducts.length === 0) return;
 
     filterProducts();

@@ -13,6 +13,7 @@
 - **PRD-039** — Un caché de productos dañado no deja el catálogo en blanco: si lo guardado no es una lista de productos se descarta y se consulta la hoja; los elementos que no son un producto válido se ignoran. No se produce ningún error de JavaScript.
 - **PRD-006** — Sin caché, los productos se piden a la hoja de Google, se muestran y quedan guardados en caché.
 - **PRD-007** — Si la hoja falla (error HTTP, sin red, CSV vacío o sin productos) se reintenta hasta 3 veces. Si un reintento funciona, el catálogo se muestra normalmente; si todos fallan se muestra un mensaje de error con botón "Reintentar", en el idioma activo, y no se guarda nada en caché.
+- **PRD-042** — Si los productos no cargaron, el aviso de error y su botón "Reintentar" pasan al idioma nuevo cuando el visitante cambia de idioma.
 - **PRD-030** — El catálogo se inicializa cuando su sección se acerca a la pantalla, o tras una espera si el navegador no puede detectarlo, y nunca dos veces.
 - **PRD-031** — El botón "Actualizar" vacía el caché de productos y recarga la página.
 
@@ -36,6 +37,8 @@
 - **PRD-018** — Con una búsqueda activa, el desplegable solo ofrece las plataformas que tienen resultados, y avisa si no hay ninguna.
 - **PRD-037** — El aviso "No hay plataformas para esta búsqueda" no es una opción del filtro: no se puede marcar, no cuenta como plataforma y desaparece cuando la búsqueda vuelve a tener resultados.
 - **PRD-038** — El filtro de plataformas funciona con cualquier nombre de plataforma, incluidos los que llevan comillas dobles, comillas simples, barra invertida o corchetes: se puede marcar, quitar con su etiqueta y abrir desde un enlace.
+- **PRD-043** — Una plataforma cuyo nombre trae espacios al inicio o al final se trata como la misma plataforma sin ellos: aparece una sola vez en el filtro y al marcarla se muestran sus productos.
+- **PRD-044** — Cada casilla del filtro de plataformas tiene un `id` único y su etiqueta apunta a ella, aunque dos plataformas tengan nombres que solo difieren en mayúsculas, espacios o guiones.
 - **PRD-019** — La búsqueda y el filtro de plataformas se combinan: se muestran los productos que cumplen ambos.
 - **PRD-020** — La búsqueda se puede combinar con una sola plataforma elegida.
 - **PRD-021** — El selector de orden reordena el catálogo por número, precio, nombre o plataforma. Los productos sin precio quedan al final al ordenar por precio.
@@ -65,6 +68,7 @@
 ### Idioma
 
 - **PRD-032** — Los textos que el catálogo genera (etiquetas de las tarjetas, botones, siglas, encabezados de la tabla) salen en el idioma activo.
+- **PRD-041** — El texto de ayuda de los buscadores del catálogo (productos y plataformas) sale en el idioma activo.
 - **PRD-033** — Al cambiar de idioma el catálogo se vuelve a dibujar en el idioma nuevo, sin esperar a otro filtro.
 
 ## Notas

@@ -19,6 +19,7 @@
 - **SW-005** — El inicio (`/`, `/index.html`), los CSS, los JS, las fuentes y el manifest se sirven desde el caché y solo van a la red si faltan; lo descargado queda guardado. Una URL con un `?v=` nuevo es un recurso distinto y se descarga. Sin caché y sin red responde 503, y una respuesta de error no se guarda.
 - **SW-006** — Las demás páginas (catálogo, seguridad) y los JSON van primero a la red, de modo que siempre llega la versión nueva, y usan la última copia guardada solo sin conexión.
 - **SW-007** — Las imágenes se responden desde el caché y se actualizan en segundo plano para la próxima vez. Sin conexión, una imagen guardada se sigue mostrando.
+- **SW-013** — Si el almacenamiento de caché del navegador no está disponible, el service worker responde igual desde la red, en sus tres estrategias; sin caché y sin conexión responde 503 en vez de dejar la petición sin respuesta. Un fallo al guardar una copia no afecta a la respuesta.
 
 ### Precache
 

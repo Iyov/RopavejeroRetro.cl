@@ -252,6 +252,7 @@ const translations = {
         'products-title': 'Productos Disponibles',
         'products-subtitle': 'Explora nuestra colección de videojuegos retro disponibles para venta.',
         'filter-search': 'Buscar producto:',
+        'filter-search-placeholder': 'Escribe para buscar...',
         'filter-platform': 'Plataforma:',
         'filter-platform-search': 'Buscar plataforma...',
         'filter-all': 'Todas',
@@ -438,6 +439,7 @@ const translations = {
         'products-title': 'Available Products',
         'products-subtitle': 'Explore our collection of retro video games available for sale.',
         'filter-search': 'Search product:',
+        'filter-search-placeholder': 'Type to search...',
         'filter-platform': 'Platform:',
         'filter-platform-search': 'Search platform...',
         'filter-all': 'All',
@@ -815,9 +817,10 @@ function initLanguage() {
     languageBtn.addEventListener('click', function() {
         languageSelectorOverlay.classList.add('active');
 
-        // Marcar la opción activa
+        // Marcar la opción activa: el idioma vigente, que puede haber cambiado desde la carga
+        const currentLanguage = localStorage.getItem('language') || 'es';
         languageOptions.forEach(option => {
-            if (option.dataset.lang === savedLanguage) {
+            if (option.dataset.lang === currentLanguage) {
                 option.classList.add('active');
             } else {
                 option.classList.remove('active');

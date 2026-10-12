@@ -10,7 +10,7 @@ const { ROOT, abrirPagina, leer, existe, scriptsDeclarados, scriptsInline } = re
 
 const ORIGEN = 'https://ropavejeroretro.cl';
 
-function crearServiceWorker({ red = async () => new Response('de la red'), cachesIniciales = {}, fallaAddAll = () => false } = {}) {
+function crearServiceWorker({ red = async () => new Response('de la red'), cachesIniciales = {}, fallaAddAll = () => false, cacheDisponible = () => true } = {}) {
     const oyentes = {};
     const almacenes = new Map(Object.entries(cachesIniciales).map(([nombre, entradas]) => [nombre, new Map(Object.entries(entradas))]));
     const registro = { skipWaiting: 0, claim: 0, addAll: [], red: [], consola: [] };
@@ -18,6 +18,7 @@ function crearServiceWorker({ red = async () => new Response('de la red'), cache
 
     const caches = {
         open: async (nombre) => {
+            if (!cacheDisponible()) throw new Error('almacenamiento de caché no disponible');
             if (!almacenes.has(nombre)) almacenes.set(nombre, new Map());
             const almacen = almacenes.get(nombre);
             return {
@@ -309,4 +310,43 @@ test('[SW-012] inicio y catálogo registran el service worker versionado, con al
         await pagina.cerrar();
     }
     pagina = null;
+});
+
+test('[SW-013] si el almacenamiento de caché no está disponible, responde igual desde la red', async () => {
+    let enLinea = true;
+    const sw = crearServiceWorker({
+        cacheDisponible: () => false,
+        red: async () => { if (!enLinea) throw new TypeError('Failed to fetch'); return new Response('de la red'); }
+    });
+    const urls = [
+        `${ORIGEN}/index.html`,                 // caché primero
+        `${ORIGEN}/js/modules/ui.js?v=1`,       // caché primero
+        `${ORIGEN}/productos.html`,             // red primero
+        `${ORIGEN}/js/siglas.json?v=1`,         // red primero
+        `${ORIGEN}/img/hero-800.webp`           // imagen
+    ];
+
+    for (const url of urls) {
+        const respuesta = await sw.pedir(url);
+        assert.ok(respuesta, `${url}: sin respuesta`);
+        assert.equal(await respuesta.text(), 'de la red', url);
+    }
+    assert.equal(sw.registro.red.length, urls.length);
+
+    // Sin caché y sin conexión no queda la petición colgada ni rechazada: responde 503
+    enLinea = false;
+    for (const url of urls) {
+        const respuesta = await sw.pedir(url);
+        assert.equal(respuesta.status, 503, url);
+    }
+});
+
+test('[SW-013] un fallo al guardar en el caché no impide entregar la respuesta de la red', async () => {
+    let disponible = true;
+    const sw = crearServiceWorker({ cacheDisponible: () => disponible });
+    await sw.pedir(`${ORIGEN}/productos.html`);
+
+    disponible = false;
+    assert.equal(await (await sw.pedir(`${ORIGEN}/productos.html`)).text(), 'de la red');
+    assert.equal(await (await sw.pedir(`${ORIGEN}/css/index.min.css?v=2`)).text(), 'de la red');
 });

@@ -10,3 +10,4 @@ El flujo completo está en [`../README.md`](../README.md). En resumen: se especi
 | 2026-10-12 | [Arreglos del catálogo: búsqueda, filtro de plataformas y nombres con "&"](2026-10-12-arreglos-catalogo.md) | Entregado |
 | 2026-10-12 | [Catálogo: redibujar al cambiar de idioma, página en la URL y robustez](2026-10-12-catalogo-idioma-url-robustez.md) | Entregado |
 | 2026-10-12 | [Páginas 404 y de seguridad, traducciones faltantes, `h1` y enlaces de `old.html`](2026-10-12-pendientes-sitio.md) | Entregado |
+| 2026-10-12 | [Selector de idioma, textos del HTML y robustez menor](2026-10-12-idioma-y-robustez-menor.md) | Entregado |

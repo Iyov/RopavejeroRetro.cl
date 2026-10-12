@@ -1949,3 +1949,104 @@ test('[PRD-040] un valor de "platform" imposible de decodificar no produce error
     assert.deepEqual(nums(), [101, 102]);
     assert.deepEqual(erroresJs(), []);
 });
+
+// ---------- Idioma y robustez menor (specs/cambios/2026-10-12-idioma-y-robustez-menor.md) ----------
+
+async function elegirIdioma(idioma) {
+    pagina.click($('#languageBtn'));
+    pagina.click($(`.language-option[data-lang="${idioma}"]`));
+    await pagina.asentar();
+}
+
+test('[PRD-041] el texto de ayuda de los buscadores del catálogo sale en el idioma activo', async () => {
+    await abrirCatalogo();
+    assert.equal($('#searchFilter').placeholder, 'Escribe para buscar...');
+    assert.equal($('#platformSearchInput').placeholder, 'Buscar plataforma...');
+
+    await elegirIdioma('en');
+    assert.equal($('#searchFilter').placeholder, 'Type to search...');
+    assert.equal($('#platformSearchInput').placeholder, 'Search platform...');
+
+    await elegirIdioma('es');
+    assert.equal($('#searchFilter').placeholder, 'Escribe para buscar...');
+    assert.equal($('#platformSearchInput').placeholder, 'Buscar plataforma...');
+    await pagina.cerrar();
+
+    await abrirCatalogo({ almacenamiento: { language: 'en' } });
+    assert.equal($('#searchFilter').placeholder, 'Type to search...');
+    assert.equal($('#platformSearchInput').placeholder, 'Search platform...');
+});
+
+test('[PRD-042] si los productos no cargaron, el aviso de error pasa al idioma nuevo al cambiar de idioma', async () => {
+    await abrirCatalogo({
+        rutas: url => (esHoja(url) ? respuesta('error', { status: 500, tipo: 'text/plain' }) : undefined),
+        esperarFilas: false
+    });
+    pagina.acelerarTemporizadores();
+    await pagina.hasta(() => $('#productsTableBody .fa-exclamation-triangle'), 'mensaje de error', 6000);
+    assert.match($('#productsTableBody').textContent, /No se pudieron cargar los productos/);
+
+    await elegirIdioma('en');
+    assert.match($('#productsTableBody').textContent, /Could not load products\. Check your internet connection\./);
+    assert.match($('#mobileCards').textContent, /Could not load products/);
+    assert.equal(limpio($('#productsTableBody button').textContent), 'Retry');
+    assert.equal(limpio($('#mobileCards button').textContent), 'Retry');
+
+    await elegirIdioma('es');
+    assert.match($('#productsTableBody').textContent, /No se pudieron cargar los productos\. Verifica tu conexión a internet\./);
+    assert.equal(limpio($('#mobileCards button').textContent), 'Reintentar');
+
+    assert.equal(cargasHoja(), 3, 'cambiar de idioma no vuelve a consultar la hoja');
+    assert.deepEqual(pagina.errores.map(e => e.message), []);
+});
+
+test('[PRD-043] una plataforma con espacios al inicio o al final es la misma plataforma sin ellos', async () => {
+    const base = { Sale: '$1', Neto: '$1.000', Stock: '1', Link: '', Sold: 0 };
+    await abrirCatalogo({
+        almacenamiento: {
+            ropavejero_products_cache_v1_1_2: JSON.stringify([
+                { ...base, Num: 1, Product: 'Con espacios', Platform: '  SNES ' },
+                { ...base, Num: 2, Product: 'Sin espacios', Platform: 'SNES' },
+                { ...base, Num: 3, Product: 'Otra', Platform: 'PS1\t' }
+            ]),
+            ropavejero_cache_timestamp_v1_1_2: String(Date.now())
+        }
+    });
+
+    assert.deepEqual($$('#platformDropdown .multi-select-option[data-value]').map(o => o.getAttribute('data-value')), ['all', 'PS1', 'SNES']);
+    assert.deepEqual(filas().map(f => f.plataforma), ['SNES', 'SNES', 'PS1']);
+
+    marcarPlataforma('SNES');
+    assert.deepEqual(nums(), [1, 2]);
+    assert.equal(new URLSearchParams(pagina.window.location.search).get('platform'), 'SNES');
+
+    marcarPlataforma('SNES', false);
+    marcarPlataforma('PS1');
+    assert.deepEqual(nums(), [3]);
+    assert.deepEqual(pagina.errores.map(e => e.message), []);
+});
+
+test('[PRD-044] cada casilla de plataforma tiene un id único y su etiqueta apunta a ella, aunque los nombres se parezcan', async () => {
+    const parecidas = ['Xbox 360', 'xbox-360', 'XBOX 360', 'Xbox  360', 'Game Boy', 'game-boy', '360'];
+    await abrirCatalogo({ productos: parecidas.map((plataforma, i) => ({ ...PRODUCTOS[0], num: i + 1, producto: `Juego ${i + 1}`, plataforma })) });
+    const opciones = $$('#platformDropdown .multi-select-option[data-value]');
+    const casillas = opciones.map(o => o.querySelector('input[type="checkbox"]'));
+    const ids = casillas.map(c => c.id);
+
+    assert.equal(opciones.length, parecidas.length + 1);
+    assert.ok(ids.every(Boolean), 'toda casilla tiene id');
+    assert.equal(new Set(ids).size, ids.length, `ids repetidos: ${ids.join(', ')}`);
+    assert.equal(ids[0], 'platform-all', 'la casilla "Todas" conserva su id');
+    opciones.forEach((opcion, i) => {
+        assert.equal(opcion.querySelector('label').getAttribute('for'), ids[i], opcion.getAttribute('data-value'));
+        assert.equal(pagina.document.getElementById(ids[i]), casillas[i], opcion.getAttribute('data-value'));
+    });
+
+    // Cada una filtra sus propios productos
+    parecidas.forEach((plataforma, i) => {
+        marcarPlataforma(plataforma);
+        assert.deepEqual(nums(), [i + 1], plataforma);
+        marcarPlataforma(plataforma, false);
+    });
+    assert.deepEqual(plataformasMarcadas(), ['all']);
+});

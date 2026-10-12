@@ -90,7 +90,7 @@ function normalizeProductData(product) {
     return {
         Num: parseInt(product.Num) || 0,
         Product: String(product.Product || ''),
-        Platform: String(product.Platform || ''),
+        Platform: String(product.Platform || '').trim(), // sin espacios sobrantes: es la clave del filtro
         Sale: String(product.Sale || 'X'),
         Neto: String(product.Neto || 'X'),
         Stock: String(product.Stock || '0'),
