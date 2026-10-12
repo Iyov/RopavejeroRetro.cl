@@ -103,7 +103,7 @@ El bot commitea directo a `main` cada 12h tocando `index.html` y `service-worker
 
 `.github/workflows/deploy-pages.yml` despliega la raíz del repo tal cual a GitHub Pages en cada push a `main` (sin build en CI — los assets minificados ya deben estar commiteados). `.nojekyll` desactiva el procesamiento de Jekyll ya que este es un sitio estático plano.
 
-Los pushes del bot de Instagram se hacen con el `GITHUB_TOKEN` por defecto, y GitHub no dispara workflows desde esos pushes: los commits "Se ... posts desde Instagram" **no** se despliegan por sí solos. Quedan publicados recién con el siguiente push humano a `main` o al ejecutar manualmente "Deploy to GitHub Pages" (`gh workflow run deploy-pages.yml`).
+Los pushes del bot de Instagram se hacen con el `GITHUB_TOKEN` por defecto, y GitHub no dispara workflows `on: push` desde esos pushes. Por eso `update_instagram.yml` lanza el despliegue explícitamente después de pushear (`gh workflow run deploy-pages.yml --ref main`, que sí funciona con `GITHUB_TOKEN` y requiere el permiso `actions: write` del job). Si se renombra `deploy-pages.yml` o se le quita `workflow_dispatch`, ese paso se rompe y los posts dejan de publicarse.
 
 `.htaccess` / `.htaccess.development` no tienen efecto en GitHub Pages (Pages no los procesa).
 

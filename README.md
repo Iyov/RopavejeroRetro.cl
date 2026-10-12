@@ -107,7 +107,7 @@ El sitio cuenta con un sistema de actualización inteligente que sincroniza los 
 4. **Sincronización Total**: Solo si hubo cambios (posts agregados, modificados, eliminados o con distinto número de likes) se actualizan los archivos de datos (`js/instagram_posts.js` y `js/instagram_posts.min.js`), la versión en el `index.html` y la versión y lista de imágenes del `service-worker.js`.
 5. **Ejecución**: Se ejecuta automáticamente cada 12 horas vía **GitHub Actions** o manualmente desde la pestaña *Actions*. El workflow commitea el resultado con `github-actions[bot]`.
 
-> **Importante:** los commits del bot no disparan el workflow de despliegue (`deploy-pages.yml`). Los posts nuevos quedan publicados recién con el siguiente push a `main` o al ejecutar manualmente *Deploy to GitHub Pages* desde la pestaña *Actions*.
+6. **Despliegue**: Cuando hubo cambios, el mismo workflow lanza *Deploy to GitHub Pages* (`deploy-pages.yml`) para publicarlos. Es un paso explícito porque los pushes del bot no disparan por sí solos el despliegue.
 
 ### Configuración de Secretos
 Para la ejecución en GitHub, se requiere configurar:

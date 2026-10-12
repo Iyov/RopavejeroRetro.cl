@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write  # Permite escribir en el repositorio
+      actions: write   # Permite disparar el workflow de despliegue
 
     steps:
     - name: Checkout del código
@@ -31,6 +32,8 @@ jobs:
       run: python api/update_instagram.py
 
     - name: Commit y Push de los cambios
+      env:
+        GH_TOKEN: ${{ github.token }}
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
@@ -46,6 +49,10 @@ jobs:
             git commit -m "$COMMIT_MSG"
             git push
             echo "Cambios pusheados: $COMMIT_MSG"
+            # Un push hecho con GITHUB_TOKEN no dispara deploy-pages.yml,
+            # así que el despliegue se lanza explícitamente.
+            gh workflow run deploy-pages.yml --ref main
+            echo "Despliegue a GitHub Pages disparado"
           else
             echo "No se generó mensaje de commit, no hay cambios en Instagram"
           fi
