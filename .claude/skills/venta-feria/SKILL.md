@@ -47,7 +47,8 @@ Escribir en dos planillas y en Instagram cambia datos reales de la tienda. Antes
 6. **Ventas, filas `XXXX`.** Van **al tope** del bloque `XXXX` que está debajo de la lista numerada (insertando hacia arriba: lo más nuevo queda arriba), justo encima de la primera fila `XXXX` existente. B = `XXXX`, E = precio de venta, F = `0`, G = `1`, H = `0`, I–P como arriba, con P igual a E. Insertar filas, copiar el formato de la fila de abajo y pegar los valores desde el portapapeles (no tipear: el autocompletado cambia los nombres). Un lote vendido a precio cerrado se reparte en miles enteros que sumen el total. Si un producto del lote ya tiene fila con ID, se ajusta su P.
 7. **Disponibles.** Para cada ID, guardar el Link (G) y poner `1` en Sold (H). Hasta que Francisco diga otra cosa: marcar con `1`, mostrarle el resultado y **borrar esas filas solo con su OK**, de abajo hacia arriba para que no se corran los números.
 8. **Instagram.** Agrupar los IDs por Link (un post puede tener varios productos vendidos) y editar cada post una sola vez. Guardar con un clic real en "Listo", y recargar el post para confirmar que quedó ❌. Las filas `XXXX` no tienen post.
-9. **Cierre.** Exportar Ventas y contar las filas de la feria (columna K) y la suma de Pago. Informar qué se registró, qué quedó pendiente y por qué, y cerrar la pestaña del navegador.
+9. **Revisar `_SinId`.** Esa carpeta tiene fotos de lo vendido sin ID, que Francisco registra a mano como `XXXX`. Comparar cada foto con las filas `XXXX` de la feria y avisar lo que falte, lo que esté duplicado o lo que tenga otro precio. En la primera feria faltaba un Uncharted 2 y un control blanco de $20 había quedado como copia del control Star Wars de $30.
+10. **Cierre.** Exportar Ventas y contar las filas de la feria (columna K) y la suma de Pago. Informar qué se registró, qué quedó pendiente y por qué, y cerrar la pestaña del navegador.
 
 ## Errores conocidos
 
