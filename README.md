@@ -5,7 +5,7 @@
 [![Website](https://img.shields.io/badge/Website-ropavejeroretro.cl-blue)](https://ropavejeroretro.cl/)
 [![Instagram](https://img.shields.io/badge/Instagram-@ropavejero.retro-E4405F?logo=instagram&logoColor=white)](https://www.instagram.com/ropavejero.retro/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/Version-2.1.0-brightgreen.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/Version-2.2.0-brightgreen.svg)](CHANGELOG.md)
 
 > **Todo lo Retro en un solo lugar** - Consolas, juegos y accesorios retro originales americanos. Revive la nostalgia de los videojuegos clásicos.
 
@@ -440,7 +440,7 @@ El detalle de arquitectura, orden de carga de módulos y precauciones está en [
 ---
 
 ## 🆕 Últimos Cambios
-### Sin versionar | Agosto – Octubre 2026
+### Versión: v2.2.0 | Octubre 2026
 
 #### Agregado
 - **Sección del local físico**: "Visítanos en el Persa Bio Bio", con dirección, horario, cómo llegar y señal de "Abierto hoy"
@@ -458,6 +458,7 @@ El detalle de arquitectura, orden de carga de módulos y precauciones está en [
 - ✅ `productos.html` no cargaba el catálogo tras la refactorización: faltaba incluir los módulos de `js/modules/`.
 - ✅ La FAQ "¿Puedo ver los productos antes de comprar?" ahora indica el local del Persa Bio Bio en vez de decir que no hay showroom.
 - ✅ Los posts de Instagram sincronizados por el bot ahora se despliegan automáticamente.
+- ✅ El bot de Instagram termina con error si la API falla o el token expiró, para que GitHub avise en vez de seguir en verde sin traer posts.
 - ✅ `sitemap.xml` ya no lista páginas `noindex` y usa la URL canónica `/productos`.
 - ✅ `old.html` ahora tiene Content Security Policy.
 
@@ -705,7 +706,7 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más det
 - 👥 **Clientes Satisfechos**: 150+
 - ⭐ **Rating Promedio**: 4.8/5
 - 🚚 **Envíos Realizados**: A todo Chile
-- 📦 **Versión Actual**: v2.1.0
+- 📦 **Versión Actual**: v2.2.0
 - ⚡ **Performance**: 60-70% más rápido que v1.0.0
 
 ---

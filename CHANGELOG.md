@@ -9,6 +9,8 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ## [Sin publicar]
 
+## [2.2.0] - 2026-10-17
+
 ### Agregado
 - Sección "Visítanos en el Persa Bio Bio" en el inicio (2026-10-12): tarjeta del local @DoubleImpactStore con dirección, metro, horario, señal "Abierto hoy" según el día en hora de Chile y botones "Cómo llegar" (Google Maps) y "Sitio del local"; ítem "Local" en el menú; aviso compacto en el catálogo. Reemplaza al bloque de texto sin estilo que estaba bajo los íconos de contacto, y se quita de la 404 y de las páginas de seguridad
 - Headers de seguridad en todas las respuestas del sitio (2026-10-12), mediante una regla de Cloudflare: HSTS (6 meses), `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, `Referrer-Policy: strict-origin-when-cross-origin` y `Permissions-Policy` sin cámara, micrófono, geolocalización, pagos ni USB

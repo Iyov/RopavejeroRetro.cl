@@ -30,7 +30,7 @@ Memoria del proyecto: acuerdos y decisiones tomados con Francisco que no se dedu
 - **Fuente única (2026-10-12):** `CLAUDE.md` es la guía técnica de referencia. `AGENTS.md` es un resumen que apunta a ella; las reglas se editan en `CLAUDE.md` y en `AGENTS.md` solo se ajusta el resumen.
 - **Memoria consolidada aquí (2026-10-12):** todo lo que se vaya acordando se registra en este archivo, para que esté disponible para cualquier agente y no solo en la memoria privada de una herramienta.
 - **Documentos históricos (2026-10-12):** los documentos antiguos de `docs/` y `SECURITY.md` no se reescriben; se les agrega una nota de vigencia y `docs/README.md` indica cuáles siguen siendo válidos.
-- **Versión del changelog (2026-10-12):** los cambios posteriores a la 2.1.0 están en `CHANGELOG.md` bajo "[Sin publicar]". El número de versión lo decide Francisco; hasta entonces no se toca el badge de versión de `README.md`.
+- **Versión del changelog (2026-10-12, actualizado 2026-10-17):** el número de versión lo decide Francisco; mientras no lo haga, los cambios se acumulan en `CHANGELOG.md` bajo "[Sin publicar]" y no se toca el badge de versión de `README.md`. El 2026-10-17 Francisco eligió la 2.2.0 para todo lo hecho desde la 2.1.0.
 
 ## Trabajo acordado para más adelante
 
@@ -49,7 +49,6 @@ No queda ninguna abierta.
 ### Decisiones abiertas
 
 - **Renovar el token de Instagram (2026-10-17).** El token de `INSTAGRAM_TOKEN` expiró el 2026-10-04 (14:02 hora del Pacífico) y desde entonces el bot no trae posts. Francisco lo renueva en Meta y actualiza el secreto del repositorio; no se puede hacer desde aquí. Mientras no lo haga, cada ejecución del bot queda en rojo (ver "Resueltos" #15).
-- **Versión del changelog (2026-10-17).** `CHANGELOG.md` acumula bajo "[Sin publicar]" todo lo hecho desde la 2.1.0 (2026-08-17): tests y SDD, arreglos del catálogo, headers de seguridad, despliegue con tests y el rediseño del local. Falta que Francisco elija el número; con eso se fecha la sección y se actualiza "Últimos Cambios" de `README.md`.
 
 
 ## Resueltos
