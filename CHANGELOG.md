@@ -57,6 +57,7 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 - `README.md`: dependencias Python (`python-dotenv` no se usa), ubicación del ID de Google Sheets (`js/modules/products.js`), número de URLs del sitemap, estado de indexación y estructura del proyecto
 
 ### Cambiado
+- Bot de Instagram (2026-10-17): ante un error de la API (por ejemplo, un token expirado) o si falta `INSTAGRAM_TOKEN`, el script termina con error y la ejecución del workflow queda en rojo, para que GitHub avise. Antes terminaba bien y el token pasó 13 días vencido sin que nadie lo notara. Un error en una página posterior a la primera ya no deja al bot seguir con una lista parcial de posts
 - El despliegue espera a los tests (2026-10-12): en cada push a `main`, `deploy-pages.yml` corre la suite completa y publica solo si pasa. El despliegue que lanza el bot de Instagram no se bloquea
 - El catálogo pide la hoja de Google con un solo pedido (2026-10-12): usa `cache: 'no-store'` en vez de los encabezados `Cache-Control` y `Pragma`, que obligaban al navegador a un pedido de comprobación previo
 - Versionado de caché unificado (2026-10-12): antes convivían el esquema manual `AAAA-MM-DD_N`, el del bot de Instagram `AAAA-MM-DD_HHMM` (en `instagram_posts.min.js` y `CACHE_VERSION`), versiones antiguas escritas dentro de `siglas.js` e `instagram.js`, y referencias sin `?v=` (Font Awesome, CSS de `old.html`, `efemerides.json`, registro del service worker en `productos.html`). Ahora todo usa el mismo valor

@@ -11,7 +11,8 @@ Cada 12 horas el bot trae los posts de Instagram marcados con `#RopavejeroRetroW
 
 - **BOT-001** — Un error de la API se clasifica: `OAuthException` con código 190, o un mensaje que menciona el token, es un token expirado o inválido; cualquier otro es un error genérico.
 - **BOT-002** — Los posts se piden a la Graph API siguiendo la paginación hasta el final, sin superar el máximo de posts configurado.
-- **BOT-003** — Ante un error de la API el bot se detiene, avisa si el problema es el token y no devuelve posts.
+- **BOT-003** — Ante un error de la API, en cualquier página, el bot se detiene sin tocar ningún archivo, avisa si el problema es el token y termina con error, para que la ejecución del workflow quede fallida.
+- **BOT-016** — Si falta `INSTAGRAM_TOKEN`, el bot avisa y termina con error, sin tocar ningún archivo.
 
 ### Selección de posts
 

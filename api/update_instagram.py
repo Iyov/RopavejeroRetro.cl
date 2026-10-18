@@ -10,6 +10,10 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import bump_version
 
 
+class InstagramAPIError(Exception):
+    """La Graph API respondió con un error: el bot se detiene sin tocar ningún archivo."""
+
+
 def detect_instagram_error(payload):
     """Detecta si la respuesta de Instagram indica un token expirado o inválido."""
     error = payload.get('error', {}) if isinstance(payload, dict) else {}
@@ -64,7 +68,7 @@ def fetch_instagram_media():
             print(f"Error al conectar con Instagram: {response.text}")
             if error_info['is_expired_token']:
                 print(error_info['message'])
-            break
+            raise InstagramAPIError(error_info['message'])
 
         data = response.json()
         if 'error' in data:
@@ -72,7 +76,7 @@ def fetch_instagram_media():
             print(f"Error al conectar con Instagram: {json.dumps(data, ensure_ascii=False)}")
             if error_info['is_expired_token']:
                 print(error_info['message'])
-            break
+            raise InstagramAPIError(error_info['message'])
 
         all_media.extend(data.get('data', []))
 
@@ -406,10 +410,19 @@ def update_files(new_posts):
 
     print(f"Proceso completado. Archivos y variantes de imagen generados.")
 
-if __name__ == "__main__":
+def main():
+    """Devuelve el código de salida: distinto de 0 deja en rojo la ejecución del workflow."""
     if not ACCESS_TOKEN:
         print("Error: No se encontró INSTAGRAM_TOKEN.")
-    else:
+        return 1
+    try:
         media = fetch_instagram_media()
-        processed = process_posts(media)
-        update_files(processed)
+    except InstagramAPIError:
+        print("No se modificó ningún archivo.")
+        return 1
+    processed = process_posts(media)
+    update_files(processed)
+    return 0
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -172,21 +172,69 @@ def test_fetch_respects_the_post_limit(monkeypatch):
 
 
 def test_fetch_stops_on_api_errors(monkeypatch, capsys):
-    """[BOT-003] Ante un error de la API se detiene, avisa si es el token y no devuelve posts."""
+    """[BOT-003] Ante un error de la API se detiene con error y avisa si es el token."""
     expired = {"error": {"message": "Session has expired", "type": "OAuthException", "code": 190}}
 
     monkeypatch.setattr(update_instagram.requests, "get", lambda url: FakeResponse(expired, status_code=400))
-    assert update_instagram.fetch_instagram_media() == []
+    with pytest.raises(update_instagram.InstagramAPIError):
+        update_instagram.fetch_instagram_media()
     assert "El token de Instagram ha expirado" in capsys.readouterr().out
 
     monkeypatch.setattr(update_instagram.requests, "get", lambda url: FakeResponse(expired, status_code=200))
-    assert update_instagram.fetch_instagram_media() == []
+    with pytest.raises(update_instagram.InstagramAPIError):
+        update_instagram.fetch_instagram_media()
     assert "El token de Instagram ha expirado" in capsys.readouterr().out
 
     html_error = FakeResponse(None, status_code=502, content_type="text/html")
     monkeypatch.setattr(update_instagram.requests, "get", lambda url: html_error)
-    assert update_instagram.fetch_instagram_media() == []
+    with pytest.raises(update_instagram.InstagramAPIError):
+        update_instagram.fetch_instagram_media()
     assert "Error al conectar con Instagram" in capsys.readouterr().out
+
+
+def test_fetch_does_not_return_partial_pages_on_error(monkeypatch):
+    """[BOT-003] Un error en una página posterior a la primera también detiene el bot, sin devolver los posts ya leídos."""
+    pages = [
+        FakeResponse({"data": [{"id": "1"}], "paging": {"next": "https://graph.instagram.com/next"}}),
+        FakeResponse({"error": {"message": "Service unavailable", "type": "OAuthException", "code": 2}}, status_code=500),
+    ]
+    monkeypatch.setattr(update_instagram.requests, "get", lambda url: pages.pop(0))
+
+    with pytest.raises(update_instagram.InstagramAPIError):
+        update_instagram.fetch_instagram_media()
+
+
+def test_main_fails_without_touching_files_on_api_error(monkeypatch):
+    """[BOT-003] Con un error de la API el bot termina con error y no toca ningún archivo."""
+    expired = {"error": {"message": "Session has expired", "type": "OAuthException", "code": 190}}
+    monkeypatch.setattr(update_instagram.requests, "get", lambda url: FakeResponse(expired, status_code=400))
+    updates = []
+    monkeypatch.setattr(update_instagram, "update_files", lambda posts: updates.append(posts))
+
+    assert update_instagram.main() != 0
+    assert updates == []
+
+
+def test_main_succeeds_when_the_api_answers(monkeypatch):
+    """[BOT-003] Si la API responde bien, el bot termina sin error."""
+    monkeypatch.setattr(update_instagram.requests, "get", lambda url: FakeResponse({"data": []}))
+    updates = []
+    monkeypatch.setattr(update_instagram, "update_files", lambda posts: updates.append(posts))
+
+    assert update_instagram.main() == 0
+    assert updates == [[]]
+
+
+def test_main_fails_without_token(monkeypatch, capsys):
+    """[BOT-016] Sin INSTAGRAM_TOKEN el bot avisa y termina con error, sin tocar ningún archivo."""
+    monkeypatch.setattr(update_instagram, "ACCESS_TOKEN", None)
+    calls = []
+    monkeypatch.setattr(update_instagram.requests, "get", lambda url: calls.append(url))
+    monkeypatch.setattr(update_instagram, "update_files", lambda posts: calls.append(posts))
+
+    assert update_instagram.main() != 0
+    assert calls == []
+    assert "INSTAGRAM_TOKEN" in capsys.readouterr().out
 
 
 # ---------- Selección y transformación de posts ----------

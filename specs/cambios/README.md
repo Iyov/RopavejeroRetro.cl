@@ -14,3 +14,4 @@ El flujo completo está en [`../README.md`](../README.md). En resumen: se especi
 | 2026-10-12 | [Pedido a la hoja de Google sin comprobación previa](2026-10-12-pedido-hoja-sin-comprobacion.md) | Entregado |
 | 2026-10-12 | [El despliegue espera a los tests](2026-10-12-despliegue-espera-tests.md) | Entregado |
 | 2026-10-12 | [Rediseño del anuncio del local del Persa Bio Bio](2026-10-12-rediseno-anuncio-local.md) | Entregado |
+| 2026-10-17 | [El bot de Instagram falla de forma visible ante un error de la API](2026-10-17-bot-falla-con-error-de-api.md) | Entregado |
