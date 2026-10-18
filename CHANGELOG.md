@@ -9,6 +9,9 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ## [Sin publicar]
 
+### Corregido
+- Google Analytics 4 no recibía ninguna visita (2026-10-18). El contenedor de GTM publicado estaba vacío: ahora la versión 2 tiene la etiqueta de Google (`G-GCE8SP8NBZ`) en todas las páginas y los eventos `generate_lead` (WhatsApp) y `outbound_click`. Además, `js/seo-analytics.js` no enviaba el evento de inicio de GTM (`gtm.js`), sin el cual GA4 no envía nada; ahora lo envía, después del consentimiento por defecto. Requisito `SEO-008`
+
 ## [2.2.0] - 2026-10-17
 
 ### Agregado

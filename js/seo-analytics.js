@@ -25,6 +25,13 @@
         wait_for_update: 500
     });
 
+    const gtmLoaded = Boolean(document.querySelector(`script[data-gtm-id="${GTM_ID}"]`));
+
+    // Evento de inicio del fragmento oficial de GTM: sin él, la etiqueta de GA4 no envía nada.
+    if (!gtmLoaded) {
+        window[dataLayerName].push({ 'gtm.start': Date.now(), event: 'gtm.js' });
+    }
+
     window[dataLayerName].push({
         event: 'seo_page_context',
         ga_measurement_id: GA4_ID,
@@ -37,7 +44,7 @@
         meta_description: metaDescription
     });
 
-    if (!document.querySelector(`script[data-gtm-id="${GTM_ID}"]`)) {
+    if (!gtmLoaded) {
         const firstScript = document.getElementsByTagName('script')[0];
         const gtmScript = document.createElement('script');
         gtmScript.async = true;

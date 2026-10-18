@@ -274,6 +274,24 @@ test('[SEO-003] Google Tag Manager se inyecta una sola vez con el contenedor del
     assert.equal(scripts[0].async, true);
 });
 
+test('[SEO-008] el evento de inicio de GTM se envía una vez, después del consentimiento y antes de seo_page_context', async () => {
+    for (const info of PAGINAS) {
+        const antes = Date.now();
+        await abrirSeo(info);
+        pagina.cargar('js/seo-analytics.js');
+        const capa = Array.from(pagina.window.dataLayer);
+        const posicion = capa.findIndex(e => e && e.event === 'gtm.js');
+        const inicio = eventos('gtm.js');
+
+        assert.equal(inicio.length, 1, info.html);
+        assert.equal(typeof inicio[0]['gtm.start'], 'number', info.html);
+        assert.ok(inicio[0]['gtm.start'] >= antes && inicio[0]['gtm.start'] <= Date.now(), info.html);
+        assert.deepEqual([capa[0][0], capa[0][1]], ['consent', 'default'], info.html);
+        assert.ok(posicion > 0, info.html);
+        assert.ok(posicion < capa.findIndex(e => e && e.event === 'seo_page_context'), info.html);
+    }
+});
+
 test('[SEO-004] un clic en un enlace externo envía outbound_click; los enlaces internos no', async () => {
     await abrirSeo(PAGINAS[0]);
     const { document } = pagina;

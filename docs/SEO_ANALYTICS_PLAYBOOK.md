@@ -25,22 +25,22 @@ Checklist:
 
 ## Google Tag Manager
 
-Configurar en el contenedor:
+Estado del contenedor `GTM-5D6LZB66` desde el 2026-10-18 (version 2, "GA4 base: etiqueta de Google y eventos"). La version 1 estaba vacia, y por eso GA4 no recibio datos hasta esa fecha.
 
-1. Un tag de configuracion `GA4` con el ID `G-GCE8SP8NBZ`.
-2. Un trigger `All Pages`.
-3. Variables de Data Layer para:
-   - `page_type`
-   - `page_title`
-   - `canonical_url`
-   - `meta_description`
-   - `page_language`
-4. Eventos para:
-   - `outbound_click`
-   - `generate_lead`
-   - `seo_page_context`
+| Etiqueta | Tipo | Activador |
+|----------|------|-----------|
+| GA4 - Etiqueta de Google | Etiqueta de Google `G-GCE8SP8NBZ`, con el parametro `page_type` | `CE - seo_page_context` (evento personalizado; lo envia cada pagina) |
+| GA4 - generate_lead (WhatsApp) | Evento GA4 `generate_lead` con `lead_channel`, `link_url`, `page_type` | `CE - generate_lead` |
+| GA4 - outbound_click | Evento GA4 `outbound_click` con `link_url`, `link_text`, `page_type` | `CE - outbound_click` |
+
+- Variables de capa de datos: `DLV - page_type`, `DLV - link_url`, `DLV - link_text`, `DLV - lead_channel`.
+- Pausadas (no borradas): la etiqueta de Google antigua `G-GCE8SP8NBZ` con "Initialization - All Pages", que nunca se publico y quedaba duplicada, y "Clic a Instagram evento de GA4", que tenia `{{Click URL}}` como ID de medicion. `outbound_click` ya mide los clics a Instagram.
+- La etiqueta de Google se activa con `seo_page_context` y no con "All Pages" para no depender del orden interno de GTM. Aun asi, `js/seo-analytics.js` envia el evento de inicio `gtm.js` (`SEO-008`): sin ese evento la etiqueta de GA4 se carga pero no envia nada (comprobado el 2026-10-18).
+- Brave bloquea GTM con sus Shields: para revisar la medicion usar Chrome o Edge sin bloqueador, o el modo Vista previa de GTM.
 
 ## Google Analytics 4
+
+Estado al 2026-10-18: propiedad `Ropavejero.Retro SpA` (flujo web `13625416084`), conservacion de datos de eventos y de usuario en 14 meses, vinculada con la propiedad de dominio `ropavejeroretro.cl` de Search Console desde el 2026-08-23. Pendiente: marcar `generate_lead` como evento clave cuando llegue el primero (GA4 solo permite marcar eventos ya recibidos).
 
 Eventos recomendados:
 
