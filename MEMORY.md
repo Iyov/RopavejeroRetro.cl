@@ -34,7 +34,7 @@ Memoria del proyecto: acuerdos y decisiones tomados con Francisco que no se dedu
 
 ## Trabajo acordado para más adelante
 
-No queda ninguno: el rediseño del anuncio del local se entregó el 2026-10-12 (ver "Resueltos").
+- **Actualización de stock tras una feria (2026-10-17):** Francisco pidió dejar como procedimiento permanente la actualización del stock vendido en ferias: leer el ID y el precio de las fotos de `D:\Downloads\Ropavejero.Retro\Ferias - Eventos\<feria>\Fco` e `\Ivette`, marcar la venta en la hoja "Ventas" (columnas I–P) y en la hoja de disponibles (Sold en H, leyendo Link en G), y cambiar ✅ por ❌ en la línea de ese ID en la descripción del post de Instagram. Acuerdos: queda como skill de Claude Code **en este repositorio** (`.claude/skills/`), autorizado por Francisco; los IDs leídos se le muestran siempre para validar antes de escribir; no se programa por horario, se lanza a mano después de cada feria; la skill se escribe después de procesar a mano la feria Retro San Antonio (2026-10-10), para basarla en el formato real de las hojas y de las descripciones; las ferias de varios días van en una carpeta por día (`AAAA-MM-DD <feria>`), y la fecha de la venta sale del nombre de la carpeta.
 
 ## Pendientes por decidir
 
