@@ -59,7 +59,7 @@ Los agentes se usan según el tamaño del cambio, porque cada uno parte sin cont
   - **`tester`** — escribe los tests de una especificación antes de implementarla. No modifica el código del sitio.
 - **La verificación final** (suite completa, trazabilidad, versión de caché, revisión del diff) la hace siempre el orquestador.
 
-Los scripts de `api/`, los workflows y la documentación los trabaja el orquestador. Las preguntas y los cambios que solo tocan documentación no necesitan este flujo.
+Los scripts de `api/`, los workflows y la documentación los trabaja el orquestador. La skill [.claude/skills/venta-feria/](.claude/skills/venta-feria/SKILL.md) (`/venta-feria "<carpeta>"`) es operación de la tienda, no del sitio: actualiza el stock después de una feria en las hojas de Google y en Instagram, sin tocar archivos del sitio. Las preguntas y los cambios que solo tocan documentación no necesitan este flujo.
 
 ### Especificación y tests
 
