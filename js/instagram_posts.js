@@ -1,5 +1,5 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-10-04 16:05:08
+// Última actualización: 2026-10-18 02:21:11
 
 const INSTAGRAM_POSTS_DATA = [
     {
@@ -40,7 +40,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DcVE2UrFfA1/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-22",
-        "likes": 21
+        "likes": 22
     },
     {
         "id": "ig_auto_18151922629510156",
@@ -170,7 +170,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DbuRAeXFRDZ/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-07",
-        "likes": 11
+        "likes": 12
     },
     {
         "id": "ig_auto_18059338853783101",
@@ -1070,7 +1070,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DW72HlJFYsM/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-04-10",
-        "likes": 44
+        "likes": 45
     },
     {
         "id": "ig_auto_18089595115977774",
@@ -1180,7 +1180,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DWaKplZFeoF/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-03-28",
-        "likes": 46
+        "likes": 45
     },
     {
         "id": "ig_auto_18023227511639731",
@@ -1380,7 +1380,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DT9E3WLFVc_/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-01-26",
-        "likes": 1159
+        "likes": 1158
     },
     {
         "id": "ig_auto_18020656073803699",
@@ -1410,7 +1410,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DPU_RqCjJYG/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2025-10-03",
-        "likes": 5858
+        "likes": 5855
     },
     {
         "id": "ig_auto_18320707375210014",
@@ -1420,7 +1420,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DPU8g8JjE5g/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2025-10-03",
-        "likes": 307
+        "likes": 306
     },
     {
         "id": "ig_auto_17895332295180674",
@@ -1430,7 +1430,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DPU5m7jjPLu/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2025-10-03",
-        "likes": 1385
+        "likes": 1383
     },
     {
         "id": "ig_auto_18047443322257213",
@@ -1460,7 +1460,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DMrCaMCs9W_/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2025-07-29",
-        "likes": 99
+        "likes": 98
     },
     {
         "id": "ig_auto_18072854129493313",
@@ -1530,7 +1530,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DLlhoaOsxNi/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2025-07-02",
-        "likes": 157
+        "likes": 156
     },
     {
         "id": "ig_auto_18180000736324897",
@@ -1540,7 +1540,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DLlhQhNMDrv/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2025-07-02",
-        "likes": 87
+        "likes": 86
     },
     {
         "id": "ig_auto_18064554059049913",
@@ -1870,7 +1870,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/C1UlIN9rOMf/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2023-12-26",
-        "likes": 77
+        "likes": 76
     },
     {
         "id": "ig_auto_17995473980111334",
