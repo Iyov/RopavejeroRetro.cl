@@ -1334,6 +1334,27 @@ body[data-page-type="home"] #productModalOverlay {
     object-fit: cover;
 }
 
+/* Ícono de la fuente del testimonio (Instagram), en lugar de una foto */
+.testimonial-source {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    color: #fff;
+    font-size: 2.4rem;
+}
+
+.testimonial-role a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.testimonial-role a:hover,
+.testimonial-role a:focus-visible {
+    color: var(--primary-color);
+}
+
 .testimonial-card blockquote {
     flex-grow: 1;
     margin-bottom: 20px;

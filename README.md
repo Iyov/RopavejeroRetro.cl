@@ -161,7 +161,6 @@ RopavejeroRetro.cl/
 ├── service-worker.js          # Service Worker para caché
 ├── robots.txt                 # Configuración para bots
 ├── sitemap.xml                # Mapa del sitio (2 URLs indexables)
-├── schema.json                # Datos estructurados Schema.org
 ├── structured-data.json       # Datos estructurados Schema.org
 ├── watcher.js                 # Minificación automática
 ├── package.json               # Scripts y dependencias de minificación
@@ -444,6 +443,7 @@ El detalle de arquitectura, orden de carga de módulos y precauciones está en [
 
 #### Cambiado
 - **SEO**: títulos, descripciones y H1 escritos con lo que la gente busca ("juegos y consolas retro en Chile"), imagen para compartir en redes, datos del local con su ubicación real y enlace al Perfil de Empresa en Google, y enlaces internos a `/`. Se eliminaron reseñas inventadas que quedaban en el código
+- **Testimonios reales**: los testimonios del inicio son ahora de clientes reales en Instagram, con enlace a la fuente; se eliminaron los inventados y `schema.json`
 
 #### Corregido
 - **Google Analytics 4**: el sitio no enviaba ninguna visita a GA4. Se publicó la configuración del contenedor de GTM (etiqueta de Google y eventos de WhatsApp y de enlaces externos), y el sitio ahora envía el evento de inicio de GTM, sin el cual GA4 no recibía nada

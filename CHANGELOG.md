@@ -20,8 +20,11 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
   - `robots.txt` queda solo con lo que Google usa.
   - Requisitos `SEO-009` a `SEO-015` y `LOC-003` modificado.
 
+- Testimonios del inicio (2026-10-19): los tres testimonios inventados y sus fotos de stock se reemplazan por tres reales de la destacada "Cliente Feliz" de Instagram (@ignacioalvaarado, @bazardekaneda y Carlos M.), cada uno con enlace a su fuente y el ícono de Instagram en lugar de una foto. Requisitos `TST-001` y `TST-002`
+
 ### Eliminado
 - Bloques antiguos de datos estructurados en el `<head>` del inicio y del catálogo, con valoraciones y reseñas inventadas (2026-10-18)
+- `schema.json`: ninguna página lo usaba y traía una valoración inventada (2026-10-19). `SEO-012` exige que ningún JSON de la raíz traiga valoraciones
 
 ### Corregido
 - Google Analytics 4 no recibía ninguna visita (2026-10-18). El contenedor de GTM publicado estaba vacío: ahora la versión 2 tiene la etiqueta de Google (`G-GCE8SP8NBZ`) en todas las páginas y los eventos `generate_lead` (WhatsApp) y `outbound_click`. Además, `js/seo-analytics.js` no enviaba el evento de inicio de GTM (`gtm.js`), sin el cual GA4 no envía nada; ahora lo envía, después del consentimiento por defecto. Requisito `SEO-008`

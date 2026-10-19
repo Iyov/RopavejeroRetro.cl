@@ -450,6 +450,11 @@ test('[SEO-012] no hay valoraciones ni reseñas ocultas, y los datos estructurad
         });
         assert.equal(documento.querySelectorAll('[itemprop="aggregateRating"], [itemprop="review"]').length, 0, html);
     });
+
+    assert.equal(existe('schema.json'), false, 'schema.json no debe existir');
+    fs.readdirSync(ROOT).filter(archivo => archivo.endsWith('.json')).forEach(archivo => {
+        assert.doesNotMatch(leer(archivo), /AggregateRating|"@type":\s*"Review"/, archivo);
+    });
 });
 
 test('[SEO-013] los datos estructurados describen el local con dirección, coordenadas, teléfono, horario y Perfil de Empresa', () => {

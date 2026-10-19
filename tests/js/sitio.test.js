@@ -230,7 +230,7 @@ test('[SITE-008] todo enlace a una sección apunta a un id que existe en la pág
 });
 
 test('[SITE-009] los JSON del sitio y los bloques JSON-LD de los HTML son válidos', () => {
-    ['manifest.json', 'schema.json', 'structured-data.json', 'js/siglas.json', 'js/console_aliases.json', 'js/efemerides.json', 'package.json']
+    ['manifest.json', 'structured-data.json', 'js/siglas.json', 'js/console_aliases.json', 'js/efemerides.json', 'package.json']
         .forEach(archivo => assert.doesNotThrow(() => JSON.parse(leer(archivo)), archivo));
 
     TODAS.forEach(html => {

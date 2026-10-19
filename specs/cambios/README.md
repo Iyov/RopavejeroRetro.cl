@@ -17,3 +17,4 @@ El flujo completo está en [`../README.md`](../README.md). En resumen: se especi
 | 2026-10-17 | [El bot de Instagram falla de forma visible ante un error de la API](2026-10-17-bot-falla-con-error-de-api.md) | Entregado |
 | 2026-10-18 | [GA4 no recibe datos: falta el evento de inicio de GTM](2026-10-18-gtm-evento-inicio.md) | Entregado |
 | 2026-10-18 | [SEO: textos para búsqueda, datos del local, enlaces internos e imagen para redes](2026-10-18-seo-contenido.md) | Entregado |
+| 2026-10-19 | [Testimonios reales y sin `schema.json`](2026-10-19-testimonios-reales.md) | Entregado |

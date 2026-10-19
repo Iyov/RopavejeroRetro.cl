@@ -311,13 +311,13 @@ const translations = {
         
         // Testimonios
         'testimonials-title': 'Testimonios de Clientes Satisfechos',
-        'testimonials-subtitle': 'Nos enorgullece contar con la confianza de la comunidad retro. Aquí algunos de sus testimonios.',
-        'testimonial-1': '"He comprado en RopavejeroRetro durante años y su servicio siempre es de primera. La calidad de los productos es excelente y siempre llegan en perfecto estado. ¡Muy recomendable!"',
-        'testimonial-2': '"Encontré exactamente lo que buscaba en RopavejeroRetro. La selección de juegos y consolas retro es impresionante, y los precios son muy competitivos. Definitivamente seré un cliente recurrente."',
-        'testimonial-3': '"El equipo de RopavejeroRetro es fantástico. Son conocedores, amables y siempre dispuestos a ayudar. Mi pedido llegó rápidamente y todo estaba como se describía. ¡No podría estar más feliz!"',
-        'testimonial-role-1': 'Coleccionista',
-        'testimonial-role-2': 'Gamer',
-        'testimonial-role-3': 'Entusiasta Retro',
+        'testimonials-subtitle': 'Esto dicen nuestros clientes en Instagram. Puedes ver todas sus historias en la destacada «Cliente Feliz».',
+        'testimonial-1': '"Full recomendado"',
+        'testimonial-2': '"Gracias a @ropavejero.retro que me salvó estas joyitas"',
+        'testimonial-3': '"Llegó todo impecable"',
+        'testimonial-role-1': 'Compró una PS3 · Historia en Instagram',
+        'testimonial-role-2': 'Compró juegos de GameCube · Historia en Instagram',
+        'testimonial-role-3': 'Compró juegos con envío · Mensaje en Instagram',
 
         // Marcas
         'brands-title': 'Marcas',
@@ -513,13 +513,13 @@ const translations = {
         
         // Testimonios
         'testimonials-title': 'Testimonials from Satisfied Customers',
-        'testimonials-subtitle': 'We are proud to have the trust of the retro community. Here are some of their testimonials.',
-        'testimonial-1': '"I have bought from RopavejeroRetro for years and their service is always first class. The quality of the products is excellent and they always arrive in perfect condition. Highly recommended!"',
-        'testimonial-2': '"I found exactly what I was looking for at RopavejeroRetro. The selection of retro games and consoles is impressive, and the prices are very competitive. I will definitely be a recurring customer."',
-        'testimonial-3': '"The RopavejeroRetro team is fantastic. They are knowledgeable, friendly and always willing to help. My order arrived quickly and everything was as described. I couldn\'t be happier!"',
-        'testimonial-role-1': 'Collector',
-        'testimonial-role-2': 'Gamer',
-        'testimonial-role-3': 'Retro Enthusiast',
+        'testimonials-subtitle': 'This is what our customers say on Instagram. You can see all their stories in the «Cliente Feliz» highlight.',
+        'testimonial-1': '"Highly recommended"',
+        'testimonial-2': '"Thanks to @ropavejero.retro for saving these gems for me"',
+        'testimonial-3': '"Everything arrived in perfect condition"',
+        'testimonial-role-1': 'Bought a PS3 · Instagram story',
+        'testimonial-role-2': 'Bought GameCube games · Instagram story',
+        'testimonial-role-3': 'Bought games with shipping · Instagram message',
 
         // Marcas
         'brands-title': 'Brands',
