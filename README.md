@@ -440,6 +440,11 @@ El detalle de arquitectura, orden de carga de módulos y precauciones está en [
 ---
 
 ## 🆕 Últimos Cambios
+### Sin publicar
+
+#### Corregido
+- **Google Analytics 4**: el sitio no enviaba ninguna visita a GA4. Se publicó la configuración del contenedor de GTM (etiqueta de Google y eventos de WhatsApp y de enlaces externos), y el sitio ahora envía el evento de inicio de GTM, sin el cual GA4 no recibía nada
+
 ### Versión: v2.2.0 | Octubre 2026
 
 #### Agregado

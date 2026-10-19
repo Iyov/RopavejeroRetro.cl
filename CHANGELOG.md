@@ -12,6 +12,10 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 ### Corregido
 - Google Analytics 4 no recibía ninguna visita (2026-10-18). El contenedor de GTM publicado estaba vacío: ahora la versión 2 tiene la etiqueta de Google (`G-GCE8SP8NBZ`) en todas las páginas y los eventos `generate_lead` (WhatsApp) y `outbound_click`. Además, `js/seo-analytics.js` no enviaba el evento de inicio de GTM (`gtm.js`), sin el cual GA4 no envía nada; ahora lo envía, después del consentimiento por defecto. Requisito `SEO-008`
 
+### Documentación
+- `docs/SEO_ANALYTICS_PLAYBOOK.md` describe el contenedor de GTM publicado, el estado de GA4 y el diagnóstico de Search Console al 2026-10-18; `CLAUDE.md` explica por qué no se puede quitar el evento `gtm.js` ni renombrar `seo_page_context` (2026-10-18)
+- Especificación en borrador `specs/cambios/2026-10-18-seo-contenido.md`: textos para búsqueda, datos del local, enlaces internos, imagen para redes y `robots.txt`, pendiente de aprobación (2026-10-18)
+
 ## [2.2.0] - 2026-10-17
 
 ### Agregado

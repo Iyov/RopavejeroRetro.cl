@@ -10,6 +10,15 @@
 
 ## Search Console
 
+Estado al 2026-10-18 (propiedad de dominio `sc-domain:ropavejeroretro.cl`):
+
+- Ultimos 16 meses: 1.540 clics, 24.100 impresiones, CTR 6,4 %, posicion media 7,5.
+- Consultas principales: "juegos retro chile", "tienda retro", "ropavejero retro", "tienda juegos retro", "consolas retro chile", "venta de consolas retro". Salvo la marca, todas aparecen entre los puestos 4 y 11.
+- Indexacion: 1 pagina indexada (`/`). `/productos` tiene 39 impresiones y 0 clics: el catalogo se dibuja con JavaScript y sin el Google ve muy poco texto. `/index.html` recibe 1.081 impresiones que deberian ir a `/`; el canonico ya apunta a `/`.
+- Sitemap `https://ropavejeroretro.cl/sitemap.xml` enviado el 2026-03-18, sin errores.
+- Core Web Vitals: sin datos todavia, por el volumen de trafico.
+- Mejoras de contenido propuestas en `specs/cambios/2026-10-18-seo-contenido.md` (pendiente de aprobacion).
+
 Metodos recomendados de verificacion:
 
 1. DNS TXT en el dominio raiz.
