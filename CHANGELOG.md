@@ -9,12 +9,25 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ## [Sin publicar]
 
+### Cambiado
+- SEO del inicio y del catálogo (2026-10-18), según `specs/cambios/2026-10-18-seo-contenido.md`. Cambios:
+  - Títulos y descripciones nuevos, de menos de 60 y 160 caracteres, escritos con las búsquedas que traen visitas ("juegos y consolas retro", "Chile"), repetidos en Open Graph y X.
+  - H1 "Juegos y consolas retro en Chile" y "Juegos y consolas retro disponibles", en español y en inglés.
+  - Imagen para redes de 1200×630 (`img/og-ropavejero.jpg`).
+  - Los datos estructurados del local llevan código postal, coordenadas reales, teléfono y enlace al Perfil de Empresa en Google, y las metaetiquetas `geo` usan las coordenadas del local en vez de las del centro de Santiago.
+  - "Cómo llegar" abre el Perfil de Empresa del local.
+  - Los enlaces internos apuntan a `/` en vez de `index.html`.
+  - `robots.txt` queda solo con lo que Google usa.
+  - Requisitos `SEO-009` a `SEO-015` y `LOC-003` modificado.
+
+### Eliminado
+- Bloques antiguos de datos estructurados en el `<head>` del inicio y del catálogo, con valoraciones y reseñas inventadas (2026-10-18)
+
 ### Corregido
 - Google Analytics 4 no recibía ninguna visita (2026-10-18). El contenedor de GTM publicado estaba vacío: ahora la versión 2 tiene la etiqueta de Google (`G-GCE8SP8NBZ`) en todas las páginas y los eventos `generate_lead` (WhatsApp) y `outbound_click`. Además, `js/seo-analytics.js` no enviaba el evento de inicio de GTM (`gtm.js`), sin el cual GA4 no envía nada; ahora lo envía, después del consentimiento por defecto. Requisito `SEO-008`
 
 ### Documentación
 - `docs/SEO_ANALYTICS_PLAYBOOK.md` describe el contenedor de GTM publicado, el estado de GA4 y el diagnóstico de Search Console al 2026-10-18; `CLAUDE.md` explica por qué no se puede quitar el evento `gtm.js` ni renombrar `seo_page_context` (2026-10-18)
-- Especificación en borrador `specs/cambios/2026-10-18-seo-contenido.md`: textos para búsqueda, datos del local, enlaces internos, imagen para redes y `robots.txt`, pendiente de aprobación (2026-10-18)
 
 ## [2.2.0] - 2026-10-17
 

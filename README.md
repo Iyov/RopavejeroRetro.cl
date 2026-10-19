@@ -442,6 +442,9 @@ El detalle de arquitectura, orden de carga de módulos y precauciones está en [
 ## 🆕 Últimos Cambios
 ### Sin publicar
 
+#### Cambiado
+- **SEO**: títulos, descripciones y H1 escritos con lo que la gente busca ("juegos y consolas retro en Chile"), imagen para compartir en redes, datos del local con su ubicación real y enlace al Perfil de Empresa en Google, y enlaces internos a `/`. Se eliminaron reseñas inventadas que quedaban en el código
+
 #### Corregido
 - **Google Analytics 4**: el sitio no enviaba ninguna visita a GA4. Se publicó la configuración del contenedor de GTM (etiqueta de Google y eventos de WhatsApp y de enlaces externos), y el sitio ahora envía el evento de inicio de GTM, sin el cual GA4 no recibía nada
 

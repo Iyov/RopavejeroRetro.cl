@@ -208,7 +208,7 @@ const translations = {
         'menu-contact': 'Contacto',
         
         // Hero
-        'hero-title': 'Bienvenidos a @Ropavejero.Retro<br/>Todo lo Retro en un solo lugar',
+        'hero-title': 'Juegos y consolas retro en Chile<br/>Todo lo Retro en un solo lugar',
         'hero-subtitle': '@Ropavejero.Retro es una tienda de Instagram de videojuegos, consolas, accesorios y coleccionables retro. Además, junto con @NekketsuStore, formó el local físico @DoubleImpactStore en Persa Bio Bio.',
         'instagram-button': 'Ir a Instagram',
         
@@ -250,7 +250,7 @@ const translations = {
         'featured-atari-title': 'Atari y más',
         'featured-atari-platforms': 'Atari · Odyssey · Pong · y otras consolas retro',
         'featured-products-button': 'Ir al catálogo',
-        'products-title': 'Productos Disponibles',
+        'products-title': 'Juegos y consolas retro disponibles',
         'products-subtitle': 'Explora nuestra colección de videojuegos retro disponibles para venta.',
         'filter-search': 'Buscar producto:',
         'filter-search-placeholder': 'Escribe para buscar...',
@@ -410,7 +410,7 @@ const translations = {
         'menu-contact': 'Contact',
         
         // Hero
-        'hero-title': 'Welcome to @Ropavejero.Retro<br/>Everything Retro in one place',
+        'hero-title': 'Retro games and consoles in Chile<br/>Everything Retro in one place',
         'hero-subtitle': '@Ropavejero.Retro is an Instagram store selling retro video games, consoles, accessories and collectibles. Together with @NekketsuStore, it also formed the @DoubleImpactStore physical location at Persa Bio Bio.',
         'instagram-button': 'Go to Instagram',
         
@@ -452,7 +452,7 @@ const translations = {
         'featured-atari-title': 'Atari and more',
         'featured-atari-platforms': 'Atari · Odyssey · Pong · and other retro consoles',
         'featured-products-button': 'Go to catalog',
-        'products-title': 'Available Products',
+        'products-title': 'Available retro games and consoles',
         'products-subtitle': 'Explore our collection of retro video games available for sale.',
         'filter-search': 'Search product:',
         'filter-search-placeholder': 'Type to search...',

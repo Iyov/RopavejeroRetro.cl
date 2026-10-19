@@ -1,17 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /admin/
-Disallow: /private/
 
-# Crawl-delay for specific bots
-User-agent: Bingbot
-Crawl-delay: 1
-
-User-agent: Slurp
-Crawl-delay: 1
-
-# Sitemap location
 Sitemap: https://ropavejeroretro.cl/sitemap.xml
-
-# Additional directives
-Host: ropavejeroretro.cl

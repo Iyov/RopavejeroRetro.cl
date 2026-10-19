@@ -3,7 +3,9 @@
 // Specs: specs/base/10-analytics.md, 11-seo.md
 const { test, afterEach } = require('node:test');
 const assert = require('node:assert/strict');
-const { abrirPagina, parsear } = require('./helpers/pagina');
+const fs = require('node:fs');
+const path = require('node:path');
+const { abrirPagina, parsear, leer, existe, ROOT } = require('./helpers/pagina');
 
 let pagina;
 afterEach(async () => { if (pagina) await pagina.cerrar(); pagina = null; });
@@ -358,4 +360,140 @@ test('[SEO-007] toda página que carga seo-analytics.js declara su data-page-typ
     });
 
     assert.deepEqual(Object.fromEntries(tipos), Object.fromEntries(PAGINAS.map(info => [info.html, info.tipo])));
+});
+
+// ---------- Contenido para buscadores (2026-10-18-seo-contenido) ----------
+
+const INDEXABLES = {
+    'index.html': {
+        titulo: 'Ropavejero Retro | Juegos y consolas retro en Chile',
+        descripcion: 'Tienda de juegos y consolas retro originales en Santiago: Nintendo, PlayStation, Sega, Xbox y Atari. Envíos a todo Chile y local en Persa Bio Bio.'
+    },
+    'productos.html': {
+        titulo: 'Catálogo de juegos y consolas retro | Ropavejero Retro',
+        descripcion: 'Juegos, consolas y accesorios retro disponibles hoy: Nintendo, PlayStation, Sega, Xbox y Atari. Revisa precios y escríbenos por WhatsApp.'
+    }
+};
+const TODAS_LAS_PAGINAS = ['index.html', 'productos.html', '404.html', 'security-policy.html', 'security-acknowledgments.html', 'old.html', 'ps3.html'];
+const PERFIL_LOCAL = 'https://www.google.com/maps?cid=2529777286738516949';
+const IMAGEN_REDES = 'https://ropavejeroretro.cl/img/og-ropavejero.jpg';
+
+const meta = (documento, atributo, valor) => {
+    const elemento = documento.querySelector(`meta[${atributo}="${valor}"]`);
+    return elemento ? elemento.getAttribute('content') : null;
+};
+
+// Diccionario de ui.js: la primera aparición de cada clave es la española y la segunda la inglesa
+const traducciones = clave => [...leer('js/modules/ui.js').matchAll(new RegExp(`'${clave}':\\s*'([^']*)'`, 'g'))].map(m => m[1]);
+
+function dimensionesJpeg(ruta) {
+    const datos = fs.readFileSync(path.join(ROOT, ruta));
+    let i = 2;
+    while (i < datos.length) {
+        const marcador = datos[i + 1];
+        if (marcador >= 0xC0 && marcador <= 0xC3) {
+            return { alto: datos.readUInt16BE(i + 5), ancho: datos.readUInt16BE(i + 7) };
+        }
+        i += 2 + datos.readUInt16BE(i + 2);
+    }
+    return null;
+}
+
+test('[SEO-009] inicio y catálogo tienen título y descripción para buscadores, repetidos en Open Graph y X', () => {
+    Object.entries(INDEXABLES).forEach(([html, esperado]) => {
+        const documento = parsear(html);
+        const titulo = documento.title;
+        const descripcion = meta(documento, 'name', 'description');
+
+        assert.equal(titulo, esperado.titulo, html);
+        assert.equal(descripcion, esperado.descripcion, html);
+        assert.ok(titulo.length <= 60, `${html}: título de ${titulo.length} caracteres`);
+        assert.ok(descripcion.length >= 70 && descripcion.length <= 160, `${html}: descripción de ${descripcion.length} caracteres`);
+        assert.match(titulo, /retro/i, html);
+        assert.match(descripcion, /retro/i, html);
+        assert.equal(meta(documento, 'property', 'og:title'), titulo, `${html}: og:title`);
+        assert.equal(meta(documento, 'name', 'twitter:title'), titulo, `${html}: twitter:title`);
+        assert.equal(meta(documento, 'property', 'og:description'), descripcion, `${html}: og:description`);
+        assert.equal(meta(documento, 'name', 'twitter:description'), descripcion, `${html}: twitter:description`);
+    });
+});
+
+test('[SEO-010] el H1 del inicio y del catálogo dice qué se vende, en español y en inglés', () => {
+    assert.deepEqual(traducciones('hero-title'), [
+        'Juegos y consolas retro en Chile<br/>Todo lo Retro en un solo lugar',
+        'Retro games and consoles in Chile<br/>Everything Retro in one place'
+    ]);
+    assert.deepEqual(traducciones('products-title'), ['Juegos y consolas retro disponibles', 'Available retro games and consoles']);
+    assert.equal(parsear('index.html').querySelector('h1').innerHTML, 'Juegos y consolas retro en Chile<br>Todo lo Retro en un solo lugar');
+    assert.equal(parsear('productos.html').querySelector('h1').textContent, 'Juegos y consolas retro disponibles');
+});
+
+test('[SEO-011] ningún enlace interno apunta a index.html', () => {
+    const enlaces = TODAS_LAS_PAGINAS.flatMap(html => Array.from(parsear(html).querySelectorAll('a[href]'))
+        .map(a => a.getAttribute('href'))
+        .filter(href => /^(\.\/|\/)?index\.html/.test(href))
+        .map(href => `${html}: ${href}`));
+
+    assert.deepEqual(enlaces, []);
+    assert.equal(parsear('404.html').querySelector('a.logo').getAttribute('href'), '/');
+});
+
+test('[SEO-012] no hay valoraciones ni reseñas ocultas, y los datos estructurados van solo en JSON-LD', () => {
+    TODAS_LAS_PAGINAS.forEach(html => {
+        const documento = parsear(html);
+        Array.from(documento.querySelectorAll('script')).forEach((script, i) => {
+            const texto = script.textContent;
+            assert.doesNotMatch(texto, /AggregateRating|"@type":\s*"Review"/, `${html}: script ${i + 1}`);
+            if (/"@context"\s*:\s*"https?:\/\/schema\.org"/.test(texto)) {
+                assert.equal(script.getAttribute('type'), 'application/ld+json', `${html}: script ${i + 1} con datos de schema.org`);
+            }
+        });
+        assert.equal(documento.querySelectorAll('[itemprop="aggregateRating"], [itemprop="review"]').length, 0, html);
+    });
+});
+
+test('[SEO-013] los datos estructurados describen el local con dirección, coordenadas, teléfono, horario y Perfil de Empresa', () => {
+    const documento = parsear('index.html');
+    const nodos = Array.from(documento.querySelectorAll('script[type="application/ld+json"]'))
+        .flatMap(bloque => JSON.parse(bloque.textContent)['@graph'] || []);
+    const local = nodos.find(nodo => nodo['@id'] === 'https://doubleimpactstore.cl/#store');
+
+    assert.ok(local, 'falta el Store del local');
+    assert.equal(local['@type'], 'Store');
+    assert.match(local.address.streetAddress, /Bio Bio 654, Local 58/);
+    assert.deepEqual(
+        [local.address.addressLocality, local.address.addressRegion, local.address.postalCode, local.address.addressCountry],
+        ['Santiago', 'Región Metropolitana', '8361348', 'CL']
+    );
+    assert.deepEqual([local.geo['@type'], local.geo.latitude, local.geo.longitude], ['GeoCoordinates', -33.4738041, -70.6410784]);
+    assert.equal(local.telephone, '+56967691585');
+    assert.equal(local.hasMap, PERFIL_LOCAL);
+    assert.ok(local.openingHoursSpecification, 'falta el horario');
+    assert.ok([].concat(local.alternateName).includes('Double Impact Store SpA'), 'alternateName con el nombre del Perfil de Empresa');
+    assert.equal(meta(documento, 'name', 'geo.position'), '-33.4738041;-70.6410784');
+    assert.equal(meta(documento, 'name', 'ICBM'), '-33.4738041, -70.6410784');
+});
+
+test('[SEO-014] inicio y catálogo comparten en redes una imagen propia de 1200×630', () => {
+    assert.ok(existe('img/og-ropavejero.jpg'), 'falta img/og-ropavejero.jpg');
+    assert.deepEqual(dimensionesJpeg('img/og-ropavejero.jpg'), { alto: 630, ancho: 1200 });
+
+    Object.keys(INDEXABLES).forEach(html => {
+        const documento = parsear(html);
+        assert.equal(meta(documento, 'property', 'og:image'), IMAGEN_REDES, html);
+        assert.equal(meta(documento, 'property', 'og:image:width'), '1200', html);
+        assert.equal(meta(documento, 'property', 'og:image:height'), '630', html);
+        assert.ok((meta(documento, 'property', 'og:image:alt') || '').trim(), `${html}: og:image:alt`);
+        assert.equal(meta(documento, 'name', 'twitter:image'), IMAGEN_REDES, html);
+        assert.ok((meta(documento, 'name', 'twitter:image:alt') || '').trim(), `${html}: twitter:image:alt`);
+    });
+});
+
+test('[SEO-015] robots.txt contiene solo directivas que Google usa, sobre rutas que existen', () => {
+    const lineas = leer('robots.txt').split(/\r?\n/).map(l => l.trim()).filter(l => l && !l.startsWith('#'));
+
+    lineas.forEach(linea => assert.match(linea, /^(User-agent|Allow|Disallow|Sitemap):/, linea));
+    lineas.filter(l => /^Disallow:\s*\/\S/.test(l)).forEach(linea => {
+        assert.ok(existe(linea.replace(/^Disallow:\s*\//, '')), `${linea}: la ruta no existe`);
+    });
 });

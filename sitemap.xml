@@ -3,7 +3,7 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://ropavejeroretro.cl/</loc>
-    <lastmod>2026-10-12</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -14,12 +14,12 @@
   </url>
   <url>
     <loc>https://ropavejeroretro.cl/productos</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
     <image:image>
-      <image:loc>https://ropavejeroretro.cl/img/RopavejeroLogo_256.png</image:loc>
-      <image:title>Productos Destacados - Ropavejero Retro</image:title>
+      <image:loc>https://ropavejeroretro.cl/img/og-ropavejero.jpg</image:loc>
+      <image:title>Catálogo de juegos y consolas retro - Ropavejero Retro</image:title>
       <image:caption>Catalogo de videojuegos retro disponibles en Santiago de Chile</image:caption>
     </image:image>
   </url>

@@ -17,7 +17,8 @@ Estado al 2026-10-18 (propiedad de dominio `sc-domain:ropavejeroretro.cl`):
 - Indexacion: 1 pagina indexada (`/`). `/productos` tiene 39 impresiones y 0 clics: el catalogo se dibuja con JavaScript y sin el Google ve muy poco texto. `/index.html` recibe 1.081 impresiones que deberian ir a `/`; el canonico ya apunta a `/`.
 - Sitemap `https://ropavejeroretro.cl/sitemap.xml` enviado el 2026-03-18, sin errores.
 - Core Web Vitals: sin datos todavia, por el volumen de trafico.
-- Mejoras de contenido propuestas en `specs/cambios/2026-10-18-seo-contenido.md` (pendiente de aprobacion).
+- Mejoras de contenido entregadas el 2026-10-18 (`specs/cambios/2026-10-18-seo-contenido.md`, requisitos `SEO-009` a `SEO-015`). Para medir su efecto, comparar en 2 a 4 semanas el CTR y la posicion de las consultas de arriba contra estas cifras.
+- Datos del Perfil de Empresa del local: "Double Impact Store SpA", Bio Bio 654, local 58, 8361348 Santiago; coordenadas -33.4738041, -70.6410784; `https://www.google.com/maps?cid=2529777286738516949`.
 
 Metodos recomendados de verificacion:
 

@@ -1,6 +1,6 @@
 # SEO: textos para búsqueda, datos del local, enlaces internos e imagen para redes
 
-- **Estado:** Borrador
+- **Estado:** Entregado
 - **Fecha:** 2026-10-18
 - **Tipo:** Cambio de comportamiento
 
@@ -23,7 +23,7 @@ En Google, el inicio y el catálogo muestran un título y una descripción compl
 
 | Dónde | Hoy | Propuesto |
 |-------|-----|-----------|
-| Inicio, `<title>` y `og:title` | Ropavejero Retro \| Tienda de videojuegos retro en Santiago de Chile | Ropavejero Retro \| Juegos y consolas retro en Santiago, Chile |
+| Inicio, `<title>` y `og:title` | Ropavejero Retro \| Tienda de videojuegos retro en Santiago de Chile | Ropavejero Retro \| Juegos y consolas retro en Chile |
 | Inicio, `description` y `og:description` | (330 caracteres) | Tienda de juegos y consolas retro originales en Santiago: Nintendo, PlayStation, Sega, Xbox y Atari. Envíos a todo Chile y local en Persa Bio Bio. |
 | Inicio, H1 (ES) | Bienvenidos a @Ropavejero.Retro / Todo lo Retro en un solo lugar | Juegos y consolas retro en Chile / Todo lo Retro en un solo lugar |
 | Inicio, H1 (EN) | Welcome to @Ropavejero.Retro / Everything Retro in one place | Retro games and consoles in Chile / Everything Retro in one place |
@@ -31,6 +31,8 @@ En Google, el inicio y el catálogo muestran un título y una descripción compl
 | Catálogo, `description` y `og:description` | (230 caracteres) | Juegos, consolas y accesorios retro disponibles hoy: Nintendo, PlayStation, Sega, Xbox y Atari. Revisa precios y escríbenos por WhatsApp. |
 | Catálogo, H1 (ES) | Productos Disponibles | Juegos y consolas retro disponibles |
 | Catálogo, H1 (EN) | Available Products | Available retro games and consoles |
+
+Al implementar, el título del inicio se acortó: el propuesto ("...en Santiago, Chile") tenía 61 caracteres y `SEO-009` pide 60 como máximo. Se mantuvo "Chile", que es lo que traen las consultas principales; "Santiago" sigue en la descripción.
 
 La marca sigue visible arriba del H1 (logo y "Ropavejero.Retro" en el encabezado) y en el subtítulo, que no cambia.
 

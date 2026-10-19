@@ -73,14 +73,14 @@ test('[I18N-001] setLanguage traduce textos, placeholders y opciones de select s
     const { document, window: w } = pagina;
 
     w.setLanguage('en');
-    assert.equal(document.getElementById('titulo').innerHTML, 'Welcome to @Ropavejero.Retro<br>Everything Retro in one place');
+    assert.equal(document.getElementById('titulo').innerHTML, 'Retro games and consoles in Chile<br>Everything Retro in one place');
     assert.equal(document.getElementById('sin-clave').textContent, 'se conserva');
     assert.equal(document.getElementById('entrada').placeholder, 'Search platform...');
     assert.equal(document.getElementById('entrada2').placeholder, 'Search platform...');
     assert.deepEqual(Array.from(document.querySelectorAll('#orden option'), o => o.textContent), ['Price: Low to high', 'sin traducir']);
 
     w.setLanguage('es');
-    assert.equal(document.getElementById('titulo').innerHTML, 'Bienvenidos a @Ropavejero.Retro<br>Todo lo Retro en un solo lugar');
+    assert.equal(document.getElementById('titulo').innerHTML, 'Juegos y consolas retro en Chile<br>Todo lo Retro en un solo lugar');
     assert.equal(document.getElementById('entrada').placeholder, 'Buscar plataforma...');
     assert.deepEqual(Array.from(document.querySelectorAll('#orden option'), o => o.textContent), ['Precio: Ascendente', 'sin traducir']);
 });
@@ -97,7 +97,7 @@ test('[I18N-002] la página se muestra en el idioma guardado, y en español si n
     await pagina.cerrar();
 
     await abrirSitio('productos.html', { almacenamiento: { language: 'en' } });
-    assert.equal(texto('[data-translate="products-title"]'), 'Available Products');
+    assert.equal(texto('[data-translate="products-title"]'), 'Available retro games and consoles');
     assert.deepEqual(
         Array.from(pagina.document.querySelectorAll('#sortFilter option'), o => o.textContent),
         ['ID number', 'Price: Low to high', 'Price: High to low', 'Name: A-Z', 'Name: Z-A', 'Platform']

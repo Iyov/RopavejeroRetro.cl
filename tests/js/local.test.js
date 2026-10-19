@@ -11,7 +11,7 @@ let pagina;
 afterEach(async () => { if (pagina) await pagina.cerrar(); pagina = null; });
 
 const PAGINAS_SIN_ANUNCIO = ['404.html', 'security-policy.html', 'security-acknowledgments.html'];
-const MAPS = 'https://www.google.com/maps/search/?api=1&query=';
+const MAPS = 'https://www.google.com/maps?cid=2529777286738516949';
 const SITIO_LOCAL = 'https://doubleimpactstore.cl/';
 // Clases que ya existen en el sitio o vienen de Font Awesome: no se exige que sean nuevas
 const CLASES_EXISTENTES = new Set(['btn', 'btn-primary', 'btn-secondary', 'container', 'section', 'section-header']);
@@ -144,15 +144,13 @@ test('[LOC-002] en el inicio el menú marca "Local" como activo al ver la secci�
 
 // ---------- LOC-003 ----------
 
-test('[LOC-003] "Cómo llegar" abre en otra pestaña la búsqueda de Bio Bio 654 en Google Maps, con noopener y noreferrer', () => {
+test('[LOC-003] "Cómo llegar" abre en otra pestaña el Perfil de Empresa del local en Google Maps, con noopener y noreferrer', () => {
     const local = parsear('index.html').querySelector('section#local');
     assert.ok(local, 'falta section#local');
-    // Se busca por comparación de texto: en jsdom un selector de atributo cuyo valor lleva "/" y "&" no encuentra nada
-    const enlace = Array.from(local.querySelectorAll('a')).find(a => (a.getAttribute('href') || '').startsWith(MAPS));
-    assert.ok(enlace, 'falta el enlace a Google Maps');
+    // Se busca por comparación de texto: en jsdom un selector de atributo cuyo valor lleva "/" y "?" no encuentra nada
+    const enlace = Array.from(local.querySelectorAll('a')).find(a => a.getAttribute('href') === MAPS);
+    assert.ok(enlace, 'falta el enlace al Perfil de Empresa en Google Maps');
 
-    const consulta = decodeURIComponent(enlace.getAttribute('href').slice(MAPS.length).replace(/\+/g, ' '));
-    assert.match(consulta, /Bio Bio 654/);
     assert.equal(enlace.getAttribute('target'), '_blank');
     assert.match(enlace.getAttribute('rel'), /noopener/);
     assert.match(enlace.getAttribute('rel'), /noreferrer/);
