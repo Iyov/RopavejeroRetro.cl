@@ -1,7 +1,17 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-10-22 16:12:00
+// Última actualización: 2026-10-25 02:04:21
 
 const INSTAGRAM_POSTS_DATA = [
+    {
+        "id": "ig_auto_18109224311224477",
+        "image": "img/IG_18109224311224477.jpeg",
+        "title": "Hobby Planet día 1",
+        "description": "📍 Centro Cultural Gabriela Mistral, Villa Alemana\n➡ Stand Nº15\n\n🕒 De 11:00 a 19:00 hrs\n🎟 Entrada liberada\n🎮 Llevaremos nuestros juegos\n📅 Sábado 24 de Octubre de 2026\n¡Nos vemos!",
+        "link": "https://www.instagram.com/p/De5A0lLmIyR/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-10-24",
+        "likes": 32
+    },
     {
         "id": "ig_auto_18126163030799246",
         "image": "img/IG_18126163030799246.jpeg",
