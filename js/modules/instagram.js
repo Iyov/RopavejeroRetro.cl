@@ -7,7 +7,7 @@ let CONSOLE_ALIASES = {};
 
 async function loadConsoleAliases() {
     try {
-        const response = await fetch(`js/console_aliases.json?v=2026-10-24_1`);
+        const response = await fetch(`js/console_aliases.json?v=2026-10-25_1`);
         if (!response.ok) throw new Error('No se pudo cargar console_aliases.json');
         CONSOLE_ALIASES = await response.json();
         console.info('✅ Console aliases cargados correctamente');
