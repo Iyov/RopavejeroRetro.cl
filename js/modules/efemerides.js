@@ -21,7 +21,7 @@ function loadEfemerides() {
     }
     
     // Cargar efemérides desde el archivo JSON de forma segura
-    fetch('js/efemerides.json?v=2026-10-26_2', {
+    fetch('js/efemerides.json?v=2026-10-27_1', {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
