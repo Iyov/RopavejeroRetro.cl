@@ -50,7 +50,12 @@ No queda ninguna abierta.
 
 ### Decisiones abiertas
 
-No queda ninguna abierta.
+Pendientes abiertos, consolidados el 2026-10-29 (el detalle y el contexto están en la entrada que los creó):
+
+- **Marcar `generate_lead` como evento clave en GA4** (desde 2026-10-18): GA4 no deja marcar eventos que no ha recibido, y el 2026-10-19 la extensión del navegador no tenía permiso para entrar a `analytics.google.com`.
+- **Borrar de "Disponibles" las 15 filas de la feria Retro San Antonio (2026-10-10) marcadas con `1` en Sold** (desde 2026-10-18): esperan el OK de Francisco; desde entonces la skill `venta-feria` ya puede borrar directamente.
+- **Corregir el pin del Perfil de Empresa "Ropavejero.Retro SpA" en Google Maps** (2026-10-19): está en el océano Pacífico (-37.06, -88.18); se corrige desde el panel del perfil, no desde el repositorio.
+- **Renovar el token de Instagram antes del ~2026-12-16** (2026-10-29): el token vigente dura 60 días desde el 2026-10-17; al vencer, el bot falla en rojo y el sitio deja de recibir posts. Entre el 2026-10-20 y el 2026-10-29 el bot corrió sin intervención (11 ejecuciones con cambios, 2 posts nuevos), así que lo demás del flujo está funcionando.
 
 
 ## Resueltos
