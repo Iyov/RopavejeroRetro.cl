@@ -44,7 +44,7 @@ window._check = async (filas, modelo) => {   // filas: [[fila, pago], ...]; mode
 Con la herramienta `computer` (clics y teclas reales), en lotes con `browser_batch`:
 
 1. Triple clic en el cuadro de nombre (buscarlo con `find`: "Name box"), escribir `I<fila>`, `Return`.
-2. Escribir cada valor seguido de `Tab`: `1`, `Vendido en <X>`, `Vendido en <X> <dd/mm/aa>`, `Pagado`, `1`, `<dd/mmm/aa>`, `1`, `<pago>`; el último con `Return`.
+2. Escribir cada valor seguido de `Tab`: `1`, `Vendido en <X>`, `Vendido en <X> <dd/mm/aa>`, `Pagado`, `1`, `<dd/mmm/aa>`, `1`, `<pago>`; el último con `Return`. Cada valor va en su propia acción `type` y cada `Tab` en una acción `key`: un solo `type` con `\t` dentro deja todo el texto en la celda I (pasó en Hobby Planet, 2026-10-24).
 
 Tipear funciona para estos valores porque coinciden exactamente con otros de la columna. Para nombres de producto (filas `XXXX`) **no tipear**: el autocompletado de Sheets puede cambiar "X-Men" por "X-Men (BL-CIB)" al presionar `Tab`. Usar el portapapeles (siguiente sección).
 
@@ -105,4 +105,6 @@ Después:
 
 - **Guardar con un clic real** en "Listo" (herramienta `computer`; en una ventana de 1358×857 queda en (1129, 109), o buscarlo con `find`). Un `.click()` desde JavaScript cierra el editor **sin guardar**.
 - Esperar 4 s, volver a abrir el post y confirmar con `document.body.innerText.split('\n').filter(l => /\] 0*(4476|4477)[\t ]/.test(l))`.
+- Si la recarga todavía muestra ✅, puede ser la versión anterior en caché: recargar otra vez antes de repetir la edición. Si al repetirla el script lanza "NO GUARDAR" con `found: []`, es porque ya quedó ❌ (pasó con 3922 en Hobby Planet).
+- Hay que definir el script en cada post: al navegar se pierde la función definida en la página anterior.
 - Si el script lanza "NO GUARDAR", el editor queda abierto: revisar las líneas del ID (`ed().innerText.split('\n').filter(l => l.includes('4476'))`) antes de seguir.
