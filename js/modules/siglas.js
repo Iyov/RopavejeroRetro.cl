@@ -4,7 +4,7 @@
 // Cargar siglas desde JSON
 async function loadSiglas() {
     try {
-        const response = await fetch('js/siglas.json?v=2026-10-30_2');
+        const response = await fetch('js/siglas.json?v=2026-10-31_1');
         if (!response.ok) {
             throw new Error('Error loading siglas');
         }
