@@ -74,7 +74,7 @@ n+2      Discount                                     0
    - Pegar los productos como valores en `C<primera fila>` (columnas C–F) desde el portapapeles, con `ctrl+shift+v`. No tipear nombres: el autocompletado de Sheets los cambia.
    - Encabezado: pegar `FB Sale - AAAA-MM-DD` en la C de la cuarta fila, y tipear la fecha (`d/m/aaaa`) en la D de Name y el total (`193,5`) en la C de Price.
    - Si los juegos superan las filas numeradas de la plantilla (47 el 2026-11-04), insertar filas antes de Shipping y copiarles el formato de una fila de producto.
-7. **Ajustar el largo del bloque.** Borrar las filas numeradas que sobran (clic derecho en los encabezados de fila → "Borrar filas X - Y") y renumerar Shipping y Discount como n+1 y n+2. El 2026-11-04 el control de permisos de Claude Code bloqueó el borrado: si vuelve a pasar, decirle a Francisco qué filas borrar y qué números poner, y no intentar otra vía.
+7. **Filas sobrantes.** No borrarlas: lo hace Francisco a mano cuando puede (acordado el 2026-11-04). Solo informarle qué filas numeradas quedaron vacías y que Shipping y Discount pasan a ser n+1 y n+2.
 8. **Verificar y cerrar.** Exportar la hoja y comprobar que cada fila tenga el producto y la plataforma de la tabla, que el encabezado esté bien y que el Total dé el total de Simon. Informarle a Francisco lo escrito, lo que quedó pendiente y lo que hay que revisar (Sale, títulos dudosos, juegos sin condición). Cerrar las pestañas abiertas.
 
 ## Errores conocidos
