@@ -11,7 +11,8 @@ Escribir en dos planillas y en Instagram cambia datos reales de la tienda. Antes
 
 ## Datos fijos
 
-- **Fotos:** `D:\Downloads\Ropavejero.Retro\Ferias - Eventos\<carpeta>\Fco` e `\Ivette`. Las subcarpetas que empiezan con `_` (`_Carlos`, `_Otros`, `_SinId`) no se procesan.
+- **Fotos:** `D:\Downloads\Ropavejero.Retro\Ferias - Eventos\<carpeta>\Fco`, `\Ivette` y `\Carlos`. Las subcarpetas que empiezan con `_` (`_Evento`, `_Otros`, `_SinId`) no se procesan.
+- **Ventas de Carlos:** la carpeta `Carlos` tiene lo que se vendió de productos de Carlos (acordado el 2026-11-04). No son de la tienda: van siempre como filas `XXXX` con `Carlos` en L (Mét Pago), aunque la etiqueta lleve número, y no pasan por Disponibles ni por Instagram. Si la misma foto aparece también en `Fco` o `Ivette`, es una sola venta, y es de Carlos.
 - **Carpeta:** `AAAA-MM-DD NombreFeria Detalle`, una por día (ej. `2026-10-10 Retro San Antonio`). La fecha sale del nombre, y el nombre corto **X** es la primera palabra después de la fecha (`Retro`, `Hobby`).
 - **Ventas:** planilla "Tienda" `1kUTZQhP7A1qsrPtjSDq7p4XCuvBtCu5RW1bQWWYgVQA`, pestaña "Ventas" (gid `659622227`). B = Num (ID), C = Product, D = Platform, E = Sale, F = Price (costo), G = Stock, H = Pulir, I–P = venta.
 - **Disponibles:** planilla `1ZDQQFeCeL3gw2qgO5_xusTKP0GiY94XVTnR_Amphbek` (gid `1184394447`). A = Num, B = Product, D = Price, G = Link (código del post), H = Sold.
@@ -24,7 +25,7 @@ Escribir en dos planillas y en Instagram cambia datos reales de la tienda. Antes
 | I Sold | `1` | `1` |
 | J UserId | `Vendido en <X>` | `Vendido en Retro` |
 | K NombreCliente | `Vendido en <X> <dd/mm/aa>` | `Vendido en Retro 10/10/26` |
-| L Mét Pago | `Pagado` | `Pagado` |
+| L Mét Pago | `Pagado`, o `Carlos` si el producto es de Carlos | `Pagado` |
 | M Test | `1` | `1` |
 | N Fecha | `<dd>/<mes>/<aa>`, **como texto** | `10/oct/26` |
 | O Entreg | `1` | `1` |
@@ -42,7 +43,7 @@ Escribir en dos planillas y en Instagram cambia datos reales de la tienda. Antes
    - Un solo candidato que calza: proponerlo.
    - Varios candidatos iguales (ej. dos Call of Duty Ghosts BL-CIB a $8): preguntar cuál.
    - No registrado, o la etiqueta no calza con el registrado (otra copia): va como fila `XXXX` (paso 6).
-4. **Validar con Francisco.** Mostrar dos tablas: los IDs (foto, ID, producto, precio en foto y en las hojas, Link) y los sin ID con la propuesta para cada uno. Señalar diferencias de precio entre la foto, Ventas y Disponibles. **No escribir nada hasta su OK.**
+4. **Validar con Francisco.** Mostrar tres tablas: las ventas de Carlos, los IDs (foto, ID, producto, precio en foto y en las hojas, Link) y los sin ID con la propuesta para cada uno. Señalar diferencias de precio entre la foto, Ventas y Disponibles. **No escribir nada hasta su OK.**
 5. **Ventas, productos con ID.** Comprobar en una exportación fresca que cada número de fila sigue correspondiendo a su ID. Escribir I–P fila por fila y verificar cada lote contra la fila modelo con `_check`.
 6. **Ventas, filas `XXXX`.** Van **al tope** del bloque `XXXX` que está debajo de la lista numerada (insertando hacia arriba: lo más nuevo queda arriba), justo encima de la primera fila `XXXX` existente. B = `XXXX`, E = precio de venta, F = `0`, G = `1`, H = `0`, I–P como arriba, con P igual a E. Insertar filas, copiar el formato de la fila de abajo y pegar los valores desde el portapapeles (no tipear: el autocompletado cambia los nombres). Un lote vendido a precio cerrado se reparte en miles enteros que sumen el total. Si un producto del lote ya tiene fila con ID, se ajusta su P.
 7. **Disponibles.** Para cada ID, guardar el Link (G) y poner `1` en Sold (H). Hasta que Francisco diga otra cosa: marcar con `1`, mostrarle el resultado y **borrar esas filas solo con su OK**, de abajo hacia arriba para que no se corran los números.
