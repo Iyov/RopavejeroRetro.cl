@@ -1,7 +1,17 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-11-14 17:25:35
+// Última actualización: 2026-11-15 03:32:42
 
 const INSTAGRAM_POSTS_DATA = [
+    {
+        "id": "ig_auto_18131908343485411",
+        "image": "img/IG_18131908343485411.jpeg",
+        "title": "Feria Retro San José de Maipo",
+        "description": "📍 Frente a Plaza de Armas\n📌 Calle de la Inmaculada esquina Camino al Volcán\n➡ Stand Nº3\n\n🕒 De 12:00 a 19:00 hrs\n📅 Sábado 14 de noviembre de 2026\n🎟 Entrada liberada\n🎮 Llevaremos nuestros juegos\n¡Nos vemos!\n\n#FeriaRetro",
+        "link": "https://www.instagram.com/p/DfuvuRYFeMU/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-11-14",
+        "likes": 49
+    },
     {
         "id": "ig_auto_18128295307867958",
         "image": "img/IG_18128295307867958.jpeg",
