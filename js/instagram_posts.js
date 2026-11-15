@@ -1,7 +1,17 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-11-15 03:32:42
+// Última actualización: 2026-11-15 18:06:15
 
 const INSTAGRAM_POSTS_DATA = [
+    {
+        "id": "ig_auto_17905812639405955",
+        "image": "img/IG_17905812639405955.jpeg",
+        "title": "Feria Friki Mall Plaza Toabalaba",
+        "description": "📍 Mall Plaza Tobalaba\n📌 Frente al Ripley\n➡ Stand Nº17\nZona Retro\n\n🕒 De 12:00 a 19:00 hrs\n📅 Domingo 15 de noviembre de 2026\n🎟 Entrada liberada\n🎮 Llevaremos nuestros juegos\n¡Nos vemos!\n\n#FeriaRetro",
+        "link": "https://www.instagram.com/p/DfxU8QIFc_v/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-11-15",
+        "likes": 8
+    },
     {
         "id": "ig_auto_18131908343485411",
         "image": "img/IG_18131908343485411.jpeg",
@@ -10,7 +20,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DfuvuRYFeMU/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-11-14",
-        "likes": 49
+        "likes": 56
     },
     {
         "id": "ig_auto_18128295307867958",
@@ -1440,7 +1450,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DPU_RqCjJYG/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2025-10-03",
-        "likes": 5851
+        "likes": 5852
     },
     {
         "id": "ig_auto_18320707375210014",
