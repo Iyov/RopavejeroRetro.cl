@@ -1,5 +1,5 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-11-16 03:33:11
+// Última actualización: 2026-11-16 21:22:05
 
 const INSTAGRAM_POSTS_DATA = [
     {
@@ -10,7 +10,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DfxU8QIFc_v/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-11-15",
-        "likes": 25
+        "likes": 27
     },
     {
         "id": "ig_auto_18131908343485411",
@@ -20,7 +20,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DfuvuRYFeMU/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-11-14",
-        "likes": 57
+        "likes": 62
     },
     {
         "id": "ig_auto_18128295307867958",
@@ -106,7 +106,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_18147514984537319",
         "image": "img/IG_18147514984537319.jpeg",
         "title": "Xbox 360 [1] | 21/Ago/26",
-        "description": "\n[❌] 4450 Star Wars The Force Unleashed I (MM) [X360] $15K\n[✅] 4451 Kinect Star Wars (CIB-2D) [X360] $12K\n[❌] 4452 LEGO Star Wars II Original Trilogy (CIB) [X360] $8K\n[✅] 4453 LEGO Star Wars The Force Awakens (CIB) [X360] $8K\n[✅] 4454 Wipeout 2 (CIB) [X360] $8K\n[✅] 4455 NBA Baller Beats (MM) [X360] $5K\n[✅] 4456 High School Musical 3 Senior Year Dance (CIB) [X360] $5K\n[✅] 4457 Madden 16 (CIB) [X360] $3K\n[✅] 4458 MLB 2K10 (MM) [X360] $3K\n[✅] 4459 NHL 15 (MM-CR) [X360] $3K\n[✅] 4460 Body & Brain Connection (MM-CR) [X360] $3K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual\nMM: Sin Manual\n2D: Dos Discos\nCR: Caja Repro",
+        "description": "\n[❌] 4450 Star Wars The Force Unleashed I (MM) [X360] $15K\n[❌] 4451 Kinect Star Wars (CIB-2D) [X360] $12K\n[❌] 4452 LEGO Star Wars II Original Trilogy (CIB) [X360] $8K\n[✅] 4453 LEGO Star Wars The Force Awakens (CIB) [X360] $8K\n[✅] 4454 Wipeout 2 (CIB) [X360] $8K\n[✅] 4455 NBA Baller Beats (MM) [X360] $5K\n[✅] 4456 High School Musical 3 Senior Year Dance (CIB) [X360] $5K\n[✅] 4457 Madden 16 (CIB) [X360] $3K\n[✅] 4458 MLB 2K10 (MM) [X360] $3K\n[✅] 4459 NHL 15 (MM-CR) [X360] $3K\n[✅] 4460 Body & Brain Connection (MM-CR) [X360] $3K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual\nMM: Sin Manual\n2D: Dos Discos\nCR: Caja Repro",
         "link": "https://www.instagram.com/p/DcU1wpRlYXX/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-08-22",
@@ -405,7 +405,7 @@ const INSTAGRAM_POSTS_DATA = [
     {
         "id": "ig_auto_18605858809018199",
         "image": "img/IG_18605858809018199.jpeg",
-        "title": "[✅] 4386 Zumba Fitness Core (CIB) [X360] $5K",
+        "title": "[❌] 4386 Zumba Fitness Core (CIB) [X360] $5K",
         "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual",
         "link": "https://www.instagram.com/p/DbM0RLzlW5p/",
         "media_type": "CAROUSEL_ALBUM",
@@ -435,7 +435,7 @@ const INSTAGRAM_POSTS_DATA = [
     {
         "id": "ig_auto_18089490338116995",
         "image": "img/IG_18089490338116995.jpeg",
-        "title": "[✅] 4382 Dance Central 1 (MM) [X360] $7K",
+        "title": "[❌] 4382 Dance Central 1 (MM) [X360] $7K",
         "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nMM: Sin Manual",
         "link": "https://www.instagram.com/p/DbMw3I-laLj/",
         "media_type": "CAROUSEL_ALBUM",
@@ -626,7 +626,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_17920755663166115",
         "image": "img/IG_17920755663166115.jpeg",
         "title": "DC3 | 19/Jun/26",
-        "description": "\n[✅] 4325 Dance Central 3 (MM-PAL) [X360] $8K\n[✅] 4326 Dance Central 3 (MM) [X360] $8K\n[✅] 4327 Dance Central 3 (MM) [X360] $7K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nMM: Sin Manual\nPAL: Europeo",
+        "description": "\n[✅] 4325 Dance Central 3 (MM-PAL) [X360] $8K\n[✅] 4326 Dance Central 3 (MM) [X360] $8K\n[❌] 4327 Dance Central 3 (MM) [X360] $7K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nMM: Sin Manual\nPAL: Europeo",
         "link": "https://www.instagram.com/p/DZyeqftFV01/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-06-20",
@@ -635,7 +635,7 @@ const INSTAGRAM_POSTS_DATA = [
     {
         "id": "ig_auto_18039500906643180",
         "image": "img/IG_18039500906643180.jpeg",
-        "title": "[✅] 4324 Lego Movie Videogame (CIB) [X360] $8K",
+        "title": "[❌] 4324 Lego Movie Videogame (CIB) [X360] $8K",
         "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual",
         "link": "https://www.instagram.com/p/DZg1oWmFRnQ/",
         "media_type": "CAROUSEL_ALBUM",
@@ -825,7 +825,7 @@ const INSTAGRAM_POSTS_DATA = [
     {
         "id": "ig_auto_17870360103618042",
         "image": "img/IG_17870360103618042.jpeg",
-        "title": "[✅] 4279 Batman Arkham City (BL-CIB-GotY) [PS3] $10K",
+        "title": "[❌] 4279 Batman Arkham City (BL-CIB-GotY) [PS3] $10K",
         "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nCIB: Caja, Juego, Manual\nGotY: Game of the Year",
         "link": "https://www.instagram.com/p/DZMAL0-ldTt/",
         "media_type": "CAROUSEL_ALBUM",
@@ -1010,7 +1010,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DYGVvbtlXvt/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-05-09",
-        "likes": 149
+        "likes": 148
     },
     {
         "id": "ig_auto_18101625304951830",
@@ -1156,7 +1156,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_18417967792125333",
         "image": "img/IG_18417967792125333.jpeg",
         "title": "Manuales Nintendo Gameboy | 09/Abr/26",
-        "description": "\n[✅] 2850\t102 Dalmatians [GBC (M)] $5K\n[✅] 2859\tGameboy Consumer Information (I) [GB (M)] $3K\n[✅] 2860\tGameboy Health & Safety (I) [GB (M)] $3K\n[✅] 2861\tGameboy Precautions Insert (I) [GB (M)] $3K\n[✅] 2863\tWord Zap (M) [GB (M)] $2K\n[✅] 2864\tWheel of Fortune (M) [GB (M)] $2K\n[✅] 2866\t4 in 1 volume II (M) [GB (M)] $3K\n[✅] 2867\tWild Snake (M) [GB (M)] $3K\n[✅] 2868\tJeopardy (M) [GB (M)] $3K\n[✅] 2869\tTurn & Burn: The Dogfight Simulator (M) [GB (M)] $5K\n[✅] 2870\tZoop (M) [GB (M)] $5K\n[❌] 2871\tGB console manual (M) [GB (M)] $10K\n[✅] 2874\tBattletoads in Ragnarok’s World (M) [GB (M)] $30K\n[✅] 2875\tFinal Fantasy Legend 2 (M) [GB (M)] $20K\n\n[❌] 4008\tDonkey Kong Land (M) [GB (M)] $10K\n[✅] 4009\tWario Land II (M) [GB (M)] $12K\n[✅] 4010\tGameboy System Console (M) [GB (M)] $8K\n[✅] 4011\tBaseball (M) [GB (M)] $5K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nM: Manual\nI: Inserto",
+        "description": "\n[✅] 2850\t102 Dalmatians [GBC (M)] $5K\n[✅] 2859\tGameboy Consumer Information (I) [GB (M)] $3K\n[✅] 2860\tGameboy Health & Safety (I) [GB (M)] $3K\n[✅] 2861\tGameboy Precautions Insert (I) [GB (M)] $3K\n[✅] 2863\tWord Zap (M) [GB (M)] $2K\n[✅] 2864\tWheel of Fortune (M) [GB (M)] $2K\n[✅] 2866\t4 in 1 volume II (M) [GB (M)] $3K\n[✅] 2867\tWild Snake (M) [GB (M)] $3K\n[✅] 2868\tJeopardy (M) [GB (M)] $3K\n[✅] 2869\tTurn & Burn: The Dogfight Simulator (M) [GB (M)] $5K\n[✅] 2870\tZoop (M) [GB (M)] $5K\n[❌] 2871\tGB console manual (M) [GB (M)] $10K\n[❌] 2874\tBattletoads in Ragnarok’s World (M) [GB (M)] $30K\n[✅] 2875\tFinal Fantasy Legend 2 (M) [GB (M)] $20K\n\n[❌] 4008\tDonkey Kong Land (M) [GB (M)] $10K\n[❌] 4009\tWario Land II (M) [GB (M)] $12K\n[✅] 4010\tGameboy System Console (M) [GB (M)] $8K\n[✅] 4011\tBaseball (M) [GB (M)] $5K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nM: Manual\nI: Inserto",
         "link": "https://www.instagram.com/p/DW7oEZilWN5/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-04-10",
@@ -1226,7 +1226,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_18023227511639731",
         "image": "img/IG_18023227511639731.jpeg",
         "title": "Xbox 360 | 27/Mar/26",
-        "description": "\n[❌️] 3925 Devil May Cry 4 (CIB) [X360] $15K\n[❌️] 3926 Gears of War Triple Pack (CIB-2D) [X360] $15K\n[❌️] 3927 Virtua Tennis 4 (CIB) [X360] $15K\n[✅] 3928 NFS Most Wanted (CIB) [X360] $20K\n[✅] 3929 Marvel Ultimate Alliance / Forza MotorSport 2 (CIB-2D) [X360] $20K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual\nMM: Sin Manual\n2D: Dos Discos",
+        "description": "\n[❌️] 3925 Devil May Cry 4 (CIB) [X360] $15K\n[❌️] 3926 Gears of War Triple Pack (CIB-2D) [X360] $15K\n[❌️] 3927 Virtua Tennis 4 (CIB) [X360] $15K\n[❌] 3928 NFS Most Wanted (CIB) [X360] $20K\n[✅] 3929 Marvel Ultimate Alliance / Forza MotorSport 2 (CIB-2D) [X360] $20K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual\nMM: Sin Manual\n2D: Dos Discos",
         "link": "https://www.instagram.com/p/DWaGDPLmFHT/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-03-28",
@@ -1416,7 +1416,7 @@ const INSTAGRAM_POSTS_DATA = [
         "id": "ig_auto_17867016285552189",
         "image": "img/IG_17867016285552189.jpeg",
         "title": "PS2 Sueltos [2] | 25/Ene/26",
-        "description": "\n[❌] 3711\tMortal Kombat Deadly Alliance (GH-L) [PS2 (L)] $12K\n[❌] 3712\tMortal Kombat Shaolin Monks (BL-L) [PS2 (L)] $25K\n[❌] 3713\tWWE Smackdown Here Comes the Pain (GH-L) [PS2 (L)] $20K\n[❌] 3714\tWWE Smackdown vs Raw 2007 (GH-L) [PS2 (L)] $12K\n[❌] 3715\tWWE Smackdown vs Raw 2008 (GH-L) [PS2 (L)] $12K\n[❌] 3716\tGTA III (BL-L) [PS2 (L)] $8K\n[❌] 3717\tGTA Vice City (BL-L) [PS2 (L)] $10K\n[❌] 3718\tGTA Vice City (BL-L) [PS2 (L)] $10K\n[❌] 3719\tDragon Ball Z Budokai 3 (GH-L) [PS2 (L)] $18K\n[❌] 3720\tStar Wars Episode III Revenge of the Sith (BL-L) [PS2 (L)] $8K\n[❌] 3721\tStar Wars Episode III Revenge of the Sith (BL-L) [PS2 (L)] $8K\n[✅] 3722\tSly 2 (GH-L) [PS2 (L)] $8K\n[✅] 3723\tSly 3 (GH-L) [PS2 (L)] $8K\n[❌] 3724\tTony Hawk Proving Ground (BL-L) [PS2 (L)] $7K\n[❌] 3725\tTony Hawk Project 8 (BL-L) [PS2 (L)] $7K\n[✅] 3726\tJak 3 (GH-L) [PS2 (L)] $7K\n[❌] 3727\tGran Turismo 3 (BL-L) [PS2 (L)] $5K\n[✅] 3728\tCrash Bandicoot The Wrath of Cortex (BL-L) [PS2 (L)] $10K\n[✅] 3729\tZone of the Enders 2nd Runner (BL-L) [PS2 (L)] $20K\n[❌] 3730\tWinning Eleven 7 (BL-L) [PS2 (L)] $7K\n[✅] 3731\tRainbow Six Lockdown (BL-L) [PS2 (L)] $5K\n[❌] 3732\tStar Wars Starfighter (BL-L) [PS2 (L)] $5K\n[❌] 3733\tGhost Recon 2 (BL-L) [PS2 (L)] $5K\n[❌] 3734\tSpiderman (BL-L-PAL) [PS2 (L)] $8K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nGH: Greatest Hits\nCE: Collector's Edition\nL: Loose: Suelto: Solo Juego\nPAL: Europeo",
+        "description": "\n[❌] 3711\tMortal Kombat Deadly Alliance (GH-L) [PS2 (L)] $12K\n[❌] 3712\tMortal Kombat Shaolin Monks (BL-L) [PS2 (L)] $25K\n[❌] 3713\tWWE Smackdown Here Comes the Pain (GH-L) [PS2 (L)] $20K\n[❌] 3714\tWWE Smackdown vs Raw 2007 (GH-L) [PS2 (L)] $12K\n[❌] 3715\tWWE Smackdown vs Raw 2008 (GH-L) [PS2 (L)] $12K\n[❌] 3716\tGTA III (BL-L) [PS2 (L)] $8K\n[❌] 3717\tGTA Vice City (BL-L) [PS2 (L)] $10K\n[❌] 3718\tGTA Vice City (BL-L) [PS2 (L)] $10K\n[❌] 3719\tDragon Ball Z Budokai 3 (GH-L) [PS2 (L)] $18K\n[❌] 3720\tStar Wars Episode III Revenge of the Sith (BL-L) [PS2 (L)] $8K\n[❌] 3721\tStar Wars Episode III Revenge of the Sith (BL-L) [PS2 (L)] $8K\n[✅] 3722\tSly 2 (GH-L) [PS2 (L)] $8K\n[❌] 3723\tSly 3 (GH-L) [PS2 (L)] $8K\n[❌] 3724\tTony Hawk Proving Ground (BL-L) [PS2 (L)] $7K\n[❌] 3725\tTony Hawk Project 8 (BL-L) [PS2 (L)] $7K\n[✅] 3726\tJak 3 (GH-L) [PS2 (L)] $7K\n[❌] 3727\tGran Turismo 3 (BL-L) [PS2 (L)] $5K\n[❌] 3728\tCrash Bandicoot The Wrath of Cortex (BL-L) [PS2 (L)] $10K\n[✅] 3729\tZone of the Enders 2nd Runner (BL-L) [PS2 (L)] $20K\n[❌] 3730\tWinning Eleven 7 (BL-L) [PS2 (L)] $7K\n[✅] 3731\tRainbow Six Lockdown (BL-L) [PS2 (L)] $5K\n[❌] 3732\tStar Wars Starfighter (BL-L) [PS2 (L)] $5K\n[❌] 3733\tGhost Recon 2 (BL-L) [PS2 (L)] $5K\n[❌] 3734\tSpiderman (BL-L-PAL) [PS2 (L)] $8K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nGH: Greatest Hits\nCE: Collector's Edition\nL: Loose: Suelto: Solo Juego\nPAL: Europeo",
         "link": "https://www.instagram.com/p/DT9E3WLFVc_/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-01-26",
