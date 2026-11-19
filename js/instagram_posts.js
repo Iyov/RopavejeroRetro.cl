@@ -1,7 +1,17 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-11-18 19:41:29
+// Última actualización: 2026-11-19 04:50:41
 
 const INSTAGRAM_POSTS_DATA = [
+    {
+        "id": "ig_auto_17957291691275010",
+        "image": "img/IG_17957291691275010.jpeg",
+        "title": "🎮 Actualización Viernes 20/Nov/26 21:00 hrs!",
+        "description": "\n✅ Se venderán juegos de DS, PS2, PS3 y más.\n🔔 Activen las notificaciones.\n\n✋ Se subirán distintos lotes en un post que contendrá en su descripción el listado con:\nEj: [✅] 125 Gungrave (BL-CIB) $55K\n1) Estado: [✅️] Disponible ó [❌️] Vendido\n2) Número (identificador): 125\n3) Nombre: Gungrave (BL-CIB)\n4) Precio: $55K, dónde K=1.000\n\nSi deseas comprar algo, basta con que comentes en el post el número del juego con un: \"Yo 125\" o \"Mio 125\", por ejemplo. En tal caso te responderemos a la brevedad y enviaremos los datos para concretar la venta. Se le da prioridad al primer comentario. Se esperan unos minutos, luego pasa al siguiente. Ten listos nuestros datos para que pueda ser lo más rápido posible.\n\n💰 Medios de Pago: Efectivo, Transferencia.\n\n🚚 Entregas en metro San Joaquín L5 o envío vía Starken a todo Chile.\n\n📷 Una vez que se concreten las ventas, enviaremos las fotos y detalles de los productos.\n\n🤞🏻 Mucha suerte en sus compras, cariños!",
+        "link": "https://www.instagram.com/p/Df5UPGUmFHy/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-11-18",
+        "likes": 7
+    },
     {
         "id": "ig_auto_17905812639405955",
         "image": "img/IG_17905812639405955.jpeg",
@@ -20,7 +30,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DfuvuRYFeMU/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-11-14",
-        "likes": 66
+        "likes": 68
     },
     {
         "id": "ig_auto_18128295307867958",
@@ -125,7 +135,7 @@ const INSTAGRAM_POSTS_DATA = [
     {
         "id": "ig_auto_18093614240532887",
         "image": "img/IG_18093614240532887.jpeg",
-        "title": "[✅] 4448\tTales of Zestiria (BL-Sellado) [PS3] $35K",
+        "title": "[❌] 4448\tTales of Zestiria (BL-Sellado) [PS3] $35K",
         "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nPS3: PlayStation 3\nBL: Black Label\nS: Sealed: Sellado de Fábrica",
         "link": "https://www.instagram.com/p/DcUxB8sFfp8/",
         "media_type": "CAROUSEL_ALBUM",
@@ -145,7 +155,7 @@ const INSTAGRAM_POSTS_DATA = [
     {
         "id": "ig_auto_18616812919027782",
         "image": "img/IG_18616812919027782.jpeg",
-        "title": "[✅] 4446\tSpy Hunter (Sellado) [3DS] $25K",
+        "title": "[❌] 4446\tSpy Hunter (Sellado) [3DS] $25K",
         "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\n3DS: Nintendo 3DS\nS: Sealed: Sellado de Fábrica",
         "link": "https://www.instagram.com/p/DcUv763lYob/",
         "media_type": "CAROUSEL_ALBUM",
@@ -155,7 +165,7 @@ const INSTAGRAM_POSTS_DATA = [
     {
         "id": "ig_auto_18089150498238111",
         "image": "img/IG_18089150498238111.jpeg",
-        "title": "[✅] 4445\tLEGO Lord Of The Rings (Sellado) [DS] $25K",
+        "title": "[❌] 4445\tLEGO Lord Of The Rings (Sellado) [DS] $25K",
         "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nDS: Nintendo DS\nS: Sealed: Sellado de Fábrica",
         "link": "https://www.instagram.com/p/DcUvY4olXpo/",
         "media_type": "CAROUSEL_ALBUM",
@@ -1420,7 +1430,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DT9E3WLFVc_/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-01-26",
-        "likes": 1157
+        "likes": 1156
     },
     {
         "id": "ig_auto_18020656073803699",
@@ -1430,7 +1440,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DT9DcoHFd2v/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-01-26",
-        "likes": 142
+        "likes": 141
     },
     {
         "id": "ig_auto_18098015590916334",
@@ -1440,7 +1450,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DT9A2Ytleo0/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-01-26",
-        "likes": 63
+        "likes": 62
     },
     {
         "id": "ig_auto_18049655384645855",
@@ -1450,7 +1460,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DPU_RqCjJYG/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2025-10-03",
-        "likes": 5849
+        "likes": 5848
     },
     {
         "id": "ig_auto_18320707375210014",
@@ -1470,7 +1480,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DPU5m7jjPLu/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2025-10-03",
-        "likes": 1382
+        "likes": 1380
     },
     {
         "id": "ig_auto_18047443322257213",

@@ -1,6 +1,6 @@
 // ========== SERVICE WORKER - ROPAVEJERO RETRO ==========
 // Versión del caché - Incrementar cuando actualices recursos
-const CACHE_VERSION = 'ropavejero-v2026-11-18_2';
+const CACHE_VERSION = 'ropavejero-v2026-11-19_1';
 const CACHE_NAME = `${CACHE_VERSION}-static`;
 const DATA_CACHE_NAME = `${CACHE_VERSION}-data`;
 
@@ -42,6 +42,10 @@ const STATIC_RESOURCES = [
 
 // Recursos de Instagram (imágenes de posts WebP responsive y fallbacks)
 const INSTAGRAM_IMAGES = [
+    '/img/IG_17957291691275010.jpeg',
+    '/img/IG_17957291691275010-400.webp',
+    '/img/IG_17957291691275010-800.webp',
+    '/img/IG_17957291691275010-1200.webp',
     '/img/IG_17905812639405955.jpeg',
     '/img/IG_17905812639405955-400.webp',
     '/img/IG_17905812639405955-800.webp',
