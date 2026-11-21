@@ -1,7 +1,327 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-11-21 04:36:00
+// Última actualización: 2026-11-21 18:23:48
 
 const INSTAGRAM_POSTS_DATA = [
+    {
+        "id": "ig_auto_18116236226617209",
+        "image": "img/IG_18116236226617209.jpeg",
+        "title": "[✅] 4541 Nintendo DSi Rosada [DS] $70K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nDS: Nintendo DS",
+        "link": "https://www.instagram.com/p/DgAlcokFTxY/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-11-21",
+        "likes": 2
+    },
+    {
+        "id": "ig_auto_18651583360036277",
+        "image": "img/IG_18651583360036277.jpeg",
+        "title": "[✅] 4540 R4 Gold Pro + lector USB (CIB) [DS] $20K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual\nDS: Nintendo DS",
+        "link": "https://www.instagram.com/p/DgAlVEYlU6u/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-11-21",
+        "likes": 5
+    },
+    {
+        "id": "ig_auto_18016627076763772",
+        "image": "img/IG_18016627076763772.jpeg",
+        "title": "[✅] 4536 2014 FIFA World Cup Brazil (BL-CIB) [PS3] $5K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nCIB: Caja, Juego, Manual",
+        "link": "https://www.instagram.com/p/DgAlNy0Ff4A/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-11-21",
+        "likes": 4
+    },
+    {
+        "id": "ig_auto_17960410272267354",
+        "image": "img/IG_17960410272267354.jpeg",
+        "title": "[✅] 4535 Call of Duty Black Ops (BL-CIB) [PS3] $8K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nCIB: Caja, Juego, Manual",
+        "link": "https://www.instagram.com/p/DgAlGRBlQJS/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-11-21",
+        "likes": 4
+    },
+    {
+        "id": "ig_auto_18124462652587595",
+        "image": "img/IG_18124462652587595.jpeg",
+        "title": "[✅] 4534 Resident Evil 5 Gold Edition (BL-CIB) [PS3] $10K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nCIB: Caja, Juego, Manual",
+        "link": "https://www.instagram.com/p/DgAk-esleds/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-11-21",
+        "likes": 8
+    },
+    {
+        "id": "ig_auto_18223535155351467",
+        "image": "img/IG_18223535155351467.jpeg",
+        "title": "[✅] 4533 Dragon Ball Z Ultimate Tenkaichi (BL-CIB) [PS3] $15K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nCIB: Caja, Juego, Manual",
+        "link": "https://www.instagram.com/p/DgAk2UPlbIb/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-11-21",
+        "likes": 12
+    },
+    {
+        "id": "ig_auto_18157402483535426",
+        "image": "img/IG_18157402483535426.jpeg",
+        "title": "[✅] 4532 Red Dead Redemption (GH-CIB-C/M-GotY) [PS3] $15K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nGH: Greatest Hits\nCIB: Caja, Juego, Manual\nC/M: Con Mapa\nGotY: Game of the Year",
+        "link": "https://www.instagram.com/p/DgAkuARFcC-/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-11-21",
+        "likes": 19
+    },
+    {
+        "id": "ig_auto_18118469870603270",
+        "image": "img/IG_18118469870603270.jpeg",
+        "title": "[✅] 4531 Caballeros del Zodiaco Batalla por el Santuario (BL-CIB) [PS3] $40K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nCIB: Caja, Juego, Manual",
+        "link": "https://www.instagram.com/p/DgAkf_DlVUh/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-11-21",
+        "likes": 3
+    },
+    {
+        "id": "ig_auto_17911269297606220",
+        "image": "img/IG_17911269297606220.jpeg",
+        "title": "[✅] 4530 Medal of Honor Frontline (GH-CIB) [PS2] $10K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nGH: Greatest Hits\nCIB: Caja, Juego, Manual",
+        "link": "https://www.instagram.com/p/DgAkYDlFZ3d/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-11-21",
+        "likes": 5
+    },
+    {
+        "id": "ig_auto_18154538458557643",
+        "image": "img/IG_18154538458557643.jpeg",
+        "title": "[✅] 4529 Sly 2 Band Of Thieves (GH-MM) [PS2] $15K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nGH: Greatest Hits\nMM: Sin Manual",
+        "link": "https://www.instagram.com/p/DgAkQe6FeWL/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-11-21",
+        "likes": 2
+    },
+    {
+        "id": "ig_auto_18032891288857332",
+        "image": "img/IG_18032891288857332.jpeg",
+        "title": "[✅] 4528 Grand Theft Auto III (BL-CIB) [PS2] $20K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nBL: Black Label\nCIB: Caja, Juego, Manual",
+        "link": "https://www.instagram.com/p/DgAkJfzlXUk/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-11-21",
+        "likes": 33
+    },
+    {
+        "id": "ig_auto_18137529733765329",
+        "image": "img/IG_18137529733765329.jpeg",
+        "title": "[✅] 4527 Super Mario Maker (MM) [3DS] $12K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nMM: Sin Manual\n3DS: Nintendo 3DS",
+        "link": "https://www.instagram.com/p/DgAkCanlXqN/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-11-21",
+        "likes": 2
+    },
+    {
+        "id": "ig_auto_18112618847351081",
+        "image": "img/IG_18112618847351081.jpeg",
+        "title": "[✅] 4526 LEGO The Hobbit (CIB) [3DS] $12K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual\n3DS: Nintendo 3DS",
+        "link": "https://www.instagram.com/p/DgAj7AOFY3a/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-11-21",
+        "likes": 2
+    },
+    {
+        "id": "ig_auto_18181722076448045",
+        "image": "img/IG_18181722076448045.jpeg",
+        "title": "[✅] 4525 Warriors Orochi 3 Ultimate (CIB) [XOne] $10K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual",
+        "link": "https://www.instagram.com/p/DgAjzzRlTcY/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-11-21",
+        "likes": 2
+    },
+    {
+        "id": "ig_auto_17959318647273831",
+        "image": "img/IG_17959318647273831.jpeg",
+        "title": "[✅] 4524 Sega Superstars Tennis + Xbox Live Arcade (CIB) [X360] $15K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual",
+        "link": "https://www.instagram.com/p/DgAjsojlQMj/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-11-21",
+        "likes": 3
+    },
+    {
+        "id": "ig_auto_18092348831260043",
+        "image": "img/IG_18092348831260043.jpeg",
+        "title": "[✅] 4523 Star Wars Jedi Knight II: Jedi Outcast (MM) [Xbox] $18K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nMM: Sin Manual",
+        "link": "https://www.instagram.com/p/DgAjlicFeWO/",
+        "media_type": "IMAGE",
+        "date": "2026-11-21",
+        "likes": 2
+    },
+    {
+        "id": "ig_auto_18161074294448256",
+        "image": "img/IG_18161074294448256.jpeg",
+        "title": "[✅] 4522 Rainbow Six 3 (CIB) [Xbox] $12K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nCIB: Caja, Juego, Manual",
+        "link": "https://www.instagram.com/p/DgAjefaFRSv/",
+        "media_type": "IMAGE",
+        "date": "2026-11-21",
+        "likes": 2
+    },
+    {
+        "id": "ig_auto_18132293530875095",
+        "image": "img/IG_18132293530875095.jpeg",
+        "title": "[✅] 4521 Project Gotham Racing 2 (PH-CIB) [Xbox] $12K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nPH: Platinum Hits\nCIB: Caja, Juego, Manual",
+        "link": "https://www.instagram.com/p/DgAjXfBlVHH/",
+        "media_type": "IMAGE",
+        "date": "2026-11-21",
+        "likes": 2
+    },
+    {
+        "id": "ig_auto_18339038395279184",
+        "image": "img/IG_18339038395279184.jpeg",
+        "title": "[✅] 4520 Battle Arena Toshinden (GH-CIB) [PS1] $28K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nGH: Greatest Hits\nCIB: Caja, Juego, Manual",
+        "link": "https://www.instagram.com/p/DgAjQcGFX6T/",
+        "media_type": "IMAGE",
+        "date": "2026-11-21",
+        "likes": 2
+    },
+    {
+        "id": "ig_auto_18454960309123275",
+        "image": "img/IG_18454960309123275.jpeg",
+        "title": "[✅] 4519 Battle Arena Toshinden (L) [PS1] $10K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nL: Loose: Suelto: Solo Juego",
+        "link": "https://www.instagram.com/p/DgAgkaTFaJB/",
+        "media_type": "IMAGE",
+        "date": "2026-11-21",
+        "likes": 2
+    },
+    {
+        "id": "ig_auto_18647593627010305",
+        "image": "img/IG_18647593627010305.jpeg",
+        "title": "[✅] 4516 Maniac Mansion (L) [NES] $35K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nL: Loose: Suelto: Solo Juego",
+        "link": "https://www.instagram.com/p/DgAgKE8Fc3b/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-11-21",
+        "likes": 4
+    },
+    {
+        "id": "ig_auto_18109888700304342",
+        "image": "img/IG_18109888700304342.jpeg",
+        "title": "[✅] 4515 Spot (+ Manual) [NES] $22K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE",
+        "link": "https://www.instagram.com/p/DgAgB-lFWmP/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-11-21",
+        "likes": 5
+    },
+    {
+        "id": "ig_auto_17874392925644534",
+        "image": "img/IG_17874392925644534.jpeg",
+        "title": "[✅] 4514 Super Off Road (L) [NES] $18K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nL: Loose: Suelto: Solo Juego",
+        "link": "https://www.instagram.com/p/DgAf0HzFe7e/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-11-21",
+        "likes": 2
+    },
+    {
+        "id": "ig_auto_17929834668441010",
+        "image": "img/IG_17929834668441010.jpeg",
+        "title": "[✅] 4513 Tecmo Bowl (L) [NES] $8K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nL: Loose: Suelto: Solo Juego",
+        "link": "https://www.instagram.com/p/DgAfoWhFXQ0/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-11-21",
+        "likes": 2
+    },
+    {
+        "id": "ig_auto_18000897516103922",
+        "image": "img/IG_18000897516103922.jpeg",
+        "title": "Portátiles Sueltos | 20/Nov/26",
+        "description": "[✅] 4506 Jeopardy! (L) [GameGear] $6K\n[✅] 4507 Ms. Pac-Man (L) [GameGear] $10K\n[✅] 4508 Aladdin (L) [GameGear] $12K\n[✅] 4509 Aladdin (L) [GameGear] $12K\n[✅] 4510 Lion King (L) [GameGear] $12K\n[✅] 4511 WWF Steel Cage Challenge (L) [GameGear] $12K\n[✅] 4512 Ecco The Tides of Time (L) [GameGear] $15K\n\n[✅] 4517 Herbie Fully Loaded (L) [GBA] $6K\n[✅] 4518 Mighty Beanz Pocket Puzzles (L) [GBA] $8K\n\n[✅] 4537 Mario Kart 7 (L) [3DS] $12K\n[✅] 4538 Lego Star Wars III The Clone Wars (L) [3DS] $7K\n[✅] 4539 Combat of Giants Dinosaurs 3D (L) [3DS] $5K\n\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nL: Loose: Suelto: Solo Juego\nGBA: GameBoy Advance\n3DS: Nintendo 3DS",
+        "link": "https://www.instagram.com/p/DgAfbkDlbVl/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-11-21",
+        "likes": 2
+    },
+    {
+        "id": "ig_auto_18142666483628479",
+        "image": "img/IG_18142666483628479.jpeg",
+        "title": "[✅] 4505 Spider-Man X-Men Arcade's Revenge (MM) [Genesis] $35K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nMM: Sin Manual",
+        "link": "https://www.instagram.com/p/DgAfSs3Ffhp/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-11-21",
+        "likes": 7
+    },
+    {
+        "id": "ig_auto_17900101914681787",
+        "image": "img/IG_17900101914681787.jpeg",
+        "title": "[✅] 4504 Lion King [Genesis] $20K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE",
+        "link": "https://www.instagram.com/p/DgAfKXmlU8G/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-11-21",
+        "likes": 3
+    },
+    {
+        "id": "ig_auto_17942048505404737",
+        "image": "img/IG_17942048505404737.jpeg",
+        "title": "[✅] 4503 NFL '95 (L) [Genesis] $5K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nL: Loose: Suelto: Solo Juego",
+        "link": "https://www.instagram.com/p/DgAfB8rFeXd/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-11-21",
+        "likes": 1
+    },
+    {
+        "id": "ig_auto_18346531822273530",
+        "image": "img/IG_18346531822273530.jpeg",
+        "title": "[✅] 4502 Troy Aikman NFL Football (L) [Genesis] $5K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nL: Loose: Suelto: Solo Juego",
+        "link": "https://www.instagram.com/p/DgAe5yCFSBz/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-11-21",
+        "likes": 1
+    },
+    {
+        "id": "ig_auto_18005334824809154",
+        "image": "img/IG_18005334824809154.jpeg",
+        "title": "[✅] 4501 Etiqueta dañada (L) [Genesis] $5K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nL: Loose: Suelto: Solo Juego",
+        "link": "https://www.instagram.com/p/DgAewnqlaEF/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-11-21",
+        "likes": 2
+    },
+    {
+        "id": "ig_auto_17901324735679405",
+        "image": "img/IG_17901324735679405.jpeg",
+        "title": "[✅] 4500 Bill Walsh College Football 95 (L) [Genesis] $5K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nL: Loose: Suelto: Solo Juego",
+        "link": "https://www.instagram.com/p/DgAegqPFZwL/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-11-21",
+        "likes": 1
+    },
+    {
+        "id": "ig_auto_18148565695563821",
+        "image": "img/IG_18148565695563821.jpeg",
+        "title": "[✅] 4499 College Football USA 96 (L) [Genesis] $5K",
+        "description": "\n[❌]: VENDIDO\n[R]: RESERVADO\n[✅]: DISPONIBLE\n\nSiglas:\nL: Loose: Suelto: Solo Juego",
+        "link": "https://www.instagram.com/p/DgAeM1QFYi6/",
+        "media_type": "CAROUSEL_ALBUM",
+        "date": "2026-11-21",
+        "likes": 1
+    },
     {
         "id": "ig_auto_17957291691275010",
         "image": "img/IG_17957291691275010.jpeg",
@@ -10,7 +330,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/Df5UPGUmFHy/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-11-18",
-        "likes": 10
+        "likes": 11
     },
     {
         "id": "ig_auto_17905812639405955",
@@ -1480,7 +1800,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DPU5m7jjPLu/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2025-10-03",
-        "likes": 1379
+        "likes": 1378
     },
     {
         "id": "ig_auto_18047443322257213",
