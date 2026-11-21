@@ -77,6 +77,26 @@ Herramienta `computer` (clics reales), coordenadas para una ventana de 1357×857
 
 Mientras la página se usa, los clics en Siguiente a veces no responden a la primera: por eso el `hover` previo y la captura antes de escribir.
 
+## Me gusta en cada post
+
+Francisco pide poner me gusta, con @ropavejero.retro, a cada publicación que se crea: el anuncio y todos los posts de la venta. Para cada código, en un lote con `browser_batch`: `navigate` a `https://www.instagram.com/p/<código>/`, esperar 2 s y ejecutar:
+
+```js
+const h = () => [...document.querySelectorAll('svg[aria-label]')]
+  .find(s => /^(Me gusta|Ya no me gusta)$/.test(s.getAttribute('aria-label')) && s.getAttribute('height') === '24');
+const a = h();
+const antes = a && a.getAttribute('aria-label');
+if (antes === 'Me gusta') {   // solo si todavía no tiene: un clic en "Ya no me gusta" lo quitaría
+  (a.closest('[role=button],button') || a.parentElement).click();
+  await new Promise(r => setTimeout(r, 1500));
+}
+location.pathname + ' ' + antes + ' -> ' + (h() && h().getAttribute('aria-label'));
+```
+
+- El corazón del post mide 24 px. Los de los comentarios son más chicos y también se llaman "Me gusta": por eso el filtro por `height`.
+- Se esperaba `-> Ya no me gusta` en todos. Recargar uno o dos posts al final para confirmar que quedó guardado.
+- Probado el 2026-11-21 con los 33 posts de la primera venta. Unos 6 posts por lote.
+
 ## Editar el texto de un post ya publicado
 
 En `https://www.instagram.com/p/<código>/`: `find` "Más opciones" → clic → Editar (1056, 158) → clic en el cuadro de texto (`find` "Añade una descripción") → `type` → clic en el texto → Listo (1128, 109). Recargar y leer con `get_page_text` para confirmar.

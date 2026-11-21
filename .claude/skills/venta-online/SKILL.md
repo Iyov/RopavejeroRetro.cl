@@ -30,6 +30,7 @@ Publicar en Instagram es público y llega a Threads y Facebook. Los textos y las
 2. En cada diseño de Canva cambiar la fecha. En el diseño 1 va `Viernes 20/Nov/2026`; en el 2, la forma corta `20 NOV`, porque `20 NOVIEMBRE` choca con los separadores; en el 3, `20 NOVIEMBRE`. Mostrarle los cambios a Francisco.
 3. Descargar los 3 en PNG (Compartir → Descargar). Los diseños 2 y 3 proponen MP4: cambiar a PNG. Copiarlos a `.cache/flayers/`.
 4. Armar el texto con la plantilla de [referencia.md](referencia.md), mostrárselo a Francisco y publicar el carrusel con el flujo de publicación (paso 4). El texto lleva `#RopavejeroRetroWeb` para que salga en la web.
+5. Ponerle me gusta al anuncio (ver paso 4).
 
 ## Paso 2: registrar los productos nuevos
 
@@ -55,14 +56,16 @@ Solo si Francisco lo pide: hay fotos de productos que no tienen ID.
 2. Publicar cada post con el flujo de [referencia.md](referencia.md): Crear → Publicación → subir las fotos → recorte "Original" → Siguiente → Siguiente → texto → Compartir. Los interruptores de Threads y Facebook vienen activados.
 3. Después del **primer** post, abrirlo en el perfil y revisar que las fotos y el texto se vean bien antes de seguir.
 4. Esperar "Se ha compartido tu publicación" antes de pasar al siguiente: si se sale antes de la página, el post puede quedar a medias.
-5. Avisar el avance a Francisco cada pocos posts.
+5. **Ponerle me gusta a cada publicación que se crea** (pedido de Francisco, 2026-11-21), con la cuenta @ropavejero.retro. Se puede hacer al final, en el cierre, con el script de la referencia: solo marca los que todavía no tienen me gusta, para no quitarlo por error.
+6. Avisar el avance a Francisco cada pocos posts.
 
 ## Paso 5: cierre
 
 1. Sacar el código de cada post con el script de la referencia: lee el título de cada post del perfil y lo cruza con su ID. Revisar que no haya duplicados.
-2. Escribir los códigos en la columna G de Disponibles. En un post de grupo, el mismo código va en todos sus productos. Verificar exportando.
-3. Informar qué se publicó, qué falló y qué queda para Francisco (ej. borrar copias en Threads o Facebook). Cerrar las pestañas y borrar `.cache/venta` y `.cache/flayers` si Francisco lo aprueba.
-4. Lo que se venda durante la venta (comentarios "Yo 125") lo atiende Francisco. Para marcar ❌ en los posts y registrar la venta en las hojas, todavía no hay un procedimiento acordado para ventas online: preguntar. El script de ✅→❌ está en `.claude/skills/venta-feria/referencia.md`.
+2. Confirmar que todos los posts de la venta (y el anuncio) tienen me gusta; poner los que falten.
+3. Escribir los códigos en la columna G de Disponibles. En un post de grupo, el mismo código va en todos sus productos. Verificar exportando.
+4. Informar qué se publicó, qué falló y qué queda para Francisco (ej. borrar copias en Threads o Facebook). Cerrar las pestañas y borrar `.cache/venta` y `.cache/flayers` si Francisco lo aprueba.
+5. Lo que se venda durante la venta (comentarios "Yo 125") lo atiende Francisco. Para marcar ❌ en los posts y registrar la venta en las hojas, todavía no hay un procedimiento acordado para ventas online: preguntar. El script de ✅→❌ está en `.claude/skills/venta-feria/referencia.md`.
 
 ## Errores conocidos
 
