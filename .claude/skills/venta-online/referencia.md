@@ -99,7 +99,25 @@ location.pathname + ' ' + antes + ' -> ' + (h() && h().getAttribute('aria-label'
 
 ## Editar el texto de un post ya publicado
 
-En `https://www.instagram.com/p/<código>/`: `find` "Más opciones" → clic → Editar (1056, 158) → clic en el cuadro de texto (`find` "Añade una descripción") → `type` → clic en el texto → Listo (1128, 109). Recargar y leer con `get_page_text` para confirmar.
+Un post corregido hay que editarlo en las tres redes: la copia de Threads y la de Facebook no se actualizan solas.
+
+**Instagram**, en `https://www.instagram.com/p/<código>/`: `find` "Más opciones" → clic → Editar (1056, 158) → clic en el texto (960, 220) → `ctrl+a` → `type` con el texto completo → revisar con `document.querySelector('[data-lexical-editor="true"]').innerText` → clic en el texto (860, 277) → Listo (1128, 109). Recargar y confirmar que dice "Editado".
+
+- Para cambiar una sola palabra en una línea se puede reemplazar con `execCommand('insertText')` sobre un rango (como el script de ✅→❌ de venta-feria). **No usarlo para insertar texto con saltos de línea**: desarma el texto del editor. Si pasa, Cancelar (224, 108) sin guardar.
+
+**Facebook**, en `https://www.facebook.com/ropavejero.retro` (Brave tiene la sesión de la página): ubicar el post bajando por el perfil con este script, que lo deja arriba de la pantalla:
+
+```js
+window.__goto = async (key) => { for (let i = 0; i < 120; i++) {
+  const el = [...document.querySelectorAll('div[dir="auto"],span[dir="auto"]')].find(e => e.innerText && e.innerText.includes(key));
+  if (el) { el.scrollIntoView({block: 'start'}); window.scrollBy(0, -150); await new Promise(r => setTimeout(r, 1200)); return 'ok'; }
+  window.scrollBy(0, 700); await new Promise(r => setTimeout(r, 700)); } return 'no'; };
+await window.__goto('4523 Star Wars');
+```
+
+Luego: ⋯ del post (1234, 120) → esperar 3 s → `find` "Edit post" → clic → clic en el texto (260, 290) → `ctrl+a` → `type` → clic en el texto para cerrar la sugerencia de hashtag → Save (270, 822). Confirmar con `document.body.innerText.match(/4523 [^\n]{0,40}/g)`.
+
+**Threads** solo deja editar durante los primeros 15 minutos: después, el menú ⋯ ya no muestra "Editar". La única opción es borrar y volver a publicar, con OK de Francisco. Si hay que corregir algo, conviene hacerlo en Threads apenas se publica.
 
 ## Borrar un post (solo con OK de Francisco)
 

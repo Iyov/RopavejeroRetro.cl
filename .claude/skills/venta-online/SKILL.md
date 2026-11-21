@@ -74,4 +74,4 @@ Solo si Francisco lo pide: hay fotos de productos que no tienen ID.
 - **"No se ha podido compartir la publicación"** puede aparecer aunque el post sí se publicó. Revisar el perfil antes de reintentar, para no duplicar.
 - **Las capturas de pantalla se congelan** ("Page.captureScreenshot timed out"): abrir una pestaña nueva y cerrar la anterior. Si el grupo de pestañas se reinicia, llamar a `tabs_context_mcp` con `createIfEmpty` y volver a calcular las coordenadas, porque el tamaño de la ventana puede cambiar.
 - **Meta Business Suite no sirve**: la cuenta de Brave no tiene páginas administrables. Se publica desde instagram.com.
-- **threads.com no está permitido** en Claude in Chrome: no se puede comprobar ahí si llegó la copia.
+- **Threads solo deja editar durante 15 minutos.** Una corrección posterior solo se puede hacer en Instagram y en Facebook (ver referencia). En la primera venta threads.com no estaba permitido en Claude in Chrome; el 2026-11-21 sí abrió.
