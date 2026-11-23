@@ -97,6 +97,19 @@ location.pathname + ' ' + antes + ' -> ' + (h() && h().getAttribute('aria-label'
 - Se esperaba `-> Ya no me gusta` en todos. Recargar uno o dos posts al final para confirmar que quedó guardado.
 - Probado el 2026-11-21 con los 33 posts de la primera venta. Unos 6 posts por lote.
 
+## Me gusta desde las otras cuentas (otros navegadores)
+
+1. `list_connected_browsers` → elegir un navegador que **no** sea el de @ropavejero.retro → `select_browser` → `tabs_context_mcp` con `createIfEmpty`.
+2. Ver la cuenta: `navigate` a `https://www.instagram.com/` y leer el usuario del panel derecho, o ejecutar `document.querySelector('a[href*="/"][role="link"] img[alt*="Foto del perfil"]')?.alt`. Informárselo a Francisco antes de dar me gusta.
+3. Por cada post, en orden: `navigate` a `https://www.instagram.com/p/<código>/` → esperar 3 s → leer el estado con
+
+   ```js
+   [...document.querySelectorAll('svg[aria-label]')].find(s => /^(Me gusta|Ya no me gusta)$/.test(s.getAttribute('aria-label')) && s.getAttribute('height') === '24')?.getAttribute('aria-label')
+   ```
+
+   → si dice "Me gusta", hacer un clic real (`computer`) en el corazón; ubicarlo con `find` "botón Me gusta del post" y confirmar con el mismo script que pasó a "Ya no me gusta" → esperar entre 20 y 60 s (variar el tiempo) antes del siguiente.
+4. Al terminar, recargar un par de posts para confirmar que el me gusta quedó guardado, cerrar la pestaña y esperar unos minutos antes del siguiente navegador.
+
 ## Editar el texto de un post ya publicado
 
 Un post corregido hay que editarlo en las tres redes: la copia de Threads y la de Facebook no se actualizan solas.

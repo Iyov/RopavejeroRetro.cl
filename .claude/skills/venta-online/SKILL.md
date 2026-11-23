@@ -65,7 +65,12 @@ Solo si Francisco lo pide: hay fotos de productos que no tienen ID.
 2. Confirmar que todos los posts de la venta (y el anuncio) tienen me gusta; poner los que falten.
 3. Escribir los códigos en la columna G de Disponibles. En un post de grupo, el mismo código va en todos sus productos. Verificar exportando.
 4. Informar qué se publicó, qué falló y qué queda para Francisco (ej. borrar copias en Threads o Facebook). Cerrar las pestañas y borrar `.cache/venta` y `.cache/flayers` si Francisco lo aprueba.
-5. Lo que se venda durante la venta (comentarios "Yo 125") lo atiende Francisco. Para marcar ❌ en los posts y registrar la venta en las hojas, todavía no hay un procedimiento acordado para ventas online: preguntar. El script de ✅→❌ está en `.claude/skills/venta-feria/referencia.md`.
+5. **Me gusta desde las otras cuentas** (pedido de Francisco, 2026-11-23). Francisco tiene otras cuentas de Instagram abiertas en otros navegadores y las usa para subir los posts en el algoritmo. Este es el último paso. Francisco abre esos navegadores; Claude los lista con `list_connected_browsers` y los usa **de a uno** con `select_browser`. Nunca usar el navegador de @ropavejero.retro (Brave) para esto. En cada navegador:
+   - Confirmar primero qué cuenta está abierta (ver referencia) y decírsela a Francisco. Si es @ropavejero.retro, o si no hay sesión, saltar ese navegador.
+   - Poner los me gusta **uno a uno**: abrir el post, hacer un clic real en el corazón solo si todavía no tiene me gusta, y esperar entre 20 y 60 segundos (variable) antes del siguiente. Nada de lotes rápidos ni de clics por JavaScript, para que no parezca coordinado y no haya riesgo de bloqueo.
+   - Al terminar una cuenta, esperar unos minutos antes de pasar al siguiente navegador y avisarle a Francisco cuántos me gusta quedaron.
+   - Si Instagram muestra un aviso de actividad inusual o limita la cuenta ("Inténtalo más tarde"), **detenerse y avisar**. No reintentar.
+6. Lo que se venda durante la venta (comentarios "Yo 125") lo atiende Francisco. Para marcar ❌ en los posts y registrar la venta en las hojas, todavía no hay un procedimiento acordado para ventas online: preguntar. El script de ✅→❌ está en `.claude/skills/venta-feria/referencia.md`.
 
 ## Errores conocidos
 
