@@ -1,5 +1,5 @@
 // ========== DATOS DE POSTS DE INSTAGRAM AUTOMATIZADOS ==========
-// Última actualización: 2026-11-26 05:45:32
+// Última actualización: 2026-11-26 20:39:29
 
 const INSTAGRAM_POSTS_DATA = [
     {
@@ -80,7 +80,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DgAkf_DlVUh/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-11-21",
-        "likes": 20
+        "likes": 21
     },
     {
         "id": "ig_auto_17911269297606220",
@@ -110,7 +110,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DgAkJfzlXUk/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-11-21",
-        "likes": 63
+        "likes": 64
     },
     {
         "id": "ig_auto_18137529733765329",
@@ -230,7 +230,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DgAf0HzFe7e/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-11-21",
-        "likes": 11
+        "likes": 12
     },
     {
         "id": "ig_auto_17929834668441010",
@@ -330,7 +330,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/Df5UPGUmFHy/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-11-18",
-        "likes": 17
+        "likes": 18
     },
     {
         "id": "ig_auto_17905812639405955",
@@ -1580,7 +1580,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DWPCCCTAcNh/",
         "media_type": "IMAGE",
         "date": "2026-03-23",
-        "likes": 94
+        "likes": 93
     },
     {
         "id": "ig_auto_18046375097729709",
@@ -1750,7 +1750,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DT9E3WLFVc_/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2026-01-26",
-        "likes": 1155
+        "likes": 1154
     },
     {
         "id": "ig_auto_18020656073803699",
@@ -1780,7 +1780,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DPU_RqCjJYG/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2025-10-03",
-        "likes": 5840
+        "likes": 5836
     },
     {
         "id": "ig_auto_18320707375210014",
@@ -1800,7 +1800,7 @@ const INSTAGRAM_POSTS_DATA = [
         "link": "https://www.instagram.com/p/DPU5m7jjPLu/",
         "media_type": "CAROUSEL_ALBUM",
         "date": "2025-10-03",
-        "likes": 1377
+        "likes": 1376
     },
     {
         "id": "ig_auto_18047443322257213",
